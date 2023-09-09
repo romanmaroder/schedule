@@ -50,7 +50,16 @@ return [
                 '<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_c>/<_a>',
             ],
         ],
-
+        'as access' => [
+            'class' => 'yii\filters\AccessControl',
+            'except' => ['site/login', 'site/error'],
+            'rules' => [
+                [
+                    'allow' => true,
+                    'roles' => ['@'],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
