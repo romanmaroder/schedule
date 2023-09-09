@@ -6,4 +6,6 @@ return [
     'senderName' => 'Example.com mailer',
     'user.passwordResetTokenExpire' => 3600,
     'user.passwordMinLength' => 8,
+    'frontendHostInfo' => 'http://example.com',
+    'backendHostInfo' => 'http://backend.example.com',
 ];
