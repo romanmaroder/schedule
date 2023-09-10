@@ -1,12 +1,13 @@
 <?php
 
 
-namespace bootstrap;
+namespace common\bootstrap;
 
 
 use yii\base\Application;
+use yii\base\BootstrapInterface;
 
-class SetUp implements \yii\base\BootstrapInterface
+class SetUp implements BootstrapInterface
 {
 
     /**
