@@ -7,8 +7,10 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
-            'class' => \yii\caching\FileCache::class,
-            'cachePath' => '@common/runtime/cache',
+            //'class' => \yii\caching\FileCache::class,
+            //'cachePath' => '@common/runtime/cache',
+            'class' => \yii\caching\MemCache::class,
+            'useMemcached' => true,
         ],
     ],
 ];
