@@ -12,10 +12,12 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
         'log',
-        'common\bootstrap\SetUp'],
+        'common\bootstrap\SetUp'
+    ],
     'modules' => [],
     'components' => [
         'request' => [
+            'baseUrl' => '',
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
@@ -44,14 +46,14 @@ return [
         'urlManager' => function () {
             return Yii::$app->get('backendUrlManager');
         },
-        'as access' => [
-            'class' => 'yii\filters\AccessControl',
-            'except' => ['site/login', 'site/error'],
-            'rules' => [
-                [
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
+    ],
+    'as access' => [
+        'class' => 'yii\filters\AccessControl',
+        'except' => ['site/login', 'site/error'],
+        'rules' => [
+            [
+                'allow' => true,
+                'roles' => ['@'],
             ],
         ],
     ],

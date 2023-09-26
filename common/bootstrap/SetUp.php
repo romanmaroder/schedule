@@ -15,6 +15,6 @@ class SetUp implements BootstrapInterface
      */
     public function bootstrap($app): void
     {
-        // TODO: Implement bootstrap() method.
+
     }
 }

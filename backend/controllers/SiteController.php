@@ -28,6 +28,7 @@ class SiteController extends Controller
         ];
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -86,4 +87,5 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
 }

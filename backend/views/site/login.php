@@ -2,6 +2,8 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+
+
 ?>
         <div class="card">
             <div class="card-body login-card-body">
@@ -40,7 +42,7 @@ use yii\helpers\Html;
                     </div>
                 </div>
 
-                <?php \yii\bootstrap4\ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
 
                 <!--<div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
