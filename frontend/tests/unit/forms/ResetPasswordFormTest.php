@@ -23,7 +23,7 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
         ]);
     }
 
-    public function testResetWrongToken()
+    public function testWrongToken()
     {
         $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function() {
             new ResetPasswordForm('');
@@ -34,11 +34,12 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
         });
     }
 
-    public function testResetCorrectToken()
+    public function testCorrectToken()
     {
         $user = $this->tester->grabFixture('user', 0);
         $form = new ResetPasswordForm($user['password_reset_token']);
-        verify($form->resetPassword())->notEmpty();
+        $form->password = 'new-password';
+        verify($form->validate());
     }
 
 }
