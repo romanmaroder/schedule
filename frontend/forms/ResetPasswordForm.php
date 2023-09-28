@@ -26,5 +26,4 @@ class ResetPasswordForm extends Model
         ];
     }
 
-
 }

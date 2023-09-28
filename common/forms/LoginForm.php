@@ -2,6 +2,7 @@
 
 namespace common\forms;
 
+use common\entities\User;
 use Yii;
 use yii\base\Model;
 
