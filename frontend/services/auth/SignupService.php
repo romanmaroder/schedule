@@ -10,12 +10,7 @@ use Yii;
 
 class SignupService
 {
-    private $supportEmail;
 
-    public function __construct($supportEmail)
-    {
-        $this->supportEmail = $supportEmail;
-    }
     public function signup(SignupForm $form): User
     {
         $user = User::signup(
@@ -33,7 +28,6 @@ class SignupService
                 ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
                 ['user' => $user]
             )
-            ->setFrom($this->supportEmail)
             ->setTo($user->email)
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
