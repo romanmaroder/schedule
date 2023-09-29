@@ -6,6 +6,7 @@ use frontend\forms\ResendVerificationEmailForm;
 use frontend\forms\VerifyEmailForm;
 use frontend\services\auth\PasswordResetService;
 use frontend\services\auth\SignupService;
+use frontend\services\contact\ContactService;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -25,12 +26,17 @@ class SiteController extends Controller
 {
     private $passwordResetService;
     private $signupService;
+    private $contactService;
 
-    public function __construct($id, $module, PasswordResetService $passwordResetService, SignupService $signupService,$config = [])
+    public function __construct($id, $module, PasswordResetService $passwordResetService,
+                                SignupService $signupService,
+                                ContactService $contactService,
+                                $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->passwordResetService= $passwordResetService;
-        $this->signupService= $signupService;
+        $this->passwordResetService = $passwordResetService;
+        $this->signupService = $signupService;
+        $this->contactService = $contactService;
     }
 
     /**
@@ -132,19 +138,21 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+        $form = new ContactForm();
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->contactService->send($form);
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
+                return $this->goHome();
+            } catch (\Exception $e) {
+                Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');
             }
-
             return $this->refresh();
         }
 
         return $this->render('contact', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 
