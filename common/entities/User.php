@@ -260,10 +260,10 @@ class User extends ActiveRecord implements IdentityInterface
      * Generates new password reset token
      * @throws \yii\base\Exception
      */
-    private function generatePasswordResetToken()
+    /*private function generatePasswordResetToken()
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }
+    }*/
 
     /**
      * Generates new token for email verification
@@ -277,10 +277,10 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Removes password reset token
      */
-    private function removePasswordResetToken()
+    /*private function removePasswordResetToken()
     {
         $this->password_reset_token = null;
-    }
+    }*/
 
     /**
      * Removes email verification token
