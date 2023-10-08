@@ -175,10 +175,13 @@ class SiteController extends Controller
     {
         $form = new SignupForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $user = $this->signupService->signup($form);
-            if (Yii::$app->getUser()->login($user)) {
+            try {
+                $this->signupService->signup($form);
                 Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
                 return $this->goHome();
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
 
@@ -255,17 +258,15 @@ class SiteController extends Controller
     public function actionVerifyEmail($token)
     {
         try {
-            $model = new VerifyEmailForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-        if (($user = $model->verifyEmail()) && Yii::$app->user->login($user)) {
+            $this->signupService->confirm($token);
             Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
+            return $this->redirect(['login']);
+        } catch (InvalidArgumentException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage() . 'Sorry, we are unable to verify your account with provided token.');
             return $this->goHome();
         }
 
-        Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
-        return $this->goHome();
     }
 
     /**

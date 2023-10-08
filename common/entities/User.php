@@ -29,7 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    public static function signup(string $username, string $email, string $password): self
+    public static function requestSignup(string $username, string $email, string $password): self
     {
         $user = new User();
         $user->username = $username;
@@ -37,9 +37,23 @@ class User extends ActiveRecord implements IdentityInterface
         $user->setPassword($password);
         $user->created_at = time();
         $user->status = self::STATUS_INACTIVE;
-        $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->generateAuthKey();
         return $user;
+    }
+
+    /**
+     * Verify email
+     *
+     * @return User|null the saved model or null if saving fails
+     */
+    public function verifyEmail(): void
+    {
+        if (!$this->isInactive()) {
+            throw new \DomainException('User is already active.');
+        }
+        $this->status = self::STATUS_ACTIVE;
+        $this->removeEmailVerificationToken();
     }
 
     /**
@@ -66,13 +80,20 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-
     /**
      * @return bool
      */
     public function isActive(): bool
     {
         return $this->status === self::STATUS_ACTIVE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInactive(): bool
+    {
+        return $this->status === self::STATUS_INACTIVE;
     }
 
     /**
@@ -260,4 +281,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    /**
+     * Removes email verification token
+     */
+    private function removeEmailVerificationToken()
+    {
+        $this->verification_token = null;
+    }
+
 }
