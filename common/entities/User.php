@@ -45,7 +45,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Verify email
      *
-     * @return User|null the saved model or null if saving fails
+     * @return void the saved model or null if saving fails
      */
     public function verifyEmail(): void
     {
@@ -176,13 +176,13 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token verify email token
      * @return static|null
      */
-    public static function findByVerificationToken($token)
+    /*public static function findByVerificationToken($token)
     {
         return static::findOne([
             'verification_token' => $token,
             'status' => self::STATUS_INACTIVE
         ]);
-    }
+    }*/
 
     /**
      * Finds out if password reset token is valid

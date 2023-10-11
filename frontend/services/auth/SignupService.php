@@ -27,9 +27,7 @@ class SignupService
             $form->password
         );
 
-        if (!$user->save()) {
-            throw new \RuntimeException('Saving error.');
-        }
+        $this->save($user);
 
         $sent = Yii::$app
             ->mailer
@@ -54,15 +52,34 @@ class SignupService
             throw new InvalidArgumentException('Verify email token cannot be blank.');
         }
 
-        /* @var $user User */
-        $user = User::findByVerificationToken($token);
-
-        if (!$user) {
-            throw new InvalidArgumentException('Wrong verify email token.');
-        }
-
+        $user = $this->findByVerificationToken($token);
         $user->verifyEmail();
+        $this->save($user);
 
+    }
+
+    /**
+     * Finds user by verification email token
+     *
+     * @param string $token verify email token
+     * @return User
+     */
+    private static function findByVerificationToken(string $token): User
+    {
+        if (!$user = User::findOne([
+            'verification_token' => $token,
+            'status' => User::STATUS_INACTIVE
+        ])) {
+            throw new \DomainException('User is not found.');
+        }
+        return $user;
+    }
+
+    /**
+     * @param User $user
+     */
+    private function save(User $user): void
+    {
         if (!$user->save()) {
             throw new \RuntimeException('Saving error.');
         }
