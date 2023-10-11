@@ -5,6 +5,7 @@ namespace frontend\services\auth;
 
 
 use common\entities\User;
+use common\repositories\UserRepository;
 use frontend\forms\SignupForm;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -13,9 +14,11 @@ use yii\mail\MailerInterface;
 class SignupService
 {
     private $mailer;
+    private $users;
 
-    public function __construct(MailerInterface $mailer)
+    public function __construct(UserRepository $users, MailerInterface $mailer)
     {
+        $this->users = $users;
         $this->mailer = $mailer;
     }
 
@@ -27,7 +30,7 @@ class SignupService
             $form->password
         );
 
-        $this->save($user);
+        $this->users->save($user);
 
         $sent = Yii::$app
             ->mailer
@@ -52,36 +55,8 @@ class SignupService
             throw new InvalidArgumentException('Verify email token cannot be blank.');
         }
 
-        $user = $this->findByVerificationToken($token);
+        $user = $this->users->getByVerificationToken($token);
         $user->verifyEmail();
-        $this->save($user);
-
-    }
-
-    /**
-     * Finds user by verification email token
-     *
-     * @param string $token verify email token
-     * @return User
-     */
-    private static function findByVerificationToken(string $token): User
-    {
-        if (!$user = User::findOne([
-            'verification_token' => $token,
-            'status' => User::STATUS_INACTIVE
-        ])) {
-            throw new \DomainException('User is not found.');
-        }
-        return $user;
-    }
-
-    /**
-     * @param User $user
-     */
-    private function save(User $user): void
-    {
-        if (!$user->save()) {
-            throw new \RuntimeException('Saving error.');
-        }
+        $this->users->save($user);
     }
 }
