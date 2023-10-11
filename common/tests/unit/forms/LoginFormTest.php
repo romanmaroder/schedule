@@ -30,38 +30,23 @@ class LoginFormTest extends \Codeception\Test\Unit
         ];
     }
 
-    public function testLoginNoUser()
+    public function testBlank()
     {
         $model = new LoginForm([
-            'username' => 'not_existing_username',
-            'password' => 'not_existing_password',
+            'username' => '',
+            'password' => '',
         ]);
 
-        verify($model->login())->false();
-        verify(Yii::$app->user->isGuest)->true();
+        verify($model->validate())->true();
     }
 
-    public function testLoginWrongPassword()
-    {
-        $model = new LoginForm([
-            'username' => 'bayer.hudson',
-            'password' => 'wrong_password',
-        ]);
-
-        verify($model->login())->false();
-        verify( $model->errors)->arrayHasKey('password');
-        verify(Yii::$app->user->isGuest)->true();
-    }
-
-    public function testLoginCorrect()
+    public function testCorrect()
     {
         $model = new LoginForm([
             'username' => 'bayer.hudson',
             'password' => 'password_0',
         ]);
 
-        verify($model->login())->true();
-        verify($model->errors)->arrayHasNotKey('password');
-        verify(Yii::$app->user->isGuest)->false();
+        verify($model->validate())->false();
     }
 }

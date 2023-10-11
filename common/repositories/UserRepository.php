@@ -9,6 +9,15 @@ use common\entities\User;
 class UserRepository
 {
     /**
+     * @param $value
+     * @return User|null
+     */
+    public function findByUsernameOrEmail($value):?User
+    {
+        return User::find()->andWhere(['or',['username'=>$value],['email'=>$value]])->one();
+    }
+
+    /**
      * @param $token
      * @return User
      */

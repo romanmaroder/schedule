@@ -2,8 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\services\AuthService;
 use frontend\forms\ResendVerificationEmailForm;
-use frontend\forms\VerifyEmailForm;
 use frontend\services\auth\PasswordResetService;
 use frontend\services\auth\SignupService;
 use frontend\services\contact\ContactService;
@@ -24,16 +24,20 @@ use frontend\forms\ContactForm;
  */
 class SiteController extends Controller
 {
+    private $authService;
     private $passwordResetService;
     private $signupService;
     private $contactService;
 
-    public function __construct($id, $module, PasswordResetService $passwordResetService,
+    public function __construct($id, $module,
+                                AuthService $authService,
+                                PasswordResetService $passwordResetService,
                                 SignupService $signupService,
                                 ContactService $contactService,
                                 $config = [])
     {
         parent::__construct($id, $module, $config);
+        $this->authService = $authService;
         $this->passwordResetService = $passwordResetService;
         $this->signupService = $signupService;
         $this->contactService = $contactService;
@@ -107,15 +111,22 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        $form = new LoginForm();
+
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $user = $this->authService->auth($form);
+                Yii::$app->user->login($user, $form->rememberMe ? 3600 * 24 * 30 : 0);
+                return $this->goBack();
+            } catch (\DomainException $e) {
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
-        $model->password = '';
+        $form->password = '';
 
         return $this->render('login', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 
