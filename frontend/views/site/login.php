@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
-/** @var \common\forms\LoginForm $model */
+/** @var \schedule\forms\auth\LoginForm $model */
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;

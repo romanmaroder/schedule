@@ -20,7 +20,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\entities\User',
+            'identityClass' => 'schedule\entities\User',
             'enableAutoLogin' => false,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
