@@ -2,8 +2,8 @@
 
 namespace backend\controllers;
 
-use common\forms\LoginForm;
-use common\services\AuthService;
+use schedule\forms\auth\LoginForm;
+use schedule\services\auth\AuthService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
