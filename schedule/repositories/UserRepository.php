@@ -4,7 +4,7 @@
 namespace schedule\repositories;
 
 
-use schedule\entities\User;
+use schedule\entities\User\User;
 
 class UserRepository
 {

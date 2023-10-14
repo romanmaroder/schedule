@@ -5,7 +5,7 @@ namespace schedule\tests\unit\entities\User;
 
 
 use Codeception\Test\Unit;
-use schedule\entities\User;
+use schedule\entities\User\User;
 
 class SignupTest extends Unit
 {

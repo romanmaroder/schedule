@@ -4,7 +4,6 @@
 namespace schedule\services\auth;
 
 
-
 use schedule\forms\auth\PasswordResetRequestForm;
 use schedule\forms\auth\ResetPasswordForm;
 use schedule\repositories\UserRepository;
@@ -16,7 +15,7 @@ class PasswordResetService
     private $mailer;
     private $users;
 
-    public function __construct(UserRepository $users,MailerInterface $mailer)
+    public function __construct(UserRepository $users, MailerInterface $mailer)
     {
         $this->users = $users;
         $this->mailer = $mailer;
@@ -35,7 +34,7 @@ class PasswordResetService
 
         $sent = $this->mailer
             ->compose(
-                ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
+                ['html' => 'auth/reset/passwordResetToken-html', 'text' => 'auth/reset/passwordResetToken-text'],
                 ['user' => $user]
             )
             ->setTo($user->email)
@@ -63,4 +62,7 @@ class PasswordResetService
         $user->resetPassword($form->password);
         $this->users->save($user);
     }
+
+
+
 }

@@ -6,5 +6,5 @@ use yii\test\ActiveFixture;
 
 class UserFixture extends ActiveFixture
 {
-    public $modelClass = 'schedule\entities\User';
+    public $modelClass = 'schedule\entities\User\User';
 }

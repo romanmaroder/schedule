@@ -4,7 +4,7 @@
 namespace schedule\services\auth;
 
 
-use schedule\entities\User;
+use schedule\entities\User\User;
 use schedule\forms\auth\SignupForm;
 use schedule\repositories\UserRepository;
 use Yii;
@@ -35,7 +35,7 @@ class SignupService
         $sent = Yii::$app
             ->mailer
             ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
+                ['html' => 'auth/signup/emailVerify-html', 'text' => 'auth/signup/emailVerify-text'],
                 ['user' => $user]
             )
             ->setTo($user->email)

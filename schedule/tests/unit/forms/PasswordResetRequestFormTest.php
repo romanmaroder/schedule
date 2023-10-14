@@ -2,7 +2,7 @@
 
 namespace schedule\tests\unit\forms;
 
-use schedule\entities\User;
+use schedule\entities\User\User;
 use schedule\forms\auth\PasswordResetRequestForm;
 use Yii;
 use common\fixtures\UserFixture as UserFixture;

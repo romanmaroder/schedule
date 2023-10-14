@@ -1,6 +1,6 @@
 <?php
 
-namespace schedule\entities;
+namespace schedule\entities\User;
 
 use Yii;
 use yii\base\NotSupportedException;
@@ -23,7 +23,7 @@ use yii\web\IdentityInterface;
  * @property integer $updated_at
  * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface  /* TODO Moved User into subdirectory */
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
@@ -99,9 +99,9 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName() /* TODO Renamed user table*/
     {
-        return '{{%user}}';
+        return '{{%users}}';
     }
 
     /**

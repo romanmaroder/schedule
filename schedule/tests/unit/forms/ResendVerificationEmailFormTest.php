@@ -1,11 +1,10 @@
 <?php
 
-namespace frontend\tests\unit\forms;
-
+namespace schedule\tests\unit\forms;
 
 use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
-use frontend\forms\ResendVerificationEmailForm;
+use schedule\forms\auth\ResendVerificationEmailForm;
 
 class ResendVerificationEmailFormTest extends Unit
 {

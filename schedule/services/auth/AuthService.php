@@ -4,7 +4,7 @@
 namespace schedule\services\auth;
 
 
-use schedule\entities\User;
+use schedule\entities\User\User;
 use schedule\forms\auth\LoginForm;
 use schedule\repositories\UserRepository;
 

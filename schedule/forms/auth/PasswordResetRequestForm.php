@@ -2,7 +2,7 @@
 
 namespace schedule\forms\auth;
 
-use schedule\entities\User;
+use schedule\entities\User\User;
 use yii\base\Model;
 
 /**
