@@ -9,7 +9,7 @@ use schedule\repositories\UserRepository;
 use Yii;
 use yii\mail\MailerInterface;
 
-class EmailResendService /* TODO Separated controllers  */
+class EmailResendService
 {
     private $mailer;
     private $users;
