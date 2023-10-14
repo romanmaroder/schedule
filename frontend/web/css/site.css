@@ -101,3 +101,7 @@ a.desc:after {
 {
     text-decoration: none;
 }
+
+.auth-clients {
+    padding: 0 0 20px 0;
+}
