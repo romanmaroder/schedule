@@ -1,5 +1,6 @@
 <?php
 
+use kartik\date\DatePicker;
 use schedule\entities\user\User;
 use schedule\helpers\UserHelper;
 use yii\helpers\Html;
@@ -39,7 +40,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'id',
-                'created_at:datetime',
+                [
+                    'attribute' => 'created_at',
+                    'filter' => DatePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'date_from',
+                        'attribute2' => 'date_to',
+                        'type' => DatePicker::TYPE_RANGE,
+                        'separator' => '-',
+                        'pluginOptions' => [
+                            'todayHighlight' => true,
+                            'autoclose'=>true,
+                            'format' => 'yyyy-mm-dd',
+                        ],
+                    ]),
+                    'format' => 'datetime',
+                ],
                 [
                     'attribute' => 'username',
                     'value' => function (User $model) {
