@@ -46,4 +46,15 @@ class UserManageService
         );
         $this->repository->save($user);
     }
+
+    /**
+     * @param $id
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function remove($id): void
+    {
+        $user = $this->repository->get($id);
+        $this->repository->remove($user);
+    }
 }

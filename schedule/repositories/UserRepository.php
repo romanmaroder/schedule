@@ -83,6 +83,18 @@ class UserRepository
     }
 
     /**
+     * @param User $user
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function remove(User $user):void
+    {
+        if (!$user->delete()){
+            throw new \RuntimeException('Removing error.');
+        }
+    }
+
+    /**
      * @param array $condition
      * @return User
      */
