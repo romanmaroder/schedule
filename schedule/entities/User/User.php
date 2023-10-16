@@ -25,13 +25,25 @@ use yii\web\IdentityInterface;
  * @property integer $updated_at
  * @property string $password write-only password
  *
- *  @property Network[] $networks
+ * @property Network[] $networks
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+
+    public static function create(string $username, string $email, string $password): self
+    {
+        $user = new User();
+        $user->username = $username;
+        $user->email = $email;
+        $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
+        $user->created_at = time();
+        $user->status = self::STATUS_ACTIVE;
+        $user->auth_key = Yii::$app->security->generateRandomString();
+        return $user;
+    }
 
     public static function requestSignup(string $username, string $email, string $password): self
     {
@@ -80,11 +92,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $networks = $this->networks;
         foreach ($networks as $current) {
-            if ($current->isFor($network,$identity)){
+            if ($current->isFor($network, $identity)) {
                 throw new \DomainException('Network is already attached');
             }
         }
-        $networks[]= Network::create($networks,$identity);
+        $networks[] = Network::create($networks, $identity);
         $this->networks = $networks;
     }
 
