@@ -5,6 +5,7 @@ namespace backend\controllers;
 use schedule\entities\user\User;
 use backend\forms\UserSearch;
 use schedule\forms\manage\User\UserCreateForm;
+use schedule\forms\manage\User\UserEditForm;
 use schedule\services\manage\UserManageService;
 use Yii;
 use yii\web\Controller;
@@ -83,7 +84,7 @@ class UserController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $user = $this->service->create($form);
-                return $this->redirect(['view','id'=>$user->id]);
+                return $this->redirect(['view', 'id' => $user->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
@@ -104,14 +105,22 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $user = $this->findModel($id);
+        $form = new UserEditForm($user);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load($this->request->post()) && $form->validate()) {
+            try {
+                $this->service->edit($user->id, $form);
+                return $this->redirect(['view', 'id' => $user->id]);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
+            'user'=>$user,
         ]);
     }
 
