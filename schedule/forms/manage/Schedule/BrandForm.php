@@ -5,18 +5,17 @@ namespace schedule\forms\manage\Schedule;
 
 
 use schedule\entities\Schedule\Brand;
+use schedule\forms\CompositeForm;
 use schedule\forms\manage\MetaForm;
-use yii\base\Model;
 
 /**
  * @property MetaForm $meta
  */
-class BrandForm extends Model
+class BrandForm extends CompositeForm
 {
     public $name;
     public $slug;
 
-    private $_meta;
     private $_brand;
 
     /**
@@ -29,23 +28,12 @@ class BrandForm extends Model
         if ($brand){
             $this->name = $brand->name;
             $this->slug = $brand->slug;
-            $this->_meta = new MetaForm($brand->meta);
+            $this->meta = new MetaForm($brand->meta);
             $this->_brand = $brand;
+        }else{
+            $this->meta = new MetaForm();
         }
         parent::__construct($config);
-    }
-
-    /**
-     * @param array $data
-     * @param null $formName
-     * @return bool
-     */
-    public function load($data, $formName = null):bool
-    {
-         $self = parent::load($data, $formName);
-         $meta = $this->_meta->load($data,$formName ? null : 'meta');
-         return $self && $meta;
-
     }
 
     public function rules():array
@@ -58,5 +46,8 @@ class BrandForm extends Model
         ];
     }
 
-
+    protected function internalForms(): array
+    {
+        return ['meta'];
+    }
 }
