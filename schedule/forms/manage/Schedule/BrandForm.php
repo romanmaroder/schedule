@@ -7,6 +7,7 @@ namespace schedule\forms\manage\Schedule;
 use schedule\entities\Schedule\Brand;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\MetaForm;
+use schedule\validators\SlugValidator;
 
 /**
  * @property MetaForm $meta
@@ -41,7 +42,7 @@ class BrandForm extends CompositeForm
         return [
             [['name', 'slug'], 'required'],
             [['name', 'slug'], 'string', 'max' => 255],
-            ['slug', 'match', 'pattern' => '#^[a-z0-9_-]*$#s'],
+            ['slug', SlugValidator::class],
             [['name', 'slug'], 'unique', 'targetClass' => Brand::class, 'filter' => $this->_brand ? ['<>', 'id', $this->_brand->id] : null]
         ];
     }
