@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $name
  * @property string $slug
+ * @property string $meta_json [json]
  * @property Meta $meta
  */
 class Brand extends ActiveRecord
