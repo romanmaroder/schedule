@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'password_reset_token') ?>
 
     <?php // echo $form->field($model, 'email') ?>
-
+ъъъъ
     <?php // echo $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>

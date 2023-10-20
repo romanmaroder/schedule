@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'status',
                    // 'filter' => UserHelper::statusList(),
-                    'filter' => Html::activeDropDownList($searchModel, 'id', UserHelper::statusList(),
+                    'filter' => Html::activeDropDownList($searchModel, 'status', UserHelper::statusList(),
                      ['prompt' => 'Select...', 'class' => 'form-control form-control-sm']),
                     'value' => function (User $model) {
                         return UserHelper::statusLabel($model->status);
