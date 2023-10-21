@@ -66,6 +66,29 @@ class Characteristic extends ActiveRecord
     /**
      * @return bool
      */
+    public function isString(): bool
+    {
+        return $this->type === self::TYPE_STRING;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInteger(): bool
+    {
+        return $this->type === self::TYPE_INTEGER;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFloat(): bool
+    {
+        return $this->type === self::TYPE_FLOAT;
+    }
+    /**
+     * @return bool
+     */
     public function isSelect(): bool
     {
         return count($this->variants) > 0;

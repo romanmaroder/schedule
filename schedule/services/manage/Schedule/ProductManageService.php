@@ -46,10 +46,14 @@ class ProductManageService
         $product->setPrice($form->price->new, $form->price->old, $form->price->intern, $form->price->employee);
 
         # Binding of additional categories to the product
-
         foreach ($form->categories->other as $otherId) {
             $category = $this->categories->get($otherId);
             $product->assignCategory($category->id);
+        }
+
+        # Binding of values to the product
+        foreach ($form->values as $value) {
+            $product->setValue($value->id, $value->value);
         }
 
         $this->products->save($product);

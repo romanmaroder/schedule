@@ -13,23 +13,24 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
- * @property integer $id
- * @property integer $created_at
+ * @property int $id
+ * @property int $created_at
  * @property string $code
  * @property string $name
- * @property integer $category_id
- * @property integer $brand_id
- * @property integer $price_old
- * @property integer $price_new
+ * @property int $category_id
+ * @property int $brand_id
+ * @property int $price_old
+ * @property int $price_new
  * @property int $price_intern [int(11)]
  * @property int $price_employee [int(11)]
- * @property integer $rating
+ * @property int $rating
  * @property string $meta_json
  *
  * @property Meta $meta
  * @property Brand $brand
  * @property Category $category
  * @property CategoryAssignment[] $categoryAssignments
+ * @property Value[] $values
  */
 class Product extends ActiveRecord
 {
@@ -61,6 +62,41 @@ class Product extends ActiveRecord
         $this->price_old = $old;
         $this->price_intern = $intern;
         $this->price_employee = $employee;
+    }
+
+    # Value methods
+
+    /**
+     * @param $id
+     * @param $value
+     */
+    public function setValue($id, $value): void
+    {
+        $values = $this->values;
+        foreach ($values as $value) {
+            if ($value->isForCharacteristic($id)) {
+                $value->change($value);
+                $this->values = $values;
+            }
+            return;
+        }
+        $values[] = Value::create($id, $value);
+        $this->values = $values;
+    }
+
+    /**
+     * @param $id
+     * @return Value
+     */
+    public function getValue($id): Value
+    {
+        $values = $this->values;
+        foreach ($values as $value) {
+            if ($value->isForCharacteristic($id)) {
+                return $value;
+            }
+        }
+        return Value::blank($id);
     }
 
     # Category methods
@@ -134,6 +170,14 @@ class Product extends ActiveRecord
         return $this->hasMany(CategoryAssignment::class, ['product_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
+    public function getValues(): ActiveQuery
+    {
+        return  $this->hasMany(Value::class,['product_id'=>'id']);
+    }
+
     public static function tableName(): string
     {
         return '{{%schedule_products}}';
@@ -145,12 +189,12 @@ class Product extends ActiveRecord
             MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['categoryAssignments'],
+                'relations' => ['categoryAssignments','values'],
             ],
         ];
     }
 
-    public function transactions()
+    public function transactions(): array
     {
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
