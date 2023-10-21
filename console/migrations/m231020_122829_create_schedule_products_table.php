@@ -34,8 +34,8 @@ class m231020_122829_create_schedule_products_table extends Migration
         $this->createIndex('{{%idx-schedule_products-category_id}}', '{{%schedule_products}}', 'category_id');
         $this->createIndex('{{%idx-schedule_products-brand_id}}', '{{%schedule_products}}', 'brand_id');
 
-        $this->addForeignKey('{{%fk-schedule_products-category_id}}', '{{%schedule_products}}', 'category_id', '{{%shop_categories}}', 'id');
-        $this->addForeignKey('{{%fk-schedule_products-brand_id}}', '{{%schedule_products}}', 'brand_id', '{{%shop_brands}}', 'id');
+        $this->addForeignKey('{{%fk-schedule_products-category_id}}', '{{%schedule_products}}', 'category_id', '{{%schedule_categories}}', 'id');
+        $this->addForeignKey('{{%fk-schedule_products-brand_id}}', '{{%schedule_products}}', 'brand_id', '{{%schedule_brands}}', 'id');
     }
 
     /**
