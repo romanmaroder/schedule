@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  *
  * @property int $service_id [int(11)]
  * @property int $category_id [int(11)]
+ * @property int $product_id [int(11)]
  */
 class CategoryAssignment extends ActiveRecord
 {

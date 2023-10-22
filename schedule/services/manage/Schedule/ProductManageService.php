@@ -6,24 +6,36 @@ namespace schedule\services\manage\Schedule;
 
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Product\Product;
+use schedule\entities\Schedule\Tag;
 use schedule\forms\manage\Schedule\Product\CategoriesForm;
 use schedule\forms\manage\Schedule\Product\PhotosForm;
 use schedule\forms\manage\Schedule\Product\ProductCreateForm;
 use schedule\repositories\Schedule\BrandRepository;
 use schedule\repositories\Schedule\CategoryRepository;
 use schedule\repositories\Schedule\ProductRepository;
+use schedule\repositories\Schedule\TagRepository;
+use schedule\services\TransactionManager;
 
 class ProductManageService
 {
     private $products;
     private $brands;
     private $categories;
+    private $tags;
+    private $transaction;
 
-    public function __construct(ProductRepository $products, BrandRepository $brands, CategoryRepository $categories)
-    {
+    public function __construct(
+        ProductRepository $products,
+        BrandRepository $brands,
+        CategoryRepository $categories,
+        TagRepository $tags,
+        TransactionManager $transaction
+    ) {
         $this->products = $products;
         $this->brands = $brands;
         $this->categories = $categories;
+        $this->tags = $tags;
+        $this->transaction = $transaction;
     }
 
     /**
@@ -61,8 +73,25 @@ class ProductManageService
         foreach ($form->photos->files as $file) {
             $product->addPhoto($file);
         }
+        # Binding tags to the product
+        foreach ($form->tags->existing as $tagId) {
+            $tag = $this->tags->get($tagId);
+            $product->assignTag($tag->id);
+        }
 
-        $this->products->save($product);
+        $this->transaction->wrap(
+            function () use ($product, $form) {
+                foreach ($form->tags->newNames as $tagName) {
+                    if (!$tag = $this->tags->findByName($tagName)) {
+                        $tag = Tag::create($tagName, $tagName);
+                        $this->tags->save($tag);
+                    }
+                    $product->assignTag($tag->id);
+                }
+                $this->products->save($product);
+            }
+        );
+
         return $product;
     }
 
