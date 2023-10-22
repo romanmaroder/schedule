@@ -6,20 +6,30 @@ namespace schedule\services\manage\Schedule;
 
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Service\Service;
+use schedule\entities\Schedule\Tag;
 use schedule\forms\manage\Schedule\Service\CategoriesForm;
 use schedule\forms\manage\Schedule\Service\ServiceCreateForm;
 use schedule\repositories\Schedule\CategoryRepository;
 use schedule\repositories\Schedule\ServiceRepository;
+use schedule\repositories\Schedule\TagRepository;
+use schedule\services\TransactionManager;
 
 class ServiceManageService
 {
     private $services;
     private $categories;
+    private $tags;
+    private $transaction;
 
-    public function __construct(ServiceRepository $services, CategoryRepository $categories)
+    public function __construct(ServiceRepository $services,
+        CategoryRepository $categories,
+        TagRepository $tags,
+        TransactionManager $transaction)
     {
         $this->services = $services;
         $this->categories = $categories;
+        $this->tags = $tags;
+        $this->transaction = $transaction;
     }
 
     /**
@@ -47,7 +57,24 @@ class ServiceManageService
             $services->assignCategory($category->id);
         }
 
-        $this->services->save($services);
+        # Binding tags to the product
+        foreach ($form->tags->existing as $tagId) {
+            $tag = $this->tags->get($tagId);
+            $services->assignTag($tag->id);
+        }
+
+        $this->transaction->wrap(
+            function () use ($services, $form) {
+                foreach ($form->tags->newNames as $tagName) {
+                    if (!$tag = $this->tags->findByName($tagName)) {
+                        $tag = Tag::create($tagName, $tagName);
+                        $this->tags->save($tag);
+                    }
+                    $services->assignTag($tag->id);
+                }
+                $this->products->save($services);
+            }
+        );
         return $services;
     }
 

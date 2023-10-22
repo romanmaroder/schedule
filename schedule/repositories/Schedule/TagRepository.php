@@ -19,7 +19,11 @@ class TagRepository
             throw new NotFoundException('Tag is not found.');
         }
         return $tag;
+    }
 
+    public function findByName($name): ?Tag
+    {
+        return Tag::findOne(['name' => $name]);
     }
 
     /**

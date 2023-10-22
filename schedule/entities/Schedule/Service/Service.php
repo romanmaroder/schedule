@@ -27,6 +27,7 @@ use yii\db\ActiveRecord;
  * @property Meta $meta
  * @property Category $category
  * @property CategoryAssignment[] $categoryAssignments
+ * @property TagAssignment[] $tagAssignments
  */
 class Service extends ActiveRecord
 {
@@ -104,6 +105,39 @@ class Service extends ActiveRecord
     {
         $this->categoryAssignments = [];
     }
+
+    # Tags
+
+    public function assignTag($id): void
+    {
+        $assignments = $this->tagAssignments;
+        foreach ($assignments as $assignment) {
+            if ($assignment->isForTag($id)) {
+                return;
+            }
+        }
+        $assignments[] = TagAssignment::create($id);
+        $this->tagAssignments = $assignments;
+    }
+
+    public function revokeTag($id): void
+    {
+        $assignments = $this->tagAssignments;
+        foreach ($assignments as $i => $assignment) {
+            if ($assignment->isForTag($id)) {
+                unset($assignments[$i]);
+                $this->tagAssignments = $assignments;
+                return;
+            }
+        }
+        throw new \DomainException('Assignment is not found.');
+    }
+
+    public function revokeTags(): void
+    {
+        $this->tagAssignments = [];
+    }
+
 
     /**
      * @return ActiveQuery
