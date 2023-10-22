@@ -356,36 +356,40 @@ class Product extends ActiveRecord
 
     public function editReview($id, $vote, $text): void
     {
-        $reviews = $this->reviews;
-        foreach ($reviews as $i => $review) {
-            if ($review->isIdEqualTo($id)) {
+        $this->doWithReview(
+            $id,
+            function (Review $review) use ($vote, $text) {
                 $review->edit($vote, $text);
-                $this->updateReviews($reviews);
-                return;
             }
-        }
-        throw new \DomainException('Review is not found.');
+        );
     }
 
     public function activateReview($id): void
     {
-        $reviews = $this->reviews;
-        foreach ($reviews as $i => $review) {
-            if ($review->isIdEqualTo($id)) {
+        $this->doWithReview(
+            $id,
+            function (Review $review) {
                 $review->activate();
-                $this->updateReviews($reviews);
-                return;
             }
-        }
-        throw new \DomainException('Review is not found.');
+        );
     }
 
     public function draftReview($id): void
     {
-        $reviews = $this->reviews;
-        foreach ($reviews as $i => $review) {
-            if ($review->isIdEqualTo($id)) {
+        $this->doWithReview(
+            $id,
+            function (Review $review) {
                 $review->draft();
+            }
+        );
+    }
+
+    private function doWithReview($id, callable $callback): void
+    {
+        $reviews = $this->reviews;
+        foreach ($reviews as $review) {
+            if ($review->isIdEqualTo($id)) {
+                $callback($review);
                 $this->updateReviews($reviews);
                 return;
             }
@@ -421,6 +425,7 @@ class Product extends ActiveRecord
         $this->reviews = $reviews;
         $this->rating = $amount ? $total / $amount : null;
     }
+
 
     /**
      * @return ActiveQuery
