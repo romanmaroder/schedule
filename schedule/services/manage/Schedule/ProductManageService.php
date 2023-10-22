@@ -138,6 +138,22 @@ class ProductManageService
         $this->products->save($product);
     }
 
+    public function addRelatedProduct($id, $otherId): void
+    {
+        $product = $this->products->get($id);
+        $other = $this->products->get($otherId);
+        $product->assignRelatedProduct($other->id);
+        $this->products->save($product);
+    }
+
+    public function removeRelatedProduct($id, $otherId): void
+    {
+        $product = $this->products->get($id);
+        $other = $this->products->get($otherId);
+        $product->revokeRelatedProduct($other->id);
+        $this->products->save($product);
+    }
+
     /**
      * @param $id
      */
