@@ -36,13 +36,31 @@
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
                     [
-                        'label' => 'Starter Pages',
+                        'label' => 'Management',
                         'icon' => 'tachometer-alt',
                         'badge' => '<span class="right badge badge-info">2</span>',
+                        'options' => ['class' => 'header'],
                         'items' => [
-                           //['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
+                            //['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
                             //['label' => 'Inactive Page', 'iconStyle' => 'far'],
-                            ['label' => 'Users', 'icon' => 'user', 'url' => ['/user/index'], 'active' => $this->context->id == 'user/index'],
+                            [
+                                'label' => 'Schedule',
+                                'icon' => 'folder',
+                                'items' => [
+                                    [
+                                        'label' => 'Brands',
+                                        'icon' => 'file-o',
+                                        'url' => ['/schedule/brand/index'],
+                                        'active' => $this->context->id == 'shop/brand'
+                                    ],
+                                ]
+                            ],
+                            [
+                                'label' => 'Users',
+                                'icon' => 'user',
+                                'url' => ['/user/index'],
+                                'active' => $this->context->id == 'user/index'
+                            ],
                         ]
                     ],
                     //['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
