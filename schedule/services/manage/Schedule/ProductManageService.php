@@ -6,6 +6,7 @@ namespace schedule\services\manage\Schedule;
 
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Product\Product;
+use schedule\forms\manage\Schedule\Product\CategoriesForm;
 use schedule\forms\manage\Schedule\Product\ProductCreateForm;
 use schedule\repositories\Schedule\BrandRepository;
 use schedule\repositories\Schedule\CategoryRepository;
@@ -55,9 +56,18 @@ class ProductManageService
         foreach ($form->values as $value) {
             $product->setValue($value->id, $value->value);
         }
+        # Linking photos to the product
+        foreach ($form->photos->files as $file) {
+            $product->addPhoto($file);
+        }
 
         $this->products->save($product);
         return $product;
+    }
+
+    public function changeCategories($id,CategoriesForm $form):void
+    {
+        
     }
 
     /**

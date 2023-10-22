@@ -5,6 +5,7 @@ namespace schedule\forms\manage\Schedule\Product;
 
 
 use schedule\entities\Schedule\Characteristic;
+use schedule\entities\Schedule\Product\Product;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\MetaForm;
 

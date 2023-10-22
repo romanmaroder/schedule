@@ -4,6 +4,7 @@
 namespace schedule\forms\manage\Schedule\Product;
 
 
+use schedule\entities\Schedule\Product\Product;
 use schedule\forms\manage\MetaForm;
 use yii\base\Model;
 

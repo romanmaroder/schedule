@@ -5,6 +5,7 @@ namespace schedule\forms\manage\Schedule\Product;
 
 
 use schedule\entities\Schedule\Characteristic;
+use schedule\entities\Schedule\Product\Value;
 use yii\base\Model;
 
 /**
@@ -19,7 +20,7 @@ class ValueForm extends Model
     /**
      * ValueForm constructor.
      * @param Characteristic $characteristic
-     * @param Value $value
+     * @param Value|null $value
      * @param array $config
      */
     public function __construct(Characteristic $characteristic, Value $value=null, $config = [])

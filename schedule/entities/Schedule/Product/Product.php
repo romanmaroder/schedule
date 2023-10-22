@@ -11,6 +11,7 @@ use schedule\entities\Schedule\Brand;
 use schedule\entities\Schedule\Category;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * @property int $id
@@ -31,6 +32,7 @@ use yii\db\ActiveRecord;
  * @property Category $category
  * @property CategoryAssignment[] $categoryAssignments
  * @property Value[] $values
+ * @property Photo[] $photos
  */
 class Product extends ActiveRecord
 {
@@ -144,7 +146,82 @@ class Product extends ActiveRecord
     {
         $this->categoryAssignments = [];
     }
-    ########
+
+    # Photo methods
+
+    /**
+     * @param UploadedFile $file
+     */
+    public function addPhoto(UploadedFile $file): void
+    {
+        $photos = $this->photos;
+        $photos[] = Photo::create($file);
+        $this->updatePhotos($photos);
+    }
+
+    /**
+     * @param $id
+     */
+    public function removePhoto($id): void
+    {
+        $photos = $this->photos;
+        foreach ($photos as $i => $photo) {
+            if ($photo->isIdEqualTo($id)) {
+                unset($photos[$i]);
+                $this->updatePhotos($photos);
+                return;
+            }
+        }
+        throw new \DomainException('Photo is not found.');
+    }
+
+    public function removePhotos(): void
+    {
+        $this->updatePhotos([]);
+    }
+
+    public function movePhotoUp($id): void
+    {
+        $photos = $this->photos;
+        foreach ($photos as $i => $photo) {
+            if ($photo->isIdEqualTo($id)) {
+                if ($prev = $photos[$i - 1] ?? null) {
+                    $photos[$i - 1] = $photo;
+                    $photos[$i] = $prev;
+                    $this->updatePhotos($photos);
+                }
+                return;
+            }
+        }
+        throw new \DomainException('Photo is not found.');
+    }
+
+    public function movePhotoDown($id): void
+    {
+        $photos = $this->photos;
+        foreach ($photos as $i => $photo) {
+            if ($photo->isIdEqualTo($id)) {
+                if ($next = $photos[$i + 1] ?? null) {
+                    $photos[$i] = $next;
+                    $photos[$i + 1] = $photo;
+                    $this->updatePhotos($photos);
+                }
+                return;
+            }
+        }
+        throw new \DomainException('Photo is not found.');
+    }
+
+    /**
+     * @param array $photos
+     */
+    private function updatePhotos(array $photos): void
+    {
+        foreach ($photos as $i => $photo) {
+            $photo->setSort($i);
+        }
+        $this->photos = $photos;
+    }
 
     /**
      * @return ActiveQuery
@@ -175,7 +252,7 @@ class Product extends ActiveRecord
      */
     public function getValues(): ActiveQuery
     {
-        return  $this->hasMany(Value::class,['product_id'=>'id']);
+        return $this->hasMany(Value::class, ['product_id' => 'id']);
     }
 
     public static function tableName(): string
@@ -189,7 +266,7 @@ class Product extends ActiveRecord
             MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['categoryAssignments','values'],
+                'relations' => ['categoryAssignments', 'values'],
             ],
         ];
     }
@@ -200,4 +277,5 @@ class Product extends ActiveRecord
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
+
 }
