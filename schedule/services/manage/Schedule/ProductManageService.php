@@ -8,6 +8,7 @@ use schedule\entities\Meta;
 use schedule\entities\Schedule\Product\Product;
 use schedule\entities\Schedule\Tag;
 use schedule\forms\manage\Schedule\Product\CategoriesForm;
+use schedule\forms\manage\Schedule\Product\ModificationForm;
 use schedule\forms\manage\Schedule\Product\PhotosForm;
 use schedule\forms\manage\Schedule\Product\ProductCreateForm;
 use schedule\forms\manage\Schedule\Product\ProductEditForm;
@@ -193,6 +194,39 @@ class ProductManageService
         $product->revokeRelatedProduct($other->id);
         $this->products->save($product);
     }
+
+    # Modification
+
+    public function addModification($id, ModificationForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->addModification(
+            $form->code,
+            $form->name,
+            $form->price
+        );
+        $this->products->save($product);
+    }
+
+    public function editModification($id, $modificationId, ModificationForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->editModification(
+            $modificationId,
+            $form->code,
+            $form->name,
+            $form->price
+        );
+        $this->products->save($product);
+    }
+
+    public function removeModification($id, $modificationId): void
+    {
+        $product = $this->products->get($id);
+        $product->removeModification($modificationId);
+        $this->products->save($product);
+    }
+
 
     /**
      * @param $id
