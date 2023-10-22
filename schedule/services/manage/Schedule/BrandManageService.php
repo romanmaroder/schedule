@@ -8,18 +8,22 @@ use schedule\entities\Meta;
 use schedule\entities\Schedule\Brand;
 use schedule\forms\manage\Schedule\BrandForm;
 use schedule\repositories\Schedule\BrandRepository;
+use schedule\repositories\Schedule\ProductRepository;
 
 class BrandManageService
 {
-private $brands;
+    private $brands;
+    private $products;
 
     /**
      * BrandManageService constructor.
-     * @param $brands
+     * @param BrandRepository $brands
+     * @param ProductRepository $products
      */
-    public function __construct(BrandRepository $brands)
+    public function __construct(BrandRepository $brands,ProductRepository $products)
     {
         $this->brands = $brands;
+        $this->products=$products;
     }
 
     /**
@@ -66,6 +70,9 @@ private $brands;
     public function remove($id):void
     {
         $brand= $this->brands->get($id);
+        if ($this->products->existsByBrand($brand->id)) {
+            throw new \DomainException('Unable to remove brand with products.');
+        }
         $this->brands->remove($brand);
     }
 }
