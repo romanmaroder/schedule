@@ -7,7 +7,7 @@ namespace schedule\entities\Schedule\Product;
 use yii\db\ActiveRecord;
 
 /**
- * @property integer $characteristic_id
+ * @property int $characteristic_id
  * @property string $value
  * @property int $product_id [int(11)]
  */

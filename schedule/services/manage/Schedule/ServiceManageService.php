@@ -42,7 +42,7 @@ class ServiceManageService
         $services->setPrice($form->price->new, $form->price->old, $form->price->intern, $form->price->employee);
 
         # Binding of additional categories to the product
-        foreach ($form->categories->other as $otherId) {
+        foreach ($form->categories->others as $otherId) {
             $category = $this->categories->get($otherId);
             $services->assignCategory($category->id);
         }
@@ -53,7 +53,15 @@ class ServiceManageService
 
     public function changeCategories($id, CategoriesForm $form): void
     {
-
+        $service = $this->services->get($id);
+        $category = $this->categories->get($form->main);
+        $service->changeMainCategory($category->id);
+        $service->revokeCategories();
+        foreach ($form->others as $otherId) {
+            $category = $this->categories->get($otherId);
+            $service->assignCategory($category->id);
+        }
+        $this->services->save($service);
     }
 
     /**

@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 class CategoriesForm extends Model
 {
     public $main;
-    public $other = [];
+    public $others = [];
 
     /**
      * CategoriesForm constructor.
@@ -22,7 +22,7 @@ class CategoriesForm extends Model
     {
         if ($service) {
             $this->main = $service->category_id;
-            $this->other = ArrayHelper::getColumn($service->categoryAssignments, 'category_id');
+            $this->others = ArrayHelper::getColumn($service->categoryAssignments, 'category_id');
         }
         parent::__construct($config);
     }
@@ -32,8 +32,8 @@ class CategoriesForm extends Model
         return [
             ['main', 'required'],
             ['main', 'integer'],
-            ['other', 'each', 'rule' => ['integer']],
-            ['other', 'default', 'value' => []],
+            ['others', 'each', 'rule' => ['integer']],
+            ['others', 'default', 'value' => []],
         ];
     }
 }

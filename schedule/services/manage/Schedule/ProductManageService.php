@@ -7,6 +7,7 @@ namespace schedule\services\manage\Schedule;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Product\Product;
 use schedule\forms\manage\Schedule\Product\CategoriesForm;
+use schedule\forms\manage\Schedule\Product\PhotosForm;
 use schedule\forms\manage\Schedule\Product\ProductCreateForm;
 use schedule\repositories\Schedule\BrandRepository;
 use schedule\repositories\Schedule\CategoryRepository;
@@ -47,7 +48,7 @@ class ProductManageService
         $product->setPrice($form->price->new, $form->price->old, $form->price->intern, $form->price->employee);
 
         # Binding of additional categories to the product
-        foreach ($form->categories->other as $otherId) {
+        foreach ($form->categories->others as $otherId) {
             $category = $this->categories->get($otherId);
             $product->assignCategory($category->id);
         }
@@ -65,9 +66,47 @@ class ProductManageService
         return $product;
     }
 
-    public function changeCategories($id,CategoriesForm $form):void
+    public function changeCategories($id, CategoriesForm $form): void
     {
-        
+        $product = $this->products->get($id);
+        $category = $this->categories->get($form->main);
+        $product->changeMainCategory($category->id);
+        $product->revokeCategories();
+        foreach ($form->others as $otherId) {
+            $category = $this->categories->get($otherId);
+            $product->assignCategory($category->id);
+        }
+        $this->products->save($product);
+    }
+
+    public function addPhotos($id, PhotosForm $form): void
+    {
+        $product = $this->products->get($id);
+        foreach ($form->files as $file) {
+            $product->addPhoto($file);
+        }
+        $this->products->save($product);
+    }
+
+    public function movePhotoUp($id, $photoId): void
+    {
+        $product = $this->products->get($id);
+        $product->movePhotoUp($photoId);
+        $this->products->save($product);
+    }
+
+    public function movePhotoDown($id, $photoId): void
+    {
+        $product = $this->products->get($id);
+        $product->movePhotoDown($photoId);
+        $this->products->save($product);
+    }
+
+    public function removePhoto($id, $photoId): void
+    {
+        $product = $this->products->get($id);
+        $product->removePhoto($photoId);
+        $this->products->save($product);
     }
 
     /**
