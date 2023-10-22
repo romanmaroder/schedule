@@ -60,6 +60,12 @@ class Service extends ActiveRecord
         $this->price_employee = $employee;
     }
 
+    public function edit($name, $description, Meta $meta): void
+    {
+        $this->name = $name;
+        $this->description = $description;
+        $this->meta = $meta;
+    }
     # Category methods
 
     /**

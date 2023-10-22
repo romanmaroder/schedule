@@ -10,6 +10,7 @@ use schedule\entities\Schedule\Tag;
 use schedule\forms\manage\Schedule\Product\CategoriesForm;
 use schedule\forms\manage\Schedule\Product\PhotosForm;
 use schedule\forms\manage\Schedule\Product\ProductCreateForm;
+use schedule\forms\manage\Schedule\Product\ProductEditForm;
 use schedule\repositories\Schedule\BrandRepository;
 use schedule\repositories\Schedule\CategoryRepository;
 use schedule\repositories\Schedule\ProductRepository;
@@ -93,6 +94,45 @@ class ProductManageService
         );
 
         return $product;
+    }
+
+    public function edit($id, ProductEditForm $form): void
+    {
+        $product = $this->products->get($id);
+        $brand = $this->brands->get($form->brandId);
+
+        $product->edit(
+            $brand->id,
+            $form->code,
+            $form->name,
+            new Meta(
+                $form->meta->title,
+                $form->meta->description,
+                $form->meta->keywords
+            )
+        );
+
+        foreach ($form->values as $value) {
+            $product->setValue($value->id, $value->value);
+        }
+
+        $product->revokeTags();
+
+        foreach ($form->tags->existing as $tagId) {
+            $tag = $this->tags->get($tagId);
+            $product->assignTag($tag->id);
+        }
+
+        $this->transaction->wrap(function () use ($product, $form) {
+            foreach ($form->tags->newNames as $tagName) {
+                if (!$tag = $this->tags->findByName($tagName)) {
+                    $tag = Tag::create($tagName, $tagName);
+                    $this->tags->save($tag);
+                }
+                $product->assignTag($tag->id);
+            }
+            $this->products->save($product);
+        });
     }
 
     public function changeCategories($id, CategoriesForm $form): void

@@ -9,6 +9,7 @@ use schedule\entities\Schedule\Service\Service;
 use schedule\entities\Schedule\Tag;
 use schedule\forms\manage\Schedule\Service\CategoriesForm;
 use schedule\forms\manage\Schedule\Service\ServiceCreateForm;
+use schedule\forms\manage\Schedule\Service\ServiceEditForm;
 use schedule\repositories\Schedule\CategoryRepository;
 use schedule\repositories\Schedule\ServiceRepository;
 use schedule\repositories\Schedule\TagRepository;
@@ -51,13 +52,13 @@ class ServiceManageService
         );
         $services->setPrice($form->price->new, $form->price->old, $form->price->intern, $form->price->employee);
 
-        # Binding of additional categories to the product
+        # Binding of additional categories to the service
         foreach ($form->categories->others as $otherId) {
             $category = $this->categories->get($otherId);
             $services->assignCategory($category->id);
         }
 
-        # Binding tags to the product
+        # Binding tags to the service
         foreach ($form->tags->existing as $tagId) {
             $tag = $this->tags->get($tagId);
             $services->assignTag($tag->id);
@@ -72,10 +73,43 @@ class ServiceManageService
                     }
                     $services->assignTag($tag->id);
                 }
-                $this->products->save($services);
+                $this->services->save($services);
             }
         );
         return $services;
+    }
+
+    public function edit($id, ServiceEditForm $form): void
+    {
+        $service = $this->services->get($id);
+
+        $service->edit(
+            $form->name,
+            $form->description,
+            new Meta(
+                $form->meta->title,
+                $form->meta->description,
+                $form->meta->keywords
+            )
+        );
+
+        $service->revokeTags();
+
+        foreach ($form->tags->existing as $tagId) {
+            $tag = $this->tags->get($tagId);
+            $service->assignTag($tag->id);
+        }
+
+        $this->transaction->wrap(function () use ($service, $form) {
+            foreach ($form->tags->newNames as $tagName) {
+                if (!$tag = $this->tags->findByName($tagName)) {
+                    $tag = Tag::create($tagName, $tagName);
+                    $this->tags->save($tag);
+                }
+                $service->assignTag($tag->id);
+            }
+            $this->services->save($service);
+        });
     }
 
     public function changeCategories($id, CategoriesForm $form): void

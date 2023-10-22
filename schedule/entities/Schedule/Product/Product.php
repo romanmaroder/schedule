@@ -68,6 +68,14 @@ class Product extends ActiveRecord
         $this->price_employee = $employee;
     }
 
+    public function edit($brandId, $code, $name, Meta $meta): void
+    {
+        $this->brand_id = $brandId;
+        $this->code = $code;
+        $this->name = $name;
+        $this->meta = $meta;
+    }
+
     # Value methods
 
     /**
