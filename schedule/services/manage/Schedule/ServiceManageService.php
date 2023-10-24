@@ -82,7 +82,7 @@ class ServiceManageService
     public function edit($id, ServiceEditForm $form): void
     {
         $service = $this->services->get($id);
-
+        $category = $this->categories->get($form->categories->main);
         $service->edit(
             $form->name,
             $form->description,
@@ -92,6 +92,14 @@ class ServiceManageService
                 $form->meta->keywords
             )
         );
+        $service->changeMainCategory($category->id);
+
+        $service->revokeCategories();
+
+        foreach ($form->categories->others as $otherId) {
+            $category=$this->categories->get($otherId);
+            $service->assignCategory($category->id);
+        }
 
         $service->revokeTags();
 
@@ -110,19 +118,6 @@ class ServiceManageService
             }
             $this->services->save($service);
         });
-    }
-
-    public function changeCategories($id, CategoriesForm $form): void
-    {
-        $service = $this->services->get($id);
-        $category = $this->categories->get($form->main);
-        $service->changeMainCategory($category->id);
-        $service->revokeCategories();
-        foreach ($form->others as $otherId) {
-            $category = $this->categories->get($otherId);
-            $service->assignCategory($category->id);
-        }
-        $this->services->save($service);
     }
 
     /**

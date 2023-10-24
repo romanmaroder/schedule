@@ -25,6 +25,7 @@ class ServiceEditForm extends CompositeForm
         $this->name = $service->name;
         $this->description = $service->description;
         $this->meta = new MetaForm($service->meta);
+        $this->categories = new CategoriesForm($service);
         $this->tags = new TagsForm($service);
 
         $this->_service = $service;
