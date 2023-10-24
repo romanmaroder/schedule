@@ -8,14 +8,17 @@ use schedule\entities\Meta;
 use schedule\entities\Schedule\Category;
 use schedule\forms\manage\Schedule\CategoryForm;
 use schedule\repositories\Schedule\CategoryRepository;
+use schedule\repositories\Schedule\ServiceRepository;
 
 class CategoryManageService
 {
     private $categories;
+    private $services;
 
-    public function __construct(CategoryRepository $categories)
+    public function __construct(CategoryRepository $categories, ServiceRepository $services)
     {
         $this->categories = $categories;
+        $this->services = $services;
     }
 
     /**
@@ -71,6 +74,9 @@ class CategoryManageService
     {
         $category = $this->categories->get($id);
         $this->assertIsNotRoot($category);
+        if ($this->services->existsByMainCategory($category->id)) {
+            throw new \DomainException('Unable to remove category with services.');
+        }
         $this->categories->remove($category);
     }
 

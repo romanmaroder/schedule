@@ -17,6 +17,11 @@ class ServiceRepository
         return $service;
     }
 
+    public function existsByMainCategory($id):bool
+    {
+        return Service::find()->andWhere(['category_id'=>$id])->exists();
+    }
+
     public function save(Service $service): void
     {
         if (!$service->save()) {
