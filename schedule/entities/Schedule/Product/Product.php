@@ -25,6 +25,7 @@ use yii\web\UploadedFile;
  * @property int $price_intern [int(11)]
  * @property int $price_employee [int(11)]
  * @property int $rating
+ * @property int $main_photo_id
  * @property string $meta_json
  *
  * @property Meta $meta
@@ -315,6 +316,7 @@ class Product extends ActiveRecord
             $photo->setSort($i);
         }
         $this->photos = $photos;
+        $this->populateRelation('mainPhoto', reset($photos));
     }
 
     # Related products
@@ -486,6 +488,14 @@ class Product extends ActiveRecord
     /**
      * @return ActiveQuery
      */
+    public function getMainPhoto(): ActiveQuery
+    {
+        return $this->hasOne(Photo::class, ['id' => 'main_photo_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getRelatedAssignments(): ActiveQuery
     {
         return $this->hasMany(RelatedAssignment::class, ['product_id' => 'id']);
@@ -528,6 +538,15 @@ class Product extends ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes):void
+    {
+        $related = $this->getRelatedRecords();
+        if (array_key_exists('mainPhoto', $related)) {
+            $this->updateAttributes(['main_photo_id' => $related['mainPhoto'] ? $related['mainPhoto']->id : null]);
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 
 }
