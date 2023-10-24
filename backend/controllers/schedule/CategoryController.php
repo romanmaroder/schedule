@@ -128,6 +128,26 @@ class CategoryController extends Controller
 
     /**
      * @param int $id
+     * @return mixed
+     */
+    public function actionMoveUp($id)
+    {
+        $this->service->moveUp($id);
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function actionMoveDown($id)
+    {
+        $this->service->moveDown($id);
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @param int $id
      * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
