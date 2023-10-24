@@ -8,6 +8,7 @@ use schedule\entities\Schedule\Category;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\MetaForm;
 use schedule\validators\SlugValidator;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property MetaForm $meta;
@@ -47,8 +48,30 @@ class CategoryForm extends CompositeForm
             [['name', 'slug', 'title'], 'string', 'max' => 255],
             [['description'], 'string'],
             ['slug', SlugValidator::class],
-            [['name', 'slug'], 'unique', 'targetClass' => Category::class, 'filter' => $this->_category ? ['<>', 'id', $this->_category->id] : null]
+            [
+                ['name', 'slug'],
+                'unique',
+                'targetClass' => Category::class,
+                'filter' => $this->_category ? ['<>', 'id', $this->_category->id] : null
+            ]
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function parentCategoriesList(): array
+    {
+        return ArrayHelper::map(
+            Category::find()->orderBy('lft')->asArray()->all(),
+            'id',
+            function (array $category) {
+                return ($category['depth'] > 1 ? str_repeat(
+                            '-- ',
+                            $category['depth'] - 1
+                        ) . ' ' : '') . $category['name'];
+            }
+        );
     }
 
     protected function internalForms(): array

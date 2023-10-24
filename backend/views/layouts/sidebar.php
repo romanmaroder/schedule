@@ -54,6 +54,7 @@
                                         'active' => $this->context->id == 'schedule/brand'
                                     ],
                                     ['label' => 'Tags', 'icon' => 'file-o', 'url' => ['/schedule/tag/index'], 'active' => $this->context->id == 'schedule/tag'],
+                                    ['label' => 'Categories', 'icon' => 'file-o', 'url' => ['/schedule/category/index'], 'active' => $this->context->id == 'schedule/category'],
                                 ]
                             ],
                             [
