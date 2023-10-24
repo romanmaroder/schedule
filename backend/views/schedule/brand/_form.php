@@ -1,7 +1,7 @@
 <?php
 
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model schedule\forms\manage\Schedule\BrandForm */

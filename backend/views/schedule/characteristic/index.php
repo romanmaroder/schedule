@@ -1,22 +1,23 @@
 <?php
 
-use schedule\entities\Schedule\Category;
+use schedule\entities\Schedule\Characteristic;
+use schedule\helpers\CharacteristicHelper;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\forms\Schedule\CategorySearch */
+/* @var $searchModel backend\forms\Schedule\CharacteristicSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Characteristic';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-index">
+<div class="characteristic-index">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Create characteristic', ['create'], ['class' => 'btn btn-success']) ?>
             </h3>
 
             <div class="card-tools">
@@ -35,29 +36,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
                     'columns' => [
-                        'id',
                         [
                             'attribute' => 'name',
-                            'value' => function (Category $model) {
-                                $indent = ($model->depth > 1 ? str_repeat(
-                                        '&nbsp;&nbsp;&nbsp;',
-                                        $model->depth - 1
-                                    ) . ' ' : '<i class="fas fa-home fa-xs"></i> ');
-                                return $indent . Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                            'value' => function (Characteristic $model) {
+                                return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
                             },
                             'format' => 'raw',
                         ],
                         [
-                            'value' => function (Category $model) {
-                                return
-                                    Html::a('<i class="fas fa-arrow-up"></i>', ['move-up', 'id' => $model->id]) .
-                                    Html::a('<i class="fas fa-arrow-down"></i>', ['move-down', 'id' => $model->id]);
+                            'attribute' => 'type',
+                            'filter' => $searchModel->typesList(),
+                            'value' => function (Characteristic $model) {
+                                return CharacteristicHelper::typeName($model->type);
                             },
-                            'format' => 'raw',
-                            'contentOptions' => ['style' => 'text-align: center'],
                         ],
-                        'slug',
-                        'title',
+                        [
+                            'attribute' => 'required',
+                            'filter' => $searchModel->requiredList(),
+                            'format' => 'boolean',
+                        ],
                         ['class' => ActionColumn::class],
                     ],
                 ]

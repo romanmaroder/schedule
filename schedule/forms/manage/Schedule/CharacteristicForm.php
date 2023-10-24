@@ -5,6 +5,7 @@ namespace schedule\forms\manage\Schedule;
 
 
 use schedule\entities\Schedule\Characteristic;
+use schedule\helpers\CharacteristicHelper;
 use yii\base\Model;
 
 /**
@@ -23,7 +24,7 @@ class CharacteristicForm extends Model
     private $_characteristic;
 
 
-    public function __construct(Characteristic $characteristic, $config = [])
+    public function __construct(Characteristic $characteristic=null, $config = [])
     {
         if ($characteristic) {
             $this->name = $characteristic->name;
@@ -49,6 +50,11 @@ class CharacteristicForm extends Model
             [['sort'], 'integer'],
             [['name'], 'unique', 'targetClass' => Characteristic::class, 'filter' => $this->_characteristic ? ['<>', 'id', $this->_characteristic->id] : null]
         ];
+    }
+
+    public function typesList(): array
+    {
+        return CharacteristicHelper::typeList();
     }
 
     /**

@@ -1,14 +1,16 @@
 <?php
 
-use yii\bootstrap4\ActiveForm;
-use yii\helpers\Html;
+
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\TagForm */
+/* @var $model schedule\forms\manage\Schedule\CharacteristicForm */
 /* @var $form yii\widgets\ActiveForm */
+
+use yii\bootstrap4\ActiveForm;
+
 ?>
 
-<div class="brand-form">
+<div class="characteristic-form">
 
     <?php
     $form = ActiveForm::begin(); ?>
@@ -28,15 +30,19 @@ use yii\helpers\Html;
         </div>
         <div class="card-body">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'type')->dropDownList($model->typesList()) ?>
+            <?= $form->field($model, 'sort')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'required')->checkbox() ?>
+            <?= $form->field($model, 'default')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'textVariants')->textarea(['rows' => 6]) ?>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
             <!--Footer-->
         </div>
         <!-- /.card-footer-->
     </div>
+
     <?php
     ActiveForm::end(); ?>
 </div>

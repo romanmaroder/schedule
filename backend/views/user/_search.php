@@ -1,7 +1,7 @@
 <?php
 
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var backend\forms\UserSearch $model */

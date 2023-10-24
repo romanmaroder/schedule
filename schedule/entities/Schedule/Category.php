@@ -12,14 +12,14 @@ use yii\db\ActiveRecord;
 
 
 /**
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $slug
  * @property string $title
  * @property string $description
- * @property integer $lft
- * @property integer $rgt
- * @property integer $depth
+ * @property int $lft
+ * @property int $rgt
+ * @property int $depth
  * @property Meta $meta
  * @property string $meta_json [json]
  * @property Category $parent
