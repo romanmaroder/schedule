@@ -8,13 +8,13 @@ use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $type
  * @property string $required
  * @property string $default
  * @property array $variants
- * @property integer $sort
+ * @property int $sort
  * @property string $variants_json [json]
  */
 class Characteristic extends ActiveRecord
@@ -96,13 +96,13 @@ class Characteristic extends ActiveRecord
 
     public function afterFind(): void
     {
-        $this->variants = Json::decode($this->getAttribute('variants_json'));
+        $this->variants = array_filter(Json::decode($this->getAttribute('variants_json')));
         parent::afterFind();
     }
 
     public function beforeSave($insert):bool
     {
-        $this->setAttribute('variants_json', Json::encode($this->variants));
+        $this->setAttribute('variants_json', Json::encode(array_filter($this->variants)));
         return parent::beforeSave($insert);
     }
 

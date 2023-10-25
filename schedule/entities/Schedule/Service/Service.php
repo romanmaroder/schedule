@@ -8,6 +8,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use schedule\entities\behaviors\MetaBehavior;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Category;
+use schedule\entities\Schedule\Tag;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -27,7 +28,9 @@ use yii\db\ActiveRecord;
  * @property Meta $meta
  * @property Category $category
  * @property CategoryAssignment[] $categoryAssignments
+ * @property Category[] $categories
  * @property TagAssignment[] $tagAssignments
+ * @property Tag[] $tags
  */
 class Service extends ActiveRecord
 {
@@ -144,7 +147,6 @@ class Service extends ActiveRecord
         $this->tagAssignments = [];
     }
 
-
     /**
      * @return ActiveQuery
      */
@@ -161,6 +163,30 @@ class Service extends ActiveRecord
         return $this->hasMany(CategoryAssignment::class, ['service_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
+    public function getCategories(): ActiveQuery
+    {
+        return $this->hasMany(Category::class, ['id' => 'category_id'])->via('categoryAssignments');
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTagAssignments(): ActiveQuery
+    {
+        return $this->hasMany(TagAssignment::class, ['service_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getTags(): ActiveQuery
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
+    }
+
     public static function tableName(): string
     {
         return '{{%schedule_services}}';
@@ -172,7 +198,7 @@ class Service extends ActiveRecord
             MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['categoryAssignments'],
+                'relations' => ['categoryAssignments', 'tagAssignments'],
             ],
         ];
     }

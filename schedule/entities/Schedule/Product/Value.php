@@ -4,12 +4,16 @@
 namespace schedule\entities\Schedule\Product;
 
 
+use schedule\entities\Schedule\Characteristic;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
  * @property int $characteristic_id
  * @property string $value
  * @property int $product_id [int(11)]
+ *
+ * @property Characteristic $characteristic
  */
 class Value extends ActiveRecord
 {
@@ -45,6 +49,14 @@ class Value extends ActiveRecord
     public function isForCharacteristic($id): bool
     {
         return $this->characteristic_id == $id;
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getCharacteristic(): ActiveQuery
+    {
+        return $this->hasOne(Characteristic::class, ['id' => 'characteristic_id']);
     }
 
     public function change($value): void

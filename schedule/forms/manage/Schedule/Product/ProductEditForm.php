@@ -4,10 +4,12 @@
 namespace schedule\forms\manage\Schedule\Product;
 
 
+use schedule\entities\Schedule\Brand;
 use schedule\entities\Schedule\Characteristic;
 use schedule\entities\Schedule\Product\Product;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\MetaForm;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property MetaForm $meta
@@ -47,13 +49,23 @@ class ProductEditForm extends CompositeForm
             [['brandId', 'code', 'name'], 'required'],
             [['brandId'], 'integer'],
             [['code', 'name'], 'string', 'max' => 255],
-            [['code'], 'unique', 'targetClass' => Product::class, 'filter' => $this->_product ? ['<>', 'id', $this->_product->id] : null],
-            ['description','string'],
+            [
+                ['code'],
+                'unique',
+                'targetClass' => Product::class,
+                'filter' => $this->_product ? ['<>', 'id', $this->_product->id] : null
+            ],
+            ['description', 'string'],
         ];
+    }
+
+    public function brandsList(): array
+    {
+        return ArrayHelper::map(Brand::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
     protected function internalForms(): array
     {
-        return ['meta', 'tags', 'values'];
+        return ['meta','categories', 'tags', 'values'];
     }
 }

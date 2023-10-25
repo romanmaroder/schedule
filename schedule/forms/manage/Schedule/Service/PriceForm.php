@@ -6,11 +6,13 @@ namespace schedule\forms\manage\Schedule\Service;
 
 use schedule\entities\Schedule\Service\Service;
 use schedule\forms\manage\MetaForm;
+use schedule\forms\manage\Schedule\Product\TagsForm;
 use yii\base\Model;
 
 /**
  * @property MetaForm $meta
  * @property CategoriesForm $categories
+ * @property TagsForm $tags
  */
 class PriceForm extends Model
 {
@@ -28,9 +30,9 @@ class PriceForm extends Model
     {
         if ($service) {
             $this->new = $service->price_new;
-            $this->old = $service->old;
-            $this->intern = $service->intern;
-            $this->employee = $service->employee;
+            $this->old = $service->price_old;
+            $this->intern = $service->price_intern;
+            $this->employee = $service->price_employee;
         }
         parent::__construct($config);
     }

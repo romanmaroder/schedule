@@ -9,6 +9,7 @@ use schedule\entities\behaviors\MetaBehavior;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Brand;
 use schedule\entities\Schedule\Category;
+use schedule\entities\Schedule\Tag;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
@@ -32,12 +33,15 @@ use yii\web\UploadedFile;
  * @property Meta $meta
  * @property Brand $brand
  * @property Category $category
+ * @property Category[] $categories
  * @property CategoryAssignment[] $categoryAssignments
  * @property TagAssignment[] $tagAssignments
+ * @property Tag[] $tags
  * @property RelatedAssignment[] $relatedAssignments
  * @property Modification[] $modifications
  * @property Value[] $values
  * @property Photo[] $photos
+ * @property Photo $mainPhoto
  * @property Review[] $reviews
  */
 class Product extends ActiveRecord
@@ -459,6 +463,14 @@ class Product extends ActiveRecord
     /**
      * @return ActiveQuery
      */
+    public function getCategories(): ActiveQuery
+    {
+        return $this->hasMany(Category::class, ['id' => 'category_id'])->via('categoryAssignments');
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getTagAssignments(): ActiveQuery
     {
         return $this->hasMany(TagAssignment::class, ['product_id' => 'id']);
@@ -467,9 +479,25 @@ class Product extends ActiveRecord
     /**
      * @return ActiveQuery
      */
+    public function getTags(): ActiveQuery
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
+    }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getModifications(): ActiveQuery
     {
         return $this->hasMany(Modification::class, ['product_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getRelateds(): ActiveQuery
+    {
+        return $this->hasMany(Product::class, ['id' => 'related_id'])->via('relatedAssignments');
     }
 
     /**
@@ -541,6 +569,17 @@ class Product extends ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public function beforeDelete(): bool
+    {
+        if (parent::beforeDelete()) {
+            foreach ($this->photos as $photo) {
+                $photo->delete();
+            }
+            return true;
+        }
+        return false;
     }
 
     public function afterSave($insert, $changedAttributes):void

@@ -9,7 +9,6 @@ use yii\db\ActiveRecord;
 /**
  * @property int $product_id;
  * @property int $tag_id;
- * @property int $service_id [int(11)]
  */
 class TagAssignment extends ActiveRecord
 {

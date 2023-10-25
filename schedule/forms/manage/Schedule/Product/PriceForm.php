@@ -21,7 +21,8 @@ class PriceForm extends Model
     public $intern;
     public $employee;
 
-    /**
+    /**n
+     *
      * PriceForm constructor.
      * @param Product|null $product
      * @param array $config
@@ -30,9 +31,9 @@ class PriceForm extends Model
     {
         if ($product){
             $this->new = $product->price_new;
-            $this->old = $product->old;
-            $this->intern = $product->intern;
-            $this->employee = $product->employee;
+            $this->old = $product->price_old;
+            $this->intern = $product->price_intern;
+            $this->employee = $product->price_employee;
         }
         parent::__construct($config);
     }

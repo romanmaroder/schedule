@@ -10,6 +10,7 @@ use schedule\entities\Schedule\Tag;
 use schedule\forms\manage\Schedule\Product\CategoriesForm;
 use schedule\forms\manage\Schedule\Product\ModificationForm;
 use schedule\forms\manage\Schedule\Product\PhotosForm;
+use schedule\forms\manage\Schedule\Product\PriceForm;
 use schedule\forms\manage\Schedule\Product\ProductCreateForm;
 use schedule\forms\manage\Schedule\Product\ProductEditForm;
 use schedule\repositories\Schedule\BrandRepository;
@@ -147,6 +148,12 @@ class ProductManageService
         });
     }
 
+    public function changePrice($id, PriceForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->setPrice($form->new, $form->old,$form->intern,$form->employee);
+        $this->products->save($product);
+    }
 
     public function addPhotos($id, PhotosForm $form): void
     {

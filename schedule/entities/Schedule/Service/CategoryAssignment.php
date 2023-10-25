@@ -12,7 +12,6 @@ use yii\db\ActiveRecord;
  *
  * @property int $service_id [int(11)]
  * @property int $category_id [int(11)]
- * @property int $product_id [int(11)]
  */
 class CategoryAssignment extends ActiveRecord
 {
@@ -35,6 +34,6 @@ class CategoryAssignment extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_category_assignments}}';
+        return '{{%schedule_category_service_assignments}}';
     }
 }

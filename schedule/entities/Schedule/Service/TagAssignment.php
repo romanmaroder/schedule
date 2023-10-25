@@ -9,7 +9,6 @@ use yii\db\ActiveRecord;
 /**
  * @property int $service_id;
  * @property int $tag_id;
- * @property int $product_id [int(11)]
  */
 class TagAssignment extends ActiveRecord
 {
@@ -27,6 +26,6 @@ class TagAssignment extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_tag_assignments}}';
+        return '{{%schedule_tag_service_assignments}}';
     }
 }

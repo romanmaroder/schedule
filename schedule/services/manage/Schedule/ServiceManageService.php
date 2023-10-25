@@ -7,7 +7,7 @@ namespace schedule\services\manage\Schedule;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Service\Service;
 use schedule\entities\Schedule\Tag;
-use schedule\forms\manage\Schedule\Service\CategoriesForm;
+use schedule\forms\manage\Schedule\Service\PriceForm;
 use schedule\forms\manage\Schedule\Service\ServiceCreateForm;
 use schedule\forms\manage\Schedule\Service\ServiceEditForm;
 use schedule\repositories\Schedule\CategoryRepository;
@@ -118,6 +118,13 @@ class ServiceManageService
             }
             $this->services->save($service);
         });
+    }
+
+    public function changePrice($id, PriceForm $form): void
+    {
+        $service = $this->services->get($id);
+        $service->setPrice($form->new, $form->old,$form->intern,$form->employee);
+        $this->services->save($service);
     }
 
     /**

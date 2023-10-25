@@ -4,10 +4,12 @@
 namespace schedule\forms\manage\Schedule\Product;
 
 
+use schedule\entities\Schedule\Brand;
 use schedule\entities\Schedule\Characteristic;
 use schedule\entities\Schedule\Product\Product;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\MetaForm;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property PriceForm $price
@@ -44,8 +46,13 @@ class ProductCreateForm extends CompositeForm
             [['code', 'name'], 'string', 'max' => 255],
             [['brandId'], 'integer'],
             [['code'], 'unique', 'targetClass' => Product::class],
-            ['description','string'],
+            ['description', 'string'],
         ];
+    }
+
+    public function brandsList(): array
+    {
+        return ArrayHelper::map(Brand::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
     protected function internalForms(): array

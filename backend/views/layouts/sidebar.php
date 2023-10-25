@@ -50,6 +50,18 @@
                                     'icon' => 'folder',
                                     'items' => [
                                         [
+                                            'label' => 'Products',
+                                            'icon' => 'file-o',
+                                            'url' => ['/schedule/product/index'],
+                                            'active' => $this->context->id == 'schedule/product'
+                                        ],
+                                        [
+                                            'label' => 'Service',
+                                            'icon' => 'file-o',
+                                            'url' => ['/schedule/service/index'],
+                                            'active' => $this->context->id == 'schedule/service'
+                                        ],
+                                        [
                                             'label' => 'Brands',
                                             'icon' => 'file-o',
                                             'url' => ['/schedule/brand/index'],

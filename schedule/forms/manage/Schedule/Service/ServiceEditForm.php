@@ -44,6 +44,6 @@ class ServiceEditForm extends CompositeForm
 
     protected function internalForms(): array
     {
-        return ['meta', 'tags'];
+        return ['meta', 'tags','categories'];
     }
 }

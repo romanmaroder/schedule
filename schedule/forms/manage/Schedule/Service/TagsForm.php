@@ -5,6 +5,7 @@ namespace schedule\forms\manage\Schedule\Service;
 
 
 use schedule\entities\Schedule\Service\Service;
+use schedule\entities\Schedule\Tag;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -36,6 +37,11 @@ class TagsForm extends Model
             ['existing', 'default', 'value' => []],
             ['textNew', 'string'],
         ];
+    }
+
+    public function tagsList(): array
+    {
+        return ArrayHelper::map(Tag::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
     /**
