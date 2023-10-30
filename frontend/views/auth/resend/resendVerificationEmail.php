@@ -4,8 +4,8 @@
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \schedule\forms\auth\ResendVerificationEmailForm $model */
 
-use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
 
 $this->title = 'Resend verification email';
 $this->params['breadcrumbs'][] = $this->title;

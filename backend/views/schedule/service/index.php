@@ -1,5 +1,6 @@
 <?php
 
+use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\Schedule\Service\Service;
 use schedule\helpers\PriceHelper;
 use yii\grid\GridView;
@@ -8,16 +9,20 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Schedule\ServiceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+PluginAsset::register($this)->add(
+    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
+);
 ?>
-<div class="service-index">
+    <div class="service-index">
 
-    <p>
-        <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <p>
+            <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
 
-    <div class="invoice p-3 mb-3">
-        <div class="card">
-            <div class="card-header">
+        <div class="invoice p-3 mb-3">
+            <div class="card">
+                <div class="card-header">
                 <h3 class="card-title ">
                     Common
                 </h3>
@@ -34,7 +39,11 @@ use yii\helpers\Html;
                 <?= GridView::widget(
                     [
                         'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
+                        //'filterModel' => $searchModel,
+                        'tableOptions' => [
+                            'class' => 'table table-striped table-bordered',
+                            'id' => 'service'
+                        ],
                         'columns' => [
                             'id',
                             [
@@ -86,12 +95,53 @@ use yii\helpers\Html;
                     ]
                 ); ?>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                <!--Footer-->
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <!--Footer-->
+                </div>
+                <!-- /.card-footer-->
             </div>
-            <!-- /.card-footer-->
-        </div>
 
+        </div>
     </div>
-</div>
+
+<?php
+$js = <<< JS
+ $(function () {
+ 
+    $('#service').DataTable({
+    
+       "paging": false,
+       "lengthChange": false,
+       "searching": true,
+       "ordering": true,
+       "info": false,
+       "autoWidth": false,
+       "responsive": true,
+        // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
+      // "buttons": [
+      //   {
+		// 		"text": "Добавить категорию",
+		// 		"className":"btn btn-success",
+		// 		"tag":"a",
+		// 		"attr":{
+		// 		//"href":create
+		// 		},
+		// 		/*"action": function ( e, dt, node, config ) {
+		// 		  $(location).attr('href',config.attr.href);
+		// 		}*/
+      //   }
+      //   ],
+        "language": {
+          "search":"Поиск"
+         },
+    }).buttons().container().appendTo('#service_wrapper .col-md-6:eq(0)');
+
+  });
+
+JS;
+
+
+$this->registerJs($js, $position = yii\web\View::POS_READY, $key = null);
+
+?>

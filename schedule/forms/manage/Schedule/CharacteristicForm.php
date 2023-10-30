@@ -24,7 +24,7 @@ class CharacteristicForm extends Model
     private $_characteristic;
 
 
-    public function __construct(Characteristic $characteristic=null, $config = [])
+    public function __construct(Characteristic $characteristic = null, $config = [])
     {
         if ($characteristic) {
             $this->name = $characteristic->name;
@@ -48,7 +48,12 @@ class CharacteristicForm extends Model
             [['default'], 'string', 'max' => 255],
             [['textVariants'], 'string'],
             [['sort'], 'integer'],
-            [['name'], 'unique', 'targetClass' => Characteristic::class, 'filter' => $this->_characteristic ? ['<>', 'id', $this->_characteristic->id] : null]
+            [
+                ['name'],
+                'unique',
+                'targetClass' => Characteristic::class,
+                'filter' => $this->_characteristic ? ['<>', 'id', $this->_characteristic->id] : null
+            ]
         ];
     }
 

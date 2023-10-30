@@ -4,8 +4,8 @@
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \schedule\forms\auth\LoginForm $model */
 
-use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -35,12 +35,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
-            <?php ActiveForm::end(); ?>
+            <?php
+            ActiveForm::end(); ?>
 
             <h2>Socials</h2>
-            <?= yii\authclient\widgets\AuthChoice::widget([
-                'baseAuthUrl' => ['auth/network/auth']
-            ]); ?>
+            <?= yii\authclient\widgets\AuthChoice::widget(
+                [
+                    'baseAuthUrl' => ['auth/network/auth']
+                ]
+            ); ?>
         </div>
     </div>
 </div>

@@ -11,10 +11,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
-<div class="card">
+<div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            Common
         </h3>
 
         <div class="card-tools">
@@ -27,15 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="card-body">
-        <?= $form->field($model, 'username')->textInput(['maxLength' => true]) ?>
-        <?= $form->field($model, 'email')->textInput(['maxLength' => true]) ?>
-        <?= $form->field($model, 'password')->passwordInput(['maxLength' => true]) ?>
+        <div class="form-group">
+            <?= $form->field($model, 'username')->textInput(
+                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('username')]
+            )->label($model->getAttributeLabel('username')) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model, 'email')->textInput(
+                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('email')]
+            )->label($model->getAttributeLabel('email')) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model, 'password')->passwordInput(['maxLength' => true, 'placeholder' => $model->getAttributeLabel('password')]
+            )->label($model->getAttributeLabel('password'))?>
+        </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-        <!--Footer-->
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
     <!-- /.card-footer-->
 </div>
 
-<?php ActiveForm::end(); ?>
+<?php
+ActiveForm::end(); ?>

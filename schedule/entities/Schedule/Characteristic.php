@@ -15,7 +15,6 @@ use yii\helpers\Json;
  * @property string $default
  * @property array $variants
  * @property int $sort
- * @property string $variants_json [json]
  */
 class Characteristic extends ActiveRecord
 {
@@ -24,6 +23,7 @@ class Characteristic extends ActiveRecord
     const TYPE_INTEGER = 'integer';
     const TYPE_FLOAT = 'float';
 
+    public $variants;
     /**
      * @param $name
      * @param $type
@@ -94,6 +94,10 @@ class Characteristic extends ActiveRecord
         return count($this->variants) > 0;
     }
 
+    public static function tableName(): string
+    {
+        return '{{%schedule_characteristics}}';
+    }
     public function afterFind(): void
     {
         $this->variants = array_filter(Json::decode($this->getAttribute('variants_json')));
@@ -106,8 +110,4 @@ class Characteristic extends ActiveRecord
         return parent::beforeSave($insert);
     }
 
-    public static function tableName(): string
-    {
-        return '{{%schedule_characteristics}}';
-    }
 }
