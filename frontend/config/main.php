@@ -52,10 +52,14 @@ return [
         },
 
     ],
-    /*'as access' => [
+    'as access' => [
         'class' => 'yii\filters\AccessControl',
         'except' => [
             'auth/auth/login',
+            'auth/auth/logout',
+            'auth/resend/resend-verification-email',
+            'auth/reset/reset-password',
+            'auth/reset/request-password-reset',
             'site/error'
         ],
         'rules' => [
@@ -64,6 +68,6 @@ return [
                 'roles' => ['@'],
             ],
         ],
-    ],*/
+    ],
     'params' => $params,
 ];

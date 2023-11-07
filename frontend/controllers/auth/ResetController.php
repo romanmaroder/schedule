@@ -8,6 +8,7 @@ use schedule\forms\auth\PasswordResetRequestForm;
 use schedule\forms\auth\ResetPasswordForm;
 use schedule\services\auth\PasswordResetService;
 use Yii;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 
@@ -26,6 +27,7 @@ class ResetController extends Controller
      */
     public function actionRequestPasswordReset()
     {
+        $this->layout = 'main-login';
         $form = new PasswordResetRequestForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
@@ -55,7 +57,7 @@ class ResetController extends Controller
         } catch (\DomainException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
-
+        $this->layout = 'main-login';
         $form = new ResetPasswordForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {

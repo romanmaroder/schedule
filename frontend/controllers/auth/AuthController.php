@@ -7,6 +7,7 @@ namespace frontend\controllers\auth;
 use schedule\forms\auth\LoginForm;
 use schedule\services\auth\AuthService;
 use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class AuthController extends Controller
@@ -18,7 +19,20 @@ class AuthController extends Controller
         parent::__construct($id, $module, $config);
         $this->service = $service;
     }
-
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
     /**
      * @return mixed
      */
@@ -27,6 +41,8 @@ class AuthController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        $this->layout = 'main-login';
+
         $form = new LoginForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
@@ -39,7 +55,8 @@ class AuthController extends Controller
             }
         }
 
-        return $this->render('login', [
+        return $this->render(
+            'login', [
             'model' => $form,
         ]);
     }
