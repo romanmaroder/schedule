@@ -12,6 +12,7 @@ use yii\web\Controller;
 class ResendController extends Controller
 {
 
+    public $layout='main-login';
     private $service;
 
     public function __construct($id, $module, EmailResendService $service, $config = [])
@@ -27,6 +28,8 @@ class ResendController extends Controller
      */
     public function actionResendVerificationEmail()
     {
+
+
         $form = new ResendVerificationEmailForm();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {

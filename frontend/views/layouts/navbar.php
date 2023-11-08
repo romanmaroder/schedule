@@ -21,6 +21,7 @@ use yii\helpers\Html;
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 <li><a href="#" class="dropdown-item">Some action </a></li>
                 <li><a href="#" class="dropdown-item">Some other action</a></li>
+                <? if (!Yii::$app->user->isGuest):?>
                 <? echo Html::tag('li', Html::a('Cabinet', ['/cabinet/default/index'], ['class' => ['btn btn-link login text-decoration-none dropdown-item']]), ['class' => ['d-flex']]);
             echo Html::beginForm(['/auth/auth/logout'], 'post', ['class' => 'd-flex'])
                 . Html::submitButton(
@@ -29,6 +30,7 @@ use yii\helpers\Html;
                 )
                 . Html::endForm()
                 ?>
+                <?php endif;?>
 
                 <li class="dropdown-divider"></li>
 
