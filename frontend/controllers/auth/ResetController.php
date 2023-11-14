@@ -15,6 +15,7 @@ use yii\web\Controller;
 class ResetController extends Controller
 {
     public $layout='main-login';
+
     private $service;
 
     public function __construct($id, $module, PasswordResetService $service, $config = [])

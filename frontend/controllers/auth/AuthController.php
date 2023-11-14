@@ -12,6 +12,8 @@ use yii\web\Controller;
 
 class AuthController extends Controller
 {
+    public $layout = 'main-login';
+
     private $service;
 
     public function __construct($id, $module, AuthService $service, $config = [])
@@ -41,7 +43,6 @@ class AuthController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        $this->layout = 'main-login';
 
         $form = new LoginForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
