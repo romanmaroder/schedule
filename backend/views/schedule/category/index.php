@@ -85,8 +85,9 @@ $js = <<< JS
  $(function () {
  
     $('#category').DataTable({
-    
-       "paging": false,
+       
+       "pageLength": 20, 
+       "paging": true,
        "lengthChange": false,
        "searching": true,
        "ordering": true,

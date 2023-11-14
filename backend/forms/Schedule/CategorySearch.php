@@ -35,6 +35,7 @@ class CategorySearch extends Model
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,
+                'pagination' => false,
                 'sort' => [
                     'defaultOrder' => ['lft' => SORT_ASC]
                 ]
