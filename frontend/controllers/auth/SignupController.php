@@ -12,6 +12,9 @@ use yii\web\Controller;
 
 class SignupController extends Controller
 {
+
+    public $layout='main-login';
+
     private $service;
 
     public function __construct($id, $module, SignupService $service, $config = [])
