@@ -6,6 +6,7 @@ namespace backend\forms\Schedule;
 
 use schedule\entities\Schedule\Category;
 use schedule\entities\Schedule\Service\Service;
+use schedule\helpers\ServiceHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -15,11 +16,12 @@ class ServiceSearch extends Model
     public $id;
     public $name;
     public $category_id;
+    public $status;
 
     public function rules(): array
     {
         return [
-            [['id', 'category_id'], 'integer'],
+            [['id', 'category_id','status'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -51,6 +53,7 @@ class ServiceSearch extends Model
             [
                 'id' => $this->id,
                 'category_id' => $this->category_id,
+                'status'=>$this->status,
             ]
         );
 
@@ -72,5 +75,10 @@ class ServiceSearch extends Model
                         ) . ' ' : '') . $category['name'];
             }
         );
+    }
+
+    public function statusList(): array
+    {
+        return ServiceHelper::statusList();
     }
 }

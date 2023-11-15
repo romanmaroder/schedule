@@ -32,6 +32,8 @@ class ServiceController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                    'activate' => ['POST'],
+                    'draft' => ['POST'],
                 ],
             ],
         ];
@@ -163,6 +165,34 @@ class ServiceController extends Controller
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function actionActivate($id)
+    {
+        try {
+            $this->service->activate($id);
+        } catch (\DomainException $e) {
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function actionDraft($id)
+    {
+        try {
+            $this->service->draft($id);
+        } catch (\DomainException $e) {
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(['view', 'id' => $id]);
     }
 
     /**

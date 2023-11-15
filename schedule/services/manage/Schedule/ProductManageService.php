@@ -156,7 +156,21 @@ class ProductManageService
     public function changePrice($id, PriceForm $form): void
     {
         $product = $this->products->get($id);
-        $product->setPrice($form->new, $form->old,$form->intern,$form->employee);
+        $product->setPrice($form->new, $form->old, $form->intern, $form->employee);
+        $this->products->save($product);
+    }
+
+    public function activate($id): void
+    {
+        $product = $this->products->get($id);
+        $product->activate();
+        $this->products->save($product);
+    }
+
+    public function draft($id): void
+    {
+        $product = $this->products->get($id);
+        $product->draft();
         $this->products->save($product);
     }
 

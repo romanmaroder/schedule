@@ -9,6 +9,7 @@ use schedule\entities\behaviors\MetaBehavior;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Brand;
 use schedule\entities\Schedule\Category;
+use schedule\entities\Schedule\Product\queries\ProductQuery;
 use schedule\entities\Schedule\Tag;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -28,6 +29,7 @@ use yii\web\UploadedFile;
  * @property int $price_employee [int(11)]
  * @property int $rating
  * @property int $main_photo_id
+ * @property int $status
  * @property string $meta_json
  *
  * @property Meta $meta
@@ -47,10 +49,13 @@ use yii\web\UploadedFile;
 class Product extends ActiveRecord
 {
 
+    const STATUS_DRAFT = 0;
+    const STATUS_ACTIVE = 1;
+
     public $meta;
 
 
-    public static function create($brandId, $categoryId, $code, $name,$description, Meta $meta): self
+    public static function create($brandId, $categoryId, $code, $name, $description, Meta $meta): self
     {
         $product = new static();
         $product->brand_id = $brandId;
@@ -59,6 +64,7 @@ class Product extends ActiveRecord
         $product->name = $name;
         $product->description = $description;
         $product->meta = $meta;
+        $product->status = self::STATUS_DRAFT;
         $product->created_at = time();
         return $product;
     }
@@ -180,6 +186,33 @@ class Product extends ActiveRecord
     {
         $this->category_id = $categoryId;
     }
+
+    public function activate(): void
+    {
+        if ($this->isActive()) {
+            throw new \DomainException('Product is already active.');
+        }
+        $this->status = self::STATUS_ACTIVE;
+    }
+
+    public function draft(): void
+    {
+        if ($this->isDraft()) {
+            throw new \DomainException('Product is already draft.');
+        }
+        $this->status = self::STATUS_DRAFT;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status == self::STATUS_ACTIVE;
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->status == self::STATUS_DRAFT;
+    }
+
 
     /**
      * @param $id
@@ -589,6 +622,11 @@ class Product extends ActiveRecord
         if (array_key_exists('mainPhoto', $related)) {
             $this->updateAttributes(['main_photo_id' => $related['mainPhoto'] ? $related['mainPhoto']->id : null]);
         }
+    }
+
+    public static function find():ProductQuery
+    {
+        return new ProductQuery(static::class);
     }
 
 }

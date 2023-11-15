@@ -6,6 +6,7 @@ namespace backend\forms\Schedule;
 
 use schedule\entities\Schedule\Category;
 use schedule\entities\Schedule\Product\Product;
+use schedule\helpers\ProductHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -17,11 +18,12 @@ class ProductSearch extends Model
     public $name;
     public $category_id;
     public $brand_id;
+    public $status;
 
     public function rules(): array
     {
         return [
-            [['id', 'category_id', 'brand_id'], 'integer'],
+            [['id', 'category_id', 'brand_id','status'], 'integer'],
             [['code', 'name'], 'safe'],
         ];
     }
@@ -55,6 +57,7 @@ class ProductSearch extends Model
                 'id' => $this->id,
                 'category_id' => $this->category_id,
                 'brand_id' => $this->brand_id,
+                'status'=>$this->status,
             ]
         );
 
@@ -77,6 +80,11 @@ class ProductSearch extends Model
                         ) . ' ' : '') . $category['name'];
             }
         );
+    }
+
+    public function statusList(): array
+    {
+        return ProductHelper::statusList();
     }
 
 }

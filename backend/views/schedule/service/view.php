@@ -2,6 +2,7 @@
 
 
 use schedule\helpers\PriceHelper;
+use schedule\helpers\ServiceHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -17,21 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php
-/*        if ($service->isActive()) : */?><!--
-            <?/*= Html::a(
+        if ($service->isActive()) : ?>
+            <?= Html::a(
                 'Draft',
                 ['draft', 'id' => $service->id],
                 ['class' => 'btn btn-primary', 'data-method' => 'post']
-            ) */?>
+            ) ?>
         <?php
-/*        else : */?>
-            --><?/*= Html::a(
+        else : ?>
+            <?= Html::a(
                 'Activate',
                 ['activate', 'id' => $service->id],
                 ['class' => 'btn btn-success', 'data-method' => 'post']
             ) ?>
         <?php
-        endif;*/ ?>
+        endif; ?>
         <?= Html::a('Update', ['update', 'id' => $service->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(
             'Delete',
@@ -66,11 +67,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $service,
                             'attributes' => [
                                 'id',
-                                /*[
+                                [
                                     'attribute' => 'status',
-                                    'value' => ProductHelper::statusLabel($service->status),
+                                    'value' => ServiceHelper::statusLabel($service->status),
                                     'format' => 'raw',
-                                ],*/
+                                ],
                                 'name',
                                 [
                                     'attribute' => 'price_new',

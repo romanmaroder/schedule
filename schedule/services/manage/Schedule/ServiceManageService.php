@@ -120,13 +120,28 @@ class ServiceManageService
                     $service->assignTag($tag->id);
                 }
                 $this->services->save($service);
-            });
+            }
+        );
     }
 
     public function changePrice($id, PriceForm $form): void
     {
         $service = $this->services->get($id);
-        $service->setPrice($form->new, $form->old,$form->intern,$form->employee);
+        $service->setPrice($form->new, $form->old, $form->intern, $form->employee);
+        $this->services->save($service);
+    }
+
+    public function activate($id): void
+    {
+        $service = $this->services->get($id);
+        $service->activate();
+        $this->services->save($service);
+    }
+
+    public function draft(int $id)
+    {
+        $service = $this->services->get($id);
+        $service->draft();
         $this->services->save($service);
     }
 

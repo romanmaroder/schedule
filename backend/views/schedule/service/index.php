@@ -3,6 +3,7 @@
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\Schedule\Service\Service;
 use schedule\helpers\PriceHelper;
+use schedule\helpers\ServiceHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -82,7 +83,7 @@ PluginAsset::register($this)->add(
                                     return PriceHelper::format($model->price_employee);
                                 },
                             ],
-                            /*[
+                            [
                                 'attribute' => 'status',
                                 'filter' => $searchModel->statusList(),
                                 'value' => function (Service $model) {
@@ -90,7 +91,7 @@ PluginAsset::register($this)->add(
                                 },
                                 'format' => 'raw',
                                 'contentOptions' => ['style' => 'text-align:center'],
-                            ]*/
+                            ]
                         ],
                     ]
                 ); ?>

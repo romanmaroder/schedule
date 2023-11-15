@@ -70,7 +70,7 @@ PluginAsset::register($this)->add(
                                     return PriceHelper::format($model->price_new);
                                 },
                             ],
-                            /*[
+                            [
                                 'attribute' => 'status',
                                 'filter' => $searchModel->statusList(),
                                 'value' => function (Product $model) {
@@ -78,7 +78,7 @@ PluginAsset::register($this)->add(
                                 },
                                 'format' => 'raw',
                                 'contentOptions' => ['style' => 'text-align:center'],
-                            ]*/
+                            ]
                         ],
                     ]
                 ); ?>

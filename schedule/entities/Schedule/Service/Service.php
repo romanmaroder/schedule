@@ -8,6 +8,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use schedule\entities\behaviors\MetaBehavior;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Category;
+use schedule\entities\Schedule\Service\queries\ServiceQuery;
 use schedule\entities\Schedule\Tag;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -35,18 +36,22 @@ use yii\db\ActiveRecord;
 class Service extends ActiveRecord
 {
 
+    const STATUS_DRAFT = 0;
+    const STATUS_ACTIVE = 1;
+
     public $meta;
 
 
-    public static function create($categoryId,  $name, $description,Meta $meta): self
+    public static function create($categoryId, $name, $description, Meta $meta): self
     {
-        $product = new static();
-        $product->category_id = $categoryId;
-        $product->name = $name;
-        $product->description= $description;
-        $product->meta = $meta;
-        $product->created_at = time();
-        return $product;
+        $service = new static();
+        $service->category_id = $categoryId;
+        $service->name = $name;
+        $service->description = $description;
+        $service->meta = $meta;
+        $service->status = self::STATUS_DRAFT;
+        $service->created_at = time();
+        return $service;
     }
 
     /**
@@ -77,6 +82,32 @@ class Service extends ActiveRecord
     public function changeMainCategory($categoryId): void
     {
         $this->category_id = $categoryId;
+    }
+
+    public function activate(): void
+    {
+        if ($this->isActive()) {
+            throw new \DomainException('Product is already active.');
+        }
+        $this->status = self::STATUS_ACTIVE;
+    }
+
+    public function draft(): void
+    {
+        if ($this->isDraft()) {
+            throw new \DomainException('Product is already draft.');
+        }
+        $this->status = self::STATUS_DRAFT;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status == self::STATUS_ACTIVE;
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->status == self::STATUS_DRAFT;
     }
 
     /**
@@ -208,6 +239,11 @@ class Service extends ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public static function find():ServiceQuery
+    {
+        return new ServiceQuery(static::class);
     }
 
 }
