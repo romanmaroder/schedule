@@ -78,6 +78,9 @@ class ServiceReadRepository
                         ],
                     ],
                 ],
+                'pagination' => [
+                    'pageSizeLimit' => [15, 100],
+                ]
             ]
         );
     }
