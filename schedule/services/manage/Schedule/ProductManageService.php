@@ -7,7 +7,6 @@ namespace schedule\services\manage\Schedule;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Product\Product;
 use schedule\entities\Schedule\Tag;
-use schedule\forms\manage\Schedule\Product\CategoriesForm;
 use schedule\forms\manage\Schedule\Product\ModificationForm;
 use schedule\forms\manage\Schedule\Product\PhotosForm;
 use schedule\forms\manage\Schedule\Product\PriceForm;
@@ -118,34 +117,40 @@ class ProductManageService
 
         $product->changeMainCategory($category->id);
 
-        $product->revokeCategories();
+        $this->transaction->wrap(
+            function () use ($product, $form) {
 
-        foreach ($form->categories->others as $otherId) {
-            $category = $this->categories->get($otherId);
-            $product->assignCategory($category->id);
-        }
+                $product->revokeCategories();
 
-        foreach ($form->values as $value) {
-            $product->setValue($value->id, $value->value);
-        }
+                $product->revokeTags();
 
-        $product->revokeTags();
+                $this->products->save($product);
 
-        foreach ($form->tags->existing as $tagId) {
-            $tag = $this->tags->get($tagId);
-            $product->assignTag($tag->id);
-        }
-
-        $this->transaction->wrap(function () use ($product, $form) {
-            foreach ($form->tags->newNames as $tagName) {
-                if (!$tag = $this->tags->findByName($tagName)) {
-                    $tag = Tag::create($tagName, $tagName);
-                    $this->tags->save($tag);
+                foreach ($form->categories->others as $otherId) {
+                    $category = $this->categories->get($otherId);
+                    $product->assignCategory($category->id);
                 }
-                $product->assignTag($tag->id);
+
+                foreach ($form->values as $value) {
+                    $product->setValue($value->id, $value->value);
+                }
+
+                foreach ($form->tags->existing as $tagId) {
+                    $tag = $this->tags->get($tagId);
+                    $product->assignTag($tag->id);
+                }
+
+
+                foreach ($form->tags->newNames as $tagName) {
+                    if (!$tag = $this->tags->findByName($tagName)) {
+                        $tag = Tag::create($tagName, $tagName);
+                        $this->tags->save($tag);
+                    }
+                    $product->assignTag($tag->id);
+                }
+                $this->products->save($product);
             }
-            $this->products->save($product);
-        });
+        );
     }
 
     public function changePrice($id, PriceForm $form): void

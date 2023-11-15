@@ -94,30 +94,33 @@ class ServiceManageService
         );
         $service->changeMainCategory($category->id);
 
-        $service->revokeCategories();
+        $this->transaction->wrap(
+            function () use ($service, $form) {
+                $service->revokeCategories();
+                $service->revokeTags();
+                $this->services->save($service);
 
-        foreach ($form->categories->others as $otherId) {
-            $category=$this->categories->get($otherId);
-            $service->assignCategory($category->id);
-        }
-
-        $service->revokeTags();
-
-        foreach ($form->tags->existing as $tagId) {
-            $tag = $this->tags->get($tagId);
-            $service->assignTag($tag->id);
-        }
-
-        $this->transaction->wrap(function () use ($service, $form) {
-            foreach ($form->tags->newNames as $tagName) {
-                if (!$tag = $this->tags->findByName($tagName)) {
-                    $tag = Tag::create($tagName, $tagName);
-                    $this->tags->save($tag);
+                foreach ($form->categories->others as $otherId) {
+                    $category = $this->categories->get($otherId);
+                    $service->assignCategory($category->id);
                 }
-                $service->assignTag($tag->id);
-            }
-            $this->services->save($service);
-        });
+
+
+                foreach ($form->tags->existing as $tagId) {
+                    $tag = $this->tags->get($tagId);
+                    $service->assignTag($tag->id);
+                }
+
+
+                foreach ($form->tags->newNames as $tagName) {
+                    if (!$tag = $this->tags->findByName($tagName)) {
+                        $tag = Tag::create($tagName, $tagName);
+                        $this->tags->save($tag);
+                    }
+                    $service->assignTag($tag->id);
+                }
+                $this->services->save($service);
+            });
     }
 
     public function changePrice($id, PriceForm $form): void
