@@ -16,7 +16,7 @@ return [
         'signup/<_a:[\w-]+>' => 'auth/signup/<_a>',
         '<_a:login|logout>' => 'auth/auth/<_a>',
 
-        'catalog' => 'shop/catalog/index',
+        'catalog' => 'scheduler/catalog/index',
 
         'cabinet' => 'cabinet/default/index',
         'cabinet/<_c:[\w\-]+>' => 'cabinet/<_c>/index',
@@ -24,6 +24,7 @@ return [
         'cabinet/<_c:[\w\-]+>/<_a:[\w-]+>' => 'cabinet/<_c>/<_a>',
         'cabinet/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => 'cabinet/<_c>/<_a>',
 
+        'user'=>'users/user/index',
 
         ['class' => 'frontend\urls\CategoryUrlRule'],
 

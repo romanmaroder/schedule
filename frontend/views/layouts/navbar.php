@@ -1,5 +1,7 @@
 <?php
 
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 
 ?>
@@ -37,6 +39,15 @@ use yii\helpers\Html;
                     Html::a(
                         'Catalog',
                         ['/schedule/catalog/index'],
+                        ['class' => ['dropdown-item']]
+                    ),
+                ); ?>
+                <?
+                echo Html::tag(
+                    'li',
+                    Html::a(
+                        'User',
+                        ['/users/user/index'],
                         ['class' => ['dropdown-item']]
                     ),
                 ); ?>
@@ -82,8 +93,6 @@ use yii\helpers\Html;
             </ul>
         </li>
         <!-- End Level two -->
-    </ul>
-    </li>
     </ul>
 
     <!-- SEARCH FORM -->

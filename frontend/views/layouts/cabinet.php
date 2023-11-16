@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 ?>
 <?php $this->beginContent('@frontend/views/layouts/main.php') ?>
-
+<div class="container-fluid">
     <div class="row">
         <div id="content" class="col-sm-9">
             <?= $content ?>
@@ -24,5 +24,5 @@ use yii\helpers\Url;
             </div>
         </aside>
     </div>
-
+</div>
 <?php $this->endContent() ?>
