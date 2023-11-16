@@ -7,7 +7,7 @@
 <?php $this->beginContent('@frontend/views/layouts/main.php') ?>
 
     <div class="row">
-        <aside id="column-left" class="col-sm-3 hidden-xs">
+        <aside id="column-left" class="col-sm-3 hidden-xs mb-2 mb-md-0">
             <div class="list-group">
                 <a href="/product/category&amp;path=20" class="list-group-item">Desktops (13)</a>
                 <a href="/product/category&amp;path=18" class="list-group-item">Laptops &amp; Notebooks (5)</a>

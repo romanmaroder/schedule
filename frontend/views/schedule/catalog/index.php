@@ -18,13 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php /*endforeach; */?>
     </div>
 </div>-->
-<div class="row">
+<!--<div class="row">-->
 
         <?= $this->render('_service', [
             'dataProvider' => $dataProvider
         ]) ?>
-</div>
-<div class="row">
-    <div class="col-sm-6 text-left"></div>
-    <div class="col-sm-6 text-right">Showing 1 to 12 of 12 (1 Pages)</div>
-</div>

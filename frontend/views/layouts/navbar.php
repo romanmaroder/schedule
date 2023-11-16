@@ -34,10 +34,24 @@ use yii\helpers\Html;
                class="nav-link dropdown-toggle">Dropdown</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 <?
+                if (!Yii::$app->user->isGuest): ?>
+                    <?
+                    echo Html::tag(
+                        'li',
+                        Html::a(
+                            'Cabinet',
+                            ['/cabinet/default/index'],
+                            ['class' => ['dropdown-item']]
+                        ),
+                        ['class' => ['d-sm-none d-inline-block']]
+                    ); ?>
+                <?php
+                endif; ?>
+                <?
                 echo Html::tag(
                     'li',
                     Html::a(
-                        'Catalog',
+                        'Service prices',
                         ['/schedule/catalog/index'],
                         ['class' => ['dropdown-item']]
                     ),
@@ -222,7 +236,7 @@ use yii\helpers\Html;
         <li class="nav-item">
             <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'nav-link']) ?>
         </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
@@ -231,7 +245,7 @@ use yii\helpers\Html;
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                 <i class="fas fa-th-large"></i>
             </a>
-        </li>
+        </li>-->
     </ul>
 </nav>
 <!-- /.navbar -->

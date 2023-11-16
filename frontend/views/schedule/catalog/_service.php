@@ -16,7 +16,7 @@ PluginAsset::register($this)->add(
 ?>
     <div class="service-index">
 
-        <div class="invoice p-3 mb-3">
+        <div class="invoice p-3 mb-3 mb-md-0">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title ">
@@ -26,8 +26,8 @@ PluginAsset::register($this)->add(
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                            <i class="fas fa-times"></i>
+                        <button type="button" class="btn btn-tool" data-card-widget="maximize" title="Maximize">
+                            <i class="fas fa-expand"></i>
                         </button>
                     </div>
                 </div>
