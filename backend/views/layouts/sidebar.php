@@ -62,6 +62,18 @@
                                             'active' => $this->context->id == 'schedule/service'
                                         ],
                                         [
+                                            'label' => 'Events',
+                                            'icon' => 'file-o',
+                                            'url' => ['/schedule/event/index'],
+                                            'active' => $this->context->id == 'schedule/event'
+                                        ],
+                                        [
+                                            'label' => 'Calendar',
+                                            'icon' => 'far fa-calendar-alt',
+                                            'url' => ['/schedule/event/calendar'],
+                                            'active' => $this->context->id == 'schedule/calendar'
+                                        ],
+                                        [
                                             'label' => 'Brands',
                                             'icon' => 'file-o',
                                             'url' => ['/schedule/brand/index'],

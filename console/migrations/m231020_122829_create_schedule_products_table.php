@@ -29,13 +29,23 @@ class m231020_122829_create_schedule_products_table extends Migration
             'meta_json' => $this->text(),
         ], $tableOptions);
 
-        $this->createIndex('{{%idx-schedule_products-code}}', '{{%schedule_products}}', 'code', true);
+        $this->createIndex('{{%idx-schedule_products-code}}',
+                           '{{%schedule_products}}',
+                           'code', true);
 
-        $this->createIndex('{{%idx-schedule_products-category_id}}', '{{%schedule_products}}', 'category_id');
-        $this->createIndex('{{%idx-schedule_products-brand_id}}', '{{%schedule_products}}', 'brand_id');
+        $this->createIndex('{{%idx-schedule_products-category_id}}',
+                           '{{%schedule_products}}', 'category_id');
 
-        $this->addForeignKey('{{%fk-schedule_products-category_id}}', '{{%schedule_products}}', 'category_id', '{{%schedule_categories}}', 'id');
-        $this->addForeignKey('{{%fk-schedule_products-brand_id}}', '{{%schedule_products}}', 'brand_id', '{{%schedule_brands}}', 'id');
+        $this->createIndex('{{%idx-schedule_products-brand_id}}',
+                           '{{%schedule_products}}', 'brand_id');
+
+        $this->addForeignKey('{{%fk-schedule_products-category_id}}',
+                             '{{%schedule_products}}', 'category_id',
+                             '{{%schedule_categories}}', 'id');
+
+        $this->addForeignKey('{{%fk-schedule_products-brand_id}}',
+                             '{{%schedule_products}}', 'brand_id',
+                             '{{%schedule_brands}}', 'id');
     }
 
     /**

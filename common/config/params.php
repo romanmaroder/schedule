@@ -39,7 +39,7 @@ return [
                     'datatables-buttons/js/buttons.colVis.min.js'
                 ]
             ],
-            /*'sweetalert2-theme-bootstrap-4' => [
+            'sweetalert2-theme-bootstrap-4' => [
                 'css' => 'sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'
             ],
             'sweetalert2'                   => [
@@ -50,7 +50,7 @@ return [
                 'css' => 'toastr/toastr.min.css',
                 'js'  => 'toastr/toastr.min.js',
             ],
-            'ekko-lightbox'                 => [
+            /*'ekko-lightbox'                 => [
                 'css' => 'ekko-lightbox/ekko-lightbox.css',
                 'js'  => 'ekko-lightbox/ekko-lightbox.min.js'
             ],

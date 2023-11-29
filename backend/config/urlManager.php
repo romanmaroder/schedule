@@ -11,6 +11,12 @@ return [
         '' => 'site/index',
         '<_a:login|logout>' => 'auth/<_a>',
 
+        'event' => 'schedule/event/index',
+        'event/<id:\d+>' => 'schedule/event/view',
+        'event/update/<id:\d+>' => 'schedule/event/update',
+        'calendar' => 'schedule/event/calendar',
+
+        
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
         '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',

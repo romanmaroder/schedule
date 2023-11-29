@@ -8,6 +8,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use schedule\entities\behaviors\MetaBehavior;
 use schedule\entities\Meta;
 use schedule\entities\Schedule\Category;
+use schedule\entities\Schedule\Event\ServiceAssignment;
 use schedule\entities\Schedule\Service\queries\ServiceQuery;
 use schedule\entities\Schedule\Tag;
 use yii\db\ActiveQuery;
@@ -87,7 +88,7 @@ class Service extends ActiveRecord
     public function activate(): void
     {
         if ($this->isActive()) {
-            throw new \DomainException('Product is already active.');
+            throw new \DomainException('Service is already active.');
         }
         $this->status = self::STATUS_ACTIVE;
     }
@@ -95,7 +96,7 @@ class Service extends ActiveRecord
     public function draft(): void
     {
         if ($this->isDraft()) {
-            throw new \DomainException('Product is already draft.');
+            throw new \DomainException('Service is already draft.');
         }
         $this->status = self::STATUS_DRAFT;
     }
@@ -184,6 +185,10 @@ class Service extends ActiveRecord
     public function getCategory(): ActiveQuery
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+    public function getEvent(): ActiveQuery
+    {
+        return $this->hasOne(ServiceAssignment::class, ['service_id' => 'id']);
     }
 
     /**

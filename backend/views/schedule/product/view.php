@@ -4,6 +4,8 @@
 use kartik\file\FileInput;
 use schedule\entities\Schedule\Product\Modification;
 use schedule\entities\Schedule\Product\Value;
+use schedule\helpers\PriceHelper;
+use schedule\helpers\ProductHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;

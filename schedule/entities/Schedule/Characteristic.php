@@ -15,6 +15,7 @@ use yii\helpers\Json;
  * @property string $default
  * @property array $variants
  * @property int $sort
+ * @property string $variants_json [json]
  */
 class Characteristic extends ActiveRecord
 {

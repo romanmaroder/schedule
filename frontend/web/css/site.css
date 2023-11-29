@@ -105,3 +105,17 @@ a.desc:after {
 .auth-clients {
     padding: 0 0 20px 0;
 }
+
+.fc-event {
+    box-shadow: 0 0.5rem 0.95rem rgba(0,0,0,.55)!important;
+}
+
+.fc-icon.fc-icon-fas,
+.fc-icon.fc-icon-far,
+.fc-icon.fc-icon-fab,
+.fc-icon.fc-icon-fal,
+.fc-icon.fc-icon-fad,
+.fc-icon.fc-icon-fa{
+    font-family: "Font Awesome 5 Free", serif !important;
+    font-weight: bold!important;
+}

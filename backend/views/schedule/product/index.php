@@ -3,6 +3,7 @@
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\Schedule\Product\Product;
 use schedule\helpers\PriceHelper;
+use schedule\helpers\ProductHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -42,7 +43,7 @@ PluginAsset::register($this)->add(
                             'id' => 'product'
                         ],
                         'columns' => [
-                            [
+                            /*[
                                 'value' => function (Product $model) {
                                     return $model->mainPhoto ? Html::img(
                                         $model->mainPhoto->getThumbFileUrl('file', 'admin')
@@ -50,7 +51,7 @@ PluginAsset::register($this)->add(
                                 },
                                 'format' => 'raw',
                                 'contentOptions' => ['style' => 'width: 100px'],
-                            ],
+                            ],*/
                             'id',
                             [
                                 'attribute' => 'name',
