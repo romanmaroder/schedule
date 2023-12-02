@@ -18,14 +18,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
 
-    $form = ActiveForm::begin(); ?>
+    $form = ActiveForm::begin(
+        [
+            'id' => 'event-form',
+            'enableAjaxValidation' => false,
+        ]
+    ); ?>
     <?= $form->field($model->master, 'master')->widget(
         Select2::class,
         [
-            'name'          => 'master',
-            'language'      => 'ru',
-            'data'          => $model->master->masterList(),
-            'options'       => ['placeholder' => 'Select'],
+            'name' => 'master',
+            'language' => 'ru',
+            'data' => $model->master->masterList(),
+            'options' => ['placeholder' => 'Select'],
             'pluginOptions' => [
                 'allowClear' => true
             ],

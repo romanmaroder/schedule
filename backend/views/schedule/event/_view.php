@@ -54,6 +54,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'label' => 'Service',
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
+                    'contentOptions' => ['class'=>'text-break'],
                 ],
             ],
         ]
@@ -63,10 +64,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <p>
             <?= Html::a(
                 'Update',
-                ['update', 'id' => $model->id],
+                ['update-ajax', 'id' => $model->id],
                 [
                     'id' => 'edit-link',
-                    'class' => 'btn btn-primary btn-sm'
+                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                    'class' => 'btn btn-primary btn-sm btn-shadow'
                 ]
             ) ?>
             <?php
@@ -107,7 +109,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',
-                    'class' => 'btn btn-danger btn-sm',
+                    'class' => 'btn btn-danger btn-sm btn-shadow',
                     'data' => [
                         'confirm' => Yii::t('app', 'Delete file?'),
                         'method' => 'post',

@@ -14,6 +14,7 @@ use schedule\services\manage\Schedule\EventManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\Response;
 
 class EventController extends Controller
 {
@@ -81,6 +82,17 @@ class EventController extends Controller
         );
     }
 
+    public function actionViewAjax($id)
+    {
+
+        return $this->renderAjax(
+            '_view',
+            [
+                'model' => $this->findModel($id),
+            ]
+        );
+    }
+
     public function actionCreate()
     {
         $form = new EventCreateForm();
@@ -101,6 +113,32 @@ class EventController extends Controller
         );
     }
 
+    public function actionCreateAjax($start = null, $end = null)
+    {
+        $form = new EventCreateForm();
+        $form->start = $start;
+        $form->end = $end;
+
+        if ($form->load(Yii::$app->request->post())) {
+            try {
+                $this->service->create($form);
+                Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
+                return $this->redirect('/schedule/event/calendar');
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+
+
+        return $this->renderAjax(
+            'create',
+            [
+                'model' => $form,
+            ]
+        );
+    }
+
     public function actionUpdate($id)
     {
         $event = $this->findModel($id);
@@ -114,18 +152,47 @@ class EventController extends Controller
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
+
         }
-        return $this->render('update', [
-            'model' => $form,
-            'event' => $event,
-        ]);
+
+        return $this->render(
+            'update',
+            [
+                'model' => $form,
+                'event' => $event,
+            ]
+        );
+    }
+
+    public function actionUpdateAjax($id)
+    {
+        $event = $this->findModel($id);
+
+        $form = new EventEditForm($event);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->edit($event->id, $form);
+                Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
+                return $this->redirect('/schedule/event/calendar');
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+        return $this->renderAjax(
+            'update',
+            [
+                'model' => $form,
+                'event' => $event,
+            ]
+        );
     }
 
     public function actionDelete($id)
     {
         try {
             $this->service->remove($id);
-        }catch(\DomainException $e){
+        } catch (\DomainException $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['index']);

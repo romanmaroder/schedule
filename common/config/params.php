@@ -42,14 +42,17 @@ return [
             'sweetalert2-theme-bootstrap-4' => [
                 'css' => 'sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'
             ],
-            'sweetalert2'                   => [
-                'css' => 'sweetalert2/sweetalert2.min.css',
-                'js'  => 'sweetalert2/sweetalert2.all.js'
+            'sweetalert2' => [
+                'css' => 'sweetalert2-theme-bootstrap-4/bootstrap-4.min.css',
+                'js' => 'sweetalert2/sweetalert2.all.js'
             ],
-            'toastr'                        => [
-                'css' => 'toastr/toastr.min.css',
-                'js'  => 'toastr/toastr.min.js',
+            'toastr' => [
+                'css' => ['toastr/toastr.min.css'],
+                'js' => ['toastr/toastr.min.js'],
             ],
+            /*'icheck-bootstrap' => [
+                'css' => 'icheck-bootstrap.css'
+            ],*/
             /*'ekko-lightbox'                 => [
                 'css' => 'ekko-lightbox/ekko-lightbox.css',
                 'js'  => 'ekko-lightbox/ekko-lightbox.min.js'

@@ -1,5 +1,6 @@
 <?php
 
+use hail812\adminlte3\assets\PluginAsset;
 use yii\bootstrap4\Modal;
 use yii\helpers\Json;
 use yii\web\JsExpression;
@@ -12,8 +13,13 @@ use yii2fullcalendar6\yii2fullcalendar6;
 $this->title = 'Calendar';
 $this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['calendar']];
 $this->params['breadcrumbs'][] = $this->title;
+PluginAsset::register($this)->add(['sweetalert2']);
+
 ?>
 <div class="row">
+    <div class="col-12">
+        <div id="resp"></div>
+    </div>
     <div class="col">
         <div class="event-index">
 
@@ -46,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							  position: 'top-end',
 							  showConfirmButton: false,
 							  timer: 5000,
+							  timerProgressBar: true,
 							});
 							Toast.fire({
 									icon: 'success',
@@ -82,18 +89,16 @@ $this->params['breadcrumbs'][] = $this->title;
              */
             $select = new JsExpression(
                 "function (selectionInfo ) {
-							let start = selectionInfo.startStr;
-							let end = selectionInfo.endStr;
-							console.log(start + '-' + end);
-                        if(app == 'app-backend'){
-                            $.ajax({
-								url:basePath +'/calendar/event/create?start='+start+'&end='+end,
-								type:'POST',
-								//data:{'start':start, 'end':end},
+							$.ajax({
+								url:'/schedule/event/create-ajax',
+								data:{'start':selectionInfo.startStr, 'end':selectionInfo.endStr},
 								success:function (data) {
+							
 									$('#modal').modal('show').find('.modal-body').html(data);
+							
 								},
 								error:function(data){
+							
 									var Toast = Swal.mixin({
 															  toast: true,
 															  position: 'top-end',
@@ -105,8 +110,11 @@ $this->params['breadcrumbs'][] = $this->title;
 																title: data.responseText
 															  });
 								},
+								complete:function(data){
+								
+								}
 							});
-						}
+							
                     }"
             );
 
@@ -150,35 +158,34 @@ $this->params['breadcrumbs'][] = $this->title;
              */
             $eventDrop = new JsExpression(
                 "function(event){
-									var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm');
-									var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm');
-									var id = event.id;
-									if(app == 'app-backend'){
-										$.ajax({
-											url: basePath +'/calendar/event/update-drop?id='+id+'&start='+start+'&end='+end,
-											type: 'POST',
-											success: function(){
-											var Toast = Swal.mixin({
-															  toast: true,
-															  position: 'top-end',
-															  showConfirmButton: false,
-															  timer: 5000,
-															});
-															  Toast.fire({
-																icon: 'info',
-																title: event.title+'</br>'+start + ' - ' + end
-															  });
-												$('#calendar').fullCalendar('refetchEvents');
-											},
-										});
-									 }
+//									var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm');
+//									var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm');
+//									var id = event.id;
+//									if(app == 'app-backend'){
+//										$.ajax({
+//											url: basePath +'/calendar/event/update-drop?id='+id+'&start='+start+'&end='+end,
+//											type: 'POST',
+//											success: function(){
+//											var Toast = Swal.mixin({
+//															  toast: true,
+//															  position: 'top-end',
+//															  showConfirmButton: false,
+//															  timer: 5000,
+//															});
+//															  Toast.fire({
+//																icon: 'info',
+//																title: event.title+'</br>'+start + ' - ' + end
+//															  });
+//												$('#calendar').fullCalendar('refetchEvents');
+//											},
+//										});
+//									 }
                 		}"
             ); ?>
 
             <?= yii2fullcalendar6::widget(
                 [
                     'id' => 'calendar',
-                    //'events' =>  $events,
                     'eventSources' => [$events, $education],
                     'clientOptions' => [
                         'headerToolbar' => [
@@ -208,28 +215,31 @@ $this->params['breadcrumbs'][] = $this->title;
                         'slotLabelInterval' => '01:00:00',
                         'displayEventTime' => true,
                         'displayEventEnd' => true,
-                        /*'slotLabelFormat' => [
-                            'hour' => 'numeric',
-                            'minute' => '2-digit',
-                            'omitZeroMinute' => false,
-                            //'meridiem' => 'short'
-                        ],*/
-                        /*'titleFormat' => [ // will produce something like "Tuesday, September 18, 2018"
-                            'month' => 'long',
-                            'year' => 'numeric',
-                            'day' => 'numeric',
-                            'weekday' => 'long'
-                        ],*/
                         'buttonIcons' => [
                             'dayGridMonth' => 'fas fas fa-calendar-alt',
                             'dayGridDay' => 'far far fa-calendar-day',
                             'dayGridWeek' => 'fas fas fa-calendar-week',
                             //'listDay'=>'fas fas fa-calendar-check',
                             'timeGridDay' => 'far far fa-calendar',
-                            'timeGridWeek' => 'fas fas fa-calendar-week'
+                            'timeGridWeek' => 'fas fas fa-calendar-week',
+                            'addEducation' => 'fas fas fa-graduation-cap'
+                        ],
+                        'customButtons' => [
+                            'addEducation' => [
+                                'text' => 'Add education event',
+                                'click' => new JsExpression(
+                                    "
+                                    function(){
+                                    alert('clicked the custom button!');}"
+                                ),
+                            ]
+                        ],
+                        'footerToolbar' => [
+                            'right' => 'addEducation'
                         ],
 
-                        'selectable' => Yii::$app->user->can('manager'),
+                        //'selectable' => Yii::$app->user->can('manager'),
+                        'selectable' => true,
                         'select' => $select,
                         'editable' => $editable,
                         'eventResize' => $eventResize,
@@ -237,15 +247,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         'initialView' => $initialView,
                         'nowIndicator' => true,
                         'eventClassNames' => ['p-1', 'm-1'],
-                        'viewDidMount'=>new JsExpression("
-                                function(info){
-                             
-                        }"),
-                        /*'initialDate' => new JsExpression(
-                                            "
-                            localStorage.getItem('fcDefaultViewDate') !==null ? localStorage.getItem('fcDefaultViewDate') : new FullCalendar.Calendar('#calendar').getDate()
+                        'viewDidMount' => new JsExpression(
                             "
-                                        ),
+                                function(info){
+                               let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
+                               var date = calendar.getDate();
+                             let a =new Intl.DateTimeFormat('default', {
+                								dateStyle:'short',
+                                                //month: 'numeric', day: 'numeric', year:'numeric',
+                                                //hour: '2-digit', minute: '2-digit', hour24: false,
+                                        }).format(new Date(date))
+                            
+                             var result = a.replace(/[\.\/]/g,'-');
+                             localStorage.setItem('fcDefaultView', info.view.type);
+                			 localStorage.setItem('fcDefaultViewDate', result );
+                        }"
+                        ),
+                        // 'initialDate' => '',
                         'windowResize' => new JsExpression(
                             "
                                 function(arg) {
@@ -253,7 +271,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                   console.log(arg);
                                    
                                }"
-                        ),*/
+                        ),
                         'eventContent' => new JsExpression(
                             "function(arg){
                               
@@ -331,39 +349,53 @@ $this->params['breadcrumbs'][] = $this->title;
                         ),
                         'dateClick' => new JsExpression(
                             "function(info){
-                                     alert('Clicked on: ' + info.dateStr);
-                                    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                                    alert('Current view: ' + info.view.type);
-                                    // change the day's background color just for fun
-                                     info.jsEvent.preventDefault(); // don't let the browser navigate
-                                    // info.dayEl.style.backgroundColor = 'red';
-                                    
-                                    
+                            $.ajax({
+								url:'/schedule/event/create-ajax',
+								data:{'start':info.startStr, 'end':info.endStr},
+								success:function (data) {
+									$('#modal').modal('show').find('.modal-body').html(data);
+								},
+								error:function(data){
+									var Toast = Swal.mixin({
+													    toast: true,
+													    position: 'top-end',
+													    showConfirmButton: false,
+													    timer: 5000,
+													});
+												Toast.fire({
+													icon: 'error',
+													title: data.responseText
+												});
+								},
+							});
+                                   
                             }"
                         ),
                         'eventClick' => new JsExpression(
                             "function(info) {
-                                if(app == 'app-backend'){
-                                    viewUrl = basePath +'/calendar/event/view?id=' + info.event.id;
-                                    updateUrl = basePath +'/calendar/event/update?id=' + info.event.id;
-                                     $('#edit-link').attr('href', updateUrl);
+                               
                                      info.jsEvent.preventDefault(); 
-                                 }else{
-                                    viewUrl = '/calendar/event/view?id=' + info.event.id;
-                                    //updateUrl = '/calendar/event/update?id=' + info.event.id;
-                                    info.jsEvent.preventDefault(); 
-                                 }
                         
-                                  $('.popover').remove();
-                                  $('#modal').find('.modal-body').load(viewUrl);
-                                  $('#modal').modal('show');
-                                        //alert(info.event.id);
-                                        //info.jsEvent.preventDefault(); // don't let the browser navigate
-
-                                        //if (info.event.url) {
-                                        //alert('Open new tab');
-                                          //window.open(info.event.url);
-                                        //}
+                                   $.ajax({
+								        url:'/schedule/event/view-ajax',
+								        data:{'id':info.event.id},
+								        success:function (data) {
+									    $('#modal').modal('show').find('.modal-body').html(data);
+								    },
+                                    error:function(data){
+                                
+                                        var Toast = Swal.mixin({
+                                                            toast: true,
+                                                            position: 'top-end',
+                                                            showConfirmButton: false,
+                                                            timer: 5000,
+                                                        });
+                                                     Toast.fire({
+                                                     icon: 'error',
+                                                     title: data.responseText
+                                                     });
+                                    },
+                                });
   
                                 }"
                         ),

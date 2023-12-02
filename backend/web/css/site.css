@@ -129,3 +129,15 @@ div.required label:after {
     font-family: "Font Awesome 5 Free", serif !important;
     font-weight: bold !important;
 }
+.fc-addEducation-button{
+    position: fixed;
+    bottom: 60px;
+    right: 0;
+    transform: translatex(-5px);
+    cursor: pointer;
+    z-index: 4;
+}
+.btn-shadow{
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important
+}
+
