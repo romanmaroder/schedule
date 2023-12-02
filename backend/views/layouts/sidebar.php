@@ -57,13 +57,13 @@
                                         ],
                                         [
                                             'label' => 'Service',
-                                            'icon' => 'file-o',
+                                            'icon' => 'fas fa-clipboard-list',
                                             'url' => ['/schedule/service/index'],
                                             'active' => $this->context->id == 'schedule/service'
                                         ],
                                         [
                                             'label' => 'Events',
-                                            'icon' => 'file-o',
+                                            'icon' => 'far fa-file-alt',
                                             'url' => ['/schedule/event/index'],
                                             'active' => $this->context->id == 'schedule/event'
                                         ],
