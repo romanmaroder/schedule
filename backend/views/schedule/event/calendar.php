@@ -263,7 +263,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 			 localStorage.setItem('fcDefaultViewDate', result );
                         }"
                         ),
-                        // 'initialDate' => '',
+                        //'initialDate' => 'new Date(localStorage.getItem("fcDefaultViewDate"))',
                         'windowResize' => new JsExpression(
                             "
                                 function(arg) {
@@ -349,9 +349,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'dateClick' => new JsExpression(
                             "function(info){
+                            
                             $.ajax({
 								url:'/schedule/event/create-ajax',
-								data:{'start':info.startStr, 'end':info.endStr},
+								data:{'start':info.dateStr, 'end':info.dateStr},
 								success:function (data) {
 									$('#modal').modal('show').find('.modal-body').html(data);
 								},
@@ -361,11 +362,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
 													    position: 'top-end',
 													    showConfirmButton: false,
 													    timer: 5000,
-													});
-												Toast.fire({
-													icon: 'error',
-													title: data.responseText
-												});
+									});
+									Toast.fire({
+										icon: 'error',
+										title: data.responseText
+									});
 								},
 							});
                                    
@@ -389,11 +390,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                             position: 'top-end',
                                                             showConfirmButton: false,
                                                             timer: 5000,
-                                                        });
-                                                     Toast.fire({
-                                                     icon: 'error',
-                                                     title: data.responseText
-                                                     });
+                                        });
+                                        Toast.fire({
+                                            icon: 'error',
+                                            title: data.responseText
+                                        });
                                     },
                                 });
   
@@ -406,7 +407,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     container: 'body',
                                                     html:true,
                                                     content: info.event.extendedProps.service,
-                                                    });
+                                    });
                                 }
                         
                         "),

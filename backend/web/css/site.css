@@ -111,6 +111,9 @@ div.required label:after {
 .fc-event-service-container{
     white-space: break-spaces;
 }
+.fc-event-title-container{
+    word-break: break-word;
+}
 
 @media (max-width: 544px), (orientation: portrait) {
     .fc-event-time-start.dayGridMonth {

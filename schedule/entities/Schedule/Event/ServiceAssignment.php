@@ -4,7 +4,6 @@
 namespace schedule\entities\Schedule\Event;
 
 
-use schedule\entities\Schedule\Service\Service;
 use yii\db\ActiveRecord;
 
 /**

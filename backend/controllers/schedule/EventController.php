@@ -20,11 +20,13 @@ class EventController extends Controller
 {
 
     private EventManageService $service;
+    private Calendar $calendar;
 
-    public function __construct($id, $module, EventManageService $service, $config = [])
+    public function __construct($id, $module, EventManageService $service, Calendar $calendar, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
+        $this->calendar = $calendar;
     }
 
     public function behaviors(): array
@@ -60,8 +62,8 @@ class EventController extends Controller
 
     public function actionCalendar()
     {
-        $events = (new Calendar())->getEvents();
-        $education = (new Calendar())->education();
+        $events = $this->calendar->getEvents();
+        $education = $this->calendar->getEducations();
         return $this->render(
             'calendar',
             [

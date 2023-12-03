@@ -1,0 +1,36 @@
+<?php
+
+use yii\db\Migration;
+
+/**
+ * Handles the creation of table `{{%schedule_educations}}`.
+ */
+class m231203_142445_create_schedule_educations_table extends Migration
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function up()
+    {
+        $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+        $this->createTable('{{%schedule_educations}}', [
+            'id' => $this->primaryKey(),
+            'teacher_id'=>$this->integer()->notNull(),
+            'student_id'=>$this->integer()->notNull(),
+            'title'=>$this->string(),
+            'description'=>$this->text(),
+            'color'=>$this->string()->defaultValue('#474D2A'),
+            'start' => $this->dateTime()->notNull(),
+            'end' => $this->dateTime(),
+            'status'=>$this->smallInteger()->notNull()->defaultValue(0)
+        ],$tableOptions);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function down()
+    {
+        $this->dropTable('{{%schedule_educations}}');
+    }
+}

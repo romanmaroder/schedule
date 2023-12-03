@@ -4,25 +4,31 @@
 namespace schedule\entities\Schedule\Event\Calendar;
 
 
+use schedule\readModels\Schedule\EducationReadRepository;
 use schedule\readModels\Schedule\EventReadRepository;
 use yii2fullcalendar6\models\Event;
 
 class Calendar
 {
-    public EventReadRepository $service;
+    public EventReadRepository $events;
+    public EducationReadRepository $educations;
 
     /**
      * Calendar constructor.
+     * @param EventReadRepository $events
+     * @param EducationReadRepository $educations
      */
-    public function __construct()
-    {
-        $this->service = new EventReadRepository(); // TODO To think of a better way to do it
+    public function __construct(
+        EventReadRepository $events,
+        EducationReadRepository $educations
+    ) {
+        $this->events = $events; // TODO To think of a better way to do it
+        $this->educations = $educations;
     }
 
     public function getEvents(): array
     {
-
-        $data = $this->service->getAll();
+        $data = $this->events->getAll();
         $events = [];
         foreach ($data as $item) {
             $event = new Event();
@@ -42,53 +48,22 @@ class Calendar
         return $events;
     }
 
-    public function education(): array
+    public function getEducations(): array
     {
-        $data = [
-            [
-                'id' => '6061',
-                'notice' => 'TEST 1',
-                'client_id' => '11',
-                'master_id' => '2',
-                'service' => 'Стопа',
-                'color' => '#000080',
-                'event_time_start' => '2023-11-25 14:00:00',
-                'event_time_end' => '2023-11-25 16:30:00'
-            ],
-            [
-                'id' => '6062',
-                'notice' => 'TEST 2',
-                'client_id' => '10',
-                'master_id' => '2',
-                'service' => 'Стопа',
-                'color' => '#A52A2A',
-                'event_time_start' => '2023-11-25 09:00:00',
-                'event_time_end' => '2023-11-25 09:30:00'
-            ],
-            [
-                'id' => '6064',
-                'notice' => 'TEST 3',
-                'client_id' => '13',
-                'master_id' => '2',
-                'service' => 'Стопа',
-                'color' => '#2F4F4F',
-                'event_time_start' => '2023-11-25 10:00:00',
-                'event_time_end' => '2023-11-25 10:30:00'
-            ]
-        ];
+        $data = $this->educations->getAll();
         $events = [];
         foreach ($data as $item) {
             $event = new Event();
             $event->id = $item['id'];
-            $event->title = $item['client_id'];
+            $event->title = $item['title'];
             $event->extendedProps = [
-                'notice' => $item['notice'],
-                'master' => $item['master_id'],
-                'service'=>$item['service']
+                'teacher' => $item['teacher_id'],
+                'student'=>$item['student_id'],
+                'description' => $item['description'],
             ];
             $event->backgroundColor = $item['color'];
-            $event->start = $item['event_time_start'];
-            $event->end = $item['event_time_end'];
+            $event->start = $item['start'];
+            $event->end = $item['end'];
 
             $events[] = $event;
         }

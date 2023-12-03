@@ -21,7 +21,7 @@ class m231123_073157_create_schedule_events_table extends Migration
                 'client_id' => $this->integer(),
                 'notice' => $this->text(),
                 'start' => $this->dateTime()->notNull(),
-                'end' => $this->dateTime()
+                'end' => $this->dateTime(),
             ],
             $tableOptions
         );

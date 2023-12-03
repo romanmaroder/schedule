@@ -107,7 +107,6 @@ class Event extends ActiveRecord
     public function behaviors(): array
     {
         return [
-            //MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
                 'relations' => [
