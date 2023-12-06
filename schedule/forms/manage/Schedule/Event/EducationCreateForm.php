@@ -7,7 +7,6 @@ namespace schedule\forms\manage\Schedule\Event;
 use schedule\forms\CompositeForm;
 
 /**
- * @property ServicesForm $services
  * @property TeacherForm $teacher
  * @property StudentForm $student
  */
@@ -30,7 +29,8 @@ class EducationCreateForm extends CompositeForm
     {
         return [
             [['start', 'end'], 'required'],
-            ['title','description','color', 'string']
+            [['title','description','color'], 'string'],
+            [['color'], 'default','value' => '#474D2A'],
         ];
     }
 

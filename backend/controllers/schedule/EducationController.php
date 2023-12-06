@@ -4,28 +4,24 @@
 namespace backend\controllers\schedule;
 
 
-use backend\forms\Schedule\EventSearch;
-use schedule\entities\Schedule\Event\Calendar\Calendar;
-use schedule\entities\Schedule\Event\Event;
-use schedule\forms\manage\Schedule\Event\EventCreateForm;
-use schedule\forms\manage\Schedule\Event\EventEditForm;
+use backend\forms\Schedule\EducationSearch;
+use schedule\entities\Schedule\Event\Education;
+use schedule\forms\manage\Schedule\Event\EducationCreateForm;
+use schedule\forms\manage\Schedule\Event\EducationEditForm;
 use schedule\repositories\NotFoundException;
-use schedule\services\manage\Schedule\EventManageService;
+use schedule\services\manage\Schedule\EducationManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
-class EventController extends Controller
+class EducationController extends Controller
 {
+    private EducationManageService $service;
 
-    private EventManageService $service;
-    private Calendar $calendar;
-
-    public function __construct($id, $module, EventManageService $service, Calendar $calendar, $config = [])
+    public function __construct($id, $module, EducationManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
-        $this->calendar = $calendar;
     }
 
     public function behaviors(): array
@@ -47,45 +43,13 @@ class EventController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new EventSearch();
+        $searchModel = new EducationSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
-        return $this->render(
-            'index',
-            [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]
-        );
-    }
-
-    public function actionCalendar()
-    {
-
-        $events = $this->calendar->getEvents();
-        $education = $this->calendar->getEducations();
-        return $this->render(
-            'calendar',
-            [
-                'events'=>$events,
-                'education'=>$education
-            ]
-        );
-    }
-
-    public function actionEvents()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $events = $this->calendar->getEvents();
-        return $events;
-    }
-
-    public function actionEducations()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $education = $this->calendar->getEducations();
-        return $education;
+        return $this->render('index',[
+            'searchModel'=>$searchModel,
+            'dataProvider'=>$dataProvider,
+        ]);
     }
 
     public function actionView($id)
@@ -112,12 +76,12 @@ class EventController extends Controller
 
     public function actionCreate()
     {
-        $form = new EventCreateForm();
+        $form = new EducationCreateForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $event = $this->service->create($form);
-                return $this->redirect(['view', 'id' => $event->id]);
-            } catch (\DomainException $e) {
+                $education = $this->service->create($form);
+                return $this->redirect(['view', 'id' => $education->id]);
+            }catch (\DomainException $e){
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
@@ -132,7 +96,7 @@ class EventController extends Controller
 
     public function actionCreateAjax($start = null, $end = null)
     {
-        $form = new EventCreateForm();
+        $form = new EducationCreateForm();
         $form->start = $start;
         $form->end = $end;
 
@@ -158,13 +122,13 @@ class EventController extends Controller
 
     public function actionUpdate($id)
     {
-        $event = $this->findModel($id);
+        $education = $this->findModel($id);
 
-        $form = new EventEditForm($event);
+        $form = new EducationEditForm($education);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $this->service->edit($event->id, $form);
-                return $this->redirect(['view', 'id' => $event->id]);
+                $this->service->edit($education->id, $form);
+                return $this->redirect(['view', 'id' => $education->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
@@ -176,19 +140,19 @@ class EventController extends Controller
             'update',
             [
                 'model' => $form,
-                'event' => $event,
+                'education' => $education,
             ]
         );
     }
 
     public function actionUpdateAjax($id)
     {
-        $event = $this->findModel($id);
+        $education = $this->findModel($id);
 
-        $form = new EventEditForm($event);
+        $form = new EducationEditForm($education);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $this->service->edit($event->id, $form);
+                $this->service->edit($education->id, $form);
                 Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
                 return $this->redirect('/schedule/event/calendar');
             } catch (\DomainException $e) {
@@ -200,7 +164,7 @@ class EventController extends Controller
             'update',
             [
                 'model' => $form,
-                'event' => $event,
+                'education' => $education,
             ]
         );
     }
@@ -215,11 +179,12 @@ class EventController extends Controller
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id): Event
+    protected function findModel($id): Education
     {
-        if (($model = Event::findOne($id)) !== null) {
+        if (($model = Education::findOne($id)) !== null) {
             return $model;
         }
         throw new NotFoundException('The requested page does not exist.');
     }
+
 }

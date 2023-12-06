@@ -186,7 +186,75 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?= yii2fullcalendar6::widget(
                 [
                     'id' => 'calendar',
-                    'eventSources' => [$events, $education],
+                    'eventSources' => [
+                        [
+                            'events' => new JsExpression(
+                                "
+                                function (info, successCallback, failureCallback) {
+                                    $.ajax({
+                                        url: '/schedule/event/events',
+                                        type: 'GET',
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
+                                            }, success: function (response) {
+                                            console.log(response);
+                                                var event = [];
+                                                 $.each(response, function( index, value ) {
+                                                    event.push({
+                                                        id: $(this).attr('id'),
+                                                        title: $(this).attr('title'),
+                                                        start: $(this).attr('start'),
+                                                        end: $(this).attr('end'),
+                                                        display: 'block',
+                                                        backgroundColor: $(this).attr('color'),
+                                                        className: '8888888888',
+                                                        allDay : $(this).attr('allDay'),
+                                                        url:'/schedule/event/view-ajax',
+                                                        extendedProps:$(this).attr('extendedProps'),
+                                                        });
+                                                    });
+                                                    console.log(event);
+                                                    successCallback(event)
+                                                },
+                                            });
+                                        }"
+                            )
+                        ],
+                        [
+                            'events' => new JsExpression(
+                                "
+                            function (info, successCallback, failureCallback) {
+                                $.ajax({
+                                    url: '/schedule/event/educations',
+                                    type: 'GET',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
+                                        }, success: function (response) {
+                                         console.log(response);
+                                            var event = [];
+                                             $.each(response, function( index, value ) {
+                                                event.push({
+                                                    id: $(this).attr('id'), 
+                                                    title: $(this).attr('title'),
+                                                    start: $(this).attr('start'),
+                                                    end: $(this).attr('end'),
+                                                    display: 'block',
+                                                    backgroundColor: $(this).attr('backgroundColor'),
+                                                    borderColor: $(this).attr('backgroundColor'),
+                                                    //className: '9999999',
+                                                    allDay : $(this).attr('allDay'),
+                                                    extendedProps:$(this).attr('extendedProps'),
+                                                    //url:'/schedule/event/view-ajax',
+                                                    });
+                                                });
+                                                 console.log(event);
+                                                successCallback(event)
+                                            },
+                                        });
+                                    }"
+                            )
+                        ]
+                    ],
                     'clientOptions' => [
                         'headerToolbar' => [
                             'left' => 'prev,next,today',
@@ -195,7 +263,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ],
                         'themeSystem' => 'standard',
                         'expandRows' => false,
-                        'stickyHeaderDates'=>true,
+                        'stickyHeaderDates' => true,
                         'navLinks' => true,
                         'contentHeight' => 'auto',
                         'locale' => 'ru',
@@ -204,8 +272,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         //'dayMaxEventRows'=>3,
                         'showNonCurrentDates' => false,
                         'fixedWeekCount' => false,
-                        'weekNumbers'=>true,
-                        'weekNumberFormat'=>['week'=>'numeric'],
+                        'weekNumbers' => true,
+                        'weekNumberFormat' => ['week' => 'numeric'],
                         'firstDay' => 1,
                         'allDaySlot' => false,
                         'slotEventOverlap' => true,
@@ -230,7 +298,27 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 'click' => new JsExpression(
                                     "
                                     function(){
-                                    alert('clicked the custom button!');}"
+                                        $.ajax({
+								url:'/schedule/education/create-ajax',
+								data:{'start':1, 'end':1},
+								success:function (data) {
+									$('#modal').modal('show').find('.modal-body').html(data);
+								},
+								error:function(data){
+									var Toast = Swal.mixin({
+													    toast: true,
+													    position: 'top-end',
+													    showConfirmButton: false,
+													    timer: 5000,
+									});
+									Toast.fire({
+										icon: 'error',
+										title: data.responseText
+									});
+								},
+							});
+                                    
+                                    }"
                                 ),
                             ]
                         ],
@@ -268,7 +356,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             "
                                 function(arg) {
                                 
-                                  console.log(arg);
+                                  //console.log(arg);
                                    
                                }"
                         ),
@@ -300,7 +388,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 wrapTime.classList.add('fc-event-time-container','text-center','text-md-left');
                                 
                                 let title = arg.event.title ? arg.event.title : arg.event.id;
-                                let service = arg.event.extendedProps.service;
+                                let service = arg.event.extendedProps.service ? arg.event.extendedProps.service : '' ;
                                 let description = arg.event.extendedProps.description ? arg.event.extendedProps.description :
                                         arg.event.extendedProps.notice;
                                  let start = startTime;
@@ -374,11 +462,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'eventClick' => new JsExpression(
                             "function(info) {
-                               
+                               //console.log(info.event);
                                      info.jsEvent.preventDefault(); 
                         
                                    $.ajax({
-								        url:'/schedule/event/view-ajax',
+								        url:info.event.url,
 								        data:{'id':info.event.id},
 								        success:function (data) {
 									    $('#modal').modal('show').find('.modal-body').html(data);

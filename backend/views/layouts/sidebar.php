@@ -68,6 +68,12 @@
                                             'active' => $this->context->id == 'schedule/event'
                                         ],
                                         [
+                                            'label' => 'Education',
+                                            'icon' => 'fas fa-graduation-cap',
+                                            'url' => ['/schedule/education/index'],
+                                            'active' => $this->context->id == 'schedule/education'
+                                        ],
+                                        [
                                             'label' => 'Calendar',
                                             'icon' => 'far fa-calendar-alt',
                                             'url' => ['/schedule/event/calendar'],

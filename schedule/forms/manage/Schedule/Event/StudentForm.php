@@ -21,7 +21,7 @@ class StudentForm extends Model
         parent::__construct($config);
     }
 
-    public function userList(): array
+    public function studentList(): array
     {
         return ArrayHelper::map(User::find()->all(),'id','username');
     }

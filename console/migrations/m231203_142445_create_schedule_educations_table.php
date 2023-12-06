@@ -19,7 +19,7 @@ class m231203_142445_create_schedule_educations_table extends Migration
             'student_id'=>$this->integer()->notNull(),
             'title'=>$this->string(),
             'description'=>$this->text(),
-            'color'=>$this->string()->defaultValue('#474D2A'),
+            'color'=>$this->string()->notNull()->defaultValue('#474D2A'),
             'start' => $this->dateTime()->notNull(),
             'end' => $this->dateTime(),
             'status'=>$this->smallInteger()->notNull()->defaultValue(0)

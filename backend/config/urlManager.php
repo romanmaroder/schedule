@@ -16,6 +16,10 @@ return [
         'event/update/<id:\d+>' => 'schedule/event/update',
         'calendar' => 'schedule/event/calendar',
 
+        'education' => 'schedule/education/index',
+        'education/<id:\d+>' => 'schedule/education/view',
+        'education/update/<id:\d+>' => 'schedule/education/update',
+
         
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',

@@ -62,6 +62,7 @@ class Calendar
                 'description' => $item['description'],
             ];
             $event->backgroundColor = $item['color'];
+            $event->borderColor = $item['color'];
             $event->start = $item['start'];
             $event->end = $item['end'];
 

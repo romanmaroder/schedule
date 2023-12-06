@@ -39,7 +39,7 @@ class EducationEditForm extends CompositeForm
     {
         return [
             [['start', 'end'], 'required'],
-            ['notice', 'string']
+            [['description','title'], 'string']
         ];
     }
 

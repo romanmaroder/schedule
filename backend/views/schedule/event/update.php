@@ -14,10 +14,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $event->client->username, 'url' => ['view', 'id' => $event->id]];
 $this->params['breadcrumbs'][] = 'update';
 
-/*echo'<pre>';
-var_dump($event);
-var_dump($model);
-die();*/
 ?>
 <div class="event-update">
 
@@ -150,10 +146,6 @@ die();*/
             ],
         ]
     ) ?>
-
-
-    <?/*= $form->field($model, 'checkEvent', ['enableAjaxValidation' => true])->label(false)
-        ->hiddenInput() */?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']) ?>

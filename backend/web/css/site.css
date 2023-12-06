@@ -135,7 +135,7 @@ div.required label:after {
 .fc-addEducation-button{
     position: fixed;
     bottom: 60px;
-    right: 0;
+    right: 25px;
     transform: translatex(-5px);
     cursor: pointer;
     z-index: 4;

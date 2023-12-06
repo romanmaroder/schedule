@@ -21,7 +21,7 @@ class TeacherForm extends Model
         parent::__construct($config);
     }
 
-    public function masterList(): array
+    public function teacherList(): array
     {
         return ArrayHelper::map(User::find()->asArray()->all(),'id','username');
     }
