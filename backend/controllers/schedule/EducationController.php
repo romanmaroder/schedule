@@ -5,6 +5,7 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\EducationSearch;
+use schedule\entities\Schedule\Event\Calendar\Calendar;
 use schedule\entities\Schedule\Event\Education;
 use schedule\forms\manage\Schedule\Event\EducationCreateForm;
 use schedule\forms\manage\Schedule\Event\EducationEditForm;
@@ -13,15 +14,18 @@ use schedule\services\manage\Schedule\EducationManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\Response;
 
 class EducationController extends Controller
 {
     private EducationManageService $service;
+    private Calendar $calendar;
 
-    public function __construct($id, $module, EducationManageService $service, $config = [])
+    public function __construct($id, $module, EducationManageService $service, Calendar $calendar,$config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
+        $this->calendar = $calendar;
     }
 
     public function behaviors(): array
@@ -50,6 +54,13 @@ class EducationController extends Controller
             'searchModel'=>$searchModel,
             'dataProvider'=>$dataProvider,
         ]);
+    }
+
+    public function actionLessons()
+    {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return $this->calendar->getEducations();
     }
 
     public function actionView($id)
@@ -98,7 +109,7 @@ class EducationController extends Controller
     {
         $form = new EducationCreateForm();
         $form->start = $start;
-        $form->end = $end;
+        $form->end =  $end;
 
         if ($form->load(Yii::$app->request->post())) {
             try {

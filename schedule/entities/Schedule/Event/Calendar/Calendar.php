@@ -34,7 +34,6 @@ class Calendar
             $event = new Event();
             $event->id = $item->id;
             $event->title = $item->client->username;
-
             $event->extendedProps = [
                 'notice' => $item->notice,
                 'master' => $item->master->username,
@@ -42,6 +41,8 @@ class Calendar
             ];
             $event->start = $item->start;
             $event->end = $item->end;
+            $event->groupId = 'event';
+            $event->display= 'block';
 
             $events[] = $event;
         }
@@ -57,14 +58,16 @@ class Calendar
             $event->id = $item['id'];
             $event->title = $item['title'];
             $event->extendedProps = [
-                'teacher' => $item['teacher_id'],
-                'student'=>$item['student_id'],
+                'teacher' => $item->teacher->username,
+                'student'=>$item->student->username,
                 'description' => $item['description'],
             ];
             $event->backgroundColor = $item['color'];
             $event->borderColor = $item['color'];
             $event->start = $item['start'];
             $event->end = $item['end'];
+            $event->groupId = 'education';
+            $event->display= 'block';
 
             $events[] = $event;
         }

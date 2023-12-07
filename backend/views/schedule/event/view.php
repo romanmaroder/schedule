@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="event-view">
+<div class="event-view container-fluid">
 
     <?= DetailView::widget(
         [
@@ -107,7 +107,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',
-                    'class' => 'btn btn-danger btn-sm',
+                    'class' => 'btn btn-danger btn-sm btn-shadow',
                     'data' => [
                         'confirm' => Yii::t('app', 'Delete file?'),
                         'method' => 'post',

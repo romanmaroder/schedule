@@ -76,7 +76,7 @@
                                         [
                                             'label' => 'Calendar',
                                             'icon' => 'far fa-calendar-alt',
-                                            'url' => ['/schedule/event/calendar'],
+                                            'url' => ['/schedule/calendar/calendar'],
                                             'active' => $this->context->id == 'schedule/calendar'
                                         ],
                                         [

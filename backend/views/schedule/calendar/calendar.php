@@ -197,7 +197,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                             }, success: function (response) {
-                                            console.log(response);
+                                           // console.log(response);
                                                 var event = [];
                                                  $.each(response, function( index, value ) {
                                                     event.push({
@@ -205,7 +205,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         title: $(this).attr('title'),
                                                         start: $(this).attr('start'),
                                                         end: $(this).attr('end'),
-                                                        display: 'block',
+                                                        display: $(this).attr('display'),
+                                                        groupId: $(this).attr('groupId'),
                                                         backgroundColor: $(this).attr('color'),
                                                         className: '8888888888',
                                                         allDay : $(this).attr('allDay'),
@@ -213,7 +214,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         });
                                                     });
-                                                    console.log(event);
+                                                    //console.log(event);
                                                     successCallback(event)
                                                 },
                                             });
@@ -225,12 +226,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 "
                             function (info, successCallback, failureCallback) {
                                 $.ajax({
-                                    url: '/schedule/event/educations',
+                                    url: '/schedule/education/lessons',
                                     type: 'GET',
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                         }, success: function (response) {
-                                         console.log(response);
+                                         //console.log(response);
                                             var event = [];
                                              $.each(response, function( index, value ) {
                                                 event.push({
@@ -238,16 +239,17 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     title: $(this).attr('title'),
                                                     start: $(this).attr('start'),
                                                     end: $(this).attr('end'),
-                                                    display: 'block',
+                                                    display: $(this).attr('display'),
+                                                    groupId: $(this).attr('groupId'),
                                                     backgroundColor: $(this).attr('backgroundColor'),
                                                     borderColor: $(this).attr('backgroundColor'),
                                                     //className: '9999999',
                                                     allDay : $(this).attr('allDay'),
                                                     extendedProps:$(this).attr('extendedProps'),
-                                                    //url:'/schedule/event/view-ajax',
+                                                    url:'/schedule/education/view-ajax',
                                                     });
                                                 });
-                                                 console.log(event);
+                                                 //console.log(event);
                                                 successCallback(event)
                                             },
                                         });
@@ -300,7 +302,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     function(){
                                         $.ajax({
 								url:'/schedule/education/create-ajax',
-								data:{'start':1, 'end':1},
+								data:{'start':new Date().toISOString().slice(0, 10), 'end':new Date().toISOString().slice(0, 10)},
 								success:function (data) {
 									$('#modal').modal('show').find('.modal-body').html(data);
 								},
@@ -362,77 +364,98 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'eventContent' => new JsExpression(
                             "function(arg){
-                              
+                            
+//                            Declaring variables
+
+                                let arrayOfDomNodes = [ ];
+                                
                                 let startTime = new Intl.DateTimeFormat('default', {
-                                                //month: 'short', day: 'numeric',
-                                                hour: '2-digit', minute: '2-digit', hour24: false,
+                                            hour: '2-digit', minute: '2-digit', hour24: false,
                                         }).format(new Date(arg.event.start));
                                         
-                                 let endTime = new Intl.DateTimeFormat('default', {
-                                                //month: 'short', day: 'numeric',
-                                                hour: '2-digit', minute: '2-digit', hour24: false,
+                                let endTime = new Intl.DateTimeFormat('default', {
+                                               hour: '2-digit', minute: '2-digit', hour24: false,
                                         }).format(new Date(arg.event.end));
                                         
                                 let wrapTitle = document.createElement('div');
                                 let wrapService = document.createElement('div');
+                                let wrapNotice = document.createElement('div');
                                 let wrapDescription = document.createElement('div');
                                 let wrapStartTime = document.createElement('span');
                                 let wrapEndTime = document.createElement('span');
                                 let wrapTime = document.createElement('div');
+                                let wrapTeacher = document.createElement('div');
+                                let wrapStudent = document.createElement('div');
+                                let title = arg.event.title;
+                                let service = arg.event.extendedProps.service;
+                                let notice = arg.event.extendedProps.notice;
+                                let start = startTime;
+                                let end = ' - ' + endTime;
+                                let teacher = arg.event.extendedProps.teacher;
+                                let student = arg.event.extendedProps.student;
+                                let description = arg.event.extendedProps.description;
                                 
                                 wrapTitle.classList.add('fc-event-title-container','mb-2','d-none','d-md-block','text-wrap');
                                 wrapService.classList.add('fc-event-service-container','mb-2','d-none', 'd-md-block');
+                                wrapNotice.classList.add('fc-event-description-container', 'mb-2','d-none','d-md-inline','text-wrap');
                                 wrapDescription.classList.add('fc-event-description-container', 'mb-2','d-none','d-md-inline','text-wrap');
                                 wrapStartTime.classList.add('fc-event-time-start','dayGridMonth');
                                 wrapEndTime.classList.add('fc-event-time-end', 'd-none', 'd-md-inline');
                                 wrapTime.classList.add('fc-event-time-container','text-center','text-md-left');
+                                wrapTeacher.classList.add('fc-event-teacher-container','mb-2','d-none','d-md-block','text-wrap');
+                                wrapStudent.classList.add('fc-event-student-container','mb-2','d-none','d-md-block','text-wrap');
                                 
-                                let title = arg.event.title ? arg.event.title : arg.event.id;
-                                let service = arg.event.extendedProps.service ? arg.event.extendedProps.service : '' ;
-                                let description = arg.event.extendedProps.description ? arg.event.extendedProps.description :
-                                        arg.event.extendedProps.notice;
-                                 let start = startTime;
-                                 let end = ' - ' + endTime;
-                                 
-                                
-                                
-                                wrapTitle.innerHTML=title;
-                                wrapService.innerHTML=service;
-                                wrapDescription.innerHTML=description;
+                                wrapTitle.innerHTML = title;
+                                wrapService.innerHTML = service;
+                                wrapNotice.innerHTML = notice;
+                                wrapDescription.innerHTML = description;
                                 wrapStartTime.innerHTML = start;
                                 wrapEndTime.innerHTML = end;
                                 wrapTime.appendChild(wrapStartTime);
                                 wrapTime.appendChild(wrapEndTime);
-                                
-                                
-                                let arrayOfDomNodes = [ ];
-                               
-                                
+                                wrapTeacher.innerHTML = teacher;
+                                wrapStudent.innerHTML = student;  
+//
+//                               Depending on the type of event display
+
                                  if(arg.view.type == 'dayGridMonth' ){
                                         arrayOfDomNodes.push(wrapTime);
                                         arrayOfDomNodes.push(wrapTitle);
                                  }
-                                 
                                  if(arg.view.type == 'dayGridDay' || arg.view.type == 'timeGridDay' || arg.view.type == 'timeGridWeek'){
                                         wrapTitle.classList.remove('d-none','text-wrap');
+                                        wrapTeacher.classList.remove('d-none','text-wrap');
+                                        wrapStudent.classList.remove('d-none','text-wrap');
                                         wrapService.classList.remove('d-none','text-wrap');
+                                        wrapNotice.classList.remove('d-none','text-wrap');
                                         wrapDescription.classList.remove('d-none','text-wrap');
                                         wrapStartTime.classList.remove('d-none','dayGridMonth');
                                         wrapEndTime.classList.remove('d-none');
                                         wrapTime.classList.remove('d-none','text-center','text-md-left');
+                                        
+                                    
                                         arrayOfDomNodes.push(wrapTitle);
-                                        arrayOfDomNodes.push(wrapService);
-                                        arrayOfDomNodes.push(wrapDescription);
+                                       
+                                        if (arg.event.groupId ==='event'){
+                                            arrayOfDomNodes.push(wrapService);
+                                            arrayOfDomNodes.push(wrapNotice);
+                                        }
+                                        if (arg.event.groupId ==='education'){
+                                             arrayOfDomNodes.push(wrapTeacher);
+                                             arrayOfDomNodes.push(wrapStudent);
+                                             arrayOfDomNodes.push(wrapDescription);
+                                        }
+                                        
                                         arrayOfDomNodes.push(wrapTime);
                                  }
 
                                  if(arg.view.type == 'dayGridWeek'){
                                        arrayOfDomNodes.push(wrapTitle);
-                                        arrayOfDomNodes.push(wrapTime);
-                                 } 
-                               
+                                       arrayOfDomNodes.push(wrapTime);
+                                 }
+
                                 return { domNodes: arrayOfDomNodes }
-                              
+                                
                                 }"
                         ),
                         'dateClick' => new JsExpression(
@@ -490,12 +513,23 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'eventMouseEnter'=>new JsExpression("
                                 function( info  ){
-                                    $(info.el).tooltip({
-                                                    title: info.event.title + '<br>' +  info.event.extendedProps.service,
-                                                    container: 'body',
-                                                    html:true,
-                                                    content: info.event.extendedProps.service,
-                                    });
+                                    if(info.event.groupId ==='event'){
+                                            $(info.el).tooltip({
+                                                        title: info.event.title + '<br>' +  info.event.extendedProps.service,
+                                                        container: 'body',
+                                                        html:true,
+                                                        content: info.event.extendedProps.service,
+                                            });
+                                    }
+                                    if(info.event.groupId ==='education'){
+                                        $(info.el).tooltip({
+                                                        title: info.event.title + '<br>' +  info.event.extendedProps.description,
+                                                        container: 'body',
+                                                        html:true,
+                                                        content: info.event.extendedProps.service,
+                                        });
+                                    }
+                                    
                                 }
                         
                         "),

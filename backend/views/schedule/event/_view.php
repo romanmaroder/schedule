@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="event-view">
+<div class="event-view container-fluid">
 
     <?= DetailView::widget(
         [

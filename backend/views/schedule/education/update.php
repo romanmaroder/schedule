@@ -14,12 +14,70 @@ use yii\helpers\Html;
 ?>
 <div class="education-update container-fluid">
 
-    <?php $form = ActiveForm::begin(
-        [
-            'id' => 'education-form',
-            'enableAjaxValidation' => false,
-        ]
-    ); ?>
+    <?php
+    $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group"><?= $form->field($model, 'start')->widget(
+                    DateTimePicker::class,
+                    [
+                        'options' => [
+                            'placeholder' => 'Начало события ...',
+                            'type' => 'text',
+                            'readonly' => true,
+                            'class' => 'text-muted small',
+                            'style' => 'border:none;background:none',
+                            'convertFormat' => true
+                        ],
+                        'type' => DateTimePicker::TYPE_BUTTON,
+                        'layout' => '{picker} {remove} {input}',
+                        'pickerIcon' => '<i class="fa fa-calendar"></i>',
+                        'removeIcon' => '<i class="fa fa-times"></i>',
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd H:ii:ss',
+                            'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                            'todayHighlight' => true,
+                            'todayBtn' => true,
+                        ],
+
+                        'language' => 'ru',
+                        'size' => 'xs'
+                    ]
+                ); ?></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group"><?= $form->field($model, 'end')->widget(
+                    DateTimePicker::class,
+                    [
+                        'options' => [
+                            'placeholder' => 'Конец события ...',
+                            'type' => 'text',
+                            'readonly' => true,
+                            'class' => 'text-muted small',
+                            'style' => 'border:none;background:none'
+                        ],
+                        'type' => DateTimePicker::TYPE_BUTTON,
+                        'layout' => '{picker} {remove} {input}',
+                        'pickerIcon' => '<i class="fa fa-calendar"></i>',
+                        'removeIcon' => '<i class="fa fa-times"></i>',
+                        'pluginOptions' => [
+                            'format' => 'yyyy-mm-dd H:ii:ss',
+                            'autoclose' => true,
+                            'hoursDisabled' => '0,1,2,3,4,5,6,22,23'
+//                'todayHighlight' => true,
+//                'todayBtn'       => true,
+//                'startDate'      => date('Y-m-d'),
+                        ],
+                        'language' => 'ru',
+                        'size' => 'xs'
+
+                    ]
+                ); ?></div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <div class="form-group"><?= $form->field($model->teacher, 'teacher')->widget(
@@ -96,73 +154,13 @@ use yii\helpers\Html;
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="form-group"><?= $form->field($model, 'start')->widget(
-                    DateTimePicker::class,
-                    [
-                        'options' => [
-                            'placeholder' => 'Начало события ...',
-                            'type' => 'text',
-                            'readonly' => true,
-                            'class' => 'text-muted small',
-                            'style' => 'border:none;background:none',
-                            'convertFormat' => true
-                        ],
-                        'type' => DateTimePicker::TYPE_BUTTON,
-                        'layout' => '{picker} {remove} {input}',
-                        'pickerIcon' => '<i class="fa fa-calendar"></i>',
-                        'removeIcon' => '<i class="fa fa-times"></i>',
-                        'pluginOptions' => [
-                            'autoclose' => true,
-                            'format' => 'yyyy-mm-dd H:ii:ss',
-//                'todayHighlight' => true,
-//                'todayBtn'       => true,
-//                'startDate'      => date('Y-m-d'),
-                        ],
-
-                        'language' => 'ru',
-                        'size' => 'xs'
-                    ]
-                ); ?></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group"><?= $form->field($model, 'end')->widget(
-                    DateTimePicker::class,
-                    [
-                        'options' => [
-                            'placeholder' => 'Конец события ...',
-                            'type' => 'text',
-                            'readonly' => true,
-                            'class' => 'text-muted small',
-                            'style' => 'border:none;background:none'
-                        ],
-                        'type' => DateTimePicker::TYPE_BUTTON,
-                        'layout' => '{picker} {remove} {input}',
-                        'pickerIcon' => '<i class="fa fa-calendar"></i>',
-                        'removeIcon' => '<i class="fa fa-times"></i>',
-                        'pluginOptions' => [
-                            'format' => 'yyyy-mm-dd H:ii:ss',
-                            'autoclose' => true,
-//                'todayHighlight' => true,
-//                'todayBtn'       => true,
-//                'startDate'      => date('Y-m-d'),
-                        ],
-                        'language' => 'ru',
-                        'size' => 'xs'
-
-                    ]
-                ); ?></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']); ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow']); ?>
             </div>
         </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php
+    ActiveForm::end(); ?>
 
 </div>

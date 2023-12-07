@@ -14,6 +14,7 @@ use schedule\services\manage\Schedule\EventManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\Response;
 
 class EventController extends Controller
 {
@@ -59,33 +60,10 @@ class EventController extends Controller
         );
     }
 
-    public function actionCalendar()
-    {
-
-        $events = $this->calendar->getEvents();
-        $education = $this->calendar->getEducations();
-        return $this->render(
-            'calendar',
-            [
-                'events'=>$events,
-                'education'=>$education
-            ]
-        );
-    }
-
     public function actionEvents()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $events = $this->calendar->getEvents();
-        return $events;
-    }
-
-    public function actionEducations()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $education = $this->calendar->getEducations();
-        return $education;
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        return $this->calendar->getEvents();
     }
 
     public function actionView($id)

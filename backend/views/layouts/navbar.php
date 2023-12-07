@@ -16,10 +16,11 @@ use yii\helpers\Html;
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
         </li>
+
         <li class="nav-item d-none d-sm-inline-block"><?=Html::a(
                 'Calendar',
-                ['/schedule/event/calendar'],
-                ['class' => ['nav-link']]
+                ['/schedule/calendar/calendar'],
+                ['class' => ['nav-link',  Yii::$app->controller->id == 'schedule/calendar' ? 'active': '' ]]
             )?></li>
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
@@ -31,10 +32,10 @@ use yii\helpers\Html;
                     'li',
                     Html::a(
                         'Calendar',
-                        ['/schedule/event/calendar'],
-                        ['class' => ['dropdown-item']]
+                        ['/schedule/calendar/calendar'],
+                        ['class' => ['dropdown-item',  Yii::$app->controller->id == 'schedule/calendar' ? 'active': '' ]]
                     ),
-                    ['class' => ['d-sm-none d-inline-block']]
+                    ['class' => ['d-sm-none']]
                 ); ?>
                 <li><?= Html::a('Sign out', ['/auth/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?></li>
 

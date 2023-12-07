@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Lesson', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="education-view">
+<div class="education-view container-fluid">
 
     <?= DetailView::widget(
         [
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'ntext',
                 ],
                 [
-                    'label' => 'description',
+                    'attribute' => 'description',
                     'format' => 'ntext',
                 ],
                 [
@@ -61,10 +61,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <p>
             <?= Html::a(
                 'Update',
-                ['update', 'id' => $model->id],
+                ['update-ajax', 'id' => $model->id],
                 [
                     'id' => 'edit-link',
-                    'class' => 'btn btn-primary btn-sm'
+                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                    'class' => 'btn btn-primary btn-sm btn-shadow'
                 ]
             ) ?>
             <?php
@@ -105,7 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',
-                    'class' => 'btn btn-danger btn-sm',
+                    'class' => 'btn btn-danger btn-sm btn-shadow',
                     'data' => [
                         'confirm' => Yii::t('app', 'Delete file?'),
                         'method' => 'post',
