@@ -66,10 +66,9 @@ use yii\helpers\Html;
                         'pluginOptions' => [
                             'format' => 'yyyy-mm-dd H:ii:ss',
                             'autoclose' => true,
-                            'hoursDisabled' => '0,1,2,3,4,5,6,22,23'
-//                'todayHighlight' => true,
-//                'todayBtn'       => true,
-//                'startDate'      => date('Y-m-d'),
+                            'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                            'todayHighlight' => true,
+                            'todayBtn' => true,
                         ],
                         'language' => 'ru',
                         'size' => 'xs'

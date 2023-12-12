@@ -98,7 +98,8 @@ div.required label:after {
     box-shadow: 0 0.5rem 0.95rem rgba(0, 0, 0, .55) !important;
 }
 
-.fc-event-service-container {
+.fc-event-service-container,
+.fc-event-notice-container {
     word-break: break-word;
     white-space: normal;
 }

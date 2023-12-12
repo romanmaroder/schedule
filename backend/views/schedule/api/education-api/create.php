@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pickerIcon' => '<i class="fa fa-calendar"></i>',
                         'removeIcon' => '<i class="fa fa-times"></i>',
                         'pluginOptions' => [
-                            'autoclose' => true,
                             'format' => 'yyyy-mm-dd H:ii:ss',
+                            'autoclose' => true,
                             'todayHighlight' => true,
                             'todayBtn'       => true,
                             'hoursDisabled' => '0,1,2,3,4,5,6,22,23'
