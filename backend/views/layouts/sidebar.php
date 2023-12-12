@@ -51,7 +51,7 @@
                                     'items' => [
                                         [
                                             'label' => 'Products',
-                                            'icon' => 'file-o',
+                                            'icon' => 'fas fa-parking',
                                             'url' => ['/schedule/product/index'],
                                             'active' => $this->context->id == 'schedule/product'
                                         ],
@@ -81,25 +81,25 @@
                                         ],
                                         [
                                             'label' => 'Brands',
-                                            'icon' => 'file-o',
+                                            'icon' => 'fa-solid fa-copyright',
                                             'url' => ['/schedule/brand/index'],
                                             'active' => $this->context->id == 'schedule/brand'
                                         ],
                                         [
                                             'label' => 'Tags',
-                                            'icon' => 'file-o',
+                                            'icon' => 'fa-solid fa-tags',
                                             'url' => ['/schedule/tag/index'],
                                             'active' => $this->context->id == 'schedule/tag'
                                         ],
                                         [
                                             'label' => 'Categories',
-                                            'icon' => 'file-o',
+                                            'icon' => 'fa-solid fa-list',
                                             'url' => ['/schedule/category/index'],
                                             'active' => $this->context->id == 'schedule/category'
                                         ],
                                         [
                                             'label' => 'Characteristics',
-                                            'icon' => 'file-o',
+                                            'icon' => 'fas fa-thermometer-quarter',
                                             'url' => ['/schedule/characteristic/index'],
                                             'active' => $this->context->id == 'schedule/characteristic'
                                         ],
