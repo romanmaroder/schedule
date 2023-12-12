@@ -22,7 +22,7 @@ PluginAsset::register($this)->add(
     </p>
 
     <div class="invoice p-3 mb-3">
-        <div class="card card-outline card-secondary">
+        <div class="card card-secondary">
             <div class='card-header'>
                 <h3 class='card-title'>Common</h3>
                 <div class='card-tools'>

@@ -20,6 +20,9 @@ return [
         'education/<id:\d+>' => 'schedule/education/view',
         'education/update/<id:\d+>' => 'schedule/education/update',
 
+        'education-api/<id:\d+>' => 'schedule/education-api/view',
+        'education-api/update/<id:\d+>' => 'schedule/education-api/update',
+
         
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',

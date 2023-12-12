@@ -90,7 +90,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             $select = new JsExpression(
                 "function (selectionInfo ) {
 							$.ajax({
-								url:'/schedule/event/create-ajax',
+								url:'/schedule/event-api/create',
 								data:{'start':selectionInfo.startStr, 'end':selectionInfo.endStr},
 								success:function (data) {
 							
@@ -197,7 +197,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                             }, success: function (response) {
-                                           // console.log(response);
+                                         
                                                 var event = [];
                                                  $.each(response, function( index, value ) {
                                                     event.push({
@@ -208,13 +208,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         display: $(this).attr('display'),
                                                         groupId: $(this).attr('groupId'),
                                                         backgroundColor: $(this).attr('color'),
-                                                        className: '8888888888',
+                                                        className: 'my-custom-classes',
                                                         allDay : $(this).attr('allDay'),
-                                                        url:'/schedule/event/view-ajax',
                                                         extendedProps:$(this).attr('extendedProps'),
+                                                        url:'/schedule/event-api/view',
                                                         });
                                                     });
-                                                    //console.log(event);
+                                                   
                                                     successCallback(event)
                                                 },
                                             });
@@ -231,7 +231,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                         }, success: function (response) {
-                                         //console.log(response);
+                                         
                                             var event = [];
                                              $.each(response, function( index, value ) {
                                                 event.push({
@@ -243,13 +243,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     groupId: $(this).attr('groupId'),
                                                     backgroundColor: $(this).attr('backgroundColor'),
                                                     borderColor: $(this).attr('backgroundColor'),
-                                                    //className: '9999999',
+                                                    className: 'my-custom-classes',
                                                     allDay : $(this).attr('allDay'),
                                                     extendedProps:$(this).attr('extendedProps'),
-                                                    url:'/schedule/education/view-ajax',
+                                                    url:'/schedule/education-api/view',
                                                     });
                                                 });
-                                                 //console.log(event);
+                                                
                                                 successCallback(event)
                                             },
                                         });
@@ -301,24 +301,24 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     "
                                     function(){
                                         $.ajax({
-								url:'/schedule/education/create-ajax',
-								data:{'start':new Date().toISOString().slice(0, 10), 'end':new Date().toISOString().slice(0, 10)},
-								success:function (data) {
-									$('#modal').modal('show').find('.modal-body').html(data);
-								},
-								error:function(data){
-									var Toast = Swal.mixin({
-													    toast: true,
-													    position: 'top-end',
-													    showConfirmButton: false,
-													    timer: 5000,
-									});
-									Toast.fire({
-										icon: 'error',
-										title: data.responseText
-									});
-								},
-							});
+                                            url:'/schedule/education-api/create',
+                                            data:{'start':new Date().toISOString().slice(0, 10), 'end':new Date().toISOString().slice(0, 10)},
+                                            success:function (data) {
+                                                $('#modal').modal('show').find('.modal-body').html(data);
+                                            },
+                                            error:function(data){
+                                                var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 5000,
+                                                });
+                                                Toast.fire({
+                                                    icon: 'error',
+                                                    title: data.responseText
+                                                });
+                                            },
+                                        });
                                     
                                     }"
                                 ),
@@ -340,18 +340,18 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'viewDidMount' => new JsExpression(
                             "
                                 function(info){
-                               let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
-                               var date = calendar.getDate();
-                             let a =new Intl.DateTimeFormat('default', {
-                								dateStyle:'short',
-                                                //month: 'numeric', day: 'numeric', year:'numeric',
-                                                //hour: '2-digit', minute: '2-digit', hour24: false,
-                                        }).format(new Date(date))
-                            
-                             var result = a.replace(/[\.\/]/g,'-');
-                             localStorage.setItem('fcDefaultView', info.view.type);
-                			 localStorage.setItem('fcDefaultViewDate', result );
-                        }"
+                                    let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
+                                    var date = calendar.getDate();
+                                    let a =new Intl.DateTimeFormat('default', {
+                                                    dateStyle:'short',
+                                                    //month: 'numeric', day: 'numeric', year:'numeric',
+                                                    //hour: '2-digit', minute: '2-digit', hour24: false,
+                                            }).format(new Date(date))
+                                
+                                    var result = a.replace(/[\.\/]/g,'-');
+                                    localStorage.setItem('fcDefaultView', info.view.type);
+                                    localStorage.setItem('fcDefaultViewDate', result );
+                                }"
                         ),
                         //'initialDate' => 'new Date(localStorage.getItem("fcDefaultViewDate"))',
                         'windowResize' => new JsExpression(
@@ -415,7 +415,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 wrapTime.appendChild(wrapEndTime);
                                 wrapTeacher.innerHTML = teacher;
                                 wrapStudent.innerHTML = student;  
-//
+
 //                               Depending on the type of event display
 
                                  if(arg.view.type == 'dayGridMonth' ){
@@ -461,55 +461,52 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'dateClick' => new JsExpression(
                             "function(info){
                             
-                            $.ajax({
-								url:'/schedule/event/create-ajax',
-								data:{'start':info.dateStr, 'end':info.dateStr},
-								success:function (data) {
-									$('#modal').modal('show').find('.modal-body').html(data);
-								},
-								error:function(data){
-									var Toast = Swal.mixin({
-													    toast: true,
-													    position: 'top-end',
-													    showConfirmButton: false,
-													    timer: 5000,
-									});
-									Toast.fire({
-										icon: 'error',
-										title: data.responseText
-									});
-								},
-							});
-                                   
+                                    $.ajax({
+                                        url:'/schedule/event-api/create',
+                                        data:{'start':info.dateStr, 'end':info.dateStr},
+                                        success:function (data) {
+                                            $('#modal').modal('show').find('.modal-body').html(data);
+                                        },
+                                        error:function(data){
+                                            var Toast = Swal.mixin({
+                                                                toast: true,
+                                                                position: 'top-end',
+                                                                showConfirmButton: false,
+                                                                timer: 5000,
+                                            });
+                                            Toast.fire({
+                                                icon: 'error',
+                                                title: data.responseText
+                                            });
+                                        },
+                                    });
                             }"
                         ),
                         'eventClick' => new JsExpression(
                             "function(info) {
-                               //console.log(info.event);
-                                     info.jsEvent.preventDefault(); 
+                                            info.jsEvent.preventDefault(); 
                         
-                                   $.ajax({
-								        url:info.event.url,
-								        data:{'id':info.event.id},
-								        success:function (data) {
-									    $('#modal').modal('show').find('.modal-body').html(data);
-								    },
-                                    error:function(data){
-                                
-                                        var Toast = Swal.mixin({
-                                                            toast: true,
-                                                            position: 'top-end',
-                                                            showConfirmButton: false,
-                                                            timer: 5000,
-                                        });
-                                        Toast.fire({
-                                            icon: 'error',
-                                            title: data.responseText
-                                        });
-                                    },
-                                });
+                                           $.ajax({
+                                                url:info.event.url,
+                                                data:{'id':info.event.id},
+                                                success:function (data) {
+                                                    $('#modal').modal('show').find('.modal-body').html(data);
+                                                },
+                                                error:function(data){
+                                                    var Toast = Swal.mixin({
+                                                                        toast: true,
+                                                                        position: 'top-end',
+                                                                        showConfirmButton: false,
+                                                                        timer: 5000,
+                                                    });
+                                                    Toast.fire({
+                                                        icon: 'error',
+                                                        title: data.responseText
+                                                    });
+                                                },
+                                           });
   
-                                }"
+                            }"
                         ),
                         'eventMouseEnter'=>new JsExpression("
                                 function( info  ){
@@ -537,200 +534,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ],
                 ]
             ); ?>
-            <!--                --><?
-            //= yii2fullcalendar::widget(
-            //                    [
-            //                        'id' => 'calendar',
-            //                        'themeSystem' => 'bootstrap4',
-            //                        'events' => $events,
-            //                        /*'defaultView' => new JsExpression(
-            //                            "
-            //             localStorage.getItem('fcDefaultView') !== null ? localStorage.getItem('fcDefaultView') : 'dayGridDay'
-            //            "
-            //                        ),*/
-            //
-            //                        'headerToolbar' => [
-            //                            'left' => 'prev,next,today',
-            //                            'center' => 'title',
-            //                            'right' => $right
-            //                        ],
-            //                        'clientOptions' => [
-            //                            // 'eventOverlap ' => false,
-            //                            // 'todayBtn' => true,
-            //                            'themeSystem' => 'bootstrap4',
-            //                            'navLinks' => true,
-            //                            'contentHeight' => 'auto',
-            //                            //'timeFormat' => 'H:mm',
-            //                            'locale' => 'ru',
-            //                            // 'eventLimit' => false,
-            //                            'eventOrder' => '-title',
-            //                            'buttonText' => [
-            //                                'GridWeek' => 'Повестка недели',
-            //                                //'agendaDay' => 'День-Время',
-            //                                //'agendaWeek' => 'Неделя-Время'
-            //                            ],
-            //                            'views' => [
-            //                                'dayGridMonth' => [
-            //                                    //'eventLimit' => 10,
-            //                                    'displayEventTime' => true, // отображение времени в месяце
-            //                                ],
-            //                                'dayGrid' => [
-            //                                    'displayEventTime' => true, // отображение времени в месяце
-            //                                ],
-            //                                'day' => [
-            //                                    //'eventLimit' => 15,
-            //                                ],
-            //                                'GridWeek' => [
-            //                                    // 'eventLimit' => false,
-            //                                    'displayEventTime' => false
-            //                                ]
-            //                            ],
-            //                            // 'eventLimitClick' => 'popover',
-            //                            //'theme' => true,
-            //                            'fixedWeekCount' => false,
-            //                            'allDaySlot' => false,
-            //                            //'allDayText'=>false,
-            //                            'slotEventOverlap' => true,
-            //                            //'agendaEventMinHeight' => 100,
-            //                            'slotDuration' => '0:15:00',
-            //                            'slotLabelInterval' => '01:00:00',
-            //                            'slotLabelFormat' => 'HH:mm',
-            //                            //'minTime' => '07:00:00',
-            //                            //'maxTime' => '22:00:00',
-            //                            'selectable' => Yii::$app->user->can('manager'),
-            //                            // 'selectHelper' => true,
-            //                            'select' => $select,
-            //                            'editable' => $editable,
-            //                            'eventResize' => $eventResize,
-            //                            'eventDrop' => $eventDrop,
-            //                            'initialView' => $initialView,
-            //                            'nowIndicator' => $nowIndicator,
-            //                            /*'defaultDate' => new JsExpression(
-            //                                "
-            //                localStorage.getItem('fcDefaultViewDate') !==null ? localStorage.getItem('fcDefaultViewDate') : $('#calendar').fullCalendar('getDate')
-            //                "
-            //                            ),*/
-            //                            'windowResize' => $window_resize,
-            //
-            //                            'eventClick' => new JsExpression(
-            //                                "function(event) {
-            //
-            //                     if(app == 'app-backend'){
-            //                        viewUrl = basePath +'/calendar/event/view?id=' + event.id;
-            //                        updateUrl = basePath +'/calendar/event/update?id=' + event.id;
-            //                         $('#edit-link').attr('href', updateUrl);
-            //                     }else{
-            //                        viewUrl = '/calendar/event/view?id=' + event.id;
-            //                        //updateUrl = '/calendar/event/update?id=' + event.id;
-            //                     }
-            //
-            //                      $('.popover').remove();
-            //                      $('#modal').find('.modal-body').load(viewUrl);
-            //                      $('#modal').modal('show');
-            //                    }"
-            //                            ),
-            //                            /*'dayRender' => new JsExpression(
-            //                                "function(cell,date){
-            //
-            //                    } "
-            //                            ),*/
-            //                            /*'eventRender' => new JsExpression(
-            //                                "function (event, element, view){
-            //                                    $('.popover').remove();
-            //                                    element.addClass('event-render');
-            //                                    element.find('.fc-content').append( element.find('.fc-time').addClass('font-italic') );
-            //
-            //                                    if (view.name == 'dayGridDay' ) {
-            //                                        element.find('.fc-content').addClass('d-flex flex-column');
-            //                                        element.addClass('fc-basic_day');
-            //                                        element.find('.fc-title').addClass('font-weight-bold pb-2').after('<span class=\"fc-description pb-2\"><i>' + event.nonstandard.description + '</i></span>');
-            //                                        if( event.nonstandard.notice){
-            //                                            element.find('.fc-description').after('<span class=\"fc-notice pb-2\"><u><i>' + event.nonstandard.notice + '</i></u></span>');
-            //                                        }
-            //                                    }
-            //                                     if (view.name == 'month' ) {
-            //                                        element.addClass('fc-basic_month');
-            //                                        element.find('.fc-content').prepend(element.find('.fc-time'));
-            //
-            //                                        if(event.title === 'Свободное время'){
-            //                                            element.find('.fc-title').addClass('free-time');
-            //                                            element.find('.fc-time').addClass('free-time');
-            //                                        }
-            //
-            //                                        element.find('.fc-content').find('.fc-time').css({'white-space':'break-spaces'});
-            //                                        element.find('.fc-content').find('.fc-title').addClass('d-none d-sm-block').css({'float':'none'});
-            //
-            //                                        if( $('.fc-basic_month').closest('div').length > 0 ){
-            //                                            element.find('.fc-content').find('.fc-title').removeClass('d-none').addClass('d-inline-block');
-            //                                            element.addClass('w-100');
-            //                                        }
-            //
-            //                                         element.popover({
-            //                                                placement: 'top',
-            //                                                html: true,
-            //                                                image: true,
-            //                                                trigger : 'hover',
-            //                                                title: event.title,
-            //                                                content: event.nonstandard.description ? event.nonstandard.description : '',
-            //                                                container:'body'
-            //                                        });
-            //                                     }
-            //                                     if ( view.name == 'GridWeek' ){
-            //                                        let pop =  element.popover({
-            //                                                placement: 'top',
-            //                                                html: true,
-            //                                                image: true,
-            //                                                trigger : 'hover',
-            //                                                title: event.title + ' ' + event.start.format('HH:mm'),
-            //                                                content: event.nonstandard.description ? event.nonstandard.description : '',
-            //                                                container:'body',
-            //
-            //                                        });
-            //                                        if(event.title === 'Свободное время'){
-            //                                            element.find('.fc-title').addClass('free-time');
-            //                                        }
-            //                                     }
-            //                                     if ( view.name == 'GridWeek' ) {
-            //                                        element.find('.fc-list-item-marker ').append(' (' + event.nonstandard.master_name + ') ');
-            //                                     }
-            //                                      if (view.name == 'listWeek') {
-            //
-            //                                          element.find('.fc-title').addClass('font-weight-bold pb-2').after('<span class=\"fc-description pb-2\"><i>' + event.nonstandard.description + '</i></span>');
-            //                                            if( event.nonstandard.notice){
-            //                                                element.find('.fc-description').after('<span class=\"fc-notice pb-2\"><u><i>' + event.nonstandard.notice + '</i></u></span>');
-            //                                            }
-            //                                      }
-            //                                      if ( view.name == 'listDay') {
-            //
-            //                                          element.find('.fc-title').addClass('font-weight-bold pb-2').after('<span class=\"fc-description pb-2\"><i>' + event.nonstandard.description + '</i></span>');
-            //                                            if( event.nonstandard.notice){
-            //                                                element.find('.fc-description').after('</br><span class=\"fc-notice pb-2\"><u><i>' + event.nonstandard.notice + '</i></u></span>');
-            //                                            }
-            //                                      }
-            //
-            //                  				}"
-            //                            ),*/
-            //                            /*'eventAfterAllRender' => new JsExpression(
-            //                                "
-            //                	function(view){
-            //						view.calendar.el.find('.fc-right').find('.btn-group-vertical').removeClass('btn-group-vertical').addClass('btn-group');
-            //						if ($(window).width() < 540 ){
-            //							view.calendar.el.find('.fc-right').find('.btn-group').removeClass('btn-group').addClass('btn-group-vertical');
-            //						}
-            //					}
-            //                "
-            //                            ),*/
-            //                            /*'viewRender' => new JsExpression(
-            //                                "function (view,event, element){
-            //								localStorage.setItem('fcDefaultView', view.name);
-            //								var date = $('#calendar').fullCalendar('getDate');
-            //								localStorage.setItem('fcDefaultViewDate', date.format());
-            //                	}"
-            //                            ),*/
-            //                        ],
-            //
-            //                    ]
-            //                ); ?>
 
         </div>
     </div>

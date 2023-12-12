@@ -5,6 +5,7 @@
 /* @var $this \yii\web\View */
 /* @var $model \schedule\entities\Schedule\Event\Education */
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -36,6 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 [
+                    'attribute' => 'student_ids',
+                    'value' => implode(', ', ArrayHelper::getColumn($model->students, 'username')),
+                    'contentOptions' => ['class'=>'text-break'],
+                ],
+                [
                     'attribute' => 'title',
                     'format' => 'ntext',
                 ],
@@ -61,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <p>
             <?= Html::a(
                 'Update',
-                ['update-ajax', 'id' => $model->id],
+                ['update', 'id' => $model->id],
                 [
                     'id' => 'edit-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
@@ -102,13 +108,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
 
             <?= Html::a(
-                Yii::t('app', 'Delete'),
+                'Delete',
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',
                     'class' => 'btn btn-danger btn-sm btn-shadow',
                     'data' => [
-                        'confirm' => Yii::t('app', 'Delete file?'),
+                        'confirm' => 'Are you sure you want to delete this item?',
                         'method' => 'post',
                     ],
                 ]

@@ -11,7 +11,7 @@ use schedule\repositories\Schedule\EducationRepository;
 
 class EducationManageService
 {
-    private $educations;
+    private EducationRepository $educations;
 
     public function __construct(EducationRepository $educations)
     {
@@ -23,6 +23,7 @@ class EducationManageService
         $education = Education::create(
             $form->teacher->teacher,
             $form->student->student,
+            $form->students->students,
             $form->title,
             $form->description,
             $form->color,
@@ -39,6 +40,7 @@ class EducationManageService
         $education->edit(
             $form->teacher->teacher,
             $form->student->student,
+            $form->students->students,
             $form->title,
             $form->description,
             $form->color,

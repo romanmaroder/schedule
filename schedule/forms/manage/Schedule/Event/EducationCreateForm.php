@@ -9,6 +9,7 @@ use schedule\forms\CompositeForm;
 /**
  * @property TeacherForm $teacher
  * @property StudentForm $student
+ * @property StudentForm $students
  */
 class EducationCreateForm extends CompositeForm
 {
@@ -22,6 +23,7 @@ class EducationCreateForm extends CompositeForm
     {
         $this->teacher = new TeacherForm();
         $this->student = new StudentForm();
+        $this->students = new StudentForm();
         parent::__construct($config);
     }
 
@@ -36,6 +38,6 @@ class EducationCreateForm extends CompositeForm
 
     protected function internalForms(): array
     {
-        return ['teacher','student'];
+        return ['teacher','student','students'];
     }
 }

@@ -99,6 +99,7 @@ class Characteristic extends ActiveRecord
     {
         return '{{%schedule_characteristics}}';
     }
+
     public function afterFind(): void
     {
         $this->variants = array_filter(Json::decode($this->getAttribute('variants_json')));

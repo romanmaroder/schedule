@@ -64,7 +64,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <p>
             <?= Html::a(
                 'Update',
-                ['update-ajax', 'id' => $model->id],
+                ['update', 'id' => $model->id],
                 [
                     'id' => 'edit-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",

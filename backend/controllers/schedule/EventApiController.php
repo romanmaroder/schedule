@@ -4,8 +4,6 @@
 namespace backend\controllers\schedule;
 
 
-use backend\forms\Schedule\EventSearch;
-use schedule\entities\Schedule\Event\Calendar\Calendar;
 use schedule\entities\Schedule\Event\Event;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
@@ -14,21 +12,16 @@ use schedule\services\manage\Schedule\EventManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\web\Response;
 
-class EventController extends Controller
+class EventApiController extends Controller
 {
-
     private EventManageService $service;
-    private Calendar $calendar;
 
-    public function __construct($id, $module, EventManageService $service, Calendar $calendar, $config = [])
+    public function __construct($id, $module, EventManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
-        $this->calendar = $calendar;
     }
-
     public function behaviors(): array
     {
         return [
@@ -36,40 +29,15 @@ class EventController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
-                    'activate' => ['POST'],
-                    'draft' => ['POST'],
-                    'delete-photo' => ['POST'],
-                    'move-photo-up' => ['POST'],
-                    'move-photo-down' => ['POST'],
                 ],
             ],
         ];
     }
 
-    public function actionIndex()
-    {
-        $searchModel = new EventSearch();
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
-
-        return $this->render(
-            'index',
-            [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]
-        );
-    }
-
-    public function actionEvents()
-    {
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-        return $this->calendar->getEvents();
-    }
-
     public function actionView($id)
     {
 
-        return $this->render(
+        return $this->renderAjax(
             'view',
             [
                 'model' => $this->findModel($id),
@@ -77,19 +45,25 @@ class EventController extends Controller
         );
     }
 
-    public function actionCreate()
+    public function actionCreate($start = null, $end = null)
     {
         $form = new EventCreateForm();
+        $form->start = $start;
+        $form->end = $end;
+
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $event = $this->service->create($form);
-                return $this->redirect(['view', 'id' => $event->id]);
+                $this->service->create($form);
+                Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
+                return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
-        return $this->render(
+
+
+        return $this->renderAjax(
             'create',
             [
                 'model' => $form,
@@ -105,15 +79,14 @@ class EventController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($event->id, $form);
-                return $this->redirect(['view', 'id' => $event->id]);
+                Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
+                return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
-
         }
-
-        return $this->render(
+        return $this->renderAjax(
             'update',
             [
                 'model' => $form,
@@ -129,7 +102,7 @@ class EventController extends Controller
         } catch (\DomainException $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
-        return $this->redirect(['index']);
+        return $this->redirect(['/schedule/calendar/calendar']);
     }
 
     protected function findModel($id): Event

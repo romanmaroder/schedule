@@ -7,11 +7,13 @@ namespace schedule\entities\Schedule\Event;
 use schedule\entities\User\User;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\Json;
 
 /**
  * @property int $id
  * @property int $teacher_id
  * @property int $student_id
+ * @property string $student_ids [json]
  * @property string $title
  * @property string $description
  * @property string $color
@@ -20,14 +22,22 @@ use yii\db\ActiveRecord;
  * @property int $status
  * @property User $teacher
  * @property User $student
+ * @property array $studentsIds
  */
 class Education extends ActiveRecord
 {
-    public static function create($teacherId, $studentId, $title, $description, $color, $start, $end): self
+    public array $studentsIds;
+    /**
+     * @var mixed|null
+     */
+    private $students;
+
+    public static function create($teacherId, $studentId, array $studentsIds, $title, $description, $color, $start, $end): self
     {
         $education = new static();
         $education->teacher_id = $teacherId;
         $education->student_id = $studentId;
+        $education->studentsIds = $studentsIds;
         $education->title = $title;
         $education->description = $description;
         $education->color = $color;
@@ -36,10 +46,11 @@ class Education extends ActiveRecord
         return $education;
     }
 
-    public function edit($teacherId, $studentId, $title, $description, $color, $start, $end): void
+    public function edit($teacherId, $studentId,  array $studentsIds, $title, $description, $color, $start, $end): void
     {
         $this->teacher_id = $teacherId;
         $this->student_id = $studentId;
+        $this->studentsIds = $studentsIds;
         $this->title = $title;
         $this->description = $description;
         $this->color = $color;
@@ -57,8 +68,25 @@ class Education extends ActiveRecord
         return $this->hasOne(User::class, ['id' => 'student_id']);
     }
 
+    public function getStudents(): ActiveQuery
+    {
+        return $this->hasMany(User::class, ['id' => 'studentsIds']);
+    }
+
     public static function tableName(): string
     {
         return '{{%schedule_educations}}';
+    }
+
+    public function afterFind(): void
+    {
+        $this->studentsIds = array_filter(Json::decode($this->getAttribute('student_ids')));
+        parent::afterFind();
+    }
+
+    public function beforeSave($insert):bool
+    {
+        $this->setAttribute('student_ids', Json::encode(array_filter($this->studentsIds)));
+        return parent::beforeSave($insert);
     }
 }

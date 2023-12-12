@@ -17,6 +17,7 @@ class m231203_142445_create_schedule_educations_table extends Migration
             'id' => $this->primaryKey(),
             'teacher_id'=>$this->integer()->notNull(),
             'student_id'=>$this->integer()->notNull(),
+            'student_ids'=>'JSON NOT NULL',
             'title'=>$this->string(),
             'description'=>$this->text(),
             'color'=>$this->string()->notNull()->defaultValue('#474D2A'),
