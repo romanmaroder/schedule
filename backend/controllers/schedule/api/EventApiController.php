@@ -1,26 +1,27 @@
 <?php
 
 
-namespace backend\controllers\schedule;
+namespace backend\controllers\schedule\api;
 
 
-use schedule\entities\Schedule\Event\Education;
-use schedule\forms\manage\Schedule\Event\EducationCreateForm;
-use schedule\forms\manage\Schedule\Event\EducationEditForm;
+use schedule\entities\Schedule\Event\Event;
+use schedule\forms\manage\Schedule\Event\EventCreateForm;
+use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\NotFoundException;
-use schedule\services\manage\Schedule\EducationManageService;
+use schedule\services\manage\Schedule\EventManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
-class EducationApiController extends Controller
-{private EducationManageService $service;
-    public function __construct($id, $module, EducationManageService $service,$config = [])
+class EventApiController extends Controller
+{
+    private EventManageService $service;
+
+    public function __construct($id, $module, EventManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
     }
-
     public function behaviors(): array
     {
         return [
@@ -46,9 +47,10 @@ class EducationApiController extends Controller
 
     public function actionCreate($start = null, $end = null)
     {
-        $form = new EducationCreateForm();
+        $form = new EventCreateForm();
         $form->start = $start;
         $form->end = $end;
+
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
@@ -60,6 +62,7 @@ class EducationApiController extends Controller
             }
         }
 
+
         return $this->renderAjax(
             'create',
             [
@@ -70,12 +73,12 @@ class EducationApiController extends Controller
 
     public function actionUpdate($id)
     {
-        $education = $this->findModel($id);
+        $event = $this->findModel($id);
 
-        $form = new EducationEditForm($education);
+        $form = new EventEditForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $this->service->edit($education->id, $form);
+                $this->service->edit($event->id, $form);
                 Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
@@ -87,6 +90,7 @@ class EducationApiController extends Controller
             'update',
             [
                 'model' => $form,
+                'event' => $event,
             ]
         );
     }
@@ -101,9 +105,9 @@ class EducationApiController extends Controller
         return $this->redirect(['/schedule/calendar/calendar']);
     }
 
-    protected function findModel($id): Education
+    protected function findModel($id): Event
     {
-        if (($model = Education::findOne($id)) !== null) {
+        if (($model = Event::findOne($id)) !== null) {
             return $model;
         }
         throw new NotFoundException('The requested page does not exist.');

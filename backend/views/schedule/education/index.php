@@ -18,7 +18,7 @@ PluginAsset::register($this)->add(
 <div class="education-index">
 
     <p>
-        <?= Html::a('Create lesson', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create lesson', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
     </p>
 
     <div class="invoice p-3 mb-3">

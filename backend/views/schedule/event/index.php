@@ -17,11 +17,11 @@ PluginAsset::register($this)->add(
     <div class="event-index">
 
         <p>
-            <?= Html::a('Create Event', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Create Event', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
         </p>
 
         <div class="invoice p-3 mb-3">
-            <div class="card card-outline card-secondary">
+            <div class="card card-secondary">
                 <div class='card-header'>
                     <h3 class='card-title'>Common</h3>
                     <div class='card-tools'>

@@ -90,7 +90,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             $select = new JsExpression(
                 "function (selectionInfo ) {
 							$.ajax({
-								url:'/schedule/event-api/create',
+								url:'schedule/api/event-api/create',
 								data:{'start':selectionInfo.startStr, 'end':selectionInfo.endStr},
 								success:function (data) {
 							
@@ -211,7 +211,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         className: 'my-custom-classes',
                                                         allDay : $(this).attr('allDay'),
                                                         extendedProps:$(this).attr('extendedProps'),
-                                                        url:'/schedule/event-api/view',
+                                                        url:'/schedule/api/event-api/view',
                                                         });
                                                     });
                                                    
@@ -246,7 +246,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     className: 'my-custom-classes',
                                                     allDay : $(this).attr('allDay'),
                                                     extendedProps:$(this).attr('extendedProps'),
-                                                    url:'/schedule/education-api/view',
+                                                    url:'/schedule/api/education-api/view',
                                                     });
                                                 });
                                                 
@@ -301,7 +301,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     "
                                     function(){
                                         $.ajax({
-                                            url:'/schedule/education-api/create',
+                                            url:'/schedule/api/education-api/create',
                                             data:{'start':new Date().toISOString().slice(0, 10), 'end':new Date().toISOString().slice(0, 10)},
                                             success:function (data) {
                                                 $('#modal').modal('show').find('.modal-body').html(data);
@@ -462,7 +462,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             "function(info){
                             
                                     $.ajax({
-                                        url:'/schedule/event-api/create',
+                                        url:'/schedule/api/event-api/create',
                                         data:{'start':info.dateStr, 'end':info.dateStr},
                                         success:function (data) {
                                             $('#modal').modal('show').find('.modal-body').html(data);

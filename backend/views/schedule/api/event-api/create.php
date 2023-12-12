@@ -178,7 +178,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-12">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow']) ?>
             </div>
         </div>
     </div>
