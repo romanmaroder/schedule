@@ -107,7 +107,33 @@ a.desc:after {
 }
 
 .fc-event {
-    box-shadow: 0 0.5rem 0.95rem rgba(0,0,0,.55)!important;
+    box-shadow: 0 0.5rem 0.95rem rgba(0, 0, 0, .55) !important;
+}
+
+.fc-event-service-container,
+.fc-event-notice-container {
+    word-break: break-word;
+    white-space: normal;
+}
+
+.fc-event-service-container,
+.fc-event-time-container,
+.fc-event-title-container {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}
+.fc-event-service-container{
+    white-space: break-spaces;
+}
+.fc-event-title-container{
+    word-break: break-word;
+}
+
+@media (max-width: 544px), (orientation: portrait) {
+    .fc-event-time-start.dayGridMonth {
+        font-size: 12px;
+        font-weight: 500;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    }
 }
 
 .fc-icon.fc-icon-fas,
@@ -118,12 +144,4 @@ a.desc:after {
 .fc-icon.fc-icon-fa {
     font-family: "Font Awesome 5 Free", serif !important;
     font-weight: bold !important;
-}
-.fc-addEducation-button{
-    position: fixed;
-    bottom: 60px;
-    right: 25px;
-    transform: translatex(-5px);
-    cursor: pointer;
-    z-index: 4;
 }
