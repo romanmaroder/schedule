@@ -57,14 +57,19 @@ PluginAsset::register($this)->add(
                                 'format' => 'raw',
                             ],
                             [
-                                'attribute' => 'student_id',
+                                'attribute' => 'student_ids',
                                 'value' => function ($model) {
-                                    return Html::a(
-                                        Html::encode($model->student->username),
-                                        ['view', 'id' => $model->id]
-                                    );
+                                    $st = '';
+                                    foreach ($model->students as $student) {
+                                        $st .= Html::a(
+                                                Html::encode($student->username),
+                                                ['/users/user/view', 'id' => $student->id]
+                                            ) .'/'. PHP_EOL;
+                                    }
+                                    return $st;
                                 },
                                 'format' => 'raw',
+                                'contentOptions' => ['class' => 'text-break'],
                             ],
                             [
                                 'attribute' => 'title',

@@ -1,6 +1,5 @@
 <?php
 
-use hail812\adminlte3\assets\PluginAsset;
 use yii\bootstrap4\Modal;
 use yii\helpers\Json;
 use yii\web\JsExpression;
@@ -13,7 +12,6 @@ use yii2fullcalendar6\yii2fullcalendar6;
 $this->title = 'Calendar';
 $this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['calendar']];
 $this->params['breadcrumbs'][] = $this->title;
-PluginAsset::register($this)->add(['sweetalert2']);
 
 ?>
 <div class="row">
@@ -87,36 +85,36 @@ PluginAsset::register($this)->add(['sweetalert2']);
              *
              * @var  $select
              */
-            $select = new JsExpression(
-                "function (selectionInfo ) {
-							$.ajax({
-								url:'/schedule/api/event-api/create',
-								data:{'start':selectionInfo.startStr, 'end':selectionInfo.endStr},
-								success:function (data) {
-							
-									$('#modal').modal('show').find('.modal-body').html(data);
-							
-								},
-								error:function(data){
-							
-									var Toast = Swal.mixin({
-															  toast: true,
-															  position: 'top-end',
-															  showConfirmButton: false,
-															  timer: 5000,
-															});
-															  Toast.fire({
-																icon: 'error',
-																title: data.responseText
-															  });
-								},
-								complete:function(data){
-								
-								}
-							});
-							
-                    }"
-            );
+//            $select = new JsExpression(
+//                "function (selectionInfo ) {
+//							$.ajax({
+//								url:'schedule/api/event-api/create',
+//								data:{'start':selectionInfo.startStr, 'end':selectionInfo.endStr},
+//								success:function (data) {
+//
+//									$('#modal').modal('show').find('.modal-body').html(data);
+//
+//								},
+//								error:function(data){
+//
+//									var Toast = Swal.mixin({
+//															  toast: true,
+//															  position: 'top-end',
+//															  showConfirmButton: false,
+//															  timer: 5000,
+//															});
+//															  Toast.fire({
+//																icon: 'error',
+//																title: data.responseText
+//															  });
+//								},
+//								complete:function(data){
+//
+//								}
+//							});
+//
+//                    }"
+//            );
 
 
             /**
@@ -192,7 +190,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 "
                                 function (info, successCallback, failureCallback) {
                                     $.ajax({
-                                        url: '/schedule/event/events',
+                                        url: '/schedule/event/event/events',
                                         type: 'GET',
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
@@ -211,7 +209,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         className: 'my-custom-classes',
                                                         allDay : $(this).attr('allDay'),
                                                         extendedProps:$(this).attr('extendedProps'),
-                                                        url:'/schedule/api/event-api/view',
+                                                        url:'/schedule/event/event/view',
                                                         });
                                                     });
                                                    
@@ -226,7 +224,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 "
                             function (info, successCallback, failureCallback) {
                                 $.ajax({
-                                    url: '/schedule/education/lessons',
+                                    url: '/schedule/education/education/lessons',
                                     type: 'GET',
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
@@ -246,7 +244,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     className: 'my-custom-classes',
                                                     allDay : $(this).attr('allDay'),
                                                     extendedProps:$(this).attr('extendedProps'),
-                                                    url:'/schedule/api/education-api/view',
+                                                    url:'/schedule/education/education/view',
                                                     });
                                                 });
                                                 
@@ -292,48 +290,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             //'listDay'=>'fas fas fa-calendar-check',
                             'timeGridDay' => 'far far fa-calendar',
                             'timeGridWeek' => 'fas fas fa-calendar-week',
-                            'addEducation' => 'fas fas fa-graduation-cap'
-                        ],
-                        'customButtons' => [
-                            'addEducation' => [
-                                'text' => 'Add education event',
-                                'click' => new JsExpression(
-                                    "
-                                    function(){
-                                        $.ajax({
-                                            url:'/schedule/api/education-api/create',
-                                            data:{'start':new Date().toISOString().slice(0, 10), 'end':new Date().toISOString().slice(0, 10)},
-                                            success:function (data) {
-                                                $('#modal').modal('show').find('.modal-body').html(data);
-                                            },
-                                            error:function(data){
-                                                var Toast = Swal.mixin({
-                                                                    toast: true,
-                                                                    position: 'top-end',
-                                                                    showConfirmButton: false,
-                                                                    timer: 5000,
-                                                });
-                                                Toast.fire({
-                                                    icon: 'error',
-                                                    title: data.responseText
-                                                });
-                                            },
-                                        });
-                                    
-                                    }"
-                                ),
-                            ]
-                        ],
-                        'footerToolbar' => [
-                            'right' => 'addEducation'
                         ],
 
                         //'selectable' => Yii::$app->user->can('manager'),
-                        'selectable' => true,
-                        'select' => $select,
-                        'editable' => $editable,
-                        'eventResize' => $eventResize,
-                        'eventDrop' => $eventDrop,
+                        //'selectable' => true,
+                        //'select' => $select,
+                        //'editable' => $editable,
+                        //'eventResize' => $eventResize,
+                        //'eventDrop' => $eventDrop,
                         'initialView' => $initialView,
                         'nowIndicator' => true,
                         'eventClassNames' => ['p-1', 'm-1'],
@@ -458,30 +422,30 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 
                                 }"
                         ),
-                        'dateClick' => new JsExpression(
-                            "function(info){
-                            
-                                    $.ajax({
-                                        url:'/schedule/api/event-api/create',
-                                        data:{'start':info.dateStr, 'end':info.dateStr},
-                                        success:function (data) {
-                                            $('#modal').modal('show').find('.modal-body').html(data);
-                                        },
-                                        error:function(data){
-                                            var Toast = Swal.mixin({
-                                                                toast: true,
-                                                                position: 'top-end',
-                                                                showConfirmButton: false,
-                                                                timer: 5000,
-                                            });
-                                            Toast.fire({
-                                                icon: 'error',
-                                                title: data.responseText
-                                            });
-                                        },
-                                    });
-                            }"
-                        ),
+//                        'dateClick' => new JsExpression(
+//                            "function(info){
+//
+//                                    $.ajax({
+//                                        url:'/schedule/api/event-api/create',
+//                                        data:{'start':info.dateStr, 'end':info.dateStr},
+//                                        success:function (data) {
+//                                            $('#modal').modal('show').find('.modal-body').html(data);
+//                                        },
+//                                        error:function(data){
+//                                            var Toast = Swal.mixin({
+//                                                                toast: true,
+//                                                                position: 'top-end',
+//                                                                showConfirmButton: false,
+//                                                                timer: 5000,
+//                                            });
+//                                            Toast.fire({
+//                                                icon: 'error',
+//                                                title: data.responseText
+//                                            });
+//                                        },
+//                                    });
+//                            }"
+//                        ),
                         'eventClick' => new JsExpression(
                             "function(info) {
                                             info.jsEvent.preventDefault(); 

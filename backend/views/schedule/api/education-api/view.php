@@ -29,17 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 [
-                    'attribute' => 'student_id',
+                    'attribute' => 'student_ids',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        //return '<span style="color: ' . $data->master->color . '">' . $data->master->username . '</p>';
-                        return $model->student->username;
-                    }
-                ],
-                [
-                    'attribute' => 'student_ids',
-                    'value' => implode(', ', ArrayHelper::getColumn($model->students, 'username')),
-                    'contentOptions' => ['class'=>'text-break'],
+                        $st = '';
+                        foreach ($model->students as $student) {
+                            $st .= Html::a(
+                                    Html::encode($student->username),
+                                    ['/users/user/view', 'id' => $student->id]
+                                ) .'/'. PHP_EOL;
+                        }
+                        return $st;
+                    },
+                    'contentOptions' => ['class' => 'text-break'],
                 ],
                 [
                     'attribute' => 'title',

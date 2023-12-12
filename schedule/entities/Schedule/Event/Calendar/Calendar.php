@@ -59,7 +59,7 @@ class Calendar
             $event->title = $item['title'];
             $event->extendedProps = [
                 'teacher' => $item->teacher->username,
-                'student'=>$item->student->username,
+                'student'=>$this->studentsName($item->students),
                 'description' => $item['description'],
             ];
             $event->backgroundColor = $item['color'];
@@ -82,5 +82,16 @@ class Calendar
             $name .= $service->name .PHP_EOL;
         }
         return $name;
+    }
+
+    private  function studentsName($students){
+        $name = '';
+        if (is_array($students)){
+            foreach ($students as $student){
+                $name .= $student->username . PHP_EOL;
+            }
+            return $name;
+        }
+        throw new \RuntimeException('Students must be array.');
     }
 }

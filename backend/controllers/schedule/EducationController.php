@@ -74,7 +74,6 @@ class EducationController extends Controller
         );
     }
 
-
     public function actionCreate()
     {
         $form = new EducationCreateForm();
@@ -94,7 +93,6 @@ class EducationController extends Controller
             ]
         );
     }
-
 
     public function actionUpdate($id)
     {
@@ -121,7 +119,6 @@ class EducationController extends Controller
         );
     }
 
-
     public function actionDelete($id)
     {
         try {
@@ -131,7 +128,6 @@ class EducationController extends Controller
         }
         return $this->redirect(['/schedule/education/index']);
     }
-
 
     protected function findModel($id): Education
     {

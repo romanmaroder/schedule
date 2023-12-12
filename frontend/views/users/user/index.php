@@ -8,6 +8,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
+use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
 
@@ -18,10 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- Default box -->
 <div class="card card-solid">
     <div class="card-header">
-        <!--<h3 class="card-title">
-            <?/*= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) */?>
-        </h3>-->
-
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                 <i class="fas fa-minus"></i>
@@ -63,12 +60,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <div class="card-footer">
                             <div class="text-right">
-                                <a href="#" class="btn btn-sm bg-teal">
+                                <!--<a href="#" class="btn btn-sm bg-teal">
                                     <i class="fas fa-comments"></i>
-                                </a>
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> View Profile
-                                </a>
+                                </a>-->
+                                <?= Html::a('<i class="fas fa-user"></i> View Profile',
+                                    ['user/view', 'id' => $user->id],
+                                    ['class' => 'btn btn-sm btn-primary']
+                                ) ?>
                             </div>
                         </div>
                     </div>

@@ -115,7 +115,15 @@ a.desc:after {
 .fc-icon.fc-icon-fab,
 .fc-icon.fc-icon-fal,
 .fc-icon.fc-icon-fad,
-.fc-icon.fc-icon-fa{
+.fc-icon.fc-icon-fa {
     font-family: "Font Awesome 5 Free", serif !important;
-    font-weight: bold!important;
+    font-weight: bold !important;
+}
+.fc-addEducation-button{
+    position: fixed;
+    bottom: 60px;
+    right: 25px;
+    transform: translatex(-5px);
+    cursor: pointer;
+    z-index: 4;
 }

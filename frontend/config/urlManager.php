@@ -24,7 +24,10 @@ return [
         'cabinet/<_c:[\w\-]+>/<_a:[\w-]+>' => 'cabinet/<_c>/<_a>',
         'cabinet/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => 'cabinet/<_c>/<_a>',
 
+        'calendar' => 'schedule/calendar/calendar/index',
+
         'user'=>'users/user/index',
+        'user/<id:\d+>'=>'users/user/view',
 
         ['class' => 'frontend\urls\CategoryUrlRule'],
 

@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = 'Update';
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow']) ?>
         </h3>
 
         <div class="card-tools">
