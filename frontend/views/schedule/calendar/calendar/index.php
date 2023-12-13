@@ -80,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     $.ajax({
                                         url: '/schedule/event/event/events',
                                         type: 'GET',
+                                        crossDomain: true,
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                             }, success: function (response) {
@@ -114,6 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $.ajax({
                                     url: '/schedule/education/education/lessons',
                                     type: 'GET',
+                                    crossDomain: true,
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                         }, success: function (response) {

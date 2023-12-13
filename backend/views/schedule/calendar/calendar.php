@@ -184,6 +184,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     $.ajax({
                                         url: '/schedule/event/events',
                                         type: 'GET',
+                                        crossDomain: true,
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                             }, success: function (response) {
@@ -218,6 +219,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 $.ajax({
                                     url: '/schedule/education/lessons',
                                     type: 'GET',
+                                    crossDomain: true,
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                         }, success: function (response) {
