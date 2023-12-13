@@ -5,7 +5,6 @@
 
 /* @var $model \schedule\entities\Schedule\Event\Education */
 
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -38,11 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         $st = '';
                         foreach ($model->students as $student) {
                             $st .= Html::a(
-                                Html::encode($student->username),
-                                ['/users/user/view', 'id' => $student->id]
-                            ) .','. PHP_EOL;
+                                    Html::encode($student->username),
+                                    ['/users/user/view', 'id' => $student->id]
+                                ) . ',' . PHP_EOL;
                         }
-                            return $st;
+                        return $st;
                     },
                     'contentOptions' => ['class' => 'text-break'],
                 ],

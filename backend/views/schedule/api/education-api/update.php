@@ -121,22 +121,6 @@ use yii\helpers\Html;
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="form-group"><?= $form->field($model->student, 'student')->widget(
-                    Select2::class,
-                    [
-                        'name' => 'student',
-                        'language' => 'ru',
-                        'data' => $model->student->studentList(),
-                        'options' => ['placeholder' => 'Select'],
-                        'pluginOptions' => [
-                            'allowClear' => true,
-                        ],
-                    ]
-                ); ?></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
             <div class="form-group">
                 <?= $form->field($model->students, 'students')->widget(
                     Select2::class,

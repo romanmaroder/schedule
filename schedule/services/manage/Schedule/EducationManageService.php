@@ -22,7 +22,6 @@ class EducationManageService
     {
         $education = Education::create(
             $form->teacher->teacher,
-            $form->student->student,
             $form->students->students,
             $form->title,
             $form->description,
@@ -39,7 +38,6 @@ class EducationManageService
         $education = $this->educations->get($id);
         $education->edit(
             $form->teacher->teacher,
-            $form->student->student,
             $form->students->students,
             $form->title,
             $form->description,

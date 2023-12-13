@@ -1,9 +1,7 @@
 <?php
 
 use yii\bootstrap4\Modal;
-use yii\helpers\Json;
 use yii\web\JsExpression;
-use yii\web\View;
 use yii2fullcalendar6\yii2fullcalendar6;
 
 /* @var $events \schedule\entities\Schedule\Event\Calendar\Calendar */
@@ -20,16 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="col">
         <div class="event-index">
-
-            <?php
-            #Регистрация переменных для использования в js коде
-
-            Yii::$app->view->registerJs(
-                "app=" . Json::encode(Yii::$app->id) . "; basePath=" . Json::encode(
-                    Yii::$app->request->baseUrl
-                ) . ";",
-                View::POS_HEAD
-            ); ?>
 
             <?php
             Modal::begin(
@@ -70,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 $editable = true;
                 $initialView = 'dayGridMonth';
             } else {
-                $right = 'dayGridMonth,dayGridWeek,dayGridDay,timeGridWeek,timeGridDay';
+                $right = 'dayGridMonth,dayGridWeek,dayGridDay,timeGridDay';
                 $editable = true;
                 $initialView = 'dayGridMonth';
             }
@@ -78,108 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 $right = 'dayGridMonth,dayGridWeek,dayGridDay,listDay,timeGridWeek,timeGridDay';
                 $initialView = 'timeGridDay';
                 $nowIndicator = true;
-            }
+            }?>
 
-            /**
-             * Triggered when a date/time selection is made
-             *
-             * @var  $select
-             */
-//            $select = new JsExpression(
-//                "function (selectionInfo ) {
-//							$.ajax({
-//								url:'schedule/api/event-api/create',
-//								data:{'start':selectionInfo.startStr, 'end':selectionInfo.endStr},
-//								success:function (data) {
-//
-//									$('#modal').modal('show').find('.modal-body').html(data);
-//
-//								},
-//								error:function(data){
-//
-//									var Toast = Swal.mixin({
-//															  toast: true,
-//															  position: 'top-end',
-//															  showConfirmButton: false,
-//															  timer: 5000,
-//															});
-//															  Toast.fire({
-//																icon: 'error',
-//																title: data.responseText
-//															  });
-//								},
-//								complete:function(data){
-//
-//								}
-//							});
-//
-//                    }"
-//            );
-
-
-            /**
-             * Triggered when resizing stops and the event has changed in duration.
-             *
-             * @var  $eventResize
-             */
-            $eventResize = new JsExpression(
-                "function(event){
-									var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm');
-									var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm');
-									var id = event.id;
-									 if(app == 'app-backend'){
-										$.ajax({
-											url: basePath +'/calendar/event/update-resize?id='+id+'&start='+start+'&end='+end,
-											type: 'POST',
-											success: function(data){
-											var Toast = Swal.mixin({
-															  toast: true,
-															  position: 'top-end',
-															  showConfirmButton: false,
-															  timer: 5000,
-															});
-															  Toast.fire({
-																icon: 'info',
-																title: start + ' - ' + end
-															  });
-												$('#calendar').fullCalendar('refetchEvents');
-											},
-										});
-									 }
-						}"
-            );
-
-            /**
-             * Triggered when dragging stops and the event has moved to a different day/time.
-             *
-             * @var  $eventDrop
-             */
-            $eventDrop = new JsExpression(
-                "function(event){
-//									var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm');
-//									var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm');
-//									var id = event.id;
-//									if(app == 'app-backend'){
-//										$.ajax({
-//											url: basePath +'/calendar/event/update-drop?id='+id+'&start='+start+'&end='+end,
-//											type: 'POST',
-//											success: function(){
-//											var Toast = Swal.mixin({
-//															  toast: true,
-//															  position: 'top-end',
-//															  showConfirmButton: false,
-//															  timer: 5000,
-//															});
-//															  Toast.fire({
-//																icon: 'info',
-//																title: event.title+'</br>'+start + ' - ' + end
-//															  });
-//												$('#calendar').fullCalendar('refetchEvents');
-//											},
-//										});
-//									 }
-                		}"
-            ); ?>
 
             <?= yii2fullcalendar6::widget(
                 [
@@ -287,17 +175,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'dayGridMonth' => 'fas fas fa-calendar-alt',
                             'dayGridDay' => 'far far fa-calendar-day',
                             'dayGridWeek' => 'fas fas fa-calendar-week',
-                            //'listDay'=>'fas fas fa-calendar-check',
+                            'listDay'=>'fas fas fa-calendar-check',
                             'timeGridDay' => 'far far fa-calendar',
                             'timeGridWeek' => 'fas fas fa-calendar-week',
                         ],
-
-                        //'selectable' => Yii::$app->user->can('manager'),
-                        //'selectable' => true,
-                        //'select' => $select,
-                        //'editable' => $editable,
-                        //'eventResize' => $eventResize,
-                        //'eventDrop' => $eventDrop,
                         'initialView' => $initialView,
                         'nowIndicator' => true,
                         'eventClassNames' => ['p-1', 'm-1'],
@@ -317,7 +198,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     localStorage.setItem('fcDefaultViewDate', result );
                                 }"
                         ),
-                        //'initialDate' => 'new Date(localStorage.getItem("fcDefaultViewDate"))',
                         'windowResize' => new JsExpression(
                             "
                                 function(arg) {
@@ -422,30 +302,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 
                                 }"
                         ),
-//                        'dateClick' => new JsExpression(
-//                            "function(info){
-//
-//                                    $.ajax({
-//                                        url:'/schedule/api/event-api/create',
-//                                        data:{'start':info.dateStr, 'end':info.dateStr},
-//                                        success:function (data) {
-//                                            $('#modal').modal('show').find('.modal-body').html(data);
-//                                        },
-//                                        error:function(data){
-//                                            var Toast = Swal.mixin({
-//                                                                toast: true,
-//                                                                position: 'top-end',
-//                                                                showConfirmButton: false,
-//                                                                timer: 5000,
-//                                            });
-//                                            Toast.fire({
-//                                                icon: 'error',
-//                                                title: data.responseText
-//                                            });
-//                                        },
-//                                    });
-//                            }"
-//                        ),
                         'eventClick' => new JsExpression(
                             "function(info) {
                                             info.jsEvent.preventDefault(); 

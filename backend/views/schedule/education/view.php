@@ -35,22 +35,26 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'teacher_id',
                             'format' => 'raw',
                             'value' => function ($model) {
-                                //return '<span style="color: ' . $data->master->color . '">' . $data->master->username . '</p>';
-                                return $model->teacher->username;
-                            }
-                        ],
-                        [
-                            'attribute' => 'student_id',
-                            'format' => 'raw',
-                            'value' => function ($model) {
-                                //return '<span style="color: ' . $data->master->color . '">' . $data->master->username . '</p>';
-                                return $model->student->username;
+                                return Html::a(
+                                    Html::encode($model->teacher->username),
+                                    ['/user/view', 'id' => $model->teacher->id]
+                                );
                             }
                         ],
                         [
                             'attribute' => 'student_ids',
-                            'value' => implode(', ', ArrayHelper::getColumn($model->students, 'username')),
-                            'contentOptions' => ['class'=>'text-break'],
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                $st = '';
+                                foreach ($model->students as $student) {
+                                    $st .= Html::a(
+                                            Html::encode($student->username),
+                                            ['/user/view', 'id' => $student->id]
+                                        ) .'/'. PHP_EOL;
+                                }
+                                return $st;
+                            },
+                            'contentOptions' => ['class' => 'text-break'],
                         ],
                         [
                             'attribute' => 'title',

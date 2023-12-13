@@ -35,16 +35,22 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'attribute' => 'master_id',
                             'format' => 'raw',
                             'value' => function ($model) {
-                                //return '<span style="color: ' . $data->master->color . '">' . $data->master->username . '</p>';
-                                return $model->master->username;
+                                return Html::a(
+                                    Html::encode($model->master->username),
+                                    ['/user/view','id'=>$model->master->id]
+
+                                );
                             }
                         ],
                         [
                             'attribute' => 'client_id',
                             'format' => 'raw',
                             'value' => function ($model) {
-                                //return '<span style="color: ' . $data->master->color . '">' . $data->master->username . '</p>';
-                                return $model->client->username;
+                                return Html::a(
+                                    Html::encode($model->client->username),
+                                    ['/user/view','id'=>$model->client->id]
+
+                                );
                             }
                         ],
                         [

@@ -78,17 +78,20 @@ class Calendar
     private function serviceNameList($services): string
     {
         $name = '';
-        foreach ($services as $service) {
-            $name .= $service->name .PHP_EOL;
+        if (is_array($services)) {
+            foreach ($services as $service) {
+                $name .= $service->name . PHP_EOL;
+            }
+            return $name;
         }
-        return $name;
+        throw new \RuntimeException('Service must be array.');
     }
 
     private  function studentsName($students){
         $name = '';
         if (is_array($students)){
             foreach ($students as $student){
-                $name .= $student->username . PHP_EOL;
+                $name .= $student->username .PHP_EOL;
             }
             return $name;
         }

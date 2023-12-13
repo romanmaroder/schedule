@@ -12,7 +12,6 @@ use yii\helpers\Json;
 /**
  * @property int $id
  * @property int $teacher_id
- * @property int $student_id
  * @property string $student_ids [json]
  * @property string $title
  * @property string $description
@@ -23,20 +22,16 @@ use yii\helpers\Json;
  * @property User $teacher
  * @property User $student
  * @property array $studentsIds
+ * @property User[] $students
  */
 class Education extends ActiveRecord
 {
     public array $studentsIds;
-    /**
-     * @var mixed|null
-     */
-    private $students;
 
-    public static function create($teacherId, $studentId, array $studentsIds, $title, $description, $color, $start, $end): self
+    public static function create($teacherId, array $studentsIds, $title, $description, $color, $start, $end): self
     {
         $education = new static();
         $education->teacher_id = $teacherId;
-        $education->student_id = $studentId;
         $education->studentsIds = $studentsIds;
         $education->title = $title;
         $education->description = $description;
@@ -46,10 +41,9 @@ class Education extends ActiveRecord
         return $education;
     }
 
-    public function edit($teacherId, $studentId,  array $studentsIds, $title, $description, $color, $start, $end): void
+    public function edit($teacherId,  array $studentsIds, $title, $description, $color, $start, $end): void
     {
         $this->teacher_id = $teacherId;
-        $this->student_id = $studentId;
         $this->studentsIds = $studentsIds;
         $this->title = $title;
         $this->description = $description;

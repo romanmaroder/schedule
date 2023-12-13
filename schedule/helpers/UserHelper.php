@@ -41,9 +41,14 @@ class UserHelper
             default => 'badge bg-warning',
         };
 
-        return Html::tag('span', ArrayHelper::getValue(self::statusList(), $status), [
-            'class' => $class,
-        ]);
+        return Html::tag(
+            'span',
+            ArrayHelper::getValue(self::statusList(), $status),
+            [
+                'class' => $class,
+            ]
+        );
     }
+
 
 }

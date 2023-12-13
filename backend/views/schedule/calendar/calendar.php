@@ -24,16 +24,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <div class="event-index">
 
             <?php
-            #Регистрация переменных для использования в js коде
-
-            Yii::$app->view->registerJs(
-                "app=" . Json::encode(Yii::$app->id) . "; basePath=" . Json::encode(
-                    Yii::$app->request->baseUrl
-                ) . ";",
-                View::POS_HEAD
-            ); ?>
-
-            <?php
             Modal::begin(
                 [
                     'title' => $this->title,

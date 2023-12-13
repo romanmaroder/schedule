@@ -12,7 +12,6 @@ class EducationSearch extends Model
 {
     public $id;
     public $teacher_id;
-    public $student_id;
     public $title;
     public $description;
     public $color;
@@ -24,7 +23,7 @@ class EducationSearch extends Model
     public function rules()
     {
         return [
-            [['id', 'teacher_id', 'student_id'], 'integer'],
+            [['id', 'teacher_id'], 'integer'],
             [['title', 'description', 'color'], 'string'],
             [['title', 'description', 'color'], 'safe'],
             [['start', 'end', 'date_to', 'date_from'], 'safe'],
@@ -52,7 +51,6 @@ class EducationSearch extends Model
             [
                 'id' => $this->id,
                 'teacher_id' => $this->teacher_id,
-                'student_id' => $this->student_id,
             ]
         );
 

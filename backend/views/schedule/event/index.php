@@ -60,7 +60,7 @@ PluginAsset::register($this)->add(
                                     'value' => function ($model) {
                                         return Html::a(
                                             Html::encode($model->client->username),
-                                            ['view', 'id' => $model->id]
+                                            ['/user/view', 'id' => $model->client->id]
                                         );
                                     },
                                     'format' => 'raw',

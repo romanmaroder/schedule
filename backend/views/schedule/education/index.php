@@ -63,7 +63,7 @@ PluginAsset::register($this)->add(
                                     foreach ($model->students as $student) {
                                         $st .= Html::a(
                                                 Html::encode($student->username),
-                                                ['/users/user/view', 'id' => $student->id]
+                                                ['/user/view', 'id' => $student->id]
                                             ) .'/'. PHP_EOL;
                                     }
                                     return $st;
