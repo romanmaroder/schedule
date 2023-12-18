@@ -53,6 +53,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id' => 'calendar',
                     'eventSources' => [
                         [
+                            'id' => 'event',
+                            'title' => 'Event',
+                            'className' => 'event-class',
+                            'backgroundColor' => '#004794',
+                            'textColor' => '#F5FCFF',
                             'events' => new JsExpression(
                                 "
                                 function (info, successCallback, failureCallback) {
@@ -74,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         display: $(this).attr('display'),
                                                         groupId: $(this).attr('groupId'),
                                                         backgroundColor: $(this).attr('color'),
-                                                        className: 'my-custom-classes',
+                                                        className: 'event-custom-classes',
                                                         allDay : $(this).attr('allDay'),
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         url:'/schedule/event/event/view',
@@ -88,6 +93,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             )
                         ],
                         [
+                            'id' => 'education',
+                            'title' => 'Education',
+                            'className' => 'education-class',
+                            'backgroundColor' => '#51560B',
+                            'textColor' => '#F5F5F5',
                             'events' => new JsExpression(
                                 "
                             function (info, successCallback, failureCallback) {
@@ -110,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     groupId: $(this).attr('groupId'),
                                                     backgroundColor: $(this).attr('backgroundColor'),
                                                     borderColor: $(this).attr('backgroundColor'),
-                                                    className: 'my-custom-classes',
+                                                    className: 'education-custom-classes',
                                                     allDay : $(this).attr('allDay'),
                                                     extendedProps:$(this).attr('extendedProps'),
                                                     url:'/schedule/education/education/view',
@@ -261,11 +271,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     
                                         arrayOfDomNodes.push(wrapTitle);
                                        
-                                        if (arg.event.groupId ==='event'){
+                                        if (arg.event.source.id ==='event'){
                                             arrayOfDomNodes.push(wrapService);
                                             arrayOfDomNodes.push(wrapNotice);
                                         }
-                                        if (arg.event.groupId ==='education'){
+                                        if (arg.event.source.id ==='education'){
                                              arrayOfDomNodes.push(wrapTeacher);
                                              arrayOfDomNodes.push(wrapStudent);
                                              arrayOfDomNodes.push(wrapDescription);
@@ -311,7 +321,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ),
                         'eventMouseEnter'=>new JsExpression("
                                 function( info  ){
-                                    if(info.event.groupId ==='event'){
+                                    if(info.event.source.id ==='event'){
                                             $(info.el).tooltip({
                                                         title: info.event.title + '<br>' +  info.event.extendedProps.service,
                                                         container: 'body',
@@ -319,7 +329,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         content: info.event.extendedProps.service,
                                             });
                                     }
-                                    if(info.event.groupId ==='education'){
+                                    if(info.event.source.id ==='education'){
                                         $(info.el).tooltip({
                                                         title: info.event.title + '<br>' +  info.event.extendedProps.description,
                                                         container: 'body',

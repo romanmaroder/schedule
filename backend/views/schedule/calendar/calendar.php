@@ -217,7 +217,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         display: $(this).attr('display'),
                                                         source: $(this).attr('source'),
                                                         backgroundColor: $(this).attr('color'),
-                                                        className: 'my-custom-classes',
+                                                        className: 'event-custom-classes',
                                                         allDay : $(this).attr('allDay'),
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         url:'/schedule/api/event-api/view',
@@ -257,7 +257,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         source: $(this).attr('source'),
                                                         backgroundColor: $(this).attr('backgroundColor'),
                                                         borderColor: $(this).attr('backgroundColor'),
-                                                        className: 'my-custom-classes',
+                                                        className: 'education-custom-classes',
                                                         allDay : $(this).attr('allDay'),
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         url:'/schedule/api/education-api/view',
@@ -272,12 +272,23 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ]
                     ],
                     'clientOptions' => [
+                        'themeSystem' => 'standard',
                         'headerToolbar' => [
                             'left' => 'prev,next,today',
                             'center' => 'title',
-                            'right' => $right
+                            'right' => 'dayGridMonth,dayGridWeek,dayGridDay,timeGridDay' //TODO timeGridWeek think about displaying
                         ],
-                        'themeSystem' => 'standard',
+                        'footerToolbar' => [
+                            'right' => 'addEducation'
+                        ],
+                        'initialView' => 'dayGridMonth',
+                        'selectable' => true,
+                        'editable' => true,
+                        'select' => $select,
+                        'eventResize' => $eventResize,
+                        'eventDrop' => $eventDrop,
+                        'droppable' => true,
+                        'nowIndicator' => true,
                         'expandRows' => false,
                         'stickyHeaderDates' => true,
                         'navLinks' => true,
@@ -339,17 +350,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 ),
                             ]
                         ],
-                        'footerToolbar' => [
-                            'right' => 'addEducation'
-                        ],
-                        'selectable' => true,
-                        'select' => $select,
-                        'editable' => true,
-                        'eventResize' => $eventResize,
-                        'droppable' => true,
-                        'eventDrop' => $eventDrop,
-                        'initialView' => $initialView,
-                        'nowIndicator' => true,
                         'eventClassNames' => ['p-1', 'm-1'],
                         'viewDidMount' => new JsExpression(
                             "
@@ -378,7 +378,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'eventContent' => new JsExpression(
                             "function(arg){
-                            
 //                            Declaring variables
 
                                 let arrayOfDomNodes = [ ];
@@ -450,11 +449,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     
                                         arrayOfDomNodes.push(wrapTitle);
                                        
-                                        if (arg.event.groupId ==='event'){
+                                        if (arg.event.source.id ==='event'){
                                             arrayOfDomNodes.push(wrapService);
                                             arrayOfDomNodes.push(wrapNotice);
                                         }
-                                        if (arg.event.groupId ==='education'){
+                                        if (arg.event.source.id ==='education'){
                                              arrayOfDomNodes.push(wrapTeacher);
                                              arrayOfDomNodes.push(wrapStudent);
                                              arrayOfDomNodes.push(wrapDescription);
@@ -524,7 +523,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'eventMouseEnter' => new JsExpression(
                             "
                                 function( info  ){
-                                    if(info.event.groupId ==='event'){
+                                    if(info.event.source.id ==='event'){
                                             $(info.el).tooltip({
                                                         title: info.event.title + '<br>' +  info.event.extendedProps.service,
                                                         container: 'body',
@@ -532,7 +531,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         content: info.event.extendedProps.service,
                                             });
                                     }
-                                    if(info.event.groupId ==='education'){
+                                    if(info.event.source.id ==='education'){
                                         $(info.el).tooltip({
                                                         title: info.event.title + '<br>' +  info.event.extendedProps.description,
                                                         container: 'body',

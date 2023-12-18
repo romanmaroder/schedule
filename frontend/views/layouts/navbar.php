@@ -1,7 +1,5 @@
 <?php
 
-use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
 
 ?>
@@ -71,14 +69,15 @@ use yii\helpers\Html;
                     <?
                     echo Html::tag(
                         'li',
-                        Html::beginForm(['/auth/auth/logout'], 'post', ['class' => ''])
-                        . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
-                            ['class' => 'btn btn-link logout text-decoration-none dropdown-item']
-                        )
-                        . Html::endForm(),
-                    );
-                    ?>
+                        Html::a(
+                            'Logout',
+                            ['/auth/auth/logout'],
+                            [
+                                'data-method' => 'post',
+                                'class' => ['dropdown-item']
+                            ]
+                        ),
+                    ); ?>
                 <?php
                 endif; ?>
 
