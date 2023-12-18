@@ -73,6 +73,11 @@ class EventManageService
         );
     }
 
+    public function save($event):void
+    {
+        $this->events->save($event);
+    }
+
     public function remove($id): void
     {
         $event = $this->events->get($id);

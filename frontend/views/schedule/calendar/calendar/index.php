@@ -44,30 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
 									icon: 'success',
 									title: '" . Yii::$app->session->getFlash('msg') . "'
 							});	  
-				})
-		";
-
+				})";
                 $this->registerJs($js, $position = yii\web\View::POS_READY, $key = null);
             }; ?>
-
-
-            <?php
-
-            if (Yii::$app->user->can('manager')) {
-                $right = 'dayGridMonth,dayGridDay,dayGridWeek,timeGridDay,timeGridWeek';
-                $editable = true;
-                $initialView = 'dayGridMonth';
-            } else {
-                $right = 'dayGridMonth,dayGridWeek,dayGridDay,timeGridDay';
-                $editable = true;
-                $initialView = 'dayGridMonth';
-            }
-            if (Yii::$app->user->can('admin')) {
-                $right = 'dayGridMonth,dayGridWeek,dayGridDay,listDay,timeGridWeek,timeGridDay';
-                $initialView = 'timeGridDay';
-                $nowIndicator = true;
-            }?>
-
 
             <?= yii2fullcalendar6::widget(
                 [
@@ -149,7 +128,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'headerToolbar' => [
                             'left' => 'prev,next,today',
                             'center' => 'title',
-                            'right' => $right
+                            'right' => 'dayGridMonth,dayGridWeek,dayGridDay,timeGridDay',
                         ],
                         'themeSystem' => 'standard',
                         'expandRows' => false,
@@ -181,7 +160,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'timeGridDay' => 'far far fa-calendar',
                             'timeGridWeek' => 'fas fas fa-calendar-week',
                         ],
-                        'initialView' => $initialView,
+                        'initialView' =>'dayGridMonth',
                         'nowIndicator' => true,
                         'eventClassNames' => ['p-1', 'm-1'],
                         'viewDidMount' => new JsExpression(

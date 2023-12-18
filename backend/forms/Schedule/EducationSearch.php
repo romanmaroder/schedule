@@ -32,7 +32,7 @@ class EducationSearch extends Model
 
     public function search(array $params): ActiveDataProvider
     {
-        $query = Education::find()->with(['teacher', 'student']);
+        $query = Education::find()->with(['teacher','student']);
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,

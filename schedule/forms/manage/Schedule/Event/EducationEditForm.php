@@ -41,8 +41,9 @@ class EducationEditForm extends CompositeForm
     {
         return [
             [['start', 'end'], 'required'],
-            [['description','title'], 'string']
-        ];
+            [['title','description','color'], 'string'],
+            [['color'], 'default','value' => '#474D2A'],
+            ];
     }
 
     protected function internalForms(): array

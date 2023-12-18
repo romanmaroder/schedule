@@ -48,6 +48,11 @@ class EducationManageService
         $this->educations->save($education);
     }
 
+    public function save($education):void
+    {
+        $this->educations->save($education);
+    }
+
     public function remove($id):void
     {
         $education = $this->educations->get($id);

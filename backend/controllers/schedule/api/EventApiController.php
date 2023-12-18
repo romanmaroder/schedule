@@ -95,6 +95,19 @@ class EventApiController extends Controller
         );
     }
 
+    public function actionDraggingResizing($id, $start, $end): Event
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $event = $this->findModel($id);
+
+        $event->start = date('Y-m-d H:i', strtotime($start));
+        $event->end = date('Y-m-d H:i', strtotime($end));
+
+        $this->service->save($event);
+        return $event;
+    }
+
     public function actionDelete($id)
     {
         try {

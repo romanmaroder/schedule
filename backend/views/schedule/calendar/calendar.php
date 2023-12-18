@@ -2,9 +2,7 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\bootstrap4\Modal;
-use yii\helpers\Json;
 use yii\web\JsExpression;
-use yii\web\View;
 use yii2fullcalendar6\yii2fullcalendar6;
 
 /* @var $events \schedule\entities\Schedule\Event\Calendar\Calendar */
@@ -115,29 +113,38 @@ PluginAsset::register($this)->add(['sweetalert2']);
              * @var  $eventResize
              */
             $eventResize = new JsExpression(
-                "function(event){
-									var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm');
-									var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm');
-									var id = event.id;
-									 if(app == 'app-backend'){
-										$.ajax({
-											url: basePath +'/calendar/event/update-resize?id='+id+'&start='+start+'&end='+end,
-											type: 'POST',
-											success: function(data){
-											var Toast = Swal.mixin({
-															  toast: true,
-															  position: 'top-end',
-															  showConfirmButton: false,
-															  timer: 5000,
-															});
-															  Toast.fire({
-																icon: 'info',
-																title: start + ' - ' + end
-															  });
-												$('#calendar').fullCalendar('refetchEvents');
-											},
-										});
-									 }
+                "function(eventResizeInfo ){
+                        console.log(eventResizeInfo);
+									$.ajax({
+                                         url:'/schedule/api/'+ eventResizeInfo.event.source.id +'-api/dragging-resizing',
+                                         data:{'id':eventResizeInfo.event.id,'start':eventResizeInfo.event.startStr,'end':eventResizeInfo.event.endStr},
+                                         success:function (data) {
+                                                console.log(data);
+                                                    var Toast = Swal.mixin({
+                                                                        toast: true,
+                                                                        position: 'top-end',
+                                                                        showConfirmButton: false,
+                                                                        timer: 5000,
+                                                    });
+                                                    Toast.fire({
+                                                        icon: 'success',
+                                                        title: `<h6>Event changed</h6>`,
+                                                        html:`<i> start: `+ data.start +`</i>` + `</br>` + `<i> end: ` + data.end + `</i>`,
+                                                    });
+                                         },
+                                         error:function(data){
+                                                    var Toast = Swal.mixin({
+                                                                        toast: true,
+                                                                        position: 'top-end',
+                                                                        showConfirmButton: false,
+                                                                        timer: 5000,
+                                                    });
+                                                    Toast.fire({
+                                                        icon: 'error',
+                                                        title: data.responseText
+                                                    });
+                                                },
+                                         });
 						}"
             );
 
@@ -147,29 +154,36 @@ PluginAsset::register($this)->add(['sweetalert2']);
              * @var  $eventDrop
              */
             $eventDrop = new JsExpression(
-                "function(event){
-//									var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm');
-//									var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm');
-//									var id = event.id;
-//									if(app == 'app-backend'){
-//										$.ajax({
-//											url: basePath +'/calendar/event/update-drop?id='+id+'&start='+start+'&end='+end,
-//											type: 'POST',
-//											success: function(){
-//											var Toast = Swal.mixin({
-//															  toast: true,
-//															  position: 'top-end',
-//															  showConfirmButton: false,
-//															  timer: 5000,
-//															});
-//															  Toast.fire({
-//																icon: 'info',
-//																title: event.title+'</br>'+start + ' - ' + end
-//															  });
-//												$('#calendar').fullCalendar('refetchEvents');
-//											},
-//										});
-//									 }
+                "function(eventDropInfo ){
+                                            $.ajax({
+                                                url:'/schedule/api/'+ eventDropInfo.event.source.id +'-api/dragging-resizing',
+                                                data:{'id':eventDropInfo.event.id,'start':eventDropInfo.event.startStr,'end':eventDropInfo.event.endStr},
+                                                success:function (data) {
+                                                    var Toast = Swal.mixin({
+                                                                        toast: true,
+                                                                        position: 'top-end',
+                                                                        showConfirmButton: false,
+                                                                        timer: 5000,
+                                                    });
+                                                    Toast.fire({
+                                                        icon: 'success',
+                                                        title: `<h6>The event has been moved to</h6>`,
+                                                        html:`<i> start: `+ data.start +`</i>` + `</br>` + `<i> end: ` + data.end + `</i>`,
+                                                    });
+                                                },
+                                                error:function(data){
+                                                    var Toast = Swal.mixin({
+                                                                        toast: true,
+                                                                        position: 'top-end',
+                                                                        showConfirmButton: false,
+                                                                        timer: 5000,
+                                                    });
+                                                    Toast.fire({
+                                                        icon: 'error',
+                                                        title: data.responseText
+                                                    });
+                                                },
+                                            });
                 		}"
             ); ?>
 
@@ -178,6 +192,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'id' => 'calendar',
                     'eventSources' => [
                         [
+                            'id' => 'event',
+                            'title' => 'Event',
+                            'className' => 'event-class',
+                            'backgroundColor'=>'#004794',
+                            'textColor'=>'#F5FCFF',
                             'events' => new JsExpression(
                                 "
                                 function (info, successCallback, failureCallback) {
@@ -188,7 +207,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         headers: {
                                             'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
                                             }, success: function (response) {
-                                         
                                                 var event = [];
                                                  $.each(response, function( index, value ) {
                                                     event.push({
@@ -197,7 +215,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         start: $(this).attr('start'),
                                                         end: $(this).attr('end'),
                                                         display: $(this).attr('display'),
-                                                        groupId: $(this).attr('groupId'),
+                                                        source: $(this).attr('source'),
                                                         backgroundColor: $(this).attr('color'),
                                                         className: 'my-custom-classes',
                                                         allDay : $(this).attr('allDay'),
@@ -213,40 +231,44 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             )
                         ],
                         [
+                            'id' => 'education',
+                            'title' => 'Education',
+                            'className' => 'education-class',
+                            'backgroundColor'=>'#51560B',
+                            'textColor'=>'#F5F5F5',
                             'events' => new JsExpression(
                                 "
-                            function (info, successCallback, failureCallback) {
-                                $.ajax({
-                                    url: '/schedule/education/lessons',
-                                    type: 'GET',
-                                    crossDomain: true,
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
-                                        }, success: function (response) {
-                                         
-                                            var event = [];
-                                             $.each(response, function( index, value ) {
-                                                event.push({
-                                                    id: $(this).attr('id'), 
-                                                    title: $(this).attr('title'),
-                                                    start: $(this).attr('start'),
-                                                    end: $(this).attr('end'),
-                                                    display: $(this).attr('display'),
-                                                    groupId: $(this).attr('groupId'),
-                                                    backgroundColor: $(this).attr('backgroundColor'),
-                                                    borderColor: $(this).attr('backgroundColor'),
-                                                    className: 'my-custom-classes',
-                                                    allDay : $(this).attr('allDay'),
-                                                    extendedProps:$(this).attr('extendedProps'),
-                                                    url:'/schedule/api/education-api/view',
+                                function (info, successCallback, failureCallback) {
+                                    $.ajax({
+                                        url: '/schedule/education/lessons',
+                                        type: 'GET',
+                                        crossDomain: true,
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
+                                            }, success: function (response) {
+                                                var event = [];
+                                                 $.each(response, function( index, value ) {
+                                                    event.push({
+                                                        id: $(this).attr('id'), 
+                                                        title: $(this).attr('title'),
+                                                        start: $(this).attr('start'),
+                                                        end: $(this).attr('end'),
+                                                        display: $(this).attr('display'),
+                                                        source: $(this).attr('source'),
+                                                        backgroundColor: $(this).attr('backgroundColor'),
+                                                        borderColor: $(this).attr('backgroundColor'),
+                                                        className: 'my-custom-classes',
+                                                        allDay : $(this).attr('allDay'),
+                                                        extendedProps:$(this).attr('extendedProps'),
+                                                        url:'/schedule/api/education-api/view',
+                                                        });
                                                     });
-                                                });
-                                                
-                                                successCallback(event)
-                                            },
-                                        });
-                                    }"
-                            )
+                                                    
+                                                    successCallback(event)
+                                                },
+                                            });
+                                        }"
+                                )
                         ]
                     ],
                     'clientOptions' => [
@@ -264,6 +286,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'eventOrder' => 'start',
                         //'eventMaxStack' => 3,
                         //'dayMaxEventRows'=>3,
+                        //'dayMaxEvents'=> true,
                         'showNonCurrentDates' => false,
                         'fixedWeekCount' => false,
                         'weekNumbers' => true,
@@ -319,12 +342,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'footerToolbar' => [
                             'right' => 'addEducation'
                         ],
-
-                        //'selectable' => Yii::$app->user->can('manager'),
                         'selectable' => true,
                         'select' => $select,
-                        'editable' => $editable,
+                        'editable' => true,
                         'eventResize' => $eventResize,
+                        'droppable' => true,
                         'eventDrop' => $eventDrop,
                         'initialView' => $initialView,
                         'nowIndicator' => true,
@@ -452,7 +474,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'dateClick' => new JsExpression(
                             "function(info){
-                            
+                            console.log(info.dateStr);
                                     $.ajax({
                                         url:'/schedule/api/event-api/create',
                                         data:{'start':info.dateStr, 'end':info.dateStr},
@@ -477,7 +499,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'eventClick' => new JsExpression(
                             "function(info) {
                                             info.jsEvent.preventDefault(); 
-                        
                                            $.ajax({
                                                 url:info.event.url,
                                                 data:{'id':info.event.id},
@@ -500,7 +521,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
   
                             }"
                         ),
-                        'eventMouseEnter'=>new JsExpression("
+                        'eventMouseEnter' => new JsExpression(
+                            "
                                 function( info  ){
                                     if(info.event.groupId ==='event'){
                                             $(info.el).tooltip({

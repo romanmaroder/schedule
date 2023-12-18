@@ -35,11 +35,6 @@ class EducationController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
-                    'activate' => ['POST'],
-                    'draft' => ['POST'],
-                    'delete-photo' => ['POST'],
-                    'move-photo-up' => ['POST'],
-                    'move-photo-down' => ['POST'],
                 ],
             ],
         ];

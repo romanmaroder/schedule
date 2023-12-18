@@ -22,7 +22,6 @@ class EducationCreateForm extends CompositeForm
     public function __construct($config = [])
     {
         $this->teacher = new TeacherForm();
-        $this->student = new StudentForm();
         $this->students = new StudentForm();
         parent::__construct($config);
     }
@@ -38,6 +37,6 @@ class EducationCreateForm extends CompositeForm
 
     protected function internalForms(): array
     {
-        return ['teacher','student','students'];
+        return ['teacher','students'];
     }
 }

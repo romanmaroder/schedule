@@ -10,11 +10,11 @@ class EducationReadRepository
 {
     public function getAll(): array
     {
-        return Education::find()->with(['teacher', 'student'])->all();
+        return Education::find()->with(['teacher','student'])->all();
     }
 
     public function find($id): ?Education
     {
-        return Education::find()->andWhere(['id' => $id])->one();
+        return Education::find()->with(['teacher','student'])->andWhere(['id' => $id])->one();
     }
 }

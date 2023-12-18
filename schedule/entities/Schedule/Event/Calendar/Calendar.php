@@ -29,6 +29,7 @@ class Calendar
     public function getEvents(): array
     {
         $data = $this->events->getAll();
+
         $events = [];
         foreach ($data as $item) {
             $event = new Event();
@@ -41,8 +42,9 @@ class Calendar
             ];
             $event->start = $item->start;
             $event->end = $item->end;
-            $event->groupId = 'event';
-            $event->display= 'block';
+            //$event->groupId = 'event';
+            $event->source = '/schedule/event/events';
+            $event->display = 'block';
 
             $events[] = $event;
         }
@@ -52,28 +54,29 @@ class Calendar
     public function getEducations(): array
     {
         $data = $this->educations->getAll();
-        $events = [];
+
         foreach ($data as $item) {
             $event = new Event();
-            $event->id = $item['id'];
-            $event->title = $item['title'];
+            $event->id = $item->id;
+            $event->title = $item->title;
             $event->extendedProps = [
                 'teacher' => $item->teacher->username,
-                'student'=>$this->studentsName($item->students),
-                'description' => $item['description'],
+                'student' => $this->studentsName($item->students),
+                'description' => $item->description,
             ];
-            $event->backgroundColor = $item['color'];
-            $event->borderColor = $item['color'];
-            $event->start = $item['start'];
-            $event->end = $item['end'];
-            $event->groupId = 'education';
-            $event->display= 'block';
+            $event->backgroundColor = $item->color;
+            $event->borderColor = $item->color;
+            $event->start = $item->start;
+            $event->end = $item->end;
+            //$event->groupId = 'education';
+            $event->source = '/schedule/education/lessons';
+            $event->display = 'block';
 
             $events[] = $event;
         }
+
         return $events;
     }
-
 
     private function serviceNameList($services): string
     {

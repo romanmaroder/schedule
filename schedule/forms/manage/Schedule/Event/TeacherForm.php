@@ -23,7 +23,7 @@ class TeacherForm extends Model
 
     public function teacherList(): array
     {
-        return ArrayHelper::map(User::find()->asArray()->all(),'id','username');
+        return ArrayHelper::map(User::find()->all(),'id','username');
     }
 
     public function rules():array
