@@ -23,7 +23,7 @@ class ValueForm extends Model
      * @param Value|null $value
      * @param array $config
      */
-    public function __construct(Characteristic $characteristic, Value $value=null, $config = [])
+    public function __construct(Characteristic $characteristic, Value $value = null, $config = [])
     {
         if ($value) {
             $this->value = $value->value;

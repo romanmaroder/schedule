@@ -106,11 +106,42 @@
                                     ]
                                 ],
                                 [
-                                    'label' => 'Users',
-                                    'icon' => 'user',
-                                    'url' => ['/user/index'],
-                                    'active' => $this->context->id == 'user/index'
+                                    'label' => 'Users Management',
+                                    'icon' => 'fas fa-users-cog',
+                                    'items'=>[
+                                        [
+                                            'label' => 'Users',
+                                            'icon' => 'fas fa-users',
+                                            'url' => ['/user/index'],
+                                            'active' => $this->context->id == 'user'
+                                        ],
+                                        [
+                                            'label' => 'Employee',
+                                            'icon' => 'fas fa-user-tie',
+                                            'url' => ['/employee/index'],
+                                            'active' => $this->context->id == 'employee'
+                                        ],
+                                        [
+                                            'label' => 'Role',
+                                            'icon' => 'fas fa-user-tag',
+                                            'url' => ['/role/index'],
+                                            'active' => $this->context->id == 'role'
+                                        ],
+                                        [
+                                            'label' => 'Rate',
+                                            'icon' => 'fas fa-percent',
+                                            'url' => ['/rate/index'],
+                                            'active' => $this->context->id == 'rate'
+                                        ],
+                                        [
+                                            'label' => 'Price',
+                                            'icon' => 'fas fa-money-check-alt',
+                                            'url' => ['/price/index'],
+                                            'active' => $this->context->id == 'price'
+                                        ],
+                                    ]
                                 ],
+
                             ]
                         ],
                         //['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],

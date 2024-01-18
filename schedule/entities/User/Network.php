@@ -8,7 +8,7 @@ use Webmozart\Assert\Assert;
 use yii\db\ActiveRecord;
 
 /**
- * @property integer $user_id
+ * @property int $user_id
  * @property string $identity
  * @property string $network
  * @property int $id [int(11)]

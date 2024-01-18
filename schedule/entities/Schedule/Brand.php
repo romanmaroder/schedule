@@ -9,7 +9,7 @@ use schedule\entities\Meta;
 use yii\db\ActiveRecord;
 
 /**
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $slug
  * @property string $meta_json [json]

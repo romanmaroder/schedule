@@ -7,7 +7,7 @@ namespace schedule\entities\Schedule;
 use yii\db\ActiveRecord;
 
 /**
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $slug
  */

@@ -16,26 +16,26 @@ PluginAsset::register($this)->add(
 );
 ?>
 
-<div class="product-index">
+    <div class="product-index">
 
-    <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <div class="invoice p-3 mb-3">
-        <div class="card card-outline card-secondary">
-            <div class='card-header'>
-                <h3 class='card-title'>Common</h3>
-                <div class='card-tools'>
-                    <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                    </button>
-                    <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                    </button>
+        <div class="invoice p-3 mb-3">
+            <div class="card card-secondary">
+                <div class='card-header'>
+                    <h3 class='card-title'>
+                    <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
+                    </h3>
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                    class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                    class='fas fa-minus'></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <?= GridView::widget(
-                    [
+                <div class="card-body">
+                    <?= GridView::widget(
+                        [
                         'dataProvider' => $dataProvider,
                         //'filterModel' => $searchModel,
                         'tableOptions' => [

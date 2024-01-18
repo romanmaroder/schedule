@@ -5,13 +5,18 @@
 /* @var $this \yii\web\View */
 /* @var $model \schedule\entities\Schedule\Event\Education */
 
+use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Lesson', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+YiiAsset::register($this);
+PluginAsset::register($this)->add(['sweetalert2']);
 ?>
 
 <div class="education-view container-fluid">
@@ -124,14 +129,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
 
                     <?= Html::a(
-                        'Delete',
+                        Yii::t('app', 'Delete'),
                         ['delete', 'id' => $model->id],
                         [
                             'id' => 'delete',
                             'class' => 'btn btn-danger btn-sm btn-shadow',
                             'data' => [
-                                'confirm' => 'Are you sure you want to delete this item?',
-                                'method' => 'post',
+                                'confirm' => Yii::t('app', 'Delete file?'),
+                                'method' => 'POST',
                             ],
                         ]
                     ) ?>

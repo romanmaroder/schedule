@@ -12,6 +12,7 @@ use yii\widgets\DetailView;
 $this->title = $model->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
@@ -37,7 +38,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'value' => function ($model) {
                                 return Html::a(
                                     Html::encode($model->master->username),
-                                    ['/user/view','id'=>$model->master->id]
+                                    ['/employee/view', 'id' => $model->employee->id]
 
                                 );
                             }
@@ -56,6 +57,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         [
                             'attribute' => 'notice',
                             'format' => 'ntext',
+                            'visible' => $model->issetNotice($model->notice),
                         ],
 
                         [
@@ -128,7 +130,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'class' => 'btn btn-danger btn-sm btn-shadow',
                             'data' => [
                                 'confirm' => Yii::t('app', 'Delete file?'),
-                                'method' => 'post',
+                                'method' => 'POST',
                             ],
                         ]
                     ) ?>

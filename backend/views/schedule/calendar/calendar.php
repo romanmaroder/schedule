@@ -216,14 +216,15 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         end: $(this).attr('end'),
                                                         display: $(this).attr('display'),
                                                         source: $(this).attr('source'),
-                                                        backgroundColor: $(this).attr('color'),
+                                                        backgroundColor: $(this).attr('backgroundColor'),
+                                                        borderColor: $(this).attr('backgroundColor'),
                                                         className: 'event-custom-classes',
                                                         allDay : $(this).attr('allDay'),
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         url:'/schedule/api/event-api/view',
                                                         });
                                                     });
-                                                   
+                                                   console.log(event);
                                                     successCallback(event)
                                                 },
                                             });

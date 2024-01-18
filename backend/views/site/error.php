@@ -17,6 +17,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <p>
             <?= nl2br(Html::encode($message)) ?>
         </p>
+        <h4 class="text-danger"><b><?= nl2br(Html::encode($exception->getMessage())) ?></b></h4>
 
         <p>
             The above error occurred while the Web server was processing your request.

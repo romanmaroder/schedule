@@ -16,11 +16,26 @@ class EventController extends Controller
     private EventManageService $service;
     private Calendar $calendar;
 
-    public function __construct($id, $module,EventManageService $service, Calendar $calendar, $config = [])
+    public function __construct($id, $module, EventManageService $service, Calendar $calendar, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->calendar = $calendar;
+    }
+
+    public function actionIndex()
+    {
+        echo '<pre>';
+        $event = Event::find()->with(['services', 'master', 'client'])->andWhere(['id' => 5])->one();
+        $a = null;
+        $b=[];
+        foreach ($event->services as $i => $service) {
+            $a += (int)$service->price_new * 0.75 * 0.5;
+            $b[]=(int)$service->price_new * 0.75;
+        }
+        var_dump($a);
+        var_dump($b);
+        //var_dump($event->services);
     }
 
     public function actionEvents()

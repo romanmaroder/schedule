@@ -1,6 +1,7 @@
 <?php
 
 
+use hail812\adminlte3\assets\PluginAsset;
 use kartik\file\FileInput;
 use schedule\entities\Schedule\Product\Modification;
 use schedule\entities\Schedule\Product\Value;
@@ -11,6 +12,7 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -21,45 +23,45 @@ use yii\widgets\DetailView;
 $this->title = $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+YiiAsset::register($this);
+PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="user-view">
-
-    <p>
-        <?php
-        if ($product->isActive()) : ?>
-            <?= Html::a(
-                'Draft',
-                ['draft', 'id' => $product->id],
-                ['class' => 'btn btn-primary', 'data-method' => 'post']
-            ) ?>
-        <?php
-        else : ?>
-            <?= Html::a(
-                'Activate',
-                ['activate', 'id' => $product->id],
-                ['class' => 'btn btn-success', 'data-method' => 'post']
-            ) ?>
-        <?php
-        endif; ?>
-        <?= Html::a('Update', ['update', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(
-            'Delete',
-            ['delete', 'id' => $product->id],
-            [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
-                    'method' => 'post',
-                ],
-            ]
-        ) ?>
-    </p>
-
+<div class="product-view">
     <div class="row">
         <div class="col-md-6">
-            <div class="card card-outline card-secondary">
+            <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Common</h3>
+                    <h3 class='card-title'>
+                        <?php
+                        if ($product->isActive()) : ?>
+                            <?= Html::a(
+                                'Draft',
+                                ['draft', 'id' => $product->id],
+                                ['class' => 'btn btn-primary btn-shadow', 'data-method' => 'post']
+                            ) ?>
+                        <?php
+                        else : ?>
+                            <?= Html::a(
+                                'Activate',
+                                ['activate', 'id' => $product->id],
+                                ['class' => 'btn btn-success btn-shadow', 'data-method' => 'post']
+                            ) ?>
+                        <?php
+                        endif; ?>
+                        <?= Html::a('Update', ['update', 'id' => $product->id], ['class' => 'btn btn-primary btn-shadow']) ?>
+                        <?= Html::a(
+                            'Delete',
+                            ['delete', 'id' => $product->id],
+                            [
+                                'class' => 'btn btn-danger btn-shadow',
+                                'data' => [
+                                    'confirm' => 'Are you sure you want to delete this item?',
+                                    'method' => 'post',
+                                ],
+                            ]
+                        ) ?>
+                    </h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
                                     class='fas fa-expand'></i>
@@ -118,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-md-6">
 
-            <div class="card card-outline card-secondary">
+            <div class="card card-secondary">
                 <div class='card-header'>
                     <h3 class='card-title'>Characteristics</h3>
                     <div class='card-tools'>
@@ -151,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="card card-outline card-secondary">
+    <div class="card card-secondary">
         <div class='card-header'>
             <h3 class='card-title'>Description</h3>
             <div class='card-tools'>
@@ -166,7 +168,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="card card-outline card-secondary" id="modifications">
+    <div class="card card-secondary" id="modifications">
         <div class='card-header'>
             <h3 class='card-title'>Modifications</h3>
             <div class='card-tools'>
@@ -207,7 +209,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="card card-outline card-secondary">
+    <div class="card card-secondary">
         <div class='card-header'>
             <h3 class='card-title'>SEO</h3>
             <div class='card-tools'>
@@ -240,7 +242,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="card card-outline card-secondary" id="photos">
+    <div class="card card-secondary" id="photos">
         <div class='card-header'>
             <h3 class='card-title'>Photos</h3>
             <div class='card-tools'>

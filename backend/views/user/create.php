@@ -2,6 +2,7 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+use yii\widgets\MaskedInput;
 
 /** @var yii\web\View $this */
 /** @var schedule\forms\manage\User\UserCreateForm $model */
@@ -17,12 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
             Common
         </h3>
 
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                <i class="fas fa-minus"></i>
+        <div class='card-tools'>
+            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                <i class="fas fa-times"></i>
+            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
             </button>
         </div>
     </div>
@@ -38,13 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
             )->label($model->getAttributeLabel('email')) ?>
         </div>
         <div class="form-group">
+            <?= $form->field($model, 'phone')->widget(MaskedInput::class, [
+                'mask' => '+9[9][9] (999) 999-99-99',
+            ])->textInput(['placeholder' => $model->getAttributeLabel('phone')])->label($model->getAttributeLabel('phone')) ?>
+        </div>
+        <div class="form-group">
             <?= $form->field($model, 'password')->passwordInput(['maxLength' => true, 'placeholder' => $model->getAttributeLabel('password')]
             )->label($model->getAttributeLabel('password'))?>
         </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow']) ?>
     </div>
     <!-- /.card-footer-->
 </div>

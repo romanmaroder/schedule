@@ -7,15 +7,18 @@ namespace schedule\services\manage;
 use schedule\entities\User\User;
 use schedule\forms\manage\User\UserCreateForm;
 use schedule\forms\manage\User\UserEditForm;
+use schedule\repositories\EmployeeRepository;
 use schedule\repositories\UserRepository;
 
 class UserManageService
 {
-    private UserRepository $repository;
+    private UserRepository $users;
+    private $employee;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $users, EmployeeRepository $employee)
     {
-        $this->repository = $repository;
+        $this->users = $users;
+        $this->employee = $employee;
     }
 
     /**
@@ -27,9 +30,10 @@ class UserManageService
         $user = User::create(
             $form->username,
             $form->email,
-            $form->password
+            $form->phone,
+            $form->password,
         );
-        $this->repository->save($user);
+        $this->users->save($user);
         return $user;
     }
 
@@ -39,12 +43,13 @@ class UserManageService
      */
     public function edit($id, UserEditForm $form): void
     {
-        $user = $this->repository->get($id);
+        $user = $this->users->get($id);
         $user->edit(
             $form->username,
-            $form->email
+            $form->email,
+            $form->phone
         );
-        $this->repository->save($user);
+        $this->users->save($user);
     }
 
     /**
@@ -54,7 +59,7 @@ class UserManageService
      */
     public function remove($id): void
     {
-        $user = $this->repository->get($id);
-        $this->repository->remove($user);
+            $user = $this->users->get($id);
+            $this->users->remove($user);
     }
 }

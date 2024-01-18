@@ -11,7 +11,7 @@ class EventReadRepository
 {
     public function getAll(): array
     {
-        return Event::find()->with(['services','master','client'])->all();
+        return Event::find()->with('services','employee','master','client')->all();
 
     }
 

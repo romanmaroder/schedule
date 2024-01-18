@@ -10,7 +10,7 @@ class m231203_142445_create_schedule_educations_table extends Migration
     /**
      * {@inheritdoc}
      */
-    public function up()
+    public function Up()
     {
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         $this->createTable('{{%schedule_educations}}', [
@@ -29,7 +29,7 @@ class m231203_142445_create_schedule_educations_table extends Migration
     /**
      * {@inheritdoc}
      */
-    public function down()
+    public function Down()
     {
         $this->dropTable('{{%schedule_educations}}');
     }

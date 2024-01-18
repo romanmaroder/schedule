@@ -50,7 +50,6 @@ class m231123_073157_create_schedule_events_table extends Migration
             'id'
         );
     }
-
     /**
      * {@inheritdoc}
      */

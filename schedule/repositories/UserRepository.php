@@ -37,6 +37,41 @@ class UserRepository
     }
 
     /**
+     * @param $id
+     * @return bool
+     */
+    public function clientEventCheck($id): bool
+    {
+        if($user = User::find()->joinWith('clientEvents ce')->andWhere(['ce.client_id'=>$id])->one()){
+            throw new \RuntimeException($user->username .' have events');
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function masterEventCheck($id): bool
+    {
+        if($user = User::find()->joinWith('masterEvents me')->andWhere(['me.master_id'=>$id])->one()){
+            throw new \RuntimeException($user->username .' have events.');
+        }
+
+        return false;
+    }
+
+    public function isAdmin($id): bool
+    {
+        $admin = User::find()->where(['id' => 1])->one();
+        if ($admin->id == $id) {
+            throw new \RuntimeException($admin->username . ' the administrator. You can\'t delete an administrator.');
+        }
+        return false;
+    }
+
+    /**
      * @param $token
      * @return User
      */
@@ -89,7 +124,12 @@ class UserRepository
      */
     public function remove(User $user):void
     {
-        if (!$user->delete()){
+        $this->isAdmin($user->id);
+
+        $this->masterEventCheck($user->id);
+        $this->clientEventCheck($user->id);
+
+        if (!$user->delete()) {
             throw new \RuntimeException('Removing error.');
         }
     }

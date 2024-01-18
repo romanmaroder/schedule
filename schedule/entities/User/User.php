@@ -3,6 +3,8 @@
 namespace schedule\entities\User;
 
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use schedule\entities\Schedule\Event\Event;
+use schedule\entities\User\Employee\Employee;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -19,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
+ * @property string $phone
  * @property string $auth_key
  * @property int $status
  * @property int $created_at
@@ -26,6 +29,7 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  *
  * @property Network[] $networks
+ * @property Employee[] $employee
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -33,11 +37,12 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    public static function create(string $username, string $email, string $password): self
+    public static function create(string $username, string $email, string $phone, string $password): self
     {
         $user = new User();
         $user->username = $username;
         $user->email = $email;
+        $user->phone = $phone;
         $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
@@ -45,10 +50,11 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
-    public function edit(string $username, string $email): void
+    public function edit(string $username, string $email, string $phone): void
     {
         $this->username = $username;
         $this->email = $email;
+        $this->phone = $phone;
         $this->updated_at = time();
     }
 
@@ -107,6 +113,34 @@ class User extends ActiveRecord implements IdentityInterface
         $this->networks = $networks;
     }
 
+    public function attachEmployee(
+        $rateId,
+        $priceId,
+        $firstName,
+        $lastName,
+        $phone,
+        $birthday,
+        $address,
+        $color,
+        $roleId,
+        $status
+    ): void {
+        $employee[] = $this->employee;
+        $employee = Employee::attach(
+            $rateId,
+            $priceId,
+            $firstName,
+            $lastName,
+            $phone,
+            $birthday,
+            $address,
+            $color,
+            $roleId,
+            $status,
+        );
+        $this->employee = $employee;
+    }
+
     /**
      * @throws \yii\base\Exception
      */
@@ -147,12 +181,45 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Network::class, ['user_id' => 'id']);
     }
 
+    public function getEmployee(): ActiveQuery
+    {
+        return $this->hasOne(Employee::class, ['user_id' => 'id']);
+    }
+
+    public function getMasterEvents(): ActiveQuery
+    {
+        return $this->hasMany(Event::class, ['master_id' => 'id']);
+    }
+
+    public function getClientEvents(): ActiveQuery
+    {
+        return $this->hasMany(Event::class, ['client_id' => 'id']);
+    }
+
+    public function parseFullName($fullName)
+    {
+        return explode(" ", $fullName);
+    }
+
+    public function mergeFullName(array $name)
+    {
+        return implode(" ", $name);
+    }
+
     /**
      * @return bool
      */
     public function isInactive(): bool
     {
         return $this->status === self::STATUS_INACTIVE;
+    }
+
+    public function issetEmail($email): bool
+    {
+        if (!$email) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -172,7 +239,7 @@ class User extends ActiveRecord implements IdentityInterface
             TimestampBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['networks'],
+                'relations' => ['networks', 'employee'],
             ],
         ];
     }

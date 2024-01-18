@@ -16,25 +16,18 @@ PluginAsset::register($this)->add(
 );
 ?>
     <div class="service-index">
-
-        <p>
-            <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success']) ?>
-        </p>
-
         <div class="invoice p-3 mb-3">
-            <div class="card">
+            <div class="card card-secondary">
                 <div class="card-header">
                 <h3 class="card-title ">
-                    Common
+                    <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
                 </h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                        </button>
+                    </div>
             </div>
             <div class="card-body">
                 <?= GridView::widget(

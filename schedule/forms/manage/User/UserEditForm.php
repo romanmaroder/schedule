@@ -7,10 +7,13 @@ namespace schedule\forms\manage\User;
 use schedule\entities\User\User;
 use yii\base\Model;
 
+
+
 class UserEditForm extends Model
 {
     public $username;
     public $email;
+    public $phone;
 
     public $_user;
 
@@ -18,6 +21,7 @@ class UserEditForm extends Model
     {
         $this->username = $user->username;
         $this->email = $user->email;
+        $this->phone = $user->phone;
         $this->_user = $user;
         parent::__construct($config);
     }
@@ -25,10 +29,11 @@ class UserEditForm extends Model
     public function rules(): array
     {
         return [
-            [['username', 'email'], 'required'],
+            [['username'], 'required'],
             ['email', 'email'],
-            ['email', 'string', 'max' => 255],
+            [['username','email','phone'],'string','max'=>255],
             [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
         ];
     }
+
 }

@@ -6,6 +6,7 @@ namespace schedule\entities\Schedule\Event;
 
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use schedule\entities\Schedule\Service\Service;
+use schedule\entities\User\Employee\Employee;
 use schedule\entities\User\User;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -21,6 +22,7 @@ use yii\db\ActiveRecord;
  * @property User $client
  * @property ServiceAssignment[] $serviceAssignments
  * @property Service[] $services
+ * @property Employee[] $employee
  */
 class Event extends ActiveRecord
 {
@@ -97,6 +99,19 @@ class Event extends ActiveRecord
     public function getClient(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'client_id']);
+    }
+
+    public function getEmployee(): ActiveQuery
+    {
+        return $this->hasOne(Employee::class,['user_id'=>'master_id']);
+    }
+
+    public function issetNotice($notice):bool
+    {
+        if (!$notice){
+            return false;
+        }
+        return true;
     }
 
     public static function tableName(): string

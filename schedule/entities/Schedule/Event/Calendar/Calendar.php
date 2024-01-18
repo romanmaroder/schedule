@@ -32,6 +32,7 @@ class Calendar
 
         $events = [];
         foreach ($data as $item) {
+
             $event = new Event();
             $event->id = $item->id;
             $event->title = $item->client->username;
@@ -40,6 +41,8 @@ class Calendar
                 'master' => $item->master->username,
                 'service' => $this->serviceNameList($item->services),
             ];
+            $event->backgroundColor = $item->employee->color;
+            $event->borderColor = $item->employee->color;
             $event->start = $item->start;
             $event->end = $item->end;
             //$event->groupId = 'event';
@@ -48,6 +51,7 @@ class Calendar
 
             $events[] = $event;
         }
+
         return $events;
     }
 
@@ -55,6 +59,7 @@ class Calendar
     {
         $data = $this->educations->getAll();
 
+        $events = [];
         foreach ($data as $item) {
             $event = new Event();
             $event->id = $item->id;

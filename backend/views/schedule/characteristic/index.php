@@ -19,18 +19,16 @@ PluginAsset::register($this)->add(
 );
 ?>
 <div class="characteristic-index">
-    <div class="card">
+    <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">
-                <?= Html::a('Create characteristic', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Create characteristic', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
             </h3>
 
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
+            <div class='card-tools'>
+                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
+                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
                 </button>
             </div>
         </div>
@@ -64,7 +62,7 @@ PluginAsset::register($this)->add(
                             'filter' => $searchModel->requiredList(),
                             'format' => 'boolean',
                         ],
-                        ['class' => ActionColumn::class],
+                        //['class' => ActionColumn::class],
                     ],
                 ]
             ); ?>

@@ -4,6 +4,7 @@
 namespace schedule\helpers;
 
 
+use schedule\entities\User\Employee\Employee;
 use schedule\entities\User\User;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -50,5 +51,11 @@ class UserHelper
         );
     }
 
+    public static function clientList(): \yii\db\ActiveQuery
+    {
+        return User::find()
+            ->leftJoin('schedule_employees', 'schedule_employees.user_id=users.id')
+            ->where(['is', 'schedule_employees.user_id', null]);
+    }
 
 }

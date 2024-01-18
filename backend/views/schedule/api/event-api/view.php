@@ -27,7 +27,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'value' => function ($model) {
                         return Html::a(
                             Html::encode($model->master->username),
-                            ['/user/view','id'=>$model->master->id]
+                            ['/employee/view','id'=>$model->employee->id]
                         );
                     }
                 ],
@@ -45,6 +45,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'attribute' => 'notice',
                     'format' => 'ntext',
+                    'visible' => $model->issetNotice($model->notice),
                 ],
 
                 [
