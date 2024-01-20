@@ -32,13 +32,13 @@ class EmployeeCreateForm extends CompositeForm
         parent::__construct($config);
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['rateId', 'priceId', 'roleId', 'firstName', 'lastName'], 'required'],
+            [['firstName', 'lastName'], 'string', 'max' => 100],
             [['birthday', 'phone', 'color'], 'string'],
             [['status', 'roleId'], 'integer'],
-            [['firstName', 'lastName'], 'string', 'max' => 100],
         ];
     }
 

@@ -19,7 +19,7 @@ $this->title = 'Login';
     <div class="card-body login-card-body">
         <p class="login-box-msg">Login to start your session</p>
 
-        <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
+        <?php $form = \yii\bootstrap5\ActiveForm::begin(['id' => 'login-form']) ?>
 
         <?= $form->field($model,'username', [
             'options' => ['class' => 'form-group has-feedback'],
@@ -54,7 +54,7 @@ $this->title = 'Login';
             </div>
         </div>
 
-        <?php \yii\bootstrap4\ActiveForm::end(); ?>
+        <?php \yii\bootstrap5\ActiveForm::end(); ?>
 
         <!--<div class="social-auth-links text-center mb-3">
             <p>- OR -</p>

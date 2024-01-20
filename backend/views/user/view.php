@@ -45,15 +45,23 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 'username',
                 [
                     'attribute' => 'email',
-                    'visible' =>$model->issetEmail($model->email),
+                    'visible' => $model->issetEmail($model->email),
                     'format' => 'email',
                 ],
                 [
                     'attribute' => 'phone',
                     'value' => function ($model) {
-                        return Html::a(Html::encode($model->phone),'tel:' . $model->phone, ['view', 'id' => $model->id]);
+                        return Html::a(
+                            Html::encode($model->phone),
+                            'tel:' . $model->phone,
+                            ['view', 'id' => $model->id]
+                        );
                     },
                     'format' => 'raw',
+                ],
+                [
+                    'attribute' => 'discount',
+                    'visible' => $model->issetDiscount($model->discount)
                 ],
                 [
                     'attribute' => 'status',

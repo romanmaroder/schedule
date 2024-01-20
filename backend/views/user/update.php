@@ -34,6 +34,8 @@ $this->params['breadcrumbs'][] = 'Update';
         <?= $form->field($model, 'phone')->widget(MaskedInput::class, [
             'mask' => '+9[9][9] (999) 999-99-99',
         ])->textInput(['placeholder' => $model->getAttributeLabel('phone')])->label($model->getAttributeLabel('phone')) ?>
+
+        <?= $form->field($model, 'discount')->textInput(['maxLength' => true]) ?>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">

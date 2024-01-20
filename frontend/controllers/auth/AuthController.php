@@ -45,6 +45,7 @@ class AuthController extends Controller
         }
 
         $form = new LoginForm();
+
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $user = $this->service->auth($form);

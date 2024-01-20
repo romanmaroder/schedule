@@ -4,6 +4,7 @@
 namespace schedule\repositories;
 
 
+use schedule\entities\User\Employee\Employee;
 use schedule\entities\User\User;
 
 class UserRepository
@@ -14,7 +15,13 @@ class UserRepository
      */
     public function findByUsernameOrEmail($value): ?User
     {
-        return User::find()->andWhere(['or', ['username' => $value], ['email' => $value]])->one();
+        return User::find()
+            ->alias('u')
+            ->andWhere(['exists', Employee::find()
+                ->alias('e')
+                ->andWhere('u.id = e.user_id')
+                ->andWhere(['u.username' => $value])]
+            )->one();
     }
 
     /**

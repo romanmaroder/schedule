@@ -1,9 +1,6 @@
 <?php
 
 
-/* @var $this \yii\web\View */
-
-/* @var $model EmployeeExistCreateForm */
 
 use kartik\color\ColorInput;
 use kartik\date\DatePicker;
@@ -15,6 +12,9 @@ use schedule\helpers\RoleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
+
+/* @var $this \yii\web\View */
+/* @var $model EmployeeExistCreateForm */
 
 $this->title = 'Create Existing Employee';
 $this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
@@ -139,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Select2::class,
                     [
                         'bsVersion' => '4.x',
-                        'name' => 'userId',
+                        'name' => 'roleId',
                         'data' => RoleHelper::roleList(),
                         'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
                         'options' => ['placeholder' => 'Select a role ...'],

@@ -91,6 +91,7 @@ class EmployeeManageService
             $form->user->username = $form->firstName . ' ' . $form->lastName,
             $form->user->email,
             $form->phone,
+            $form->user->discount,
             $form->user->password
         );
 

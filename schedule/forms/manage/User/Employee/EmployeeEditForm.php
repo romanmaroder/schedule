@@ -54,9 +54,9 @@ class EmployeeEditForm extends CompositeForm
     {
         return [
             [['userId','rateId', 'priceId', 'firstName', 'lastName'], 'required'],
+            [['firstName', 'lastName'], 'string', 'max' => 100],
             [['color','birthday','phone'],'string'],
             [['roleId'],'integer'],
-            [['firstName', 'lastName'], 'string', 'max' => 100],
         ];
     }
 

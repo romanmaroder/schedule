@@ -42,6 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ])->textInput(['placeholder' => $model->getAttributeLabel('phone')])->label($model->getAttributeLabel('phone')) ?>
         </div>
         <div class="form-group">
+            <?= $form->field($model, 'discount')->textInput(
+                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('discount')]
+            )->label($model->getAttributeLabel('discount')) ?>
+        </div>
+        <div class="form-group">
             <?= $form->field($model, 'password')->passwordInput(['maxLength' => true, 'placeholder' => $model->getAttributeLabel('password')]
             )->label($model->getAttributeLabel('password'))?>
         </div>

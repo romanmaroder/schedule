@@ -10,8 +10,8 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
 
-/** @var yii\web\View $this */
-/** @var schedule\forms\manage\User\Employee\EmployeeCreateForm $model */
+/** @var $this \yii\web\View $this */
+/** @var $model \schedule\forms\manage\User\Employee\EmployeeCreateForm  */
 
 $this->title = 'Create Employee';
 $this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
@@ -46,6 +46,11 @@ $form = ActiveForm::begin(); ?>
             <?= $form->field($model->user, 'email')->textInput(
                 ['maxLength' => true, 'placeholder' => $model->user->getAttributeLabel('email')]
             )->label($model->user->getAttributeLabel('email')) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model->user, 'discount')->textInput(
+                ['maxLength' => true, 'placeholder' => $model->user->getAttributeLabel('discount')]
+            )->label($model->user->getAttributeLabel('discount')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->user, 'password')->passwordInput(
@@ -89,6 +94,7 @@ $form = ActiveForm::begin(); ?>
                 'mask' => '+9[9][9] (999) 999-99-99',
             ])->textInput(['placeholder' => $model->getAttributeLabel('phone')])->label($model->getAttributeLabel('phone')) ?>
         </div>
+
         <div class="form-group">
             <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
                 'options' => ['placeholder' => 'Enter birth date ...'],
@@ -141,7 +147,7 @@ $form = ActiveForm::begin(); ?>
                 Select2::class,
                 [
                     'bsVersion' => '4.x',
-                    'name' => 'userId',
+                    'name' => 'roleId',
                     'data' => RoleHelper::roleList(),
                     'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
                     'options' => ['placeholder' => 'Select a role ...'],

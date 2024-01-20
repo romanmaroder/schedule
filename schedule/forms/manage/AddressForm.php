@@ -15,6 +15,7 @@ class AddressForm extends Model
     public $home;
     public $apartment;
 
+
     public function __construct(Address $address = null, $config = [])
     {
         if ($address) {

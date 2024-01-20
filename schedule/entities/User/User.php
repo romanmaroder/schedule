@@ -22,6 +22,7 @@ use yii\web\IdentityInterface;
  * @property string $verification_token
  * @property string $email
  * @property string $phone
+ * @property int $discount [smallint(6)]
  * @property string $auth_key
  * @property int $status
  * @property int $created_at
@@ -36,25 +37,34 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    const DEFAULT_PASSWORD = '12345678';
+    const DEFAULT_EMAIL = '@mail.com';
 
-    public static function create(string $username, string $email, string $phone, string $password): self
-    {
+    public static function create(
+        string $username,
+        string $email,
+        string $phone,
+        string $password,
+        int $discount = 0
+    ): self {
         $user = new User();
         $user->username = $username;
-        $user->email = $email;
+        $user->email = $email ? $email : Yii::$app->security->generateRandomString(8). self::DEFAULT_EMAIL ;
         $user->phone = $phone;
-        $user->setPassword(!empty($password) ? $password : Yii::$app->security->generateRandomString());
+        $user->discount = $discount;
+        $user->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
         $user->auth_key = Yii::$app->security->generateRandomString();
         return $user;
     }
 
-    public function edit(string $username, string $email, string $phone): void
+    public function edit(string $username, string $email, string $phone, int $discount = 0): void
     {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
+        $this->discount = $discount;
         $this->updated_at = time();
     }
 
@@ -217,6 +227,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function issetEmail($email): bool
     {
         if (!$email) {
+            return false;
+        }
+        return true;
+    }
+
+    public function issetDiscount($discount): bool
+    {
+        if (!$discount) {
             return false;
         }
         return true;
