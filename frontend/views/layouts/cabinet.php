@@ -77,7 +77,22 @@ $active ='active';
 
                                 <p class="text-muted"><?= $user->employee->birthday ?></p>
                                 <hr>
-                            <? endif; ?>
+                            <?
+                            endif; ?>
+                            <?
+                            if ($user->employee->issetAddress(
+                                $user->employee->address->town ||
+                                $user->employee->address->borough ||
+                                $user->employee->address->street ||
+                                $user->employee->address->home ||
+                                $user->employee->address->apartment
+                            )): ?>
+                                <strong><i class="fas fa-map-marker-alt"></i> Address</strong>
+
+                                <p class="text-muted"><?= $user->employee->getFullAddress() ?></p>
+                                <hr>
+                            <?
+                            endif; ?>
 
                         </div>
                         <!-- /.card-body -->

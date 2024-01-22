@@ -15,9 +15,7 @@ $this->title = 'Cabinet';
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['user'] = $user;
 
-/*echo '<pre>';
-var_dump($provider);
-die();*/
+
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
