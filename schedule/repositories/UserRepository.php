@@ -45,24 +45,10 @@ class UserRepository
                         ]
                     )->one();
         }
-        /*$app = \Yii::$app->id;
-        return match ($app) {
-            'app-backend' => User::find()
-                ->alias('u')
-                ->andWhere(['exists', Employee::find()->joinWith('role')
-                               ->alias('e')
-                               ->andWhere('u.id = e.user_id')
-                               ->andWhere(['u.username' => $value])
-                              ->andWhere(['or',['schedule_roles.name'=>'admin'],['schedule_roles.name'=>'master']])]
-                )->one(),
-            'app-frontend' => User::find()
-                ->alias('u')
-                ->andWhere(['exists', Employee::find()
-                               ->alias('e')
-                               ->andWhere('u.id = e.user_id')
-                               ->andWhere(['u.username' => $value])]
-                )->one(),
-        };*/
+
+
+
+
     }
 
     /**

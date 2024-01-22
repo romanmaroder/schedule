@@ -57,7 +57,8 @@ class EmployeeManageService
         $user->edit(
             $user->username = $user->mergeFullName([$form->firstName, $form->lastName]),
             $user->email =$form->user->email,
-            $user->phone = $form->user->phone // TODO To think about the appropriateness of phone editing
+            $user->phone = $form->user->phone,
+            $user->password = $form->user->password,
         );
 
 

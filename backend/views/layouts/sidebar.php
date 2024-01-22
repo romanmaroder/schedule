@@ -1,3 +1,8 @@
+<?php
+
+use yii\helpers\Html;
+
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -14,7 +19,12 @@
                 <img src="<?= $assetDir ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?=  Yii::$app->user->identity->username ?? '';?></a>
+                <?=
+                Html::a(
+                    Yii::$app->user->identity->username ?? '' ,
+                    ['/cabinet/default/index'],
+                    ['class' => ['d-block']]
+                ); ?>
             </div>
         </div>
 

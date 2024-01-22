@@ -43,7 +43,7 @@ a.desc:after {
 
 .grid-view th,
 .grid-view td:last-child {
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 .grid-view .filters input,

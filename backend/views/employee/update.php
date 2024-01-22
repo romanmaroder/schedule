@@ -52,6 +52,10 @@ $form = ActiveForm::begin(); ?>
                 )->label($model->getAttributeLabel('email')) ?>
             </div>
             <div class="form-group">
+                <?= $form->field($model->user, 'password')->passwordInput(['maxLength' => true, 'placeholder' => $model->user->getAttributeLabel('password')]
+                )->label($model->user->getAttributeLabel('password'))?>
+            </div>
+            <div class="form-group">
                 <?= $form->field($model, 'rateId')->widget(
                     Select2::class,
                     [

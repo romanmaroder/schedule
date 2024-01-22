@@ -35,8 +35,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => UserHelper::statusLabel($model->status),
                     'format' => 'raw',
                 ],
-                'created_at:datetime',
-                'updated_at:datetime',
+                [
+                    'attribute' => 'phone',
+                    'value' => function ($model) {
+                        return Html::a(
+                            Html::encode($model->phone),
+                            'tel:' . $model->phone,
+                            ['view', 'id' => $model->id]
+                        );
+                    },
+                    'format' => 'raw',
+                ],
+                //'created_at:datetime',
+                //'updated_at:datetime',
             ],
         ]) ?>
     </div>

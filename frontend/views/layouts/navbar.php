@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 <!-- Navbar -->
@@ -11,7 +12,7 @@ use yii\helpers\Html;
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= \yii\helpers\Url::home() ?>" class="nav-link">Home</a>
+            <a href="<?= Url::home() ?>" class="nav-link">Home</a>
         </li>
         <?
         if (!Yii::$app->user->isGuest): ?>
@@ -21,9 +22,9 @@ use yii\helpers\Html;
                 Html::a(
                     'Cabinet',
                     ['/cabinet/default/index'],
-                    ['class' => ['nav-link']]
+                    ['class' => ['nav-link',  Yii::$app->controller->id == 'cabinet/default' ? 'active': '' ]]
                 ),
-                ['class' => ['nav-item d-none d-sm-inline-block']]
+                ['class' => ['nav-item d-none d-sm-block']]
             ); ?>
         <?php
         endif; ?>
@@ -39,9 +40,9 @@ use yii\helpers\Html;
                         Html::a(
                             'Cabinet',
                             ['/cabinet/default/index'],
-                            ['class' => ['dropdown-item']]
+                            ['class' => ['dropdown-item', Yii::$app->controller->id == 'cabinet/default' ? 'active': '']]
                         ),
-                        ['class' => ['d-sm-none d-inline-block']]
+                        ['class' => ['d-sm-none d-block']]
                     ); ?>
                 <?php
                 endif; ?>
@@ -51,7 +52,7 @@ use yii\helpers\Html;
                     Html::a(
                         'Service prices',
                         ['/schedule/catalog/index'],
-                        ['class' => ['dropdown-item']]
+                        ['class' => ['dropdown-item', Yii::$app->controller->id == 'schedule/catalog' ? 'active': '']]
                     ),
                 ); ?>
                 <?
@@ -60,7 +61,7 @@ use yii\helpers\Html;
                     Html::a(
                         'User',
                         ['/users/user/index'],
-                        ['class' => ['dropdown-item']]
+                        ['class' => ['dropdown-item', Yii::$app->controller->id == 'users/user' ? 'active': '']]
                     ),
                 ); ?>
                 <!--                <li><a href="#" class="dropdown-item">Some other action</a></li>-->
@@ -74,7 +75,7 @@ use yii\helpers\Html;
                             ['/auth/auth/logout'],
                             [
                                 'data-method' => 'post',
-                                'class' => ['dropdown-item']
+                                'class' => ['dropdown-item', Yii::$app->controller->id == '/auth/auth' ? 'active': '']
                             ]
                         ),
                     ); ?>
@@ -109,7 +110,7 @@ use yii\helpers\Html;
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!--<form class="form-inline ml-3">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -118,7 +119,7 @@ use yii\helpers\Html;
                 </button>
             </div>
         </div>
-    </form>
+    </form>-->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -233,7 +234,7 @@ use yii\helpers\Html;
             </div>
         </li>-->
         <li class="nav-item">
-            <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'nav-link']) ?>
+            <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'nav-link','title'=>'logout']) ?>
         </li>
         <!--<li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">

@@ -31,10 +31,19 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card-body">
         <?= $form->field($model, 'username')->textInput(['maxLength' => true]) ?>
         <?= $form->field($model, 'email')->textInput(['maxLength' => true]) ?>
-        <?= $form->field($model, 'phone')->widget(MaskedInput::class, [
-            'mask' => '+9[9][9] (999) 999-99-99',
-        ])->textInput(['placeholder' => $model->getAttributeLabel('phone')])->label($model->getAttributeLabel('phone')) ?>
+        <?= $form->field($model, 'phone')->widget(
+            MaskedInput::class,
+            [
+                'mask' => '+9[9][9] (999) 999-99-99',
+            ]
+        )->textInput(['placeholder' => $model->getAttributeLabel('phone')])->label(
+            $model->getAttributeLabel('phone')
+        ) ?>
 
+
+        <?= $form->field($model, 'password')->passwordInput(
+            ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('password')]
+        )->label($model->getAttributeLabel('password')) ?>
         <?= $form->field($model, 'discount')->textInput(['maxLength' => true]) ?>
     </div>
     <!-- /.card-body -->
@@ -45,4 +54,5 @@ $this->params['breadcrumbs'][] = 'Update';
     <!-- /.card-footer-->
 </div>
 
-<?php ActiveForm::end(); ?>
+<?php
+ActiveForm::end(); ?>

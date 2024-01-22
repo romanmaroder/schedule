@@ -49,6 +49,7 @@ class UserManageService
             $form->username,
             $form->email,
             $form->phone,
+            $form->password,
             $form->discount,
         );
         $this->users->save($user);

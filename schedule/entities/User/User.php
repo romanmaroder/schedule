@@ -27,7 +27,8 @@ use yii\web\IdentityInterface;
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
- * @property string $password write-only password
+// * @property string $password write-only password
+ * @property string $password
  *
  * @property Network[] $networks
  * @property Employee[] $employee
@@ -40,6 +41,8 @@ class User extends ActiveRecord implements IdentityInterface
     const DEFAULT_PASSWORD = '12345678';
     const DEFAULT_EMAIL = '@mail.com';
 
+    public $password;
+
     public static function create(
         string $username,
         string $email,
@@ -51,20 +54,21 @@ class User extends ActiveRecord implements IdentityInterface
         $user->username = $username;
         $user->email = $email ? $email : Yii::$app->security->generateRandomString(8). self::DEFAULT_EMAIL ;
         $user->phone = $phone;
-        $user->discount = $discount;
         $user->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
+        $user->discount = $discount;
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
         $user->auth_key = Yii::$app->security->generateRandomString();
         return $user;
     }
 
-    public function edit(string $username, string $email, string $phone, int $discount = 0): void
+    public function edit(string $username, string $email, string $phone, string $password, int $discount = 0): void
     {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
         $this->discount = $discount;
+        $this->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
         $this->updated_at = time();
     }
 
@@ -73,7 +77,7 @@ class User extends ActiveRecord implements IdentityInterface
         $user = new User();
         $user->username = $username;
         $user->email = $email;
-        $user->setPassword($password);
+        $user->setPassword( $password);
         $user->created_at = time();
         $user->status = self::STATUS_INACTIVE;
         $user->generateEmailVerificationToken();
@@ -215,6 +219,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return implode(" ", $name);
     }
+
 
     /**
      * @return bool
