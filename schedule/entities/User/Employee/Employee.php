@@ -7,6 +7,7 @@ namespace schedule\entities\User\Employee;
 use schedule\entities\Address;
 use schedule\entities\behaviors\AddressBehavior;
 use schedule\entities\Schedule\Event\Event;
+use schedule\entities\User\Price;
 use schedule\entities\User\Rate;
 use schedule\entities\User\Role;
 use schedule\entities\User\User;
@@ -176,6 +177,10 @@ class Employee extends ActiveRecord
     public function getRate(): ActiveQuery
     {
         return $this->hasOne(Rate::class, ['id' => 'rate_id']);
+    }
+    public function getPrice(): ActiveQuery
+    {
+        return $this->hasOne(Price::class, ['id' => 'rate_id']);
     }
 
     public function getEvents(): ActiveQuery

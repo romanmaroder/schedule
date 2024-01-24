@@ -1,4 +1,6 @@
 <?php
+
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
 /** @var \schedule\forms\auth\LoginForm $model */
@@ -6,12 +8,12 @@ use yii\helpers\Html;
 $this->title = 'Login';
 ?>
 <div class="">
-   <?php if (Yii::$app->getSession()->hasFlash('success')):?>
+    <?php if (Yii::$app->getSession()->hasFlash('success')): ?>
+        <?php
+        echo '<p class="text-success text-center"><b>' . Yii::$app->session->getFlash('success') . '</b></p>'; ?>
     <?php
-    echo '<p class="text-success text-center"><b>'.Yii::$app->session->getFlash('success').'</b></p>'; ?>
-    <?php
-        else: ?>
-          <?php  echo '<p class="text-danger text-center"><b>'.Yii::$app->session->getFlash('error').'</b></p>'; ?>
+    else: ?>
+        <?php echo '<p class="text-danger text-center"><b>' . Yii::$app->session->getFlash('error') . '</b></p>'; ?>
     <?php
     endif; ?>
 </div>
@@ -19,9 +21,9 @@ $this->title = 'Login';
     <div class="card-body login-card-body">
         <p class="login-box-msg">Login to start your session</p>
 
-        <?php $form = \yii\bootstrap5\ActiveForm::begin(['id' => 'login-form']) ?>
+        <?php $form = ActiveForm::begin(['id' => 'login-form']) ?>
 
-        <?= $form->field($model,'username', [
+        <?= $form->field($model, 'username', [
             'options' => ['class' => 'form-group has-feedback'],
             'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-envelope"></span></div></div>',
             'template' => '{beginWrapper}{input}{error}{hint}{endWrapper}',
@@ -41,28 +43,27 @@ $this->title = 'Login';
 
         <div class="row">
             <div class="col-8">
-                <?= $form->field($model, 'rememberMe')->checkbox([
-                    'template' => '<div class="icheck-primary">{input}{label}</div>',
-                    'labelOptions' => [
-                        'class' => ''
-                    ],
-                    'uncheck' => null
-                ]) ?>
+                <?= $form->field($model, 'rememberMe',
+                    ['options' =>
+                        ['template' => '<div class="icheck-primary">{input}{label}</div>',
+                        'labelOptions' => ['class' => ''],
+                        'uncheck' => null],
+                    ])->checkbox([])->label(false) ?>
             </div>
             <div class="col-4">
                 <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
             </div>
         </div>
 
-        <?php \yii\bootstrap5\ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
 
         <!--<div class="social-auth-links text-center mb-3">
             <p>- OR -</p>
-            <?/*= yii\authclient\widgets\AuthChoice::widget(
+            <? /*= yii\authclient\widgets\AuthChoice::widget(
                 [
                     'baseAuthUrl' => ['auth/network/auth']
                 ]
-            ); */?>
+            ); */ ?>
         </div>-->
         <!-- /.social-auth-links -->
 

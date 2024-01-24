@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var schedule\entities\User\Employee\Employee $model */
 
-$this->title = $model->first_name;
+$this->title = $model->getFullName();
 $this->params['breadcrumbs'][] = ['label' => 'Employee', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -90,6 +90,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             return $model->rate->name;
                         },
                     ],
+                    [
+                        'attribute' => 'price_id',
+                        'value' => function ($model) {
+                            return $model->price->name;
+                        },
+                    ],
+
                     'status',
                     [
                         'attribute' => 'address.town',

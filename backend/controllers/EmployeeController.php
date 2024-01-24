@@ -110,7 +110,7 @@ class EmployeeController extends Controller
 
         return $this->render('update', [
             'model' => $form,
-            'user' => $employee,
+            'employee' => $employee,
         ]);
     }
 

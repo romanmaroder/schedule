@@ -10,8 +10,7 @@ use yii\widgets\MaskedInput;
 
 $this->title = 'Update User: ' . $user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $user->id, 'url' => ['view', 'id' => $user->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = $user->username;
 ?>
 
 <?php $form = ActiveForm::begin(); ?>

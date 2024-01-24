@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var schedule\entities\user\User $model */
 
-$this->title = $model->id;
+$this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 

@@ -4,6 +4,8 @@
 
 /* @var $user \schedule\entities\User\User */
 
+/* @var $employee \schedule\entities\User\Employee\Employee */
+
 /* @var $provider \schedule\entities\Schedule\Event\Event */
 
 use hail812\adminlte3\assets\PluginAsset;
@@ -14,7 +16,6 @@ use yii\helpers\Html;
 $this->title = 'Cabinet';
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['user'] = $user;
-
 
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
@@ -31,12 +32,9 @@ PluginAsset::register($this)->add(
                     'id' => 'event'
                 ],
                 'columns' => [
-
-                    //'id',
-
                     [
                         'attribute' => 'start',
-                        'format' => ['datetime', 'php:d.m.Y']
+                        'format' => ['datetime', 'php:d-m-Y']
                     ],
                     [
                         'attribute' => 'client_id',
@@ -63,11 +61,6 @@ PluginAsset::register($this)->add(
                     [
                         'attribute' => 'end',
                         'format' => ['datetime', 'php: H:i']
-                    ],
-                    [
-                        'attribute' => 'service',
-                        'value' => function ($model) {
-                           return implode(', ', ArrayHelper::getColumn($model->services, 'name'));},
                     ],
 
                 ],
@@ -96,6 +89,7 @@ $js = <<< JS
        "lengthChange": false,
        "searching": true,
        "ordering": true,
+       //"order": [[0, 'desc']],
        "info": false,
        "autoWidth": false,
        "responsive": true,
@@ -115,7 +109,7 @@ $js = <<< JS
       //   ],
         "language": {
           "search":"Поиск"
-         },
+         }
     }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
 
   });

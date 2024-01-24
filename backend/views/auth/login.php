@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $model \schedule\forms\auth\LoginForm */
@@ -21,7 +22,7 @@ use yii\helpers\Html;
         <p class="login-box-msg">Login to start your session</p>
 
         <?php
-        $form = \yii\bootstrap5\ActiveForm::begin(['id' => 'login-form']) ?>
+        $form = ActiveForm::begin(['id' => 'login-form']) ?>
 
         <?= $form->field(
             $model,
@@ -67,7 +68,7 @@ use yii\helpers\Html;
         </div>
 
         <?php
-        \yii\bootstrap5\ActiveForm::end(); ?>
+        ActiveForm::end(); ?>
 
     </div>
     <!-- /.login-card-body -->

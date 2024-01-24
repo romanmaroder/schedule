@@ -5,19 +5,47 @@ namespace schedule\readModels\Schedule;
 
 
 use schedule\entities\Schedule\Event\Event;
-use yii\db\ActiveQuery;
+use yii\db\Expression;
 
 class EventReadRepository
 {
     public function getAll(): array
     {
-        return Event::find()->with('services','employee','master','client')->all();
-
+        return Event::find()->with('services', 'employee', 'master', 'client')->all();
     }
 
-    public function getAllById($id):array
+    public function getAllById($id): array
     {
-        return Event::find()->with('services','employee','master','client')->andWhere(['master_id' => $id])->all();
+        return Event::find()->with('services', 'employee', 'master', 'client')->andWhere(['master_id' => $id])
+            ->all();
+    }
+
+    public function getAllDayById($id): array
+    {
+        return Event::find()->with('services', 'employee', 'master', 'client')
+            ->andwhere(['DATE(start)'=>new Expression('DATE(NOW())')])
+            ->andWhere(['master_id' => $id])
+            ->all();
+    }
+
+    public function getAllWeekById($id): array
+    {
+        return Event::find()->with('services', 'employee', 'master', 'client')
+            ->andwhere(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
+            ->andWhere(['master_id' => $id])
+            ->all();
+    }
+
+    public function getEventsCount($id): bool|int|string|null
+    {
+        return Event::find()->andWhere(['master_id'=>$id])->count();
+    }
+
+    public function getEventsCountToday($id): bool|int|string|null
+    {
+        return Event::find()
+            ->andwhere(['DATE(start)'=>new Expression('DATE(NOW())')])
+            ->andWhere(['master_id'=>$id])->count();
     }
 
     public function find($id): ?Event

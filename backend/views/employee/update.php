@@ -4,7 +4,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $model \schedule\forms\manage\User\Employee\EmployeeEditForm */
-/* @var $user null|\schedule\entities\User\Employee\Employee */
+/* @var $employee \schedule\entities\User\Employee\Employee */
 
 use kartik\color\ColorInput;
 use kartik\date\DatePicker;
@@ -16,9 +16,9 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
 
-$this->title = 'Update Employee';
+$this->title = 'Update Employee: ' . $employee->user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $employee->user->username;
 ?>
 <?php
 $form = ActiveForm::begin(); ?>

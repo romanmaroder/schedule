@@ -35,17 +35,14 @@ $active ='active';
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Followers</b> <a class="float-right">1,322</a>
+                                    <b>Total entries</b> <span class="float-right badge badge-warning"><?=$this->context->totalCount?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Following</b> <a class="float-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Friends</b> <a class="float-right">13,287</a>
+                                    <b>Today's total entries</b> <span class="float-right badge badge-danger "><?=$this->context->todayCount?></span>
                                 </li>
                             </ul>
 
-                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                            <!--<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -107,18 +104,13 @@ $active ='active';
                         <!-- /.card-header -->
                         <div class="card-body">
 
-                            <!--<strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>-->
                             <div class="list-group list-group-flush">
-                                <!--<a href="<?/*= Html::encode(Url::to(['/auth/auth/login'])) */?>"
-                                   class="list-group-item  text-muted">Login</a>-->
                                 <?=Html::a(Html::encode('Events'),Url::to(['/cabinet/default/index']),
-                                    ['class' => ['list-group-item',  Yii::$app->controller->id == 'cabinet/default' ? 'active': '' ]])?>
-                                <!--<a href="<? /*= Html::encode(Url::to(['/auth/signup/signup'])) */ ?>"
-                                   class="list-group-item  text-muted">Signup</a>-->
-                                <!--<a href="<? /*= Html::encode(Url::to(['/auth/reset/request-password-reset'])) */ ?>"
-                                   class="list-group-item  text-muted">Forgotten Password</a>-->
-                                <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/profile/index']),
-                                    ['class' => ['list-group-item',  Yii::$app->controller->id == 'cabinet/profile' ? 'active': '' ]])?>
+                                    ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/index' ? 'active': '' ]])?>
+                                <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/default/profile']),
+                                    ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active': '' ]])?>
+                                <?=Html::a(Html::encode('Timeline'),Url::to(['/cabinet/default/timeline']),
+                                    ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/timeline' ? 'active': '' ]])?>
 
                             </div>
                         </div>
@@ -134,17 +126,15 @@ $active ='active';
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
                                     <?=Html::a(Html::encode('Events'),Url::to(['/cabinet/default/index']),
-                                     ['class' => ['nav-link',  Yii::$app->controller->id == 'cabinet/default' ? 'active': '' ]])?>
+                                     ['class' => ['nav-link',  Yii::$app->controller->route == 'cabinet/default/index' ? 'active': '' ]])?>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link"
-                                       href="#timeline"
-                                                        data-toggle="tab">Timeline
-                                    </a>
+                                    <?=Html::a(Html::encode('Timeline'),Url::to(['/cabinet/default/timeline']),
+                                               ['class' => ['nav-link',  Yii::$app->controller->route == 'cabinet/default/timeline' ? 'active': '' ]])?>
                                 </li>
                                 <li class="nav-item">
-                                    <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/profile/index']),
-                                        ['class' => ['nav-link',  Yii::$app->controller->id == 'cabinet/profile' ? 'active': '' ]])?>
+                                    <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/default/profile']),
+                                        ['class' => ['nav-link',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active': '' ]])?>
 
                                 </li>
                             </ul>
