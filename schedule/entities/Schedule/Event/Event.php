@@ -26,6 +26,8 @@ use yii\db\ActiveRecord;
  */
 class Event extends ActiveRecord
 {
+    public $sum;
+    public $discount;
 
     public static function create($masterId, $clientId, $notice, $start, $end): self
     {

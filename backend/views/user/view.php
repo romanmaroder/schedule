@@ -45,7 +45,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 'username',
                 [
                     'attribute' => 'email',
-                    'visible' => $model->issetEmail($model->email),
+                    'visible' => $model->visibleEmail($model->email),
                     'format' => 'email',
                 ],
                 [
@@ -61,7 +61,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ],
                 [
                     'attribute' => 'discount',
-                    'visible' => $model->issetDiscount($model->discount)
+                    'visible' => $model->visibleDiscount($model->discount)
                 ],
                 [
                     'attribute' => 'status',

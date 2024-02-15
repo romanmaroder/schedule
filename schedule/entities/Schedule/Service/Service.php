@@ -22,8 +22,6 @@ use yii\db\ActiveRecord;
  * @property int $category_id
  * @property int $price_old
  * @property int $price_new
- * @property int $price_intern [int(11)]
- * @property int $price_employee [int(11)]
  * @property string $meta_json
  * @property int $status
  *
@@ -58,15 +56,11 @@ class Service extends ActiveRecord
     /**
      * @param $new
      * @param $old
-     * @param $intern
-     * @param $employee
      */
-    public function setPrice($new, $old, $intern, $employee): void
+    public function setPrice($new, $old): void
     {
         $this->price_new = $new;
         $this->price_old = $old;
-        $this->price_intern = $intern;
-        $this->price_employee = $employee;
     }
 
     public function edit($name, $description, Meta $meta): void
@@ -188,7 +182,7 @@ class Service extends ActiveRecord
     }
     public function getEvent(): ActiveQuery
     {
-        return $this->hasOne(ServiceAssignment::class, ['service_id' => 'id']);
+        return $this->hasMany(ServiceAssignment::class, ['service_id' => 'id']);
     }
 
     /**
@@ -221,6 +215,31 @@ class Service extends ActiveRecord
     public function getTags(): ActiveQuery
     {
         return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getPriceOld(): int
+    {
+        return $this->price_old;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriceNew()
+    {
+        return $this->price_new;
     }
 
     public static function tableName(): string

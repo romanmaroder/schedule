@@ -37,7 +37,7 @@ class UserEditForm extends Model
     public function rules(): array
     {
         return [
-            [['username','password'], 'required'],
+            [['username'], 'required'],
             ['email', 'email'],
             [['discount'],'integer'],
             [['username','email','phone'],'string','max'=>255],

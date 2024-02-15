@@ -7,6 +7,7 @@ return [
     'hostInfo' => $params['backendHostInfo'],
     'enablePrettyUrl' => true,
     'showScriptName' => false,
+    'cache' => false,
     'rules' => [
         '' => 'site/index',
         '<_a:login|logout>' => 'auth/<_a>',

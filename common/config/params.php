@@ -30,13 +30,20 @@ return [
                     'datatables-responsive/js/responsive.bootstrap4.min.js'
                 ]
             ],
-            'datatables-buttons'            => [
+            'datatables-buttons' => [
                 'css' => 'datatables-buttons/css/buttons.bootstrap4.min.css',
-                'js'  => [
+                'js' => [
                     'datatables-buttons/js/dataTables.buttons.min.js',
                     'datatables-buttons/js/buttons.bootstrap4.min.js',
                     'datatables-buttons/js/buttons.html5.min.js',
                     'datatables-buttons/js/buttons.colVis.min.js'
+                ]
+            ],
+            'datatables-colreorder' => [
+                'css' => 'datatables-colreorder/css/colReorder.bootstrap4.min.css',
+                'js' => [
+                    'datatables-colreorder/js/colReorder.bootstrap4.js',
+                    'datatables-colreorder/js/dataTables.colReorder.js'
                 ]
             ],
             'sweetalert2-theme-bootstrap-4' => [

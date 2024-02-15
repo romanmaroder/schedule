@@ -34,6 +34,7 @@ use yii\db\ActiveRecord;
  * @property User $user
  * @property Role $role
  * @property Rate $rate
+ * @property Price $price
  */
 class Employee extends ActiveRecord
 {
@@ -180,7 +181,7 @@ class Employee extends ActiveRecord
     }
     public function getPrice(): ActiveQuery
     {
-        return $this->hasOne(Price::class, ['id' => 'rate_id']);
+        return $this->hasOne(Price::class, ['id' => 'price_id']);
     }
 
     public function getEvents(): ActiveQuery

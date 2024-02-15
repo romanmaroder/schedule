@@ -85,14 +85,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     'value' => PriceHelper::format($service->price_old),
                                 ],
                                 [
-                                    'attribute' => 'price_intern',
-                                    'value' => PriceHelper::format($service->price_intern),
-                                ],
-                                [
-                                    'attribute' => 'price_employee',
-                                    'value' => PriceHelper::format($service->price_employee),
-                                ],
-                                [
                                     'attribute' => 'category_id',
                                     'value' => ArrayHelper::getValue($service, 'category.name'),
                                 ],

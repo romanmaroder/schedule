@@ -17,33 +17,33 @@ class ServiceReadRepository
 {
     public function getAll(): DataProviderInterface
     {
-        $query = Service::find()->alias('p')->active('p');
+        $query = Service::find()->alias('s')->active('s');
         return $this->getProvider($query);
     }
 
     public function getAllByCategory(Category $category): DataProviderInterface
     {
-        $query = Service::find()->alias('p')->active('p')->with('category');
+        $query = Service::find()->alias('s')->active('s')->with('category');
         $ids = ArrayHelper::merge([$category->id], $category->getDescendants()->select('id')->column());
         $query->joinWith(['categoryAssignments ca'], false);
-        $query->andWhere(['or', ['p.category_id' => $ids], ['ca.category_id' => $ids]]);
-        $query->groupBy('p.id');
+        $query->andWhere(['or', ['s.category_id' => $ids], ['ca.category_id' => $ids]]);
+        $query->groupBy('s.id');
         return $this->getProvider($query);
     }
 
     public function getAllByBrand(Brand $brand): DataProviderInterface
     {
-        $query = Service::find()->alias('p')->active('p');
-        $query->andWhere(['p.brand_id' => $brand->id]);
+        $query = Service::find()->alias('s')->active('s');
+        $query->andWhere(['s.brand_id' => $brand->id]);
         return $this->getProvider($query);
     }
 
     public function getAllByTag(Tag $tag): DataProviderInterface
     {
-        $query = Service::find()->alias('p')->active('p');
+        $query = Service::find()->alias('s')->active('s');
         $query->joinWith(['tagAssignments ta'], false);
         $query->andWhere(['ta.tag_id' => $tag->id]);
-        $query->groupBy('p.id');
+        $query->groupBy('s.id');
         return $this->getProvider($query);
     }
 
@@ -61,20 +61,20 @@ class ServiceReadRepository
                     'defaultOrder' => ['id' => SORT_DESC],
                     'attributes' => [
                         'id' => [
-                            'asc' => ['p.id' => SORT_ASC],
-                            'desc' => ['p.id' => SORT_DESC],
+                            'asc' => ['s.id' => SORT_ASC],
+                            'desc' => ['s.id' => SORT_DESC],
                         ],
                         'name' => [
-                            'asc' => ['p.name' => SORT_ASC],
-                            'desc' => ['p.name' => SORT_DESC],
+                            'asc' => ['s.name' => SORT_ASC],
+                            'desc' => ['s.name' => SORT_DESC],
                         ],
                         'price' => [
-                            'asc' => ['p.price_new' => SORT_ASC],
-                            'desc' => ['p.price_new' => SORT_DESC],
+                            'asc' => ['s.price_new' => SORT_ASC],
+                            'desc' => ['s.price_new' => SORT_DESC],
                         ],
                         'rating' => [
-                            'asc' => ['p.rating' => SORT_ASC],
-                            'desc' => ['p.rating' => SORT_DESC],
+                            'asc' => ['s.rating' => SORT_ASC],
+                            'desc' => ['s.rating' => SORT_DESC],
                         ],
                     ],
                 ],

@@ -81,28 +81,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         )->label($model->price->getAttributeLabel('old')) ?>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <?= $form->field($model->price, 'intern')->textInput(
-                            [
-                                'maxlength' => true,
-                                'value' => $model->price->isNewRecord ?? 0,
-                                'placeholder' => $model->price->getAttributeLabel('intern')
-                            ]
-                        )->label($model->price->getAttributeLabel('intern')) ?>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <?= $form->field($model->price, 'employee')->textInput(
-                            [
-                                'maxlength' => true,
-                                'value' => $model->isNewRecord ?? 0,
-                                'placeholder' => $model->getAttributeLabel('employee')
-                            ]
-                        )->label($model->getAttributeLabel('employee')) ?>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

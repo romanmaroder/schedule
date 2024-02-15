@@ -21,8 +21,6 @@ class m231021_195710_create_schedule_services_table extends Migration
             'description' => $this->text(),
             'price_old' => $this->integer(),
             'price_new' => $this->integer(),
-            'price_intern' => $this->integer(),
-            'price_employee' => $this->integer(),
             'meta_json' => $this->text(),
             'status' => $this->smallInteger()->defaultValue(1)->notNull(),
         ], $tableOptions);

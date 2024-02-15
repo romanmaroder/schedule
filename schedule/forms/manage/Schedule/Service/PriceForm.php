@@ -18,8 +18,6 @@ class PriceForm extends Model
 {
     public $old;
     public $new;
-    public $intern;
-    public $employee;
 
     /**
      * PriceForm constructor.
@@ -31,8 +29,6 @@ class PriceForm extends Model
         if ($service) {
             $this->new = $service->price_new;
             $this->old = $service->price_old;
-            $this->intern = $service->price_intern;
-            $this->employee = $service->price_employee;
         }
         parent::__construct($config);
     }
@@ -41,7 +37,7 @@ class PriceForm extends Model
     {
         return [
             [['new'], 'required'],
-            [['new', 'old', 'intern', 'employee'], 'integer', 'min' => 0],
+            [['new', 'old',], 'integer', 'min' => 0],
         ];
     }
 }

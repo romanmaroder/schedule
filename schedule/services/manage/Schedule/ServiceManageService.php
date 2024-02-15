@@ -50,7 +50,7 @@ class ServiceManageService
                 $form->meta->keywords,
             )
         );
-        $services->setPrice($form->price->new, $form->price->old, $form->price->intern, $form->price->employee);
+        $services->setPrice($form->price->new, $form->price->old);
 
         # Binding of additional categories to the service
         foreach ($form->categories->others as $otherId) {
@@ -127,7 +127,7 @@ class ServiceManageService
     public function changePrice($id, PriceForm $form): void
     {
         $service = $this->services->get($id);
-        $service->setPrice($form->new, $form->old, $form->intern, $form->employee);
+        $service->setPrice($form->new, $form->old);
         $this->services->save($service);
     }
 

@@ -31,7 +31,7 @@ $emptyEducations = 'lesson';
         <div class="time-label">
             <span class="bg-danger"><?=date('d-M-Y')?></span>
         </div>
-        <? if (!$events || !$educations):?>
+        <? if (!$events && !$educations):?>
             <div>
                 <i class="fas fa-exclamation-circle bg-warning"></i>
 

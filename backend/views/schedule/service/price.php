@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $service schedule\entities\Schedule\Service\Service */
 /* @var $model schedule\forms\manage\Schedule\Service\PriceForm */
 
-$this->title                   = 'Price for Service: ' . $service->name;
+$this->title                   ='Price for Service: ' . $service->name;
 $this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $service->name, 'url' => ['view', 'id' => $service->id]];
 $this->params['breadcrumbs'][] = 'Price';
@@ -30,8 +30,6 @@ $this->params['breadcrumbs'][] = 'Price';
         <div class="card-body">
             <?= $form->field($model, 'new')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'old')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'intern')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'employee')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="card-footer bg-secondary">
             <div class='form-group'>

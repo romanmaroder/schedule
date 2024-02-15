@@ -68,18 +68,6 @@ PluginAsset::register($this)->add(
                                         return PriceHelper::format($model->price_old);
                                     },
                                 ],
-                                [
-                                    'attribute' => 'price_intern',
-                                    'value' => function (Service $model) {
-                                        return PriceHelper::format($model->price_intern);
-                                    },
-                                ],
-                                [
-                                    'attribute' => 'price_employee',
-                                    'value' => function (Service $model) {
-                                        return PriceHelper::format($model->price_employee);
-                                    },
-                                ],
                                 /*[
                                     'attribute' => 'status',
                                     //'filter' => $searchModel->statusList(),

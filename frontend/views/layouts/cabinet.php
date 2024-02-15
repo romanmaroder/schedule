@@ -107,6 +107,8 @@ $active ='active';
                             <div class="list-group list-group-flush">
                                 <?=Html::a(Html::encode('Events'),Url::to(['/cabinet/default/index']),
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/index' ? 'active': '' ]])?>
+                                <?=Html::a(Html::encode('Salary'),Url::to(['/cabinet/salary/index']),
+                                    ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/salary/index' ? 'active': '' ]])?>
                                 <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/default/profile']),
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active': '' ]])?>
                                 <?=Html::a(Html::encode('Timeline'),Url::to(['/cabinet/default/timeline']),

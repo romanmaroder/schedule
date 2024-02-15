@@ -1,14 +1,14 @@
 <?php
 
 
-namespace backend\forms\Schedule;
+namespace frontend\forms\Salary;
 
 
 use schedule\entities\Schedule\Event\Event;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class EventSearch extends Model
+class SalarySearch extends Model
 {
 
     public $id;
@@ -30,14 +30,25 @@ class EventSearch extends Model
 
     public function search(array $params): ActiveDataProvider
     {
-         $query = Event::find()->joinWith(['services','master','client']);
+        /*$query = Event::find()
+            ->joinWith(['services s', 'master m', 'client c'])
+            ->select(
+                [
+                    'DATE(start) as start',
+                    'SUM(s.price_new) as sum',
+
+                ]
+            );*/
+        $query = Event::find()
+            ->with(['services', 'master', 'client'])
+            ->andWhere(['master_id' => \Yii::$app->user->getId()]);
 
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,
-                'sort' => [
+                /*'sort' => [
                     'defaultOrder' => ['id' => SORT_DESC]
-                ]
+                ]*/
             ]
         );
         $this->load($params);
@@ -50,8 +61,7 @@ class EventSearch extends Model
         $query->andFilterWhere(
             [
                 'id' => $this->id,
-                'master_id' => \Yii::$app->id == 'app-backend' ? $this->master_id : \Yii::$app->user->getId(),
-                'client_id' => $this->client_id,
+                'master_id' => \Yii::$app->user->getId(),
             ]
         );
 
@@ -59,6 +69,7 @@ class EventSearch extends Model
         $query->andFilterWhere(['>=', 'start', $this->start ? $this->start . ' 00:00:00' : null])
             ->andFilterWhere(['<=', 'end', $this->end ? $this->end . ' 23:59:59' : null]);
 
+        $query->groupBy(['DATE(start)']);
 
         return $dataProvider;
     }

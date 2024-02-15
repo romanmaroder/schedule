@@ -4,6 +4,8 @@
 namespace common\bootstrap;
 
 
+use schedule\cart\Cart;
+use schedule\cart\storage\DbStorage;
 use schedule\services\auth\SignupService;
 use schedule\services\ContactService;
 use yii\base\BootstrapInterface;
@@ -30,5 +32,12 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(ContactService::class, [], [
             $app->params['adminEmail']
         ]);
+        $container->setSingleton(Cart::class, function () use ($app) {
+            return new Cart(
+                new DbStorage($app->get('user'),$app->db)
+                //new HybridStorage($app->get('user'), 'cart', 3600 * 24, $app->db),
+                //new DynamicCost(new SimpleCost())
+            );
+        });
     }
 }

@@ -46,6 +46,19 @@ class EventController extends Controller
         $searchModel = new EventSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
+        $events = Event::find()->with(['services', 'employee', 'client'])->andWhere(['id' => 20])->all();
+        $price = $events[0]->services[0]->price_new;
+        $discount = $events[0]->client->discount;
+        $rate = $events[0]->employee->rate->rate;
+
+        $cost = $price * (1 - $discount/100);
+        $salary = $cost *$rate;
+        /* echo '<pre>';
+         var_dump($events[0]->services[0]->price_new);
+         var_dump($events[0]->employee->rate->rate);
+         var_dump($cost);
+         var_dump($salary);
+         die();*/
         return $this->render(
             'index',
             [

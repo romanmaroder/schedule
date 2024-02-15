@@ -43,6 +43,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public $password;
 
+
     public static function create(
         string $username,
         string $email,
@@ -68,7 +69,12 @@ class User extends ActiveRecord implements IdentityInterface
         $this->email = $email;
         $this->phone = $phone;
         $this->discount = $discount;
-        $this->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
+        if (!empty($password)){
+            $this->setPassword( $password );
+        }else{
+          $this->password_hash ;
+        }
+
         $this->updated_at = time();
     }
 
@@ -210,6 +216,14 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Event::class, ['client_id' => 'id']);
     }
 
+    /**
+     * @return int
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
     public function parseFullName($fullName)
     {
         return explode(" ", $fullName);
@@ -229,7 +243,7 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->status === self::STATUS_INACTIVE;
     }
 
-    public function issetEmail($email): bool
+    public function visibleEmail($email): bool
     {
         if (!$email) {
             return false;
@@ -237,7 +251,7 @@ class User extends ActiveRecord implements IdentityInterface
         return true;
     }
 
-    public function issetDiscount($discount): bool
+    public function visibleDiscount($discount): bool
     {
         if (!$discount) {
             return false;
