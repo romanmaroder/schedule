@@ -6,74 +6,70 @@ use schedule\entities\Schedule\Event\Event;
 
 class CartItem
 {
-    private $event;
+    private $events;
 
-    public function __construct(Event $event)
+
+    public function __construct(Event $events)
     {
-        $this->event = $event;
+        $this->events = $events;
     }
 
 
-    public function getEventId()
+    public function getEvents(): Event
     {
-        return $this->event->id;
+        return $this->events;
     }
 
-    public function getEvent(): Event
-    {
-        return $this->event;
-    }
-
-    public function getPrice(): int
+    public function getTotalPrice(): int
     {
         $price = null;
-        foreach ($this->event->services as $item) {
-            $price += ($item->price_new * $this->getPriceEmployee() );
+        foreach ($this->events->services as $item) {
+            $price += $item->price_new * $this->getEmployeePrice();
         }
         return $price;
     }
 
-    public function getPrices()
+    public function getPriceList():string
     {
         $prices = '';
-        foreach ($this->event->services as $item) {
-            $prices .= ($item->price_new * $this->getPriceEmployee() ). '</br>';
+        foreach ($this->events->services as $item) {
+            $prices .= $item->price_new * $this->getEmployeePrice() . '</br>';
         }
         return $prices;
     }
 
-    public function getDiscount()
-    {
-        return $this->event->client->getDiscount();
-    }
-
-    public function getServices()
+    public function getServiceList(): string
     {
         $service = '';
-        foreach ($this->event->services as $item) {
+        foreach ($this->events->services as $item) {
             $service .= $item->name . '</br>';
         }
         return $service;
     }
 
-    public function getRate()
+    public function getDiscount()
     {
-        return $this->event->employee->rate->rate;
-    }
-
-    public function getPriceEmployee()
-    {
-        return $this->event->employee->price->rate;
+        return $this->events->client->getDiscount();
     }
 
     public function getCost(): int|float
     {
-        return $this->getPrice() * (1 - $this->getDiscount() / 100);
+        return $this->getTotalPrice() * (1 - $this->getDiscount() / 100);
     }
 
-    public function getSalary()
+    public function getSalary(): float|int
     {
-        return $this->getCost() * $this->getRate();
+        return $this->getCost() * $this->getEmployeeRate();
+    }
+
+    private function getEmployeeRate()
+    {
+        return $this->events->employee->rate->rate;
+    }
+
+    private function getEmployeePrice()
+    {
+        return $this->events->employee->price->rate;
     }
 
 

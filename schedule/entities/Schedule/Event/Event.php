@@ -7,6 +7,8 @@ namespace schedule\entities\Schedule\Event;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use schedule\entities\Schedule\Service\Service;
 use schedule\entities\User\Employee\Employee;
+use schedule\entities\User\Price;
+use schedule\entities\User\Rate;
 use schedule\entities\User\User;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;

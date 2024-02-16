@@ -6,6 +6,7 @@ namespace schedule\cart\storage;
 
 use schedule\cart\CartItem;
 use schedule\entities\Schedule\Event\Event;
+use schedule\entities\Schedule\Service\Service;
 use yii\db\Connection;
 use yii\db\Query;
 
@@ -14,7 +15,7 @@ class DbStorage implements StorageInterface
     private $userId;
     private $db;
 
-    public function __construct($userId, Connection $db)
+    public function __construct ($userId, Connection $db)
     {
         $this->userId = $userId;
         $this->db = $db;
@@ -34,8 +35,8 @@ class DbStorage implements StorageInterface
             function (array $row) {
                 /** @var Event $event */
                 if ($event = Event::find()
-                    ->with(['services', 'master', 'client'])
-                    ->andWhere(['id' => $row['id']])
+                    ->with(['employee'])
+                   ->andWhere(['id' => $row['id']])
                     ->one()) {
                     return new CartItem($event);
                 }

@@ -41,6 +41,7 @@ class Employee extends ActiveRecord
     public $address;
 
 
+
     public static function attach(
         $rateId,
         $priceId,

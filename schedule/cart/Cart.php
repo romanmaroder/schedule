@@ -36,13 +36,15 @@ class Cart
         return count($this->items);
     }
 
-    public function getSalaryTotal(): int|float
+    public function getFullSalary(): int|float
     {
         $this->loadItems();
         return array_sum(array_map(function (CartItem $item) {
-            return $item->getSalary();
+            return $item->getSalary() ;
         }, $this->items));
     }
+
+
 
     /*public function add(CartItem $item): void
     {

@@ -17,6 +17,7 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons','datatables-colreorder']
 );
 
+
 ?>
     <div class="cabinet-index">
 
@@ -31,8 +32,11 @@ PluginAsset::register($this)->add(
                         'showFooter' => true,
                         'showHeader' => true,
                         'tableOptions' => [
-                            'class' => 'table table-bordered',
+                            'class' => 'table table-striped',
                             'id' => 'salary'
+                        ],
+                        'headerRowOptions' => [
+                                'class'=>'table-light'
                         ],
                         'emptyText' => 'No results found',
                         'emptyTextOptions' => [
@@ -47,23 +51,25 @@ PluginAsset::register($this)->add(
                                     'class' => ['']
                                 ],
                                 'value' => function ($model) {
-                                    return DATE('Y-m-d', strtotime($model->getEvent()->start));
+                                    return DATE('Y-m-d', strtotime($model->getEvents()->start));
                                 },
-                                'footerOptions'  => ['class' => 'bg-info text-left'],
+                                'footer' => $cart->getFullSalary(),
+                                'footerOptions' => ['class' => 'bg-info text-left'],
                             ],
                             [
                                 'attribute' => 'Services',
-                                'headerOptions' => ['class' => 'text-center'],
+                                'headerOptions' => ['class' => 'text-left'],
                                 'value' => function ($model) {
-                                    return $model->getServices();
+                                    return $model->getServiceList();
                                 },
+                                //'footer' => $cart->getPrice(),
                                 'format' => 'raw'
                             ],
                             [
                                 'attribute' => 'Price',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getPrices();
+                                    return $model->getPriceList();
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -73,16 +79,15 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Total',
                                 'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) {
-                                    return $model->getPrice();
+                                'value' => function ($model) use ($cart) {
+                                    return $model->getTotalPrice();
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ]
                             ],
-
                             [
-                                'attribute' => 'Discount',
+                                'attribute' => 'Client discount',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
                                     return $model->getDiscount() .'%';
@@ -103,28 +108,28 @@ PluginAsset::register($this)->add(
                                         'class' => ['text-center align-middle']
                                     ];
                                 },
-                                'footerOptions'  => ['class' => 'text-center'],
+                                'footerOptions'  => ['class' => 'text-center bg-info'],
                             ],
-
                             [
                                 'attribute' => 'Salary',
                                 'headerOptions' => ['class' => 'text-right '],
-                                'value' => function ($model) {
+                                'value' => function ($model) use ($cart) {
                                     return $model->getSalary();
                                 },
                                 'contentOptions' => function ($model) use ($cart) {
                                     return [
                                         'data-total' => $model->getSalary(),
-                                        'class' => ['text-right align-middle text-info ']
+                                        'class' => ['text-right align-middle text-info']
                                     ];
                                 },
-                                'footer' => $cart->getSalaryTotal(),
+                                'footer' => $cart->getFullSalary(),
                                 'footerOptions'  => ['class' => 'bg-info text-right '],
                             ]
                         ]
                     ]
                 ) ?>
             </div>
+
         </div>
 
     </div>
@@ -192,14 +197,14 @@ $js = <<< JS
                             }else{
                                  $( api.column( 6 ).footer() ).html(pageTotalSalary);
                             }
-                            
+
                             //
-                            
+
                              /*var diffPage =  pageTotalPrice - pageTotalSalary;
                              var diffTotal =  totalPrice - totalSalary;*/
                             $( api.column( 0 ).footer() )
                             .html( pageTotalSalary);
-                            
+
                         },
                 "fnStateSave": function (oSettings, oData) {
                 localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
@@ -226,14 +231,14 @@ $js = <<< JS
                 }
                 },
     }).buttons().container().appendTo('#salary_wrapper .col-md-6:eq(0)');
-   
+
    table.on("column-reorder", function(e, settings, details){
        let order = table.order();
    })
-   
+
  });
 
-          
+
 JS;
 
 

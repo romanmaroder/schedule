@@ -5,6 +5,7 @@ namespace frontend\controllers\cabinet;
 
 
 use schedule\services\schedule\CartService;
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 
@@ -25,14 +26,15 @@ class SalaryController extends Controller
     {
         $cart = $this->service->getCart();
 
+       /* echo'<pre>';
+        var_dump($cart->getItems());
+        die();*/
         $dataProvider = new ArrayDataProvider([
             'models' => $cart->getItems()
                                    ]);
 
 
-      /*  echo '<pre>';
-        var_dump($a);
-        die();*/
+
         return $this->render('index', [
             'cart' => $cart,
             'dataProvider'=>$dataProvider,
