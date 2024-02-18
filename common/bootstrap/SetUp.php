@@ -32,6 +32,7 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(ContactService::class, [], [
             $app->params['adminEmail']
         ]);
+
         $container->setSingleton(Cart::class, function () use ($app) {
             return new Cart(
                 new DbStorage($app->get('user') ,$app->db)

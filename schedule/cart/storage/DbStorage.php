@@ -6,7 +6,6 @@ namespace schedule\cart\storage;
 
 use schedule\cart\CartItem;
 use schedule\entities\Schedule\Event\Event;
-use schedule\entities\Schedule\Service\Service;
 use yii\db\Connection;
 use yii\db\Query;
 
@@ -23,11 +22,13 @@ class DbStorage implements StorageInterface
 
     public function load(): array
     {
-        $rows = (new Query())
-            ->select('*')
-            ->from('{{%schedule_events}}')
-            ->where(['master_id' => $this->userId->id])
-            ->orderBy('DATE(start)')
+        $query = (new Query())
+            ->select('id')
+            ->from('{{%schedule_events}}');
+        if (\Yii::$app->id == 'app-frontend') {
+            $query->where(['master_id' => $this->userId->id]);
+            }
+        $rows= $query->orderBy('DATE(start)')
             ->all(\Yii::$app->db);
 
 
@@ -36,7 +37,7 @@ class DbStorage implements StorageInterface
                 /** @var Event $event */
                 if ($event = Event::find()
                     ->with(['employee'])
-                   ->andWhere(['id' => $row['id']])
+                    ->andWhere(['id' => $row['id']])
                     ->one()) {
                     return new CartItem($event);
                 }

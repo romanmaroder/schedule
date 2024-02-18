@@ -49,7 +49,7 @@ class User extends ActiveRecord implements IdentityInterface
         string $email,
         string $phone,
         string $password,
-        int $discount = 0
+         $discount = 0
     ): self {
         $user = new User();
         $user->username = $username;

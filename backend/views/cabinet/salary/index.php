@@ -46,9 +46,9 @@ PluginAsset::register($this)->add(
                         'headerRowOptions' => [
                             'class' => 'table-light'
                         ],
-                        /*'rowOptions' => function ($model) {
+                        'rowOptions' => function ($model) {
                             return ['style' => 'background-color:' . $model->getEvents()->employee->color];
-                        },*/
+                        },
                         'emptyText' => 'No results found',
                         'emptyTextOptions' => [
                             'tag' => 'div',
@@ -67,25 +67,15 @@ PluginAsset::register($this)->add(
                                 'footer' => $cart->getFullSalary(),
                                 'footerOptions' => ['class' => 'bg-info text-left'],
                             ],
-                            /*[
-                                'attribute' => 'Date1',
-                                'headerOptions' => ['class' => ''],
-                                'value' => function ($model) {
-                                    return DATE('Y-m-d', strtotime($model->getEvents()->end));
-                                },
-                                'contentOptions' => [
-                                    'class' => ['align-middle']
-                                ],
-                                'footer' => $cart->getFullSalary(),
-                                'footerOptions' => ['class' => 'bg-info text-left'],
-                            ],*/
-                            /*[
+                            [
                                 'attribute' => 'Master',
                                 'value' => function ($model) {
                                     return $model->getEvents()->employee->getFullName();
                                 },
+                                //'headerOptions' => ['class' => 'text-center'],
+                                'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
-                                    'class' => ['align-middle']
+                                    'class' => ['text-center align-middle']
                                 ],
                             ],
                             [
@@ -93,10 +83,11 @@ PluginAsset::register($this)->add(
                                 'value' => function ($model) {
                                     return $model->getEvents()->client->username;
                                 },
+                                'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
-                                    'class' => ['align-middle']
+                                    'class' => ['text-center align-middle']
                                 ],
-                            ],*/
+                            ],
                             [
                                 'attribute' => 'Services',
                                 'headerOptions' => ['class' => 'text-left'],
@@ -181,7 +172,7 @@ $js = <<< JS
    let table= $('#salary').DataTable({
                 bDestroy: true,
                 responsive: true,
-                pageLength: 5,
+                pageLength: 10,
                 paging: true,
                 searching: true,
                 ordering: false,
@@ -207,41 +198,41 @@ $js = <<< JS
                             };
                             // Total over all pages
                             totalPriceWithDiscount = api
-                                .column( 5 )
+                                .column( 7 )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Total over this page
                             pageTotalPriceWithDiscount = api
-                                .column( 5, { page: 'current'} )
+                                .column( 7, { page: 'current'} )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Update footer
-                            $( api.column( 5 ).footer() )
+                            $( api.column( 7 ).footer() )
                             .html( pageTotalPriceWithDiscount);
                             // Total over all pages
                             totalSalary = api
-                                .column( 6 )
+                                .column( 8 )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Total over this page
                             pageTotalSalary = api
-                                .column( 6, { page: 'current'} )
+                                .column( 8, { page: 'current'} )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Update footer
                             if ( pageTotalSalary === 0 ){
-                                 $( api.column( 6 ).footer() )
+                                 $( api.column( 8 ).footer() )
                                  .html('-');
                             }else{
-                                 $( api.column( 6 ).footer() ).html(pageTotalSalary);
+                                 $( api.column( 8 ).footer() ).html(pageTotalSalary);
                             }
 
                             //
@@ -260,7 +251,7 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,4]
+                    columns: [0,1,2,6]
                 },
                language: {
                     searchBuilder: {
