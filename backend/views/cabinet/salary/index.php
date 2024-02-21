@@ -92,7 +92,7 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Services',
                                 'headerOptions' => ['class' => 'text-left'],
                                 'value' => function ($model) {
-                                    return $model->getServiceList();
+                                    return implode('</br>', $model->getServiceList());
                                 },
                                 //'footer' => $cart->getPrice(),
                                 'format' => 'raw'
@@ -101,7 +101,7 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Price',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getPriceList();
+                                    return implode('</br>', $model->getPriceList());
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']

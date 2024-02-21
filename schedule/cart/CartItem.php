@@ -22,29 +22,25 @@ class CartItem
 
     public function getTotalPrice(): int
     {
-        $price = null;
-        foreach ($this->events->services as $item) {
-            $price += $item->price_new * $this->getEmployeePrice();
-        }
-        return $price;
+        return array_sum(array_map(function ($service){
+            return $service->price_new * $this->getEmployeePrice();
+        },$this->events->services));
+
     }
 
-    public function getPriceList():string
+    public function getPriceList():array
     {
-        $prices = '';
-        foreach ($this->events->services as $item) {
-            $prices .= $item->price_new * $this->getEmployeePrice() . '</br>';
-        }
-        return $prices;
+        return  array_map(function ($service){
+            return $service->price_new  * $this->getEmployeePrice();
+        },$this->events->services);
+
     }
 
-    public function getServiceList(): string
+    public function getServiceList():array
     {
-        $service = '';
-        foreach ($this->events->services as $item) {
-            $service .= $item->name . '</br>';
-        }
-        return $service;
+        return  array_map(function ($service){
+            return $service->name. PHP_EOL;
+        },$this->events->services);
     }
 
     public function getDiscount()

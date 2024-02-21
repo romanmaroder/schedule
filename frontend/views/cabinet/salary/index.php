@@ -101,7 +101,8 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Services',
                                 'headerOptions' => ['class' => 'text-left'],
                                 'value' => function ($model) {
-                                    return $model->getServiceList();
+                                    return implode('</br>', $model->getServiceList());
+
                                 },
                                 //'footer' => $cart->getPrice(),
                                 'format' => 'raw'
@@ -110,7 +111,7 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Price',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getPriceList();
+                                    return implode('</br>', $model->getPriceList());
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -130,6 +131,9 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Client discount',
                                 'headerOptions' => ['class' => 'text-center'],
+                                /*'value' => function ($model) {
+                                    return $model->getDiscount() .'%';
+                                },*/
                                 'value' => function ($model) {
                                     return $model->getDiscount() .'%';
                                 },
@@ -181,7 +185,7 @@ $js = <<< JS
    let table= $('#salary').DataTable({
                 bDestroy: true,
                 responsive: true,
-                pageLength: 5,
+                pageLength: 10,
                 paging: true,
                 searching: true,
                 ordering: false,
@@ -260,7 +264,7 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,4]
+                    columns: [0]
                 },
                language: {
                     searchBuilder: {
