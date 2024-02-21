@@ -235,10 +235,6 @@ $js = <<< JS
                                  $( api.column( 8 ).footer() ).html(pageTotalSalary);
                             }
 
-                            //
-
-                             /*var diffPage =  pageTotalPrice - pageTotalSalary;
-                             var diffTotal =  totalPrice - totalSalary;*/
                             $( api.column( 0 ).footer() )
                             .html( pageTotalSalary);
 
@@ -270,12 +266,12 @@ $js = <<< JS
                         title: {
                             0: 'Filters',
                             _: 'Filters (%d)'
-                        },
+                        }
                         //value: 'Option',
                         //valueJoiner: 'et'
                     },
                     lengthMenu: 'Show <select class="form-control form-control-sm">'+
-                    '<option value="5">5</option>'+
+                    '<option value="10">10</option>'+
                     '<option value="20">20</option>'+
                     '<option value="50">50</option>'+
                     '<option value="-1">All</option>'+
@@ -289,9 +285,9 @@ $js = <<< JS
                }
     }).buttons().container().appendTo('#salary_wrapper .col-md-6:eq(0)');
 
-   /*table.on("column-reorder", function(e, settings, details){
+   table.on("column-reorder", function(e, settings, details){
        let order = table.order();
-   });*/
+   });
    
 
  });

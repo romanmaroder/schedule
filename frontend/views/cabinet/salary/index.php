@@ -247,11 +247,7 @@ $js = <<< JS
                             }else{
                                  $( api.column( 6 ).footer() ).html(pageTotalSalary);
                             }
-
-                            //
-
-                             /*var diffPage =  pageTotalPrice - pageTotalSalary;
-                             var diffTotal =  totalPrice - totalSalary;*/
+                            
                             $( api.column( 0 ).footer() )
                             .html( pageTotalSalary);
 
@@ -283,12 +279,12 @@ $js = <<< JS
                         title: {
                             0: 'Filters',
                             _: 'Filters (%d)'
-                        },
+                        }
                         //value: 'Option',
                         //valueJoiner: 'et'
                     },
                     lengthMenu: 'Show <select class="form-control form-control-sm">'+
-                    '<option value="5">5</option>'+
+                    '<option value="10">10</option>'+
                     '<option value="20">20</option>'+
                     '<option value="50">50</option>'+
                     '<option value="-1">All</option>'+
