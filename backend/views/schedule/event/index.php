@@ -86,7 +86,7 @@ die();*/
                                     'value' => function ($model) {
                                        return implode(', ', ArrayHelper::getColumn($model->services, 'name'));},
                                 ],
-
+                                'amount'
                             ],
                         ]
                     ); ?>

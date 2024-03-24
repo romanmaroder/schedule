@@ -3,11 +3,12 @@
 /* @var $this yii\web\View */
 /* @var $category schedule\entities\Schedule\Category */
 /* @var $dataProvider yii\data\DataProviderInterface */
+/* @var $user \schedule\entities\User\User */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Catalog';
+$this->title = 'Category';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -21,5 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--<div class="row">-->
 
         <?= $this->render('_service', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'user'=>$user
         ]) ?>

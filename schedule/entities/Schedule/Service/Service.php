@@ -180,6 +180,7 @@ class Service extends ActiveRecord
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
+
     public function getEvent(): ActiveQuery
     {
         return $this->hasMany(ServiceAssignment::class, ['service_id' => 'id']);

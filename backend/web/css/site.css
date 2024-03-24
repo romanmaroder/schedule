@@ -146,3 +146,20 @@ div.required label:after {
     box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important
 }
 
+.user-panel p{
+    height: auto;
+    /*width: 2.1rem;*/
+    padding: 5px;
+    background-color: #c2c7d0;
+    font-weight: 700;
+    /*font-size: 12px;*/
+    text-align: center;
+    vertical-align: middle;
+}
+
+.discount.text-shadow {
+    text-shadow: 1px 1px black;
+}
+.discount.box-shadow {
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.3);
+}

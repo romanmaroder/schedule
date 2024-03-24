@@ -31,7 +31,7 @@ use yii\web\IdentityInterface;
  * @property string $password
  *
  * @property Network[] $networks
- * @property Employee[] $employee
+ * @property Employee $employee
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -232,6 +232,18 @@ class User extends ActiveRecord implements IdentityInterface
     public function mergeFullName(array $name)
     {
         return implode(" ", $name);
+    }
+
+    public function getInitials(): string
+    {
+        $str = $this->username;
+        $arr = explode(' ',$str);
+        foreach ($arr as $key=>$value)
+        {
+            mb_internal_encoding("UTF-8");
+            $arr["$key"] = mb_strtoupper(mb_substr(trim($value),0,1));
+        }
+        return implode('.',$arr).'';
     }
 
 

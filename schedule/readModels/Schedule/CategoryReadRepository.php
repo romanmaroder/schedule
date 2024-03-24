@@ -38,4 +38,10 @@ class CategoryReadRepository
         }
         return $query->all();
     }
+
+    public function getTreeForMainMenu(): array
+    {
+        return $this->getRoot()->getDescendants()->all();
+
+    }
 }

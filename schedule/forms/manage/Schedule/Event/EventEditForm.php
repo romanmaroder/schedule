@@ -14,10 +14,12 @@ use schedule\forms\CompositeForm;
  */
 class EventEditForm extends CompositeForm
 {
-
     public $notice;
     public $start;
     public $end;
+    public $discount;
+    public $discount_from;
+    public $status;
 
     private $_event;
 
@@ -28,6 +30,9 @@ class EventEditForm extends CompositeForm
         $this->notice = $event->notice;
         $this->start = $event->start;
         $this->end = $event->end;
+        $this->discount = $event->discount;
+        $this->discount_from = $event->discount_from;
+        $this->status = $event->status;
         $this->services = new ServicesForm($event);
         $this->_event = $event;
         parent::__construct($config);
@@ -36,8 +41,17 @@ class EventEditForm extends CompositeForm
     public function rules():array
     {
         return [
+            [['discount_from','status'], 'integer'],
             [['start', 'end'], 'required'],
-            ['notice', 'string']
+            ['notice', 'string'],
+            ['discount', 'required', 'when' => function($model) {
+                return $model->discount_from > 0;
+            },'whenClient' => "function (attribute, value) {
+                return $('#discountFrom').val() != 0;
+            }"
+            ],
+            [['discount'], 'integer','max' => 100,'min'=>0],
+            [['status'], 'safe'],
         ];
     }
 

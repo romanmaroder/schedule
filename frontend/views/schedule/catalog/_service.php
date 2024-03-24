@@ -2,12 +2,12 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\Schedule\Service\Service;
-use schedule\helpers\PriceHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $user \schedule\entities\User\User */
 
 
 PluginAsset::register($this)->add(
@@ -40,35 +40,44 @@ PluginAsset::register($this)->add(
                                 'id' => 'service'
                             ],
                             'columns' => [
-                                'id',
+                                [
+                                    'attribute' => 'parent category',
+                                    'value' => function (Service $model) {
+                                        return Html::a(Html::encode($model->category->parent->parent->name),
+                                                       ['category', 'id' => $model->category->parent->parent->id]);
+                                        },
+                                    'format' => 'raw',
+                                ],
                                 [
                                     'attribute' => 'parent category',
                                     'value' => function (Service $model) {
                                         return Html::a(Html::encode($model->category->parent->name),
-                                                       ['view', 'id' => $model->category->parent->id]);
+                                                       ['category', 'id' => $model->category->parent->id]);
                                         },
                                     'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'name',
                                     'value' => function (Service $model) {
-                                        return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                                        return Html::a(Html::encode($model->category->name),
+                                                       ['category', 'id' => $model->category->id]);
                                     },
                                     'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'price_new',
-                                    'value' => function (Service $model) {
-                                        return PriceHelper::format($model->price_new);
+                                    'value' => function (Service $model) use($user){
+                                        //return PriceHelper::format($model->price_new);
+                                        return $model->price_new * $user->employee->rate->rate;
                                     },
                                 ],
-                                [
+                                /*[
                                     'attribute' => 'price_old',
                                     'value' => function (Service $model) {
                                         return PriceHelper::format($model->price_old);
                                     },
                                 ],
-                                /*[
+                                [
                                     'attribute' => 'status',
                                     //'filter' => $searchModel->statusList(),
                                     'value' => function (Service $model) {

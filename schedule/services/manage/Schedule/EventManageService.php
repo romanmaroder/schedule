@@ -35,11 +35,18 @@ class EventManageService
             $form->notice,
             $form->start,
             $form->end,
+            $form->discount,
+            $form->discount_from,
+            $form->status,
         );
+
+        $amount = 0;
         foreach ($form->services->lists as $listId) {
             $service = $this->services->get($listId);
-            $event->assignService($service->id);
+            $amount += $service->price_new;
+            $event->assignService($service->id, $service->price_new);
         }
+        $event->amount($amount);
 
         $this->transaction->wrap(
             function () use ($event, $form) {
@@ -52,28 +59,41 @@ class EventManageService
     public function edit($id, EventEditForm $form): void
     {
         $event = $this->events->get($id);
+
+        if ($form->discount_from == 0){
+            $form->discount = 0;
+        }
         $event->edit(
             $form->master->master,
             $form->client->client,
             $form->notice,
             $form->start,
             $form->end,
+            $form->discount,
+            $form->discount_from,
+            $form->status,
         );
         $this->transaction->wrap(
             function () use ($event, $form) {
                 $event->revokeServices();
                 $this->events->save($event);
 
+                $amount = 0;
                 foreach ($form->services->lists as $listId) {
                     $service = $this->services->get($listId);
-                    $event->assignService($service->id);
+                    $amount += $service->price_new;
+                    $event->assignService($service->id, $service->price_new);
                 }
+
+
+                $event->amount($amount);
                 $this->events->save($event);
             }
         );
     }
 
-    public function save($event):void
+
+    public function save($event): void
     {
         $this->events->save($event);
     }

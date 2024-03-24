@@ -22,7 +22,6 @@ class m231024_171951_add_schedule_product_description_field extends Migration
     {
         $this->dropColumn('{{%schedule_products}}', 'description');
 
-        return false;
     }
 
     /*

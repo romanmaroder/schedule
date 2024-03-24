@@ -43,10 +43,12 @@ class CatalogController extends Controller
     {
         $dataProvider = $this->service->getAll();
         $category = $this->categories->getRoot();
+        $user = \Yii::$app->user->identity;
 
         return $this->render('index', [
             'category' => $category,
             'dataProvider' => $dataProvider,
+            'user'=>$user,
         ]);
     }
     /**
@@ -60,11 +62,13 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        $dataProvider = $this->products->getAllByCategory($category);
+        $dataProvider = $this->service->getAllByCategory($category);
+        $user = \Yii::$app->user->identity;
 
         return $this->render('category', [
             'category' => $category,
             'dataProvider' => $dataProvider,
+            'user'=>$user,
         ]);
     }
 

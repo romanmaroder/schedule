@@ -7,8 +7,6 @@ namespace schedule\entities\Schedule\Event;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use schedule\entities\Schedule\Service\Service;
 use schedule\entities\User\Employee\Employee;
-use schedule\entities\User\Price;
-use schedule\entities\User\Rate;
 use schedule\entities\User\User;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -18,40 +16,56 @@ use yii\db\ActiveRecord;
  * @property int $master_id
  * @property int $client_id
  * @property string $notice
+ * @property int $discount [int(11)]
+ * @property int $discount_from [smallint(6)]
+ * @property int $amount [int(11)]
+ * @property int $status [smallint(6)]
  * @property int $start
  * @property int $end
  * @property User $master
  * @property User $client
  * @property ServiceAssignment[] $serviceAssignments
  * @property Service[] $services
- * @property Employee[] $employee
+ * @property Employee $employee
  */
 class Event extends ActiveRecord
 {
-    public $sum;
-    public $discount;
 
-    public static function create($masterId, $clientId, $notice, $start, $end): self
-    {
+    public static function create(
+        $masterId,
+        $clientId,
+        $notice,
+        $start,
+        $end,
+        $discount,
+        $discount_from,
+        $status,
+    ): self {
         $event = new static();
         $event->master_id = $masterId;
         $event->client_id = $clientId;
         $event->notice = $notice;
         $event->start = $start;
         $event->end = $end;
+        $event->discount = $discount;
+        $event->discount_from = $discount_from;
+        $event->status = $status;
         return $event;
     }
 
-    public function edit($masterId, $clientId, $notice, $start, $end): void
+    public function edit($masterId, $clientId, $notice, $start, $end, $discount, $discount_from, $status): void
     {
         $this->master_id = $masterId;
         $this->client_id = $clientId;
         $this->notice = $notice;
         $this->start = $start;
         $this->end = $end;
+        $this->discount = $discount;
+        $this->discount_from = $discount_from;
+        $this->status = $status;
     }
 
-    public function assignService($id): void
+    public function assignService($id, $price): void
     {
         $assignments = $this->serviceAssignments;
         foreach ($assignments as $assignment) {
@@ -59,8 +73,21 @@ class Event extends ActiveRecord
                 return;
             }
         }
-        $assignments[] = ServiceAssignment::create($id);
+        $assignments[] = ServiceAssignment::create($id, $price);
         $this->serviceAssignments = $assignments;
+    }
+
+    public function amount($amount): int
+    {
+        return $this->amount = $amount;
+    }
+
+    public function getDiscount(): int|null
+    {
+        if ($this->discount == null){
+            return 0;
+        }
+        return $this->discount;
     }
 
     public function revokeService($id): void

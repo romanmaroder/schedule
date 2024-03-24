@@ -170,6 +170,70 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="row">
         <div class="col-12">
+            <div class="form-group">
+                <?= $form->field($model, 'discount_from')->widget(
+                    Select2::class,
+                    [
+                        'name' => 'discount_from',
+                        'language' => 'ru',
+                        'data' => \schedule\helpers\DiscountHelper::discountList(),
+                        'theme' => Select2::THEME_BOOTSTRAP,
+                        'options' => [
+                            'id' => 'discountFrom',
+                            'placeholder' => 'Select',
+                            'value' => 0,
+                            'multiple' => false,
+                            'autocomplete' => 'on',
+                        ],
+                        'pluginOptions' => [
+                            'tags' => false,
+                            'allowClear' => false,
+                        ],
+                        'pluginEvents' => [
+                            "change" => 'function() { 
+                                            let data_id = $(this).val();
+                                            let discount = $(".discount");
+                                            
+                                            if(data_id > 0) {
+                                                discount.each(function() {
+                                                        $(this).removeClass( "d-none");
+                                                        $(this).attr( "required" );
+                                                    });
+                                            }else{
+                                                discount.each(function() {
+                                                        $(this).addClass( "d-none");
+                                                    });
+                                            }
+                                            
+                                            }',
+                        ],
+                    ]
+                ) ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <?= $form->field($model, 'discount')->input(
+                    'text',
+                    ['class' => 'discount form-control d-none']
+                )->label(
+                    $model->getAttributeLabel('discount'),
+                    ['class' => 'discount control-label d-none']
+                ) ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <?= $form->field($model, 'status')->input('text')?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <div class="form-group"><?= $form->field($model, 'notice')->textarea(
                     ['maxlength' => true, 'row' => 5]
                 ) ?></div>

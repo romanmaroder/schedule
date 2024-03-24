@@ -16,12 +16,13 @@ class AppAsset extends AssetBundle
         //'css/dataTables.dataTables.css',
         //'css/searchBuilder.dataTables.css',
         //'css/buttons.dataTables.css',
-        'css/dataTables.dateTime.css',
+        'css/dataTable/dataTables.dateTime.css',
     ];
     public $js = [
         //'js/searchBuilder.dataTables.js',
         //'js/buttons.dataTables.js',
-        'js/dataTables.dateTime.js',
+        'js/dataTable/dataTables.dateTime.js',
+        //'js/dataTable/buttons.colVis.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

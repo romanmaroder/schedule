@@ -44,7 +44,26 @@ class Cart
         }, $this->items));
     }
 
+    public function getFullProfit(): int|float
+    {
+        $this->loadItems();
+        return array_sum(array_map(function (CartItem $item) {
+            return $item->getProfit() ;
+        }, $this->items));
+    }
 
+    public function getFullDiscountedPrice(): int|float
+    {
+        $this->loadItems();
+        return array_sum(array_map(function (CartItem $item) {
+            return $item->getDiscountedPrice() ;
+        }, $this->items));
+    }
+    /*public function getCost(): Cost
+    {
+        $this->loadItems();
+        return $this->calculator->getCost($this->items);
+    }*/
 
     /*public function add(CartItem $item): void
     {
@@ -92,11 +111,6 @@ class Cart
         $this->saveItems();
     }*/
 
-    public function getCost(): Cost
-    {
-        $this->loadItems();
-        return $this->calculator->getCost($this->items);
-    }
 
     private function loadItems(): void
     {
@@ -107,7 +121,7 @@ class Cart
 
     private function saveItems(): void
     {
-        $this->storage->save($this->items);
+       // $this->storage->save($this->items);
     }
 
 }

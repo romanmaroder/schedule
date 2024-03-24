@@ -26,14 +26,9 @@ class SalaryController extends Controller
     {
         $cart = $this->service->getCart();
 
-       /* echo'<pre>';
-        var_dump($cart->getItems());
-        die();*/
         $dataProvider = new ArrayDataProvider([
             'models' => $cart->getItems()
                                    ]);
-
-
 
         return $this->render('index', [
             'cart' => $cart,

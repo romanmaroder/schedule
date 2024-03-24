@@ -62,6 +62,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
                     'contentOptions' => ['class'=>'text-break'],
                 ],
+                'amount'
             ],
         ]
     ) ?>

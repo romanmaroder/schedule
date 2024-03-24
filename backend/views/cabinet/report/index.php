@@ -4,9 +4,10 @@
 
 /* @var $cart \schedule\cart\Cart */
 
-/* @var $dataProvider */
+/* @var $dataProvider \yii\data\ArrayDataProvider */
 
 use hail812\adminlte3\assets\PluginAsset;
+use schedule\helpers\DiscountHelper;
 use yii\grid\GridView;
 
 $this->title = 'Salary';
@@ -47,7 +48,7 @@ PluginAsset::register($this)->add(
                             'class' => 'table-light'
                         ],
                         'rowOptions' => function ($model) {
-                            return ['style' => 'background-color:' . $model->getEvents()->employee->color];
+                            return ['style' => 'background-color:' . $model->getColor()];
                         },
                         'emptyText' => 'No results found',
                         'emptyTextOptions' => [
@@ -59,18 +60,18 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Date',
                                 'headerOptions' => ['class' => ''],
                                 'value' => function ($model) {
-                                    return DATE('Y-m-d', strtotime($model->getEvents()->start));
+                                    return DATE('Y-m-d', strtotime($model->getDate()));
                                 },
                                 'contentOptions' => [
                                     'class' => ['align-middle']
                                 ],
-                                'footer' => $cart->getFullSalary(),
+                                'footer' => $cart->getFullProfit() - $cart->getFullSalary(),
                                 'footerOptions' => ['class' => 'bg-info text-left'],
                             ],
-                            [
+                           [
                                 'attribute' => 'Master',
                                 'value' => function ($model) {
-                                    return $model->getEvents()->employee->getFullName();
+                                    return $model->getMasterName();
                                 },
                                 //'headerOptions' => ['class' => 'text-center'],
                                 'headerOptions' => ['class' => 'text-center'],
@@ -78,30 +79,45 @@ PluginAsset::register($this)->add(
                                     'class' => ['text-center align-middle']
                                 ],
                             ],
+                            /*[
+                               'attribute' => 'Client',
+                               'value' => function ($model) {
+                                   return $model->getClientName();
+                               },
+                               'headerOptions' => ['class' => 'text-center'],
+                               'contentOptions' => [
+                                   'class' => ['text-center align-middle']
+                               ],
+                           ],*/
                             [
-                                'attribute' => 'Client',
-                                'value' => function ($model) {
-                                    return $model->getEvents()->client->username;
-                                },
+                                'attribute' => 'Services',
                                 'headerOptions' => ['class' => 'text-center'],
+                                'value' => function ($model) {
+                                    return $model->getServiceList();
+                                },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
-                            ],
-                            [
-                                'attribute' => 'Services',
-                                'headerOptions' => ['class' => 'text-left'],
-                                'value' => function ($model) {
-                                    return implode('</br>', $model->getServiceList());
-                                },
                                 //'footer' => $cart->getPrice(),
                                 'format' => 'raw'
                             ],
                             [
-                                'attribute' => 'Price',
+                                'attribute' => 'Category',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return implode('</br>', $model->getPriceList());
+                                    return $model->getCategory();
+                                },
+                                'contentOptions' => [
+                                    'class' => ['text-center align-middle']
+                                ],
+                                //'footer' => $cart->getPrice(),
+                                'format' => 'raw'
+                            ],
+                            [
+                                'attribute' => 'Price Master',
+                                'headerOptions' => ['class' => 'text-center'],
+                                'value' => function ($model) {
+                                   return $model->getMasterPrice();
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -109,53 +125,60 @@ PluginAsset::register($this)->add(
                                 'format' => 'raw'
                             ],
                             [
-                                'attribute' => 'Total',
+                                'attribute' => 'Discount',
                                 'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) use ($cart) {
-                                    return $model->getTotalPrice();
+                                'value' => function ($model) {
+                                    return $model->getDiscount() .'%<br>' . DiscountHelper::discountLabel($model->getDiscountFrom());
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
-                                ]
+                                ],
+                                'format' => 'raw'
                             ],
                             [
-                                'attribute' => 'Client discount',
+                                'attribute' => 'Cost With Discount',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getDiscount() .'%';
-                                },
-                                'contentOptions' => [
-                                    'class' => ['text-center align-middle']
-                                ]
-                            ],
-                            [
-                                'attribute' => 'Cost',
-                                'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) {
-                                    return $model->getCost();
+                                    return $model->getDiscountedPrice();
                                 },
                                 'contentOptions' => function ($model) use ($cart) {
                                     return [
-                                        'data-total' => $model->getCost(),
+                                        'data-total' => $model->getDiscountedPrice(),
                                         'class' => ['text-center align-middle']
                                     ];
                                 },
+                                'footer' => $cart->getFullDiscountedPrice(),
                                 'footerOptions'  => ['class' => 'text-center bg-info'],
                             ],
                             [
                                 'attribute' => 'Salary',
-                                'headerOptions' => ['class' => 'text-right '],
+                                'headerOptions' => ['class' => 'text-center '],
                                 'value' => function ($model) use ($cart) {
                                     return $model->getSalary();
                                 },
                                 'contentOptions' => function ($model) use ($cart) {
                                     return [
                                         'data-total' => $model->getSalary(),
-                                        'class' => ['text-right align-middle text-dark']
+                                        'class' => ['text-center align-middle text-dark']
                                     ];
                                 },
                                 'footer' => $cart->getFullSalary(),
                                 'footerOptions'  => ['class' => 'bg-info text-right '],
+                            ],
+                            [
+                                'attribute' => 'Profit',
+                                'headerOptions' => ['class' => 'text-right '],
+                                'value' => function ($model) use ($cart) {
+                                    return $model->getProfit();
+                                },
+                                'contentOptions' => function ($model) use ($cart) {
+                                    return [
+                                        'data-total' => $model->getProfit(),
+                                        'class' => ['text-right align-middle text-dark']
+                                    ];
+                                },
+                                'footer' => $cart->getFullProfit(),
+                                'footerOptions' => ['class' => 'bg-info text-right '],
                             ]
                         ]
                     ]
@@ -186,7 +209,7 @@ $js = <<< JS
                     footer: true
                 },
                 bStateSave: true,
-                dom:'<"row"<"col-12"Q>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
+                dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                             var api = this.api();
                             // Remove the formatting to get integer data for summation
@@ -197,14 +220,14 @@ $js = <<< JS
                                         i : 0;
                             };
                             // Total over all pages
-                            totalPriceWithDiscount = api
+                            totalSalary = api
                                 .column( 7 )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Total over this page
-                            pageTotalPriceWithDiscount = api
+                            pageTotalSalary = api
                                 .column( 7, { page: 'current'} )
                                 .nodes()
                                 .reduce( function (a, b) {
@@ -212,31 +235,31 @@ $js = <<< JS
                                 }, 0 );
                             // Update footer
                             $( api.column( 7 ).footer() )
-                            .html( pageTotalPriceWithDiscount);
+                            .html( pageTotalSalary);
                             // Total over all pages
-                            totalSalary = api
+                            totalProfit = api
                                 .column( 8 )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Total over this page
-                            pageTotalSalary = api
+                            pageTotalProfit = api
                                 .column( 8, { page: 'current'} )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Update footer
-                            if ( pageTotalSalary === 0 ){
-                                 $( api.column( 8 ).footer() )
+                            if ( pageTotalProfit === 0 ){
+                                 $( api.column( 7 ).footer() )
                                  .html('-');
                             }else{
-                                 $( api.column( 8 ).footer() ).html(pageTotalSalary);
+                                 $( api.column( 8 ).footer() ).html(pageTotalProfit);
                             }
 
                             $( api.column( 0 ).footer() )
-                            .html( pageTotalSalary);
+                            .html( pageTotalProfit );
 
                         },
                 fnStateSave: function (oSettings, oData) {
@@ -247,9 +270,10 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,1,2,6]
+                    columns: [0,1,2,3]
                 },
-               language: {
+                buttons:  ['copy', 'csv', 'excel', 'pdf', 'print'],
+                language: {
                     searchBuilder: {
                         add: 'Add filter',
                         //condition: 'Comparator',
@@ -277,12 +301,12 @@ $js = <<< JS
                     '<option value="-1">All</option>'+
                     '</select>',
                     paginate: {
-                first: "First",
-                previous: '<i class="fas fa-backward"></i>',
-                last: "Last",
-                next: '<i class="fas fa-forward"></i>'
+                        first: "First",
+                        previous: '<i class="fas fa-backward"></i>',
+                        last: "Last",
+                        next: '<i class="fas fa-forward"></i>'
+                    }
                 }
-               }
     }).buttons().container().appendTo('#salary_wrapper .col-md-6:eq(0)');
 
    table.on("column-reorder", function(e, settings, details){
@@ -299,3 +323,5 @@ JS;
 $this->registerJs($js, $position = yii\web\View::POS_READY, $key = null);
 
 ?>
+
+
