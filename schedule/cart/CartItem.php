@@ -42,6 +42,11 @@ class CartItem
         return $this->item->events->client->username;
     }
 
+    public function getStatus()
+    {
+        return$this->item->events->status;
+    }
+
     /**
      * Discount
      * @return int|null

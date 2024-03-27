@@ -11,6 +11,11 @@ use yii\helpers\Html;
 /* @var $searchModel backend\forms\Schedule\ServiceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+
+$this->title                   ='Services';
+$this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );

@@ -8,6 +8,7 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\helpers\DiscountHelper;
+use schedule\helpers\EventHelper;
 use yii\grid\GridView;
 
 $this->title = 'Salary';
@@ -71,13 +72,15 @@ PluginAsset::register($this)->add(
                            [
                                 'attribute' => 'Master',
                                 'value' => function ($model) {
-                                    return $model->getMasterName();
+                                    return $model->getMasterName() . PHP_EOL.'<br>'.
+                                        '<small>('.$model->getClientName().')</small>';
                                 },
                                 //'headerOptions' => ['class' => 'text-center'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
+                               'format' => 'raw'
                             ],
                             /*[
                                'attribute' => 'Client',
@@ -139,7 +142,7 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Cost With Discount',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getDiscountedPrice();
+                                    return $model->getDiscountedPrice() .'<br>'. EventHelper::statusLabel($model->getStatus());
                                 },
                                 'contentOptions' => function ($model) use ($cart) {
                                     return [
@@ -147,8 +150,9 @@ PluginAsset::register($this)->add(
                                         'class' => ['text-center align-middle']
                                     ];
                                 },
-                                'footer' => $cart->getFullDiscountedPrice(),
+                                'footer' => $cart->getFullDiscountedCost(),
                                 'footerOptions'  => ['class' => 'text-center bg-info'],
+                                'format' => 'raw'
                             ],
                             [
                                 'attribute' => 'Salary',
@@ -163,7 +167,7 @@ PluginAsset::register($this)->add(
                                     ];
                                 },
                                 'footer' => $cart->getFullSalary(),
-                                'footerOptions'  => ['class' => 'bg-info text-right '],
+                                'footerOptions'  => ['class' => 'bg-info text-center'],
                             ],
                             [
                                 'attribute' => 'Profit',
@@ -220,14 +224,33 @@ $js = <<< JS
                                         i : 0;
                             };
                             // Total over all pages
-                            totalSalary = api
+                          let  totalCostWithDiscount = api
+                                .column( 6 )
+                                .nodes()
+                                .reduce( function (a, b) {
+                                    return intVal(a) + intVal($(b).attr('data-total'));
+                                }, 0 );
+                            // Total over this page
+                          let  pageCostWithDiscount = api
+                                .column( 6, { page: 'current'} )
+                                .nodes()
+                                .reduce( function (a, b) {
+                                    return intVal(a) + intVal($(b).attr('data-total'));
+                                }, 0 );
+                            // Update footer
+                            $( api.column( 6 ).footer() )
+                            .html( pageCostWithDiscount);
+                            
+                            
+                            // Total over all pages
+                           let totalSalary = api
                                 .column( 7 )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Total over this page
-                            pageTotalSalary = api
+                            let pageTotalSalary = api
                                 .column( 7, { page: 'current'} )
                                 .nodes()
                                 .reduce( function (a, b) {
@@ -236,15 +259,16 @@ $js = <<< JS
                             // Update footer
                             $( api.column( 7 ).footer() )
                             .html( pageTotalSalary);
+                            
                             // Total over all pages
-                            totalProfit = api
+                           let totalProfit = api
                                 .column( 8 )
                                 .nodes()
                                 .reduce( function (a, b) {
                                     return intVal(a) + intVal($(b).attr('data-total'));
                                 }, 0 );
                             // Total over this page
-                            pageTotalProfit = api
+                           let pageTotalProfit = api
                                 .column( 8, { page: 'current'} )
                                 .nodes()
                                 .reduce( function (a, b) {

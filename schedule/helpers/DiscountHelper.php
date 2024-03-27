@@ -29,26 +29,26 @@ class DiscountHelper
     {
         switch ($discount) {
             case Discount::NO_DISCOUNT:
-                $class = 'badge bg-danger bg-gradient discount text-shadow box-shadow';
+                $class = 'badge bg-danger bg-gradient text-shadow box-shadow';
                 break;
             case Discount::MASTER_DISCOUNT:
                 $class = 'badge bg-info bg-gradient text-shadow box-shadow';
                 break;
             case Discount::STUDIO_DISCOUNT:
-                $class = 'badge bg-warning bg-gradient discount text-shadow box-shadow';
+                $class = 'badge bg-warning bg-gradient text-shadow box-shadow';
                 break;
             case Discount::STUDIO_DISCOUNT_WITH_MASTER:
-                $class = 'badge bg-primary bg-gradient discount text-shadow box-shadow';
+                $class = 'badge bg-primary bg-gradient text-shadow box-shadow';
                 break;
             default:
-                $class = 'badge bg-danger bg-gradient discount text-shadow box-shadow';
+                $class = 'badge bg-danger bg-gradient text-shadow box-shadow';
         }
 
         /*$class = match ($discount) {
             Discount::NO_DISCOUNT => 'badge bg-danger',
-            Discount::MASTER_DISCOUNT => 'badge bg-info discount',
-            Discount::STUDIO_DISCOUNT => 'badge bg-warning discount',
-            Discount::STUDIO_DISCOUNT_WITH_MASTER => 'badge bg-primary discount',
+            Discount::MASTER_DISCOUNT => 'badge bg-info',
+            Discount::STUDIO_DISCOUNT => 'badge bg-warning',
+            Discount::STUDIO_DISCOUNT_WITH_MASTER => 'badge bg-primary',
             default => 'badge bg-danger',
         };*/
 

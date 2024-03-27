@@ -62,11 +62,21 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
                     'contentOptions' => ['class'=>'text-break'],
                 ],
-                'amount'
+                'amount',
+                [
+                    'attribute' => 'status',
+                    'value' => \schedule\helpers\EventHelper::statusLabel($model->status),
+                    'format' => 'raw',
+
+                ]
             ],
         ]
     ) ?>
         <p>
+            <?php
+            if ($model->isNotPayed()):?>
+
+
             <?= Html::a(
                 'Update',
                 ['update', 'id' => $model->id],
@@ -76,6 +86,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'class' => 'btn btn-primary btn-sm btn-shadow'
                 ]
             ) ?>
+            <?php endif;?>
+
             <?php
 
             /*$options = [

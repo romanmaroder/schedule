@@ -59,6 +59,14 @@ class Cart
             return $item->getDiscountedPrice() ;
         }, $this->items));
     }
+
+    public function getFullDiscountedCost(): int|float
+    {
+        $this->loadItems();
+        return array_sum(array_map(function (CartItem $item) {
+            return $item->getDiscountCost() ;
+        }, $this->items));
+    }
     /*public function getCost(): Cost
     {
         $this->loadItems();

@@ -48,6 +48,11 @@ class EventReadRepository
             ->andWhere(['master_id'=>$id])->count();
     }
 
+    public function getUnpaidRecords(): array
+    {
+       return Event::find()->where(['status'=>0])->all();
+    }
+
     public function find($id): ?Event
     {
         return Event::find()->andWhere(['master_id' => $id])->one();

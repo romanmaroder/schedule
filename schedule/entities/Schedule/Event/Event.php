@@ -30,6 +30,8 @@ use yii\db\ActiveRecord;
  */
 class Event extends ActiveRecord
 {
+    public const STATUS_NOT_PAYED = 0;
+    public const STATUS_PAYED = 1;
 
     public static function create(
         $masterId,
@@ -49,7 +51,7 @@ class Event extends ActiveRecord
         $event->end = $end;
         $event->discount = $discount;
         $event->discount_from = $discount_from;
-        $event->status = $status;
+        $event->status = self::STATUS_NOT_PAYED;
         return $event;
     }
 
@@ -65,6 +67,15 @@ class Event extends ActiveRecord
         $this->status = $status;
     }
 
+    public function isPayed():bool
+    {
+        return $this->status == self::STATUS_PAYED;
+    }
+
+    public function isNotPayed():bool
+    {
+        return $this->status == self::STATUS_NOT_PAYED;
+    }
     public function assignService($id, $price): void
     {
         $assignments = $this->serviceAssignments;

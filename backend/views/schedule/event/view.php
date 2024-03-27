@@ -73,7 +73,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'label' => 'Service',
                             'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
                         ],
-                        'amount'
+                        'amount',
+                        [
+                            'attribute' => 'status',
+                            'value' => \schedule\helpers\EventHelper::statusLabel($model->status),
+                            'format' => 'raw',
+
+                        ]
                     ],
                 ]
             ) ?>

@@ -158,11 +158,11 @@ a.desc:after {
     vertical-align: middle;
 }
 
-.discount.text-shadow {
+.text-shadow {
     text-shadow: 1px 1px black;
 }
 
-.discount.box-shadow {
+.box-shadow {
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
 }
 

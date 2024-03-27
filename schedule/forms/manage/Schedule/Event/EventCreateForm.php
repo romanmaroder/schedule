@@ -42,7 +42,6 @@ class EventCreateForm extends CompositeForm
             }"
             ],
             [['discount'], 'integer','max' => 100,'min'=>0],
-            [['status'], 'safe'],
         ];
     }
 

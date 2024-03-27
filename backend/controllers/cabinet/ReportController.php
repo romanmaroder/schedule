@@ -4,6 +4,7 @@
 namespace backend\controllers\cabinet;
 
 
+use schedule\readModels\Schedule\EventReadRepository;
 use schedule\services\schedule\CartService;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
@@ -11,12 +12,14 @@ use yii\web\Controller;
 class ReportController extends Controller
 {
     private $service;
+    private $repository;
 
-    public function __construct($id, $module, CartService $service, $config = [])
+    public function __construct($id, $module, CartService $service, EventReadRepository $repository, $config = [])
     {
         parent::__construct($id, $module, $config);
 
         $this->service = $service;
+        $this->repository = $repository;
     }
 
     public function actionIndex()
@@ -56,6 +59,19 @@ class ReportController extends Controller
                 'dataProvider' => $dataProvider,
             ]
         );
+    }
+
+    public function actionUnpaid()
+    {
+        $dataProvider = new ArrayDataProvider(
+            [
+                'models' => $this->repository->getUnpaidRecords()
+            ]
+        );
+
+        return $this->render('unpaid',[
+            'dataProvider'=>$dataProvider,
+        ]);
     }
 
 }

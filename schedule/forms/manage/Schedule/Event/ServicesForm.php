@@ -31,6 +31,7 @@ class ServicesForm extends Model
         return [
             ['lists', 'each', 'rule' => ['integer']],
             ['lists', 'default', 'value' => []],
+            ['lists','required']
         ];
     }
 }
