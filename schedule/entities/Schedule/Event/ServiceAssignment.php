@@ -4,6 +4,7 @@
 namespace schedule\entities\Schedule\Event;
 
 
+use schedule\cart\CartItem;
 use schedule\entities\Schedule\Service\Service;
 use schedule\entities\User\Employee\Employee;
 use yii\db\ActiveQuery;

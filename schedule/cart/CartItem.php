@@ -22,6 +22,10 @@ class CartItem
         return $this->item;
     }
 
+    public function getId()
+    {
+        return $this->item->event_id;
+    }
     public function getColor(): string
     {
         return $this->item->events->employee->color;
@@ -42,9 +46,9 @@ class CartItem
         return $this->item->events->client->username;
     }
 
-    public function getStatus()
+    public function getStatus(): int
     {
-        return$this->item->events->status;
+        return $this->item->events->status;
     }
 
     /**

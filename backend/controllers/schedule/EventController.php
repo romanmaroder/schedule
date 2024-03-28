@@ -11,6 +11,7 @@ use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\NotFoundException;
 use schedule\services\manage\Schedule\EventManageService;
+use schedule\services\schedule\CartService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -21,12 +22,14 @@ class EventController extends Controller
 
     private EventManageService $service;
     private Calendar $calendar;
+    private CartService $cart;
 
-    public function __construct($id, $module, EventManageService $service, Calendar $calendar, $config = [])
+    public function __construct($id, $module, EventManageService $service, Calendar $calendar, CartService $cart, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->calendar = $calendar;
+        $this->cart = $cart;
     }
 
     public function behaviors(): array
@@ -63,11 +66,13 @@ class EventController extends Controller
 
     public function actionView($id)
     {
+       $cart = $this->cart->getCart();
 
         return $this->render(
             'view',
             [
                 'model' => $this->findModel($id),
+                'cart'=>$cart,
             ]
         );
     }

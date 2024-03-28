@@ -9,6 +9,7 @@ use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\NotFoundException;
 use schedule\services\manage\Schedule\EventManageService;
+use schedule\services\schedule\CartService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -16,11 +17,13 @@ use yii\web\Controller;
 class EventApiController extends Controller
 {
     private EventManageService $service;
+    private CartService $cart;
 
-    public function __construct($id, $module, EventManageService $service, $config = [])
+    public function __construct($id, $module, EventManageService $service,CartService $cart, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
+        $this->cart = $cart;
     }
     public function behaviors(): array
     {
@@ -36,11 +39,12 @@ class EventApiController extends Controller
 
     public function actionView($id)
     {
-
+        $cart = $this->cart->getCart();
         return $this->renderAjax(
             'view',
             [
                 'model' => $this->findModel($id),
+                'cart'=>$cart,
             ]
         );
     }
@@ -54,7 +58,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
+                Yii::$app->session->setFlash('msg', "Event " . $form->start . '-' . $form->end . " saved.");
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -79,7 +83,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($event->id, $form);
-                Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
+                Yii::$app->session->setFlash('msg', "Event " . $form->start . '-' . $form->end . " saved.");
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

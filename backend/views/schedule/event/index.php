@@ -13,10 +13,9 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 
-/*echo '<pre>';
-var_dump($searchModel);
-var_dump($dataProvider->getModels());
-die();*/
+$this->title = 'Event';
+$this->params['breadcrumbs'][] = $this->title;
+
 
 ?>
 
@@ -68,25 +67,16 @@ die();*/
                                     },
                                     'format' => 'raw',
                                 ],
-                                /* [
-                                     'attribute' => 'start',
-                                     'format' => ['datetime', 'php:Y-m-d / H:i']
-                                 ],
-                                 [
-                                     'attribute' => 'end',
-                                     'format' => ['datetime', 'php:Y-m-d / H:i']
-                                 ],*/
                                 [
                                     'attribute' => 'notice',
                                     'format' => 'ntext'
                                 ],
                                 [
                                     'attribute' => 'service',
-                                    //'filter' =>  $searchModel->serviceList(),
                                     'value' => function ($model) {
                                        return implode(', ', ArrayHelper::getColumn($model->services, 'name'));},
                                 ],
-                                'amount'
+                                'amount',
                             ],
                         ]
                     ); ?>

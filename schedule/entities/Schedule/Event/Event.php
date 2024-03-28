@@ -101,6 +101,20 @@ class Event extends ActiveRecord
         return $this->discount;
     }
 
+    public function getDiscountedPrice($model, $cart): float|int
+    {
+        return array_sum(
+            array_map(
+                function ($item) use ($model) {
+                    if ($model->id == $item->getId()) {
+                        return $item->getDiscountedPrice();
+                    }
+                },
+                $cart->getItems()
+            )
+        );
+    }
+
     public function revokeService($id): void
     {
         $assignments = $this->serviceAssignments;

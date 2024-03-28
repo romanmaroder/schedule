@@ -75,23 +75,12 @@ PluginAsset::register($this)->add(
                                     return $model->getMasterName() . PHP_EOL.'<br>'.
                                         '<small>('.$model->getClientName().')</small>';
                                 },
-                                //'headerOptions' => ['class' => 'text-center'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
                                'format' => 'raw'
                             ],
-                            /*[
-                               'attribute' => 'Client',
-                               'value' => function ($model) {
-                                   return $model->getClientName();
-                               },
-                               'headerOptions' => ['class' => 'text-center'],
-                               'contentOptions' => [
-                                   'class' => ['text-center align-middle']
-                               ],
-                           ],*/
                             [
                                 'attribute' => 'Services',
                                 'headerOptions' => ['class' => 'text-center'],
@@ -101,7 +90,6 @@ PluginAsset::register($this)->add(
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
-                                //'footer' => $cart->getPrice(),
                                 'format' => 'raw'
                             ],
                             [
@@ -113,7 +101,6 @@ PluginAsset::register($this)->add(
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
-                                //'footer' => $cart->getPrice(),
                                 'format' => 'raw'
                             ],
                             [

@@ -1,6 +1,7 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
+use schedule\helpers\EventHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -8,12 +9,15 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model \schedule\entities\Schedule\Event\Event */
+/* @var $cart \schedule\cart\Cart */
 
 $this->title = $model->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
+
 ?>
 <div class="event-view container-fluid">
 
@@ -64,8 +68,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ],
                 'amount',
                 [
+                    'attribute' => 'Cost',
+                    'value' => $model->getDiscountedPrice($model,$cart),
+                ],
+                [
                     'attribute' => 'status',
-                    'value' => \schedule\helpers\EventHelper::statusLabel($model->status),
+                    'value' => EventHelper::statusLabel($model->status),
                     'format' => 'raw',
 
                 ]

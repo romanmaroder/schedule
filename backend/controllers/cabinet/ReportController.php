@@ -11,8 +11,8 @@ use yii\web\Controller;
 
 class ReportController extends Controller
 {
-    private $service;
-    private $repository;
+    private CartService $service;
+    private EventReadRepository $repository;
 
     public function __construct($id, $module, CartService $service, EventReadRepository $repository, $config = [])
     {

@@ -24,6 +24,7 @@ PluginAsset::register($this)->add(
     ]
 );
 
+
 echo GridView::widget(
     [
         'dataProvider' => $dataProvider,
@@ -32,7 +33,7 @@ echo GridView::widget(
         'showHeader' => true,
         'tableOptions' => [
             'class' => 'table table-striped table-bordered',
-            'id' => 'report'
+            'id' => 'unpaid'
         ],
         'headerRowOptions' => [
             'class' => 'table-light'
@@ -83,6 +84,12 @@ echo GridView::widget(
                     'class' => ['text-center align-middle']
                 ],
             ],
+            [
+                'attribute' => 'Debt',
+                'value' => function ($model) {
+                    return $model->amount;
+                }
+            ]
         ]
     ]
 );
@@ -90,7 +97,7 @@ echo GridView::widget(
 
 $js = <<< JS
  $(function () {
-   let table= $('#report').DataTable({
+   let table= $('#unpaid').DataTable({
                 bDestroy: true,
                 responsive: true,
                 pageLength: 10,
@@ -220,7 +227,7 @@ $js = <<< JS
                 next: '<i class="fas fa-forward"></i>'
                 }
                }
-    }).buttons().container().appendTo('#report_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#unpaid_wrapper .col-md-6:eq(0)');
 
    /*table.on("column-reorder", function(e, settings, details){
        let order = table.order();

@@ -56,7 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'end',
-                    //'label'     => 'Время',
                     'format' => ['date', 'php:d-m-Y / H:i'],
                 ],
             ],
