@@ -26,143 +26,147 @@ PluginAsset::register($this)->add(
         'datatables-fixedheader',
     ]
 );
+?>
+<div class="report-index">
 
-/*echo '<pre>';
-\yii\helpers\VarDumper::dump($dataProvider,10,true);
-die();*/
-
-
-echo GridView::widget(
-    [
-        'dataProvider' => $dataProvider,
-        'summary' => false,
-        'showFooter' => true,
-        'showHeader' => true,
-        'tableOptions' => [
-            'class' => 'table table-striped table-bordered',
-            'id' => 'report'
-        ],
-        'headerRowOptions' => [
-            'class' => 'table-light'
-        ],
-        'rowOptions' => function ($model) {
-            return ['style' => 'background-color:' . $model->getColor()];
-        },
-        'emptyText' => 'No results found',
-        'emptyTextOptions' => [
-            'tag' => 'div',
-            'class' => 'col-12 col-lg-6 mb-3 text-info'
-        ],
-        'columns' => [
-            [
-                'attribute' => 'Date',
-                'value' => function ($model) use ($cart) {
-                    return DATE('Y-m-d', strtotime($model->getDate()));
-                }
-            ],
-            [
-                'attribute' => 'Master',
-                'value' => function ($model) {
-                    return $model->getMasterName();
-                },
-                'headerOptions' => ['class' => 'text-center'],
-                'contentOptions' => [
-                    'class' => ['text-center align-middle']
-                ],
-            ],
-            /*[
-                'attribute' => 'Client',
-                'value' => function ($model) {
-                    return $model->getClientName();
-                }
-            ],*/
-            [
-                'attribute' => 'Service',
-                'value' => function ($model) {
-                    return $model->getServiceList();
-                },
-                'headerOptions' => ['class' => 'text-center'],
-                'contentOptions' => [
-                    'class' => ['text-center align-middle']
-                ],
-            ],
-            [
-                'attribute' => 'Origin Price',
-                'value' => function ($model) use ($cart) {
-                    return $model->getOriginalPrice();
-                },
-                'headerOptions' => ['class' => 'text-center'],
-                'contentOptions' => [
-                    'class' => ['text-center align-middle']
-                ],
-            ],
-            /*[
-                'attribute' => 'Discount',
-                'value' => function ($model) use ($cart) {
-                    return $model->getDiscount();
-                },
-            ],*/
-            [
-                'attribute' => 'Cost With Discount',
-                'value' => function ($model) use ($cart) {
-                    return $model->getDiscountedPrice();
-                },
-                'headerOptions' => ['class' => 'text-center'],
-                'contentOptions' => [
-                    'class' => ['text-center align-middle']
-                ],
-            ],
-            /*[
-                'attribute' => 'Master Price',
-                'value' => function ($model) use ($cart) {
-                    return $model->getMasterPrice();
-                },
-            ],/*
-            [
-                'attribute' => 'Rate',
-                'value' => function ($model) use ($cart) {
-                    return $model->getEmployeeRate();
-                },
-            ],*/
-            [
-                'attribute' => 'Salary',
-                'value' => function ($model) use ($cart) {
-                    return $model->getSalary();
-                },
-                'headerOptions' => ['class' => 'text-center'],
-                'contentOptions' => [
-                    'class' => ['text-center align-middle']
-                ],
-            ],
-            [
-                'attribute' => 'Profit',
-                'headerOptions' => ['class' => 'text-right '],
-                'value' => function ($model) use ($cart) {
-                    return $model->getProfit();
-                },
-                'contentOptions' => function ($model) use ($cart) {
-                    return [
-                        'data-total' => $model->getTotalProfit(),
-                        'class' => ['text-right align-middle text-dark']
-                    ];
-                },
-                'footer' => $cart->getFullProfit(),
-                'footerOptions' => ['class' => 'bg-info text-right '],
-            ]
-        ]
-    ]
-);
+    <div class="table-responsive ">
+        <div class="container-fluid">
 
 
+            <?php
+            echo GridView::widget(
+                [
+                    'dataProvider' => $dataProvider,
+                    'summary' => false,
+                    'showFooter' => true,
+                    'showHeader' => true,
+                    'tableOptions' => [
+                        'class' => 'table table-bordered',
+                        'id' => 'report'
+                    ],
+                    'headerRowOptions' => [
+                        'class' => 'table-light'
+                    ],
+                    'rowOptions' => function ($model) {
+                        return ['style' => 'background-color:' . $model->getColor()];
+                    },
+                    'emptyText' => 'No results found',
+                    'emptyTextOptions' => [
+                        'tag' => 'div',
+                        'class' => 'col-12 col-lg-6 mb-3 text-info'
+                    ],
+                    'columns' => [
+                        [
+                            'attribute' => 'Date',
+                            'value' => function ($model) use ($cart) {
+                                return DATE('Y-m-d', strtotime($model->getDate()));
+                            }
+                        ],
+                        [
+                            'attribute' => 'Master',
+                            'value' => function ($model) {
+                                return $model->getMasterName();
+                            },
+                            'headerOptions' => ['class' => 'text-center'],
+                            'contentOptions' => [
+                                'class' => ['text-center align-middle']
+                            ],
+                        ],
+                        /*[
+                            'attribute' => 'Client',
+                            'value' => function ($model) {
+                                return $model->getClientName();
+                            }
+                        ],*/
+                        [
+                            'attribute' => 'Service',
+                            'value' => function ($model) {
+                                return $model->getServiceList();
+                            },
+                            'headerOptions' => ['class' => 'text-center'],
+                            'contentOptions' => [
+                                'class' => ['text-center align-middle']
+                            ],
+                        ],
+                        [
+                            'attribute' => 'Origin Price',
+                            'value' => function ($model) use ($cart) {
+                                return $model->getOriginalPrice();
+                            },
+                            'headerOptions' => ['class' => 'text-center'],
+                            'contentOptions' => [
+                                'class' => ['text-center align-middle']
+                            ],
+                        ],
+                        /*[
+                            'attribute' => 'Discount',
+                            'value' => function ($model) use ($cart) {
+                                return $model->getDiscount();
+                            },
+                        ],*/
+                        [
+                            'attribute' => 'Cost With Discount',
+                            'value' => function ($model) use ($cart) {
+                                return $model->getDiscountedPrice();
+                            },
+                            'headerOptions' => ['class' => 'text-center'],
+                            'contentOptions' => [
+                                'class' => ['text-center align-middle']
+                            ],
+                        ],
+                        /*[
+                            'attribute' => 'Master Price',
+                            'value' => function ($model) use ($cart) {
+                                return $model->getMasterPrice();
+                            },
+                        ],/*
+                        [
+                            'attribute' => 'Rate',
+                            'value' => function ($model) use ($cart) {
+                                return $model->getEmployeeRate();
+                            },
+                        ],*/
+                        [
+                            'attribute' => 'Salary',
+                            'value' => function ($model) use ($cart) {
+                                return $model->getSalary();
+                            },
+                            'headerOptions' => ['class' => 'text-center'],
+                            'contentOptions' => [
+                                'class' => ['text-center align-middle']
+                            ],
+                        ],
+                        [
+                            'attribute' => 'Profit',
+                            'headerOptions' => ['class' => 'text-right '],
+                            'value' => function ($model) use ($cart) {
+                                return $model->getProfit();
+                            },
+                            'contentOptions' => function ($model) use ($cart) {
+                                return [
+                                    'data-total' => $model->getTotalProfit(),
+                                    'class' => ['text-right align-middle text-dark']
+                                ];
+                            },
+                            'footer' => $cart->getFullProfit(),
+                            'footerOptions' => ['class' => 'bg-info text-right '],
+                        ]
+                    ]
+                ]
+            ); ?>
+        </div>
+    </div>
+</div>
+<?php
 $js = <<< JS
- $(function () {
-   let table= $('#report').DataTable({
-                bDestroy: true,
-                responsive: true,
-                pageLength: 10,
-                paging: true,
-                searching: true,
-                ordering: false,
+$(function () {
+let table= $('#report').DataTable({
+bDestroy: true,
+responsive: true,
+pageLength: 10,
+paging: true,
+searching: true,
+ordering: false,
                 info: true,
                 autoWidth: false,
                 colReorder:{

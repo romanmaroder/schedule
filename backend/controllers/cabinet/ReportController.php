@@ -63,15 +63,21 @@ class ReportController extends Controller
 
     public function actionUnpaid()
     {
+        $cart = $this->service->getCart();
+
         $dataProvider = new ArrayDataProvider(
             [
                 'models' => $this->repository->getUnpaidRecords()
             ]
         );
 
-        return $this->render('unpaid',[
-            'dataProvider'=>$dataProvider,
-        ]);
+        return $this->render(
+            'unpaid',
+            [
+                'dataProvider' => $dataProvider,
+                'cart' => $cart,
+            ]
+        );
     }
 
 }

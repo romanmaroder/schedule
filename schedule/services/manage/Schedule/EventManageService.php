@@ -4,11 +4,13 @@
 namespace schedule\services\manage\Schedule;
 
 
+use schedule\cart\CartItem;
 use schedule\entities\Schedule\Event\Event;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\Schedule\EventRepository;
 use schedule\repositories\Schedule\ServiceRepository;
+use schedule\services\schedule\CartService;
 use schedule\services\TransactionManager;
 
 class EventManageService
@@ -16,15 +18,18 @@ class EventManageService
     private $events;
     private $services;
     private $transaction;
+    private $cart;
 
     public function __construct(
         EventRepository $events,
         ServiceRepository $services,
-        TransactionManager $transaction
+        TransactionManager $transaction,
+        CartService $cart,
     ) {
         $this->events = $events;
         $this->services = $services;
         $this->transaction = $transaction;
+        $this->cart = $cart;
     }
 
     public function create(EventCreateForm $form): Event
@@ -38,15 +43,16 @@ class EventManageService
             $form->discount,
             $form->discount_from,
             $form->status,
+            $form->amount,
         );
 
-        $amount = 0;
+
         foreach ($form->services->lists as $listId) {
             $service = $this->services->get($listId);
-            $amount += $service->price_new;
+
             $event->assignService($service->id, $service->price_new);
         }
-        $event->amount($amount);
+
 
         $this->transaction->wrap(
             function () use ($event, $form) {
@@ -63,6 +69,8 @@ class EventManageService
         if ($form->discount_from == 0){
             $form->discount = 0;
         }
+
+
         $event->edit(
             $form->master->master,
             $form->client->client,
@@ -72,21 +80,21 @@ class EventManageService
             $form->discount,
             $form->discount_from,
             $form->status,
+            $form->amount,
         );
         $this->transaction->wrap(
             function () use ($event, $form) {
                 $event->revokeServices();
                 $this->events->save($event);
-
                 $amount = 0;
                 foreach ($form->services->lists as $listId) {
                     $service = $this->services->get($listId);
-                    $amount += $service->price_new;
+
                     $event->assignService($service->id, $service->price_new);
+                    $amount += $service->price_new;
                 }
 
-
-                $event->amount($amount);
+                $event->getAmount($amount);
                 $this->events->save($event);
             }
         );

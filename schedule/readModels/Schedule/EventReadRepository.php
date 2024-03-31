@@ -28,7 +28,7 @@ class EventReadRepository
             ->all();
     }
 
-    public function getAllWeekById($id): array
+    public function getAllWeekById($id):array
     {
         return Event::find()->with('services', 'employee', 'master', 'client')
             ->andwhere(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])

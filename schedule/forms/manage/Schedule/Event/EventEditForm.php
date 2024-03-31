@@ -20,7 +20,7 @@ class EventEditForm extends CompositeForm
     public $discount;
     public $discount_from;
     public $status;
-
+    public $amount;
     private $_event;
 
     public function __construct(Event $event, $config = [])
@@ -33,6 +33,7 @@ class EventEditForm extends CompositeForm
         $this->discount = $event->discount;
         $this->discount_from = $event->discount_from;
         $this->status = $event->status;
+        $this->amount = $event->amount;
         $this->services = new ServicesForm($event);
         $this->_event = $event;
         parent::__construct($config);
@@ -41,7 +42,7 @@ class EventEditForm extends CompositeForm
     public function rules():array
     {
         return [
-            [['discount_from','status'], 'integer'],
+            [['discount_from','status','amount'], 'integer'],
             [['start', 'end'], 'required'],
             ['notice', 'string'],
             ['discount', 'required', 'when' => function($model) {
@@ -51,6 +52,7 @@ class EventEditForm extends CompositeForm
             }"
             ],
             [['discount'], 'integer','max' => 100,'min'=>0],
+            [['amount'],'safe']
         ];
     }
 

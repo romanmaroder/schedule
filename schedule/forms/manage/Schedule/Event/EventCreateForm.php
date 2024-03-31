@@ -19,6 +19,7 @@ class EventCreateForm extends CompositeForm
     public $discount;
     public $discount_from;
     public $status;
+    public $amount;
 
 
     public function __construct($config = [])
@@ -32,9 +33,10 @@ class EventCreateForm extends CompositeForm
     public function rules():array
     {
         return [
-            [['discount_from','status'], 'integer'],
+            [['discount_from','status','amount'], 'integer'],
             [['start', 'end'], 'required'],
             ['notice', 'string'],
+            ['amount', 'safe'],
             ['discount', 'required', 'when' => function($model) {
                 return $model->discount_from > 0;
             },'whenClient' => "function (attribute, value) {

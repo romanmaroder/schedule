@@ -7,6 +7,7 @@ namespace backend\controllers\schedule;
 use backend\forms\Schedule\EventSearch;
 use schedule\entities\Schedule\Event\Calendar\Calendar;
 use schedule\entities\Schedule\Event\Event;
+use schedule\entities\Schedule\Event\ServiceAssignment;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\NotFoundException;
@@ -100,6 +101,7 @@ class EventController extends Controller
     public function actionUpdate($id)
     {
         $event = $this->findModel($id);
+        $cart = $this->cart->getCart();
 
         $form = new EventEditForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
@@ -118,9 +120,11 @@ class EventController extends Controller
             [
                 'model' => $form,
                 'event' => $event,
+                'cart'=>$cart
             ]
         );
     }
+
 
     public function actionDelete($id)
     {

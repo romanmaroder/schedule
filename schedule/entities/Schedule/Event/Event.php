@@ -33,6 +33,7 @@ class Event extends ActiveRecord
     public const STATUS_NOT_PAYED = 0;
     public const STATUS_PAYED = 1;
 
+
     public static function create(
         $masterId,
         $clientId,
@@ -42,6 +43,7 @@ class Event extends ActiveRecord
         $discount,
         $discount_from,
         $status,
+        $amount,
     ): self {
         $event = new static();
         $event->master_id = $masterId;
@@ -52,10 +54,11 @@ class Event extends ActiveRecord
         $event->discount = $discount;
         $event->discount_from = $discount_from;
         $event->status = self::STATUS_NOT_PAYED;
+        $event->amount = $amount;
         return $event;
     }
 
-    public function edit($masterId, $clientId, $notice, $start, $end, $discount, $discount_from, $status): void
+    public function edit($masterId, $clientId, $notice, $start, $end, $discount, $discount_from, $status, $amount): void
     {
         $this->master_id = $masterId;
         $this->client_id = $clientId;
@@ -65,17 +68,21 @@ class Event extends ActiveRecord
         $this->discount = $discount;
         $this->discount_from = $discount_from;
         $this->status = $status;
+        if ($this->isPayed()) {
+            $this->amount = $amount;
+        }
     }
 
-    public function isPayed():bool
+    public function isPayed(): bool
     {
         return $this->status == self::STATUS_PAYED;
     }
 
-    public function isNotPayed():bool
+    public function isNotPayed(): bool
     {
         return $this->status == self::STATUS_NOT_PAYED;
     }
+
     public function assignService($id, $price): void
     {
         $assignments = $this->serviceAssignments;
@@ -88,7 +95,7 @@ class Event extends ActiveRecord
         $this->serviceAssignments = $assignments;
     }
 
-    public function amount($amount): int
+    public function getAmount($amount)
     {
         return $this->amount = $amount;
     }
@@ -113,6 +120,7 @@ class Event extends ActiveRecord
                 $cart->getItems()
             )
         );
+
     }
 
     public function revokeService($id): void
@@ -193,4 +201,16 @@ class Event extends ActiveRecord
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
+
+    /*public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        if ($this->getAttribute('amount') != $this->getOldAttribute('amount')) {
+            $this->status = self::STATUS_NOT_PAYED;
+        }
+        return true;
+    }*/
+
 }

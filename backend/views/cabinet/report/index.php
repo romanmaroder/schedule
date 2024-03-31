@@ -10,6 +10,7 @@ use hail812\adminlte3\assets\PluginAsset;
 use schedule\helpers\DiscountHelper;
 use schedule\helpers\EventHelper;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 $this->title = 'Salary';
 $this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
@@ -29,7 +30,7 @@ PluginAsset::register($this)->add(
 
 
 ?>
-    <div class="cabinet-index">
+    <div class="salary-index">
 
         <div class="table-responsive ">
             <div class="container-fluid">
@@ -42,7 +43,7 @@ PluginAsset::register($this)->add(
                         'showFooter' => true,
                         'showHeader' => true,
                         'tableOptions' => [
-                            'class' => 'table table-striped table-bordered',
+                            'class' => 'table table-bordered',
                             'id' => 'salary'
                         ],
                         'headerRowOptions' => [
@@ -61,19 +62,26 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Date',
                                 'headerOptions' => ['class' => ''],
                                 'value' => function ($model) {
-                                    return DATE('Y-m-d', strtotime($model->getDate()));
+                                    return Html::a(
+                                        Html::encode(DATE('Y-m-d', strtotime($model->getDate()))),
+                                        ['schedule/event/view', 'id' => $model->getId()]
+                                    );
                                 },
                                 'contentOptions' => [
                                     'class' => ['align-middle']
                                 ],
                                 'footer' => $cart->getFullProfit() - $cart->getFullSalary(),
                                 'footerOptions' => ['class' => 'bg-info text-left'],
+                                'format' => 'raw'
                             ],
                            [
                                 'attribute' => 'Master',
                                 'value' => function ($model) {
                                     return $model->getMasterName() . PHP_EOL.'<br>'.
-                                        '<small>('.$model->getClientName().')</small>';
+                                        '<small>('. Html::a(
+                                            Html::encode($model->getClientName()),
+                                            ['schedule/event/view', 'id' => $model->getId()]).')</small>';
+
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [

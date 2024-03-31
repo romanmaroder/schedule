@@ -16,7 +16,6 @@ PluginAsset::register($this)->add(
 $this->title = 'Event';
 $this->params['breadcrumbs'][] = $this->title;
 
-
 ?>
 
     <div class="event-index">

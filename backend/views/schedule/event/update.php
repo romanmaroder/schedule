@@ -7,13 +7,13 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $event \schedule\entities\Schedule\Event\Event */
-/* @var $model\schedule\forms\manage\Schedule\Event\EventEditForm */
+/* @var $model \schedule\forms\manage\Schedule\Event\EventEditForm */
+/* @var $cart \schedule\cart\Cart */
 
 $this->title = 'Update Event: ' . $event->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $event->client->username, 'url' => ['view', 'id' => $event->id]];
 $this->params['breadcrumbs'][] = 'update';
-
 
 ?>
 <div class="event-update container-fluid">
@@ -171,6 +171,24 @@ $this->params['breadcrumbs'][] = 'update';
                                     'tags' => true,
                                     'allowClear' => true,
                                 ],
+                                'pluginEvents' => [
+                                    "change" => 'function() { 
+                                            let data_id = $(this).val();
+                                            let discount = $(".discount");
+                                            
+                                            if(data_id > 0) {
+                                                discount.each(function() {
+                                                        $(this).removeClass( "d-none");
+                                                        $(this).attr( "required" );
+                                                    });
+                                            }else{
+                                                discount.each(function() {
+                                                        $(this).addClass( "d-none");
+                                                    });
+                                            }
+                                            
+                                            }',
+                                ],
                             ]
                         ) ?></div>
                 </div>
@@ -279,6 +297,11 @@ $this->params['breadcrumbs'][] = 'update';
                     <div class="form-group"> <?= $form->field($model, 'notice')->textarea(
                             ['maxlength' => true, 'row' => 5]
                         ) ?></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group"> <?= $form->field($model, 'amount')->hiddenInput()->label(false) ;?></div>
                 </div>
             </div>
         </div>

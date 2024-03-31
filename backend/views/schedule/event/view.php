@@ -76,7 +76,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ],
                         'amount',
                         [
-                            'attribute' => 'Cost',
+                            'attribute' => 'cost',
                             'value' => $model->getDiscountedPrice($model,$cart),
                         ],
                         [
@@ -84,7 +84,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'value' => EventHelper::statusLabel($model->status),
                             'format' => 'raw',
 
-                        ]
+                        ],
+                        'notice'
                     ],
                 ]
             ) ?>

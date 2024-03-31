@@ -47,12 +47,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     }
                 ],
                 [
-                    'attribute' => 'notice',
-                    'format' => 'ntext',
-                    'visible' => $model->issetNotice($model->notice),
-                ],
-
-                [
                     'attribute' => 'start',
                     'format' => ['date', 'php:d-m-Y / H:i '],
                 ],
@@ -66,17 +60,22 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
                     'contentOptions' => ['class'=>'text-break'],
                 ],
-                'amount',
+                //'amount',
                 [
                     'attribute' => 'Cost',
                     'value' => $model->getDiscountedPrice($model,$cart),
+                    'visible' => $model->isNotPayed(),
                 ],
                 [
                     'attribute' => 'status',
                     'value' => EventHelper::statusLabel($model->status),
                     'format' => 'raw',
-
-                ]
+                ],
+                [
+                    'attribute' => 'notice',
+                    'format' => 'ntext',
+                    'visible' => $model->issetNotice($model->notice),
+                ],
             ],
         ]
     ) ?>

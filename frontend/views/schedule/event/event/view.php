@@ -47,10 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['class'=>'text-break'],
                 ],
                 [
-                    'attribute' => 'notice',
-                    'format' => 'ntext',
-                ],
-                [
                     'attribute' => 'start',
                     'format' => ['date', 'php:d-m-Y / H:i '],
                 ],
@@ -58,6 +54,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'end',
                     'format' => ['date', 'php:d-m-Y / H:i'],
                 ],
+                [
+                    'attribute' => 'notice',
+                    'visible' => $model->issetNotice($model->notice),
+                    'format' => 'ntext',
+                ]
             ],
         ]
     ) ?>

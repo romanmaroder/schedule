@@ -52,7 +52,10 @@ PluginAsset::register($this)->add(
                             return implode(', ', ArrayHelper::getColumn($provider->services, 'name'));
                         },
                     ],
-                    'notice:ntext',
+                    [
+                        'attribute' => 'notice',
+                        'format' => 'ntext'
+                    ],
 
                     [
                         'attribute' => 'start',

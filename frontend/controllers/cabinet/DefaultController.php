@@ -11,6 +11,7 @@ use schedule\readModels\Schedule\EventReadRepository;
 use schedule\readModels\User\UserReadRepository;
 use schedule\services\manage\EmployeeManageService;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
