@@ -103,10 +103,16 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'schedule/tag'
                                         ],
                                         [
-                                            'label' => 'Categories',
+                                            'label' => 'Service categories',
                                             'icon' => 'fa-solid fa-list',
                                             'url' => ['/schedule/category/index'],
                                             'active' => $this->context->id == 'schedule/category'
+                                        ],
+                                        [
+                                            'label' => 'Expense categories',
+                                            'icon' => 'fas fa-balance-scale',
+                                            'url' => ['/expenses/category/index'],
+                                            'active' => $this->context->id == 'expenses/category'
                                         ],
                                         [
                                             'label' => 'Characteristics',

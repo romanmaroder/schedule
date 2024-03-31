@@ -4,13 +4,11 @@
 namespace schedule\services\manage\Schedule;
 
 
-use schedule\cart\CartItem;
 use schedule\entities\Schedule\Event\Event;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\Schedule\EventRepository;
 use schedule\repositories\Schedule\ServiceRepository;
-use schedule\services\schedule\CartService;
 use schedule\services\TransactionManager;
 
 class EventManageService
@@ -18,18 +16,15 @@ class EventManageService
     private $events;
     private $services;
     private $transaction;
-    private $cart;
 
     public function __construct(
         EventRepository $events,
         ServiceRepository $services,
         TransactionManager $transaction,
-        CartService $cart,
     ) {
         $this->events = $events;
         $this->services = $services;
         $this->transaction = $transaction;
-        $this->cart = $cart;
     }
 
     public function create(EventCreateForm $form): Event
@@ -86,14 +81,13 @@ class EventManageService
             function () use ($event, $form) {
                 $event->revokeServices();
                 $this->events->save($event);
+
                 $amount = 0;
                 foreach ($form->services->lists as $listId) {
                     $service = $this->services->get($listId);
-
                     $event->assignService($service->id, $service->price_new);
                     $amount += $service->price_new;
                 }
-
                 $event->getAmount($amount);
                 $this->events->save($event);
             }
