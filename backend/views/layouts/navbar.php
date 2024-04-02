@@ -17,7 +17,7 @@ use yii\helpers\Url;
             Html::a(
                 'Home',
                  Url::home(),
-                ['class' => ['nav-link',  Yii::$app->controller->id == 'schedule/calendar' ? 'active': '' ]]
+                ['class' => ['nav-link',  Yii::$app->controller->id == 'site' ? 'active': '' ]]
             ),
             ['class' => ['nav-item d-none d-sm-inline-block']]
         ); ?>

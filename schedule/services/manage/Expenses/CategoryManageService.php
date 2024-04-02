@@ -8,14 +8,14 @@ use schedule\entities\Meta;
 use schedule\entities\Expenses\Category;
 use schedule\forms\manage\Expenses\CategoryForm;
 use schedule\repositories\Expenses\CategoryRepository;
-use schedule\repositories\Schedule\ServiceRepository;
+use schedule\repositories\Expenses\ExpenseRepository;
 
 class CategoryManageService
 {
     private $categories;
     private $services;
 
-    public function __construct(CategoryRepository $categories, ServiceRepository $services)
+    public function __construct(CategoryRepository $categories, ExpenseRepository $services)
     {
         $this->categories = $categories;
         $this->services = $services;

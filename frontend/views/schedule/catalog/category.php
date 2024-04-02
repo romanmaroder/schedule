@@ -1,7 +1,7 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Schedule\Service\Service;
+use schedule\entities\Schedule\Service\Expenses;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -47,7 +47,7 @@ PluginAsset::register($this)->add(
                             'columns' => [
                                 [
                                     'attribute' => 'parent category',
-                                    'value' => function (Service $model) {
+                                    'value' => function (Expenses $model) {
                                         return Html::a(
                                             Html::encode($model->category->parent->name),
                                             ['category', 'id' => $model->category->parent->id]
@@ -64,7 +64,7 @@ PluginAsset::register($this)->add(
                                 ],
                                 [
                                     'attribute' => 'price_new',
-                                    'value' => function (Service $model) use ($user) {
+                                    'value' => function (Expenses $model) use ($user) {
                                         return $model->price_new * $user->employee->rate->rate;
                                     },
                                 ],

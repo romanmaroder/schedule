@@ -47,6 +47,12 @@ use yii\helpers\Html;
             <?php
             echo \hail812\adminlte\widgets\Menu::widget(
                 [
+                    'options' => [
+                        'class' => 'nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent',
+                        'data-widget' => 'treeview',
+                        'role' => 'menu',
+                        'data-accordion' => 'false'
+                    ],
                     'items' => [
                         [
                             'label' => 'Management',
@@ -58,19 +64,13 @@ use yii\helpers\Html;
                                 //['label' => 'Inactive Page', 'iconStyle' => 'far'],
                                 [
                                     'label' => 'Schedule',
-                                    'icon' => 'folder',
+                                    'icon' => 'fas fa-folder-plus',
                                     'items' => [
                                         [
                                             'label' => 'Products',
                                             'icon' => 'fas fa-parking',
                                             'url' => ['/schedule/product/index'],
                                             'active' => $this->context->id == 'schedule/product'
-                                        ],
-                                        [
-                                            'label' => 'Service',
-                                            'icon' => 'fas fa-clipboard-list',
-                                            'url' => ['/schedule/service/index'],
-                                            'active' => $this->context->id == 'schedule/service'
                                         ],
                                         [
                                             'label' => 'Events',
@@ -103,18 +103,6 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'schedule/tag'
                                         ],
                                         [
-                                            'label' => 'Service categories',
-                                            'icon' => 'fa-solid fa-list',
-                                            'url' => ['/schedule/category/index'],
-                                            'active' => $this->context->id == 'schedule/category'
-                                        ],
-                                        [
-                                            'label' => 'Expense categories',
-                                            'icon' => 'fas fa-balance-scale',
-                                            'url' => ['/expenses/category/index'],
-                                            'active' => $this->context->id == 'expenses/category'
-                                        ],
-                                        [
                                             'label' => 'Characteristics',
                                             'icon' => 'fas fa-thermometer-quarter',
                                             'url' => ['/schedule/characteristic/index'],
@@ -123,9 +111,45 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
+                                    'label' => 'Expense Management',
+                                    'icon' => 'fas fa-balance-scale',
+                                    'items' => [
+                                        [
+                                            'label' => 'Expense',
+                                            'icon' => 'fas fa-clipboard-list',
+                                            'url' => ['/expenses/expense/index'],
+                                            'active' => $this->context->id == 'expenses/expense'
+                                        ],
+                                        [
+                                            'label' => 'Categories',
+                                            'icon' => 'fas fa-clipboard-list',
+                                            'url' => ['/expenses/category/index'],
+                                            'active' => $this->context->id == 'expenses/category'
+                                        ],
+                                    ]
+                                ],
+                                [
+                                    'label' => 'Service Management',
+                                    'icon' => 'fas fa-hand-spock',
+                                    'items' => [
+                                        [
+                                            'label' => 'Service',
+                                            'icon' => 'fas fa-clipboard-list',
+                                            'url' => ['/schedule/service/index'],
+                                            'active' => $this->context->id == 'schedule/service'
+                                        ],
+                                        [
+                                            'label' => 'Categories',
+                                            'icon' => 'fa-solid fa-list',
+                                            'url' => ['/schedule/category/index'],
+                                            'active' => $this->context->id == 'schedule/category'
+                                        ],
+                                    ]
+                                ],
+                                [
                                     'label' => 'Users Management',
                                     'icon' => 'fas fa-users-cog',
-                                    'items'=>[
+                                    'items' => [
                                         [
                                             'label' => 'Users',
                                             'icon' => 'fas fa-users',

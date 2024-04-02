@@ -1,12 +1,12 @@
 <?php
 
 
-namespace schedule\entities\Schedule\Service\queries;
+namespace schedule\entities\Expenses\Expenses\queries;
 
 
-use schedule\entities\Schedule\Service\Expenses;
+use schedule\entities\Expenses\Expenses\Expenses;
 
-class ServiceQuery extends \yii\db\ActiveQuery
+class ExpensesQuery extends \yii\db\ActiveQuery
 {
     public function active($alias = null)
     {

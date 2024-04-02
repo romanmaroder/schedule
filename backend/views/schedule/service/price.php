@@ -4,7 +4,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $service schedule\entities\Schedule\Service\Service */
+/* @var $service schedule\entities\Schedule\Service\Expenses */
 /* @var $model schedule\forms\manage\Schedule\Service\PriceForm */
 
 $this->title                   ='Price for Service: ' . $service->name;
