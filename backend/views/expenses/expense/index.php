@@ -8,7 +8,6 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\Expenses\Expenses\Expenses;
-use schedule\helpers\ExpenseHelper;
 use schedule\helpers\PriceHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -46,14 +45,18 @@ PluginAsset::register($this)->add(
                             'id' => 'expense'
                         ],
                         'columns' => [
-                            'id',
-                            [
-                                'attribute' => 'name',
-                                'value' => function (Expenses $model) {return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);}, 'format' => 'raw',],
+                            //'id',
                             [
                                 'attribute' => 'category_id',
                                 'filter' => $searchModel->categoriesList(),
                                 'value' => 'category.name',
+                            ],
+                            [
+                                'attribute' => 'name',
+                                'value' => function (Expenses $model) {
+                                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                                },
+                                'format' => 'raw',
                             ],
                             [
                                 'attribute' => 'value',

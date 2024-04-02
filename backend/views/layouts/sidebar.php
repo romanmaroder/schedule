@@ -117,8 +117,8 @@ use yii\helpers\Html;
                                         [
                                             'label' => 'Expense',
                                             'icon' => 'fas fa-clipboard-list',
-                                            'url' => ['/expenses/expense/index'],
-                                            'active' => $this->context->id == 'expenses/expense'
+                                            'url' => ['/cabinet/report/expenses'],
+                                            'active' => $this->context->id == 'cabinet/report'
                                         ],
                                         [
                                             'label' => 'Categories',
