@@ -67,6 +67,11 @@ class Cart
             return $item->getDiscountCost() ;
         }, $this->items));
     }
+
+    public function getTotalWithSubtractions($expense): float|int
+    {
+        return $this->getFullProfit() - $expense ;
+    }
     /*public function getCost(): Cost
     {
         $this->loadItems();

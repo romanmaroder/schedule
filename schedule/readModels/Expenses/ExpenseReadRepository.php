@@ -11,6 +11,7 @@ use schedule\entities\Schedule\Tag;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\db\ActiveQuery;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 class ExpenseReadRepository
@@ -50,6 +51,11 @@ class ExpenseReadRepository
     public function find($id): ?Expenses
     {
         return Expenses::find()->active()->andWhere(['id' => $id])->one();
+    }
+
+    public function summ()
+    {
+        return Expenses::find()->active()->sum('value');
     }
 
     private function getProvider(ActiveQuery $query): ActiveDataProvider

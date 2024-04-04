@@ -61,11 +61,14 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Date',
                                 'headerOptions' => ['class' => ''],
-                                'value' => function ($model) {
+                                /*'value' => function ($model) {
                                     return Html::a(
                                         Html::encode(DATE('Y-m-d', strtotime($model->getDate()))),
                                         ['schedule/event/view', 'id' => $model->getId()]
                                     );
+                                },*/
+                                'value' => function ($model) {
+                                    return DATE('Y-m-d', strtotime($model->getDate()));
                                 },
                                 'contentOptions' => [
                                     'class' => ['align-middle']

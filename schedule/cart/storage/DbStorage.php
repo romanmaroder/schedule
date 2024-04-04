@@ -79,32 +79,6 @@ class DbStorage implements StorageInterface
             },
             $rows
         );
-
-
-        //        $query = (new Query())
-//            ->select(['id', 'master_id'])
-//            ->from('{{%schedule_events}}');
-//        if (\Yii::$app->id == 'app-frontend') {
-//            $query->where(['master_id' => $this->userId->id]);
-//        }
-//        $rows = $query->orderBy('DATE(start)')
-//            ->all(\Yii::$app->db);
-
-//        return array_map(
-//            function (array $row) {
-//                /** @var Event $event */
-//                if ($event = Event::find()
-//                    ->with(['services','employee'])
-//                    ->andWhere(['id' => $row['id']])
-//                    ->one()) {
-//                    return new CartItem($event);
-//                }
-//                return false;
-//            },
-//            $rows
-//        );
-
-
     }
 
     public function save(array $items): void

@@ -20,6 +20,11 @@ class CartService
         return $this->cart;
     }
 
+    public function getTotalWithSubtractions($expense)
+    {
+        return $this->cart->getTotalWithSubtractions($expense);
+    }
+
     /*public function add($productId, $modificationId, $quantity): void
     {
         $product = $this->products->get($productId);

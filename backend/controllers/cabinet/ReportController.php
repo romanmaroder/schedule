@@ -4,10 +4,14 @@
 namespace backend\controllers\cabinet;
 
 
+use schedule\entities\Expenses\Expenses\Expenses;
+use schedule\entities\Schedule\Event\Event;
 use schedule\readModels\Expenses\ExpenseReadRepository;
 use schedule\readModels\Schedule\EventReadRepository;
 use schedule\services\schedule\CartService;
 use yii\data\ArrayDataProvider;
+use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class ReportController extends Controller
@@ -16,8 +20,14 @@ class ReportController extends Controller
     private EventReadRepository $repository;
     private ExpenseReadRepository $expenses;
 
-    public function __construct($id, $module, CartService $service, EventReadRepository $repository, ExpenseReadRepository $expenses, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        CartService $service,
+        EventReadRepository $repository,
+        ExpenseReadRepository $expenses,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
 
         $this->service = $service;
@@ -89,6 +99,57 @@ class ReportController extends Controller
             'expenses',
             [
                 'expenses' => $expenses,
+            ]
+        );
+    }
+
+    public function actionSummaryReport()
+    {
+        $cart = $this->service->getCart();
+        $expense = $this->expenses->summ();
+
+
+        $even = Event::find()->select([new Expression('SUM(amount) as amount, MONTHNAME(start) as start')])
+            ->groupBy(['MONTHNAME(start)'])
+            ->asArray()
+            ->all();
+
+        $expen = Expenses::find()
+            ->select(
+                [new Expression('SUM(value) as value, MONTHNAME(FROM_UNIXTIME(created_at)) as start')]
+            )->groupBy(['MONTHNAME(FROM_UNIXTIME(created_at))'])
+            ->asArray()
+            ->all();
+
+        /*$b = Expenses::find()->select(
+            [new Expression('SUM(value) as value, MONTHNAME(FROM_UNIXTIME(created_at)) as start')]
+        )
+            ->groupBy(['MONTHNAME(FROM_UNIXTIME(created_at))'])
+            ->asArray()
+            ->all();*/
+
+
+
+
+        $event = new ArrayDataProvider(
+            [
+                'allModels' => $even
+            ]
+        );
+
+        /*$expense = new ArrayDataProvider(
+            [
+                'allModels' => $expen
+            ]
+        )*/;
+
+
+        return $this->render(
+            'summary',
+            [
+                'cart' => $cart,
+                'event' => $event,
+                'expense' => $expense
             ]
         );
     }
