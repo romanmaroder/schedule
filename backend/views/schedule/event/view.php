@@ -81,7 +81,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ],
                         [
                             'attribute' => 'status',
-                            'value' => EventHelper::statusLabel($model->status),
+                            'value' => \schedule\helpers\EventPaymentStatusHelper::statusLabel($model->status),
+                            'format' => 'raw',
+
+                        ],
+                        [
+                            'attribute' => 'payment',
+                            'value' => \schedule\helpers\EventMethodsOfPayment::statusLabel($model->payment),
                             'format' => 'raw',
 
                         ],

@@ -45,6 +45,13 @@ a.desc:after {
     white-space: nowrap;
 }
 
+@media (max-width: 767px) {
+    .grid-view th,
+    .grid-view td:last-child {
+        white-space: normal;
+    }
+}
+
 .grid-view .filters input,
 .grid-view .filters select {
     min-width: 50px;

@@ -8,7 +8,7 @@ use schedule\entities\Schedule\Event\Event;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-class EventHelper
+class EventPaymentStatusHelper
 {
     public static function statusList(): array
     {

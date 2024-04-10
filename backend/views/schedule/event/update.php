@@ -257,10 +257,53 @@ $this->params['breadcrumbs'][] = 'update';
                             [
                                 'name' => 'status',
                                 'language' => 'ru',
-                                'data' => \schedule\helpers\EventHelper::statusList(),
+                                'data' => \schedule\helpers\EventPaymentStatusHelper::statusList(),
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [
                                     'id' => 'status',
+                                    'placeholder' => 'Select',
+                                    'multiple' => false,
+                                    'autocomplete' => 'on',
+                                ],
+                                'pluginOptions' => [
+                                    'tags' => false,
+                                    'allowClear' => false,
+                                ],
+                                /*'pluginEvents' => [
+                                    "change" => 'function() {
+                                            let data_id = $(this).val();
+                                            let discount = $(".discount");
+
+                                            if(data_id > 0) {
+                                                discount.each(function() {
+                                                        $(this).removeClass( "d-none");
+                                                        $(this).attr( "required" );
+                                                    });
+                                            }else{
+                                                discount.each(function() {
+                                                        $(this).addClass( "d-none");
+                                                    });
+                                            }
+
+                                            }',
+                                ],*/
+                            ]
+                        ) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <?= $form->field($model, 'payment')->widget(
+                            Select2::class,
+                            [
+                                'name' => 'payment',
+                                'language' => 'ru',
+                                'data' => \schedule\helpers\EventMethodsOfPayment::statusList(),
+                                'theme' => Select2::THEME_BOOTSTRAP,
+                                'options' => [
+                                    'id' => 'payment',
                                     'placeholder' => 'Select',
                                     'multiple' => false,
                                     'autocomplete' => 'on',

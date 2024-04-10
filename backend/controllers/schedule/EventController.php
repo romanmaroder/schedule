@@ -7,7 +7,6 @@ namespace backend\controllers\schedule;
 use backend\forms\Schedule\EventSearch;
 use schedule\entities\Schedule\Event\Calendar\Calendar;
 use schedule\entities\Schedule\Event\Event;
-use schedule\entities\Schedule\Event\ServiceAssignment;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\NotFoundException;
@@ -120,11 +119,34 @@ class EventController extends Controller
             [
                 'model' => $form,
                 'event' => $event,
-                'cart'=>$cart
+                'cart' => $cart
             ]
         );
     }
 
+    public function actionPay($id)
+    {
+        $this->service->pay($id);
+        return $this->redirect('index');
+    }
+
+    public function actionUnpay($id)
+    {
+        $this->service->unpay($id);
+        return $this->redirect('index');
+    }
+
+    public function actionCash($id)
+    {
+        $this->service->cash($id);
+        return $this->redirect('index');
+    }
+
+    public function actionCard($id)
+    {
+        $this->service->card($id);
+        return $this->redirect('index');
+    }
 
     public function actionDelete($id)
     {

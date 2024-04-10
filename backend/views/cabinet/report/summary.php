@@ -69,23 +69,14 @@ PluginAsset::register($this)->add(
 $js = <<< JS
  $(function () {
    let table= $('#report').DataTable({
-                bDestroy: true,
                 responsive: true,
-                pageLength: 10,
-                paging: true,
+                paging: false,
                 searching: true,
                 ordering: false,
                 info: true,
                 autoWidth: false,
-                colReorder:{
-                    realtime:false
-                },
-                fixedHeader: {
-                    header: true,
-                    footer: true
-                },
                 bStateSave: true,
-                dom:'<"row"> t <"row"<"col-sm-4"l><"col-sm-4 mb-2"i><"col-sm-4"p>> ',
+                dom:'t <"row"<"col-sm-4"l><"col-sm-4 mb-2"i><"col-sm-4"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                             var api = this.api();
                             // Remove the formatting to get integer data for summation
@@ -115,34 +106,7 @@ $js = <<< JS
                             .html( pageTotalProfit );
 
                         },
-                fnStateSave: function (oSettings, oData) {
-                localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
-                },
-                fnStateLoad: function () {
-                var data = localStorage.getItem('DataTables_' + window.location.pathname);
-                return JSON.parse(data);
-                },
-                language: {
-                    lengthMenu: 'Show <select class="form-control form-control-sm">'+
-                    '<option value="10">10</option>'+
-                    '<option value="20">20</option>'+
-                    '<option value="50">50</option>'+
-                    '<option value="-1">All</option>'+
-                    '</select>',
-                    paginate: {
-                        first: "First",
-                        previous: '<i class="fas fa-backward"></i>',
-                        last: "Last",
-                        next: '<i class="fas fa-forward"></i>'
-                    }
-                }
-    });
-
-   table.on("column-reorder", function(e, settings, details){
-       let order = table.order();
-   });
-   
-
+    }); 
  });
 
 

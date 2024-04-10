@@ -8,6 +8,7 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 $this->title = 'Expenses';
 $this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
@@ -53,13 +54,16 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'category_id',
                                 'value' => function ($model) {
-                                    return $model->category->name;
+                                  return  Html::a(
+                                        Html::encode($model->category->name),
+                                        ['expenses/expense/view', 'id' => $model->id]);
                                 },
                                 'contentOptions' => function ($model) {
                                     return [
                                         'data-total' => $model->value,
                                     ];
                                 },
+                                'format' => 'raw'
                             ],
 
                             'name',
@@ -149,7 +153,7 @@ ordering: false,
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,2,3]
+                    columns: [0,1,2,3]
                 },
                buttons: [
                 {

@@ -18,7 +18,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
     <div class="col-12">
         <div id="resp"></div>
     </div>
-    <div class="col">
+    <div class="col-12">
         <div class="event-index">
 
             <?php

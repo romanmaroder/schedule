@@ -38,16 +38,17 @@ class EventManageService
             $form->discount,
             $form->discount_from,
             $form->status,
+            $form->payment,
             $form->amount,
         );
 
-
+        $amount = 0;
         foreach ($form->services->lists as $listId) {
             $service = $this->services->get($listId);
-
+            $amount += $service->price_new;
             $event->assignService($service->id, $service->price_new);
         }
-
+        $event->getAmount($amount);
 
         $this->transaction->wrap(
             function () use ($event, $form) {
@@ -75,6 +76,7 @@ class EventManageService
             $form->discount,
             $form->discount_from,
             $form->status,
+            $form->payment,
             $form->amount,
         );
         $this->transaction->wrap(
@@ -94,6 +96,35 @@ class EventManageService
         );
     }
 
+    public function pay($id)
+    {
+        $event = $this->events->get($id);
+        $event->status = $event->toPay();
+        $this->events->save($event);
+    }
+
+    public function unpay($id)
+    {
+        $event = $this->events->get($id);
+
+        $event->status = $event->cancelPay();
+        $event->payment = null;
+        $this->events->save($event);
+    }
+
+    public function cash($id)
+    {
+        $event = $this->events->get($id);
+        $event->payment = $event->cashPayment();
+        $this->events->save($event);
+    }
+
+    public function card($id)
+    {
+        $event = $this->events->get($id);
+        $event->payment = $event->cardPayment();
+        $this->events->save($event);
+    }
 
     public function save($event): void
     {

@@ -20,6 +20,7 @@ use yii\db\ActiveRecord;
  * @property int $discount_from [smallint(6)]
  * @property int $amount [int(11)]
  * @property int $status [smallint(6)]
+ * @property int $payment [smallint(6)]
  * @property int $start
  * @property int $end
  * @property User $master
@@ -32,6 +33,8 @@ class Event extends ActiveRecord
 {
     public const STATUS_NOT_PAYED = 0;
     public const STATUS_PAYED = 1;
+    public const STATUS_CASH = 2;
+    public const STATUS_CARD = 3;
 
 
     public static function create(
@@ -43,6 +46,7 @@ class Event extends ActiveRecord
         $discount,
         $discount_from,
         $status,
+        $payment,
         $amount,
     ): self {
         $event = new static();
@@ -54,12 +58,23 @@ class Event extends ActiveRecord
         $event->discount = $discount;
         $event->discount_from = $discount_from;
         $event->status = self::STATUS_NOT_PAYED;
+        $event->payment = self::STATUS_CASH;
         $event->amount = $amount;
         return $event;
     }
 
-    public function edit($masterId, $clientId, $notice, $start, $end, $discount, $discount_from, $status, $amount): void
-    {
+    public function edit(
+        $masterId,
+        $clientId,
+        $notice,
+        $start,
+        $end,
+        $discount,
+        $discount_from,
+        $status,
+        $payment,
+        $amount
+    ): void {
         $this->master_id = $masterId;
         $this->client_id = $clientId;
         $this->notice = $notice;
@@ -69,7 +84,10 @@ class Event extends ActiveRecord
         $this->discount_from = $discount_from;
         $this->status = $status;
         if ($this->isPayed()) {
+            $this->payment = $payment;
             $this->amount = $amount;
+        } else {
+            $this->payment = null;
         }
     }
 
@@ -81,6 +99,36 @@ class Event extends ActiveRecord
     public function isNotPayed(): bool
     {
         return $this->status == self::STATUS_NOT_PAYED;
+    }
+
+    public function toPay(): int
+    {
+        return $this->status = self::STATUS_PAYED;
+    }
+
+    public function cancelPay(): int
+    {
+        return $this->status = self::STATUS_NOT_PAYED;
+    }
+
+    public function isCardPayment(): bool
+    {
+        return $this->payment == self::STATUS_CARD;
+    }
+
+    public function isCashPayment(): bool
+    {
+        return $this->payment == self::STATUS_CASH;
+    }
+
+    public function cardPayment(): int
+    {
+        return $this->payment = self::STATUS_CARD;
+    }
+
+    public function cashPayment(): int
+    {
+        return $this->payment = self::STATUS_CASH;
     }
 
     public function assignService($id, $price): void
@@ -116,6 +164,7 @@ class Event extends ActiveRecord
                     if ($model->id == $item->getId()) {
                         return $item->getDiscountedPrice();
                     }
+                    return false;
                 },
                 $cart->getItems()
             )

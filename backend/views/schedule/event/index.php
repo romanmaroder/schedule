@@ -1,9 +1,12 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
+use schedule\helpers\EventMethodsOfPayment;
+use schedule\helpers\EventPaymentStatusHelper;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Schedule\EventSearch */
@@ -67,15 +70,77 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'format' => 'raw',
                                 ],
                                 [
-                                    'attribute' => 'notice',
-                                    'format' => 'ntext'
-                                ],
-                                [
                                     'attribute' => 'service',
                                     'value' => function ($model) {
-                                       return implode(', ', ArrayHelper::getColumn($model->services, 'name'));},
+                                        return implode(', ', ArrayHelper::getColumn($model->services, 'name'));
+                                    },
                                 ],
                                 'amount',
+                                [
+                                    'attribute' => 'status',
+                                    'value' => function ($model) {
+                                        return EventPaymentStatusHelper::statusLabel($model->status);
+                                    },
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => [
+                                        'class' => ['text-center align-middle']
+                                    ],
+                                    'format' => 'raw',
+
+                                ],
+                                [
+                                    'attribute' => 'payment',
+                                    'value' => function ($model) {
+                                        return EventMethodsOfPayment::statusLabel($model->payment);
+                                    },
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => [
+                                        'class' => ['text-center align-middle']
+                                    ],
+                                    'format' => 'raw',
+                                ],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'template' => '{status} {payment}',
+                                    //'header' => '<i class="fas fa-cash-register"></i>',
+                                    'header' => 'Cash register',
+                                    'headerOptions' => [
+                                            'class'=>'text-center'
+                                    ],
+                                    'buttonOptions' => [
+                                            'class'=>'text-center'
+                                    ],
+                                    'visibleButtons' => [
+                                        'status' => true,
+                                        'payment' => function ($model) {
+                                            return $model->status == 1;
+                                        },
+                                    ],
+                                    'buttons' => [
+                                        'status' => function ($url, $model, $key) {
+                                            return $model->status == 0 ? Html::a(
+                                                'PAY',
+                                                Url::to(['schedule/event/pay', 'id' => $model->id]),
+                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs']
+                                            ) : Html::a(
+                                                'NO PAYED',
+                                                Url::to(['schedule/event/unpay', 'id' => $model->id]),
+                                                ['class' => 'btn bg-danger bg-gradient text-shadow box-shadow btn-xs']
+                                            );
+                                        },
+                                        'payment' => function ($url, $model, $key) {
+                                            return  $model->payment == 2 ? Html::a(
+                                                'CARD',
+                                                Url::to(['schedule/event/card', 'id' => $model->id]),
+                                                ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
+                                            ) : Html::a(
+                                                'CASH',
+                                                Url::to(['schedule/event/cash', 'id' => $model->id]),
+                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs']
+                                            );;
+                                        },
+                                    ],
+                                ],
                             ],
                         ]
                     ); ?>

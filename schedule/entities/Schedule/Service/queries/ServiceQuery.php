@@ -4,7 +4,7 @@
 namespace schedule\entities\Schedule\Service\queries;
 
 
-use schedule\entities\Schedule\Service\Expenses;
+use schedule\entities\Schedule\Service\Service;
 
 class ServiceQuery extends \yii\db\ActiveQuery
 {
@@ -12,7 +12,7 @@ class ServiceQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere(
             [
-                ($alias ? $alias . '.' : '') . 'status' => Expenses::STATUS_ACTIVE,
+                ($alias ? $alias . '.' : '') . 'status' => Service::STATUS_ACTIVE,
             ]
         );
     }

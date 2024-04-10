@@ -48,7 +48,7 @@ use yii\helpers\Html;
             echo \hail812\adminlte\widgets\Menu::widget(
                 [
                     'options' => [
-                        'class' => 'nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent',
+                        'class' => 'nav nav-pills nav-sidebar flex-column nav-child-indent',
                         'data-widget' => 'treeview',
                         'role' => 'menu',
                         'data-accordion' => 'false'
@@ -118,7 +118,7 @@ use yii\helpers\Html;
                                             'label' => 'Expense',
                                             'icon' => 'fas fa-clipboard-list',
                                             'url' => ['/expenses/expense/index'],
-                                            'active' => $this->context->id == 'cabinet/report'
+                                            'active' => $this->context->id == 'expenses/expense'
                                         ],
                                         [
                                             'label' => 'Categories',
