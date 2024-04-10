@@ -26,6 +26,7 @@ class CartItem
     {
         return $this->item->event_id;
     }
+
     public function getColor(): string
     {
         return $this->item->events->employee->color;
@@ -49,6 +50,22 @@ class CartItem
     public function getStatus(): int
     {
         return $this->item->events->status;
+    }
+
+    public function getCash(): float|int
+    {
+        if ($this->item->events->isCashPayment()) {
+            return $this->getDiscountedPrice();
+        }
+        return false;
+    }
+
+    public function getCard(): float|int
+    {
+        if ($this->item->events->isCardPayment()) {
+            return $this->getDiscountedPrice();
+        }
+        return false;
     }
 
     /**

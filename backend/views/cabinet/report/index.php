@@ -9,6 +9,7 @@
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\helpers\DiscountHelper;
 use schedule\helpers\EventHelper;
+use schedule\helpers\EventPaymentStatusHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -140,7 +141,7 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Cost With Discount',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getDiscountedPrice() .'<br>'. EventHelper::statusLabel($model->getStatus());
+                                    return $model->getDiscountedPrice() .'<br>'. EventPaymentStatusHelper::statusLabel($model->getStatus());
                                 },
                                 'contentOptions' => function ($model) use ($cart) {
                                     return [

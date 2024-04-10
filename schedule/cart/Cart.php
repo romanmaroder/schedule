@@ -52,15 +52,8 @@ class Cart
         }, $this->items));
     }
 
-    public function getFullDiscountedPrice(): int|float
-    {
-        $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getDiscountedPrice() ;
-        }, $this->items));
-    }
 
-    public function getFullDiscountedCost(): int|float
+    public function getFullDiscountedCost(): float|int
     {
         $this->loadItems();
         return array_sum(array_map(function (CartItem $item) {
@@ -72,6 +65,24 @@ class Cart
     {
         return $this->getFullProfit() - $expense ;
     }
+
+
+    public function getCash(): float|int
+    {
+        $this->loadItems();
+        return array_sum(array_map(function (CartItem $item) {
+            return $item->getCash() ;
+        }, $this->items));
+    }
+
+    public function getCard(): float|int
+    {
+        $this->loadItems();
+        return array_sum(array_map(function (CartItem $item) {
+            return $item->getCard() ;
+        }, $this->items));
+    }
+
     /*public function getCost(): Cost
     {
         $this->loadItems();

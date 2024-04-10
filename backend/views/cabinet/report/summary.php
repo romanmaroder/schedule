@@ -5,8 +5,6 @@
 
 /* @var $cart \schedule\cart\Cart */
 
-/* @var $event \yii\data\ArrayDataProvider */
-
 /* @var $expense schedule\forms\manage\Expenses\ */
 
 /* @var $merg */

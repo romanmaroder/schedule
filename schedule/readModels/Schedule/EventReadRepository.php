@@ -53,6 +53,16 @@ class EventReadRepository
        return Event::find()->where(['status'=>0])->all();
     }
 
+    public function getCash()
+    {
+        return Event::find()->where(['payment'=>2])->sum('amount');
+    }
+
+    public function getCard()
+    {
+        return Event::find()->where(['payment'=>3])->sum('amount');
+    }
+
     public function find($id): ?Event
     {
         return Event::find()->andWhere(['master_id' => $id])->one();

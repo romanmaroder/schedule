@@ -25,6 +25,17 @@ class CartService
         return $this->cart->getTotalWithSubtractions($expense);
     }
 
+    public function getCash(): float|int
+    {
+        return $this->cart->getCash();
+    }
+
+    public function getCard(): float|int
+    {
+        return $this->cart->getCard();
+    }
+
+
     /*public function add($productId, $modificationId, $quantity): void
     {
         $product = $this->products->get($productId);

@@ -12,6 +12,7 @@ use schedule\services\schedule\CartService;
 use yii\data\ArrayDataProvider;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class ReportController extends Controller
@@ -92,9 +93,24 @@ class ReportController extends Controller
         );
     }
 
+    public function actionPayment()
+    {
+        $card= $this->service->getCard();
+        $cash= $this->service->getCash();
+
+        return $this->render(
+            'method',
+            [
+                'card' => $card,
+                'cash'=>$cash,
+            ]
+        );
+    }
+
     public function actionExpenses()
     {
         $expenses = $this->expenses->getAll();
+
         return $this->render(
             'expenses',
             [
@@ -109,46 +125,10 @@ class ReportController extends Controller
         $expense = $this->expenses->summ();
 
 
-        $even = Event::find()->select([new Expression('SUM(amount) as amount, MONTHNAME(start) as start')])
-            ->groupBy(['MONTHNAME(start)'])
-            ->asArray()
-            ->all();
-
-        $expen = Expenses::find()
-            ->select(
-                [new Expression('SUM(value) as value, MONTHNAME(FROM_UNIXTIME(created_at)) as start')]
-            )->groupBy(['MONTHNAME(FROM_UNIXTIME(created_at))'])
-            ->asArray()
-            ->all();
-
-        /*$b = Expenses::find()->select(
-            [new Expression('SUM(value) as value, MONTHNAME(FROM_UNIXTIME(created_at)) as start')]
-        )
-            ->groupBy(['MONTHNAME(FROM_UNIXTIME(created_at))'])
-            ->asArray()
-            ->all();*/
-
-
-
-
-        $event = new ArrayDataProvider(
-            [
-                'allModels' => $even
-            ]
-        );
-
-        /*$expense = new ArrayDataProvider(
-            [
-                'allModels' => $expen
-            ]
-        )*/;
-
-
         return $this->render(
             'summary',
             [
                 'cart' => $cart,
-                'event' => $event,
                 'expense' => $expense
             ]
         );
