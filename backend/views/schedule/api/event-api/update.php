@@ -3,6 +3,8 @@
 use kartik\datetime\DateTimePicker;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
+use schedule\helpers\DiscountHelper;
+use schedule\helpers\EventPaymentStatusHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -172,7 +174,7 @@ $this->params['breadcrumbs'][] = 'update';
                     [
                         'name' => 'discount_from',
                         'language' => 'ru',
-                        'data' => \schedule\helpers\DiscountHelper::discountList(),
+                        'data' => DiscountHelper::discountList(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'discountFrom',
@@ -227,7 +229,7 @@ $this->params['breadcrumbs'][] = 'update';
                     [
                         'name' => 'status',
                         'language' => 'ru',
-                        'data' => \schedule\helpers\EventHelper::statusList(),
+                        'data' => EventPaymentStatusHelper::statusList(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'status',

@@ -111,6 +111,16 @@ use yii\helpers\Url;
                             ),
                             ['class' => ['d-block']]
                         ); ?>
+                        <?
+                        echo Html::tag(
+                            'li',
+                            Html::a(
+                                'Payment',
+                                ['/cabinet/report/payment'],
+                                ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/report/payment' ? 'active': '' ]]
+                            ),
+                            ['class' => ['d-block']]
+                        ); ?>
                     </ul>
                 </li>
                 <li class="dropdown-divider"></li>

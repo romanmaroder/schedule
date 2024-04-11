@@ -97,12 +97,14 @@ class ReportController extends Controller
     {
         $card= $this->service->getCard();
         $cash= $this->service->getCash();
+        $cart = $this->service->getCart();
 
         return $this->render(
             'method',
             [
                 'card' => $card,
                 'cash'=>$cash,
+                'cart'=>$cart
             ]
         );
     }
