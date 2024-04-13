@@ -130,6 +130,50 @@ $this->params['breadcrumbs'][] = $this->title;
                 )->label($model->getAttributeLabel('apartment')) ?>
             </div>
             <div class="form-group">
+                <?= $form->field($model->schedule, 'hoursWork')->widget(
+                    Select2::class,
+                    [
+                        'name' => 'hoursWork',
+                        'language' => 'ru',
+                        'data' => [7,8,9,10],
+                        'theme' => Select2::THEME_BOOTSTRAP,
+                        'options' => [
+                            'id' => 'hoursWork',
+                            'placeholder' => 'Select',
+                            'multiple' => true,
+                            'autocomplete' => 'off',
+                        ],
+                        'pluginOptions' => [
+                            'tags' => true,
+                            'allowClear' => true,
+                        ],
+                    ]
+                ) ?>
+            </div>
+            <div class="form-group">
+                <?= $form->field($model->schedule, 'weekends')->widget(
+                    Select2::class,
+                    [
+                        'name' => 'weekends',
+                        'language' => 'ru',
+                        'data' => [0,6],
+                        'theme' => Select2::THEME_BOOTSTRAP,
+                        'options' => [
+                            'id' => 'weekends',
+                            'placeholder' => 'Select',
+                            'multiple' => true,
+                            'autocomplete' => 'off',
+                        ],
+                        'pluginOptions' => [
+                            'tags' => true,
+                            'allowClear' => true,
+                        ],
+                    ]
+                ) ?>
+            </div>
+
+
+            <div class="form-group">
                 <?= $form->field($model, 'color')->widget(ColorInput::class, [
                     'options' => ['placeholder' => 'Select color ...'],
                 ]) ?>

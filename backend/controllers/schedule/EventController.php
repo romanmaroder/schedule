@@ -9,11 +9,13 @@ use schedule\entities\Schedule\Event\Calendar\Calendar;
 use schedule\entities\Schedule\Event\Event;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
+use schedule\readModels\Employee\EmployeeReadRepository;
 use schedule\repositories\NotFoundException;
 use schedule\services\manage\Schedule\EventManageService;
 use schedule\services\schedule\CartService;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -23,13 +25,22 @@ class EventController extends Controller
     private EventManageService $service;
     private Calendar $calendar;
     private CartService $cart;
+    private EmployeeReadRepository $employees;
 
-    public function __construct($id, $module, EventManageService $service, Calendar $calendar, CartService $cart, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        EventManageService $service,
+        Calendar $calendar,
+        CartService $cart,
+        EmployeeReadRepository $employees,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->calendar = $calendar;
         $this->cart = $cart;
+        $this->employees = $employees;
     }
 
     public function behaviors(): array
@@ -146,6 +157,20 @@ class EventController extends Controller
     {
         $this->service->card($id);
         return $this->redirect('index');
+    }
+
+    public function actionCheck($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $employee = $this->employees->findEmployee($id);
+
+        $hours = $employee->schedule->disabledHours($employee->schedule->hoursWork);
+        $weekends = $employee->schedule->weekends;
+
+        return [
+            'hours' => $hours,
+            'weekends' => $weekends
+        ];
     }
 
     public function actionDelete($id)

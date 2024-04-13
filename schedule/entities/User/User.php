@@ -22,7 +22,6 @@ use yii\web\IdentityInterface;
  * @property string $verification_token
  * @property string $email
  * @property string $phone
- * @property int $discount [smallint(6)]
  * @property string $auth_key
  * @property int $status
  * @property int $created_at
@@ -49,26 +48,23 @@ class User extends ActiveRecord implements IdentityInterface
         string $email,
         string $phone,
         string $password,
-         $discount = 0
     ): self {
         $user = new User();
         $user->username = $username;
         $user->email = $email ? $email : Yii::$app->security->generateRandomString(8). self::DEFAULT_EMAIL ;
         $user->phone = $phone;
         $user->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
-        $user->discount = $discount;
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
         $user->auth_key = Yii::$app->security->generateRandomString();
         return $user;
     }
 
-    public function edit(string $username, string $email, string $phone, string $password, int $discount = 0): void
+    public function edit(string $username, string $email, string $phone, string $password): void
     {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
-        $this->discount = $discount;
         if (!empty($password)){
             $this->setPassword( $password );
         }else{
@@ -141,6 +137,7 @@ class User extends ActiveRecord implements IdentityInterface
         $phone,
         $birthday,
         $address,
+        $schedule,
         $color,
         $roleId,
         $status
@@ -154,6 +151,7 @@ class User extends ActiveRecord implements IdentityInterface
             $phone,
             $birthday,
             $address,
+            $schedule,
             $color,
             $roleId,
             $status,
@@ -216,13 +214,6 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Event::class, ['client_id' => 'id']);
     }
 
-    /**
-     * @return int
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
 
     public function parseFullName($fullName)
     {
@@ -258,14 +249,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function visibleEmail($email): bool
     {
         if (!$email) {
-            return false;
-        }
-        return true;
-    }
-
-    public function visibleDiscount($discount): bool
-    {
-        if (!$discount) {
             return false;
         }
         return true;

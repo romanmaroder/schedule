@@ -2,6 +2,7 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\User\Employee\Employee;
+use schedule\helpers\ScheduleHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
@@ -128,6 +129,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             );
                         },
                         'format' => 'raw',
+                    ],
+                    [
+                        'attribute' => 'Hours',
+                        'value' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork),
+                    ],
+                    [
+                        'attribute' => 'Weekends',
+                        'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                     ],
                 ],
             ]

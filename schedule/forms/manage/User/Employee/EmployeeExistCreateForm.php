@@ -7,10 +7,12 @@ namespace schedule\forms\manage\User\Employee;
 use schedule\entities\User\User;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\AddressForm;
+use schedule\forms\manage\ScheduleForm;
 use yii\helpers\ArrayHelper;
 
 /**
  * @property AddressForm $address
+ * @property ScheduleForm $schedule
  */
 class EmployeeExistCreateForm extends CompositeForm
 {
@@ -28,6 +30,7 @@ class EmployeeExistCreateForm extends CompositeForm
     public function __construct($config = [])
     {
         $this->address = new AddressForm();
+        $this->schedule = new ScheduleForm();
         parent::__construct($config);
     }
 
@@ -52,6 +55,6 @@ class EmployeeExistCreateForm extends CompositeForm
 
     protected function internalForms(): array
     {
-        return ['address'];
+        return ['address','schedule'];
     }
 }

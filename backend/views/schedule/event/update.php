@@ -1,8 +1,8 @@
 <?php
 
 use kartik\datetime\DateTimePicker;
-use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
+use kartik\widgets\Select2;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -51,11 +51,33 @@ $this->params['breadcrumbs'][] = 'update';
                                 'pluginOptions' => [
                                     'autoclose' => true,
                                     'format' => 'yyyy-mm-dd H:ii:ss',
-                                    'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                                    //'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
                                     'todayHighlight' => true,
                                     'todayBtn' => true,
                                 ],
-
+                                'pluginEvents' => [
+                                    "show" => 'function() {
+                                    let data_id = $("#master").val();
+                                    console.log(data_id);
+                                    $.ajax({
+                                        url: "/schedule/event/check",
+                                        method: "get",
+                                        dataType: "json",
+                                        data: {id: data_id},
+                                        success: function(data){
+                                           $("#eventeditform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           
+                                           $("#eventeditform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                            $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           console.log(data)
+                                        },
+                                        error: function(data , jqXHR, exception){
+                                            console.log(exception)
+                                        }
+                                    });
+                                    }',
+                                ],
                                 'language' => 'ru',
                                 'size' => 'xs'
                             ]
@@ -81,10 +103,31 @@ $this->params['breadcrumbs'][] = 'update';
                                 'pluginOptions' => [
                                     'format' => 'yyyy-mm-dd H:ii:ss',
                                     'autoclose' => true,
-                                    'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                                    //'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
                                     'todayHighlight' => true,
                                     'todayBtn' => true,
                                 ],
+                                /*'pluginEvents' => [
+                                    "show" => 'function() {
+                                    let data_id = $("#select2-master-container").val();
+                                    $.ajax({
+                                        url: "/schedule/event/check",
+                                        method: "get",
+                                        dataType: "json",
+                                        data: {id: data_id},
+                                        success: function(data){
+                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+
+                                           $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+
+                                           console.log(data)
+                                        },
+                                        error: function(data , jqXHR, exception){
+                                            console.log(exception)
+                                        }
+                                    });
+                                    }',
+                                ],*/
                                 'language' => 'ru',
                                 'size' => 'xs'
 
@@ -104,35 +147,30 @@ $this->params['breadcrumbs'][] = 'update';
                                     'id' => 'master',
                                     'autocomplete' => 'off',
                                 ],
-                                'pluginOptions' => [
-                                    'allowClear' => true
-                                ],
-                                /*'pluginEvents'  => [
+                                'pluginOptions' => ['allowClear' => true],
+                                'pluginEvents' => [
                                     "change" => 'function() {
-                                    var data_id = $(this).val();
+                                    let data_id = $(this).val();
                                     $.ajax({
-                                        url: "/calendar/event/user-service",
+                                        url: "/schedule/event/check",
                                         method: "get",
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                           $("select#serviceUser").html(data).attr("disabled", false);
+                                           $("#eventeditform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           
+                                           $("#eventeditform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           
+                                           console.log(data)
                                         },
                                         error: function(data , jqXHR, exception){
-                                            var Toast = Swal.mixin({
-                                                              toast: true,
-                                                              position: "top-end",
-                                                              showConfirmButton: false,
-                                                              timer: 5000,
-                                                            });
-                                              Toast.fire({
-                                                icon: "error",
-                                                title: data.responseJSON.message
-                                              });
+                                            console.log(exception)
                                         }
                                     });
                                     }',
-                                ],*/
+                                ],
                             ]
                         ); ?></div>
                 </div>

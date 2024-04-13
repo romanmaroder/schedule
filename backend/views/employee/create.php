@@ -6,6 +6,7 @@ use kartik\select2\Select2;
 use schedule\helpers\PriceHelper;
 use schedule\helpers\RateHelper;
 use schedule\helpers\RoleHelper;
+use schedule\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
@@ -46,11 +47,6 @@ $form = ActiveForm::begin(); ?>
             <?= $form->field($model->user, 'email')->textInput(
                 ['maxLength' => true, 'placeholder' => $model->user->getAttributeLabel('email')]
             )->label($model->user->getAttributeLabel('email')) ?>
-        </div>
-        <div class="form-group">
-            <?= $form->field($model->user, 'discount')->textInput(
-                ['maxLength' => true, 'placeholder' => $model->user->getAttributeLabel('discount')]
-            )->label($model->user->getAttributeLabel('discount')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->user, 'password')->passwordInput(
@@ -135,6 +131,48 @@ $form = ActiveForm::begin(); ?>
             )->label($model->getAttributeLabel('apartment')) ?>
         </div>
         <div class="form-group">
+            <?= $form->field($model->schedule, 'hoursWork')->widget(
+                Select2::class,
+                [
+                    'name' => 'hoursWork',
+                    'language' => 'ru',
+                    'data' => ScheduleHelper::hours(),
+                    'theme' => Select2::THEME_BOOTSTRAP,
+                    'options' => [
+                        'id' => 'hoursWork',
+                        'placeholder' => 'Select',
+                        'multiple' => true,
+                        'autocomplete' => 'off',
+                    ],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'allowClear' => true,
+                    ],
+                ]
+            ) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model->schedule, 'weekends')->widget(
+                Select2::class,
+                [
+                    'name' => 'weekends',
+                    'language' => 'ru',
+                    'data' => ScheduleHelper::days(),
+                    'theme' => Select2::THEME_BOOTSTRAP,
+                    'options' => [
+                        'id' => 'weekends',
+                        'placeholder' => 'Select',
+                        'multiple' => true,
+                        'autocomplete' => 'off',
+                    ],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'allowClear' => true,
+                    ],
+                ]
+            ) ?>
+        </div>
+        <div class="form-group">
             <?= $form->field($model, 'color')->widget(
                 ColorInput::class,
                 [
@@ -146,7 +184,7 @@ $form = ActiveForm::begin(); ?>
             <?= $form->field($model, 'roleId')->widget(
                 Select2::class,
                 [
-                    'bsVersion' => '4.x',
+                    //'bsVersion' => '4.x',
                     'name' => 'roleId',
                     'data' => RoleHelper::roleList(),
                     'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set

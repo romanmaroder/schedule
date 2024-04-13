@@ -60,10 +60,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'format' => 'raw',
                 ],
                 [
-                    'attribute' => 'discount',
-                    'visible' => $model->visibleDiscount($model->discount)
-                ],
-                [
                     'attribute' => 'status',
                     'value' => UserHelper::statusLabel($model->status),
                     'format' => 'raw',

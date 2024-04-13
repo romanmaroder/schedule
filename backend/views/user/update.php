@@ -43,7 +43,6 @@ $this->params['breadcrumbs'][] = $user->username;
         <?= $form->field($model, 'password')->passwordInput(
             ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('password')]
         )->label($model->getAttributeLabel('password')) ?>
-        <?= $form->field($model, 'discount')->textInput(['maxLength' => true]) ?>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">

@@ -5,6 +5,7 @@ namespace schedule\services\manage;
 
 
 use schedule\entities\Address;
+use schedule\entities\Schedule;
 use schedule\entities\User\Employee\Employee;
 use schedule\entities\User\User;
 use schedule\forms\manage\User\Employee\EmployeeCreateForm;
@@ -44,6 +45,10 @@ class EmployeeManageService
                 $form->address->home,
                 $form->address->apartment,
             ),
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends
+            ),
             $form->color,
             $form->roleId,
             $form->status
@@ -78,6 +83,10 @@ class EmployeeManageService
                 $form->address->home,
                 $form->address->apartment,
             ),
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
+            ),
             $form->color,
             $form->roleId,
             $form->status,
@@ -92,7 +101,6 @@ class EmployeeManageService
             $form->user->username = $form->firstName . ' ' . $form->lastName,
             $form->user->email,
             $form->phone,
-            $form->user->discount,
             $form->user->password
         );
 
@@ -109,6 +117,10 @@ class EmployeeManageService
                 $form->address->street,
                 $form->address->home,
                 $form->address->apartment,
+            ),
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
             ),
             $form->color,
             $form->roleId,

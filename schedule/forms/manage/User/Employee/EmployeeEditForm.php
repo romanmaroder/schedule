@@ -7,10 +7,12 @@ namespace schedule\forms\manage\User\Employee;
 use schedule\entities\User\Employee\Employee;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\AddressForm;
+use schedule\forms\manage\ScheduleForm;
 use schedule\forms\manage\User\UserEditForm;
 
 /**
  * @property AddressForm $address
+ * @property ScheduleForm $schedule
  * @property UserEditForm $user
  */
 class EmployeeEditForm extends CompositeForm
@@ -40,12 +42,14 @@ class EmployeeEditForm extends CompositeForm
             $this->phone = $employee->phone;
             $this->birthday = $employee->birthday;
             $this->address = new AddressForm($employee->address);
+            $this->schedule = new ScheduleForm($employee->schedule);
             $this->color = $employee->color;
             $this->roleId = $employee->role_id;
             $this->status = $employee->status;
             $this->_employee = $employee;
         }else{
             $this->address = new AddressForm();
+            $this->schedule = new ScheduleForm();
         }
         parent::__construct($config);
     }
@@ -62,7 +66,7 @@ class EmployeeEditForm extends CompositeForm
 
     protected function internalForms(): array
     {
-        return ['address', 'user'];
+        return ['address','schedule' ,'user'];
     }
 
 }

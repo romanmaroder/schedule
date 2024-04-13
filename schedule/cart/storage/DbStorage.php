@@ -66,7 +66,7 @@ class DbStorage implements StorageInterface
                                 $q->select(['username']);
                             },
                             'events.client'=> function ($q) {
-                                $q->select(['username', 'discount']);
+                                $q->select(['username']);
                             }
                         ]
                     )

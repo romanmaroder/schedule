@@ -6,6 +6,8 @@ namespace schedule\entities\User\Employee;
 
 use schedule\entities\Address;
 use schedule\entities\behaviors\AddressBehavior;
+use schedule\entities\behaviors\ScheduleWorkBehavior;
+use schedule\entities\Schedule;
 use schedule\entities\Schedule\Event\Event;
 use schedule\entities\User\Price;
 use schedule\entities\User\Rate;
@@ -30,16 +32,17 @@ use yii\db\ActiveRecord;
  * @property string $role_id
  * @property int $status
  * @property Address $address
- *
+ * @property Schedule $schedule
  * @property User $user
  * @property Role $role
  * @property Rate $rate
  * @property Price $price
+ * @property string $schedule_json [json]
  */
 class Employee extends ActiveRecord
 {
     public $address;
-
+    public $schedule;
 
 
     public static function attach(
@@ -50,6 +53,7 @@ class Employee extends ActiveRecord
         $phone,
         $birthday,
         Address $address,
+        Schedule $schedule,
         $color,
         $roleId,
         $status
@@ -62,6 +66,7 @@ class Employee extends ActiveRecord
         $employee->phone = $phone;
         $employee->birthday = $birthday;
         $employee->address = $address;
+        $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
         $employee->status = $status;
@@ -77,6 +82,7 @@ class Employee extends ActiveRecord
         $phone,
         $birthday,
         Address $address,
+        Schedule $schedule,
         $color,
         $roleId,
         $status
@@ -90,6 +96,7 @@ class Employee extends ActiveRecord
         $employee->phone = $phone;
         $employee->birthday = $birthday;
         $employee->address = $address;
+        $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
         $employee->status = $status;
@@ -104,6 +111,7 @@ class Employee extends ActiveRecord
         $phone,
         $birthday,
         Address $address,
+        Schedule $schedule,
         $color,
         $roleId,
         $status
@@ -115,6 +123,7 @@ class Employee extends ActiveRecord
         $this->phone = $phone;
         $this->birthday = $birthday;
         $this->address = $address;
+        $this->schedule = $schedule;
         $this->color = $color;
         $this->role_id = $roleId;
         $this->status = $status;
@@ -148,6 +157,16 @@ class Employee extends ActiveRecord
             return false;
         }
         return true;
+    }
+
+    public function getHours()
+    {
+        return $this->schedule->hoursWork;
+    }
+
+    public function getWeekends()
+    {
+        return $this->schedule->weekends;
     }
 
     /**
@@ -198,7 +217,8 @@ class Employee extends ActiveRecord
     public function behaviors(): array
     {
         return [
-            AddressBehavior::class
+            AddressBehavior::class,
+            ScheduleWorkBehavior::class
         ];
     }
 }

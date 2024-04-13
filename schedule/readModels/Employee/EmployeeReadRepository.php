@@ -15,6 +15,11 @@ class EmployeeReadRepository
         return Employee::find()->with('role')->andWhere(['id' => $id])->one();
     }
 
+    public function findEmployee($id)
+    {
+        return Employee::find()->with('role')->andWhere(['user_id' => $id])->one();
+    }
+
     private function getProvider(ActiveQuery $query): ActiveDataProvider
     {
         return new ActiveDataProvider(

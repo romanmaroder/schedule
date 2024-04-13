@@ -6,10 +6,12 @@ namespace schedule\forms\manage\User\Employee;
 
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\AddressForm;
+use schedule\forms\manage\ScheduleForm;
 use schedule\forms\manage\User\UserEmployeeCreateForm;
 
 /**
  * @property AddressForm $address
+ * @property ScheduleForm $schedule
  * @property UserEmployeeCreateForm $user
  */
 class EmployeeCreateForm extends CompositeForm
@@ -28,6 +30,7 @@ class EmployeeCreateForm extends CompositeForm
     public function __construct($config = [])
     {
         $this->address = new AddressForm();
+        $this->schedule = new ScheduleForm();
         $this->user = new UserEmployeeCreateForm();
         parent::__construct($config);
     }
@@ -44,6 +47,6 @@ class EmployeeCreateForm extends CompositeForm
 
     protected function internalForms(): array
     {
-        return ['address', 'user'];
+        return ['address','schedule', 'user'];
     }
 }

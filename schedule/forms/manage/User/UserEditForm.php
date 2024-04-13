@@ -15,7 +15,6 @@ class UserEditForm extends Model
     public $email;
     public $phone;
     public $password;
-    public $discount;
 
     public $_user;
 
@@ -28,7 +27,6 @@ class UserEditForm extends Model
             $this->email = $user->email;
             $this->phone = $user->phone;
             $this->password = $user->password;
-            $this->discount = $user->discount;
             $this->_user = $user;
         }
         parent::__construct($config);
@@ -39,7 +37,6 @@ class UserEditForm extends Model
         return [
             [['username'], 'required'],
             ['email', 'email'],
-            [['discount'],'integer'],
             [['username','email','phone'],'string','max'=>255],
             [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
             ['password','string','min' => 6],

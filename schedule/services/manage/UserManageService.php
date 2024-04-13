@@ -32,7 +32,6 @@ class UserManageService
             $form->email,
             $form->phone,
             $form->password,
-            (int)$form->discount,
         );
         $this->users->save($user);
         return $user;
@@ -50,7 +49,6 @@ class UserManageService
             $form->email,
             $form->phone,
             $form->password,
-            $form->discount,
         );
         $this->users->save($user);
     }
