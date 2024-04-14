@@ -16,6 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
+
+/*echo'<pre>';
+\yii\helpers\VarDumper::dump($model->schedule->hoursWork,10,true);
+\yii\helpers\VarDumper::dump($model->address->home,10,true);
+die();*/
+
+
 ?>
 
 

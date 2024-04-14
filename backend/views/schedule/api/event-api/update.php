@@ -41,7 +41,8 @@ $this->params['breadcrumbs'][] = 'update';
                         'pluginOptions' => [
                             'autoclose' => true,
                             'format' => 'yyyy-mm-dd H:ii:ss',
-                            'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                            //'hoursDisabled' => [0,1,2,3,4,5,6,22,23],
+                            //'daysOfWeekDisabled' => [0,6],
                             'todayHighlight' => true,
                             'todayBtn' => true,
                         ],
@@ -93,7 +94,8 @@ $this->params['breadcrumbs'][] = 'update';
                         'pluginOptions' => [
                             'format' => 'yyyy-mm-dd H:ii:ss',
                             'autoclose' => true,
-                            'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                            //'hoursDisabled' => [0,1,2,3,4,5,6,22,23],
+                            //'daysOfWeekDisabled' => [0,6],
                             'todayHighlight' => true,
                             'todayBtn' => true,
                         ],

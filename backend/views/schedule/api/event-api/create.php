@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'todayHighlight' => true,
                             'todayBtn' => true,
                             //'daysOfWeekDisabled' => [0,6],
-                            'hoursDisabled' => [0, 1, 2, 3, 4, 5, 6, 22, 23]
+                            //'hoursDisabled' => [0, 1, 2, 3, 4, 5, 6, 22, 23]
                         ],
                         'language' => 'ru',
                         'size' => 'xs'

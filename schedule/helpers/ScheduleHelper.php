@@ -20,19 +20,19 @@ class ScheduleHelper
         return Schedule::scheduleHours();
     }
 
-    public static function getWeekends(array $days): string
+    public static function getWeekends($days): string
     {
         if (is_array($days)) {
             return implode(', ', Schedule::getScheduleDays($days));
         }
-        throw new \DomainException('The passed argument must be an array.');
+        return '';
     }
 
-    public static function getWorkingHours(array $hours): string
+    public static function getWorkingHours($hours): string
     {
         if (is_array($hours)) {
             return implode(', ', Schedule::getScheduleHours($hours));
         }
-        throw new \DomainException('The passed argument must be an array.');
+        return '';
     }
 }

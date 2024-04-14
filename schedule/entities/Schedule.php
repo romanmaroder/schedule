@@ -27,12 +27,14 @@ class Schedule
 
     /**
      * List of weekends
-     * @param array $days
+     * @param  $days
      * @return array
      */
-    public static function getScheduleDays(array $days): array
+    public static function getScheduleDays($days): array
     {
-        return $result = array_intersect_key(self::scheduleDays(), array_flip($days));
+        if (is_array($days)) {
+            return $result = array_intersect_key(self::scheduleDays(), array_flip($days));
+        }
     }
 
     public static function scheduleHours(): array
@@ -42,21 +44,27 @@ class Schedule
 
     /**
      * List of working hours
-     * @param array $hours
+     * @param  $hours
      * @return array
      */
-    public static function getScheduleHours(array $hours): array
+    public static function getScheduleHours($hours): array
     {
-        return $result = array_intersect_key(self::scheduleHours(), array_flip($hours));
+        if (is_array($hours)) {
+            return $result = array_intersect_key(self::scheduleHours(), array_flip($hours));
+        }
+        return [];
     }
 
     /**
-     * @param array $hours
+     * @param  $hours
      * @return array
      */
-    public function disabledHours(array $hours): array
+    public function disabledHours($hours): array
     {
-        return array_keys(array_diff_key(self::scheduleHours(),array_flip($hours)));
+        if (is_array($hours)) {
+            return array_keys(array_diff_key(self::scheduleHours(), array_flip($hours)));
+        }
+        return [];
     }
 
 
