@@ -46,7 +46,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 'username',
                 [
                     'attribute' => 'email',
-                    'visible' => $model->visibleEmail($model->email),
+                    'visible' => $model->email ?: false,
                     'format' => 'email',
                 ],
                 [
@@ -58,6 +58,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             ['view', 'id' => $model->id]
                         );
                     },
+                    'visible' => $model->phone ?: false,
                     'format' => 'raw',
                 ],
                 [
@@ -68,11 +69,20 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'attribute' => 'Hours',
                     'value' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork),
+                    'visible' => $model->schedule->hoursWork ?: false,
                 ],
                 [
                     'attribute' => 'Days',
                     'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
+                    'visible' => $model->schedule->weekends ?: false,
                 ],
+                [
+                    'attribute' => 'notice',
+                    'value' => function($model){ return $model->notice;},
+                    'visible' => $model->notice ?: false,
+                    'format' => 'ntext',
+                ],
+                //'notice:ntext',
                 'created_at:datetime',
                 'updated_at:datetime',
             ],

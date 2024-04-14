@@ -37,6 +37,7 @@ class UserManageService
                 $form->schedule->hoursWork,
                 $form->schedule->weekends
             ),
+            $form->notice,
         );
         $this->users->save($user);
         return $user;
@@ -58,6 +59,7 @@ class UserManageService
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
             ),
+            $form->notice,
         );
         $this->users->save($user);
     }

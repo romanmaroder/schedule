@@ -33,6 +33,7 @@ use yii\web\IdentityInterface;
  * @property Network[] $networks
  * @property Employee $employee
  * @property Schedule $schedule
+ * @property string $notice [varchar(255)]
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -52,6 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
         string $phone,
         string $password,
         Schedule $schedule,
+        string $notice
     ): self {
         $user = new User();
         $user->username = $username;
@@ -61,11 +63,12 @@ class User extends ActiveRecord implements IdentityInterface
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
         $user->schedule = $schedule;
+        $user->notice = $notice;
         $user->auth_key = Yii::$app->security->generateRandomString();
         return $user;
     }
 
-    public function edit(string $username, string $email, string $phone, string $password, Schedule $schedule,): void
+    public function edit(string $username, string $email, string $phone, string $password, Schedule $schedule,$notice): void
     {
         $this->username = $username;
         $this->email = $email;
@@ -76,6 +79,7 @@ class User extends ActiveRecord implements IdentityInterface
             $this->password_hash;
         }
         $this->schedule = $schedule;
+        $this->notice = $notice;
         $this->updated_at = time();
     }
 
@@ -248,15 +252,6 @@ class User extends ActiveRecord implements IdentityInterface
             $arr["$key"] = mb_strtoupper(mb_substr(trim($value),0,1));
         }
         return implode('.',$arr).'';
-    }
-
-
-    public function visibleEmail($email): bool
-    {
-        if (!$email) {
-            return false;
-        }
-        return true;
     }
 
     public function getHours()

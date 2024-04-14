@@ -17,6 +17,7 @@ class UserCreateForm extends CompositeForm
     public $email;
     public $phone;
     public $password;
+    public $notice;
 
     public function __construct($config = [])
     {
@@ -29,7 +30,7 @@ class UserCreateForm extends CompositeForm
         return [
             [['username'],'required'],
             ['email','email'],
-            [['username','email','phone'],'string','max'=>255],
+            [['username','email','phone','notice'],'string','max'=>255],
             [['username','email'],'unique','targetClass' => User::class],
             ['password','string','min' => 6],
         ];

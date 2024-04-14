@@ -89,6 +89,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             )->label('Days') ?>
         </div>
+        <div class="form-group">
+            <?= $form->field($model, 'notice')->textarea(
+                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('notice'),'row'=>5,]
+            )->label($model->getAttributeLabel('notice')) ?>
+        </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">

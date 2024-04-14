@@ -19,6 +19,7 @@ class UserEditForm extends CompositeForm
     public $email;
     public $phone;
     public $password;
+    public $notice;
 
     public $_user;
 
@@ -32,6 +33,7 @@ class UserEditForm extends CompositeForm
             $this->phone = $user->phone;
             $this->password = $user->password;
             $this->schedule = new ScheduleForm($user->schedule);
+            $this->notice = $user->notice;
             $this->_user = $user;
         }else{
             $this->schedule = new ScheduleForm();
@@ -44,7 +46,7 @@ class UserEditForm extends CompositeForm
         return [
             [['username'], 'required'],
             ['email', 'email'],
-            [['username','email','phone'],'string','max'=>255],
+            [['username','email','phone','notice'],'string','max'=>255],
             [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
             ['password','string','min' => 6],
         ];

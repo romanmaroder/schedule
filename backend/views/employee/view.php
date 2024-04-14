@@ -133,6 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'Weekends',
                         'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                     ],
+                    'notice:ntext'
                 ],
             ]
         ) ?>
