@@ -4,6 +4,7 @@
 namespace schedule\services\manage;
 
 
+use schedule\entities\Schedule;
 use schedule\entities\User\User;
 use schedule\forms\manage\User\UserCreateForm;
 use schedule\forms\manage\User\UserEditForm;
@@ -32,6 +33,10 @@ class UserManageService
             $form->email,
             $form->phone,
             $form->password,
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends
+            ),
         );
         $this->users->save($user);
         return $user;
@@ -49,6 +54,10 @@ class UserManageService
             $form->email,
             $form->phone,
             $form->password,
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
+            ),
         );
         $this->users->save($user);
     }

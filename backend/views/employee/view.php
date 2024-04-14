@@ -1,10 +1,8 @@
 <?php
 
-use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\User\Employee\Employee;
 use schedule\helpers\ScheduleHelper;
 use yii\helpers\Html;
-use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
@@ -13,16 +11,6 @@ use yii\widgets\DetailView;
 $this->title = $model->getFullName();
 $this->params['breadcrumbs'][] = ['label' => 'Employee', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-YiiAsset::register($this);
-PluginAsset::register($this)->add(['sweetalert2']);
-
-/*echo'<pre>';
-\yii\helpers\VarDumper::dump($model->schedule->hoursWork,10,true);
-\yii\helpers\VarDumper::dump($model->address->home,10,true);
-die();*/
-
-
 ?>
 
 

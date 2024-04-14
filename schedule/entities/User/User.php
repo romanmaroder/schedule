@@ -3,6 +3,8 @@
 namespace schedule\entities\User;
 
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use schedule\entities\behaviors\ScheduleWorkBehavior;
+use schedule\entities\Schedule;
 use schedule\entities\Schedule\Event\Event;
 use schedule\entities\User\Employee\Employee;
 use Yii;
@@ -23,24 +25,24 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $phone
  * @property string $auth_key
+ * @property string $schedule_json [json]
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
-// * @property string $password write-only password
  * @property string $password
- *
  * @property Network[] $networks
  * @property Employee $employee
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_INACTIVE = 9;
-    const STATUS_ACTIVE = 10;
-    const DEFAULT_PASSWORD = '12345678';
-    const DEFAULT_EMAIL = '@mail.com';
+    public const STATUS_DELETED = 0;
+    public const STATUS_INACTIVE = 9;
+    public const STATUS_ACTIVE = 10;
+    public const DEFAULT_PASSWORD = '12345678';
+    public const DEFAULT_EMAIL = '@mail.com';
 
     public $password;
+    public $schedule;
 
 
     public static function create(
@@ -48,6 +50,7 @@ class User extends ActiveRecord implements IdentityInterface
         string $email,
         string $phone,
         string $password,
+        Schedule $schedule,
     ): self {
         $user = new User();
         $user->username = $username;
@@ -56,21 +59,22 @@ class User extends ActiveRecord implements IdentityInterface
         $user->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
+        $user->schedule = $schedule;
         $user->auth_key = Yii::$app->security->generateRandomString();
         return $user;
     }
 
-    public function edit(string $username, string $email, string $phone, string $password): void
+    public function edit(string $username, string $email, string $phone, string $password, Schedule $schedule,): void
     {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
-        if (!empty($password)){
-            $this->setPassword( $password );
-        }else{
-          $this->password_hash ;
+        if (!empty($password)) {
+            $this->setPassword($password);
+        } else {
+            $this->password_hash;
         }
-
+        $this->schedule = $schedule;
         $this->updated_at = time();
     }
 
@@ -137,10 +141,10 @@ class User extends ActiveRecord implements IdentityInterface
         $phone,
         $birthday,
         $address,
-        $schedule,
         $color,
         $roleId,
-        $status
+        $status,
+        $schedule
     ): void {
         $employee[] = $this->employee;
         $employee = Employee::attach(
@@ -151,10 +155,10 @@ class User extends ActiveRecord implements IdentityInterface
             $phone,
             $birthday,
             $address,
-            $schedule,
             $color,
             $roleId,
             $status,
+            $schedule
         );
         $this->employee = $employee;
     }
@@ -189,6 +193,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function isActive(): bool
     {
         return $this->status === self::STATUS_ACTIVE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInactive(): bool
+    {
+        return $this->status === self::STATUS_INACTIVE;
     }
 
     /**
@@ -238,20 +250,22 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
-    /**
-     * @return bool
-     */
-    public function isInactive(): bool
-    {
-        return $this->status === self::STATUS_INACTIVE;
-    }
-
     public function visibleEmail($email): bool
     {
         if (!$email) {
             return false;
         }
         return true;
+    }
+
+    public function getHours()
+    {
+        return $this->schedule->hoursWork;
+    }
+
+    public function getWeekends()
+    {
+        return $this->schedule->weekends;
     }
 
     /**
@@ -273,6 +287,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'class' => SaveRelationsBehavior::class,
                 'relations' => ['networks', 'employee'],
             ],
+            ScheduleWorkBehavior::class
         ];
     }
 

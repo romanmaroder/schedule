@@ -64,6 +64,10 @@ class EmployeeManageService
             $user->email =$form->user->email,
             $user->phone = $form->user->phone,
             $user->password = $form->user->password,
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
+            ),
         );
 
 
@@ -101,7 +105,11 @@ class EmployeeManageService
             $form->user->username = $form->firstName . ' ' . $form->lastName,
             $form->user->email,
             $form->phone,
-            $form->user->password
+            $form->user->password,
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
+            ),
         );
 
         $user->attachEmployee(
@@ -117,8 +125,7 @@ class EmployeeManageService
                 $form->address->street,
                 $form->address->home,
                 $form->address->apartment,
-            ),
-            new Schedule(
+            ),new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
             ),

@@ -1,5 +1,7 @@
 <?php
 
+use kartik\widgets\Select2;
+use schedule\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
@@ -43,6 +45,50 @@ $this->params['breadcrumbs'][] = $user->username;
         <?= $form->field($model, 'password')->passwordInput(
             ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('password')]
         )->label($model->getAttributeLabel('password')) ?>
+
+        <div class="form-group">
+            <?= $form->field($model->schedule, 'hoursWork')->widget(
+                Select2::class,
+                [
+                    'name' => 'hoursWork',
+                    'language' => 'ru',
+                    'data' => ScheduleHelper::hours(),
+                    'theme' => Select2::THEME_BOOTSTRAP,
+                    'options' => [
+                        'id' => 'hoursWork',
+                        'placeholder' => 'Select',
+                        'multiple' => true,
+                        'autocomplete' => 'off',
+                    ],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'allowClear' => true,
+                    ],
+                ]
+            ) ?>
+        </div>
+        <div class="form-group">
+            <?= $form->field($model->schedule, 'weekends')->widget(
+                Select2::class,
+                [
+                    'name' => 'weekends',
+                    'language' => 'ru',
+                    'data' => ScheduleHelper::days(),
+                    'theme' => Select2::THEME_BOOTSTRAP,
+                    'options' => [
+                        'id' => 'weekends',
+                        'placeholder' => 'Select',
+                        'multiple' => true,
+                        'autocomplete' => 'off',
+                    ],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'allowClear' => true,
+                    ],
+                ]
+            ) ?>
+        </div>
+
     </div>
     <!-- /.card-body -->
     <div class="card-footer">

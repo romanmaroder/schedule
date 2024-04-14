@@ -5,11 +5,15 @@ namespace schedule\forms\manage\User;
 
 
 use schedule\entities\User\User;
+use schedule\forms\CompositeForm;
+use schedule\forms\manage\ScheduleForm;
 use yii\base\Model;
 
+/**
+ * @property ScheduleForm $schedule
+ */
 
-
-class UserEditForm extends Model
+class UserEditForm extends CompositeForm
 {
     public $username;
     public $email;
@@ -27,7 +31,10 @@ class UserEditForm extends Model
             $this->email = $user->email;
             $this->phone = $user->phone;
             $this->password = $user->password;
+            $this->schedule = new ScheduleForm($user->schedule);
             $this->_user = $user;
+        }else{
+            $this->schedule = new ScheduleForm();
         }
         parent::__construct($config);
     }
@@ -43,4 +50,8 @@ class UserEditForm extends Model
         ];
     }
 
+    protected function internalForms(): array
+    {
+        return ['schedule' ];
+    }
 }

@@ -167,10 +167,6 @@ class EventController extends Controller
         $hours = $employee->schedule->disabledHours($employee->schedule->hoursWork);
         $weekends = $employee->schedule->weekends;
 
-        /*echo'<pre>';
-        var_dump($hours);
-        var_dump($weekends);
-        die();*/
         return [
             'hours' => $hours,
             'weekends' => $weekends

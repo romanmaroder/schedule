@@ -1,6 +1,7 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
+use schedule\helpers\ScheduleHelper;
 use schedule\helpers\UserHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -63,6 +64,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'attribute' => 'status',
                     'value' => UserHelper::statusLabel($model->status),
                     'format' => 'raw',
+                ],
+                [
+                    'attribute' => 'Hours',
+                    'value' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork),
+                ],
+                [
+                    'attribute' => 'Weekends',
+                    'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                 ],
                 'created_at:datetime',
                 'updated_at:datetime',
