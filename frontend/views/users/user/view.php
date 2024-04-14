@@ -1,5 +1,6 @@
 <?php
 
+use schedule\helpers\ScheduleHelper;
 use schedule\helpers\UserHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -29,7 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'username',
-                'email:email',
+                [
+                    'attribute' => 'email',
+                    'visible' => $model->email ?: false,
+                    'format' => 'email',
+                ],
                 [
                     'attribute' => 'status',
                     'value' => UserHelper::statusLabel($model->status),
@@ -45,6 +50,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         );
                     },
                     'format' => 'raw',
+                    'visible' => $model->phone ?: false,
+                ],
+                [
+                    'attribute' => 'Hours',
+                    'value' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork),
+                    'visible' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork) ?: false,
+                ],
+                [
+                    'attribute' => 'Days',
+                    'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
+                    'visible' => ScheduleHelper::getWeekends($model->schedule->weekends) ?: false,
                 ],
                 //'created_at:datetime',
                 //'updated_at:datetime',

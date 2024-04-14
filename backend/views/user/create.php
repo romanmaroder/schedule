@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'allowClear' => true,
                     ],
                 ]
-            ) ?>
+            )->label('Days') ?>
         </div>
     </div>
     <!-- /.card-body -->

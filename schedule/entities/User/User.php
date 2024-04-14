@@ -32,6 +32,7 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property Network[] $networks
  * @property Employee $employee
+ * @property Schedule $schedule
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -279,7 +280,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             TimestampBehavior::class,

@@ -70,7 +70,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'value' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork),
                 ],
                 [
-                    'attribute' => 'Weekends',
+                    'attribute' => 'Days',
                     'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                 ],
                 'created_at:datetime',

@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $user->username;
                         'allowClear' => true,
                     ],
                 ]
-            ) ?>
+            ) ->label('Days')?>
         </div>
 
     </div>

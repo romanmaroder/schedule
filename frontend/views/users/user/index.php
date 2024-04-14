@@ -8,6 +8,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
+use schedule\helpers\ScheduleHelper;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
@@ -41,20 +42,51 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="row">
                                 <div class="col-12">
                                     <h2 class="lead"><b><?= $user->username ?></b>
-                                    <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist /
-                                        Coffee Lover </p>
-                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small mb-2">
-                                            <span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address:
-                                            Demo Street 123, Demo City 04312, NJ
-                                        </li>
-                                        <li class="small mb-2">
-                                            <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                            <a href="tel:+80012122352"> Phone #: + 800 - 12 12 23 52</a></li>
-                                        <li class="small">
-                                            <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span>
-                                            <a href="mailto:<?= $user->email; ?>"><?= $user->email; ?></a></li>
-                                    </ul>
+                                        <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist
+                                            /
+                                            Coffee Lover </p>
+                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                            <li class="small mb-2">
+                                                <span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
+                                                Address:
+                                                Demo Street 123, Demo City 04312, NJ
+                                            </li>
+                                            <?
+                                            if ($user->phone): ?>
+                                                <li class="small mb-2">
+                                                    <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                                                    <a href="tel:<?= $user->phone; ?>"> Phone
+                                                        #: <?= $user->phone; ?></a>
+                                                </li>
+                                            <?endif; ?>
+                                            <?
+                                            if ($user->email): ?>
+                                                <li class="small mb-2">
+                                                    <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span>
+                                                    <a href="mailto:<?= $user->email; ?>"><?= $user->email; ?></a>
+                                                </li>
+                                            <?endif; ?>
+                                            <?
+                                            if ($user->schedule->weekends): ?>
+                                                <li class="small mb-2">
+                                                    <span class="fa-li"><i class="fas fa-calendar-alt"></i></span>
+                                                    Days :
+                                                    <span><?= ScheduleHelper::getWeekends(
+                                                            $user->schedule->weekends
+                                                        ); ?></span>
+                                                </li>
+                                            <?endif; ?>
+                                            <?
+                                            if ($user->schedule->hoursWork): ?>
+                                                <li class="small mb-2">
+                                                    <span class="fa-li"><i class="fas fa-clock"></i></span>
+                                                    Hours:
+                                                    <span><?= ScheduleHelper::getWorkingHours(
+                                                            $user->schedule->hoursWork
+                                                        ); ?></span>
+                                                </li>
+                                            <?endif; ?>
+                                        </ul>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +95,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <!--<a href="#" class="btn btn-sm bg-teal">
                                     <i class="fas fa-comments"></i>
                                 </a>-->
-                                <?= Html::a('<i class="fas fa-user"></i> View Profile',
+                                <?= Html::a(
+                                    '<i class="fas fa-user"></i> View Profile',
                                     ['user/view', 'id' => $user->id],
                                     ['class' => 'btn btn-sm btn-primary']
                                 ) ?>
