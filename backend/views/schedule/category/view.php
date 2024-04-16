@@ -48,6 +48,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'name',
                         'slug',
                         'title',
+                        'description'
                     ],
                 ]
             ) ?>

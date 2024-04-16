@@ -9,6 +9,7 @@ use schedule\entities\behaviors\AddressBehavior;
 use schedule\entities\behaviors\ScheduleWorkBehavior;
 use schedule\entities\Schedule;
 use schedule\entities\Schedule\Event\Event;
+use schedule\entities\User\Employee\queries\EmployeeQuery;
 use schedule\entities\User\Price;
 use schedule\entities\User\Rate;
 use schedule\entities\User\Role;
@@ -44,6 +45,9 @@ class Employee extends ActiveRecord
     public $address;
     public $schedule;
 
+    public const STATUS_INACTIVE = 0;
+    public const STATUS_ACTIVE = 1;
+
 
     public static function attach(
         $rateId,
@@ -69,7 +73,7 @@ class Employee extends ActiveRecord
         $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
-        $employee->status = $status;
+        $employee->status = self::STATUS_INACTIVE;
         return $employee;
     }
 
@@ -99,7 +103,7 @@ class Employee extends ActiveRecord
         $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
-        $employee->status = $status;
+        $employee->status = self::STATUS_ACTIVE;
         return $employee;
     }
 
@@ -220,5 +224,10 @@ class Employee extends ActiveRecord
             AddressBehavior::class,
             ScheduleWorkBehavior::class
         ];
+    }
+
+    public static function find():EmployeeQuery
+    {
+        return new EmployeeQuery(static::class);
     }
 }

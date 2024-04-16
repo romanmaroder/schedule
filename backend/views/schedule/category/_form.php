@@ -53,6 +53,14 @@ use yii\helpers\Html;
                     ]
                 )->label($model->getAttributeLabel('title')) ?>
             </div>
+            <div class="form-group">
+                <?= $form->field($model, 'description')->textInput(
+                    [
+                        'maxlength' => true,
+                        'placeholder' => $model->getAttributeLabel('description')
+                    ]
+                )->label($model->getAttributeLabel('description')) ?>
+            </div>
         </div>
         <div class="card-header">
             <h3 class="card-title">

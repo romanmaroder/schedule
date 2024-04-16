@@ -14,14 +14,15 @@ class UserEmployeeCreateForm extends Model
     public $email;
     public $phone;
     public $password;
+    public $notice;
 
 
     public function rules()
     {
         return [
-            [['username'],'safe'],
+            [['username','notice'],'safe'],
             ['email','email'],
-            [['username','email','phone'],'string','max'=>255],
+            [['username','email','phone','notice'],'string','max'=>255],
             [['username'],'unique','targetClass' => User::class],
             ['password','string','min' => 6],
         ];

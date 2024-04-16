@@ -31,6 +31,7 @@ class ServiceReadRepository
         return $this->getProvider($query);
     }
 
+
     public function getAllByBrand(Brand $brand): DataProviderInterface
     {
         $query = Service::find()->alias('s')->active('s');

@@ -23,7 +23,7 @@ class MasterForm extends Model
 
     public function masterList(): array
     {
-        return ArrayHelper::map(Employee::find()->joinWith('role')->where(['not in', 'name', ['admin']])->asArray()->all(),'user_id',function ($employee) {
+        return ArrayHelper::map(Employee::find()->joinWith('role')->where(['not in', 'name', ['admin']])->active()->asArray()->all(),'user_id',function ($employee) {
 
             return $employee['first_name'].' '.$employee['last_name'];
 

@@ -57,9 +57,9 @@ PluginAsset::register($this)->add(
                                 ],
                                 [
                                     'attribute' => 'name',
-                                    /*'value' => function (Service $model) {
-                                        return Html::a(Html::encode($model->category->name), ['category', 'id' => $model->category->id]);
-                                    },*/
+                                    'value' => function (Service $model) {
+                                        return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                                    },
                                     'format' => 'raw',
                                 ],
                                 [

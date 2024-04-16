@@ -53,7 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
         string $phone,
         string $password,
         Schedule $schedule,
-        string $notice
+        ?string $notice
     ): self {
         $user = new User();
         $user->username = $username;

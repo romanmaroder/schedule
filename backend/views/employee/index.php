@@ -10,7 +10,6 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\User\Employee\Employee;
-use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -84,10 +83,21 @@ PluginAsset::register($this)->add(
                     [
                         'attribute' => 'color',
                         'value' => function (Employee $model) {
-                            return Html::tag('div', '', ['style' => 'width:20px;height:20px;margin:0 auto;background-color:' . $model->color]);
+                            return Html::tag(
+                                'div',
+                                '',
+                                ['style' => 'width:20px;height:20px;margin:0 auto;background-color:' . $model->color]
+                            );
                         },
                         'format' => 'raw',
                     ],
+                    [
+                        'attribute' => 'status',
+                        'value' => function ($model) {
+                            return \schedule\helpers\EmployeeHelper::statusLabel($model->status);
+                        },
+                        'format' => 'raw'
+                    ]
                     /*[
                         'class' => ActionColumn::class,
                         'urlCreator' => function ($action, Employee $model, $key, $index, $column) {

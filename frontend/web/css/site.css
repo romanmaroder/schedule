@@ -166,4 +166,9 @@ a.desc:after {
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
-
+.nav-link.aside-menu{
+    color: #6c757d;
+}
+.nav-link.aside-menu.active {
+    color: #000;
+}

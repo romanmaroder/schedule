@@ -68,6 +68,7 @@ class EmployeeManageService
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
             ),
+            $user->notice = $form->user->notice,
         );
 
 
@@ -110,6 +111,7 @@ class EmployeeManageService
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
             ),
+            $form->user->notice,
         );
 
         $user->attachEmployee(

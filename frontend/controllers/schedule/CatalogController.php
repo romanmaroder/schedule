@@ -9,6 +9,7 @@ use schedule\readModels\Schedule\CategoryReadRepository;
 use schedule\readModels\Schedule\ProductReadRepository;
 use schedule\readModels\Schedule\ServiceReadRepository;
 use schedule\readModels\Schedule\TagReadRepository;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -65,11 +66,37 @@ class CatalogController extends Controller
         $dataProvider = $this->service->getAllByCategory($category);
         $user = \Yii::$app->user->identity;
 
-        return $this->render('category', [
-            'category' => $category,
-            'dataProvider' => $dataProvider,
-            'user'=>$user,
-        ]);
+        return $this->render(
+            'category',
+            [
+                'category' => $category,
+                'dataProvider' => $dataProvider,
+                'user' => $user,
+            ]
+        );
+    }
+
+    public function actionView($id)
+    {
+        if (!$service = $this->service->find($id)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+
+        $category = $this->categories->find($service->category_id);
+        $menu = $this->service->getAll()->getModels();
+
+        $user = \Yii::$app->user->identity;
+
+        return $this->render(
+            'view',
+            [
+                'category' => $category,
+                'menu' => $menu,
+                'service' => $service,
+                'user' => $user,
+            ]
+        );
     }
 
     /**

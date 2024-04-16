@@ -6,6 +6,7 @@ use kartik\color\ColorInput;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use schedule\forms\manage\User\Employee\EmployeeExistCreateForm;
+use schedule\helpers\EmployeeHelper;
 use schedule\helpers\PriceHelper;
 use schedule\helpers\RateHelper;
 use schedule\helpers\RoleHelper;
@@ -100,9 +101,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
             </div>
             <div class="form-group">
-                <?= $form->field($model, 'status')->textInput(
-                    ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('status')]
-                )->label($model->getAttributeLabel('status')) ?>
+                <?= $form->field($model, 'status')->widget(
+                    Select2::class,
+                    [
+                        'bsVersion' => '4.x',
+                        'name' => 'status',
+                        'data' => EmployeeHelper::statusList(),
+                        'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
+                        'options' => ['placeholder' => 'Select a status ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+
+                    ]
+                ) ?>
             </div>
             <div class="form-group">
                 <?= $form->field($model->address, 'town')->textInput(

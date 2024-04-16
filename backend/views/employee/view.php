@@ -92,8 +92,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->price->name;
                         },
                     ],
-
-                    'status',
+                    [
+                        'attribute' => 'status',
+                        'value' => function ($model) {
+                            return \schedule\helpers\EmployeeHelper::statusLabel($model->status);
+                        },
+                        'format' => 'raw',
+                    ],
                     [
                         'attribute' => 'address.town',
                         'visible' => $model->issetAddress($model->address->town),
@@ -133,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'Weekends',
                         'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                     ],
-                    'notice:ntext'
+                    //'notice:ntext'
                 ],
             ]
         ) ?>

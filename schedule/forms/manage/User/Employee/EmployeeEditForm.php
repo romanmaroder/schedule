@@ -60,7 +60,7 @@ class EmployeeEditForm extends CompositeForm
             [['userId','rateId', 'priceId', 'firstName', 'lastName'], 'required'],
             [['firstName', 'lastName'], 'string', 'max' => 100],
             [['color','birthday','phone'],'string'],
-            [['roleId'],'integer'],
+            [['roleId','status'],'integer'],
         ];
     }
 

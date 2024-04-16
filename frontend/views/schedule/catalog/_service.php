@@ -2,12 +2,14 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\Schedule\Service\Service;
+use schedule\helpers\ServiceHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $user \schedule\entities\User\User */
+/* @var $category \schedule\entities\Schedule\Category */
 
 
 PluginAsset::register($this)->add(
@@ -40,14 +42,14 @@ PluginAsset::register($this)->add(
                                 'id' => 'service'
                             ],
                             'columns' => [
-                                [
+                                /*[
                                     'attribute' => 'parent category',
-                                    'value' => function (Service $model) {
+                                    'value' => function (Service $model) use ($category) {
                                         return Html::a(Html::encode($model->category->parent->parent->name),
-                                                       ['category', 'id' => $model->category->parent->parent->id]);
+                                                       ['category', 'id' => $model->category->parent->id ]);
                                         },
                                     'format' => 'raw',
-                                ],
+                                ],*/
                                 [
                                     'attribute' => 'parent category',
                                     'value' => function (Service $model) {
@@ -59,8 +61,8 @@ PluginAsset::register($this)->add(
                                 [
                                     'attribute' => 'name',
                                     'value' => function (Service $model) {
-                                        return Html::a(Html::encode($model->category->name),
-                                                       ['category', 'id' => $model->category->id]);
+                                        return Html::a(Html::encode($model->name),
+                                                       ['view', 'id' => $model->id]);
                                     },
                                     'format' => 'raw',
                                 ],
@@ -68,7 +70,7 @@ PluginAsset::register($this)->add(
                                     'attribute' => 'price_new',
                                     'value' => function (Service $model) use($user){
                                         //return PriceHelper::format($model->price_new);
-                                        return $model->price_new * $user->employee->rate->rate;
+                                        return $model->price_new * $user->employee->price->rate; // TODO подумать ставка или прайс
                                     },
                                 ],
                                 /*[
@@ -76,7 +78,7 @@ PluginAsset::register($this)->add(
                                     'value' => function (Service $model) {
                                         return PriceHelper::format($model->price_old);
                                     },
-                                ],
+                                ],*/
                                 [
                                     'attribute' => 'status',
                                     //'filter' => $searchModel->statusList(),
@@ -85,7 +87,7 @@ PluginAsset::register($this)->add(
                                     },
                                     'format' => 'raw',
                                     'contentOptions' => ['style' => 'text-align:center'],
-                                ]*/
+                                ]
                             ],
                         ]
                     ); ?>
@@ -106,7 +108,7 @@ $js = <<< JS
  
     $('#service').DataTable({
     
-       "pageLength": 3, 
+       //"pageLength": 3, 
        "paging": true,
        "lengthChange": false,
        "searching": true,
@@ -130,7 +132,7 @@ $js = <<< JS
       //   ],
         "language": {
           "search":"Поиск"
-         },
+         }
     }).buttons().container().appendTo('#service_wrapper .col-md-6:eq(0)');
 
   });
