@@ -48,10 +48,10 @@ PluginAsset::register($this)->add(
                     'id' => 'employee'
                 ],
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+                    //['class' => 'yii\grid\SerialColumn'],
 
                     //'id',
-                    'user_id',
+                    //'user_id',
                     [
                         'attribute' => 'username',
                         'value' => function (Employee $model) {
@@ -78,6 +78,10 @@ PluginAsset::register($this)->add(
                         'value' => function (Employee $model) {
                             return Html::a(Html::encode($model->phone), 'tel:' . $model->phone, ['view', 'id' => $model->id]);
                         },
+                        'contentOptions' => [
+                            'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw',
                     ],
                     [
@@ -89,6 +93,7 @@ PluginAsset::register($this)->add(
                                 ['style' => 'width:20px;height:20px;margin:0 auto;background-color:' . $model->color]
                             );
                         },
+                        'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw',
                     ],
                     [
@@ -96,6 +101,10 @@ PluginAsset::register($this)->add(
                         'value' => function ($model) {
                             return \schedule\helpers\EmployeeHelper::statusLabel($model->status);
                         },
+                        'contentOptions' => [
+                                'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw'
                     ]
                     /*[

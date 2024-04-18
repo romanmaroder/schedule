@@ -44,6 +44,10 @@ PluginAsset::register($this)->add(
                                 ['/user/view', 'id' => $model->client->id]
                             );
                         },
+                        'contentOptions' => [
+                            'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw',
                     ],
                     [
@@ -51,18 +55,34 @@ PluginAsset::register($this)->add(
                         'value' => function ($provider) {
                             return implode(', ', ArrayHelper::getColumn($provider->services, 'name'));
                         },
+                        'contentOptions' => [
+                            'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                     ],
                     [
                         'attribute' => 'notice',
+                        'contentOptions' => [
+                            'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                         'format' => 'ntext'
                     ],
 
                     [
                         'attribute' => 'start',
+                        'contentOptions' => [
+                            'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                         'format' => ['datetime', 'php: H:i']
                     ],
                     [
                         'attribute' => 'end',
+                        'contentOptions' => [
+                            'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                         'format' => ['datetime', 'php: H:i']
                     ],
 

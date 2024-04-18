@@ -77,8 +77,17 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'visible' => $model->schedule->weekends ?: false,
                 ],
                 [
+                    'attribute' => 'Week',
+                    'value' => function ($model) {
+                        return $model->schedule->week;
+                    },
+                    'visible' => $model->schedule->week ?: false,
+                ],
+                [
                     'attribute' => 'notice',
-                    'value' => function($model){ return $model->notice;},
+                    'value' => function ($model) {
+                        return $model->notice;
+                    },
                     'visible' => $model->notice ?: false,
                     'format' => 'ntext',
                 ],

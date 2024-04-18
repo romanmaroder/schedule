@@ -47,7 +47,8 @@ class EmployeeManageService
             ),
             new Schedule(
                 $form->schedule->hoursWork,
-                $form->schedule->weekends
+                $form->schedule->weekends,
+                $form->schedule->week
             ),
             $form->color,
             $form->roleId,
@@ -67,6 +68,7 @@ class EmployeeManageService
             new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $user->notice = $form->user->notice,
         );
@@ -91,6 +93,7 @@ class EmployeeManageService
             new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->color,
             $form->roleId,
@@ -110,6 +113,7 @@ class EmployeeManageService
             new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->user->notice,
         );
@@ -130,6 +134,7 @@ class EmployeeManageService
             ),new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->color,
             $form->roleId,

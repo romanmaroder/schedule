@@ -8,16 +8,19 @@ class Schedule
 {
     public $hoursWork;
     public $weekends;
+    public $week;
 
     /**
      * Schedule constructor.
      * @param $hoursWork
      * @param $weekends
+     * @param $week
      */
-    public function __construct($hoursWork, $weekends,)
+    public function __construct($hoursWork, $weekends, $week)
     {
         $this->hoursWork = $hoursWork;
         $this->weekends = $weekends;
+        $this->week = $week;
     }
 
     public static function scheduleDays(): array

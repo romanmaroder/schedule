@@ -90,6 +90,11 @@ $this->params['breadcrumbs'][] = $this->title;
             )->label('Days') ?>
         </div>
         <div class="form-group">
+            <?= $form->field($model->schedule, 'week')->textInput(
+                ['maxLength' => true, 'placeholder' => $model->schedule->getAttributeLabel('week')]
+            )->label($model->schedule->getAttributeLabel('week')) ?>
+        </div>
+        <div class="form-group">
             <?= $form->field($model, 'notice')->textarea(
                 ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('notice'),'row'=>5,]
             )->label($model->getAttributeLabel('notice')) ?>

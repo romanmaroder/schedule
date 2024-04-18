@@ -32,6 +32,7 @@ class ScheduleWorkBehavior extends Behavior
         $model->{$this->attribute} = new Schedule(
             ArrayHelper::getValue($schedule, 'hoursWork'),
             ArrayHelper::getValue($schedule, 'weekends'),
+            ArrayHelper::getValue($schedule, 'week'),
         );
     }
 
@@ -48,6 +49,7 @@ class ScheduleWorkBehavior extends Behavior
                 [
                     'hoursWork' => $model->{$this->attribute}->hoursWork,
                     'weekends' => $model->{$this->attribute}->weekends,
+                    'week' => $model->{$this->attribute}->week,
                 ]
             )
         );

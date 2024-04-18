@@ -35,7 +35,8 @@ class UserManageService
             $form->password,
             new Schedule(
                 $form->schedule->hoursWork,
-                $form->schedule->weekends
+                $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->notice,
         );
@@ -58,6 +59,7 @@ class UserManageService
             new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->notice,
         );

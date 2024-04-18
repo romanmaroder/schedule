@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             if ($user->notice): ?>
                                                 <li class="mb-2">
                                                     <span class="fa-li"><i class="fas fa-calendar-week"></i></span>
-                                                    Week :
+                                                    Notice :
                                                     <span><?= $user->notice; ?></span>
                                                 </li>
                                             <?endif; ?>
@@ -83,6 +83,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <span><?= ScheduleHelper::getWorkingHours(
                                                             $user->schedule->hoursWork
                                                         ); ?></span>
+                                                </li>
+                                            <?endif; ?>
+                                            <?
+                                            if ($user->schedule->week): ?>
+                                                <li class="mb-2">
+                                                    <span class="fa-li"><i class="fas fa-calendar-alt"></i></span>
+                                                    Week :
+                                                    <span><?=  $user->schedule->week; ?></span>
                                                 </li>
                                             <?endif; ?>
                                         </ul>

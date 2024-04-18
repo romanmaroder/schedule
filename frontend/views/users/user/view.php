@@ -62,6 +62,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                     'visible' => ScheduleHelper::getWeekends($model->schedule->weekends) ?: false,
                 ],
+                [
+                    'attribute' => 'Week',
+                    'value' => function($model){ return $model->schedule->week;},
+                    'visible' => $model->schedule->weekends ?: false,
+                ],
+                [
+                    'attribute' => 'Notice',
+                    'value' => function($model){ return $model->notice;},
+                    'visible' => $model->notice ?: false,
+                ]
                 //'created_at:datetime',
                 //'updated_at:datetime',
             ],
