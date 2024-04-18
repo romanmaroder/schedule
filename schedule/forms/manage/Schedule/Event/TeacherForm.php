@@ -5,6 +5,7 @@ namespace schedule\forms\manage\Schedule\Event;
 
 
 use schedule\entities\Schedule\Event\Education;
+use schedule\entities\User\Employee\Employee;
 use schedule\entities\User\User;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
@@ -23,7 +24,7 @@ class TeacherForm extends Model
 
     public function teacherList(): array
     {
-        return ArrayHelper::map(User::find()->all(),'id','username');
+        return ArrayHelper::map(Employee::find()->where(['role_id'=>2])->all(),'id',function($item){ return $item->getFullName();});
     }
 
     public function rules():array
