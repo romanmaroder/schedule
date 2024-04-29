@@ -2,6 +2,8 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\helpers\EventHelper;
+use schedule\helpers\EventMethodsOfPayment;
+use schedule\helpers\EventPaymentStatusHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -81,17 +83,24 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ],
                         [
                             'attribute' => 'status',
-                            'value' => \schedule\helpers\EventPaymentStatusHelper::statusLabel($model->status),
+                            'value' => EventPaymentStatusHelper::statusLabel($model->status),
                             'format' => 'raw',
 
                         ],
                         [
                             'attribute' => 'payment',
-                            'value' => \schedule\helpers\EventMethodsOfPayment::statusLabel($model->payment),
+                            'value' => EventMethodsOfPayment::statusLabel($model->payment),
+                            'visible' => $model->payment ?: false,
                             'format' => 'raw',
 
                         ],
-                        'notice'
+                        [
+                            'attribute' => 'notice',
+                            'value' => $model->notice,
+                            'visible' => $model->notice ?: false,
+                            'format' => 'raw',
+
+                        ]
                     ],
                 ]
             ) ?>

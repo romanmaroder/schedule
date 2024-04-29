@@ -73,8 +73,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ],
                 [
                     'attribute' => 'notice',
-                    'format' => 'ntext',
                     'visible' => $model->issetNotice($model->notice),
+                    'format' => 'ntext',
                 ],
             ],
         ]

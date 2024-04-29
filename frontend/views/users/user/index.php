@@ -58,11 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 </li>
                                             <?endif; ?>
                                             <?
-                                            if ($user->notice): ?>
+                                            if ($user->schedule->week): ?>
                                                 <li class="mb-2">
                                                     <span class="fa-li"><i class="fas fa-calendar-week"></i></span>
-                                                    Notice :
-                                                    <span><?= $user->notice; ?></span>
+                                                    Week :
+                                                    <span><?=  $user->schedule->week; ?></span>
                                                 </li>
                                             <?endif; ?>
                                             <?
@@ -86,11 +86,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 </li>
                                             <?endif; ?>
                                             <?
-                                            if ($user->schedule->week): ?>
+                                            if ($user->notice): ?>
                                                 <li class="mb-2">
-                                                    <span class="fa-li"><i class="fas fa-calendar-alt"></i></span>
-                                                    Week :
-                                                    <span><?=  $user->schedule->week; ?></span>
+                                                    <span class="fa-li"><i class="fas fa-comment-alt"></i></span>
+                                                    Notice :
+                                                    <span><?= $user->notice; ?></span>
                                                 </li>
                                             <?endif; ?>
                                         </ul>
