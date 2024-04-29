@@ -25,7 +25,7 @@ class ClientForm extends Model
     public function userList(): array
     {
         return ArrayHelper::map(
-            User::find()->joinWith(['employee','employee.role'])->orderBy('schedule_employees.id')->asArray()->all(),
+            User::find()->joinWith(['employee','employee.role'])->where(['users.status'=> User::STATUS_ACTIVE])->orderBy('schedule_employees.id')->asArray()->all(),
             'id',
             'username',
             'employee.role.name'

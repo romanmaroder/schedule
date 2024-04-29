@@ -9,6 +9,7 @@
 
 
 use schedule\helpers\ScheduleHelper;
+use schedule\helpers\UserHelper;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
@@ -41,19 +42,29 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="col-12">
                                     <h2 class="lead mb-3"><b><?= $user->username ?></b></h2>
 
-                                        <ul class="ml-4 mb-0 fa-ul text-muted">
-                                          <?
-                                            if ($user->phone): ?>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <?
+                                        if ($user->status): ?>
+                                            <li class="mb-2">
+                                                <span class="fa-li"><i class="fas fa-shield-alt"></i></span>
+                                                <?= UserHelper::statusLabel($user->status) ?>
+                                            </li>
+                                        <?
+                                        endif; ?>
+
+                                        <?
+                                        if ($user->phone): ?>
+                                            <li class="mb-2">
+                                                <span class="fa-li"><i class="fas fa-phone"></i></span>
+                                                <a href="tel:<?= $user->phone; ?>"> Phone
+                                                    #: <?= $user->phone; ?></a>
+                                            </li>
+                                        <?
+                                        endif; ?>
+                                        <?
+                                        if ($user->email): ?>
                                                 <li class="mb-2">
-                                                    <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                                    <a href="tel:<?= $user->phone; ?>"> Phone
-                                                        #: <?= $user->phone; ?></a>
-                                                </li>
-                                            <?endif; ?>
-                                            <?
-                                            if ($user->email): ?>
-                                                <li class="mb-2">
-                                                    <span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span>
+                                                    <span class="fa-li"><i class="fas fa-envelope"></i></span>
                                                     <a href="mailto:<?= $user->email; ?>"><?= $user->email; ?></a>
                                                 </li>
                                             <?endif; ?>
