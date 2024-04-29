@@ -123,7 +123,7 @@ class DefaultController extends Controller
         if ($form->load($this->request->post()) && $form->validate()) {
             try {
                 $this->employeeService->edit($employee->id, $form);
-                return $this->redirect(['cabinet/default/index',]);
+                return $this->redirect(['cabinet/default/profile',]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());

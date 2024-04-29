@@ -7,7 +7,6 @@ namespace schedule\forms\manage\User;
 use schedule\entities\User\User;
 use schedule\forms\CompositeForm;
 use schedule\forms\manage\ScheduleForm;
-use yii\base\Model;
 
 /**
  * @property ScheduleForm $schedule
@@ -28,7 +27,6 @@ class UserEditForm extends CompositeForm
     public function __construct(User $user, $config = [])
     {
         if ($user){
-
             $this->username = $user->username;
             $this->email = $user->email;
             $this->phone = $user->phone;

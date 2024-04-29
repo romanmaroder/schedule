@@ -9,6 +9,13 @@
 /* @var $model \schedule\forms\manage\User\Employee\EmployeeEditForm */
 
 use kartik\date\DatePicker;
+use kartik\widgets\ColorInput;
+use kartik\widgets\Select2;
+use schedule\helpers\EmployeeHelper;
+use schedule\helpers\PriceHelper;
+use schedule\helpers\RateHelper;
+use schedule\helpers\RoleHelper;
+use schedule\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
@@ -92,6 +99,56 @@ $this->params['employee'] = $employee;
             ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('apartment')]
         )->label($model->getAttributeLabel('apartment')) ?>
     </div>
+
+    <div class="form-group row d-none">
+        <?= $form->field($model, 'rateId')->hiddenInput()->label(false)  ?>
+        <?= $form->field($model, 'priceId')->hiddenInput()->label(false)  ?>
+        <?= $form->field($model, 'status')->hiddenInput()->label(false) ?>
+        <?= $form->field($model, 'color')->hiddenInput()->label(false) ?>
+        <?= $form->field($model, 'roleId')->hiddenInput()->label(false)  ?>
+
+        <?= $form->field($model->schedule, 'hoursWork')->widget(
+            Select2::class,
+            [
+                'name' => 'hoursWork',
+                'language' => 'ru',
+                'data' => ScheduleHelper::hours(),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'options' => [
+                    'id' => 'hoursWork',
+                    'class'=>'d-none',
+                    'placeholder' => 'Select',
+                    'multiple' => true,
+                    'autocomplete' => 'off',
+                ],
+                'pluginOptions' => [
+                    'tags' => true,
+                    'allowClear' => true,
+                ],
+            ]
+        ) ?>
+        <?= $form->field($model->schedule, 'weekends')->widget(
+            Select2::class,
+            [
+                'name' => 'weekends',
+                'language' => 'ru',
+                'data' => ScheduleHelper::days(),
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'options' => [
+                    'id' => 'weekends',
+                    'class'=>'d-none',
+                    'placeholder' => 'Select',
+                    'multiple' => true,
+                    'autocomplete' => 'off',
+                ],
+                'pluginOptions' => [
+                    'tags' => true,
+                    'allowClear' => true,
+                ],
+            ]
+        ) ?>
+    </div>
+
     <div class="form-group">
         <div class="offset-sm-2 col-sm-10">
             <?= Html::submitButton('Save', ['class' => 'btn btn-danger btn-shadow']) ?>
