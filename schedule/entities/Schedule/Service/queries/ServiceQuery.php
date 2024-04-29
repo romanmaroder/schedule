@@ -5,10 +5,11 @@ namespace schedule\entities\Schedule\Service\queries;
 
 
 use schedule\entities\Schedule\Service\Service;
+use yii\db\ActiveQuery;
 
-class ServiceQuery extends \yii\db\ActiveQuery
+class ServiceQuery extends ActiveQuery
 {
-    public function active($alias = null)
+    public function active($alias = null): ServiceQuery
     {
         return $this->andWhere(
             [
