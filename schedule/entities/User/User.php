@@ -68,7 +68,7 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
-    public function edit(string $username, string $email, string $phone, string $password, Schedule $schedule,$notice): void
+    public function edit(string $username, string $email, string $phone, string $password, int $status, Schedule $schedule,$notice): void
     {
         $this->username = $username;
         $this->email = $email;
@@ -78,6 +78,7 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             $this->password_hash;
         }
+        $this->status = $status;
         $this->schedule = $schedule;
         $this->notice = $notice;
         $this->updated_at = time();

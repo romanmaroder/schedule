@@ -56,6 +56,7 @@ class UserManageService
             $form->email,
             $form->phone,
             $form->password,
+            $form->status,
             new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,

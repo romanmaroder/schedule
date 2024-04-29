@@ -65,6 +65,7 @@ class EmployeeManageService
             $user->email =$form->user->email,
             $user->phone = $form->user->phone,
             $user->password = $form->user->password,
+            $user->status = $form->user->status,
             new Schedule(
                 $form->schedule->hoursWork,
                 $form->schedule->weekends,
