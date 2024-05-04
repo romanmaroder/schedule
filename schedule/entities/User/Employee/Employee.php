@@ -133,6 +133,15 @@ class Employee extends ActiveRecord
         $this->status = $status;
     }
 
+    public function editProfile(string $firstName, string $lastName, string $phone, string $birthday,Address $address): void
+    {
+        $this->first_name = $firstName;
+        $this->last_name = $lastName;
+        $this->phone = $phone;
+        $this->birthday = $birthday;
+        $this->address = $address;
+    }
+
     /**
      * @return string
      */

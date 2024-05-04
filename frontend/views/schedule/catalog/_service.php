@@ -37,9 +37,10 @@ PluginAsset::register($this)->add(
                     <?= GridView::widget(
                         [
                             'dataProvider' => $dataProvider,
+                            'summary' => false,
                             'tableOptions' => [
                                 'class' => 'table table-striped table-bordered',
-                                'id' => 'service'
+                                'id' => 'service',
                             ],
                             'columns' => [
                                 /*[
@@ -108,12 +109,13 @@ $js = <<< JS
  
     $('#service').DataTable({
     
-       //"pageLength": 3, 
+       "pageLength": -1, 
        "paging": true,
-       "lengthChange": false,
+       "lengthChange": true,
+       "lengthMenu": [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
        "searching": true,
        "ordering": true,
-       "info": false,
+       "info": true,
        "autoWidth": false,
        "responsive": true,
        //"dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
@@ -131,7 +133,7 @@ $js = <<< JS
       //   }
       //   ],
         "language": {
-          "search":"Поиск"
+          "search":"Search"
          }
     }).buttons().container().appendTo('#service_wrapper .col-md-6:eq(0)');
 

@@ -133,10 +133,12 @@ $(function () {
 let table= $('#unpaid').DataTable({
         bDestroy: true,
         responsive: true,
-        pageLength: 10,
-                        paging: true,
-                        searching: true,
-                        ordering: false,
+        pageLength: -1, 
+        paging: true,
+        lengthChange: true,
+        lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
+        searching: true,
+        ordering: false,
         info: true,
         autoWidth: false,
         colReorder:{
@@ -215,12 +217,6 @@ let table= $('#unpaid').DataTable({
                                 //value: 'Option',
                                 //valueJoiner: 'et'
                             },
-                            lengthMenu: 'Show <select class="form-control form-control-sm">'+
-                            '<option value="10">10</option>'+
-                            '<option value="20">20</option>'+
-                            '<option value="50">50</option>'+
-                            '<option value="-1">All</option>'+
-                            '</select>',
                             paginate: {
                         first: "First",
                         previous: '<i class="fas fa-backward"></i>',

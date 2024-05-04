@@ -84,12 +84,23 @@ class User extends ActiveRecord implements IdentityInterface
         $this->updated_at = time();
     }
 
+    public function editProfile(array $username, string $email, string $password)
+    {
+        $this->username = $this->mergeFullName($username);
+        $this->email = $email;
+        if (!empty($password)) {
+            $this->setPassword($password);
+        } else {
+            $this->password_hash;
+        }
+    }
+
     public static function requestSignup(string $username, string $email, string $password): self
     {
         $user = new User();
         $user->username = $username;
         $user->email = $email;
-        $user->setPassword( $password);
+        $user->setPassword($password);
         $user->created_at = time();
         $user->status = self::STATUS_INACTIVE;
         $user->generateEmailVerificationToken();

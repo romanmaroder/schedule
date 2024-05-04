@@ -198,8 +198,10 @@ $js = <<< JS
    let table= $('#salary').DataTable({
                 bDestroy: true,
                 responsive: true,
-                pageLength: 10,
+                pageLength: -1, 
                 paging: true,
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
                 searching: true,
                 ordering: false,
                 info: true,
@@ -317,19 +319,13 @@ $js = <<< JS
                         //value: 'Option',
                         //valueJoiner: 'et'
                     },
-                    lengthMenu: 'Show <select class="form-control form-control-sm">'+
-                    '<option value="10">10</option>'+
-                    '<option value="20">20</option>'+
-                    '<option value="50">50</option>'+
-                    '<option value="-1">All</option>'+
-                    '</select>',
                     paginate: {
                         first: "First",
                         previous: '<i class="fas fa-backward"></i>',
                         last: "Last",
                         next: '<i class="fas fa-forward"></i>'
                     }
-                }
+                },
     }).buttons().container().appendTo('#salary_wrapper .col-md-6:eq(0)');
 
    table.on("column-reorder", function(e, settings, details){

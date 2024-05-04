@@ -9,13 +9,6 @@
 /* @var $model \schedule\forms\manage\User\Employee\EmployeeEditForm */
 
 use kartik\date\DatePicker;
-use kartik\widgets\ColorInput;
-use kartik\widgets\Select2;
-use schedule\helpers\EmployeeHelper;
-use schedule\helpers\PriceHelper;
-use schedule\helpers\RateHelper;
-use schedule\helpers\RoleHelper;
-use schedule\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
@@ -42,14 +35,14 @@ $this->params['employee'] = $employee;
         )->label($model->getAttributeLabel('lastName')) ?>
     </div>
     <div class="form-group row">
-        <?= $form->field($model->user, 'email')->textInput(
+        <?= $form->field($model, 'email')->textInput(
             ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('email')]
         )->label($model->getAttributeLabel('email')) ?>
     </div>
     <div class="form-group row">
-        <?= $form->field($model->user, 'password')->passwordInput(
-            ['maxLength' => true, 'placeholder' => $model->user->getAttributeLabel('password')]
-        )->label($model->user->getAttributeLabel('password'))->hint('Re-enter your password') ?>
+        <?= $form->field($model, 'password')->passwordInput(
+            ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('password')]
+        )->label($model->getAttributeLabel('password'))->hint('Re-enter your password') ?>
     </div>
 
     <div class="form-group row">
@@ -98,55 +91,6 @@ $this->params['employee'] = $employee;
         <?= $form->field($model->address, 'apartment')->textInput(
             ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('apartment')]
         )->label($model->getAttributeLabel('apartment')) ?>
-    </div>
-
-    <div class="form-group row d-none">
-        <?= $form->field($model, 'rateId')->hiddenInput()->label(false)  ?>
-        <?= $form->field($model, 'priceId')->hiddenInput()->label(false)  ?>
-        <?= $form->field($model, 'status')->hiddenInput()->label(false) ?>
-        <?= $form->field($model, 'color')->hiddenInput()->label(false) ?>
-        <?= $form->field($model, 'roleId')->hiddenInput()->label(false)  ?>
-
-        <?= $form->field($model->schedule, 'hoursWork')->widget(
-            Select2::class,
-            [
-                'name' => 'hoursWork',
-                'language' => 'ru',
-                'data' => ScheduleHelper::hours(),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'options' => [
-                    'id' => 'hoursWork',
-                    'class'=>'d-none',
-                    'placeholder' => 'Select',
-                    'multiple' => true,
-                    'autocomplete' => 'off',
-                ],
-                'pluginOptions' => [
-                    'tags' => true,
-                    'allowClear' => true,
-                ],
-            ]
-        ) ?>
-        <?= $form->field($model->schedule, 'weekends')->widget(
-            Select2::class,
-            [
-                'name' => 'weekends',
-                'language' => 'ru',
-                'data' => ScheduleHelper::days(),
-                'theme' => Select2::THEME_BOOTSTRAP,
-                'options' => [
-                    'id' => 'weekends',
-                    'class'=>'d-none',
-                    'placeholder' => 'Select',
-                    'multiple' => true,
-                    'autocomplete' => 'off',
-                ],
-                'pluginOptions' => [
-                    'tags' => true,
-                    'allowClear' => true,
-                ],
-            ]
-        ) ?>
     </div>
 
     <div class="form-group">

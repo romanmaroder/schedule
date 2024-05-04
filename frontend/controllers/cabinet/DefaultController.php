@@ -4,14 +4,14 @@
 namespace frontend\controllers\cabinet;
 
 
-use schedule\forms\manage\User\Employee\EmployeeEditForm;
+use schedule\forms\user\ProfileEditForm;
 use schedule\readModels\Employee\EmployeeReadRepository;
 use schedule\readModels\Schedule\EducationReadRepository;
 use schedule\readModels\Schedule\EventReadRepository;
 use schedule\readModels\User\UserReadRepository;
 use schedule\services\manage\EmployeeManageService;
+use schedule\useCases\cabinet\ProfileService;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -27,6 +27,7 @@ class DefaultController extends Controller
     private $users;
     private $employee;
     private $education;
+    private $profile;
 
     private EmployeeManageService $employeeService;
 
@@ -38,6 +39,7 @@ class DefaultController extends Controller
         EmployeeReadRepository $employee,
         EducationReadRepository $education,
         EmployeeManageService $employeeManageService,
+        ProfileService $profile,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
@@ -49,6 +51,7 @@ class DefaultController extends Controller
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
         $this->user= $this->users->find(\Yii::$app->user->getId());
+        $this->profile = $profile;
     }
 
     public function behaviors(): array
@@ -118,11 +121,11 @@ class DefaultController extends Controller
         $user = $this->users->find(\Yii::$app->user->getId());
         $employee = $this->employee->find($user->employee);
 
-        $form = new EmployeeEditForm($employee);
+        $form = new ProfileEditForm($employee);
 
         if ($form->load($this->request->post()) && $form->validate()) {
             try {
-                $this->employeeService->edit($employee->id, $form);
+                $this->profile->edit($employee->id, $form);
                 return $this->redirect(['cabinet/default/profile',]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
