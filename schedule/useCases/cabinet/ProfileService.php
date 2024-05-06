@@ -38,7 +38,11 @@ class ProfileService
                 $form->address->apartment,
             ),
         );
-        $user->editProfile([$form->firstName, $form->lastName], $form->email, $form->password);
+        $user->editProfile(
+            [$form->firstName, $form->lastName],
+            $form->email,
+            $form->password
+        );
 
         $this->employees->save($employee);
         $this->users->save($user);

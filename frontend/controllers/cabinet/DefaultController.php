@@ -22,10 +22,11 @@ class DefaultController extends Controller
     public $totalCount;
     public $todayCount;
     public $user;
+    public $employee;
 
     private $events;
     private $users;
-    private $employee;
+    private $employees;
     private $education;
     private $profile;
 
@@ -36,7 +37,7 @@ class DefaultController extends Controller
         $module,
         EventReadRepository $events,
         UserReadRepository $users,
-        EmployeeReadRepository $employee,
+        EmployeeReadRepository $employees,
         EducationReadRepository $education,
         EmployeeManageService $employeeManageService,
         ProfileService $profile,
@@ -45,12 +46,17 @@ class DefaultController extends Controller
         parent::__construct($id, $module, $config);
         $this->events = $events;
         $this->users = $users;
-        $this->employee = $employee;
+        $this->employees = $employees;
         $this->education = $education;
         $this->employeeService = $employeeManageService;
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
-        $this->user= $this->users->find(\Yii::$app->user->getId());
+        if (!$this->user) {
+            $this->user = $this->users->find(\Yii::$app->user->getId());
+        }
+        if (!$this->employee) {
+            $this->employee = $this->employees->find($this->user->employee);
+        }
         $this->profile = $profile;
     }
 
@@ -71,8 +77,7 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $user = $this->users->find(\Yii::$app->user->getId());
-        $event = $this->events->getAllWeekById($user->id);
+        $event = $this->events->getAllWeekById($this->user->id);
 
 
         $provider = new ArrayDataProvider(
@@ -88,7 +93,7 @@ class DefaultController extends Controller
         return $this->render(
             'index',
             [
-                'user' => $user,
+                'user' => $this->user,
                 'provider' => $provider,
             ]
         );
@@ -96,36 +101,29 @@ class DefaultController extends Controller
 
     public function actionTimeline()
     {
-        $user = $this->users->find(\Yii::$app->user->getId());
+        $events = $this->events->getAllDayById($this->employee->user_id);
 
-        $employee = $this->employee->find($user->employee);
-
-        $events = $this->events->getAllDayById($employee->user_id);
-
-        $educations = $this->education->getLessonDayById($user->id);
+        $educations = $this->education->getLessonDayById($this->user->id);
 
 
         return $this->render(
             'timeline',
             [
-                'employee' => $employee,
-                'user' => $user,
+                'employee' => $this->employee,
+                'user' => $this->user,
                 'events' => $events,
-                'educations'=>$educations,
+                'educations' => $educations,
             ]
         );
     }
 
     public function actionProfile()
     {
-        $user = $this->users->find(\Yii::$app->user->getId());
-        $employee = $this->employee->find($user->employee);
-
-        $form = new ProfileEditForm($employee);
+        $form = new ProfileEditForm($this->employee);
 
         if ($form->load($this->request->post()) && $form->validate()) {
             try {
-                $this->profile->edit($employee->id, $form);
+                $this->profile->edit($this->employee->id, $form);
                 return $this->redirect(['cabinet/default/profile',]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -137,10 +135,11 @@ class DefaultController extends Controller
         return $this->render(
             'profile',
             [
-                'employee' => $employee,
-                'user' => $user,
+                'employee' => $this->employee,
+                'user' => $this->user,
                 'model' => $form,
             ]
         );
     }
+
 }

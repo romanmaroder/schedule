@@ -171,23 +171,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             'timeGridDay' => 'far far fa-calendar',
                             'timeGridWeek' => 'fas fas fa-calendar-week',
                         ],
-                        'initialView' =>'dayGridMonth',
+                        'initialView' =>  new JsExpression(
+                            "
+             localStorage.getItem('fullCalendarDefaultView') !== null ? localStorage.getItem('fullCalendarDefaultView') : 'dayGridMonth'"),
                         'nowIndicator' => true,
                         'eventClassNames' => ['p-1', 'm-1'],
                         'viewDidMount' => new JsExpression(
                             "
                                 function(info){
-                                    let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
-                                    var date = calendar.getDate();
-                                    let a =new Intl.DateTimeFormat('default', {
-                                                    dateStyle:'short',
-                                                    //month: 'numeric', day: 'numeric', year:'numeric',
-                                                    //hour: '2-digit', minute: '2-digit', hour24: false,
-                                            }).format(new Date(date))
-                                
-                                    var result = a.replace(/[\.\/]/g,'-');
-                                    localStorage.setItem('fcDefaultView', info.view.type);
-                                    localStorage.setItem('fcDefaultViewDate', result );
+//                                    let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
+//                                    var date = calendar.getDate();
+//                                    let a =new Intl.DateTimeFormat('default', {
+//                                                    dateStyle:'short',
+//                                                    //month: 'numeric', day: 'numeric', year:'numeric',
+//                                                    //hour: '2-digit', minute: '2-digit', hour24: false,
+//                                            }).format(new Date(date))
+//                                
+//                                    var result = a.replace(/[\.\/]/g,'-');
+//                                    localStorage.setItem('fcDefaultView', info.view.type);
+//                                    localStorage.setItem('fcDefaultViewDate', result );
                                 }"
                         ),
                         'windowResize' => new JsExpression(
@@ -342,6 +344,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                         
                         "),
+                        'initialDate' => new JsExpression('new Date(localStorage.getItem("fullCalendarDefaultDate"))'),
+                        'datesSet' => new JsExpression(
+                            "function( dateInfo)
+                                        {
+                                        var date = new Date(dateInfo.view.currentStart);
+                                            var date = new Date(dateInfo.view.currentStart);
+                                            var view = dateInfo.view.type;
+
+                                            dateObj = new Date(date) /* Or empty, for today */
+                                            dateIntNTZ = dateObj.getTime() - dateObj.getTimezoneOffset() * 60 * 1000
+                                            dateObjNTZ = new Date(dateIntNTZ)
+                                            localStorage.fullCalendarDefaultDate =  dateObjNTZ.toISOString().slice(0, 10)
+                                            
+                                            localStorage.fullCalendarDefaultView = view;
+                                        }"
+                        ),
 
                     ],
                 ]

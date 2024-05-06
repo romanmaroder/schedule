@@ -114,12 +114,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
              */
             $eventResize = new JsExpression(
                 "function(eventResizeInfo ){
-                        console.log(eventResizeInfo);
 									$.ajax({
                                          url:'/schedule/api/'+ eventResizeInfo.event.source.id +'-api/dragging-resizing',
                                          data:{'id':eventResizeInfo.event.id,'start':eventResizeInfo.event.startStr,'end':eventResizeInfo.event.endStr},
                                          success:function (data) {
-                                                console.log(data);
                                                     var Toast = Swal.mixin({
                                                                         toast: true,
                                                                         position: 'top-end',
@@ -185,7 +183,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                 },
                                             });
                 		}"
-            ); ?>
+            );
+            ?>
 
             <?= yii2fullcalendar6::widget(
                 [
@@ -224,7 +223,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         url:'/schedule/api/event-api/view',
                                                         });
                                                     });
-                                                   console.log(event);
                                                     successCallback(event)
                                                 },
                                             });
@@ -282,7 +280,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'footerToolbar' => [
                             'right' => 'addEducation'
                         ],
-                        'initialView' => 'dayGridMonth',
+                        'initialView' =>  new JsExpression(
+                            "
+             localStorage.getItem('fullCalendarDefaultView') !== null ? localStorage.getItem('fullCalendarDefaultView') : '$initialView'"),
                         'selectable' => true,
                         'editable' => true,
                         'select' => $select,
@@ -355,25 +355,24 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'viewDidMount' => new JsExpression(
                             "
                                 function(info){
-                                    let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
-                                    var date = calendar.getDate();
-                                    let a =new Intl.DateTimeFormat('default', {
-                                                    dateStyle:'short',
-                                                    //month: 'numeric', day: 'numeric', year:'numeric',
-                                                    //hour: '2-digit', minute: '2-digit', hour24: false,
-                                            }).format(new Date(date))
-                                
-                                    var result = a.replace(/[\.\/]/g,'-');
-                                    localStorage.setItem('fcDefaultView', info.view.type);
-                                    localStorage.setItem('fcDefaultViewDate', result );
+//                                    let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
+//                                    var date = calendar.getDate();
+//                                    let a =new Intl.DateTimeFormat('default', {
+//                                                    dateStyle:'short',
+//                                                    //month: 'numeric', day: 'numeric', year:'numeric',
+//                                                    //hour: '2-digit', minute: '2-digit', hour24: false,
+//                                            }).format(new Date(date))
+//                                
+//                                    var result = a.replace(/[\.\/]/g,'-');
+//                                    localStorage.setItem('fcDefaultView', info.view.type);
+//                                    localStorage.setItem('fcDefaultViewDate', result );
+
                                 }"
                         ),
-                        //'initialDate' => 'new Date(localStorage.getItem("fcDefaultViewDate"))',
                         'windowResize' => new JsExpression(
                             "
                                 function(arg) {
                                 
-                                  //console.log(arg);
                                    
                                }"
                         ),
@@ -474,7 +473,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'dateClick' => new JsExpression(
                             "function(info){
-                            console.log(info.dateStr);
                                     $.ajax({
                                         url:'/schedule/api/event-api/create',
                                         data:{'start':info.dateStr, 'end':info.dateStr},
@@ -543,7 +541,25 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     
                                 }
                         
-                        "),
+                        "
+                        ),
+                        'initialDate' => new JsExpression('new Date(localStorage.getItem("fullCalendarDefaultDate"))'),
+                        'datesSet' => new JsExpression(
+                            "function( dateInfo)
+                                        {
+                                        var date = new Date(dateInfo.view.currentStart);
+                                            var date = new Date(dateInfo.view.currentStart);
+                                            var view = dateInfo.view.type;
+
+                                            dateObj = new Date(date) 
+                                            dateIntNTZ = dateObj.getTime() - dateObj.getTimezoneOffset() * 60 * 1000
+                                            dateObjNTZ = new Date(dateIntNTZ)
+                                            
+                                            localStorage.fullCalendarDefaultDate =  dateObjNTZ.toISOString().slice(0, 10)
+                                            
+                                            localStorage.fullCalendarDefaultView = view;
+                                        }"
+                        ),
 
                     ],
                 ]

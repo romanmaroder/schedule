@@ -27,7 +27,11 @@ class UserRepository
                                 ->andWhere('u.id = e.user_id')
                                 ->andWhere(['u.username' => $value])
                                 ->andWhere(
-                                    ['or', ['schedule_roles.id' => '1'], ['schedule_roles.id' => '2']] //TODO think about defining mandatory roles for the admin panel
+                                    [
+                                        'or',
+                                        ['schedule_roles.id' => '1'],
+                                        ['schedule_roles.id' => '2']
+                                    ] //TODO think about defining mandatory roles for the admin panel
                                 )
                         ]
                     )->one();
@@ -45,10 +49,6 @@ class UserRepository
                         ]
                     )->one();
         }
-
-
-
-
     }
 
     /**

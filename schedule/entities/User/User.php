@@ -84,7 +84,7 @@ class User extends ActiveRecord implements IdentityInterface
         $this->updated_at = time();
     }
 
-    public function editProfile(array $username, string $email, string $password)
+    public function editProfile(array $username, string $email, string $password): void
     {
         $this->username = $this->mergeFullName($username);
         $this->email = $email;
