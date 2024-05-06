@@ -107,6 +107,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'headerOptions' => [
                                             'class'=>'text-center'
                                     ],
+                                    'contentOptions' => [
+                                        'class' => ['text-center align-middle']
+                                    ],
                                     'buttonOptions' => [
                                             'class'=>'text-center'
                                     ],
