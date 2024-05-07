@@ -502,6 +502,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                 data:{'id':info.event.id},
                                                 success:function (data) {
                                                     $('#modal').modal('show').find('.modal-body').html(data);
+                                                    
+                                                    $('#modal').modal('show').find('.modal-title').html(info.event.title);
                                                 },
                                                 error:function(data){
                                                     var Toast = Swal.mixin({

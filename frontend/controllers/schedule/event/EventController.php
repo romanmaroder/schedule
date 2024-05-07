@@ -25,7 +25,7 @@ class EventController extends Controller
 
     public function actionIndex()
     {
-        echo '<pre>';
+        /*echo '<pre>';
         $event = Event::find()->with(['services', 'master', 'client'])->andWhere(['id' => 5])->one();
         $a = null;
         $b=[];
@@ -34,7 +34,7 @@ class EventController extends Controller
             $b[]=(int)$service->price_new * 0.75;
         }
         var_dump($a);
-        var_dump($b);
+        var_dump($b);*/
         //var_dump($event->services);
     }
 
