@@ -1,15 +1,13 @@
 <?php
 
-use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model \schedule\entities\Schedule\Event\Event */
 
-$this->title = $model->client->username;
+$this->title = $model->client->username .'123';
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'model' => $model,
             'attributes' => [
-                [
+                /*[
                     'attribute' => 'master_id',
                     'value' => function ($model) {
                         return Html::a(
@@ -28,14 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
                         );
                     },
                     'format' => 'raw',
-                ],
-                [
+                ],*/
+                /*[
                     'attribute' => 'client_id',
                     'value' => function ($model) {
                         return Html::a(
                             Html::encode($model->client->username),
                             ['/users/user/view','id'=>$model->client->id]
 
+                        );
+                    },
+                    'format' => 'raw',
+                ],*/
+                [
+                    'attribute' => 'Phone',
+                    'value' => function ($model) {
+                        return Html::a(
+                            Html::encode($model->client->phone),
+                            'tel:' . $model->client->phone,
+                            ['view', 'id' => $model->id]
                         );
                     },
                     'format' => 'raw',

@@ -24,7 +24,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?php
             Modal::begin(
                 [
-                    'title' => $this->title,
+                    //'title' => $this->title,
+                    'headerOptions'=>[
+                        'class'=>'justify-content-center'
+                    ],
                     'size' => 'SIZE_SMALL',
                     'id' => 'modal',
                     'options' => ['tabindex' => '']
@@ -502,6 +505,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                 data:{'id':info.event.id},
                                                 success:function (data) {
                                                     $('#modal').modal('show').find('.modal-body').html(data);
+                                                    $('#modal').modal('show').find('.modal-header').html(info.event.title);
                                                 },
                                                 error:function(data){
                                                     var Toast = Swal.mixin({

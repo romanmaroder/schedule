@@ -8,7 +8,7 @@ use yii2fullcalendar6\yii2fullcalendar6;
 /* @var $education\schedule\entities\Schedule\Event\Calendar\Calendar */
 
 $this->title = 'Calendar';
-$this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['calendar']];
+$this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -22,7 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php
             Modal::begin(
                 [
-                    'title' => $this->title,
+                    //'title' => $this->title,
+                    'headerOptions'=>[
+                            'class'=>'justify-content-center'
+                    ],
                     'size' => 'SIZE_SMALL',
                     'id' => 'modal',
                     'options' => ['tabindex' => '']
@@ -136,12 +139,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]
                     ],
                     'clientOptions' => [
+                        'themeSystem' => 'standard',
                         'headerToolbar' => [
                             'left' => 'prev,next,today',
                             'center' => 'title',
                             'right' => 'dayGridMonth,dayGridWeek,dayGridDay,timeGridDay',
                         ],
-                        'themeSystem' => 'standard',
                         'expandRows' => false,
                         'stickyHeaderDates' => true,
                         'navLinks' => true,
@@ -305,6 +308,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 data:{'id':info.event.id},
                                                 success:function (data) {
                                                     $('#modal').modal('show').find('.modal-body').html(data);
+                                                    $('#modal').modal('show').find('.modal-header').html(info.event.title);
+                                                    
                                                 },
                                                 error:function(data){
                                                     var Toast = Swal.mixin({
