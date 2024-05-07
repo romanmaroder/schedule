@@ -305,7 +305,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 data:{'id':info.event.id},
                                                 success:function (data) {
                                                     $('#modal').modal('show').find('.modal-body').html(data);
-                                                    $('#modal').modal('show').find('.modal-title').html(info.event.title);
+                                                    $('#modal').modal('show').find('#modal-label').html(info.event.title);
                                                     
                                                 },
                                                 error:function(data){
