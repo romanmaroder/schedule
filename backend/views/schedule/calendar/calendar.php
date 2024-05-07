@@ -478,6 +478,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         data:{'start':info.dateStr, 'end':info.dateStr},
                                         success:function (data) {
                                             $('#modal').modal('show').find('.modal-body').html(data);
+                                            $('#modal').modal('show').find('#modal-label').html(info.view.title);
                                         },
                                         error:function(data){
                                             var Toast = Swal.mixin({
@@ -502,8 +503,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                 data:{'id':info.event.id},
                                                 success:function (data) {
                                                     $('#modal').modal('show').find('.modal-body').html(data);
-                                                    
                                                     $('#modal').modal('show').find('#modal-label').html(info.event.title);
+                                                   
                                                 },
                                                 error:function(data){
                                                     var Toast = Swal.mixin({
