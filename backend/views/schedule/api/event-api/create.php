@@ -8,9 +8,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model \schedule\forms\manage\Schedule\Event\EventCreateForm */
 
-$this->title = 'Create Event';
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 

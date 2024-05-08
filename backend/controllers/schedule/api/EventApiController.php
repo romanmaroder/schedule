@@ -5,6 +5,7 @@ namespace backend\controllers\schedule\api;
 
 
 use schedule\entities\Schedule\Event\Event;
+use schedule\forms\manage\Schedule\Event\EventCopyForm;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\NotFoundException;
@@ -98,6 +99,33 @@ class EventApiController extends Controller
             ]
         );
     }
+
+    public function actionCopy($id)
+    {
+        $obj = $this->findModel($id);
+
+        $event = $obj->copy();
+
+        $form = new EventCopyForm($event);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->copy($form);
+                Yii::$app->session->setFlash('msg', "The entry " . $event->client->username ." copied.");
+                return $this->redirect('/schedule/calendar/calendar');
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+        return $this->renderAjax(
+            'copy',
+            [
+                'model' => $form,
+                'event' => $event,
+            ]
+        );
+    }
+
 
     public function actionDraggingResizing($id, $start, $end): Event
     {

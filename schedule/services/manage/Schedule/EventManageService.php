@@ -5,6 +5,7 @@ namespace schedule\services\manage\Schedule;
 
 
 use schedule\entities\Schedule\Event\Event;
+use schedule\forms\manage\Schedule\Event\EventCopyForm;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\repositories\Schedule\EventRepository;
@@ -94,6 +95,39 @@ class EventManageService
                 $this->events->save($event);
             }
         );
+    }
+
+    public function copy(EventCopyForm $form): Event
+    {
+
+        $event = Event::create(
+            $form->master->master,
+            $form->client->client,
+            $form->notice,
+            $form->start,
+            $form->end,
+            $form->discount,
+            $form->discount_from,
+            $form->status,
+            $form->payment,
+            $form->amount,
+        );
+
+        $amount = 0;
+        foreach ($form->services->lists as $listId) {
+            $service = $this->services->get($listId);
+            $amount += $service->price_new;
+            $event->assignService($service->id, $service->price_new);
+        }
+        $event->getAmount($amount);
+
+        $this->transaction->wrap(
+            function () use ($event, $form) {
+                $this->events->save($event);
+            }
+        );
+        return $event;
+
     }
 
     public function pay($id)

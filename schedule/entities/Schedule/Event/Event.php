@@ -26,7 +26,7 @@ use yii\db\ActiveRecord;
  * @property User $master
  * @property User $client
  * @property ServiceAssignment[] $serviceAssignments
- * @property Service[] $services
+ * @property Service $services
  * @property Employee $employee
  */
 class Event extends ActiveRecord
@@ -89,6 +89,16 @@ class Event extends ActiveRecord
         } else {
             $this->payment = null;
         }
+    }
+
+    public function lastId()
+    {
+        return self::find()->orderBy('id DESC')->one();
+    }
+
+    public function copy()
+    {
+        return clone $this;
     }
 
     public function isPayed(): bool
@@ -238,7 +248,7 @@ class Event extends ActiveRecord
             [
                 'class' => SaveRelationsBehavior::class,
                 'relations' => [
-                    'serviceAssignments'
+                    'serviceAssignments',
                 ],
             ],
         ];

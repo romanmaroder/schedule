@@ -11,10 +11,6 @@ use yii\widgets\DetailView;
 /* @var $model \schedule\entities\Schedule\Event\Event */
 /* @var $cart \schedule\cart\Cart */
 
-$this->title = $model->client->username;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 
@@ -138,6 +134,16 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'confirm' => Yii::t('app', 'Delete file?'),
                         'method' => 'post',
                     ],
+                ]
+            ) ?>
+
+            <?= Html::a(
+                Yii::t('app', 'Copy'),
+                ['copy', 'id' => $model->id],
+                [
+                    'id' => 'copy-link',
+                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                    'class' => 'btn btn-primary btn-sm btn-shadow'
                 ]
             ) ?>
         </p>

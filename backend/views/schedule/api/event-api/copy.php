@@ -11,9 +11,8 @@ use yii\helpers\Html;
 /* @var $event \schedule\entities\Schedule\Event\Event */
 /* @var $model\schedule\forms\manage\Schedule\Event\EventEditForm */
 
-
 ?>
-<div class="event-update container-fluid">
+<div class="event-copy container-fluid">
 
     <?php
     $form = ActiveForm::begin(); ?>
@@ -52,11 +51,11 @@ use yii\helpers\Html;
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                           $("#eventeditform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventcopyform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventcopyform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
                                            
-                                           $("#eventeditform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                            $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventcopyform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                            $("#eventcopyform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
                                            console.log(data)
                                         },
                                         error: function(data , jqXHR, exception){
