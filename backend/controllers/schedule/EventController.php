@@ -7,6 +7,7 @@ namespace backend\controllers\schedule;
 use backend\forms\Schedule\EventSearch;
 use schedule\entities\Schedule\Event\Calendar\Calendar;
 use schedule\entities\Schedule\Event\Event;
+use schedule\forms\manage\Schedule\Event\EventCopyForm;
 use schedule\forms\manage\Schedule\Event\EventCreateForm;
 use schedule\forms\manage\Schedule\Event\EventEditForm;
 use schedule\readModels\Employee\EmployeeReadRepository;
@@ -131,6 +132,32 @@ class EventController extends Controller
                 'model' => $form,
                 'event' => $event,
                 'cart' => $cart
+            ]
+        );
+    }
+
+    public function actionCopy($id)
+    {
+        $obj = $this->findModel($id);
+
+        $event = $obj->copy();
+
+        $form = new EventCopyForm($event);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->copy($form);
+                Yii::$app->session->setFlash('msg', "The entry " . $event->client->username ." copied.");
+                return $this->redirect(['view', 'id' => $event->id]);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+        return $this->render(
+            'copy',
+            [
+                'model' => $form,
+                'event' => $event,
             ]
         );
     }

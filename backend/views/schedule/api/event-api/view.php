@@ -86,7 +86,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'id' => 'edit-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-primary btn-sm btn-shadow'
+                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow'
                 ]
             ) ?>
             <?php endif;?>
@@ -123,13 +123,21 @@ PluginAsset::register($this)->add(['sweetalert2']);
             }
             echo Html::tag('a', '<i class="fas fa-map-marker-alt"></i>', $options);*/
             ?>
-
+            <?= Html::a(
+                Yii::t('app', 'Copy'),
+                ['copy', 'id' => $model->id],
+                [
+                    'id' => 'copy-link',
+                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient text-shadow'
+                ]
+            ) ?>
             <?= Html::a(
                 Yii::t('app', 'Delete'),
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',
-                    'class' => 'btn btn-danger btn-sm btn-shadow',
+                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadowml-5',
                     'data' => [
                         'confirm' => Yii::t('app', 'Delete file?'),
                         'method' => 'post',
@@ -137,14 +145,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ]
             ) ?>
 
-            <?= Html::a(
-                Yii::t('app', 'Copy'),
-                ['copy', 'id' => $model->id],
-                [
-                    'id' => 'copy-link',
-                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-primary btn-sm btn-shadow'
-                ]
-            ) ?>
+
         </p>
 </div>

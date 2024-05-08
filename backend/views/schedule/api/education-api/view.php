@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'id' => 'edit-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-primary btn-sm btn-shadow'
+                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow'
                 ]
             ) ?>
             <?php
@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',
-                    'class' => 'btn btn-danger btn-sm btn-shadow',
+                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadow',
                     'data' => [
                         'confirm' => 'Are you sure you want to delete this item?',
                         'method' => 'post',

@@ -35,6 +35,7 @@ class EventSearch extends Model
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,
+                'pagination' => false,
                 'sort' => [
                     'defaultOrder' => ['id' => SORT_DESC]
                 ]

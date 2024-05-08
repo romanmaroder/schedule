@@ -42,13 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'dataProvider' => $dataProvider,
                             //'filterModel' => $searchModel,
+                            'summary' => false,
                             'tableOptions' => [
                                 'class' => 'table table-striped table-bordered',
                                 'id' => 'event'
                             ],
                             'columns' => [
 
-                                'id',
+                                //'id',
                                 [
                                     'attribute' => 'master_id',
                                     'value' => function ($model) {
@@ -144,6 +145,36 @@ $this->params['breadcrumbs'][] = $this->title;
                                         },
                                     ],
                                 ],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'template' => '{copy}',
+                                    //'header' => '<i class="fas fa-cash-register"></i>',
+                                    'header' => 'Copy',
+                                    'headerOptions' => [
+                                        'class'=>'text-center'
+                                    ],
+                                    'contentOptions' => [
+                                        'class' => ['text-center align-middle']
+                                    ],
+                                    'buttonOptions' => [
+                                        'class'=>'text-center'
+                                    ],
+                                    'visibleButtons' => [
+                                        'status' => true,
+                                        'payment' => function ($model) {
+                                            return $model->status == 1;
+                                        },
+                                    ],
+                                    'buttons' => [
+                                        'copy' => function ($url, $model, $key) {
+                                            return  Html::a(
+                                                'COPY',
+                                                Url::to(['schedule/event/copy', 'id' => $model->id]),
+                                                ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
+                                            );
+                                        },
+                                    ],
+                                ],
                             ],
                         ]
                     ); ?>
@@ -160,11 +191,11 @@ $js = <<< JS
  
     $('#event').DataTable({
     
-       "paging": false,
+       "paging": true,
        "lengthChange": false,
        "searching": true,
        "ordering": true,
-       "info": false,
+       "info": true,
        "autoWidth": false,
        "responsive": true,
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",

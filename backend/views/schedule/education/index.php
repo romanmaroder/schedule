@@ -20,7 +20,7 @@ PluginAsset::register($this)->add(
         <div class="card card-secondary">
             <div class='card-header'>
                 <h3 class='card-title'>
-                    <?= Html::a('Create lesson', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
+                    <?= Html::a('Create lesson', ['create'], ['class' => 'btn btn-success btn-shadow bg-gradient text-shadow']) ?>
                 </h3>
                 <div class='card-tools'>
                     <button type='button' class='btn btn-tool' data-card-widget='maximize'><i

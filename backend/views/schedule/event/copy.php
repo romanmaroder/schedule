@@ -1,22 +1,23 @@
 <?php
 
 use kartik\datetime\DateTimePicker;
+use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
-use kartik\widgets\Select2;
+use schedule\helpers\DiscountHelper;
+use schedule\helpers\EventPaymentStatusHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $event \schedule\entities\Schedule\Event\Event */
-/* @var $model \schedule\forms\manage\Schedule\Event\EventEditForm */
-/* @var $cart \schedule\cart\Cart */
+/* @var $model\schedule\forms\manage\Schedule\Event\EventEditForm */
 
-$this->title = 'Update Event: ' . $event->client->username;
+$this->title = 'Copy Event: ' . $event->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $event->client->username, 'url' => ['view', 'id' => $event->id]];
-$this->params['breadcrumbs'][] = 'update';
+$this->params['breadcrumbs'][] = 'copying';
 
 ?>
-<div class="event-update container-fluid">
+<div class="event-copy container-fluid">
 
     <?php
     $form = ActiveForm::begin(); ?>
@@ -51,7 +52,8 @@ $this->params['breadcrumbs'][] = 'update';
                                 'pluginOptions' => [
                                     'autoclose' => true,
                                     'format' => 'yyyy-mm-dd H:ii:ss',
-                                    //'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                                    //'hoursDisabled' => [0,1,2,3,4,5,6,22,23],
+                                    //'daysOfWeekDisabled' => [0,6],
                                     'todayHighlight' => true,
                                     'todayBtn' => true,
                                 ],
@@ -65,11 +67,11 @@ $this->params['breadcrumbs'][] = 'update';
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                           $("#eventeditform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventcopyform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventcopyform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
                                            
-                                           $("#eventeditform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                            $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventcopyform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                            $("#eventcopyform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
                                            console.log(data)
                                         },
                                         error: function(data , jqXHR, exception){
@@ -103,31 +105,11 @@ $this->params['breadcrumbs'][] = 'update';
                                 'pluginOptions' => [
                                     'format' => 'yyyy-mm-dd H:ii:ss',
                                     'autoclose' => true,
-                                    //'hoursDisabled' => '0,1,2,3,4,5,6,22,23',
+                                    //'hoursDisabled' => [0,1,2,3,4,5,6,22,23],
+                                    //'daysOfWeekDisabled' => [0,6],
                                     'todayHighlight' => true,
                                     'todayBtn' => true,
                                 ],
-                                /*'pluginEvents' => [
-                                    "show" => 'function() {
-                                    let data_id = $("#select2-master-container").val();
-                                    $.ajax({
-                                        url: "/schedule/event/check",
-                                        method: "get",
-                                        dataType: "json",
-                                        data: {id: data_id},
-                                        success: function(data){
-                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-
-                                           $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
-
-                                           console.log(data)
-                                        },
-                                        error: function(data , jqXHR, exception){
-                                            console.log(exception)
-                                        }
-                                    });
-                                    }',
-                                ],*/
                                 'language' => 'ru',
                                 'size' => 'xs'
 
@@ -147,7 +129,9 @@ $this->params['breadcrumbs'][] = 'update';
                                     'id' => 'master',
                                     'autocomplete' => 'off',
                                 ],
-                                'pluginOptions' => ['allowClear' => true],
+                                'pluginOptions' => [
+                                    'allowClear' => true
+                                ],
                                 'pluginEvents' => [
                                     "change" => 'function() {
                                     let data_id = $(this).val();
@@ -209,28 +193,11 @@ $this->params['breadcrumbs'][] = 'update';
                                     'tags' => true,
                                     'allowClear' => true,
                                 ],
-                                'pluginEvents' => [
-                                    "change" => 'function() { 
-                                            let data_id = $(this).val();
-                                            let discount = $(".discount");
-                                            
-                                            if(data_id > 0) {
-                                                discount.each(function() {
-                                                        $(this).removeClass( "d-none");
-                                                        $(this).attr( "required" );
-                                                    });
-                                            }else{
-                                                discount.each(function() {
-                                                        $(this).addClass( "d-none");
-                                                    });
-                                            }
-                                            
-                                            }',
-                                ],
                             ]
                         ) ?></div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
@@ -239,7 +206,7 @@ $this->params['breadcrumbs'][] = 'update';
                             [
                                 'name' => 'discount_from',
                                 'language' => 'ru',
-                                'data' => \schedule\helpers\DiscountHelper::discountList(),
+                                'data' => DiscountHelper::discountList(),
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [
                                     'id' => 'discountFrom',
@@ -253,21 +220,20 @@ $this->params['breadcrumbs'][] = 'update';
                                 ],
                                 'pluginEvents' => [
                                     "change" => 'function() { 
-                                            let data_id = $(this).val();
-                                            let discount = $(".discount");
-                                            
-                                            if(data_id > 0) {
-                                                discount.each(function() {
-                                                        $(this).removeClass( "d-none");
-                                                        $(this).attr( "required" );
-                                                    });
-                                            }else{
-                                                discount.each(function() {
-                                                        $(this).addClass( "d-none");
-                                                    });
-                                            }
-                                            
-                                            }',
+                                let data_id = $(this).val();
+                                let discount = $(".discount");
+                                
+                                if(data_id > 0) {
+                                    discount.each(function() {
+                                            $(this).removeClass( "d-none");
+                                            $(this).attr( "required" );
+                                        });
+                                }else{
+                                    discount.each(function() {
+                                            $(this).addClass( "d-none");
+                                        });
+                                }     
+                            }',
                                 ],
                             ]
                         ) ?>
@@ -295,53 +261,10 @@ $this->params['breadcrumbs'][] = 'update';
                             [
                                 'name' => 'status',
                                 'language' => 'ru',
-                                'data' => \schedule\helpers\EventPaymentStatusHelper::statusList(),
+                                'data' => EventPaymentStatusHelper::statusList(),
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [
                                     'id' => 'status',
-                                    'placeholder' => 'Select',
-                                    'multiple' => false,
-                                    'autocomplete' => 'on',
-                                ],
-                                'pluginOptions' => [
-                                    'tags' => false,
-                                    'allowClear' => false,
-                                ],
-                                /*'pluginEvents' => [
-                                    "change" => 'function() {
-                                            let data_id = $(this).val();
-                                            let discount = $(".discount");
-
-                                            if(data_id > 0) {
-                                                discount.each(function() {
-                                                        $(this).removeClass( "d-none");
-                                                        $(this).attr( "required" );
-                                                    });
-                                            }else{
-                                                discount.each(function() {
-                                                        $(this).addClass( "d-none");
-                                                    });
-                                            }
-
-                                            }',
-                                ],*/
-                            ]
-                        ) ?>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <?= $form->field($model, 'payment')->widget(
-                            Select2::class,
-                            [
-                                'name' => 'payment',
-                                'language' => 'ru',
-                                'data' => \schedule\helpers\EventMethodsOfPayment::statusList(),
-                                'theme' => Select2::THEME_BOOTSTRAP,
-                                'options' => [
-                                    'id' => 'payment',
                                     'placeholder' => 'Select',
                                     'multiple' => false,
                                     'autocomplete' => 'on',
@@ -380,18 +303,13 @@ $this->params['breadcrumbs'][] = 'update';
                         ) ?></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group"> <?= $form->field($model, 'amount')->hiddenInput()->label(false) ;?></div>
-                </div>
-            </div>
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
                             'Save',
-                            ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']
+                            ['class' => 'btn btn-success btn-sm btn-shadow']
                         ) ?></div>
                 </div>
             </div>
