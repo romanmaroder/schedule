@@ -18,6 +18,11 @@ class EventRepository
         return $event;
     }
 
+    public function getLastId(): Event
+    {
+        return Event::find()->orderBy('id DESC')->one();
+    }
+
     public function save(Event $event):void
     {
         if (!$event->save()){

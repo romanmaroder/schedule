@@ -102,9 +102,7 @@ class EventApiController extends Controller
 
     public function actionCopy($id)
     {
-        $obj = $this->findModel($id);
-
-        $event = $obj->copy();
+        $event = $this->findModel($id);
 
         $form = new EventCopyForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {

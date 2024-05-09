@@ -100,7 +100,8 @@ class EventManageService
     public function copy(EventCopyForm $form): Event
     {
 
-        $event = Event::create(
+        $event = Event::copy(
+            $form->id = $this->events->getLastId()->id + 1,
             $form->master->master,
             $form->client->client,
             $form->notice,

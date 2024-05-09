@@ -27,26 +27,27 @@ class EventCopyForm extends CompositeForm
 
     public function __construct(Event $event, $config = [])
     {
-        $this->id = $event->lastId()->id +1;
-        $this->master = new MasterForm($event);
-        $this->client = new ClientForm($event);
-        $this->notice = $event->notice;
-        $this->start = $event->start;
-        $this->end = $event->end;
-        $this->discount = $event->discount;
-        $this->discount_from = $event->discount_from;
-        $this->status = $event->status;
-        $this->payment = $event->payment;
-        $this->amount = $event->amount;
-        $this->services = new ServicesForm($event);
-        $this->_event = $event;
+        $clone = $event->copied();
+
+        $this->master = new MasterForm($clone);
+        $this->client = new ClientForm($clone);
+        $this->notice = $clone->notice;
+        $this->start = $clone->start;
+        $this->end = $clone->end;
+        $this->discount = $clone->discount;
+        $this->discount_from = $clone->discount_from;
+        $this->status = $clone->status;
+        $this->payment = $clone->payment;
+        $this->amount = $clone->amount;
+        $this->services = new ServicesForm($clone);
+        $this->_event = $clone;
         parent::__construct($config);
     }
 
     public function rules():array
     {
         return [
-            [['id','discount_from','status','amount','payment'], 'integer'],
+            [['discount_from','status','amount','payment'], 'integer'],
             [['start', 'end'], 'required'],
             ['notice', 'string'],
             ['discount', 'required', 'when' => function($model) {

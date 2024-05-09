@@ -91,12 +91,35 @@ class Event extends ActiveRecord
         }
     }
 
-    public function lastId()
-    {
-        return self::find()->orderBy('id DESC')->one();
+    public static function copy(
+        $id,
+        $masterId,
+        $clientId,
+        $notice,
+        $start,
+        $end,
+        $discount,
+        $discount_from,
+        $status,
+        $payment,
+        $amount,
+    ): self {
+        $event = new static();
+        $event->id = $id;
+        $event->master_id = $masterId;
+        $event->client_id = $clientId;
+        $event->notice = $notice;
+        $event->start = $start;
+        $event->end = $end;
+        $event->discount = $discount;
+        $event->discount_from = $discount_from;
+        $event->status = self::STATUS_NOT_PAYED;
+        $event->payment = self::STATUS_CASH;
+        $event->amount = $amount;
+        return $event;
     }
 
-    public function copy()
+    public function copied(): Event
     {
         return clone $this;
     }
