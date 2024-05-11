@@ -182,6 +182,24 @@ use yii\helpers\Html;
                                         ],
                                     ]
                                 ],
+                                [
+                                    'label' => 'Blog',
+                                    'icon' => 'fas fa-blog',
+                                    'items' => [
+                                        [
+                                            'label' => 'Tags',
+                                            'icon' => 'fa-solid fa-tags',
+                                            'url' => ['/blog/tag/index'],
+                                            'active' => $this->context->id == 'blog/tag'
+                                        ],
+                                        [
+                                            'label' => 'Categories',
+                                            'icon' => 'fas fa-clipboard-list',
+                                            'url' => ['/blog/category/index'],
+                                            'active' => $this->context->id == 'blog/category'
+                                        ],
+                                    ]
+                                ],
 
                             ]
                         ],

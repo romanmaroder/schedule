@@ -51,6 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 //'id',
                                 [
+                                    'attribute' => 'start',
+                                    'format' => ['date', 'php:d-m-Y'],
+                                ],
+                                [
                                     'attribute' => 'master_id',
                                     'value' => function ($model) {
                                         return Html::a(

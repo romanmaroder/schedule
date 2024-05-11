@@ -1,14 +1,16 @@
 <?php
 
-use yii\bootstrap4\ActiveForm;
+
+
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\TagForm */
+/* @var $model schedule\forms\manage\Blog\TagForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="brand-form">
+<div class="tag-form">
 
     <?php
     $form = ActiveForm::begin(); ?>
@@ -46,4 +48,5 @@ use yii\helpers\Html;
     </div>
     <?php
     ActiveForm::end(); ?>
+
 </div>

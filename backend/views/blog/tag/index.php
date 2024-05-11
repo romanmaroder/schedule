@@ -1,19 +1,16 @@
 <?php
 
-use schedule\entities\Schedule\Tag;
-use yii\grid\ActionColumn;
+use schedule\entities\Blog\Tag;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\forms\Schedule\TagSearch */
+/* @var $searchModel backend\forms\Blog\TagSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Tags';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">

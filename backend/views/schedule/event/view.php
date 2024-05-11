@@ -149,7 +149,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     }
                     echo Html::tag('a', '<i class="fas fa-map-marker-alt"></i>', $options);*/
                     ?>
-
+                    <?= Html::a(
+                        Yii::t('app', 'Copy'),
+                        ['copy', 'id' => $model->id],
+                        [
+                            'id' => 'copy-link',
+                            'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient text-shadow',
+                        ]
+                    ) ?>
                     <?= Html::a(
                         Yii::t('app', 'Delete'),
                         ['delete', 'id' => $model->id],
@@ -160,15 +167,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 'confirm' => Yii::t('app', 'Delete file?'),
                                 'method' => 'POST',
                             ],
-                        ]
-                    ) ?>
-
-                    <?= Html::a(
-                        Yii::t('app', 'Copy'),
-                        ['copy', 'id' => $model->id],
-                        [
-                            'id' => 'copy-link',
-                            'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow',
                         ]
                     ) ?>
                 </p>
