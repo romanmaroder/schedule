@@ -187,6 +187,12 @@ use yii\helpers\Html;
                                     'icon' => 'fas fa-blog',
                                     'items' => [
                                         [
+                                            'label' => 'Posts',
+                                            'icon' => 'fas fa-keyboard',
+                                            'url' => ['/blog/post/index'],
+                                            'active' => $this->context->id == 'blog/post'
+                                        ],
+                                        [
                                             'label' => 'Tags',
                                             'icon' => 'fa-solid fa-tags',
                                             'url' => ['/blog/tag/index'],
