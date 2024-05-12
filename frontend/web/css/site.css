@@ -172,3 +172,8 @@ a.desc:after {
 .nav-link.aside-menu.active {
     color: #000;
 }
+.blog-posts-item {
+    margin: 20px 0;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+}

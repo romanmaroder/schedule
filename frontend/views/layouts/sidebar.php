@@ -63,6 +63,7 @@ use yii\helpers\Html;
                         'url' => ['/schedule/calendar/calendar/index'],
                         'active' => $this->context->id == 'schedule/calendar/calendar'
                     ],
+                    ['label' => 'Blog', 'url' => ['/blog/post/index']],
                     /*['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
