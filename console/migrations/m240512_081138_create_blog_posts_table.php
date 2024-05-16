@@ -18,7 +18,7 @@ class m240512_081138_create_blog_posts_table extends Migration
             'title' => $this->string()->notNull(),
             'description' => $this->text(),
             'content' => 'MEDIUMTEXT',
-            'photo' => $this->string(),
+            'files' => $this->string(),
             'status' => $this->integer()->notNull(),
             'meta_json' => 'JSON NOT NULL',
         ], $tableOptions);

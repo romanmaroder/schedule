@@ -48,8 +48,8 @@ class PostManageService
             )
         );
 
-        if ($form->photo) {
-            $post->setPhoto($form->photo);
+        if ($form->file) {
+            $post->addPhoto($form->file);
         }
 
         foreach ($form->tags->existing as $tagId) {
@@ -90,9 +90,12 @@ class PostManageService
             )
         );
 
-        if ($form->photo) {
-            $post->setPhoto($form->photo);
-        }
+        if ($form->file) {
+
+                $post->addPhoto($form->file);
+
+       }
+
 
         $this->transaction->wrap(
             function () use ($post, $form) {
@@ -110,6 +113,8 @@ class PostManageService
                     }
                     $post->assignTag($tag->id);
                 }
+
+
                 $this->posts->save($post);
             }
         );

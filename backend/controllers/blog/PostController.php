@@ -57,16 +57,19 @@ class PostController extends Controller
     /**
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
-            'post' => $this->findModel($id),
+           'post' => $this->findModel($id),
         ]);
     }
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function actionCreate()
     {
@@ -88,6 +91,7 @@ class PostController extends Controller
     /**
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {

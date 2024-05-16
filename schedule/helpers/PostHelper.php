@@ -27,13 +27,13 @@ class PostHelper
     {
         switch ($status) {
             case Post::STATUS_DRAFT:
-                $class = 'badge bg-default bg-gradient text-shadow box-shadow';
+                $class = 'badge bg-secondary bg-gradient text-shadow box-shadow';
                 break;
             case Post::STATUS_ACTIVE:
                 $class = 'badge bg-success bg-gradient text-shadow box-shadow';
                 break;
             default:
-                $class = 'badge bg-default bg-gradient text-shadow box-shadow';
+                $class = 'badge bg-secondary bg-gradient text-shadow box-shadow';
         }
 
         /*$class = match ($status) {

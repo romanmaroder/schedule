@@ -1,11 +1,11 @@
 <?php
 
+use kartik\widgets\FileInput;
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model schedule\forms\manage\Blog\Post\PostForm */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="post-form">
@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
     <?php
     $form = ActiveForm::begin(
         [
+            'enableClientValidation' => true,
             'options' => ['enctype' => 'multipart/form-data']
         ]
     ); ?>
@@ -39,6 +40,14 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
                 <?= $form->field($model, 'content')->textarea(['rows' => 20]) ?>
+            </div>
+            <div class="form-group">
+                <?= $form->field($model, 'file')->label(false)->widget(FileInput::class, [
+                    'options' => [
+                        'accept' => 'image/*',
+                        //'multiple'=>true
+                    ]
+                ]) ?>
             </div>
         </div>
     </div>

@@ -11,5 +11,11 @@
         'dataProvider' => $dataProvider,
         'layout' => "{items}\n{pager}",
         'itemView' => '_post',
+        'itemOptions' => [
+            'tag' => false,
+        ],
     ]
 ) ?>
+
+
+

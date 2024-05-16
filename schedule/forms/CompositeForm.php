@@ -9,18 +9,13 @@ use yii\helpers\ArrayHelper;
 
 abstract class CompositeForm extends Model
 {
-    /**
-     * @var Model[]|array[]
-     */
+/**
+ * @var Model[]|array[]
+ */
     private $forms = [];
 
     abstract protected function internalForms(): array;
 
-    /**
-     * @param array $data
-     * @param null $formName
-     * @return bool
-     */
     public function load($data, $formName = null): bool
     {
         $success = parent::load($data, $formName);
@@ -34,12 +29,6 @@ abstract class CompositeForm extends Model
         return $success;
     }
 
-    /**
-     * @param null $attributeNames
-     * @param bool $clearErrors
-     * @return bool
-     * @throws \Exception
-     */
     public function validate($attributeNames = null, $clearErrors = true): bool
     {
         $parentNames = $attributeNames !== null ? array_filter((array)$attributeNames, 'is_string') : null;
@@ -53,6 +42,49 @@ abstract class CompositeForm extends Model
             }
         }
         return $success;
+    }
+
+    public function hasErrors($attribute = null): bool
+    {
+        if ($attribute !== null) {
+            return parent::hasErrors($attribute);
+        }
+        if (parent::hasErrors($attribute)) {
+            return true;
+        }
+        foreach ($this->forms as $name => $form) {
+            if (is_array($form)) {
+                foreach ($form as $i => $item) {
+                    if ($item->hasErrors()) {
+                        return true;
+                    }
+                }
+            } else {
+                if ($form->hasErrors()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function getFirstErrors(): array
+    {
+        $errors = parent::getFirstErrors();
+        foreach ($this->forms as $name => $form) {
+            if (is_array($form)) {
+                foreach ($form as $i => $item) {
+                    foreach ($item->getFirstErrors() as $attribute => $error) {
+                        $errors[$name . '.' . $i . '.' . $attribute] = $error;
+                    }
+                }
+            } else {
+                foreach ($form->getFirstErrors() as $attribute => $error) {
+                    $errors[$name . '.' . $attribute] = $error;
+                }
+            }
+        }
+        return $errors;
     }
 
     public function __get($name)
@@ -70,5 +102,10 @@ abstract class CompositeForm extends Model
         } else {
             parent::__set($name, $value);
         }
+    }
+
+    public function __isset($name)
+    {
+        return isset($this->forms[$name]) || parent::__isset($name);
     }
 }

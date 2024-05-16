@@ -1,6 +1,7 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
+use schedule\helpers\PostHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -10,12 +11,16 @@ use yii\widgets\DetailView;
 /* @var $post schedule\entities\Blog\Post\Post */
 /* @var $modificationsProvider yii\data\ActiveDataProvider */
 
+
 $this->title = $post->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
+
+
+
 ?>
 <div class="card card-secondary">
     <div class="card-header">
@@ -92,7 +97,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-        <h3>Photo</h3>
+        Photo
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -102,10 +107,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
     </div>
     <div class="card-body">
         <?php
-        if ($post->photo): ?>
+        if ($post->files): ?>
             <?= Html::a(
-                Html::img($post->getThumbFileUrl('photo', 'thumb')),
-                $post->getUploadedFileUrl('photo'),
+                Html::img($post->getThumbFileUrl('files','blog_list')),
+                $post->getUploadedFileUrl('files'),
                 [
                     'class' => 'thumbnail',
                     'target' => '_blank'
@@ -118,7 +123,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-        <h3>Description</h3>
+        Description
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -133,7 +138,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-        <h3>Content</h3>
+       Content
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -148,7 +153,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-        <h3>SEO</h3>
+       SEO
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -162,7 +167,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 'model' => $post,
                 'attributes' => [
                     [
-                        'attribute' => 'meta.title',
+                        'attribute' => '.meta.title',
                         'value' => $post->meta->title,
                     ],
                     [

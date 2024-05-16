@@ -1,7 +1,7 @@
 <?php
 
-use schedule\entities\Blog\Category;
-use yii\grid\ActionColumn;
+use schedule\entities\Blog\Post\Post;
+use schedule\helpers\PostHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -36,7 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                  'columns' => [
                                      [
                                          'value' => function (Post $model) {
-                                             return $model->photo ? Html::img($model->getThumbFileUrl('photo', 'admin')) : null;
+                                             return $model->files ? Html::img(
+                                                 $model->getThumbFileUrl('files', 'admin')
+                                             ) : '';
                                          },
                                          'format' => 'raw',
                                          'contentOptions' => ['style' => 'width: 100px'],

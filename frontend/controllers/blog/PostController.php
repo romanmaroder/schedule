@@ -4,8 +4,9 @@
 namespace frontend\controllers\blog;
 
 
-use schedule\readModels\Schedule\CategoryReadRepository;
-use schedule\readModels\Schedule\TagReadRepository;
+use schedule\readModels\Blog\CategoryReadRepository;
+use schedule\readModels\Blog\PostReadRepository;
+use schedule\readModels\Blog\TagReadRepository;
 use schedule\services\Blog\CommentService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

@@ -17,9 +17,10 @@ $this->params['breadcrumbs'][] = $category->name;
 $this->params['active_category'] = $category;
 ?>
 
-<h1><?= Html::encode($category->getHeadingTile()) ?></h1>
+<!--<h1><?/*= Html::encode($category->getHeadingTile()) */?></h1>-->
 
-<?php if (trim($category->description)): ?>
+<?php //if (trim($category->description)): ?>
+<?php if ($category->description): ?>
     <div class="panel panel-default">
         <div class="panel-body">
             <?= Yii::$app->formatter->asNtext($category->description) ?>

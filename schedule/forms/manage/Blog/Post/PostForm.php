@@ -21,7 +21,10 @@ class PostForm extends CompositeForm
     public $title;
     public $description;
     public $content;
-    public $photo;
+    /**
+     * @var UploadedFile
+     */
+    public $file;
 
     public function __construct(Post $post = null, $config = [])
     {
@@ -46,7 +49,8 @@ class PostForm extends CompositeForm
             [['title'], 'string', 'max' => 255],
             [['categoryId'], 'integer'],
             [['description', 'content'], 'string'],
-            [['photo'], 'image'],
+            //['files', 'each', 'rule' => ['image']],
+            [['file'], 'image'],
         ];
     }
 
@@ -63,9 +67,10 @@ class PostForm extends CompositeForm
     public function beforeValidate(): bool
     {
         if (parent::beforeValidate()) {
-            $this->photo = UploadedFile::getInstance($this, 'photo');
+            $this->file = UploadedFile::getInstance($this, 'file');
             return true;
         }
         return false;
     }
+
 }

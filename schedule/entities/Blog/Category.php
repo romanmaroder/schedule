@@ -9,13 +9,14 @@ use schedule\entities\Meta;
 use yii\db\ActiveRecord;
 
 /**
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $slug
  * @property string $title
  * @property string $description
  * @property int $sort
  * @property Meta $meta
+ * @property string $meta_json [json]
  */
 class Category extends ActiveRecord
 {

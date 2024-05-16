@@ -25,7 +25,7 @@
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-field-range": "*",
         "paulzi/yii2-nested-sets": "^1.0",
-        "yii-dream-team/yii2-upload-behavior": "*",
+        "romanmaroder/yii2-upload-behavior": "^1.0",
         "romanmaroder/yii2fullcalendar6":"*"
     },
     "require-dev": {

@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
+
 ?>
 <div class="product-view">
     <div class="row">

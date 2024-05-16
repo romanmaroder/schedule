@@ -5,6 +5,7 @@ namespace schedule\entities\Blog\Post;
 
 
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use romanmaroder\upload\ImageUploadBehavior;
 use schedule\entities\behaviors\MetaBehavior;
 use schedule\entities\Blog\Category;
 use schedule\entities\Blog\Post\queries\PostQuery;
@@ -14,7 +15,7 @@ use schedule\services\WaterMarker;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
-use yiidreamteam\upload\ImageUploadBehavior;
+
 
 /**
  * @property int $id
@@ -23,9 +24,10 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property string $title
  * @property string $description
  * @property string $content
- * @property string $photo
+ * @property string $files [varchar(255)]
  * @property int $status
  * @property int $comments_count
+ *
  * @property Meta $meta
  * @property Category $category
  * @property TagAssignment[] $tagAssignments
@@ -33,6 +35,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property string $meta_json [json]
  *
  * @property Comment[] $comments
+ *
  * @mixin ImageUploadBehavior
  */
 class Post extends ActiveRecord
@@ -56,9 +59,9 @@ class Post extends ActiveRecord
         return $post;
     }
 
-    public function setPhoto(UploadedFile $photo): void
+    public function addPhoto(UploadedFile $photo): void
     {
-        $this->photo = $photo;
+        $this->files = $photo;
     }
 
 
@@ -256,11 +259,11 @@ class Post extends ActiveRecord
             MetaBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['tagAssignments','comments'],
+                'relations' => ['tagAssignments', 'comments'],
             ],
-            [
+            'files'=>[
                 'class' => ImageUploadBehavior::class,
-                'attribute' => 'photo',
+                'attribute' => 'files',
                 'createThumbsOnRequest' => true,
                 'filePath' => '@staticRoot/origin/posts/[[id]].[[extension]]',
                 'fileUrl' => '@static/origin/posts/[[id]].[[extension]]',
@@ -269,8 +272,14 @@ class Post extends ActiveRecord
                 'thumbs' => [
                     'admin' => ['width' => 100, 'height' => 70],
                     'thumb' => ['width' => 640, 'height' => 480],
-                    'blog_list' => ['width' => 1000, 'height' => 150],
-                    'origin' => ['processor' => [new WaterMarker(1024, 768, '@frontend/web/image/logo.png'), 'process']],
+                    'blog_list' => ['width' => 128, 'height' => 128],
+                    'widget_list' => ['width' => 228, 'height' => 228],
+                    'origin' => [
+                        'processor' => [
+                            new WaterMarker(1024, 768, '@frontend/web/img/logo.jpg'),
+                            'process'
+                        ]
+                    ],
                 ],
             ],
         ];
