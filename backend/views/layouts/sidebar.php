@@ -204,6 +204,12 @@ use yii\helpers\Html;
                                             'url' => ['/blog/category/index'],
                                             'active' => $this->context->id == 'blog/category'
                                         ],
+                                        [
+                                            'label' => 'Comments',
+                                            'icon' => 'fas fa-comments',
+                                            'url' => ['/blog/comment/index'],
+                                            'active' => $this->context->id == 'blog/comment'
+                                        ],
                                     ]
                                 ],
 
