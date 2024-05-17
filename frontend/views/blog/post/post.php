@@ -32,7 +32,7 @@ foreach ($post->tags as $tag) {
 <p class="mb-5">
     <?php
     if ($post->files): ?>
-        <img src="<?= Html::encode($post->getThumbFileUrl('files', 'origin')) ?>" alt="Image1" class="img-fluid"/>
+        <img src="<?= Html::encode($post->getThumbFileUrl('files', 'origin')) ?>" alt="Image1" class="img-fluid thumbnail-shadow"/>
     <?php
     endif; ?>
 </p>
@@ -44,7 +44,7 @@ foreach ($post->tags as $tag) {
         <?php
         if ($post->files): ?>
             <img src="<?= Html::encode($post->getThumbFileUrl('files', 'blog_list')) ?>" alt="Image"
-                 class="img-fluidid"/>
+                 class="img-fluidid thumbnail-shadow"/>
         <?php
         endif; ?>
     </div>

@@ -882,7 +882,8 @@ h1, h2, h3,
 }
 
 .post-entry-2 .contents h2 {
-    font-size: 15px;
+    /*font-size: 15px;*/
+    font-size: 20px;
 }
 
 .trend-entry {
@@ -942,6 +943,7 @@ h1, h2, h3,
     background-position: center center;
     background-repeat: no-repeat;
 }
+
 
 .half-post-entry .contents {
     padding: 50px;
@@ -1116,4 +1118,11 @@ h1, h2, h3,
 
 .single-content {
     font-size: .9rem;
+}
+
+.thumbnail-shadow{
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important;
+}
+.half-post-entry-shadow{
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important;
 }

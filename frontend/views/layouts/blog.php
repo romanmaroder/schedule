@@ -10,7 +10,7 @@ use frontend\widgets\Blog\CategoriesWidget;
 <?php
 $this->beginContent('@frontend/views/layouts/main.php') ?>
 
-<div class="site-section">
+<div class="site-section pt-4">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 single-content">

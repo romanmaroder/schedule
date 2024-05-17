@@ -274,6 +274,8 @@ class Post extends ActiveRecord
                     'thumb' => ['width' => 640, 'height' => 480],
                     'blog_list' => ['width' => 128, 'height' => 128],
                     'widget_list' => ['width' => 228, 'height' => 228],
+                    'widget_last_post' => ['width' => 1900, 'height' => 1140],
+                    'widget_last_post_thumb' => ['width' => 300, 'height' => 400],
                     'origin' => [
                         'processor' => [
                             new WaterMarker(1024, 768, '@frontend/web/img/logo.jpg'),

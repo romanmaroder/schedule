@@ -36,7 +36,7 @@ class PostReadRepository
 
     public function getLast($limit): array
     {
-        return Post::find()->with('category')->orderBy(['id' => SORT_DESC])->limit($limit)->all();
+        return Post::find()->active()->with('category')->orderBy(['id' => SORT_DESC])->limit($limit)->all();
     }
 
     public function getPopular($limit): array
