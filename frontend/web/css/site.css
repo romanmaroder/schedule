@@ -187,3 +187,10 @@ a.desc:after {
     padding: 20px 0;
     border-top: 1px solid #eee;
 }
+.btn-shadow{
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important
+}
+
+.img-shadow{
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)
+}

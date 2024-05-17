@@ -5,6 +5,7 @@ namespace schedule\entities\Blog\Post;
 
 
 use schedule\entities\Blog\Post\queries\PostQuery;
+use schedule\entities\User\Employee\Employee;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -18,6 +19,7 @@ use yii\db\ActiveRecord;
  * @property bool $active
  *
  * @property Post $post
+ * @property Employee $employee
  */
 class Comment extends ActiveRecord
 {
@@ -66,6 +68,11 @@ class Comment extends ActiveRecord
     public function getPost(): ActiveQuery
     {
         return $this->hasOne(Post::class, ['id' => 'post_id']);
+    }
+
+    public function getEmployee()
+    {
+        return $this->hasOne(Employee::class,['user_id'=>'user_id']);
     }
 
     public static function tableName(): string
