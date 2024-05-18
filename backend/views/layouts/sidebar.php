@@ -212,6 +212,18 @@ use yii\helpers\Html;
                                         ],
                                     ]
                                 ],
+                                [
+                                    'label' => 'Content',
+                                    'icon' => 'far fa-file-alt',
+                                    'items' => [
+                                        [
+                                            'label' => 'Pages',
+                                            'icon' => 'fas fa-file-word',
+                                            'url' => ['/page/index'],
+                                            'active' => $this->context->id == 'page'
+                                        ],
+                                    ]
+                                ],
 
                             ]
                         ],
