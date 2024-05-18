@@ -19,10 +19,16 @@ foreach ($page->parents as $parent) {
 }
 $this->params['breadcrumbs'][] = $page->title;
 ?>
-<article class="page-view">
 
-    <h1><?= Html::encode($page->title) ?></h1>
-
-    <?= Yii::$app->formatter->asNtext($page->content) ?>
-
-</article>
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 single-content">
+                <h1 class="mb-4">
+                    <?= Html::encode($page->title) ?>
+                </h1>
+                <p class="text-secondary"> <?= Yii::$app->formatter->asNtext($page->content) ?></p>
+            </div>
+        </div>
+    </div>
+</div>
