@@ -17,7 +17,7 @@ $url = Url::to(['post', 'id' => $model->id]);
         if ($model->files): ?>
             <a href="<?= Html::encode($url) ?>">
                 <img src="<?= Html::encode($model->getThumbFileUrl('files', 'blog_list')) ?>" alt="user image"
-                     class="img-circle img-bordered-sm"/>
+                     class="img-circle img-bordered-sm img-shadow"/>
             </a>
         <?php
         endif; ?>
