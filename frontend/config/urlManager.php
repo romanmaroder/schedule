@@ -37,6 +37,8 @@ return [
         'user'=>'users/user/index',
         'user/<id:\d+>'=>'users/user/view',
 
+        ['class' => 'frontend\urls\PageUrlRule'],
+
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
         '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',
