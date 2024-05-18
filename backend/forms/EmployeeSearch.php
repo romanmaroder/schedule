@@ -3,9 +3,9 @@
 namespace backend\forms;
 
 use schedule\entities\User\Employee\Employee;
-use schedule\entities\User\User;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 
 /**
  * UserSearch represents the model behind the search form of `schedule\entities\user\User`.
@@ -16,6 +16,7 @@ class EmployeeSearch extends Model
     public $first_name;
     public $last_name;
     public $username;
+    public $role;
 
     /**
      * {@inheritdoc}
@@ -25,6 +26,7 @@ class EmployeeSearch extends Model
         return [
             [['id'], 'integer'],
             [['first_name', 'last_name','username'], 'string'],
+            [['role'], 'safe']
         ];
     }
 
@@ -38,12 +40,14 @@ class EmployeeSearch extends Model
      */
     public function search(array $params): ActiveDataProvider
     {
-        $query = Employee::find()->joinWith(['user']);
+        $query = Employee::find()->alias('e')->joinWith(['user']);
 
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        $dataProvider = new ActiveDataProvider(
+            [
+                'query' => $query,
+            ]
+        );
 
         $this->load($params);
 
@@ -51,16 +55,27 @@ class EmployeeSearch extends Model
             $query->where('0=1');
             return $dataProvider;
         }
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'users.username'=>$this->username,
-        ]);
+        $query->andFilterWhere(
+            [
+                'e.id' => $this->id,
+                'e.first_name' => $this->first_name,
+                'e.last_name' => $this->last_name,
+                'users.username' => $this->username,
+            ]
+        );
 
-        $query->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name]);
+        if (!empty($this->role)) {
+            $query->innerJoin('{{%auth_assignments}} a', 'a.user_id = e.id');
+            $query->andWhere(['a.item_name' => $this->role]);
+        }
+
+        $query->andFilterWhere(['like', 'e.first_name', $this->first_name])
+            ->andFilterWhere(['like', 'e.last_name', $this->last_name]);
 
         return $dataProvider;
+    }
+    public function rolesList(): array
+    {
+        return ArrayHelper::map(\Yii::$app->authManager->getRoles(), 'name', 'description');
     }
 }

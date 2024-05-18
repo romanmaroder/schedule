@@ -2,6 +2,7 @@
 
 use schedule\entities\User\Employee\Employee;
 use schedule\helpers\ScheduleHelper;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -79,6 +80,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function ($model) {
                             return $model->role->name;
                         },
+                    ],
+                    [
+                        'label' => 'Role',
+                        'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->id), 'description')),
+                        'format' => 'raw',
                     ],
                     [
                         'attribute' => 'rate_id',

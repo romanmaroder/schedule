@@ -13,16 +13,26 @@ use schedule\forms\manage\User\Employee\EmployeeEditForm;
 use schedule\forms\manage\User\Employee\EmployeeExistCreateForm;
 use schedule\repositories\EmployeeRepository;
 use schedule\repositories\UserRepository;
+use schedule\services\RoleManager;
+use schedule\services\TransactionManager;
 
 class EmployeeManageService
 {
     private EmployeeRepository $repository;
     private UserRepository $users;
+    private $roles;
+    private $transaction;
 
-    public function __construct(EmployeeRepository $repository, UserRepository $users)
-    {
+    public function __construct(
+        EmployeeRepository $repository,
+        UserRepository $users,
+        RoleManager $roles,
+        TransactionManager $transaction
+    ) {
         $this->repository = $repository;
         $this->users = $users;
+        $this->roles = $roles;
+        $this->transaction = $transaction;
     }
 
     public function create(EmployeeExistCreateForm $form): void
@@ -54,7 +64,13 @@ class EmployeeManageService
             $form->roleId,
             $form->status
         );
-        $this->repository->save($employee);
+
+        $this->transaction->wrap(
+            function () use ($employee, $form) {
+                $this->repository->save($employee);
+                $this->roles->assign($employee->id, $form->role);
+            }
+        );
     }
 
     public function edit($id, EmployeeEditForm $form): void
@@ -100,8 +116,13 @@ class EmployeeManageService
             $form->roleId,
             $form->status,
         );
-        $this->repository->save($employee);
-        $this->users->save($user);
+        $this->transaction->wrap(
+            function () use ($employee, $form, $user) {
+                $this->repository->save($employee);
+                $this->roles->assign($employee->id, $form->role);
+                $this->users->save($user);
+            }
+        );
     }
 
     public function attach(EmployeeCreateForm $form)
@@ -142,6 +163,12 @@ class EmployeeManageService
             $form->status
         );
         $this->users->save($user);
+    }
+
+    public function assignRole($id, $role): void
+    {
+        $employee = $this->repository->get($id);
+        $this->roles->assign($employee->id, $role);
     }
 
     public function remove($id): void

@@ -9,6 +9,8 @@ use schedule\forms\CompositeForm;
 use schedule\forms\manage\AddressForm;
 use schedule\forms\manage\ScheduleForm;
 use schedule\forms\manage\User\UserEditForm;
+use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property AddressForm $address
@@ -27,6 +29,7 @@ class EmployeeEditForm extends CompositeForm
     public $color;
     public $roleId;
     public $status;
+    public $role;
 
     private $_employee;
 
@@ -46,6 +49,8 @@ class EmployeeEditForm extends CompositeForm
             $this->color = $employee->color;
             $this->roleId = $employee->role_id;
             $this->status = $employee->status;
+            $roles = Yii::$app->authManager->getRolesByUser($employee->id);
+            $this->role = $roles ? reset($roles)->name : null;
             $this->_employee = $employee;
         }else{
             $this->address = new AddressForm();
@@ -57,16 +62,21 @@ class EmployeeEditForm extends CompositeForm
     public function rules()
     {
         return [
-            [['userId','rateId', 'priceId', 'firstName', 'lastName'], 'required'],
+            [['userId', 'rateId', 'priceId', 'firstName', 'lastName', 'role'], 'required'],
             [['firstName', 'lastName'], 'string', 'max' => 100],
-            [['color','birthday','phone'],'string'],
-            [['roleId','status'],'integer'],
+            [['color', 'birthday', 'phone'], 'string'],
+            [['roleId', 'status'], 'integer'],
         ];
+    }
+
+    public function rolesList(): array
+    {
+        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
     }
 
     protected function internalForms(): array
     {
-        return ['address','schedule' ,'user'];
+        return ['address', 'schedule', 'user'];
     }
 
 }

@@ -8,6 +8,7 @@ use schedule\forms\CompositeForm;
 use schedule\forms\manage\AddressForm;
 use schedule\forms\manage\ScheduleForm;
 use schedule\forms\manage\User\UserEmployeeCreateForm;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property AddressForm $address
@@ -25,6 +26,7 @@ class EmployeeCreateForm extends CompositeForm
     public $color;
     public $roleId;
     public $status;
+    public $role;
 
 
     public function __construct($config = [])
@@ -38,15 +40,20 @@ class EmployeeCreateForm extends CompositeForm
     public function rules(): array
     {
         return [
-            [['rateId', 'priceId', 'roleId', 'firstName', 'lastName'], 'required'],
+            [['rateId', 'priceId', 'roleId', 'firstName', 'lastName', 'role'], 'required'],
             [['firstName', 'lastName'], 'string', 'max' => 100],
             [['birthday', 'phone', 'color'], 'string'],
             [['status', 'roleId'], 'integer'],
         ];
     }
 
+    public function rolesList(): array
+    {
+        return ArrayHelper::map(\Yii::$app->authManager->getRoles(), 'name', 'description');
+    }
+
     protected function internalForms(): array
     {
-        return ['address','schedule', 'user'];
+        return ['address', 'schedule', 'user'];
     }
 }

@@ -26,6 +26,7 @@ class EmployeeExistCreateForm extends CompositeForm
     public $color;
     public $roleId;
     public $status;
+    public $role;
 
     public function __construct($config = [])
     {
@@ -37,7 +38,7 @@ class EmployeeExistCreateForm extends CompositeForm
     public function rules(): array
     {
         return [
-            [['userId', 'rateId','roleId', 'priceId'], 'required'],
+            [['userId', 'rateId','roleId', 'priceId','role'], 'required'],
             [['firstName', 'lastName'], 'safe'],
             [['birthday', 'phone','color'], 'string'],
             [['userId', 'status','rateId','roleId', 'priceId'], 'integer'],
@@ -52,6 +53,10 @@ class EmployeeExistCreateForm extends CompositeForm
            ->where(['is','schedule_employees.user_id',null])->asArray()->all(),'id','username');
     }
 
+    public function rolesList(): array
+    {
+        return ArrayHelper::map(\Yii::$app->authManager->getRoles(), 'name', 'description');
+    }
 
     protected function internalForms(): array
     {

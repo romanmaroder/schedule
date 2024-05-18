@@ -206,6 +206,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 )  ?>
             </div>
+            <div class="form-group">
+                <?= $form->field($model, 'role')->widget(
+                    Select2::class,
+                    [
+                        'bsVersion' => '4.x',
+                        'name' => 'roleId',
+                        'data' => $model->rolesList(),
+                        'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
+                        'options' => ['placeholder' => 'Select a role ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+
+                    ]
+                )  ?>
+            </div>
         </div>
     </div>
     <!-- /.card-body -->

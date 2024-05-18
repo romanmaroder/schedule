@@ -28,7 +28,8 @@
         "romanmaroder/yii2-upload-behavior": "^1.0",
         "romanmaroder/yii2fullcalendar6":"*",
         "mihaildev/yii2-ckeditor": "^1.0",
-        "mihaildev/yii2-elfinder": "^1.2"
+        "mihaildev/yii2-elfinder": "^1.2",
+        "fishvision/yii2-migrate": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
