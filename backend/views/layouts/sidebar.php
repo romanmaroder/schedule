@@ -222,6 +222,12 @@ use yii\helpers\Html;
                                             'url' => ['/page/index'],
                                             'active' => $this->context->id == 'page'
                                         ],
+                                        [
+                                            'label' => 'Files',
+                                            'icon' => 'fas fa-file-upload',
+                                            'url' => ['/file/index'],
+                                            'active' => $this->context->id == 'file'
+                                        ],
                                     ]
                                 ],
 
