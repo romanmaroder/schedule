@@ -1,5 +1,6 @@
 <?php
 
+use mihaildev\ckeditor\CKEditor;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -54,12 +55,7 @@ use yii\helpers\Html;
                 )->label($model->getAttributeLabel('title')) ?>
             </div>
             <div class="form-group">
-                <?= $form->field($model, 'description')->textInput(
-                    [
-                        'maxlength' => true,
-                        'placeholder' => $model->getAttributeLabel('description')
-                    ]
-                )->label($model->getAttributeLabel('description')) ?>
+                <?= $form->field($model, 'description')->widget(CKEditor::class)->label($model->getAttributeLabel('description')) ?>
             </div>
         </div>
         <div class="card-header">
@@ -86,7 +82,7 @@ use yii\helpers\Html;
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
             <!--Footer-->
         </div>
         <!-- /.card-footer-->

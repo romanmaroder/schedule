@@ -26,7 +26,8 @@
         "kartik-v/yii2-field-range": "*",
         "paulzi/yii2-nested-sets": "^1.0",
         "romanmaroder/yii2-upload-behavior": "^1.0",
-        "romanmaroder/yii2fullcalendar6":"*"
+        "romanmaroder/yii2fullcalendar6":"*",
+        "mihaildev/yii2-ckeditor": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -30,23 +30,23 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             <?= Html::a(
                                 'Draft',
                                 ['draft', 'id' => $service->id],
-                                ['class' => 'btn btn-primary btn-shadow', 'data-method' => 'post']
+                                ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow', 'data-method' => 'post']
                             ) ?>
                         <?php
                         else : ?>
                             <?= Html::a(
                                 'Activate',
                                 ['activate', 'id' => $service->id],
-                                ['class' => 'btn btn-success btn-shadow', 'data-method' => 'post']
+                                ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient btn-shadow', 'data-method' => 'post']
                             ) ?>
                         <?php
                         endif; ?>
-                        <?= Html::a('Update', ['update', 'id' => $service->id], ['class' => 'btn btn-primary btn-shadow']) ?>
+                        <?= Html::a('Update', ['update', 'id' => $service->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow']) ?>
                         <?= Html::a(
                             'Delete',
                             ['delete', 'id' => $service->id],
                             [
-                                'class' => 'btn btn-danger btn-shadow',
+                                'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient btn-shadow',
                                 'data' => [
                                     'confirm' => 'Are you sure you want to delete this item?',
                                     'method' => 'post',
@@ -101,7 +101,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ) ?>
                     <br/>
                     <p>
-                        <?= Html::a('Change Price', ['price', 'id' => $service->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Change Price', ['price', 'id' => $service->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
                     </p>
                 </div>
             </div>
@@ -120,7 +120,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
         </div>
         <div class="card-body">
-            <?= Yii::$app->formatter->asNtext($service->description) ?>
+            <?= Yii::$app->formatter->asHtml($product->description, [
+                'Attr.AllowedRel' => array('nofollow'),
+                'HTML.SafeObject' => true,
+                'Output.FlashCompat' => true,
+                'HTML.SafeIframe' => true,
+                'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+            ]) ?>
         </div>
     </div>
 

@@ -2,6 +2,7 @@
 
 use kartik\select2\Select2;
 use kartik\widgets\FileInput;
+use mihaildev\ckeditor\CKEditor;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -68,9 +69,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="form-group">
-                <?= $form->field($model, 'description')->textarea(
-                    ['rows' => 3, 'placeholder' => $model->getAttributeLabel('description')]
-                )->label($model->getAttributeLabel('description')) ?>
+                <?= $form->field($model, 'description')->widget(CKEditor::class)->label(
+                    $model->getAttributeLabel('description')
+                ) ?>
             </div>
         </div>
     </div>
@@ -274,7 +275,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <div class="card-footer bg-secondary form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
     </div>
 
     <?php

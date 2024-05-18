@@ -1,5 +1,6 @@
 <?php
 
+use mihaildev\ckeditor\CKEditor;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = 'Update';
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                 </div>
             </div>
-            <?= $form->field($model, 'description')->textarea(['rows' => 10]) ?>
+            <?= $form->field($model, 'description')->widget(CKEditor::class) ?>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -111,7 +112,7 @@ $this->params['breadcrumbs'][] = 'Update';
         <!-- /.card-body -->
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
             </div>
             <!--Footer-->
         </div>

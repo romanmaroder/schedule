@@ -147,7 +147,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
         </div>
     </div>
     <div class="card-body">
-        <?= Yii::$app->formatter->asNtext($post->content) ?>
+        <?= Yii::$app->formatter->asHtml($post->content, [
+            'Attr.AllowedRel' => array('nofollow'),
+            'HTML.SafeObject' => true,
+            'Output.FlashCompat' => true,
+            'HTML.SafeIframe' => true,
+            'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+        ]) ?>
     </div>
 </div>
 

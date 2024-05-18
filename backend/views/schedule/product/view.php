@@ -39,23 +39,23 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             <?= Html::a(
                                 'Draft',
                                 ['draft', 'id' => $product->id],
-                                ['class' => 'btn btn-primary btn-shadow', 'data-method' => 'post']
+                                ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         else : ?>
                             <?= Html::a(
                                 'Activate',
                                 ['activate', 'id' => $product->id],
-                                ['class' => 'btn btn-success btn-shadow', 'data-method' => 'post']
+                                ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         endif; ?>
-                        <?= Html::a('Update', ['update', 'id' => $product->id], ['class' => 'btn btn-primary btn-shadow']) ?>
+                        <?= Html::a('Update', ['update', 'id' => $product->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
                         <?= Html::a(
                             'Delete',
                             ['delete', 'id' => $product->id],
                             [
-                                'class' => 'btn btn-danger btn-shadow',
+                                'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient',
                                 'data' => [
                                     'confirm' => 'Are you sure you want to delete this item?',
                                     'method' => 'post',
@@ -114,7 +114,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ) ?>
                     <br/>
                     <p>
-                        <?= Html::a('Change Price', ['price', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Change Price', ['price', 'id' => $product->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
                     </p>
                 </div>
             </div>
@@ -165,7 +165,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
         </div>
         <div class="card-body">
-            <?= Yii::$app->formatter->asNtext($product->description) ?>
+            <?= Yii::$app->formatter->asHtml($product->description, [
+                'Attr.AllowedRel' => array('nofollow'),
+                'HTML.SafeObject' => true,
+                'Output.FlashCompat' => true,
+                'HTML.SafeIframe' => true,
+                'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+            ]) ?>
         </div>
     </div>
 
@@ -184,7 +190,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 <?= Html::a(
                     'Add Modification',
                     ['shop/modification/create', 'product_id' => $product->id],
-                    ['class' => 'btn btn-success']
+                    ['class' => 'btn btn-success btn-gradient btn-shadow']
                 ) ?>
             </p>
             <?= GridView::widget(
@@ -327,7 +333,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
             <div class='card-footer bg-secondary'>
                 <div class='form-group'>
-                    <?= Html::submitButton('Upload', ['class' => 'btn btn-success']) ?>
+                    <?= Html::submitButton('Upload', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
                 </div>
 
                 <?php

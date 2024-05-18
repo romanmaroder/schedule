@@ -55,7 +55,13 @@ foreach ($post->tags as $tag) {
             ); ?></span>
     </div>
 </div>
-<p><?= Yii::$app->formatter->asNtext($post->content) ?></p>
+<p><?= Yii::$app->formatter->asHtml($post->content, [
+        'Attr.AllowedRel' => array('nofollow'),
+        'HTML.SafeObject' => true,
+        'Output.FlashCompat' => true,
+        'HTML.SafeIframe' => true,
+        'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+    ]) ?></p>
 <div class="pt-5">
     <p>Categories: <a href="#"><?= $post->category->name ?></a> Tags: <a href="#">#<?= implode(', ', $tagLinks) ?></a>
     </p>

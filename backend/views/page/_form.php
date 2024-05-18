@@ -6,6 +6,7 @@
 
 /* @var $form yii\widgets\ActiveForm */
 
+use mihaildev\ckeditor\CKEditor;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -37,7 +38,7 @@ $form = ActiveForm::begin(); ?>
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="form-group">
-            <?= $form->field($model, 'content')->textarea(['rows' => 15]) ?>
+            <?= $form->field($model, 'content')->widget(CKEditor::class) ?>
         </div>
 
     </div>

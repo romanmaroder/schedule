@@ -27,7 +27,13 @@ $this->params['breadcrumbs'][] = $page->title;
                 <h1 class="mb-4">
                     <?= Html::encode($page->title) ?>
                 </h1>
-                <p class="text-secondary"> <?= Yii::$app->formatter->asNtext($page->content) ?></p>
+                <p class="text-secondary">  <?= Yii::$app->formatter->asHtml($page->content, [
+                        'Attr.AllowedRel' => array('nofollow'),
+                        'HTML.SafeObject' => true,
+                        'Output.FlashCompat' => true,
+                        'HTML.SafeIframe' => true,
+                        'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+                    ]) ?></p>
             </div>
         </div>
     </div>

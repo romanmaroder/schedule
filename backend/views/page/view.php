@@ -61,7 +61,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="card-body">
-        <?= Yii::$app->formatter->asNtext($page->content) ?>
+        <?= Yii::$app->formatter->asHtml($page->content, [
+            'Attr.AllowedRel' => array('nofollow'),
+            'HTML.SafeObject' => true,
+            'Output.FlashCompat' => true,
+            'HTML.SafeIframe' => true,
+            'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+        ]) ?>
     </div>
 </div>
 
