@@ -11,8 +11,9 @@ use yii\base\BaseObject;
 use yii\caching\Cache;
 use yii\helpers\ArrayHelper;
 use yii\web\UrlNormalizerRedirectException;
+use yii\web\UrlRuleInterface;
 
-class PageUrlRule extends BaseObject
+class PageUrlRule extends BaseObject implements UrlRuleInterface
 {
     private $repository;
     private $cache;
