@@ -65,7 +65,7 @@ class EmployeeSearch extends Model
         );
 
         if (!empty($this->role)) {
-            $query->innerJoin('{{%auth_assignments}} a', 'a.user_id = e.id');
+            $query->innerJoin('{{%auth_assignments}} a', 'a.user_id = users.id');
             $query->andWhere(['a.item_name' => $this->role]);
         }
 

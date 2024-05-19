@@ -79,12 +79,11 @@ return [
     ],
     'as access' => [
         'class' => 'yii\filters\AccessControl',
-        'except' => ['auth/login', 'site/error'],
+        'except' => ['auth/login','auth/logout','site/error'],
         'rules' => [
             [
                 'allow' => true,
-                'roles' => ['@'],
-                //'roles' => ['admin'],
+                'roles' => ['admin','manager'],
             ],
         ],
     ],

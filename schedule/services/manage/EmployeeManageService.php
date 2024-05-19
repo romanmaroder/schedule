@@ -68,7 +68,7 @@ class EmployeeManageService
         $this->transaction->wrap(
             function () use ($employee, $form) {
                 $this->repository->save($employee);
-                $this->roles->assign($employee->id, $form->role);
+                $this->roles->assign($employee->user_id, $form->role);
             }
         );
     }
@@ -119,7 +119,7 @@ class EmployeeManageService
         $this->transaction->wrap(
             function () use ($employee, $form, $user) {
                 $this->repository->save($employee);
-                $this->roles->assign($employee->id, $form->role);
+                $this->roles->assign($employee->user_id, $form->role);
                 $this->users->save($user);
             }
         );
@@ -168,12 +168,13 @@ class EmployeeManageService
     public function assignRole($id, $role): void
     {
         $employee = $this->repository->get($id);
-        $this->roles->assign($employee->id, $role);
+        $this->roles->assign($employee->user_id, $role);
     }
 
     public function remove($id): void
     {
         $employee = $this->repository->get($id);
+        $this->roles->revoke($employee->user_id);
         $this->repository->remove($employee);
     }
 

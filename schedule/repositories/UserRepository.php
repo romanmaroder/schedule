@@ -15,29 +15,7 @@ class UserRepository
      */
     public function findByUsernameOrEmail($value): ?User
     {
-        switch (\Yii::$app->id) {
-            case 'app-backend':
-                return User::find()
-                    ->alias('u')
-                    ->andWhere(
-                        [
-                            'exists',
-                            Employee::find()->joinWith('role')
-                                ->alias('e')
-                                ->andWhere('u.id = e.user_id')
-                                ->andWhere(['u.username' => $value])
-                                ->andWhere(
-                                    [
-                                        'or',
-                                        ['schedule_roles.id' => '1'],
-                                        ['schedule_roles.id' => '2']
-                                    ] //TODO think about defining mandatory roles for the admin panel
-                                )
-                        ]
-                    )->one();
-
-            case 'app-frontend':
-                return User::find()
+        return User::find()
                     ->alias('u')
                     ->andWhere(
                         [
@@ -48,8 +26,10 @@ class UserRepository
                                 ->andWhere(['u.username' => $value])
                         ]
                     )->one();
+
+
         }
-    }
+
 
     /**
      * @param $network

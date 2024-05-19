@@ -65,7 +65,7 @@ return [
         'rules' => [
             [
                 'allow' => true,
-                'roles' => ['@'],
+                'roles' => ['employee'],
             ],
         ],
     ],

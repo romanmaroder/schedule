@@ -49,7 +49,7 @@ class EmployeeEditForm extends CompositeForm
             $this->color = $employee->color;
             $this->roleId = $employee->role_id;
             $this->status = $employee->status;
-            $roles = Yii::$app->authManager->getRolesByUser($employee->id);
+            $roles = Yii::$app->authManager->getRolesByUser($employee->user_id);
             $this->role = $roles ? reset($roles)->name : null;
             $this->_employee = $employee;
         }else{

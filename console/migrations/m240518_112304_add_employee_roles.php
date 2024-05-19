@@ -16,31 +16,26 @@ class m240518_112304_add_employee_roles extends Migration
             '{{%auth_items}}',
             ['type', 'name', 'description'],
             [
+                [1, 'admin', 'Admin'],
                 [1, 'employee', 'Employee'],
                 [1, 'manager', 'Manager'],
-                [1, 'admin', 'Admin'],
             ]
         );
 
-        $this->batchInsert(
-            '{{%auth_item_children}}',
-            ['parent', 'child'],
-            [
-                ['admin', 'employee', 'manager'],
-            ]
-        );
+        $this->batchInsert('{{%auth_item_children}}', ['parent', 'child'], [
+            ['admin', 'manager'],
+            ['admin', 'employee'],
+            ['manager', 'employee'],
+        ]);
 
         $this->execute(
-            'INSERT INTO {{%auth_assignments}} (item_name, user_id) SELECT \'employee\', e.id FROM {{%schedule_employees}} e ORDER BY e.id'
+            'INSERT INTO {{%auth_assignments}} (item_name, user_id) SELECT \'admin\', e.user_id FROM {{%schedule_employees}} e ORDER BY e.user_id'
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
+    public function down()
     {
-        $this->delete('{{%auth_items}}', ['name' => ['employee', 'manager', 'admin']]);
+        $this->delete('{{%auth_items}}', ['name' => ['user', 'admin']]);
     }
 
 }

@@ -26,16 +26,16 @@ class RoleController extends Controller
      */
     public function actionAssign(): void
     {
-        $lastName = $this->prompt('Employee:', ['required' => true]);
-        $employee= $this->findModel($lastName);
+        $phone = $this->prompt('Phone employee: +X (XXX) XXX-XX-XX', ['required' => true]);
+        $employee= $this->findModel($phone);
         $role = $this->select('Role:', ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description'));
         $this->service->assignRole($employee->id, $role);
         $this->stdout('Done!' . PHP_EOL);
     }
 
-    private function findModel($lastName): Employee
+    private function findModel($phone): Employee
     {
-        if (!$model = Employee::findOne(['last_name' => $lastName])) {
+        if (!$model = Employee::findOne(['phone' => $phone])) {
             throw new Exception('Employee is not found');
         }
         return $model;
