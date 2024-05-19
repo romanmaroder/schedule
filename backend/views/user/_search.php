@@ -36,8 +36,8 @@ use yii\helpers\Html;
     <?php // echo $form->field($model, 'verification_token') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
+        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary btn-shadow btn-sm btn-gradient']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

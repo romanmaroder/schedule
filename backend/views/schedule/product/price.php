@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Price';
         </div>
         <div class="card-footer bg-secondary">
             <div class='form-group'>
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
             </div>
         </div>
     </div>

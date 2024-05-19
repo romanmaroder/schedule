@@ -32,27 +32,27 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             <?= Html::a(
                                 'Draft',
                                 ['draft', 'id' => $expense->id],
-                                ['class' => 'btn btn-primary btn-shadow', 'data-method' => 'post']
+                                ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         else : ?>
                             <?= Html::a(
                                 'Activate',
                                 ['activate', 'id' => $expense->id],
-                                ['class' => 'btn btn-success btn-shadow', 'data-method' => 'post']
+                                ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         endif; ?>
                         <?= Html::a(
                             'Update',
                             ['update', 'id' => $expense->id],
-                            ['class' => 'btn btn-primary btn-shadow']
+                            ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']
                         ) ?>
                         <?= Html::a(
                             'Delete',
                             ['delete', 'id' => $expense->id],
                             [
-                                'class' => 'btn btn-danger btn-shadow',
+                                'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient',
                                 'data' => [
                                     'confirm' => 'Are you sure you want to delete this item?',
                                     'method' => 'post',

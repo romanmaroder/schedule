@@ -120,7 +120,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
         </div>
         <div class="card-body">
-            <?= Yii::$app->formatter->asHtml($product->description, [
+            <?= Yii::$app->formatter->asHtml($service->description, [
                 'Attr.AllowedRel' => array('nofollow'),
                 'HTML.SafeObject' => true,
                 'Output.FlashCompat' => true,

@@ -309,7 +309,7 @@ $this->params['breadcrumbs'][] = 'copying';
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
                             'Save',
-                            ['class' => 'btn btn-success btn-sm btn-shadow']
+                            ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']
                         ) ?></div>
                 </div>
             </div>

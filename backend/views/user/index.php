@@ -23,7 +23,7 @@ PluginAsset::register($this)->add(
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
+            <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
         </h3>
 
         <div class='card-tools'>

@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <!-- /.card-body -->
     <div class="card-footer">
         <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
         </div>
         <!--Footer-->
     </div>

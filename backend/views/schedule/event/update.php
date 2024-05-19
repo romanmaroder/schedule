@@ -391,7 +391,7 @@ $this->params['breadcrumbs'][] = 'update';
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
                             'Save',
-                            ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']
+                            ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']
                         ) ?></div>
                 </div>
             </div>

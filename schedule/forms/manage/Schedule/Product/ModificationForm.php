@@ -20,9 +20,11 @@ class ModificationForm extends Model
      */
     public function __construct(Modification $modification = null, $config = [])
     {
-        $this->code = $modification->code;
-        $this->name = $modification->name;
-        $this->price = $modification->price;
+        if ($modification) {
+            $this->code = $modification->code;
+            $this->name = $modification->name;
+            $this->price = $modification->price;
+        }
         parent::__construct($config);
     }
 

@@ -20,12 +20,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-secondary">
         <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $characteristic->id], ['class' => 'btn btn-primary btn-shadow']) ?>
+            <?= Html::a('Update', ['update', 'id' => $characteristic->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
                 'Delete',
                 ['delete', 'id' => $characteristic->id],
                 [
-                    'class' => 'btn btn-danger btn-shadow',
+                    'class' => 'btn btn-danger btn-sm btn-shadow btn-gradient',
                     'data' => [
                         'confirm' => 'Are you sure you want to delete this item?',
                         'method' => 'post',

@@ -32,7 +32,7 @@ class EmployeeRepository
 
     public function remove(Employee $employee): void
     {
-        $this->checkEvent($employee->user_id);
+        //$this->checkEvent($employee->user_id);
 
         if (!$employee->delete()) {
             throw new \RuntimeException('Removing error.');

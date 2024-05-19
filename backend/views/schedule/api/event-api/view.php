@@ -86,7 +86,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'id' => 'edit-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow'
+                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
                 ]
             ) ?>
             <?php endif;?>
@@ -129,7 +129,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'id' => 'copy-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient text-shadow'
+                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient'
                 ]
             ) ?>
             <?= Html::a(
@@ -137,7 +137,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',
-                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadowml-5',
+                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-5',
                     'data' => [
                         'confirm' => Yii::t('app', 'Delete file?'),
                         'method' => 'post',

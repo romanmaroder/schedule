@@ -189,8 +189,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <p>
                 <?= Html::a(
                     'Add Modification',
-                    ['shop/modification/create', 'product_id' => $product->id],
-                    ['class' => 'btn btn-success btn-gradient btn-shadow']
+                    ['schedule/modification/create', 'product_id' => $product->id],
+                    ['class' => 'btn btn-success btn-gradient btn-sm btn-gradient btn-shadow']
                 ) ?>
             </p>
             <?= GridView::widget(

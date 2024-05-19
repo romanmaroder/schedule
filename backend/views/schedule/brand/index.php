@@ -22,7 +22,7 @@ PluginAsset::register($this)->add(
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::a('Create Brand', ['create'], ['class' => 'btn btn-success btn-shadow']) ?>
+            <?= Html::a('Create Brand', ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
         </h3>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>

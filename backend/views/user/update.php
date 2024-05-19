@@ -114,7 +114,7 @@ $this->params['breadcrumbs'][] = $user->username;
     <!-- /.card-body -->
     <div class="card-footer">
         <!--Footer-->
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
     </div>
     <!-- /.card-footer-->
 </div>

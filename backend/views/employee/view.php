@@ -17,12 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="card card-secondary">
     <div class="card-header">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-shadow']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
         <?= Html::a(
             'Delete',
             ['delete', 'id' => $model->id],
             [
-                'class' => 'btn btn-danger btn-shadow delete',
+                'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient delete',
                 'data' => [
                     'confirm' => 'Are you sure you want to delete this item?',
                     'method' => 'post',

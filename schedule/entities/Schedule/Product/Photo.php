@@ -4,9 +4,9 @@
 namespace schedule\entities\Schedule\Product;
 
 
+use romanmaroder\upload\ImageUploadBehavior;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
-use yiidreamteam\upload\ImageUploadBehavior;
 
 
 /**

@@ -291,7 +291,7 @@ use yii\helpers\Html;
         <div class="col-12">
             <div class="form-group"> <?= Html::submitButton(
                     'Save',
-                    ['class' => 'btn btn-success btn-sm btn-shadow']
+                    ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
                 ) ?></div>
         </div>
     </div>

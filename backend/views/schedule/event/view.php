@@ -114,7 +114,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ['update', 'id' => $model->id],
                         [
                             'id' => 'edit-link',
-                            'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow'
+                            'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
                         ]
                     ) ?>
                     <?php
@@ -154,7 +154,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ['copy', 'id' => $model->id],
                         [
                             'id' => 'copy-link',
-                            'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient text-shadow',
+                            'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
                         ]
                     ) ?>
                     <?= Html::a(
@@ -162,7 +162,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ['delete', 'id' => $model->id],
                         [
                             'id' => 'delete',
-                            'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadow',
+                            'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient',
                             'data' => [
                                 'confirm' => Yii::t('app', 'Delete file?'),
                                 'method' => 'POST',

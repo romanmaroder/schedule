@@ -31,7 +31,7 @@ use yii\helpers\Html;
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow']) ?>
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
             <!--Footer-->
         </div>
         <!-- /.card-footer-->

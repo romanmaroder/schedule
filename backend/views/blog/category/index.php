@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card-header">
         <h3 class="card-title">
             <?= Html::a(
-                'Create Tag',
+                'Create Category',
                 ['create'],
                 ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']
             ) ?>

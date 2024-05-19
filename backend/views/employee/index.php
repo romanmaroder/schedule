@@ -24,10 +24,10 @@ PluginAsset::register($this)->add(
 <div class="card card-secondary">
     <div class="card-header">
         <span class="card-title mb-2 mr-2 mb-md-0 ">
-                <span class=""><?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success btn-shadow']) ?></span>
+                <span class=""><?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?></span>
         </span>
         <span class="card-title ">
-                <span class=""> <?= Html::a('Create Existing Employee', ['existing-user'], ['class' => 'btn btn-success btn-shadow']) ?></span>
+                <span class=""> <?= Html::a('Create Existing Employee', ['existing-user'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?></span>
         </span>
 
         <div class='card-tools'>
