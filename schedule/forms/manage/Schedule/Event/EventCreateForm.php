@@ -21,6 +21,9 @@ class EventCreateForm extends CompositeForm
     public $status;
     public $payment;
     public $amount;
+    public $rate;
+    public $price;
+    public $fullname;
 
 
     public function __construct($config = [])
@@ -37,7 +40,7 @@ class EventCreateForm extends CompositeForm
             [['discount_from','status','amount','payment'], 'integer'],
             [['start', 'end'], 'required'],
             ['notice', 'string'],
-            [['amount','payment'], 'safe'],
+            [['amount','payment','rate','price','fullname'], 'safe'],
             ['discount', 'required', 'when' => function($model) {
                 return $model->discount_from > 0;
             },'whenClient' => "function (attribute, value) {

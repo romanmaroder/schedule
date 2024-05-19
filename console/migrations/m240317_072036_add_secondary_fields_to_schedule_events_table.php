@@ -17,8 +17,8 @@ class m240317_072036_add_secondary_fields_to_schedule_events_table extends Migra
         $this->addColumn('{{%schedule_events}}', 'discount_from', $this->smallInteger()->after('discount'));
         $this->addColumn('{{%schedule_events}}', 'amount', $this->integer()->after('discount_from'));
         $this->addColumn('{{%schedule_events}}', 'status', $this->smallInteger()->after('amount'));
-        $this->addColumn('{{%schedule_events}}', 'rate', $this->integer()->after('status'));
-        $this->addColumn('{{%schedule_events}}', 'price', $this->integer()->after('rate'));
+        $this->addColumn('{{%schedule_events}}', 'rate', $this->decimal(3,2)->after('status'));
+        $this->addColumn('{{%schedule_events}}', 'price', $this->decimal(3,2)->after('rate'));
         $this->addColumn('{{%schedule_events}}', 'fullname', $this->string()->after('price'));
         $this->addColumn('{{%schedule_events}}', 'default_color', $this->string()->defaultValue('#747d8c')->after('fullname'));
     }

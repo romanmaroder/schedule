@@ -28,6 +28,11 @@ use yii\db\ActiveRecord;
  * @property ServiceAssignment[] $serviceAssignments
  * @property Service $services
  * @property Employee $employee
+ *
+ * @property int $rate [int(11)]
+ * @property int $price [int(11)]
+ * @property string $fullname [varchar(255)]
+ * @property string $default_color [varchar(255)]
  */
 class Event extends ActiveRecord
 {
@@ -35,7 +40,7 @@ class Event extends ActiveRecord
     public const STATUS_PAYED = 1;
     public const STATUS_CASH = 2;
     public const STATUS_CARD = 3;
-
+    public const DEFAULT_COLOR = '#747d8c';
 
     public static function create(
         $masterId,
@@ -48,6 +53,9 @@ class Event extends ActiveRecord
         $status,
         $payment,
         $amount,
+        $rate,
+        $price,
+        $fullname,
     ): self {
         $event = new static();
         $event->master_id = $masterId;
@@ -60,6 +68,10 @@ class Event extends ActiveRecord
         $event->status = self::STATUS_NOT_PAYED;
         $event->payment = self::STATUS_CASH;
         $event->amount = $amount;
+        $event->rate = $rate;
+        $event->price = $price;
+        $event->fullname = $fullname;
+        $event->default_color = self::DEFAULT_COLOR;
         return $event;
     }
 
@@ -73,7 +85,10 @@ class Event extends ActiveRecord
         $discount_from,
         $status,
         $payment,
-        $amount
+        $amount,
+        $rate,
+        $price,
+        $fullname,
     ): void {
         $this->master_id = $masterId;
         $this->client_id = $clientId;
@@ -89,6 +104,9 @@ class Event extends ActiveRecord
         } else {
             $this->payment = null;
         }
+        $this->rate = $rate;
+        $this->price = $price;
+        $this->fullname = $fullname;
     }
 
     public static function copy(
@@ -103,6 +121,9 @@ class Event extends ActiveRecord
         $status,
         $payment,
         $amount,
+        $rate,
+        $price,
+        $fullname,
     ): self {
         $event = new static();
         $event->id = $id;
@@ -116,6 +137,9 @@ class Event extends ActiveRecord
         $event->status = self::STATUS_NOT_PAYED;
         $event->payment = self::STATUS_CASH;
         $event->amount = $amount;
+        $event->rate = $rate;
+        $event->price = $price;
+        $event->fullname = $fullname;
         return $event;
     }
 
