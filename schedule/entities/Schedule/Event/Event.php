@@ -41,6 +41,7 @@ class Event extends ActiveRecord
     public const STATUS_CASH = 2;
     public const STATUS_CARD = 3;
     public const DEFAULT_COLOR = '#747d8c';
+    public const EX_EMPLOYEE = ' (Ex-employee)';
 
     public static function create(
         $masterId,
@@ -282,6 +283,16 @@ class Event extends ActiveRecord
             return false;
         }
         return true;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->fullname . self::EX_EMPLOYEE;
+    }
+
+    public function getDefaultColor()
+    {
+        return self::DEFAULT_COLOR;
     }
 
     public static function tableName(): string

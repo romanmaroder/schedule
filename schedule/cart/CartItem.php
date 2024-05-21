@@ -3,6 +3,7 @@
 namespace schedule\cart;
 
 use schedule\entities\Schedule\Event\ServiceAssignment;
+use schedule\entities\User\Employee\Employee;
 
 /**
  * If the rate and price are 100% (1), the foreman's wages are not included.
@@ -29,7 +30,7 @@ class CartItem
 
     public function getColor(): string
     {
-        return $this->item->events->employee->color;
+        return $this->item->events->employee->color ?? $this->item->events->default_color;
     }
 
     public function getDate(): string
@@ -39,7 +40,10 @@ class CartItem
 
     public function getMasterName(): string
     {
-        return $this->item->events->employee->getFullName();
+        if ($this->isEmployee()) {
+            return $this->item->events->employee->getFullName();
+        }
+        return $this->item->events->getFullName();
     }
 
     public function getClientName(): string
@@ -206,12 +210,12 @@ class CartItem
 
     public function getEmployeeRate() // TODO return to protect
     {
-        return $this->item->events->employee->rate->rate;
+        return $this->item->events->employee->rate->rate ?? $this->item->events->rate;
     }
 
     public function getEmployeePrice() // TODO return to protect
     {
-        return $this->item->events->employee->price->rate;
+        return $this->item->events->employee->price->rate ?? $this->item->events->price;
     }
 
     /**
@@ -271,5 +275,11 @@ class CartItem
         return $this->getDiscountedPrice() * $this->getEmployeeRate();
     }
 
+    private function isEmployee()
+    {
+        if ($this->item->events->employee != null) {
+            return $this->item->events->employee;
+        }
+    }
 
 }

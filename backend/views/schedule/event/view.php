@@ -42,7 +42,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'value' => function ($model) {
                                 return Html::a(
                                     Html::encode($model->master->username),
-                                    ['/employee/view', 'id' => $model->employee->id]
+                                    ['/employee/view', 'id' => $model->employee->id ?? $model->master_id]
 
                                 );
                             }

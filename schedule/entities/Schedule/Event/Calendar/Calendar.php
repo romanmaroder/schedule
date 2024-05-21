@@ -30,19 +30,22 @@ class Calendar
     {
         $data = $this->events->getAll();
 
+        /*echo'<pre>';
+        var_dump($data);
+        die();*/
         $events = [];
         foreach ($data as $item) {
 
             $event = new Event();
             $event->id = $item->id;
-            $event->title = $item->client->username;
+            $event->title = $item->client->username ?: $item->fullname;
             $event->extendedProps = [
                 'notice' => $item->notice,
-                'master' => $item->master->username,
+                'master' => $item->master->username ?: $item->fullname,
                 'service' => $this->serviceNameList($item->services),
             ];
-            $event->backgroundColor = $item->employee->color;
-            $event->borderColor = $item->employee->color;
+            $event->backgroundColor = $item->employee->color ??  $item->default_color;
+            $event->borderColor = $item->employee->color ?? $item->default_color;
             $event->start = $item->start;
             $event->end = $item->end;
             //$event->groupId = 'event';

@@ -10,6 +10,7 @@ use schedule\helpers\EmployeeHelper;
 use schedule\helpers\PriceHelper;
 use schedule\helpers\RateHelper;
 use schedule\helpers\RoleHelper;
+use schedule\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
@@ -147,7 +148,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'name' => 'hoursWork',
                         'language' => 'ru',
-                        'data' => [7,8,9,10],
+                        'data' => ScheduleHelper::hours(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'hoursWork',
@@ -168,7 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'name' => 'weekends',
                         'language' => 'ru',
-                        'data' => [0,6],
+                        'data' => ScheduleHelper::days(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'weekends',

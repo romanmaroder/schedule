@@ -48,7 +48,7 @@ PluginAsset::register($this)->add(
                             'class' => 'table-light'
                         ],
                         'rowOptions' => function ($model) {
-                            return ['style' => 'background-color:' . $model->employee->color];
+                            return ['style' => 'background-color:' . $model->getDefaultColor() ?? $model->employee->color];
                         },
                         'emptyText' => 'No results found',
                         'emptyTextOptions' => [
@@ -73,7 +73,7 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Master',
                                 'value' => function ($model) {
-                                    return $model->employee->user->username;
+                                    return $model->employee->user->username ?? $model->getFullName();
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
