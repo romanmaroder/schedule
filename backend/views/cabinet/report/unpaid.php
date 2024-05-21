@@ -79,6 +79,7 @@ PluginAsset::register($this)->add(
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
+                                'format' => 'raw'
                             ],
                             [
                                 'attribute' => 'Client',

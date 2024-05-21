@@ -41,7 +41,7 @@ class Event extends ActiveRecord
     public const STATUS_CASH = 2;
     public const STATUS_CARD = 3;
     public const DEFAULT_COLOR = '#747d8c';
-    public const EX_EMPLOYEE = ' (Ex-employee)';
+    public const EX_EMPLOYEE = ' <small><i class="fas fa-user-slash"></i></small>';
 
     public static function create(
         $masterId,
