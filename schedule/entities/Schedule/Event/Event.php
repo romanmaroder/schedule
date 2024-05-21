@@ -293,12 +293,30 @@ class Event extends ActiveRecord
         return $this->fullname . self::EX_EMPLOYEE;
     }
 
-    public function getDefaultColor()
+    public function getDefaultColor(): string
     {
         if ($this->employee) {
             return $this->employee->color;
         }
             return self::DEFAULT_COLOR;
+    }
+
+
+    public function getRate(): int|float
+    {
+        if ($this->employee){
+            return $this->employee->rate->rate;
+        }
+        return $this->rate;
+    }
+
+
+    public function getPrice(): int|float
+    {
+        if ($this->employee){
+            return $this->employee->price->rate;
+        }
+        return $this->price;
     }
 
     public static function tableName(): string

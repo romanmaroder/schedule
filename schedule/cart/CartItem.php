@@ -3,7 +3,6 @@
 namespace schedule\cart;
 
 use schedule\entities\Schedule\Event\ServiceAssignment;
-use schedule\entities\User\Employee\Employee;
 
 /**
  * If the rate and price are 100% (1), the foreman's wages are not included.
@@ -23,16 +22,13 @@ class CartItem
         return $this->item;
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->item->event_id;
     }
 
     public function getColor(): string
     {
-        if ($this->isEmployee()) {
-            return $this->item->events->employee->color;
-        }
         return $this->item->events->getDefaultColor();
     }
 
@@ -43,9 +39,6 @@ class CartItem
 
     public function getMasterName(): string
     {
-        if ($this->isEmployee()) {
-            return $this->item->events->employee->getFullName();
-        }
         return $this->item->events->getFullName();
     }
 
@@ -123,7 +116,7 @@ class CartItem
         return $this->getMasterPrice() - $this->getDiscountedPrice();
     }
 
-    public function getDiscountFrom()
+    public function getDiscountFrom(): float|int
     {
         return $this->item->events->discount_from;
     }
@@ -211,14 +204,14 @@ class CartItem
         return $this->getProfit();
     }
 
-    public function getEmployeeRate() // TODO return to protect
+    private function getEmployeeRate(): float|int
     {
-        return $this->item->events->employee->rate->rate ?? $this->item->events->rate;
+        return  $this->item->events->getRate();
     }
 
-    public function getEmployeePrice() // TODO return to protect
+    private function getEmployeePrice(): float|int
     {
-        return $this->item->events->employee->price->rate ?? $this->item->events->price;
+        return $this->item->events->getPrice();
     }
 
     /**
@@ -276,13 +269,6 @@ class CartItem
     private function getProfitWithOutDiscountAndStudioDiscount(): float|int
     {
         return $this->getDiscountedPrice() * $this->getEmployeeRate();
-    }
-
-    private function isEmployee()
-    {
-        if ($this->item->events->employee != null) {
-            return $this->item->events->employee;
-        }
     }
 
 }
