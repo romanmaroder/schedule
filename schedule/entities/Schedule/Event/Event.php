@@ -287,6 +287,9 @@ class Event extends ActiveRecord
 
     public function getFullName(): string
     {
+        if ($this->employee){
+            return $this->employee->getFullName();
+        }
         return $this->fullname . self::EX_EMPLOYEE;
     }
 

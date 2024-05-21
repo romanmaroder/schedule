@@ -73,7 +73,7 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Master',
                                 'value' => function ($model) {
-                                    return $model->employee->user->username ?? $model->getFullName();
+                                    return $model->getFullName();
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
