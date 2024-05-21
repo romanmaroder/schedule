@@ -48,7 +48,7 @@ PluginAsset::register($this)->add(
                             'class' => 'table-light'
                         ],
                         'rowOptions' => function ($model) {
-                            return ['style' => 'background-color:' . $model->getDefaultColor() ?? $model->employee->color];
+                            return ['style' => 'background-color:' . $model->getDefaultColor() ];
                         },
                         'emptyText' => 'No results found',
                         'emptyTextOptions' => [

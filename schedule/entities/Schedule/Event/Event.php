@@ -292,7 +292,10 @@ class Event extends ActiveRecord
 
     public function getDefaultColor()
     {
-        return self::DEFAULT_COLOR;
+        if ($this->employee) {
+            return $this->employee->color;
+        }
+            return self::DEFAULT_COLOR;
     }
 
     public static function tableName(): string

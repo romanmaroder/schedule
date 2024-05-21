@@ -20,7 +20,7 @@ PluginAsset::register($this)->add(
     [
         'datatables',
         'datatables-bs4',
-        'datatables-responsive',
+       'datatables-responsive',
         'datatables-buttons',
         'datatables-colreorder',
         'datatables-searchbuilder',
