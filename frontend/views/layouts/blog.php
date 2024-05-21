@@ -4,7 +4,10 @@
 
 /* @var $content string */
 
+use frontend\assets\BlogAsset;
 use frontend\widgets\Blog\CategoriesWidget;
+
+BlogAsset::register($this);
 
 ?>
 <?php

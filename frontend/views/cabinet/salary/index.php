@@ -25,14 +25,9 @@ PluginAsset::register($this)->add(
     ]
 );
 
-/*foreach ($dataProvider->getModels() as $model) {
 
-echo '<pre>';
-var_export($model->getDiscountFrom());
-}
-die();*/
 ?>
-    <div class="cabinet-index">
+    <div class="salary-index">
 
         <div class="table-responsive ">
             <div class="container-fluid">
@@ -53,6 +48,7 @@ die();*/
                         ],
                         'rowOptions' => function ($model) {
                             return ['style' => 'background-color:' . $model->getColor()];
+
                         },
                         'emptyText' => 'No results found',
                         'emptyTextOptions' => [
@@ -148,12 +144,14 @@ $js = <<< JS
    let table= $('#salary').DataTable({
                 bDestroy: true,
                 responsive: true,
-                pageLength: 10,
+                pageLength: -1,
                 paging: true,
                 searching: true,
                 ordering: false,
                 info: true,
                 autoWidth: false,
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
                 colReorder:{
                     realtime:false
                 },
@@ -207,7 +205,7 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,4]
+                    columns: [0,5]
                 },
                language: {
                     searchBuilder: {
@@ -230,24 +228,24 @@ $js = <<< JS
                         //value: 'Option',
                         //valueJoiner: 'et'
                     },
-                    lengthMenu: 'Show <select class="form-control form-control-sm">'+
+                    /*lengthMenu: 'Show <select class="form-control form-control-sm">'+
                     '<option value="10">10</option>'+
                     '<option value="20">20</option>'+
                     '<option value="50">50</option>'+
                     '<option value="-1">All</option>'+
-                    '</select>',
+                    '</select>',*/
                     paginate: {
-                first: "First",
-                previous: '<i class="fas fa-backward"></i>',
-                last: "Last",
-                next: '<i class="fas fa-forward"></i>'
-                }
+                        first: "First",
+                        previous: '<i class="fas fa-backward"></i>',
+                        last: "Last",
+                        next: '<i class="fas fa-forward"></i>'
+                    }
                }
     }).buttons().container().appendTo('#salary_wrapper .col-md-6:eq(0)');
 
-   /*table.on("column-reorder", function(e, settings, details){
+   table.on("column-reorder", function(e, settings, details){
        let order = table.order();
-   });*/
+   });
    
 
  });

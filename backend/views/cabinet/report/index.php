@@ -8,7 +8,6 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\helpers\DiscountHelper;
-use schedule\helpers\EventHelper;
 use schedule\helpers\EventPaymentStatusHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -62,12 +61,6 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Date',
                                 'headerOptions' => ['class' => ''],
-                                /*'value' => function ($model) {
-                                    return Html::a(
-                                        Html::encode(DATE('Y-m-d', strtotime($model->getDate()))),
-                                        ['schedule/event/view', 'id' => $model->getId()]
-                                    );
-                                },*/
                                 'value' => function ($model) {
                                     return DATE('Y-m-d', strtotime($model->getDate()));
                                 },
@@ -78,7 +71,7 @@ PluginAsset::register($this)->add(
                                 'footerOptions' => ['class' => 'bg-info text-left'],
                                 'format' => 'raw'
                             ],
-                           [
+                            [
                                 'attribute' => 'Master',
                                 'value' => function ($model) {
                                     return $model->getMasterName() . PHP_EOL.'<br>'.
@@ -325,7 +318,7 @@ $js = <<< JS
                         last: "Last",
                         next: '<i class="fas fa-forward"></i>'
                     }
-                },
+                }
     }).buttons().container().appendTo('#salary_wrapper .col-md-6:eq(0)');
 
    table.on("column-reorder", function(e, settings, details){

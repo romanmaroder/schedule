@@ -30,7 +30,10 @@ class CartItem
 
     public function getColor(): string
     {
-        return $this->item->events->employee->color ?? $this->item->events->default_color;
+        if ($this->isEmployee()) {
+            return $this->item->events->employee->color;
+        }
+        return $this->item->events->getDefaultColor();
     }
 
     public function getDate(): string
