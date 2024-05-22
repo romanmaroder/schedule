@@ -8,10 +8,13 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
+use backend\widgets\grid\RoleColumn;
 use hail812\adminlte3\assets\PluginAsset;
 use schedule\entities\User\Employee\Employee;
+use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Employee';
 $this->params['breadcrumbs'][] = $this->title;
@@ -53,11 +56,20 @@ PluginAsset::register($this)->add(
                     //'id',
                     //'user_id',
                     [
-                        'attribute' => 'username',
+                        'attribute' => 'first_name',
                         'value' => function (Employee $model) {
-                            return Html::a(Html::encode($model->user->username), ['/employee/view', 'id' => $model->id]);
+                            return Html::a(Html::encode($model->getFullName()), ['/employee/view', 'id' => $model->id]);
                         },
                         'format' => 'raw',
+                    ],
+                    [
+                        'attribute' => 'role',
+                        'class' => RoleColumn::class,
+                        //'filter' => $searchModel->rolesList(),
+                        'contentOptions' => [
+                            'class'=>'text-center'
+                        ],
+                        'headerOptions' => ['class' => 'text-center'],
                     ],
                     /*[
                         'attribute' => 'first_name',
@@ -106,13 +118,13 @@ PluginAsset::register($this)->add(
                         ],
                         'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw'
-                    ]
-                    /*[
+                    ],
+                    [
                         'class' => ActionColumn::class,
                         'urlCreator' => function ($action, Employee $model, $key, $index, $column) {
                             return Url::toRoute([$action, 'id' => $model->id]);
                         }
-                    ],*/
+                    ],
                 ],
             ]
         ); ?>

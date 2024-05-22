@@ -19,6 +19,9 @@ class m240518_112304_add_employee_roles extends Migration
                 [1, 'admin', 'Admin'],
                 [1, 'employee', 'Employee'],
                 [1, 'manager', 'Manager'],
+                [2, 'permission_admin', 'Admin permission'],
+                [2, 'permission_employee', 'Employee permission'],
+                [2, 'permission_manager', 'Manager permission'],
             ]
         );
 
@@ -26,6 +29,9 @@ class m240518_112304_add_employee_roles extends Migration
             ['admin', 'manager'],
             ['admin', 'employee'],
             ['manager', 'employee'],
+            ['admin', 'permission_admin'],
+            ['employee', 'permission_employee'],
+            ['manager', 'permission_manager'],
         ]);
 
         $this->execute(
@@ -35,7 +41,7 @@ class m240518_112304_add_employee_roles extends Migration
 
     public function down()
     {
-        $this->delete('{{%auth_items}}', ['name' => ['user', 'admin']]);
+        $this->delete('{{%auth_items}}', ['name' => ['admin','employee','manager']]);
     }
 
 }

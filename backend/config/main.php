@@ -83,7 +83,7 @@ return [
         'rules' => [
             [
                 'allow' => true,
-                'roles' => ['admin','manager'],
+                'roles' => ['permission_admin','permission_manager'],
             ],
         ],
     ],

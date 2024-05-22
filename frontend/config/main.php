@@ -65,7 +65,7 @@ return [
         'rules' => [
             [
                 'allow' => true,
-                'roles' => ['employee'],
+                'roles' => ['permission_manager','permission_employee'],
             ],
         ],
     ],
