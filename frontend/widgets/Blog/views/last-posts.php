@@ -7,9 +7,8 @@ use yii\helpers\StringHelper;
 use yii\helpers\Url;
 
 ?>
-<div class="container-fluid">
-    <div class="row">
-        <?php foreach ($posts as $i => $post): ?>
+
+<?php foreach ($posts as $i => $post): ?>
             <?php $url = Url::to(['/blog/post/post', 'id' => $post->id]); ?>
             <? if ($i == 0) : ?>
                 <div class="py-0">
@@ -80,5 +79,3 @@ use yii\helpers\Url;
                 </div>
             </div>
         </div>
-    </div>
-</div>
