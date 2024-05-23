@@ -18,16 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 /*[
-                    'attribute' => 'master_id',
-                    'value' => function ($model) {
-                        return Html::a(
-                            Html::encode($model->master->username),
-                            ['/users/user/view','id'=>$model->master->id]
-                        );
-                    },
-                    'format' => 'raw',
-                ],*/
-                /*[
                     'attribute' => 'client_id',
                     'value' => function ($model) {
                         return Html::a(
@@ -67,7 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'notice',
                     'visible' => $model->issetNotice($model->notice),
                     'format' => 'ntext',
-                ]
+                ],
+                [
+                    'attribute' => 'master_id',
+                    'value' => function ($model) {
+                        return Html::a(
+                            Html::encode($model->master->username),
+                            ['/users/user/view','id'=>$model->master->id]
+                        );
+                    },
+                    'format' => 'raw',
+                    'visible' => Yii::$app->user->identity->getId() != $model->master_id,
+                ],
             ],
         ]
     ) ?>
