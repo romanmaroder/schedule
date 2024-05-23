@@ -83,7 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'label' => 'Role',
-                        'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->user_id), 'description')),
+                        //'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->user_id), 'description')),
+                        'value' => \schedule\helpers\EmployeeHelper::rolesLabel($model->user_id),
                         'format' => 'raw',
                     ],
                     [

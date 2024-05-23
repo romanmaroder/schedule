@@ -9,7 +9,6 @@ use schedule\entities\User\Employee\Employee;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\rbac\Item;
 
 class EmployeeHelper
 {
@@ -49,6 +48,50 @@ class EmployeeHelper
         return Html::tag(
             'span',
             ArrayHelper::getValue(self::statusList(), $status),
+            [
+                'class' => $class,
+            ]
+        );
+    }
+
+    public static function rolesList(): array
+    {
+        return [
+            Rbac::ROLE_ADMIN => 'admin',
+            Rbac::ROLE_EMPLOYEE => 'employee',
+            Rbac::ROLE_MANAGER => 'manager',
+        ];
+    }
+
+    public static function rolesLabel($userId): string
+    {
+        $roles = ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($userId), 'name');
+        $role = ArrayHelper::getValue(self::rolesList(), $roles);
+
+        switch ($role) {
+            case Rbac::ROLE_ADMIN:
+                $class = 'badge bg-danger bg-gradient box-shadow';
+                break;
+            case Rbac::ROLE_MANAGER:
+                $class = 'badge bg-warning bg-gradient box-shadow';
+                break;
+            case Rbac::ROLE_EMPLOYEE:
+                $class = 'badge bg-info bg-gradient box-shadow';
+                break;
+            default:
+                $class = 'badge bg-secondary';
+        }
+
+        /* $class = match ($role) {
+            Rbac::ROLE_ADMIN => 'badge bg-danger bg-gradient box-shadow',
+            Rbac::ROLE_MANAGER => 'badge bg-warning bg-gradient box-shadow',
+            Rbac::ROLE_EMPLOYEE => 'badge bg-info bg-gradient box-shadow',
+            default => 'badge bg-secondary',
+        };*/
+
+        return Html::tag(
+            'span',
+            ArrayHelper::getValue(self::rolesList(), $roles),
             [
                 'class' => $class,
             ]
