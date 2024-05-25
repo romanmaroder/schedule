@@ -16,7 +16,6 @@ use schedule\services\manage\Schedule\EventManageService;
 use schedule\services\schedule\CartService;
 use Yii;
 use yii\filters\VerbFilter;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -70,15 +69,19 @@ class EventController extends Controller
         );
     }
 
+
     public function actionEvents()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
+
         return $this->calendar->getEvents();
     }
 
+
+
     public function actionView($id)
     {
-       $cart = $this->cart->getCart();
+        $cart = $this->cart->getCart();
 
         return $this->render(
             'view',

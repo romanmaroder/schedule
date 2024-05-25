@@ -48,7 +48,7 @@ class Calendar
             $event->borderColor = $item->employee->color ?? $item->default_color;
             $event->start = $item->start;
             $event->end = $item->end;
-            //$event->groupId = 'event';
+            $event->groupId = $item->master->id;
             $event->source = '/schedule/event/events';
             $event->display = 'block';
 
