@@ -42,7 +42,7 @@ return [
             ],
         ],
         'user' => [
-            'identityClass' => 'schedule\entities\User\User',
+            'identityClass' => 'common\auth\Identity',
             'enableAutoLogin' => false,
             'enableSession' => false,
         ],

@@ -5,7 +5,7 @@ return [
     'components' => [
         'user' => [
             'class' => \yii\web\User::class,
-            'identityClass' => 'schedule\entities\User\User',
+            'identityClass' => 'common\auth\Identity',
         ],
     ],
 ];

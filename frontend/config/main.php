@@ -24,7 +24,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'schedule\entities\User\User',
+            'identityClass' => 'common\auth\Identity',
             'enableAutoLogin' => false,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
             'loginUrl' => ['auth/auth/login'],

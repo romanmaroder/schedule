@@ -14,7 +14,12 @@ class UserReadRepository
 
     public function find($id): ?User
     {
-        return User::find()->andWhere(['id' => $id])->one();
+        return User::find()->where(['id' => $id])->one();
+    }
+
+    public function findActiveById($id): ?User
+    {
+        return User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
     }
 
     private function getProvider(ActiveQuery $query): ActiveDataProvider

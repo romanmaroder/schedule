@@ -50,7 +50,7 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
-            'identityClass' => 'schedule\entities\User\User',
+            'identityClass' => 'common\auth\Identity',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
             'loginUrl' => ['auth/login'],
