@@ -37,9 +37,12 @@ return [
                 'user_credentials' => [
                     'class' => 'OAuth2\GrantType\UserCredentials',
                 ],
+                'config'=>[
+                    'always_issue_new_refresh_token' => true
+                ],
                 'refresh_token' => [
                     'class' => 'OAuth2\GrantType\RefreshToken',
-                    'always_issue_new_refresh_token' => true
+
                 ]
             ]
         ]
@@ -79,6 +82,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                'profile' => 'user/profile/index',
+                'POST oauth2/<action:\w+>' => 'oauth2/rest/<action>',
             ],
         ],
     ],
