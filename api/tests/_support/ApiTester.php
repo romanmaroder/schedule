@@ -26,4 +26,5 @@ class ApiTester extends \Codeception\Actor
     /**
      * Define custom actions here
      */
+
 }
