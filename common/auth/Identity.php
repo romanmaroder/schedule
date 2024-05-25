@@ -3,13 +3,14 @@
 
 namespace common\auth;
 
-
+use filsh\yii2\oauth2server\Module;
+use OAuth2\Storage\UserCredentialsInterface;
 use schedule\entities\User\User;
 use schedule\readModels\User\UserReadRepository;
-use yii\base\NotSupportedException;
+use Yii;
 use yii\web\IdentityInterface;
 
-class Identity implements IdentityInterface
+class Identity implements IdentityInterface, UserCredentialsInterface
 {
 
     private $user;
@@ -27,13 +28,29 @@ class Identity implements IdentityInterface
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        $data = self::getOauth()->getServer()->getResourceController()->getToken();
+        return !empty($data['user_id']) ? static::findIdentity($data['user_id']) : null;
     }
 
     public function getId(): int
     {
         return $this->user->id;
     }
+
+    public function checkUserCredentials($username, $password): bool
+    {
+        if (!$user = self::getRepository()->findActiveByUsername($username)) {
+            return false;
+        }
+        return $user->validatePassword($password);
+    }
+
+    public function getUserDetails($username): array
+    {
+        $user = self::getRepository()->findActiveByUsername($username);
+        return ['user_id' => $user->id];
+    }
+
 
     public function getAuthKey(): string
     {
@@ -52,12 +69,18 @@ class Identity implements IdentityInterface
         foreach ($arr as $key=>$value)
         {
             mb_internal_encoding("UTF-8");
-            $arr["$key"] = mb_strtoupper(mb_substr(trim($value),0,1));
+            $arr["$key"] = mb_strtoupper(mb_substr(trim($value), 0, 1));
         }
-        return implode('.',$arr).'';
+        return implode('.', $arr) . '';
     }
+
     private static function getRepository(): UserReadRepository
     {
         return \Yii::$container->get(UserReadRepository::class);
+    }
+
+    private static function getOauth(): \yii\base\Module
+    {
+        return Yii::$app->getModule('oauth2');
     }
 }
