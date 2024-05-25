@@ -16,8 +16,7 @@ class EventReadRepository
 
     public function getAllById($id): array
     {
-        return Event::find()->with('services', 'employee', 'master', 'client')->andWhere(['master_id' => $id])
-            ->all();
+        return Event::find()->with('services', 'employee', 'master', 'client')->where(['master_id' => $id])->all();
     }
 
     public function getAllDayById($id): array

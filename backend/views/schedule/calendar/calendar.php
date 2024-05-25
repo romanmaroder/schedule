@@ -13,7 +13,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['calendar']];
 $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(['sweetalert2']);
 
+
 ?>
+
+
 <div class="row">
     <div class="col-12">
         <div id="resp"></div>
@@ -219,6 +222,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         borderColor: $(this).attr('backgroundColor'),
                                                         className: 'event-custom-classes',
                                                         allDay : $(this).attr('allDay'),
+                                                        groupId : $(this).attr('groupId'),
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         url:'/schedule/api/event-api/view',
                                                         });
@@ -267,7 +271,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                 },
                                             });
                                         }"
-                                )
+                            )
                         ]
                     ],
                     'clientOptions' => [
@@ -312,6 +316,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'slotLabelInterval' => '01:00:00',
                         'displayEventTime' => true,
                         'displayEventEnd' => true,
+                        'filterResourcesWithEvents'=>true,
                         'buttonIcons' => [
                             'dayGridMonth' => 'fas fas fa-calendar-alt',
                             'dayGridDay' => 'far far fa-calendar-day',
@@ -352,20 +357,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             ]
                         ],
                         'eventClassNames' => ['p-1', 'm-1'],
-                        'viewDidMount' => new JsExpression(
+                        'eventDidMount' => new JsExpression(
                             "
                                 function(info){
-//                                    let calendar = new FullCalendar.Calendar(document.getElementById('calendar'));
-//                                    var date = calendar.getDate();
-//                                    let a =new Intl.DateTimeFormat('default', {
-//                                                    dateStyle:'short',
-//                                                    //month: 'numeric', day: 'numeric', year:'numeric',
-//                                                    //hour: '2-digit', minute: '2-digit', hour24: false,
-//                                            }).format(new Date(date))
-//                                
-//                                    var result = a.replace(/[\.\/]/g,'-');
-//                                    localStorage.setItem('fcDefaultView', info.view.type);
-//                                    localStorage.setItem('fcDefaultViewDate', result );
 
                                 }"
                         ),

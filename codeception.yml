@@ -4,7 +4,9 @@ include:
     - common
     - frontend
     - backend
+    - api
 paths:
     output: console/runtime/output
+    log: console/runtime/logs
 settings:
     colors: true
