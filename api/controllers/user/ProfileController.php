@@ -1,15 +1,16 @@
 <?php
+namespace api\controllers\user;
 
-
+use api\helpers\DateHelper;
 use schedule\entities\User\User;
 use schedule\helpers\UserHelper;
 use yii\rest\Controller;
 
 class ProfileController extends Controller
 {
-    public function actionIndex(): array
+    public function actionIndex()
     {
-        return $this->serializeUser($this->findModel());
+       return $this->serializeUser($this->findModel());
     }
 
     public function verbs(): array
@@ -21,7 +22,8 @@ class ProfileController extends Controller
 
     private function findModel(): User
     {
-        return User::findOne(\Yii::$app->user->id);
+        return User::findOne(\Yii::$app->user->identity->getId());
+
     }
 
     private function serializeUser(User $user): array

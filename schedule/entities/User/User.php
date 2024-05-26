@@ -252,6 +252,17 @@ class User extends ActiveRecord
         return implode(" ", $name);
     }
 
+    public function getInitials(): string
+    {
+        $str = $this->username;
+        $arr = explode(' ',$str);
+        foreach ($arr as $key=>$value)
+        {
+            mb_internal_encoding("UTF-8");
+            $arr["$key"] = mb_strtoupper(mb_substr(trim($value), 0, 1));
+        }
+        return implode('.', $arr) . '';
+    }
 
     public function getHours()
     {

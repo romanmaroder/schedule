@@ -38,10 +38,11 @@ return [
                     'class' => 'OAuth2\GrantType\UserCredentials',
                 ],
                 'config'=>[
-                    'always_issue_new_refresh_token' => true
+
                 ],
                 'refresh_token' => [
                     'class' => 'OAuth2\GrantType\RefreshToken',
+                    'always_issue_new_refresh_token' => true
 
                 ]
             ]

@@ -14,7 +14,7 @@ class UserReadRepository
 
     public function find($id): ?User
     {
-        return User::find()->where(['id' => $id])->one();
+        return User::find()->with(['employee'])->andWhere(['id' => $id])->one();
     }
 
     public function findActiveById($id): ?User

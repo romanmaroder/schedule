@@ -69,9 +69,9 @@ PluginAsset::register($this)->add(
                                 ],
                                 [
                                     'attribute' => 'price_new',
-                                    'value' => function (Service $model) use($user){
+                                    'value' => function (Service $model) use( $user){
                                         //return PriceHelper::format($model->price_new);
-                                        return $model->price_new * $user->employee->price->rate; // TODO подумать ставка или прайс
+                                        return $model->price_new * $user->employee->rate->rate; // TODO подумать ставка или прайс
                                     },
                                 ],
                                 /*[

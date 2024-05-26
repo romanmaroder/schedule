@@ -65,7 +65,7 @@ PluginAsset::register($this)->add(
                                 'contentOptions' => function ($model) use ($cart) {
                                     return [
                                         'data-total' => $model->getSalary(),
-                                        'class' => ['text-center align-middle text-dark']
+                                        'class' => ['text-center align-middle']
                                     ];
                                 },
                                 'footer' => $cart->getFullSalary(),
@@ -91,7 +91,7 @@ PluginAsset::register($this)->add(
                                 'contentOptions' => function ($model) use ($cart) {
                                     return [
                                         //'data-total' => $model->getSalary(),
-                                        'class' => ['text-center align-middle text-dark']
+                                        'class' => ['text-center align-middle ']
                                     ];
                                 },
                                 /*'footer' => $cart->getFullSalary(),
