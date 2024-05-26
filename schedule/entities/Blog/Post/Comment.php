@@ -4,7 +4,6 @@
 namespace schedule\entities\Blog\Post;
 
 
-use schedule\entities\Blog\Post\queries\PostQuery;
 use schedule\entities\User\Employee\Employee;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -65,6 +64,11 @@ class Comment extends ActiveRecord
         return $this->parent_id == $id;
     }
 
+    public function isEmployee(): bool
+    {
+        return isset($this->employee->user_id);
+    }
+
     public function getPost(): ActiveQuery
     {
         return $this->hasOne(Post::class, ['id' => 'post_id']);
@@ -72,7 +76,7 @@ class Comment extends ActiveRecord
 
     public function getEmployee()
     {
-        return $this->hasOne(Employee::class,['user_id'=>'user_id']);
+        return $this->hasOne(Employee::class, ['user_id' => 'user_id']);
     }
 
     public static function tableName(): string

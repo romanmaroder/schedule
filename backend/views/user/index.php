@@ -39,6 +39,7 @@ PluginAsset::register($this)->add(
             [
                 'dataProvider' => $dataProvider,
                 //'filterModel' => $searchModel,
+                'summary' => false,
                 'tableOptions' => [
                     'class' => 'table table-striped table-bordered',
                     'id' => 'user'
@@ -108,10 +109,6 @@ PluginAsset::register($this)->add(
         ); ?>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer">
-        <!--Footer-->
-    </div>
-    <!-- /.card-footer-->
 </div>
 
 

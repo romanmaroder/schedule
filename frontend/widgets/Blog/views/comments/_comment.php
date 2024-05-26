@@ -15,10 +15,24 @@ use yii\helpers\Url;
 <ul class="comment-list" data-id="<?= $item->comment->id ?>">
     <li class="comment">
         <div class="vcard bio">
+            <?php
+            if ($item->comment->isEmployee()) : ?>
+                <span><?= $item->comment->employee->user->getInitials() ?></span>
+            <?php
+            else: ?>
             <?= Html::img(Url::to('/img/logo.jpg')) ?>
+            <?php
+            endif; ?>
         </div>
         <div class="comment-body">
-            <h3><?= $item->comment->employee->getFullName() ?></h3>
+            <?php
+            if ($item->comment->isEmployee()) : ?>
+                <h3><?= $item->comment->employee->getFullName() ?></h3>
+            <?php
+            else: ?>
+                <h3>Anonymous</h3>
+            <?php
+            endif; ?>
             <div class="meta"><?= Yii::$app->formatter->asDatetime($item->comment->created_at) ?></div>
             <p><?php
                 if ($item->comment->isActive()): ?>
