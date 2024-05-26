@@ -22,7 +22,7 @@ class ProfileController extends Controller
 
     private function findModel(): User
     {
-        return User::findOne(\Yii::$app->user->identity->getId());
+        return User::findOne(\Yii::$app->user->id);
 
     }
 

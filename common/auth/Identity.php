@@ -3,7 +3,7 @@
 
 namespace common\auth;
 
-use filsh\yii2\oauth2server\Module;
+use filsh\yii2\oauth2server\Module ;
 use OAuth2\Storage\UserCredentialsInterface;
 use schedule\entities\User\User;
 use schedule\readModels\User\UserReadRepository;
@@ -68,8 +68,8 @@ class Identity implements IdentityInterface, UserCredentialsInterface
         return \Yii::$container->get(UserReadRepository::class);
     }
 
-    private static function getOauth(): \yii\base\Module
+    private static function getOauth(): Module
     {
-        return Yii::$app->getModule('oauth2');
+      return Yii::$app->getModule('oauth2');
     }
 }
