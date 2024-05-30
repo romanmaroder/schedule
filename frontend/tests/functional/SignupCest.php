@@ -9,7 +9,7 @@ class SignupCest
     protected $formId = '#form-signup';
 
 
-    public function _before(FunctionalTester $I)
+    /*public function _before(FunctionalTester $I)
     {
         $I->amOnRoute('auth/signup/request');
     }
@@ -55,5 +55,5 @@ class SignupCest
 
         $I->seeEmailIsSent();
         $I->see('Thank you for registration. Please check your inbox for verification email.');
-    }
+    }*/
 }

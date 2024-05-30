@@ -51,7 +51,7 @@ $this->title = 'Login';
                     ])->checkbox([])->label(false) ?>
             </div>
             <div class="col-4">
-                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
+                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block','name'=>'submitButton']) ?>
             </div>
         </div>
 

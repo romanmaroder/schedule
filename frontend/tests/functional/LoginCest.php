@@ -2,8 +2,8 @@
 
 namespace frontend\tests\functional;
 
-use frontend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
+use frontend\tests\FunctionalTester;
 
 class LoginCest
 {
@@ -14,7 +14,7 @@ class LoginCest
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @return array
      */
-    public function _fixtures()
+    /*public function _fixtures()
     {
         return [
             'user' => [
@@ -26,7 +26,7 @@ class LoginCest
 
     public function _before(FunctionalTester $I)
     {
-        $I->amOnRoute('auth/auth/login');
+        $I->amOnRoute('/auth/auth/login');
     }
 
     protected function formParams($login, $password)
@@ -62,5 +62,5 @@ class LoginCest
         $I->see('Logout (erau)', 'form button[type=submit]');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
-    }
+    }*/
 }

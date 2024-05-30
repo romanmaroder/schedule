@@ -1,5 +1,5 @@
 <?php
-
+namespace api\tests\api;
 
 use api\tests\ApiTester;
 

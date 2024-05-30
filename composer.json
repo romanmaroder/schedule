@@ -30,7 +30,7 @@
         "mihaildev/yii2-ckeditor": "^1.0",
         "mihaildev/yii2-elfinder": "^1.2",
         "fishvision/yii2-migrate": "^1.0",
-        "guzzlehttp/guzzle": "^6.2",
+        "guzzlehttp/guzzle": "^7",
         "filsh/yii2-oauth2-server": "^2.0"
     },
     "require-dev": {
@@ -38,20 +38,22 @@
         "yiisoft/yii2-gii": "~2.2.0",
         "yiisoft/yii2-faker": "~2.0.0",
         "phpunit/phpunit": "~9.5.0",
-        "codeception/codeception": "^5.0.0 || ^4.0",
-        "codeception/lib-innerbrowser": "^4.0 || ^3.0 || ^1.1",
+        "codeception/codeception": "^5.0.1",
+        "codeception/lib-innerbrowser": "^3.1.0",
         "codeception/module-asserts": "^3.0 || ^1.1",
         "codeception/module-yii2": "^1.1",
         "codeception/module-filesystem": "^3.0 || ^2.0 || ^1.1",
         "codeception/verify": "^3.0 || ^2.2",
         "symfony/browser-kit": "^6.0 || >=2.7 <=4.2.4",
-        "flow/jsonpath": "^0.3.4"
+        "codeception/module-rest": "*",
+        "codeception/module-phpbrowser": "^3.0",
     },
     "autoload-dev": {
         "psr-4": {
             "common\\tests\\": ["common/tests/", "common/tests/_support"],
             "backend\\tests\\": ["backend/tests/", "backend/tests/_support"],
-            "frontend\\tests\\": ["frontend/tests/", "frontend/tests/_support"]
+            "frontend\\tests\\": ["frontend/tests/", "frontend/tests/_support"],
+            "api\\tests\\": ["api/tests/", "api/tests/_support"]
         }
     },
     "config": {

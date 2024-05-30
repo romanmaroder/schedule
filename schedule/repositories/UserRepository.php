@@ -17,7 +17,8 @@ class UserRepository
     {
         return User::find()
                     ->alias('u')
-                    ->andWhere(
+            ->where(['u.username'=>$value])
+                    /*->andWhere(
                         [
                             'exists',
                             Employee::find()
@@ -25,7 +26,7 @@ class UserRepository
                                 ->andWhere('u.id = e.user_id')
                                 ->andWhere(['u.username' => $value])
                         ]
-                    )->one();
+                    )*/->one();
 
 
         }

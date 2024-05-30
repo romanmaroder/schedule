@@ -1,5 +1,5 @@
 namespace: backend\tests
-actor_suffix: Tester
+actor: Tester
 paths:
     tests: tests
     output: tests/_output

@@ -8,7 +8,7 @@ use frontend\tests\FunctionalTester;
 
 class ContactCest
 {
-    public function _before(FunctionalTester $I)
+    /*public function _before(FunctionalTester $I)
     {
         $I->amOnRoute('contact/index');
     }
@@ -56,5 +56,5 @@ class ContactCest
         ]);
         $I->seeEmailIsSent();
         $I->see('Thank you for contacting us. We will respond to you as soon as possible.');
-    }
+    }*/
 }

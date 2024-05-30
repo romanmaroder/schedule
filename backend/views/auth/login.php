@@ -30,7 +30,7 @@ use yii\helpers\Html;
             [
                 'options' => ['class' => 'form-group has-feedback'],
                 'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-envelope"></span></div></div>',
-                'template' => '{beginWrapper}{input}{error}{hint}{endWrapper}',
+                'template' => '{beginWrapper}{label}{input}{error}{hint}{endWrapper}',
                 'wrapperOptions' => ['class' => 'input-group mb-3']
             ]
         )
@@ -43,7 +43,7 @@ use yii\helpers\Html;
             [
                 'options' => ['class' => 'form-group has-feedback'],
                 'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>',
-                'template' => '{beginWrapper}{input}{error}{endWrapper}',
+                'template' => '{beginWrapper}{label}{input}{error}{endWrapper}',
                 'wrapperOptions' => ['class' => 'input-group mb-3']
             ]
         )
@@ -63,7 +63,7 @@ use yii\helpers\Html;
                 ) */?>
             </div>-->
             <div class="col-4">
-                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
+                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block','name'=>'Sign In']) ?>
             </div>
         </div>
 

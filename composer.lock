@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20712a1a9b477710aef694054f083ca4",
+    "content-hash": "bdec10975929c52dc8ebc6097767c272",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -87,16 +87,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.7.1",
+            "version": "3.6.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "fde1f76e2799dd877c176abde0ec836553246991"
+                "url": "git@github.com:jquery/jquery-dist.git",
+                "reference": "91ef2d8836342875f2519b5815197ea0f23613cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/fde1f76e2799dd877c176abde0ec836553246991",
-                "reference": "fde1f76e2799dd877c176abde0ec836553246991"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/91ef2d8836342875f2519b5815197ea0f23613cf",
+                "reference": "91ef2d8836342875f2519b5815197ea0f23613cf"
             },
             "type": "bower-asset",
             "license": [
@@ -667,37 +667,47 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.8",
+            "version": "7.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "a52f0440530b54fa079ce76e8c5d196a42cad981"
+                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a52f0440530b54fa079ce76e8c5d196a42cad981",
-                "reference": "a52f0440530b54fa079ce76e8c5d196a42cad981",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/41042bc7ab002487b876a0683fc8dce04ddce104",
+                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.9",
-                "php": ">=5.5",
-                "symfony/polyfill-intl-idn": "^1.17"
+                "guzzlehttp/promises": "^1.5.3 || ^2.0.1",
+                "guzzlehttp/psr7": "^1.9.1 || ^2.5.1",
+                "php": "^7.2.5 || ^8.0",
+                "psr/http-client": "^1.0",
+                "symfony/deprecation-contracts": "^2.2 || ^3.0"
+            },
+            "provide": {
+                "psr/http-client-implementation": "1.0"
             },
             "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.8.2",
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
-                "psr/log": "^1.1"
+                "php-http/client-integration-tests": "dev-master#2c025848417c1135031fdf9c728ee53d0a7ceaee as 3.0.999",
+                "php-http/message-factory": "^1.1",
+                "phpunit/phpunit": "^8.5.36 || ^9.6.15",
+                "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
             "suggest": {
+                "ext-curl": "Required for CURL handler support",
+                "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "6.5-dev"
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": false
                 }
             },
             "autoload": {
@@ -750,19 +760,20 @@
                 }
             ],
             "description": "Guzzle is a PHP HTTP client library",
-            "homepage": "http://guzzlephp.org/",
             "keywords": [
                 "client",
                 "curl",
                 "framework",
                 "http",
                 "http client",
+                "psr-18",
+                "psr-7",
                 "rest",
                 "web service"
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/6.5.8"
+                "source": "https://github.com/guzzle/guzzle/tree/7.8.1"
             },
             "funding": [
                 {
@@ -778,33 +789,37 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-20T22:16:07+00:00"
+            "time": "2023-12-03T20:35:24+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.5.3",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "67ab6e18aaa14d753cc148911d273f6e6cb6721e"
+                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/67ab6e18aaa14d753cc148911d273f6e6cb6721e",
-                "reference": "67ab6e18aaa14d753cc148911d273f6e6cb6721e",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/bbff78d96034045e58e13dedd6ad91b5d1253223",
+                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^4.4 || ^5.1"
+                "bamarni/composer-bin-plugin": "^1.8.2",
+                "phpunit/phpunit": "^8.5.36 || ^9.6.15"
             },
             "type": "library",
+            "extra": {
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": false
+                }
+            },
             "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
                 "psr-4": {
                     "GuzzleHttp\\Promise\\": "src/"
                 }
@@ -841,7 +856,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.5.3"
+                "source": "https://github.com/guzzle/promises/tree/2.0.2"
             },
             "funding": [
                 {
@@ -857,42 +872,48 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-21T12:31:43+00:00"
+            "time": "2023-12-03T20:19:20+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.9.1",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "e4490cabc77465aaee90b20cfc9a770f8c04be6b"
+                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/e4490cabc77465aaee90b20cfc9a770f8c04be6b",
-                "reference": "e4490cabc77465aaee90b20cfc9a770f8c04be6b",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/45b30f99ac27b5ca93cb4831afe16285f57b8221",
+                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0",
-                "psr/http-message": "~1.0",
-                "ralouphie/getallheaders": "^2.0.5 || ^3.0.0"
+                "php": "^7.2.5 || ^8.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.1 || ^2.0",
+                "ralouphie/getallheaders": "^3.0"
             },
             "provide": {
+                "psr/http-factory-implementation": "1.0",
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "ext-zlib": "*",
-                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
+                "bamarni/composer-bin-plugin": "^1.8.2",
+                "http-interop/http-factory-tests": "^0.9",
+                "phpunit/phpunit": "^8.5.36 || ^9.6.15"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
+            "extra": {
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": false
+                }
+            },
             "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
                 "psr-4": {
                     "GuzzleHttp\\Psr7\\": "src/"
                 }
@@ -931,6 +952,11 @@
                     "name": "Tobias Schultze",
                     "email": "webmaster@tubo-world.de",
                     "homepage": "https://github.com/Tobion"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://sagikazarmark.hu"
                 }
             ],
             "description": "PSR-7 message implementation that also provides common utility methods",
@@ -946,7 +972,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/1.9.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.6.2"
             },
             "funding": [
                 {
@@ -962,7 +988,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-17T16:00:37+00:00"
+            "time": "2023-12-03T20:05:35+00:00"
         },
         {
             "name": "hail812/yii2-adminlte-widgets",
@@ -2758,25 +2784,27 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.19.1",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "4e1b88d21c69391150ace211e9eaf05810858d0b"
+                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4e1b88d21c69391150ace211e9eaf05810858d0b",
-                "reference": "4e1b88d21c69391150ace211e9eaf05810858d0b",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/139676794dc1e9231bf7bcd123cfc0c99182cb13",
+                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13",
                 "shasum": ""
             },
             "require": {
+                "ext-ctype": "*",
+                "ext-json": "*",
                 "ext-tokenizer": "*",
-                "php": ">=7.1"
+                "php": ">=7.4"
             },
             "require-dev": {
                 "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -2784,7 +2812,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.9-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -2808,9 +2836,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.19.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.2"
             },
-            "time": "2024-03-17T08:10:35+00:00"
+            "time": "2024-03-05T20:51:40+00:00"
         },
         {
             "name": "npm-asset/bootstrap",
@@ -2826,13 +2854,13 @@
         },
         {
             "name": "npm-asset/fullcalendar--adaptive",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/adaptive/-/adaptive-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/adaptive/-/adaptive-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--premium-common": "~6.1.11"
+                "npm-asset/fullcalendar--premium-common": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -2868,10 +2896,10 @@
         },
         {
             "name": "npm-asset/fullcalendar--interaction",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/interaction/-/interaction-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/interaction/-/interaction-6.1.13.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -2880,10 +2908,10 @@
         },
         {
             "name": "npm-asset/fullcalendar--list",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/list/-/list-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/list/-/list-6.1.13.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -2892,13 +2920,13 @@
         },
         {
             "name": "npm-asset/fullcalendar--multimonth",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/multimonth/-/multimonth-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/multimonth/-/multimonth-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--daygrid": "~6.1.11"
+                "npm-asset/fullcalendar--daygrid": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -2907,10 +2935,10 @@
         },
         {
             "name": "npm-asset/fullcalendar--premium-common",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/premium-common/-/premium-common-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/premium-common/-/premium-common-6.1.13.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -2919,13 +2947,13 @@
         },
         {
             "name": "npm-asset/fullcalendar--resource",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/resource/-/resource-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/resource/-/resource-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--premium-common": "~6.1.11"
+                "npm-asset/fullcalendar--premium-common": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -2934,14 +2962,14 @@
         },
         {
             "name": "npm-asset/fullcalendar--resource-daygrid",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/resource-daygrid/-/resource-daygrid-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/resource-daygrid/-/resource-daygrid-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--daygrid": "~6.1.11",
-                "npm-asset/fullcalendar--premium-common": "~6.1.11"
+                "npm-asset/fullcalendar--daygrid": "~6.1.13",
+                "npm-asset/fullcalendar--premium-common": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -2950,15 +2978,15 @@
         },
         {
             "name": "npm-asset/fullcalendar--resource-timegrid",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/resource-timegrid/-/resource-timegrid-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/resource-timegrid/-/resource-timegrid-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--premium-common": "~6.1.11",
-                "npm-asset/fullcalendar--resource-daygrid": "~6.1.11",
-                "npm-asset/fullcalendar--timegrid": "~6.1.11"
+                "npm-asset/fullcalendar--premium-common": "~6.1.13",
+                "npm-asset/fullcalendar--resource-daygrid": "~6.1.13",
+                "npm-asset/fullcalendar--timegrid": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -2967,15 +2995,15 @@
         },
         {
             "name": "npm-asset/fullcalendar--resource-timeline",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/resource-timeline/-/resource-timeline-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/resource-timeline/-/resource-timeline-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--premium-common": "~6.1.11",
-                "npm-asset/fullcalendar--scrollgrid": "~6.1.11",
-                "npm-asset/fullcalendar--timeline": "~6.1.11"
+                "npm-asset/fullcalendar--premium-common": "~6.1.13",
+                "npm-asset/fullcalendar--scrollgrid": "~6.1.13",
+                "npm-asset/fullcalendar--timeline": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -2984,13 +3012,13 @@
         },
         {
             "name": "npm-asset/fullcalendar--scrollgrid",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/scrollgrid/-/scrollgrid-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/scrollgrid/-/scrollgrid-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--premium-common": "~6.1.11"
+                "npm-asset/fullcalendar--premium-common": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -2999,13 +3027,13 @@
         },
         {
             "name": "npm-asset/fullcalendar--timegrid",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/timegrid/-/timegrid-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/timegrid/-/timegrid-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--daygrid": "~6.1.11"
+                "npm-asset/fullcalendar--daygrid": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -3014,14 +3042,14 @@
         },
         {
             "name": "npm-asset/fullcalendar--timeline",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/timeline/-/timeline-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/timeline/-/timeline-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--premium-common": "~6.1.11",
-                "npm-asset/fullcalendar--scrollgrid": "~6.1.11"
+                "npm-asset/fullcalendar--premium-common": "~6.1.13",
+                "npm-asset/fullcalendar--scrollgrid": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -3030,25 +3058,25 @@
         },
         {
             "name": "npm-asset/fullcalendar-scheduler",
-            "version": "6.1.11",
+            "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/fullcalendar-scheduler/-/fullcalendar-scheduler-6.1.11.tgz"
+                "url": "https://registry.npmjs.org/fullcalendar-scheduler/-/fullcalendar-scheduler-6.1.13.tgz"
             },
             "require": {
-                "npm-asset/fullcalendar--adaptive": "~6.1.11",
-                "npm-asset/fullcalendar--core": "~6.1.11",
-                "npm-asset/fullcalendar--daygrid": "~6.1.11",
-                "npm-asset/fullcalendar--interaction": "~6.1.11",
-                "npm-asset/fullcalendar--list": "~6.1.11",
-                "npm-asset/fullcalendar--multimonth": "~6.1.11",
-                "npm-asset/fullcalendar--resource": "~6.1.11",
-                "npm-asset/fullcalendar--resource-daygrid": "~6.1.11",
-                "npm-asset/fullcalendar--resource-timegrid": "~6.1.11",
-                "npm-asset/fullcalendar--resource-timeline": "~6.1.11",
-                "npm-asset/fullcalendar--scrollgrid": "~6.1.11",
-                "npm-asset/fullcalendar--timegrid": "~6.1.11",
-                "npm-asset/fullcalendar--timeline": "~6.1.11"
+                "npm-asset/fullcalendar--adaptive": "~6.1.13",
+                "npm-asset/fullcalendar--core": "~6.1.13",
+                "npm-asset/fullcalendar--daygrid": "~6.1.13",
+                "npm-asset/fullcalendar--interaction": "~6.1.13",
+                "npm-asset/fullcalendar--list": "~6.1.13",
+                "npm-asset/fullcalendar--multimonth": "~6.1.13",
+                "npm-asset/fullcalendar--resource": "~6.1.13",
+                "npm-asset/fullcalendar--resource-daygrid": "~6.1.13",
+                "npm-asset/fullcalendar--resource-timegrid": "~6.1.13",
+                "npm-asset/fullcalendar--resource-timeline": "~6.1.13",
+                "npm-asset/fullcalendar--scrollgrid": "~6.1.13",
+                "npm-asset/fullcalendar--timegrid": "~6.1.13",
+                "npm-asset/fullcalendar--timeline": "~6.1.13"
             },
             "type": "npm-asset",
             "license": [
@@ -3813,26 +3841,79 @@
             "time": "2019-01-08T18:20:26+00:00"
         },
         {
-            "name": "psr/http-message",
-            "version": "1.1",
+            "name": "psr/http-client",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-fig/http-message.git",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
+                "url": "https://github.com/php-fig/http-client.git",
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/bb5906edc1c324c9a05aa0873d40117941e5fa90",
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0"
+                "php": "^7.0 || ^8.0",
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP clients",
+            "homepage": "https://github.com/php-fig/http-client",
+            "keywords": [
+                "http",
+                "http-client",
+                "psr",
+                "psr-18"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/http-client"
+            },
+            "time": "2023-09-23T14:17:50+00:00"
+        },
+        {
+            "name": "psr/http-factory",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-factory.git",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "psr/http-message": "^1.0 || ^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -3847,7 +3928,61 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
+            "keywords": [
+                "factory",
+                "http",
+                "message",
+                "psr",
+                "psr-17",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/http-factory"
+            },
+            "time": "2024-04-15T12:06:14+00:00"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -3861,9 +3996,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/1.1"
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
-            "time": "2023-04-04T09:50:52+00:00"
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/log",
@@ -6827,40 +6962,42 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "5.0.0",
+            "version": "5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "7afeb3f3558e3e5c08e82f3a745e3e6945cb28d7"
+                "reference": "3b2d7d1a88e7e1d9dc0acb6d3c8f0acda0a37374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/7afeb3f3558e3e5c08e82f3a745e3e6945cb28d7",
-                "reference": "7afeb3f3558e3e5c08e82f3a745e3e6945cb28d7",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/3b2d7d1a88e7e1d9dc0acb6d3c8f0acda0a37374",
+                "reference": "3b2d7d1a88e7e1d9dc0acb6d3c8f0acda0a37374",
                 "shasum": ""
             },
             "require": {
                 "behat/gherkin": "^4.6.2",
-                "codeception/lib-asserts": "2.0.*@dev",
-                "codeception/stub": "^3.7 | ^4.0",
+                "codeception/lib-asserts": "^2.0",
+                "codeception/stub": "^4.1",
                 "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "php": "^8.0",
-                "phpunit/php-code-coverage": "^9.2",
-                "phpunit/php-text-template": "^2.0",
-                "phpunit/phpunit": "^9.5",
-                "psy/psysh": "^0.11.2",
-                "sebastian/diff": "^4.0",
-                "symfony/console": ">=4.4.24 <7.0",
-                "symfony/css-selector": ">=4.4.24 <7.0",
-                "symfony/event-dispatcher": ">=4.4.24 <7.0",
-                "symfony/finder": ">=4.4.24 <7.0",
-                "symfony/var-dumper": ">=4.4.24 < 7.0",
-                "symfony/yaml": ">=4.4.24 <7.0"
+                "phpunit/php-code-coverage": "^9.2 || ^10.0 || ^11.0",
+                "phpunit/php-text-template": "^2.0 || ^3.0 || ^4.0",
+                "phpunit/php-timer": "^5.0.3 || ^6.0 || ^7.0",
+                "phpunit/phpunit": "^9.5.20 || ^10.0 || ^11.0",
+                "psy/psysh": "^0.11.2 || ^0.12",
+                "sebastian/comparator": "^4.0.5 || ^5.0 || ^6.0",
+                "sebastian/diff": "^4.0.3 || ^5.0 || ^6.0",
+                "symfony/console": ">=4.4.24 <8.0",
+                "symfony/css-selector": ">=4.4.24 <8.0",
+                "symfony/event-dispatcher": ">=4.4.24 <8.0",
+                "symfony/finder": ">=4.4.24 <8.0",
+                "symfony/var-dumper": ">=4.4.24 <8.0",
+                "symfony/yaml": ">=4.4.24 <8.0"
             },
             "conflict": {
-                "codeception/lib-innerbrowser": "<3.0",
+                "codeception/lib-innerbrowser": "<3.1.3",
                 "codeception/module-filesystem": "<3.0",
                 "codeception/module-phpbrowser": "<2.5"
             },
@@ -6877,8 +7014,9 @@
                 "codeception/module-phpbrowser": "*@dev",
                 "codeception/util-universalframework": "*@dev",
                 "ext-simplexml": "*",
-                "symfony/dotenv": ">=4.4.24 <7.0",
-                "symfony/process": ">=4.4.24 <7.0",
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "symfony/dotenv": ">=4.4.24 <8.0",
+                "symfony/process": ">=4.4.24 <8.0",
                 "vlucas/phpdotenv": "^5.1"
             },
             "suggest": {
@@ -6928,7 +7066,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/Codeception/issues",
-                "source": "https://github.com/Codeception/Codeception/tree/5.0.0"
+                "source": "https://github.com/Codeception/Codeception/tree/5.1.2"
             },
             "funding": [
                 {
@@ -6936,20 +7074,20 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-07-28T08:34:19+00:00"
+            "time": "2024-03-07T07:19:42+00:00"
         },
         {
             "name": "codeception/lib-asserts",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/lib-asserts.git",
-                "reference": "78c55044611437988b54e1daecf13f247a742bf8"
+                "reference": "b8c7dff552249e560879c682ba44a4b963af91bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/lib-asserts/zipball/78c55044611437988b54e1daecf13f247a742bf8",
-                "reference": "78c55044611437988b54e1daecf13f247a742bf8",
+                "url": "https://api.github.com/repos/Codeception/lib-asserts/zipball/b8c7dff552249e560879c682ba44a4b963af91bc",
+                "reference": "b8c7dff552249e560879c682ba44a4b963af91bc",
                 "shasum": ""
             },
             "require": {
@@ -6988,35 +7126,34 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/lib-asserts/issues",
-                "source": "https://github.com/Codeception/lib-asserts/tree/2.0.1"
+                "source": "https://github.com/Codeception/lib-asserts/tree/2.1.0"
             },
-            "time": "2022-09-27T06:17:39+00:00"
+            "time": "2023-02-10T18:36:23+00:00"
         },
         {
             "name": "codeception/lib-innerbrowser",
-            "version": "3.0.1",
+            "version": "3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/lib-innerbrowser.git",
-                "reference": "a216c769d6449b949b7a5cc5e2d43f94d175642b"
+                "reference": "10482f7e34c0537bf5b87bc82a3d65a1842a8b4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/a216c769d6449b949b7a5cc5e2d43f94d175642b",
-                "reference": "a216c769d6449b949b7a5cc5e2d43f94d175642b",
+                "url": "https://api.github.com/repos/Codeception/lib-innerbrowser/zipball/10482f7e34c0537bf5b87bc82a3d65a1842a8b4f",
+                "reference": "10482f7e34c0537bf5b87bc82a3d65a1842a8b4f",
                 "shasum": ""
             },
             "require": {
-                "codeception/codeception": "*@dev",
+                "codeception/codeception": "^5.0",
+                "codeception/lib-web": "^1.0.1",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "php": "^8.0",
+                "phpunit/phpunit": "^9.5",
                 "symfony/browser-kit": "^4.4.24 || ^5.4 || ^6.0",
                 "symfony/dom-crawler": "^4.4.30 || ^5.4 || ^6.0"
-            },
-            "conflict": {
-                "codeception/codeception": "<5.0"
             },
             "require-dev": {
                 "codeception/util-universalframework": "dev-master"
@@ -7048,9 +7185,111 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/lib-innerbrowser/issues",
-                "source": "https://github.com/Codeception/lib-innerbrowser/tree/3.0.1"
+                "source": "https://github.com/Codeception/lib-innerbrowser/tree/3.1.3"
             },
-            "time": "2022-03-06T10:39:43+00:00"
+            "time": "2022-10-03T15:33:34+00:00"
+        },
+        {
+            "name": "codeception/lib-web",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/lib-web.git",
+                "reference": "01ff7f9ed8760ba0b0805a0b3a843b4e74165a60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/lib-web/zipball/01ff7f9ed8760ba0b0805a0b3a843b4e74165a60",
+                "reference": "01ff7f9ed8760ba0b0805a0b3a843b4e74165a60",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "guzzlehttp/psr7": "^2.0",
+                "php": "^8.0",
+                "phpunit/phpunit": "^9.5 | ^10.0 | ^11.0",
+                "symfony/css-selector": ">=4.4.24 <8.0"
+            },
+            "conflict": {
+                "codeception/codeception": "<5.0.0-alpha3"
+            },
+            "require-dev": {
+                "php-webdriver/webdriver": "^1.12"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gintautas Miselis"
+                }
+            ],
+            "description": "Library containing files used by module-webdriver and lib-innerbrowser or module-phpbrowser",
+            "homepage": "https://codeception.com/",
+            "keywords": [
+                "codeception"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeception/lib-web/issues",
+                "source": "https://github.com/Codeception/lib-web/tree/1.0.6"
+            },
+            "time": "2024-02-06T20:50:08+00:00"
+        },
+        {
+            "name": "codeception/lib-xml",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/lib-xml.git",
+                "reference": "ba49213e60807e3612513f404a5c93aec63f4c72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/lib-xml/zipball/ba49213e60807e3612513f404a5c93aec63f4c72",
+                "reference": "ba49213e60807e3612513f404a5c93aec63f4c72",
+                "shasum": ""
+            },
+            "require": {
+                "codeception/lib-web": "^1.0.6",
+                "ext-dom": "*",
+                "php": "^8.0",
+                "symfony/css-selector": ">=4.4.24 <8.0"
+            },
+            "conflict": {
+                "codeception/codeception": "<5.0.0-alpha3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gintautas Miselis"
+                }
+            ],
+            "description": "Files used by module-rest and module-soap",
+            "homepage": "https://codeception.com/",
+            "keywords": [
+                "codeception"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeception/lib-xml/issues",
+                "source": "https://github.com/Codeception/lib-xml/tree/1.0.3"
+            },
+            "time": "2024-02-06T21:00:41+00:00"
         },
         {
             "name": "codeception/module-asserts",
@@ -7162,28 +7401,153 @@
             "time": "2023-12-08T19:23:28+00:00"
         },
         {
-            "name": "codeception/module-yii2",
-            "version": "1.1.7",
+            "name": "codeception/module-phpbrowser",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Codeception/module-yii2.git",
-                "reference": "338ab4dfa04b3f7312856915f2daebad73985911"
+                "url": "https://github.com/Codeception/module-phpbrowser.git",
+                "reference": "a972411f60cd00d00d5e5e3b35496ba4a23bcffc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/module-yii2/zipball/338ab4dfa04b3f7312856915f2daebad73985911",
-                "reference": "338ab4dfa04b3f7312856915f2daebad73985911",
+                "url": "https://api.github.com/repos/Codeception/module-phpbrowser/zipball/a972411f60cd00d00d5e5e3b35496ba4a23bcffc",
+                "reference": "a972411f60cd00d00d5e5e3b35496ba4a23bcffc",
                 "shasum": ""
             },
             "require": {
-                "codeception/codeception": "^5.0.0-RC6",
-                "codeception/lib-innerbrowser": "^3.0",
+                "codeception/codeception": "*@dev",
+                "codeception/lib-innerbrowser": "*@dev",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.4",
+                "php": "^8.0",
+                "symfony/browser-kit": "^5.4 || ^6.0 || ^7.0"
+            },
+            "conflict": {
+                "codeception/codeception": "<5.0",
+                "codeception/lib-innerbrowser": "<3.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^3.199",
+                "codeception/module-rest": "^2.0 || *@dev",
+                "ext-curl": "*"
+            },
+            "suggest": {
+                "codeception/phpbuiltinserver": "Start and stop PHP built-in web server for your tests"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Bodnarchuk"
+                },
+                {
+                    "name": "Gintautas Miselis"
+                }
+            ],
+            "description": "Codeception module for testing web application over HTTP",
+            "homepage": "https://codeception.com/",
+            "keywords": [
+                "codeception",
+                "functional-testing",
+                "http"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeception/module-phpbrowser/issues",
+                "source": "https://github.com/Codeception/module-phpbrowser/tree/3.0.1"
+            },
+            "time": "2023-12-08T19:41:28+00:00"
+        },
+        {
+            "name": "codeception/module-rest",
+            "version": "3.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/module-rest.git",
+                "reference": "bb545d4f7c261472472da8730267d9df162199cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/module-rest/zipball/bb545d4f7c261472472da8730267d9df162199cb",
+                "reference": "bb545d4f7c261472472da8730267d9df162199cb",
+                "shasum": ""
+            },
+            "require": {
+                "codeception/codeception": "^5.0.8",
+                "codeception/lib-xml": "^1.0",
+                "ext-dom": "*",
+                "ext-json": "*",
+                "justinrainbow/json-schema": "~5.2.9",
+                "php": "^8.0",
+                "softcreatr/jsonpath": "^0.8"
+            },
+            "require-dev": {
+                "codeception/lib-innerbrowser": "^3.0 | ^4.0",
+                "codeception/stub": "^4.0",
+                "codeception/util-universalframework": "^1.0",
+                "ext-libxml": "*",
+                "ext-simplexml": "*"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "For using AWS Auth"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gintautas Miselis"
+                }
+            ],
+            "description": "REST module for Codeception",
+            "homepage": "https://codeception.com/",
+            "keywords": [
+                "codeception",
+                "rest"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeception/module-rest/issues",
+                "source": "https://github.com/Codeception/module-rest/tree/3.3.2"
+            },
+            "time": "2023-02-09T18:11:19+00:00"
+        },
+        {
+            "name": "codeception/module-yii2",
+            "version": "1.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/module-yii2.git",
+                "reference": "2971f1fb44cd3088f7ecbe78bc51161c037a6551"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/module-yii2/zipball/2971f1fb44cd3088f7ecbe78bc51161c037a6551",
+                "reference": "2971f1fb44cd3088f7ecbe78bc51161c037a6551",
+                "shasum": ""
+            },
+            "require": {
+                "codeception/codeception": "^5.0.8",
+                "codeception/lib-innerbrowser": "^3.0 | ^4.0",
                 "php": "^8.0"
             },
             "require-dev": {
                 "codeception/module-asserts": "^3.0",
                 "codeception/module-filesystem": "^3.0",
-                "codeception/verify": "^2.2",
+                "codeception/verify": "^3.0",
                 "codemix/yii2-localeurls": "^1.7",
                 "yiisoft/yii2": "dev-master",
                 "yiisoft/yii2-app-advanced": "dev-master"
@@ -7210,34 +7574,37 @@
                 }
             ],
             "description": "Codeception module for Yii2 framework",
-            "homepage": "http://codeception.com/",
+            "homepage": "https://codeception.com/",
             "keywords": [
                 "codeception",
                 "yii2"
             ],
             "support": {
                 "issues": "https://github.com/Codeception/module-yii2/issues",
-                "source": "https://github.com/Codeception/module-yii2/tree/1.1.7"
+                "source": "https://github.com/Codeception/module-yii2/tree/1.1.10"
             },
-            "time": "2022-07-15T18:09:58+00:00"
+            "time": "2023-12-04T09:18:47+00:00"
         },
         {
             "name": "codeception/stub",
-            "version": "4.0.2",
+            "version": "4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Stub.git",
-                "reference": "18a148dacd293fc7b044042f5aa63a82b08bff5d"
+                "reference": "4fcad2c165f365377486dc3fd8703b07f1f2fcae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Stub/zipball/18a148dacd293fc7b044042f5aa63a82b08bff5d",
-                "reference": "18a148dacd293fc7b044042f5aa63a82b08bff5d",
+                "url": "https://api.github.com/repos/Codeception/Stub/zipball/4fcad2c165f365377486dc3fd8703b07f1f2fcae",
+                "reference": "4fcad2c165f365377486dc3fd8703b07f1f2fcae",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 | ^8.0",
-                "phpunit/phpunit": "^8.4 | ^9.0 | ^10.0 | 10.0.x-dev"
+                "phpunit/phpunit": "^8.4 | ^9.0 | ^10.0 | ^11"
+            },
+            "conflict": {
+                "codeception/codeception": "<5.0.6"
             },
             "require-dev": {
                 "consolidation/robo": "^3.0"
@@ -7255,9 +7622,9 @@
             "description": "Flexible Stub wrapper for PHPUnit's Mock Builder",
             "support": {
                 "issues": "https://github.com/Codeception/Stub/issues",
-                "source": "https://github.com/Codeception/Stub/tree/4.0.2"
+                "source": "https://github.com/Codeception/Stub/tree/4.1.3"
             },
-            "time": "2022-01-31T19:25:15+00:00"
+            "time": "2024-02-02T19:21:00+00:00"
         },
         {
             "name": "codeception/verify",
@@ -7372,31 +7739,39 @@
             "time": "2024-01-02T13:46:09+00:00"
         },
         {
-            "name": "flow/jsonpath",
-            "version": "0.3.4",
+            "name": "justinrainbow/json-schema",
+            "version": "v5.2.13",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FlowCommunications/JSONPath.git",
-                "reference": "00aa9c361e4d0a210dd95f3c917a1e0dde3a957f"
+                "url": "https://github.com/jsonrainbow/json-schema.git",
+                "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlowCommunications/JSONPath/zipball/00aa9c361e4d0a210dd95f3c917a1e0dde3a957f",
-                "reference": "00aa9c361e4d0a210dd95f3c917a1e0dde3a957f",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
+                "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=5.3.3"
             },
             "require-dev": {
-                "peekmo/jsonpath": "dev-master",
-                "phpunit/phpunit": "^4.0"
+                "friendsofphp/php-cs-fixer": "~2.2.20||~2.15.1",
+                "json-schema/json-schema-test-suite": "1.2.0",
+                "phpunit/phpunit": "^4.8.35"
             },
+            "bin": [
+                "bin/validate-json"
+            ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Flow\\JSONPath": "src/",
-                    "Flow\\JSONPath\\Test": "tests/"
+                "psr-4": {
+                    "JsonSchema\\": "src/JsonSchema/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -7405,17 +7780,33 @@
             ],
             "authors": [
                 {
-                    "name": "Stephen Frank",
-                    "email": "stephen@flowsa.com"
+                    "name": "Bruno Prieto Reis",
+                    "email": "bruno.p.reis@gmail.com"
+                },
+                {
+                    "name": "Justin Rainbow",
+                    "email": "justin.rainbow@gmail.com"
+                },
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
+                    "name": "Robert Schönthal",
+                    "email": "seroscho@googlemail.com"
                 }
             ],
-            "description": "JSONPath implementation for parsing, searching and flattening arrays",
+            "description": "A library to validate a json schema.",
+            "homepage": "https://github.com/justinrainbow/json-schema",
+            "keywords": [
+                "json",
+                "schema"
+            ],
             "support": {
-                "issues": "https://github.com/FlowCommunications/JSONPath/issues",
-                "source": "https://github.com/FlowCommunications/JSONPath/tree/master"
+                "issues": "https://github.com/jsonrainbow/json-schema/issues",
+                "source": "https://github.com/jsonrainbow/json-schema/tree/v5.2.13"
             },
-            "abandoned": "softcreatr/jsonpath",
-            "time": "2016-09-06T17:43:18+00:00"
+            "time": "2023-09-26T02:20:38+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -7527,25 +7918,25 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.22",
+            "version": "v0.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "128fa1b608be651999ed9789c95e6e2a31b5802b"
+                "reference": "b6b6cce7d3ee8fbf31843edce5e8f5a72eff4a73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/128fa1b608be651999ed9789c95e6e2a31b5802b",
-                "reference": "128fa1b608be651999ed9789c95e6e2a31b5802b",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/b6b6cce7d3ee8fbf31843edce5e8f5a72eff4a73",
+                "reference": "b6b6cce7d3ee8fbf31843edce5e8f5a72eff4a73",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-tokenizer": "*",
-                "nikic/php-parser": "^4.0 || ^3.1",
-                "php": "^8.0 || ^7.0.8",
-                "symfony/console": "^6.0 || ^5.0 || ^4.0 || ^3.4",
-                "symfony/var-dumper": "^6.0 || ^5.0 || ^4.0 || ^3.4"
+                "nikic/php-parser": "^5.0 || ^4.0",
+                "php": "^8.0 || ^7.4",
+                "symfony/console": "^7.0 || ^6.0 || ^5.0 || ^4.0 || ^3.4",
+                "symfony/var-dumper": "^7.0 || ^6.0 || ^5.0 || ^4.0 || ^3.4"
             },
             "conflict": {
                 "symfony/console": "4.4.37 || 5.3.14 || 5.3.15 || 5.4.3 || 5.4.4 || 6.0.3 || 6.0.4"
@@ -7556,8 +7947,7 @@
             "suggest": {
                 "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
                 "ext-pdo-sqlite": "The doc command requires SQLite to work.",
-                "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well.",
-                "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history."
+                "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well."
             },
             "bin": [
                 "bin/psysh"
@@ -7565,7 +7955,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-0.11": "0.11.x-dev"
+                    "dev-main": "0.12.x-dev"
                 },
                 "bamarni-bin": {
                     "bin-links": false,
@@ -7601,9 +7991,77 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.22"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.3"
             },
-            "time": "2023-10-14T21:56:36+00:00"
+            "time": "2024-04-02T15:57:53+00:00"
+        },
+        {
+            "name": "softcreatr/jsonpath",
+            "version": "0.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SoftCreatR/JSONPath.git",
+                "reference": "fc12dee0b46f3fa3a175c4051dbab60984acef4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SoftCreatR/JSONPath/zipball/fc12dee0b46f3fa3a175c4051dbab60984acef4b",
+                "reference": "fc12dee0b46f3fa3a175c4051dbab60984acef4b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=8.0"
+            },
+            "replace": {
+                "flow/jsonpath": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Flow\\JSONPath\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Frank",
+                    "email": "stephen@flowsa.com",
+                    "homepage": "https://prismaticbytes.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sascha Greuel",
+                    "email": "hello@1-2.dev",
+                    "homepage": "https://1-2.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "JSONPath implementation for parsing, searching and flattening arrays",
+            "support": {
+                "email": "hello@1-2.dev",
+                "forum": "https://github.com/SoftCreatR/JSONPath/discussions",
+                "issues": "https://github.com/SoftCreatR/JSONPath/issues",
+                "source": "https://github.com/SoftCreatR/JSONPath"
+            },
+            "funding": [
+                {
+                    "url": "https://ecologi.com/softcreatr?r=61212ab3fc69b8eb8a2014f4",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/softcreatr",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-08-17T20:14:00+00:00"
         },
         {
             "name": "symfony/browser-kit",
