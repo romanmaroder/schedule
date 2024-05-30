@@ -6,7 +6,6 @@
 use frontend\assets\AppAsset;
 use hail812\adminlte3\assets\AdminLteAsset;
 use hail812\adminlte3\assets\FontAwesomeAsset;
-use schedule\entities\User\User;
 use yii\helpers\Html;
 
 AppAsset::register($this);
@@ -40,7 +39,7 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <?= $this->render('sidebar', ['assetDir' => $assetDir,'user'=>User::findOne(\Yii::$app->user->identity->getId())]) ?>
+    <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
 
     <!-- Content Wrapper. Contains page content -->
     <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>

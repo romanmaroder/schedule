@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+
 /** @var $user \schedule\entities\User\User*/
+
+$user = $this->params['user'];
 
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
