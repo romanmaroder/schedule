@@ -4,7 +4,6 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
-use schedule\entities\User\User;
 use yii\helpers\Html;
 
 

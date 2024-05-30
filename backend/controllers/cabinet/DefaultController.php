@@ -67,8 +67,7 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $user = $this->users->find(\Yii::$app->user->getId());
-        $event = $this->events->getAllWeekById($user->id);
+        $event = $this->events->getAllWeekById($this->user->id);
 
 
         $provider = new ArrayDataProvider(
@@ -84,7 +83,7 @@ class DefaultController extends Controller
         return $this->render(
             'index',
             [
-                'user' => $user,
+                'user' => $this->user,
                 'provider' => $provider,
             ]
         );
@@ -92,20 +91,18 @@ class DefaultController extends Controller
 
     public function actionTimeline()
     {
-        $user = $this->users->find(\Yii::$app->user->getId());
-
-        $employee = $this->employee->find($user->employee);
+        $employee = $this->employee->find($this->user->employee);
 
         $events = $this->events->getAllDayById($employee->user_id);
 
-        $educations = $this->education->getLessonDayById($user->id);
+        $educations = $this->education->getLessonDayById($this->user->id);
 
 
         return $this->render(
             'timeline',
             [
                 'employee' => $employee,
-                'user' => $user,
+                'user' => $this->user,
                 'events' => $events,
                 'educations'=>$educations,
             ]
@@ -114,8 +111,7 @@ class DefaultController extends Controller
 
     public function actionProfile()
     {
-        $user = $this->users->find(\Yii::$app->user->getId());
-        $employee = $this->employee->find($user->employee);
+        $employee = $this->employee->find($this->user->employee);
 
         $form = new EmployeeEditForm($employee);
 
@@ -134,7 +130,7 @@ class DefaultController extends Controller
             'profile',
             [
                 'employee' => $employee,
-                'user' => $user,
+                'user' => $this->user,
                 'model' => $form,
             ]
         );

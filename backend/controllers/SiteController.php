@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use schedule\readModels\User\UserReadRepository;
 use yii\web\Controller;
 
 /**
@@ -10,17 +9,6 @@ use yii\web\Controller;
  */
 class SiteController extends Controller
 {
-    private UserReadRepository $users;
-
-    public function __construct(
-        $id,
-        $module,
-        UserReadRepository $users,
-        $config = []
-    ) {
-        parent::__construct($id, $module, $config);
-        $this->users = $users;
-    }
 
     /**
      * {@inheritdoc}
@@ -41,13 +29,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $user = $this->users->find(\Yii::$app->user->getId());
-        return $this->render(
-            'index',
-            [
-                'user' => $user
-            ]
-        );
+        return $this->render('index' );
     }
 
 }

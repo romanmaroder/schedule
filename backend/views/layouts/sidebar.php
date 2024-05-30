@@ -1,12 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-
 /** @var $user \schedule\entities\User\User*/
 
-$user = $this->params['user'];
 
 ?>
+<?php if (Yii::$app->id ==='app-backend'):?>
+<?php $user = \schedule\entities\User\User::findOne(Yii::$app->user->identity->getId());?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -279,3 +279,4 @@ $user = $this->params['user'];
     </div>
     <!-- /.sidebar -->
 </aside>
+<?php endif;?>

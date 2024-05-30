@@ -1,9 +1,8 @@
 <?php
-/* @var $user \schedule\entities\User\User */
+
 
 $this->title = 'Starter Page';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
-$this->params['user'] = $user;
 ?>
 <div class="container-fluid">
     <div class="row">
