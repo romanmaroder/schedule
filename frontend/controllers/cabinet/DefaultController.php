@@ -21,6 +21,8 @@ class DefaultController extends Controller
     public $layout = 'cabinet';
     public $totalCount;
     public $todayCount;
+    public $totalLessonCount;
+    public $todayLessonCount;
     public $user;
     public $employee;
 
@@ -51,6 +53,10 @@ class DefaultController extends Controller
         $this->employeeService = $employeeManageService;
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
+
+        $this->totalLessonCount = $this->education->getLessonCount(\Yii::$app->user->getId());
+        $this->todayLessonCount = $this->education->getLessonCountToday(\Yii::$app->user->getId());
+
         if (!$this->user) {
             $this->user = $this->users->find(\Yii::$app->user->getId());
         }
@@ -105,7 +111,6 @@ class DefaultController extends Controller
 
         $educations = $this->education->getLessonDayById($this->user->id);
 
-
         return $this->render(
             'timeline',
             [
@@ -116,6 +121,7 @@ class DefaultController extends Controller
             ]
         );
     }
+
 
     public function actionProfile()
     {

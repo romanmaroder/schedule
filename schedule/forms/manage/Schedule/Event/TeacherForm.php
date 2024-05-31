@@ -24,7 +24,7 @@ class TeacherForm extends Model
 
     public function teacherList(): array
     {
-        return ArrayHelper::map(Employee::find()->where(['role_id'=>2])->all(),'id',function($item){ return $item->getFullName();});
+        return ArrayHelper::map(Employee::find()->where(['role_id'=>2])->all(),'user_id',function($item){ return $item->getFullName();});
     }
 
     public function rules():array

@@ -24,7 +24,7 @@ class StudentForm extends Model
 
     public function studentList(): array
     {
-        return ArrayHelper::map(Employee::find()->where(['role_id'=>3])->all(),'id',function($item){ return $item->getFullName();});
+        return ArrayHelper::map(Employee::find()->where(['role_id'=>3])->all(),'user_id',function($item){ return $item->getFullName();});
     }
 
     public function rules():array

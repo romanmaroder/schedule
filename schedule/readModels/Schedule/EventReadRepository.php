@@ -35,6 +35,11 @@ class EventReadRepository
             ->all();
     }
 
+    public function getAllEventsCount(): bool|int|string|null
+    {
+        return Event::find()->count();
+    }
+
     public function getEventsCount($id): bool|int|string|null
     {
         return Event::find()->andWhere(['master_id'=>$id])->count();

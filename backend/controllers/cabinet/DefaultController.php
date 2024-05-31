@@ -20,6 +20,8 @@ class DefaultController extends Controller
     public $layout = 'cabinet';
     public $totalCount;
     public $todayCount;
+    public $totalAllCount;
+    public $totalLessonCount;
     public $user;
 
     private $events;
@@ -45,8 +47,12 @@ class DefaultController extends Controller
         $this->employee = $employee;
         $this->education = $education;
         $this->employeeService = $employeeManageService;
+
+        $this->totalAllCount = $this->events->getAllEventsCount();
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
+
+        $this->totalLessonCount = $this->education->getAllLessonCount();
         $this->user= $this->users->find(\Yii::$app->user->getId());
     }
 

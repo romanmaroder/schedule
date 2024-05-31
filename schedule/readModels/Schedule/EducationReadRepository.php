@@ -22,9 +22,26 @@ class EducationReadRepository
     public function getLessonDayById($id)
     {
         return Education::find()->with('teacher','student')
-            ->andwhere(['DATE(start)'=>new Expression('DATE(NOW())')])
+            ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
             ->andWhere(['LIKE','student_ids', $id ])
             ->all();
 
+    }
+
+    public function getLessonCount($id): bool|int|string|null
+    {
+        return Education::find()->where(['LIKE','student_ids', $id ])->count();
+    }
+
+    public function getAllLessonCount(): bool|int|string|null
+    {
+        return Education::find()->count();
+    }
+
+    public function getLessonCountToday($id): bool|int|string|null
+    {
+        return Education::find()
+            ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
+            ->andWhere(['LIKE','student_ids', $id ])->count();
     }
 }

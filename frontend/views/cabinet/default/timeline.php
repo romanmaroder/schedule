@@ -49,9 +49,9 @@ $emptyEducations = 'lesson';
         <?endif;?>
         <? foreach($events as $event) :?>
             <div>
-                <i class="fas fa-user bg-info"></i>
+                <i class="fas fa-user bg-info btn-shadow"></i>
 
-                <div class="timeline-item">
+                <div class="timeline-item btn-shadow">
                 <span class="time"><i class="far fa-clock"></i>
                     <?= date('H:i',strtotime($event->start))?>-<?= date('H:i',strtotime($event->end))?>
                 </span>
@@ -68,10 +68,12 @@ $emptyEducations = 'lesson';
         <? foreach($educations as $education) :?>
 
             <div>
-                <i class="fas fa-comments bg-warning"></i>
+                <i class="fas fa-comments bg-warning btn-shadow"></i>
 
-                <div class="timeline-item">
-                    <span class="time"><i class="far fa-clock"></i><?= date('H:i',strtotime($education->start))?>-<?= date('H:i',strtotime($education->end))?></span>
+                <div class="timeline-item btn-shadow">
+                    <span class="time"><i class="far fa-clock"></i>
+                        <?= date('H:i',strtotime($education->start))?>-<?= date('H:i',strtotime($education->end))?>
+                    </span>
 
                     <h3 class="timeline-header"> <?= Html::a(Html::encode($education->teacher->username),Url::toRoute(['user/view','id'=>$education->teacher->id]))?>
                        <span class="text-success ml-3"><?=$education->title?></span>

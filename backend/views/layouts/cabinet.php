@@ -34,12 +34,28 @@ $active ='active';
                             <p class="text-muted text-center"><?= $user->employee->role->name ?></p>
 
                             <ul class="list-group list-group-unbordered mb-3">
-                                <li class="list-group-item">
-                                    <b>Total entries</b> <span class="float-right badge badge-warning btn-shadow"><?=$this->context->totalCount?></span>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Today's total entries</b> <span class="float-right badge badge-danger btn-shadow"><?=$this->context->todayCount?></span>
-                                </li>
+                                <? if ($this->context->totalAllCount) :?>
+                                    <li class="list-group-item">
+                                        <b>Total entries</b> <span
+                                                class="float-right badge badge-warning btn-shadow"><?= $this->context->totalAllCount ?></span>
+                                    </li>
+                                <?endif;?>
+                                <? if ($this->context->totalCount) :?>
+                                    <li class="list-group-item">
+                                        <b>Total entries</b> <span
+                                                class="float-right badge badge-warning btn-shadow"><?= $this->context->totalCount ?></span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Today's total entries</b> <span
+                                                class="float-right badge badge-danger btn-shadow"><?= $this->context->todayCount ?></span>
+                                    </li>
+                                <?endif;?>
+                                <? if ($this->context->totalLessonCount) :?>
+                                    <li class="list-group-item">
+                                        <b>Total lessons</b> <span
+                                                class="float-right badge badge-info btn-shadow"><?= $this->context->totalLessonCount ?></span>
+                                    </li>
+                                <?endif;?>
                             </ul>
 
                             <!--<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->

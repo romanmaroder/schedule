@@ -42,7 +42,7 @@ $emptyEducations = 'lesson';
                     </h3>
 
                     <div class="timeline-body">
-                        You have no <?= !$events ? $emptyEvents : $emptyEducations?> today
+                        You have no <?= $events==null ? $emptyEvents : $emptyEducations?> today
                     </div>
                 </div>
             </div>
@@ -68,10 +68,12 @@ $emptyEducations = 'lesson';
         <? foreach($educations as $education) :?>
 
             <div>
-                <i class="fas fa-comments bg-warning"></i>
+                <i class="fas fa-comments bg-warning btn-shadow"></i>
 
                 <div class="timeline-item">
-                    <span class="time"><i class="far fa-clock"></i><?= date('H:i',strtotime($education->start))?>-<?= date('H:i',strtotime($education->end))?></span>
+                    <span class="time"><i class="far fa-clock"></i>
+                        <?= date('H:i',strtotime($education->start))?>-<?= date('H:i',strtotime($education->end))?>
+                    </span>
 
                     <h3 class="timeline-header"> <?= Html::a(Html::encode($education->teacher->username),Url::toRoute(['user/view','id'=>$education->teacher->id]))?>
                         <span class="text-success ml-3"><?=$education->title?></span>
