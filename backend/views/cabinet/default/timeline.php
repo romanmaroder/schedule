@@ -29,13 +29,13 @@ $emptyEducations = 'lesson';
 <div class="active tab-pane" id="timeline">
     <div class="timeline timeline-inverse">
         <div class="time-label">
-            <span class="bg-danger"><?=date('d-M-Y')?></span>
+            <span class="bg-danger btn-shadow"><?=date('d-M-Y')?></span>
         </div>
         <? if (!$events && !$educations):?>
             <div>
-                <i class="fas fa-exclamation-circle bg-warning"></i>
+                <i class="fas fa-exclamation-circle bg-warning btn-shadow"></i>
 
-                <div class="timeline-item">
+                <div class="timeline-item btn-shadow">
                     <span class="time"><i class="far fa-clock"></i><?=date('H:i')?></span>
 
                     <h3 class="timeline-header"><a href="#">Warning</a>
@@ -86,7 +86,7 @@ $emptyEducations = 'lesson';
 
         <?endforeach;?>
         <div>
-            <i class="far fa-clock bg-gray"></i>
+            <i class="far fa-clock bg-gray btn-shadow"></i>
         </div>
     </div>
 

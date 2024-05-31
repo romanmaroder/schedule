@@ -25,7 +25,7 @@ $active ='active';
                             <div class="text-center">
                                 <?= Html::img(
                                     '@web/img/user1-128x128.jpg',
-                                    ['alt' => 'avatar', 'class' => 'profile-user-img img-fluid img-circle']
+                                    ['alt' => 'avatar', 'class' => 'profile-user-img img-fluid img-circle img-shadow']
                                 ) ?>
                             </div>
 
@@ -35,10 +35,10 @@ $active ='active';
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Total entries</b> <span class="float-right badge badge-warning"><?=$this->context->totalCount?></span>
+                                    <b>Total entries</b> <span class="float-right badge badge-warning btn-shadow"><?=$this->context->totalCount?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Today's total entries</b> <span class="float-right badge badge-danger "><?=$this->context->todayCount?></span>
+                                    <b>Today's total entries</b> <span class="float-right badge badge-danger btn-shadow"><?=$this->context->todayCount?></span>
                                 </li>
                             </ul>
 
@@ -128,15 +128,15 @@ $active ='active';
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
                                     <?=Html::a(Html::encode('Events'),Url::to(['/cabinet/default/index']),
-                                     ['class' => ['nav-link',  Yii::$app->controller->route == 'cabinet/default/index' ? 'active': '' ]])?>
+                                     ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/index' ? 'active btn-shadow': '' ]])?>
                                 </li>
                                 <li class="nav-item">
                                     <?=Html::a(Html::encode('Timeline'),Url::to(['/cabinet/default/timeline']),
-                                               ['class' => ['nav-link',  Yii::$app->controller->route == 'cabinet/default/timeline' ? 'active': '' ]])?>
+                                               ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/timeline' ? 'active btn-shadow': '' ]])?>
                                 </li>
                                 <li class="nav-item">
                                     <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/default/profile']),
-                                        ['class' => ['nav-link',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active': '' ]])?>
+                                        ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active btn-shadow': '' ]])?>
 
                                 </li>
                             </ul>

@@ -95,7 +95,7 @@ $this->params['employee'] = $employee;
 
     <div class="form-group">
         <div class="offset-sm-2 col-sm-10">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-danger btn-shadow']) ?>
+            <?= Html::submitButton('Save', ['class' => 'btn btn-danger btn-sm btn-shadow']) ?>
         </div>
     </div>
     <?php
