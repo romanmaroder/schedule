@@ -7,4 +7,4 @@ php -S 127.0.0.1:8080 -t api/web
 php vendor/bin/codecept run -c frontend
 
 ## Access Token
-"access_token": "380bdea34c33e2db545e548a6c4d0f5a491aea44"
+"access_token": "4d7424165b62c3939e4167d22a0d5496baf29b9a"

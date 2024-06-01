@@ -23,14 +23,14 @@ class EducationReadRepository
     {
         return Education::find()->with('teacher','student')
             ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
-            ->andWhere(['LIKE','student_ids', $id ])
+            ->andWhere(['','LIKE','student_ids', $id ])
             ->all();
 
     }
 
     public function getLessonCount($id): bool|int|string|null
     {
-        return Education::find()->where(['LIKE','student_ids', $id ])->count();
+        return Education::find()->andFilterWhere(['LIKE','student_ids', $id ])->count();
     }
 
     public function getAllLessonCount(): bool|int|string|null
@@ -42,6 +42,6 @@ class EducationReadRepository
     {
         return Education::find()
             ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
-            ->andWhere(['LIKE','student_ids', $id ])->count();
+            ->andFilterWhere(['LIKE','student_ids', $id ])->count();
     }
 }

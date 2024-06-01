@@ -1,8 +1,9 @@
-    RewriteEngine on
+#SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+RewriteEngine on
 
-    # если это папка или файл, открываем его
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
+# если это папка или файл, открываем его
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 
-    # в противном случае перенаправляем на index.php
-    RewriteRule . index-test.php
+# в противном случае перенаправляем на index.php
+RewriteRule (.*) index-test.php
