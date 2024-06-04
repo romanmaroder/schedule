@@ -66,8 +66,10 @@ return [
             [
                 'allow' => true,
                 'roles' => ['permission_manager','permission_employee'],
+
             ],
         ],
+
     ],
     'params' => $params,
 ];

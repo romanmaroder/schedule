@@ -57,10 +57,8 @@ class DefaultController extends Controller
         $this->totalLessonCount = $this->education->getLessonCount(\Yii::$app->user->getId());
         $this->todayLessonCount = $this->education->getLessonCountToday(\Yii::$app->user->getId());
 
-        if (!$this->user) {
-            $this->user = $this->users->find(\Yii::$app->user->getId());
-        }
-        if (!$this->employee) {
+        $this->user = $this->users->find(\Yii::$app->user->getId());
+        if ($this->user) {
             $this->employee = $this->employees->find($this->user->employee);
         }
         $this->profile = $profile;
