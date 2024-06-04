@@ -63,7 +63,7 @@ foreach ($post->tags as $tag) {
         'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
     ]) ?></p>
 <div class="pt-5">
-    <p>Categories: <a href="#"><?= $post->category->name ?></a> Tags: <a href="#">#<?= implode(', ', $tagLinks) ?></a>
+    <p>Categories: <?= Html::a(Html::encode($post->category->name), ['category', 'slug' => $post->category->slug])?> Tags: <a href="#">#<?= implode(', ', $tagLinks) ?></a>
     </p>
 </div>
 

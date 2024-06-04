@@ -7,6 +7,7 @@ namespace schedule\readModels\Schedule;
 use schedule\entities\Schedule\Brand;
 use schedule\entities\Schedule\Category;
 use schedule\entities\Schedule\Product\Product;
+use schedule\entities\Schedule\Tag;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\db\ActiveQuery;

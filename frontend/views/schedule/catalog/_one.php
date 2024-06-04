@@ -6,6 +6,9 @@
 /* @var $service \schedule\entities\Schedule\Service\Service */
 /* @var $category \schedule\entities\Schedule\Category */
 
+use yii\helpers\Url;
+
+$url = Url::to(['service', 'id' => $service->id]);
 ?>
 
 <div class="col-12 col-md-12 col-lg-8 order-1 order-md-1">

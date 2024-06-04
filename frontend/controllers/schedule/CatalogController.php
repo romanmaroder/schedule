@@ -133,7 +133,8 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        $dataProvider = $this->products->getAllByTag($tag);
+        $dataProvider = $this->service->getAllByTag($tag);
+
 
         return $this->render('tag', [
             'tag' => $tag,
