@@ -3,17 +3,17 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\User\Employee\EmployeeEditForm */
-/* @var $employee \schedule\entities\User\Employee\Employee */
+/* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
+/* @var $employee \core\entities\User\Employee\Employee */
 
 use kartik\color\ColorInput;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
-use schedule\helpers\EmployeeHelper;
-use schedule\helpers\PriceHelper;
-use schedule\helpers\RateHelper;
-use schedule\helpers\RoleHelper;
-use schedule\helpers\ScheduleHelper;
+use core\helpers\EmployeeHelper;
+use core\helpers\PriceHelper;
+use core\helpers\RateHelper;
+use core\helpers\RoleHelper;
+use core\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;

@@ -5,11 +5,11 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\ServiceSearch;
-use schedule\entities\Schedule\Service\Service;
-use schedule\forms\manage\Schedule\Service\PriceForm;
-use schedule\forms\manage\Schedule\Service\ServiceCreateForm;
-use schedule\forms\manage\Schedule\Service\ServiceEditForm;
-use schedule\services\manage\Schedule\ServiceManageService;
+use core\entities\Schedule\Service\Service;
+use core\forms\manage\Schedule\Service\PriceForm;
+use core\forms\manage\Schedule\Service\ServiceCreateForm;
+use core\forms\manage\Schedule\Service\ServiceEditForm;
+use core\services\manage\Schedule\ServiceManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

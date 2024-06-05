@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use schedule\readModels\User\UserReadRepository;
+use core\readModels\User\UserReadRepository;
 use yii\web\Controller;
 
 /**

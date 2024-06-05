@@ -3,9 +3,9 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $cart \schedule\cart\Cart */
+/* @var $cart \core\cart\Cart */
 
-/* @var $expense schedule\forms\manage\Expenses\ */
+/* @var $expense core\forms\manage\Expenses\ */
 
 /* @var $merg */
 

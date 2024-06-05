@@ -5,12 +5,12 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\EducationSearch;
-use schedule\entities\Schedule\Event\Calendar\Calendar;
-use schedule\entities\Schedule\Event\Education;
-use schedule\forms\manage\Schedule\Event\EducationCreateForm;
-use schedule\forms\manage\Schedule\Event\EducationEditForm;
-use schedule\repositories\NotFoundException;
-use schedule\services\manage\Schedule\EducationManageService;
+use core\entities\Schedule\Event\Calendar\Calendar;
+use core\entities\Schedule\Event\Education;
+use core\forms\manage\Schedule\Event\EducationCreateForm;
+use core\forms\manage\Schedule\Event\EducationEditForm;
+use core\repositories\NotFoundException;
+use core\services\manage\Schedule\EducationManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -121,7 +121,7 @@ class EducationController extends Controller
         } catch (\DomainException $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
-        return $this->redirect(['/schedule/education/index']);
+        return $this->redirect(['/core/education/index']);
     }
 
     protected function findModel($id): Education

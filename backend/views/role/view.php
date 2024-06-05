@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $role null|\schedule\entities\User\Role */
+/* @var $role null|\core\entities\User\Role */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;

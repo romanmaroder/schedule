@@ -2,8 +2,8 @@
 
 
 /* @var $this yii\web\View */
-/* @var $post schedule\entities\Blog\Post\Post */
-/* @var $model \schedule\forms\manage\Blog\CommentForm*/
+/* @var $post core\entities\Blog\Post\Post */
+/* @var $model \core\forms\manage\Blog\CommentForm*/
 
 
 use yii\bootstrap4\ActiveForm;use yii\helpers\Html;

@@ -5,9 +5,9 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\CategorySearch;
-use schedule\entities\Schedule\Category;
-use schedule\forms\manage\Schedule\CategoryForm;
-use schedule\services\manage\Schedule\CategoryManageService;
+use core\entities\Schedule\Category;
+use core\forms\manage\Schedule\CategoryForm;
+use core\services\manage\Schedule\CategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

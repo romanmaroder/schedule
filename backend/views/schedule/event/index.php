@@ -1,8 +1,8 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\EventMethodsOfPayment;
-use schedule\helpers\EventPaymentStatusHelper;
+use core\helpers\EventMethodsOfPayment;
+use core\helpers\EventPaymentStatusHelper;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;

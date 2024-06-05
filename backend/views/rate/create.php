@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\User\Rate\RateForm */
+/* @var $model \core\forms\manage\User\Rate\RateForm */
 
 
 $this->title = 'Create Rate';

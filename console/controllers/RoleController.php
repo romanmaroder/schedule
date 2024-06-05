@@ -5,8 +5,8 @@ namespace console\controllers;
 
 
 use Exception;
-use schedule\entities\User\Employee\Employee;
-use schedule\services\manage\EmployeeManageService;
+use core\entities\User\Employee\Employee;
+use core\services\manage\EmployeeManageService;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;

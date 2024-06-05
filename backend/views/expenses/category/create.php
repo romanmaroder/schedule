@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\Expenses\CategoryForm */
+/* @var $model \core\forms\manage\Expenses\CategoryForm */
 
 $this->title = 'Create Expenses categories';
 $this->params['breadcrumbs'][] = ['label' => 'Expenses', 'url' => ['index']];

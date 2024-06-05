@@ -3057,11 +3057,11 @@
             ]
         },
         {
-            "name": "npm-asset/fullcalendar-scheduler",
+            "name": "npm-asset/fullcalendar-corer",
             "version": "6.1.13",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/fullcalendar-scheduler/-/fullcalendar-scheduler-6.1.13.tgz"
+                "url": "https://registry.npmjs.org/fullcalendar-corer/-/fullcalendar-corer-6.1.13.tgz"
             },
             "require": {
                 "npm-asset/fullcalendar--adaptive": "~6.1.13",
@@ -4215,7 +4215,7 @@
                 "shasum": ""
             },
             "require": {
-                "npm-asset/fullcalendar-scheduler": "*"
+                "npm-asset/fullcalendar-corer": "*"
             },
             "require-dev": {
                 "codeception/codeception": "*"

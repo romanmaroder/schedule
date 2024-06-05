@@ -1,14 +1,14 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\PostHelper;
+use core\helpers\PostHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $post schedule\entities\Blog\Post\Post */
+/* @var $post core\entities\Blog\Post\Post */
 /* @var $modificationsProvider yii\data\ActiveDataProvider */
 
 

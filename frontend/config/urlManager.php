@@ -23,7 +23,8 @@ return [
         'blog/<slug:[\w\-]+>' => 'blog/post/category',
 
         'catalog' => 'schedule/catalog/index',
-       // ['class' => 'frontend\urls\CategoryUrlRule'],
+        'price' => 'schedule/price/index',
+       ['class' => 'frontend\urls\CategoryUrlRule'],
         'catalog/<id:\d+>' => 'schedule/catalog/product',
 
         'cabinet' => 'cabinet/default/index',

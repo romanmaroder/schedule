@@ -2,8 +2,8 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use kartik\date\DatePicker;
-use schedule\entities\user\User;
-use schedule\helpers\UserHelper;
+use core\entities\user\User;
+use core\helpers\UserHelper;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

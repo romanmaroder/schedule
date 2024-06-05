@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 
-/* @var $user \schedule\entities\User\User */
+/* @var $user \core\entities\User\User */
 
-/* @var $employee \schedule\entities\User\Employee\Employee */
+/* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $provider \schedule\entities\Schedule\Event\Event */
+/* @var $provider \core\entities\core\Event\Event */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;

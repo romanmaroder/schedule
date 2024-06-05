@@ -4,9 +4,9 @@
 namespace backend\controllers\schedule;
 
 
-use schedule\entities\Schedule\Product\Product;
-use schedule\forms\manage\Schedule\Product\ModificationForm;
-use schedule\services\manage\Schedule\ProductManageService;
+use core\entities\Schedule\Product\Product;
+use core\forms\manage\Schedule\Product\ModificationForm;
+use core\services\manage\Schedule\ProductManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -39,7 +39,7 @@ class ModificationController extends Controller
      */
     public function actionIndex()
     {
-        return $this->redirect('schedule/product');
+        return $this->redirect('core/product');
     }
 
     /**
@@ -55,7 +55,7 @@ class ModificationController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->addModification($product->id, $form);
-                return $this->redirect(['schedule/product/view', 'id' => $product->id, '#' => 'modifications']);
+                return $this->redirect(['core/product/view', 'id' => $product->id, '#' => 'modifications']);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
@@ -82,7 +82,7 @@ class ModificationController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->editModification($product->id, $modification->id, $form);
-                return $this->redirect(['schedule/product/view', 'id' => $product->id, '#' => 'modifications']);
+                return $this->redirect(['core/product/view', 'id' => $product->id, '#' => 'modifications']);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
@@ -109,7 +109,7 @@ class ModificationController extends Controller
         } catch (\DomainException $e) {
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
-        return $this->redirect(['schedule/product/view', 'id' => $product->id, '#' => 'modifications']);
+        return $this->redirect(['core/product/view', 'id' => $product->id, '#' => 'modifications']);
     }
 
     /**

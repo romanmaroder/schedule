@@ -1,4 +1,4 @@
-POST http://api.schedule:8080/oauth2/token
+POST http://api.core:8080/oauth2/token
 Content-Type: application/json
 
 {

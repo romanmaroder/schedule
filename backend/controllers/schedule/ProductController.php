@@ -5,13 +5,13 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\ProductSearch;
-use schedule\entities\Schedule\Product\Modification;
-use schedule\entities\Schedule\Product\Product;
-use schedule\forms\manage\Schedule\Product\PhotosForm;
-use schedule\forms\manage\Schedule\Product\PriceForm;
-use schedule\forms\manage\Schedule\Product\ProductCreateForm;
-use schedule\forms\manage\Schedule\Product\ProductEditForm;
-use schedule\services\manage\Schedule\ProductManageService;
+use core\entities\Schedule\Product\Modification;
+use core\entities\Schedule\Product\Product;
+use core\forms\manage\Schedule\Product\PhotosForm;
+use core\forms\manage\Schedule\Product\PriceForm;
+use core\forms\manage\Schedule\Product\ProductCreateForm;
+use core\forms\manage\Schedule\Product\ProductEditForm;
+use core\services\manage\Schedule\ProductManageService;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;

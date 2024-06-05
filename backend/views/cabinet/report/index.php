@@ -2,13 +2,13 @@
 
 /* @var $this yii\web\View */
 
-/* @var $cart \schedule\cart\Cart */
+/* @var $cart \core\cart\Cart */
 
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\DiscountHelper;
-use schedule\helpers\EventPaymentStatusHelper;
+use core\helpers\DiscountHelper;
+use core\helpers\EventPaymentStatusHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -77,7 +77,7 @@ PluginAsset::register($this)->add(
                                     return $model->getMasterName() . PHP_EOL.'<br>'.
                                         '<small>('. Html::a(
                                             Html::encode($model->getClientName()),
-                                            ['schedule/event/view', 'id' => $model->getId()]).')</small>';
+                                            ['core/event/view', 'id' => $model->getId()]).')</small>';
 
                                 },
                                 'headerOptions' => ['class' => 'text-center'],

@@ -3,9 +3,9 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $post \schedule\entities\Blog\Post\Post */
+/* @var $post \core\entities\Blog\Post\Post */
 
-/* @var $comment \schedule\entities\Blog\Post\Comment */
+/* @var $comment \core\entities\Blog\Post\Comment */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;

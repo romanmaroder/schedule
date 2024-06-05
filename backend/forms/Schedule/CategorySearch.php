@@ -4,7 +4,7 @@
 namespace backend\forms\Schedule;
 
 
-use schedule\entities\Schedule\Category;
+use core\entities\Schedule\Category;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

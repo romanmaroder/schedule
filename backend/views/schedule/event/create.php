@@ -3,12 +3,12 @@
 use kartik\datetime\DateTimePicker;
 use kartik\form\ActiveForm;
 use kartik\select2\Select2;
-use schedule\helpers\DiscountHelper;
-use schedule\helpers\EventPaymentStatusHelper;
+use core\helpers\DiscountHelper;
+use core\helpers\EventPaymentStatusHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \schedule\forms\manage\Schedule\Event\EventCreateForm */
+/* @var $model \core\forms\manage\Schedule\Event\EventCreateForm */
 
 $this->title = 'Create Event';
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];

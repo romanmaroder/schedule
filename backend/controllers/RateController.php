@@ -5,9 +5,9 @@ namespace backend\controllers;
 
 
 use backend\forms\RateSearch;
-use schedule\entities\User\Rate;
-use schedule\forms\manage\User\Rate\RateForm;
-use schedule\services\manage\RateServiceManager;
+use core\entities\User\Rate;
+use core\forms\manage\User\Rate\RateForm;
+use core\services\manage\RateServiceManager;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

@@ -1,12 +1,12 @@
 <?php
 
-use schedule\helpers\ScheduleHelper;
-use schedule\helpers\UserHelper;
+use core\helpers\ScheduleHelper;
+use core\helpers\UserHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var schedule\entities\user\User $model */
+/** @var core\entities\user\User $model */
 
 $this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];

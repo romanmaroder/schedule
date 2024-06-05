@@ -5,9 +5,9 @@ namespace backend\controllers;
 
 
 use backend\forms\PageSearch;
-use schedule\entities\Page;
-use schedule\forms\manage\PageForm;
-use schedule\services\manage\PageManageService;
+use core\entities\Page;
+use core\forms\manage\PageForm;
+use core\services\manage\PageManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

@@ -8,8 +8,8 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
-use schedule\helpers\ScheduleHelper;
-use schedule\helpers\UserHelper;
+use core\helpers\ScheduleHelper;
+use core\helpers\UserHelper;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 

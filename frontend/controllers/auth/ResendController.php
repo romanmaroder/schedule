@@ -4,8 +4,8 @@
 namespace frontend\controllers\auth;
 
 
-use schedule\forms\auth\ResendVerificationEmailForm;
-use schedule\services\auth\EmailResendService;
+use core\forms\auth\ResendVerificationEmailForm;
+use core\services\auth\EmailResendService;
 use Yii;
 use yii\web\Controller;
 

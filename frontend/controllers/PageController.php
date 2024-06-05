@@ -4,7 +4,7 @@
 namespace frontend\controllers;
 
 
-use schedule\readModels\PageReadRepository;
+use core\readModels\PageReadRepository;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 

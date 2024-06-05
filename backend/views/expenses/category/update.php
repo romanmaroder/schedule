@@ -3,8 +3,8 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\Expenses\CategoryForm */
-/* @var $category \schedule\entities\Expenses\Category */
+/* @var $model \core\forms\manage\Expenses\CategoryForm */
+/* @var $category \core\entities\Expenses\Category */
 
 $this->title = 'Update Expenses categories: ' . $category->name;
 $this->params['breadcrumbs'][] = ['label' => 'Expenses categories', 'url' => ['index']];

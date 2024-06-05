@@ -3,7 +3,7 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $page \schedule\entities\Page */
+/* @var $page \core\entities\Page */
 
 
 use yii\helpers\Html;

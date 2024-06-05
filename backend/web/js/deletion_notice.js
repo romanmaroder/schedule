@@ -51,7 +51,7 @@
                 var id = $(this).attr('data-id');
                 console.log(id);
                 try {
-                    const deleteUrl = `http://backend.schedule/employee/delete?id=${id}`;
+                    const deleteUrl = `http://backend.core/employee/delete?id=${id}`;
                     const response = await fetch(deleteUrl);
                     if (response.ok) {
                         return Swal.showValidationMessage(`

@@ -5,9 +5,9 @@ namespace backend\controllers;
 
 
 use backend\forms\RoleSearch;
-use schedule\entities\User\Role;
-use schedule\forms\manage\User\Role\RoleForm;
-use schedule\services\manage\RoleServiceManager;
+use core\entities\User\Role;
+use core\forms\manage\User\Role\RoleForm;
+use core\services\manage\RoleServiceManager;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

@@ -6,7 +6,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $category schedule\entities\Blog\Category */
+/* @var $category core\entities\Blog\Category */
 
 $this->title = $category->name;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

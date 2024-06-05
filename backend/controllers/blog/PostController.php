@@ -5,9 +5,9 @@ namespace backend\controllers\blog;
 
 
 use backend\forms\Blog\PostSearch;
-use schedule\entities\Blog\Post\Post;
-use schedule\forms\manage\Blog\Post\PostForm;
-use schedule\services\manage\Blog\PostManageService;
+use core\entities\Blog\Post\Post;
+use core\forms\manage\Blog\Post\PostForm;
+use core\services\manage\Blog\PostManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

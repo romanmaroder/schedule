@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\DataProviderInterface */
-/* @var $tag schedule\entities\Schedule\Tag */
+/* @var $tag core\entities\core\Tag */
 
 use yii\helpers\Html;
 
-$this->title = 'Posts with tag ' . ' "'.$tag->name . '"';
+$this->title = 'Posts with tag ' . ' "'. $tag->name . '"';
 
 $this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $tag->name;

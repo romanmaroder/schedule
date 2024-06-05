@@ -1,15 +1,15 @@
 <?php
 
+use core\helpers\ScheduleHelper;
 use kartik\widgets\Select2;
-use schedule\helpers\ScheduleHelper;
-use schedule\helpers\UserHelper;
+use core\helpers\UserHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
 
 /** @var yii\web\View $this */
-/** @var schedule\forms\manage\User\UserEditForm $model */
-/** @var schedule\entities\User\User $user */
+/** @var core\forms\manage\User\UserEditForm $model */
+/** @var core\entities\User\User $user */
 
 $this->title = 'Update User: ' . $user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];

@@ -5,7 +5,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\CharacteristicForm */
+/* @var $model core\forms\manage\Schedule\CharacteristicForm */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>

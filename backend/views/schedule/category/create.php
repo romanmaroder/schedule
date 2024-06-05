@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\CategoryForm */
+/* @var $model core\forms\manage\core\CategoryForm */
 
 $this->title = 'Create Category';
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

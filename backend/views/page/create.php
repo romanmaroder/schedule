@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\PageForm */
+/* @var $model \core\forms\manage\PageForm */
 
 
 $this->title = 'Create Page';

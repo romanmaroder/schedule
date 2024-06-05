@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 
-/* @var $employee \schedule\entities\User\Employee\Employee */
+/* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $user \schedule\entities\User\User */
+/* @var $user \core\entities\User\User */
 
-/* @var $model \schedule\forms\manage\User\Employee\EmployeeEditForm */
+/* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
 
 use kartik\date\DatePicker;
 use yii\bootstrap4\ActiveForm;

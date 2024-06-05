@@ -3,10 +3,10 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use kartik\file\FileInput;
-use schedule\entities\Schedule\Product\Modification;
-use schedule\entities\Schedule\Product\Value;
-use schedule\helpers\PriceHelper;
-use schedule\helpers\ProductHelper;
+use core\entities\Schedule\Product\Modification;
+use core\entities\Schedule\Product\Value;
+use core\helpers\PriceHelper;
+use core\helpers\ProductHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
@@ -16,8 +16,8 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $product schedule\entities\Schedule\Product\Product */
-/* @var $photosForm schedule\forms\manage\Schedule\Product\PhotosForm */
+/* @var $product core\entities\Schedule\Product\Product */
+/* @var $photosForm core\forms\manage\Schedule\Product\PhotosForm */
 /* @var $modificationsProvider yii\data\ActiveDataProvider */
 
 $this->title = $product->name;

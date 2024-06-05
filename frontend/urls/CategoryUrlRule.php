@@ -4,8 +4,8 @@
 namespace frontend\urls;
 
 
-use schedule\entities\Schedule\Category;
-use schedule\readModels\Schedule\CategoryReadRepository;
+use core\entities\Schedule\Category;
+use core\readModels\Schedule\CategoryReadRepository;
 use yii\base\BaseObject;
 use yii\caching\Cache;
 use yii\helpers\ArrayHelper;
@@ -43,16 +43,16 @@ class CategoryUrlRule extends BaseObject implements UrlRuleInterface
                 return false;
             }
             if ($path != $result['path']) {
-                throw new UrlNormalizerRedirectException(['schedule/catalog/category', 'id' => $result['id']], 301);
+                throw new UrlNormalizerRedirectException(['core/catalog/category', 'id' => $result['id']], 301);
             }
-            return ['schedule/catalog/category', ['id' => $result['id']]];
+            return ['core/catalog/category', ['id' => $result['id']]];
         }
         return false;
     }
 
     public function createUrl($manager, $route, $params)
     {
-        if ($route == 'schedule/catalog/category') {
+        if ($route == 'core/catalog/category') {
             if (empty($params['id'])) {
                 throw new \InvalidArgumentException('Empty id.');
             }

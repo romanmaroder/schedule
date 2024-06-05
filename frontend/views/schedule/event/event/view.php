@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \schedule\entities\Schedule\Event\Event */
+/* @var $model \core\entities\Schedule\Event\Event */
 
 $this->title = $model->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
@@ -61,10 +61,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'master_id',
                     'value' => function ($model) {
-                        return Html::a(
-                            Html::encode($model->master->username),
-                            ['/users/user/view','id'=>$model->master->id]
-                        );
+                        if ($model->employee !== null) {
+                            return Html::a(
+                                Html::encode($model->master->username),
+                                ['/users/user/view','id'=>$model->master->id]
+                            );
+                        }
+                        return $model->getFullName();
                     },
                     'format' => 'raw',
                     'visible' => Yii::$app->user->identity->getId() != $model->master_id,

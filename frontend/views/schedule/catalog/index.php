@@ -1,16 +1,21 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $category schedule\entities\Schedule\Category */
 /* @var $dataProvider yii\data\DataProviderInterface */
-/* @var $user \schedule\entities\User\User */
+/* @var $category \core\entities\Schedule\Category*/
 
-$this->title = 'Category';
+use yii\helpers\Html;
+
+$this->title = 'Catalog';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-        <?= $this->render('_service', [
-    'dataProvider' => $dataProvider,
-    'user' => $user,
+        <h1><?= Html::encode($this->title) ?></h1>
+
+<?= $this->render('_subcategories', [
     'category' => $category
+]) ?>
+
+<?= $this->render('_list', [
+    'dataProvider' => $dataProvider
 ]) ?>

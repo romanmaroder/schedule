@@ -4,7 +4,7 @@
 namespace backend\forms\Blog;
 
 
-use schedule\entities\Blog\Category;
+use core\entities\Blog\Category;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

@@ -1,6 +1,6 @@
 <?php
 
-/** @var $posts \schedule\entities\Blog\Post\Post[] */
+/** @var $posts \core\entities\Blog\Post\Post[] */
 
 use yii\helpers\Html;
 use yii\helpers\StringHelper;

@@ -1,6 +1,6 @@
 # global codeception file to run tests from all apps
 include:
-    - schedule
+    - core
     - common
     - frontend
     - backend

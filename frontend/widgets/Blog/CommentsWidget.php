@@ -4,9 +4,9 @@
 namespace frontend\widgets\Blog;
 
 
-use schedule\entities\Blog\Post\Comment;
-use schedule\entities\Blog\Post\Post;
-use schedule\forms\manage\Blog\CommentForm;
+use core\entities\Blog\Post\Comment;
+use core\entities\Blog\Post\Post;
+use core\forms\manage\Blog\CommentForm;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 

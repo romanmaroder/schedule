@@ -4,14 +4,15 @@
 namespace frontend\controllers\schedule;
 
 
-use schedule\entities\User\User;
-use schedule\readModels\Schedule\BrandReadRepository;
-use schedule\readModels\Schedule\CategoryReadRepository;
-use schedule\readModels\Schedule\ProductReadRepository;
-use schedule\readModels\Schedule\ServiceReadRepository;
-use schedule\readModels\Schedule\TagReadRepository;
-use schedule\readModels\User\UserReadRepository;
-use schedule\repositories\NotFoundException;
+use core\entities\User\User;
+use core\forms\manage\Schedule\AddToCartForm;
+use core\forms\manage\Schedule\ReviewForm;
+use core\readModels\Schedule\BrandReadRepository;
+use core\readModels\Schedule\CategoryReadRepository;
+use core\readModels\Schedule\ProductReadRepository;
+use core\readModels\Schedule\TagReadRepository;
+use core\readModels\User\UserReadRepository;
+use core\repositories\NotFoundException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -20,7 +21,6 @@ class CatalogController extends Controller
     public $layout = 'catalog';
 
     private $products;
-    private $service;
     private $categories;
     private $brands;
     private $tags;
@@ -29,16 +29,15 @@ class CatalogController extends Controller
     public function __construct(
         $id,
         $module,
-        ServiceReadRepository $service,
         ProductReadRepository $products,
         CategoryReadRepository $categories,
         BrandReadRepository $brands,
         TagReadRepository $tags,
         UserReadRepository $users,
-        $config = [])
+        $config = []
+    )
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
         $this->products = $products;
         $this->categories = $categories;
         $this->brands = $brands;
@@ -46,17 +45,19 @@ class CatalogController extends Controller
         $this->users = $users;
     }
 
+    /**
+     * @return mixed
+     */
     public function actionIndex()
     {
-        $dataProvider = $this->service->getAll();
+        $dataProvider = $this->products->getAll();
         $category = $this->categories->getRoot();
 
-        return $this->render('index',
-                             [
-                                 'category' => $category,
-                                 'dataProvider' => $dataProvider,
-                                 'user' => $this->findModel(),
-                             ]);
+        return $this->render('index', [
+            'category' => $category,
+            'dataProvider' => $dataProvider,
+            'user' => $this->findModel(),
+        ]);
     }
 
     /**
@@ -70,37 +71,13 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        $dataProvider = $this->service->getAllByCategory($category);
+        $dataProvider = $this->products->getAllByCategory($category);
 
-        return $this->render(
-            'category',
-            [
-                'category' => $category,
-                'dataProvider' => $dataProvider,
-                'user' => $this->findModel(),
-            ]
-        );
-    }
-
-    public function actionView($id)
-    {
-        if (!$service = $this->service->find($id)) {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-
-
-        $category = $this->categories->find($service->category_id);
-        $menu = $this->service->getAll()->getModels();
-
-        return $this->render(
-            'view',
-            [
-                'category' => $category,
-                'menu' => $menu,
-                'service' => $service,
-                'user' => $this->findModel(),
-            ]
-        );
+        return $this->render('category', [
+            'category' => $category,
+            'dataProvider' => $dataProvider,
+            'user' => $this->findModel(),
+        ]);
     }
 
     /**
@@ -133,8 +110,7 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        $dataProvider = $this->service->getAllByTag($tag);
-
+        $dataProvider = $this->products->getAllByTag($tag);
 
         return $this->render('tag', [
             'tag' => $tag,
@@ -143,19 +119,20 @@ class CatalogController extends Controller
     }
 
     /**
-     * @param $id
      * @return mixed
-     * @throws NotFoundHttpException
      */
-    public function actionService($id)
+    public function actionSearch()
     {
-        if (!$service = $this->service->find($id)) {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+        /*$form = new SearchForm();
+        $form->load(\Yii::$app->request->queryParams);
+        $form->validate();
 
-        return $this->render('service', [
-            'service' => $service,
-        ]);
+        $dataProvider = $this->products->search($form);
+
+        return $this->render('search', [
+            'dataProvider' => $dataProvider,
+            'searchForm' => $form,
+        ]);*/
     }
 
     /**
@@ -169,12 +146,16 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
 
-        return $this->render(
-            'product',
-            [
-                'product' => $product,
-            ]
-        );
+        $this->layout = 'blank';
+
+        $cartForm = new AddToCartForm($product);
+        $reviewForm = new ReviewForm();
+
+        return $this->render('product', [
+            'product' => $product,
+            'cartForm' => $cartForm,
+            'reviewForm' => $reviewForm,
+        ]);
     }
 
     protected function findModel(): User

@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Blog\Post\PostForm */
+/* @var $model core\forms\manage\Blog\Post\PostForm */
 
 $this->title = 'Create Post';
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];

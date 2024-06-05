@@ -1,7 +1,7 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Schedule\Brand;
+use core\entities\Schedule\Brand;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

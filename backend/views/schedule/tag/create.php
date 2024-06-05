@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\TagForm */
+/* @var $model core\forms\manage\Schedule\TagForm */
 
 $this->title = 'Create Tag';
 $this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];

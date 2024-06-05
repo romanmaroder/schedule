@@ -4,7 +4,7 @@
 namespace frontend\controllers\cabinet;
 
 
-use schedule\services\auth\NetworkService;
+use core\services\auth\NetworkService;
 use Yii;
 use yii\authclient\AuthAction;
 use yii\authclient\ClientInterface;

@@ -1,13 +1,13 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\CharacteristicHelper;
+use core\helpers\CharacteristicHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $characteristic schedule\entities\Schedule\Characteristic */
+/* @var $characteristic core\entities\Schedule\Characteristic */
 
 $this->title = $characteristic->name;
 $this->params['breadcrumbs'][] = ['label' => 'Characteristic', 'url' => ['index']];

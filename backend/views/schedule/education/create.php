@@ -3,7 +3,7 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $model \schedule\forms\manage\Schedule\Event\EducationCreateForm */
+/* @var $model \core\forms\manage\Schedule\Event\EducationCreateForm */
 
 use kartik\datetime\DateTimePicker;
 use kartik\form\ActiveForm;

@@ -6,7 +6,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $tag schedule\entities\Blog\Tag */
+/* @var $tag core\entities\Blog\Tag */
 
 $this->title = $tag->name;
 $this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];

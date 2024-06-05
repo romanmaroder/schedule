@@ -2,8 +2,8 @@
 namespace api\controllers\user;
 
 use api\helpers\DateHelper;
-use schedule\entities\User\User;
-use schedule\helpers\UserHelper;
+use core\entities\User\User;
+use core\helpers\UserHelper;
 use yii\rest\Controller;
 
 class ProfileController extends Controller

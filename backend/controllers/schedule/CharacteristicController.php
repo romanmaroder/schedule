@@ -3,9 +3,9 @@
 namespace backend\controllers\schedule;
 
 use backend\forms\Schedule\CharacteristicSearch;
-use schedule\entities\Schedule\Characteristic;
-use schedule\forms\manage\Schedule\CharacteristicForm;
-use schedule\services\manage\Schedule\CharacteristicManageService;
+use core\entities\Schedule\Characteristic;
+use core\forms\manage\Schedule\CharacteristicForm;
+use core\services\manage\Schedule\CharacteristicManageService;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

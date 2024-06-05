@@ -3,8 +3,8 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\User\Rate\RateForm */
-/* @var $rate  \schedule\entities\User\Rate*/
+/* @var $model \core\forms\manage\User\Rate\RateForm */
+/* @var $rate  \core\entities\User\Rate*/
 
 $this->title = 'Update Rate: ' . $rate->name;
 $this->params['breadcrumbs'][] = ['label' => 'Rates', 'url' => ['index']];

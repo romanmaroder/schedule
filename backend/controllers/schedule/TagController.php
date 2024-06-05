@@ -5,9 +5,9 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\TagSearch;
-use schedule\entities\Schedule\Tag;
-use schedule\forms\manage\Schedule\TagForm;
-use schedule\services\manage\Schedule\TagManageService;
+use core\entities\Schedule\Tag;
+use core\forms\manage\Schedule\TagForm;
+use core\services\manage\Schedule\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

@@ -4,8 +4,8 @@
 namespace frontend\widgets;
 
 
-use schedule\entities\Schedule\Category;
-use schedule\readModels\Schedule\CategoryReadRepository;
+use core\entities\core\Category;
+use core\readModels\core\CategoryReadRepository;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -41,7 +41,7 @@ class MainNavCategoriesWidget extends Widget
                     echo Html::beginTag('li', ['class' => $category->children ? 'hassubs' : '']);
 
                     echo Html::a(Html::encode($category->name) . ($category->children ? "<i class='fas fa-chevron-right'></i>" : ''),
-                        ['/schedule/catalog/category', 'id' => $category->id],['class' => $active ? 'active' : '']
+                        ['/core/catalog/category', 'id' => $category->id],['class' => $active ? 'active' : '']
                     );
 
                     if ($category->children) {

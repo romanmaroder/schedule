@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Blog\TagForm */
+/* @var $model core\forms\manage\Blog\TagForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

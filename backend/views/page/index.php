@@ -10,7 +10,7 @@
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-use schedule\entities\Page;
+use core\entities\Page;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $brand schedule\entities\Schedule\Brand */
-/* @var $model schedule\forms\manage\Schedule\BrandForm */
+/* @var $brand core\entities\Schedule\Brand */
+/* @var $model core\forms\manage\Schedule\BrandForm */
 
 $this->title = 'Update Brand: ' . $brand->name;
 $this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];

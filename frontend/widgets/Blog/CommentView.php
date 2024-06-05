@@ -4,7 +4,7 @@
 namespace frontend\widgets\Blog;
 
 
-use schedule\entities\Blog\Post\Comment;
+use core\entities\Blog\Post\Comment;
 
 class CommentView
 {

@@ -5,7 +5,7 @@ namespace frontend\controllers\auth;
 
 
 use common\auth\Identity;
-use schedule\services\auth\NetworkService;
+use core\services\auth\NetworkService;
 use Yii;
 use yii\authclient\ClientInterface;
 use yii\helpers\ArrayHelper;

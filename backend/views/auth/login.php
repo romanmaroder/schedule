@@ -3,7 +3,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $model \schedule\forms\auth\LoginForm */
+/* @var $model \core\forms\auth\LoginForm */
 ?>
 <div class="">
     <?php

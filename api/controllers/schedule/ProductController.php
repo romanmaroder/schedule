@@ -1,7 +1,7 @@
 <?php
 
 
-namespace api\controllers\schedule;
+namespace api\controllers\core;
 
 
 use yii\rest\Controller;

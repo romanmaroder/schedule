@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\DataProviderInterface */
-/* @var $category schedule\entities\Schedule\Category */
+/* @var $category core\entities\core\Category */
 
 use yii\helpers\Html;
 

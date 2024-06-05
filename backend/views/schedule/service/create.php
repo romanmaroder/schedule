@@ -6,7 +6,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\Service\ServiceCreateForm */
+/* @var $model core\forms\manage\Schedule\Service\ServiceCreateForm */
 
 $this->title = 'Create Service';
 $this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];

@@ -5,8 +5,8 @@ namespace frontend\controllers\auth;
 
 
 use common\auth\Identity;
-use schedule\forms\auth\LoginForm;
-use schedule\services\auth\AuthService;
+use core\forms\auth\LoginForm;
+use core\services\auth\AuthService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

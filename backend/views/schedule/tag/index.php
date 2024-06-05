@@ -1,7 +1,6 @@
 <?php
 
-use schedule\entities\Schedule\Tag;
-use yii\grid\ActionColumn;
+use core\entities\Schedule\Tag;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

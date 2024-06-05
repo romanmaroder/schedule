@@ -4,8 +4,8 @@ use yii\bootstrap4\Modal;
 use yii\web\JsExpression;
 use yii2fullcalendar6\yii2fullcalendar6;
 
-/* @var $events \schedule\entities\Schedule\Event\Calendar\Calendar */
-/* @var $education\schedule\entities\Schedule\Event\Calendar\Calendar */
+/* @var $events \core\entities\Schedule\Event\Calendar\Calendar*/
+/* @var $education \core\entities\Schedule\Event\Calendar\Calendar */
 
 $this->title = 'Calendar';
 $this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['index']];

@@ -4,13 +4,13 @@
 namespace frontend\controllers\cabinet;
 
 
-use schedule\forms\user\ProfileEditForm;
-use schedule\readModels\Employee\EmployeeReadRepository;
-use schedule\readModels\Schedule\EducationReadRepository;
-use schedule\readModels\Schedule\EventReadRepository;
-use schedule\readModels\User\UserReadRepository;
-use schedule\services\manage\EmployeeManageService;
-use schedule\useCases\cabinet\ProfileService;
+use core\forms\user\ProfileEditForm;
+use core\readModels\Employee\EmployeeReadRepository;
+use core\readModels\Schedule\EducationReadRepository;
+use core\readModels\Schedule\EventReadRepository;
+use core\readModels\User\UserReadRepository;
+use core\services\manage\EmployeeManageService;
+use core\useCases\cabinet\ProfileService;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;

@@ -4,7 +4,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \schedule\forms\manage\User\Role\RoleForm */
+/* @var $model \core\forms\manage\User\Role\RoleForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

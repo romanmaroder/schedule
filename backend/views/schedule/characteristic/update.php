@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $characteristic schedule\entities\Schedule\Characteristic */
-/* @var $model schedule\forms\manage\Schedule\CharacteristicForm */
+/* @var $characteristic core\entities\Schedule\Characteristic */
+/* @var $model core\forms\manage\Schedule\CharacteristicForm */
 
 $this->title = 'Update Characteristic: ' . $characteristic->name;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

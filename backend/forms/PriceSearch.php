@@ -4,7 +4,7 @@
 namespace backend\forms;
 
 
-use schedule\entities\User\Price;
+use core\entities\User\Price;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

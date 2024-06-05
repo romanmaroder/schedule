@@ -4,8 +4,7 @@
 namespace frontend\controllers\cabinet;
 
 
-use schedule\services\schedule\CartService;
-use yii\data\ActiveDataProvider;
+use core\services\Schedule\CartService;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 

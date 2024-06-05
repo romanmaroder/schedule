@@ -3,8 +3,8 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\User\Role\RoleForm */
-/* @var $role null|\schedule\entities\User\Role */
+/* @var $model \core\forms\manage\User\Role\RoleForm */
+/* @var $role null|\core\entities\User\Role */
 
 $this->title = 'Update Role: ' . $role->name;
 $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];

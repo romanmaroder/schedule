@@ -4,8 +4,8 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $product schedule\entities\Schedule\Product\Product */
-/* @var $model schedule\forms\manage\Schedule\Product\PriceForm */
+/* @var $product \core\entities\Schedule\Product\Product */
+/* @var $model core\forms\manage\Schedule\Product\PriceForm */
 
 $this->title                   = 'Price for Product: ' . $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];

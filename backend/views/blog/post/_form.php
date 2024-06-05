@@ -6,7 +6,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Blog\Post\PostForm */
+/* @var $model core\forms\manage\Blog\Post\PostForm */
 ?>
 
 <div class="post-form">

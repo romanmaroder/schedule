@@ -1,9 +1,9 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Schedule\Service\Service;
-use schedule\helpers\PriceHelper;
-use schedule\helpers\ServiceHelper;
+use core\entities\Schedule\Service\Service;
+use core\helpers\PriceHelper;
+use core\helpers\ServiceHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

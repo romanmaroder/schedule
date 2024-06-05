@@ -5,8 +5,8 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $service schedule\entities\Schedule\Service\Expenses */
-/* @var $model schedule\forms\manage\Schedule\Service\ServiceEditForm */
+/* @var $service \core\entities\Expenses\Expenses\Expenses */
+/* @var $model core\forms\manage\Schedule\Service\ServiceEditForm */
 
 $this->title = 'Update Service: ' . $service->name;
 $this->params['breadcrumbs'][] = ['label' => 'Services', 'url' => ['index']];

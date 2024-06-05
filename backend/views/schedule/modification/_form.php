@@ -4,7 +4,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\Product\ModificationForm */
+/* @var $model core\forms\manage\core\Product\ModificationForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

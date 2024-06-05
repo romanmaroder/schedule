@@ -4,8 +4,8 @@
 namespace frontend\controllers;
 
 
-use schedule\forms\ContactForm;
-use schedule\services\ContactService;
+use core\forms\ContactForm;
+use core\services\ContactService;
 use Yii;
 use yii\web\Controller;
 

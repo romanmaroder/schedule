@@ -6,7 +6,7 @@ use kartik\select2\Select2;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \schedule\forms\manage\Schedule\Event\EventCreateForm */
+/* @var $model \core\forms\manage\Schedule\Event\EventCreateForm */
 
 
 ?>
@@ -172,7 +172,7 @@ use yii\helpers\Html;
                     [
                         'name' => 'discount_from',
                         'language' => 'ru',
-                        'data' => \schedule\helpers\DiscountHelper::discountList(),
+                        'data' => \core\helpers\DiscountHelper::discountList(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'discountFrom',
@@ -229,7 +229,7 @@ use yii\helpers\Html;
 //                    [
 //                        'name' => 'status',
 //                        'language' => 'ru',
-//                        'data' => \schedule\helpers\EventHelper::statusList(),
+//                        'data' => \core\helpers\EventHelper::statusList(),
 //                        'theme' => Select2::THEME_BOOTSTRAP,
 //                        'options' => [
 //                            'id' => 'status',

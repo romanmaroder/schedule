@@ -4,11 +4,11 @@
 namespace backend\controllers\cabinet;
 
 
-use schedule\entities\Expenses\Expenses\Expenses;
-use schedule\entities\Schedule\Event\Event;
-use schedule\readModels\Expenses\ExpenseReadRepository;
-use schedule\readModels\Schedule\EventReadRepository;
-use schedule\services\schedule\CartService;
+use core\entities\Expenses\Expenses\Expenses;
+use core\entities\core\Event\Event;
+use core\readModels\Expenses\ExpenseReadRepository;
+use core\readModels\core\EventReadRepository;
+use core\services\core\CartService;
 use yii\data\ArrayDataProvider;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;

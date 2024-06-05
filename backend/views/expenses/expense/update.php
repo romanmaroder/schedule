@@ -3,9 +3,9 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $model \schedule\forms\manage\Expenses\Expense\ExpenseEditForm */
+/* @var $model \core\forms\manage\Expenses\Expense\ExpenseEditForm */
 
-/* @var $expense \schedule\entities\Expenses\Expenses\Expenses */
+/* @var $expense \core\entities\Expenses\Expenses\Expenses */
 
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;

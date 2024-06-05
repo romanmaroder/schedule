@@ -1,17 +1,16 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\EventHelper;
-use schedule\helpers\EventMethodsOfPayment;
-use schedule\helpers\EventPaymentStatusHelper;
+use core\helpers\EventMethodsOfPayment;
+use core\helpers\EventPaymentStatusHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \schedule\entities\Schedule\Event\Event */
-/* @var $cart \schedule\cart\Cart */
+/* @var $model \core\entities\Schedule\Event\Event */
+/* @var $cart \core\cart\Cart */
 
 $this->title = $model->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];

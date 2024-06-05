@@ -1,7 +1,7 @@
 <?php
 
-use schedule\entities\Blog\Post\Post;
-use schedule\helpers\PostHelper;
+use core\entities\Blog\Post\Post;
+use core\helpers\PostHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

@@ -5,9 +5,9 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\BrandSearch;
-use schedule\entities\Schedule\Brand;
-use schedule\forms\manage\Schedule\BrandForm;
-use schedule\services\manage\Schedule\BrandManageService;
+use core\entities\Schedule\Brand;
+use core\forms\manage\Schedule\BrandForm;
+use core\services\manage\Schedule\BrandManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

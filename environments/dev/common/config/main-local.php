@@ -15,7 +15,7 @@ return [
             // send all mails to a file by default.
             'useFileTransport' => true,
             'messageConfig' => [
-                'from' => ['support@example.com' => 'Schedule']
+                'from' => ['support@example.com' => 'schedule']
             ]
             // You have to set
             //

@@ -4,9 +4,9 @@
 namespace backend\forms\Blog;
 
 
-use schedule\entities\Blog\Category;
-use schedule\entities\Blog\Post\Post;
-use schedule\helpers\PostHelper;
+use core\entities\Blog\Category;
+use core\entities\Blog\Post\Post;
+use core\helpers\PostHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;

@@ -3,8 +3,8 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\PageForm */
-/* @var $page \schedule\entities\Page */
+/* @var $model \core\forms\manage\PageForm */
+/* @var $page \core\entities\Page */
 
 
 $this->title = 'Update Page: ' . $page->title;

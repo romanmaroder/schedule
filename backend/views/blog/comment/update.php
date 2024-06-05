@@ -3,10 +3,10 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $post \schedule\entities\Blog\Post\Post */
-/* @var $model \schedule\forms\manage\Blog\Post\CommentEditForm */
+/* @var $post \core\entities\Blog\Post\Post */
+/* @var $model \core\forms\manage\Blog\Post\CommentEditForm */
 
-/* @var $comment \schedule\entities\Blog\Post\Comment */
+/* @var $comment \core\entities\Blog\Post\Comment */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;

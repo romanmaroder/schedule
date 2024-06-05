@@ -4,8 +4,8 @@
 namespace backend\forms\Schedule;
 
 
-use schedule\entities\Schedule\Characteristic;
-use schedule\helpers\CharacteristicHelper;
+use core\entities\Schedule\Characteristic;
+use core\helpers\CharacteristicHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

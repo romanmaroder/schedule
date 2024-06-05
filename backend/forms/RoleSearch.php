@@ -4,7 +4,7 @@
 namespace backend\forms;
 
 
-use schedule\entities\User\Role;
+use core\entities\User\Role;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

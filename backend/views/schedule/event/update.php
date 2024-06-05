@@ -6,9 +6,9 @@ use kartik\widgets\Select2;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $event \schedule\entities\Schedule\Event\Event */
-/* @var $model \schedule\forms\manage\Schedule\Event\EventEditForm */
-/* @var $cart \schedule\cart\Cart */
+/* @var $event \core\entities\Schedule\Event\Event */
+/* @var $model \core\forms\manage\Schedule\Event\EventEditForm */
+/* @var $cart \core\cart\Cart */
 
 $this->title = 'Update Event: ' . $event->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
@@ -239,7 +239,7 @@ $this->params['breadcrumbs'][] = 'update';
                             [
                                 'name' => 'discount_from',
                                 'language' => 'ru',
-                                'data' => \schedule\helpers\DiscountHelper::discountList(),
+                                'data' => \core\helpers\DiscountHelper::discountList(),
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [
                                     'id' => 'discountFrom',
@@ -295,7 +295,7 @@ $this->params['breadcrumbs'][] = 'update';
                             [
                                 'name' => 'status',
                                 'language' => 'ru',
-                                'data' => \schedule\helpers\EventPaymentStatusHelper::statusList(),
+                                'data' => \core\helpers\EventPaymentStatusHelper::statusList(),
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [
                                     'id' => 'status',
@@ -338,7 +338,7 @@ $this->params['breadcrumbs'][] = 'update';
                             [
                                 'name' => 'payment',
                                 'language' => 'ru',
-                                'data' => \schedule\helpers\EventMethodsOfPayment::statusList(),
+                                'data' => \core\helpers\EventMethodsOfPayment::statusList(),
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [
                                     'id' => 'payment',

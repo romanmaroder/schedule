@@ -5,8 +5,8 @@ namespace frontend\controllers\users;
 
 
 use backend\forms\UserSearch;
-use schedule\entities\User\User;
-use schedule\services\manage\UserManageService;
+use core\entities\User\User;
+use core\services\manage\UserManageService;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

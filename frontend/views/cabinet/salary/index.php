@@ -1,12 +1,12 @@
 <?php
 /* @var $this yii\web\View */
 
-/* @var $cart \schedule\cart\Cart */
+/* @var $cart \core\cart\Cart */
 
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\DiscountHelper;
+use core\helpers\DiscountHelper;
 use yii\grid\GridView;
 
 $this->title = 'Salary';

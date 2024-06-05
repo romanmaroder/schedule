@@ -4,7 +4,7 @@
 namespace backend\forms\Blog;
 
 
-use schedule\entities\Blog\Post\Comment;
+use core\entities\Blog\Post\Comment;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

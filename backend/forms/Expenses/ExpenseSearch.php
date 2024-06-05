@@ -4,9 +4,9 @@
 namespace backend\forms\Expenses;
 
 
-use schedule\entities\Expenses\Expenses\Expenses;
-use schedule\entities\Expenses\Category;
-use schedule\helpers\ExpenseHelper;
+use core\entities\Expenses\Expenses\Expenses;
+use core\entities\Expenses\Category;
+use core\helpers\ExpenseHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;

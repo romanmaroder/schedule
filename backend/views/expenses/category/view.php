@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $category \schedule\entities\Expenses\Category */
+/* @var $category \core\entities\Expenses\Category */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;

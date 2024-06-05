@@ -1,6 +1,6 @@
 <?php
 
-use schedule\entities\Blog\Tag;
+use core\entities\Blog\Tag;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

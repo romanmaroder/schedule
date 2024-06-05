@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $category schedule\entities\Blog\Category */
-/* @var $model schedule\forms\manage\Blog\CategoryForm */
+/* @var $category core\entities\Blog\Category */
+/* @var $model core\forms\manage\Blog\CategoryForm */
 
 $this->title = 'Update Category: ' . $category->name;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

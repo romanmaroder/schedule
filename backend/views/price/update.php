@@ -3,8 +3,8 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\User\Price\PriceForm */
-/* @var $price null|\schedule\entities\User\Price */
+/* @var $model \core\forms\manage\User\Price\PriceForm */
+/* @var $price null|\core\entities\User\Price */
 
 $this->title = 'Update Price: ' . $price->name;
 $this->params['breadcrumbs'][] = ['label' => 'Prices', 'url' => ['index']];

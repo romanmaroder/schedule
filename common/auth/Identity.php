@@ -5,8 +5,8 @@ namespace common\auth;
 
 use filsh\yii2\oauth2server\Module ;
 use OAuth2\Storage\UserCredentialsInterface;
-use schedule\entities\User\User;
-use schedule\readModels\User\UserReadRepository;
+use core\entities\User\User;
+use core\readModels\User\UserReadRepository;
 use Yii;
 use yii\web\IdentityInterface;
 

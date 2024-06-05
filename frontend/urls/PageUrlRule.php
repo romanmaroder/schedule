@@ -5,8 +5,8 @@ namespace frontend\urls;
 
 
 use InvalidArgumentException;
-use schedule\entities\Page;
-use schedule\readModels\PageReadRepository;
+use core\entities\Page;
+use core\readModels\PageReadRepository;
 use yii\base\BaseObject;
 use yii\caching\Cache;
 use yii\helpers\ArrayHelper;

@@ -1,8 +1,8 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Schedule\Characteristic;
-use schedule\helpers\CharacteristicHelper;
+use core\entities\Schedule\Characteristic;
+use core\helpers\CharacteristicHelper;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

@@ -4,7 +4,7 @@
 namespace frontend\forms\Salary;
 
 
-use schedule\entities\Schedule\Event\Event;
+use core\entities\Schedule\Event\Event;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

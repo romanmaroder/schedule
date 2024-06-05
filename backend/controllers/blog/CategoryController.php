@@ -5,9 +5,9 @@ namespace backend\controllers\blog;
 
 
 use backend\forms\Blog\CategorySearch;
-use schedule\entities\Blog\Category;
-use schedule\forms\manage\Blog\CategoryForm;
-use schedule\services\manage\Blog\CategoryManageService;
+use core\entities\Blog\Category;
+use core\forms\manage\Blog\CategoryForm;
+use core\services\manage\Blog\CategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

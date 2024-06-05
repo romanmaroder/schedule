@@ -5,15 +5,15 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\EventSearch;
-use schedule\entities\Schedule\Event\Calendar\Calendar;
-use schedule\entities\Schedule\Event\Event;
-use schedule\forms\manage\Schedule\Event\EventCopyForm;
-use schedule\forms\manage\Schedule\Event\EventCreateForm;
-use schedule\forms\manage\Schedule\Event\EventEditForm;
-use schedule\readModels\Employee\EmployeeReadRepository;
-use schedule\repositories\NotFoundException;
-use schedule\services\manage\Schedule\EventManageService;
-use schedule\services\schedule\CartService;
+use core\entities\Schedule\Event\Calendar\Calendar;
+use core\entities\Schedule\Event\Event;
+use core\forms\manage\Schedule\Event\EventCopyForm;
+use core\forms\manage\Schedule\Event\EventCreateForm;
+use core\forms\manage\Schedule\Event\EventEditForm;
+use core\readModels\Employee\EmployeeReadRepository;
+use core\repositories\NotFoundException;
+use core\services\manage\Schedule\EventManageService;
+use core\services\Schedule\CartService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -192,8 +192,8 @@ class EventController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $employee = $this->employees->findEmployee($id);
 
-        $hours = $employee->schedule->disabledHours($employee->schedule->hoursWork);
-        $weekends = $employee->schedule->weekends;
+        $hours = $employee->core->disabledHours($employee->core->hoursWork);
+        $weekends = $employee->core->weekends;
 
         return [
             'hours' => $hours,

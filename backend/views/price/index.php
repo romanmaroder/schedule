@@ -8,7 +8,7 @@
 
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\User\Price;
+use core\entities\User\Price;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

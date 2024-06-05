@@ -4,8 +4,8 @@
 namespace frontend\controllers\auth;
 
 
-use schedule\forms\auth\SignupForm;
-use schedule\services\auth\SignupService;
+use core\forms\auth\SignupForm;
+use core\services\auth\SignupService;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;

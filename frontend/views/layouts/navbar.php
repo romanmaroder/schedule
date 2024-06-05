@@ -34,8 +34,8 @@ use yii\helpers\Url;
                     'li',
                     Html::a(
                         'Service prices',
-                        ['/schedule/catalog/index'],
-                        ['class' => ['dropdown-item', Yii::$app->controller->id == 'schedule/catalog' ? 'active': '']]
+                        ['/schedule/price/index'],
+                        ['class' => ['dropdown-item', Yii::$app->controller->id == 'schedule/price' ? 'active': '']]
                     ),
                 ); ?>
                 <?

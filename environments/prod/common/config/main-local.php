@@ -13,7 +13,7 @@ return [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@common/mail',
             'messageConfig' => [
-                'from' => ['support@example.com' => 'Schedule']
+                'from' => ['support@example.com' => 'schedule']
             ]
         ],
     ],

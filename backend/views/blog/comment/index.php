@@ -8,7 +8,7 @@
 /* @var $dataProvider */
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Blog\Post\Comment;
+use core\entities\Blog\Post\Comment;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\StringHelper;

@@ -1,13 +1,13 @@
 <?php
 
 use kartik\widgets\Select2;
-use schedule\helpers\ScheduleHelper;
+use core\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
 
 /** @var yii\web\View $this */
-/** @var schedule\forms\manage\User\UserCreateForm $model */
+/** @var core\forms\manage\User\UserCreateForm $model */
 
 $this->title = 'Create User';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];

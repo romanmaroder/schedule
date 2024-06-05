@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var $post schedule\entities\Blog\Post\Post */
+/* @var $post core\entities\Blog\Post\Post */
 
 use frontend\widgets\Blog\CommentsWidget;
 use yii\helpers\Html;

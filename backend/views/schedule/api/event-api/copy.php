@@ -3,13 +3,13 @@
 use kartik\datetime\DateTimePicker;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
-use schedule\helpers\DiscountHelper;
-use schedule\helpers\EventPaymentStatusHelper;
+use core\helpers\DiscountHelper;
+use core\helpers\EventPaymentStatusHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $event \schedule\entities\Schedule\Event\Event */
-/* @var $model\schedule\forms\manage\Schedule\Event\EventEditForm */
+/* @var $event \core\entities\Schedule\Event\Event */
+/* @var $model\core\forms\manage\Schedule\Event\EventEditForm */
 
 ?>
 <div class="event-copy container-fluid">

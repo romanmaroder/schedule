@@ -1,13 +1,12 @@
 <?php
 
-use schedule\entities\User\Employee\Employee;
-use schedule\helpers\ScheduleHelper;
-use yii\helpers\ArrayHelper;
+use core\entities\User\Employee\Employee;
+use core\helpers\ScheduleHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var schedule\entities\User\Employee\Employee $model */
+/** @var core\entities\User\Employee\Employee $model */
 
 $this->title = $model->getFullName();
 $this->params['breadcrumbs'][] = ['label' => 'Employee', 'url' => ['index']];
@@ -84,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => 'Role',
                         //'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->user_id), 'description')),
-                        'value' => \schedule\helpers\EmployeeHelper::rolesLabel($model->user_id),
+                        'value' => \core\helpers\EmployeeHelper::rolesLabel($model->user_id),
                         'format' => 'raw',
                     ],
                     [
@@ -102,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'status',
                         'value' => function ($model) {
-                            return \schedule\helpers\EmployeeHelper::statusLabel($model->status);
+                            return \core\helpers\EmployeeHelper::statusLabel($model->status);
                         },
                         'format' => 'raw',
                     ],

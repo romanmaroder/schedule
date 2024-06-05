@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\User\Role\RoleForm */
+/* @var $model \core\forms\manage\User\Role\RoleForm */
 
 $this->title = 'Create Role';
 $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];

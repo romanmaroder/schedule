@@ -4,7 +4,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \schedule\forms\manage\User\Price\PriceForm */
+/* @var $model \core\forms\manage\User\Price\PriceForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

@@ -4,7 +4,7 @@
 namespace backend\forms\Expenses;
 
 
-use schedule\entities\Expenses\Category;
+use core\entities\Expenses\Category;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

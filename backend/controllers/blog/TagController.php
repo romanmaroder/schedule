@@ -5,9 +5,9 @@ namespace backend\controllers\blog;
 
 
 use backend\forms\Blog\TagSearch;
-use schedule\entities\Blog\Tag;
-use schedule\forms\manage\Blog\TagForm;
-use schedule\services\manage\Blog\TagManageService;
+use core\entities\Blog\Tag;
+use core\forms\manage\Blog\TagForm;
+use core\services\manage\Blog\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

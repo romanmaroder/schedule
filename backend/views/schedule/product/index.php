@@ -1,14 +1,14 @@
 <?php
 
+use core\entities\Schedule\Product\Product;
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Schedule\Product\Product;
-use schedule\helpers\PriceHelper;
-use schedule\helpers\ProductHelper;
+use core\helpers\PriceHelper;
+use core\helpers\ProductHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\forms\Schedule\ProductSearch */
+/* @var $searchModel \backend\forms\Schedule\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 PluginAsset::register($this)->add(

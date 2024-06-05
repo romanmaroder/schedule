@@ -7,7 +7,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\User\Rate;
+use core\entities\User\Rate;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

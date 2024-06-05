@@ -7,8 +7,8 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Expenses\Expenses\Expenses;
-use schedule\helpers\PriceHelper;
+use core\entities\Expenses\Expenses\Expenses;
+use core\helpers\PriceHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

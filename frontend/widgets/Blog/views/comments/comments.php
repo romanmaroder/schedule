@@ -3,9 +3,9 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $post \schedule\entities\Blog\Post\Post */
+/* @var $post \core\entities\Blog\Post\Post */
 /* @var $items \frontend\widgets\Blog\CommentView[] */
-/* @var $commentForm \schedule\forms\manage\Blog\CommentForm */
+/* @var $commentForm \core\forms\manage\Blog\CommentForm */
 
 /* @var $count int */
 

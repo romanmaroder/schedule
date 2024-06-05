@@ -4,11 +4,11 @@
 namespace backend\widgets\grid;
 
 
+use core\access\Rbac;
 use Yii;
 use yii\grid\DataColumn;
 use yii\helpers\Html;
 use yii\rbac\Item;
-use schedule\access\Rbac;
 
 class RoleColumn extends DataColumn
 {

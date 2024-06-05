@@ -2,11 +2,11 @@
 
 namespace backend\controllers;
 
-use schedule\entities\user\User;
+use core\entities\user\User;
 use backend\forms\UserSearch;
-use schedule\forms\manage\User\UserCreateForm;
-use schedule\forms\manage\User\UserEditForm;
-use schedule\services\manage\UserManageService;
+use core\forms\manage\User\UserCreateForm;
+use core\forms\manage\User\UserEditForm;
+use core\services\manage\UserManageService;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

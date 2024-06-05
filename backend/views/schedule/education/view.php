@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\entities\Schedule\Event\Education */
+/* @var $model \core\entities\Schedule\Event\Education */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;

@@ -6,7 +6,7 @@
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
 
-/* @var $cart \schedule\cart\Cart */
+/* @var $cart \core\cart\Cart */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
@@ -61,7 +61,7 @@ PluginAsset::register($this)->add(
                                 'value' => function ($model) {
                                     return Html::a(
                                         Html::encode(DATE('Y-m-d', strtotime($model->start))),
-                                        ['schedule/event/view', 'id' => $model->id]
+                                        ['core/event/view', 'id' => $model->id]
                                     );
                                 },
                                 'headerOptions' => ['class' => 'text-center'],

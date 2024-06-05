@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\Expenses\CategoryForm|\yii\db\ActiveRecord */
+/* @var $model \core\forms\manage\Expenses\CategoryForm|\yii\db\ActiveRecord */
 ?>
 
 <div class="category-form">

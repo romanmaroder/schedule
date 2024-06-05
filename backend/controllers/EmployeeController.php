@@ -5,11 +5,11 @@ namespace backend\controllers;
 
 
 use backend\forms\EmployeeSearch;
-use schedule\entities\User\Employee\Employee;
-use schedule\forms\manage\User\Employee\EmployeeCreateForm;
-use schedule\forms\manage\User\Employee\EmployeeEditForm;
-use schedule\forms\manage\User\Employee\EmployeeExistCreateForm;
-use schedule\services\manage\EmployeeManageService;
+use core\entities\User\Employee\Employee;
+use core\forms\manage\User\Employee\EmployeeCreateForm;
+use core\forms\manage\User\Employee\EmployeeEditForm;
+use core\forms\manage\User\Employee\EmployeeExistCreateForm;
+use core\services\manage\EmployeeManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

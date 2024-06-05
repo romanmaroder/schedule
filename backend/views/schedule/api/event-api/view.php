@@ -1,15 +1,15 @@
 <?php
 
+use core\helpers\EventPaymentStatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\EventPaymentStatusHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \schedule\entities\Schedule\Event\Event */
-/* @var $cart \schedule\cart\Cart */
+/* @var $model \core\entities\Schedule\Event\Event */
+/* @var $cart \core\cart\Cart */
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
@@ -25,10 +25,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'attribute' => 'master_id',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return Html::a(
-                            Html::encode($model->master->username),
-                            ['/employee/view','id'=>$model->employee->id ?? $model->master_id]
-                        );
+                        if ($model->employee !== null) {
+                            return Html::a(
+                                Html::encode($model->master->username),
+                                ['/employee/view', 'id' => $model->employee->id]
+                            );
+                        }
+                        return $model->getFullName();
                     }
                 ],
                 [

@@ -5,9 +5,9 @@ namespace backend\controllers\blog;
 
 
 use backend\forms\Blog\CommentSearch;
-use schedule\entities\Blog\Post\Post;
-use schedule\forms\manage\Blog\Post\CommentEditForm;
-use schedule\services\Blog\CommentManageService;
+use core\entities\Blog\Post\Post;
+use core\forms\manage\Blog\Post\CommentEditForm;
+use core\services\Blog\CommentManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

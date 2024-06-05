@@ -3,12 +3,12 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $expense \schedule\entities\Expenses\Expenses\Expenses */
+/* @var $expense \core\entities\Expenses\Expenses\Expenses */
 
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\ExpenseHelper;
-use schedule\helpers\PriceHelper;
+use core\helpers\ExpenseHelper;
+use core\helpers\PriceHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;

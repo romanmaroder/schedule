@@ -1,6 +1,6 @@
 <?php
 
-use schedule\entities\Blog\Category;
+use core\entities\Blog\Category;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

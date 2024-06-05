@@ -2,13 +2,13 @@
 
 namespace backend\forms;
 
-use schedule\entities\User\Employee\Employee;
+use core\entities\User\Employee\Employee;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 
 /**
- * UserSearch represents the model behind the search form of `schedule\entities\user\User`.
+ * UserSearch represents the model behind the search form of `core\entities\user\User`.
  */
 class EmployeeSearch extends Model
 {

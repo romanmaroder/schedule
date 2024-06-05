@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model schedule\forms\manage\Schedule\BrandForm */
+/* @var $model core\forms\manage\Schedule\BrandForm */
 
 $this->title = 'Create Brand';
 $this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];

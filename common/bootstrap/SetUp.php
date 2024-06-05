@@ -4,10 +4,10 @@
 namespace common\bootstrap;
 
 
-use schedule\cart\Cart;
-use schedule\cart\storage\DbStorage;
-use schedule\services\auth\SignupService;
-use schedule\services\ContactService;
+use core\cart\Cart;
+use core\cart\storage\DbStorage;
+use core\services\auth\SignupService;
+use core\services\ContactService;
 use yii\base\BootstrapInterface;
 use yii\caching\Cache;
 use yii\mail\MailerInterface;

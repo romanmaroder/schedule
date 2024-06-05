@@ -4,7 +4,7 @@
 namespace backend\forms\Schedule;
 
 
-use schedule\entities\Schedule\Tag;
+use core\entities\Schedule\Tag;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

@@ -1,7 +1,7 @@
 <?php
 
+use core\entities\Schedule\Category;
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\Schedule\Category;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

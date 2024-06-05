@@ -4,7 +4,7 @@
 namespace backend\forms;
 
 
-use schedule\entities\Page;
+use core\entities\Page;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

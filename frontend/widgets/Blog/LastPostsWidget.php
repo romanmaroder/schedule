@@ -4,7 +4,7 @@
 namespace frontend\widgets\Blog;
 
 
-use schedule\readModels\Blog\PostReadRepository;
+use core\readModels\Blog\PostReadRepository;
 use yii\base\Widget;
 
 class LastPostsWidget extends Widget

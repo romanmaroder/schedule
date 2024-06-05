@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $rate \schedule\entities\User\Rate  */
+/* @var $rate \core\entities\User\Rate  */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;

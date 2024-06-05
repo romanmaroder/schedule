@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var $model schedule\entities\Blog\Post\Post */
+/* @var $model core\entities\Blog\Post\Post */
 
 use yii\helpers\Html;
 use yii\helpers\Url;

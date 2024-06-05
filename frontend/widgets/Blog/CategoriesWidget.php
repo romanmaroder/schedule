@@ -4,8 +4,8 @@
 namespace frontend\widgets\Blog;
 
 
-use schedule\entities\Blog\Category;
-use schedule\readModels\Blog\CategoryReadRepository;
+use core\entities\Blog\Category;
+use core\readModels\Blog\CategoryReadRepository;
 use yii\base\Widget;
 use yii\helpers\Html;
 

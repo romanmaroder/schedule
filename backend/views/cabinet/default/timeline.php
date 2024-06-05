@@ -3,15 +3,15 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $employee \schedule\entities\User\Employee\Employee */
+/* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $user \schedule\entities\User\User */
+/* @var $user \core\entities\User\User */
 
-/* @var $events \schedule\entities\Schedule\Event\Event */
+/* @var $events \core\entities\core\Event\Event */
 
-/* @var $model \schedule\forms\manage\User\Employee\EmployeeEditForm */
+/* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
 
-/* @var $educations \schedule\entities\Schedule\Event\Education */
+/* @var $educations \core\entities\core\Event\Education */
 
 
 use yii\helpers\ArrayHelper;

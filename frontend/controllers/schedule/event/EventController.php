@@ -4,10 +4,10 @@
 namespace frontend\controllers\schedule\event;
 
 
-use schedule\entities\Schedule\Event\Calendar\Calendar;
-use schedule\entities\Schedule\Event\Event;
-use schedule\repositories\NotFoundException;
-use schedule\services\manage\Schedule\EventManageService;
+use core\entities\Schedule\Event\Calendar\Calendar;
+use core\entities\Schedule\Event\Event;
+use core\repositories\NotFoundException;
+use core\services\manage\Schedule\EventManageService;
 use yii\web\Controller;
 use yii\web\Response;
 

@@ -1,6 +1,6 @@
 <?php
 
-/* @var $user \schedule\entities\User\User */
+/* @var $user \core\entities\User\User */
 
 $this->title = 'Starter Page';
 $this->params['breadcrumbs'] = [['label' => $this->title]];

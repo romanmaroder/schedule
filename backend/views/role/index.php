@@ -8,7 +8,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\entities\User\Role;
+use core\entities\User\Role;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;

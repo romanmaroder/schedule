@@ -4,7 +4,7 @@
 namespace backend\forms\Schedule;
 
 
-use schedule\entities\Schedule\Event\Education;
+use core\entities\Schedule\Event\Education;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

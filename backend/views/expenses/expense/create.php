@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \schedule\forms\manage\Expenses\Expense\ExpenseCreateForm */
+/* @var $model \core\forms\manage\Expenses\Expense\ExpenseCreateForm */
 
 use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;

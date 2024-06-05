@@ -2,15 +2,15 @@
 
 
 use hail812\adminlte3\assets\PluginAsset;
-use schedule\helpers\PriceHelper;
-use schedule\helpers\ServiceHelper;
+use core\helpers\PriceHelper;
+use core\helpers\ServiceHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $service schedule\entities\Schedule\Service\Service */
+/* @var $service core\entities\Schedule\Service\Service */
 
 $this->title = $service->name;
 $this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];

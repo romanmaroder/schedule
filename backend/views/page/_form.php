@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var $model schedule\forms\manage\PageForm */
+/* @var $model core\forms\manage\PageForm */
 
 /* @var $form yii\widgets\ActiveForm */
 

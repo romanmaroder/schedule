@@ -4,7 +4,7 @@
 namespace backend\forms\Blog;
 
 
-use schedule\entities\Blog\Tag;
+use core\entities\Blog\Tag;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
