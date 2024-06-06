@@ -4,10 +4,10 @@
 namespace core\entities\Expenses\Expenses;
 
 
-use core\entities\Schedule\Tag;
-use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\queries\ExpensesQuery;
+use core\entities\Shop\Product\Tag;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -23,7 +23,7 @@ use yii\db\ActiveRecord;
  * @property CategoryAssignment[] $categoryAssignments
  * @property Category[] $categories
  * @property TagAssignment[] $tagAssignments
- * @property Tag[] $tags
+ * @property \core\entities\Shop\Product\Tag[] $tags
  */
 class Expenses extends ActiveRecord
 {

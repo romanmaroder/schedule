@@ -4,7 +4,7 @@
 namespace core\forms\manage\Schedule;
 
 
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
 use core\validators\SlugValidator;

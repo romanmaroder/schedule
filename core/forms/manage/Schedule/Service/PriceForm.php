@@ -6,7 +6,7 @@ namespace core\forms\manage\Schedule\Service;
 
 use core\entities\Schedule\Service\Service;
 use core\forms\manage\MetaForm;
-use core\forms\manage\Schedule\Product\TagsForm;
+use core\forms\manage\Shop\Product\TagsForm;
 use yii\base\Model;
 
 /**

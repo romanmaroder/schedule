@@ -4,7 +4,7 @@
 namespace core\forms\manage\Schedule;
 
 
-use core\entities\Schedule\Characteristic;
+use core\entities\CommonUses\Characteristic;
 use core\helpers\CharacteristicHelper;
 use yii\base\Model;
 

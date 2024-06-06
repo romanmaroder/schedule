@@ -5,7 +5,7 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\TagSearch;
-use core\entities\Schedule\Tag;
+use core\entities\Shop\Product\Tag;
 use core\forms\manage\Schedule\TagForm;
 use core\services\manage\Schedule\TagManageService;
 use Yii;

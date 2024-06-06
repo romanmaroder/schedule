@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $product \core\entities\Schedule\Product\Product*/
+/* @var $product \core\entities\Shop\Product\Product*/
 
 use core\helpers\PriceHelper;
 use yii\helpers\Html;

@@ -6,7 +6,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $brand core\entities\Schedule\Brand */
+/* @var $brand \core\entities\CommonUses\Brand */
 
 $this->title = $brand->name;
 $this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];

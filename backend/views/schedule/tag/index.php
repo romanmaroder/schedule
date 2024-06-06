@@ -1,6 +1,6 @@
 <?php
 
-use core\entities\Schedule\Tag;
+use core\entities\Shop\Product\Tag;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

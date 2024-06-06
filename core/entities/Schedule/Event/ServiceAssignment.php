@@ -10,7 +10,7 @@ use yii\db\ActiveRecord;
 
 /**
  * Class ServiceAssignment
- * @package core\entities\core\Event
+ * @package core\entities\Schedule\Event
  *
  * @property int $event_id [int(11)]
  * @property int $service_id [int(11)]

@@ -34,7 +34,7 @@ class m231025_102240_create_schedule_category_service_assignments_table extends 
                              'RESTRICT');
         $this->addForeignKey('{{%fk-schedule_category_service_assignments-category_id}}',
                              '{{%schedule_category_service_assignments}}', 'category_id',
-                             '{{%schedule_categories}}', 'id', 'CASCADE',
+                             '{{%schedule_service_categories}}', 'id', 'CASCADE',
                              'RESTRICT');
     }
 

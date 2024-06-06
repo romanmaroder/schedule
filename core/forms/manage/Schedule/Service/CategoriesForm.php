@@ -4,7 +4,7 @@
 namespace core\forms\manage\Schedule\Service;
 
 
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use core\entities\Schedule\Service\Service;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;

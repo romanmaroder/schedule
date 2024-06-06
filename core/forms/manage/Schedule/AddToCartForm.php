@@ -4,8 +4,8 @@
 namespace core\forms\manage\Schedule;
 
 
-use core\entities\Schedule\Product\Modification;
-use core\entities\Schedule\Product\Product;
+use core\entities\Shop\Product\Modification;
+use core\entities\Shop\Product\Product;
 use core\helpers\PriceHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;

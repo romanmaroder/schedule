@@ -1,6 +1,5 @@
 <?php
 
-use core\entities\User\User;
 use yii\db\Migration;
 
 class m130524_201442_init extends Migration
@@ -26,14 +25,7 @@ class m130524_201442_init extends Migration
             'updated_at' => $this->integer()->unsigned()->notNull(),
         ], $tableOptions);
 
-        /*$admin                = new User();
-        $admin->email         = 'admin@admin.ru';
-        $admin->username      = 'Admin Admin';
-        $admin->password_hash = '$2y$13$P9.d7KUb8C6BHCvkdzMsrOi5U.vIAw01UmriB.34PiN50e8nTGFge';
-        $admin->status        = 10;
 
-        $admin->generateAuthKey();
-        $admin->save();*/
     }
 
     public function down()

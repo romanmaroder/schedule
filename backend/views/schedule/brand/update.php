@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $brand core\entities\Schedule\Brand */
+/* @var $brand \core\entities\CommonUses\Brand */
 /* @var $model core\forms\manage\Schedule\BrandForm */
 
 $this->title = 'Update Brand: ' . $brand->name;

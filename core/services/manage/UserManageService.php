@@ -10,16 +10,21 @@ use core\forms\manage\User\UserCreateForm;
 use core\forms\manage\User\UserEditForm;
 use core\repositories\EmployeeRepository;
 use core\repositories\UserRepository;
+use core\services\RoleManager;
 
 class UserManageService
 {
     private UserRepository $users;
     private $employee;
+    private $roles;
 
-    public function __construct(UserRepository $users, EmployeeRepository $employee)
+    public function __construct(UserRepository $users,
+        EmployeeRepository $employee,
+        RoleManager $roles)
     {
         $this->users = $users;
         $this->employee = $employee;
+        $this->roles = $roles;
     }
 
     /**
@@ -65,6 +70,12 @@ class UserManageService
             $form->notice,
         );
         $this->users->save($user);
+    }
+
+    public function assignRole($id, $role): void
+    {
+        $user = $this->users->get($id);
+        $this->roles->assign($user->id, $role);
     }
 
     /**

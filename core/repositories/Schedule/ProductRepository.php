@@ -4,7 +4,7 @@
 namespace core\repositories\Schedule;
 
 
-use core\entities\Schedule\Product\Product;
+use core\entities\Shop\Product\Product;
 use core\repositories\NotFoundException;
 
 class ProductRepository

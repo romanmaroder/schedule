@@ -5,7 +5,7 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\CategorySearch;
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use core\forms\manage\Schedule\CategoryForm;
 use core\services\manage\Schedule\CategoryManageService;
 use Yii;
@@ -55,6 +55,7 @@ class CategoryController extends Controller
     /**
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -148,7 +149,7 @@ class CategoryController extends Controller
 
     /**
      * @param int $id
-     * @return Category the loaded model
+     * @return \core\entities\Schedule\Service\Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     private function findModel($id): Category

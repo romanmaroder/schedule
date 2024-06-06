@@ -4,7 +4,6 @@
 namespace backend\forms\Schedule;
 
 
-use core\entities\Schedule\Brand;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -28,7 +27,7 @@ class BrandSearch extends Model
      */
     public function search(array $params): ActiveDataProvider
     {
-        $query = Brand::find();
+        $query = \core\entities\CommonUses\Brand::find();
 
         $dataProvider = new ActiveDataProvider(
             [

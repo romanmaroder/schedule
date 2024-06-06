@@ -4,7 +4,7 @@
 namespace core\services\manage\Schedule;
 
 
-use core\entities\Schedule\Characteristic;
+use core\entities\CommonUses\Characteristic;
 use core\forms\manage\Schedule\CharacteristicForm;
 use core\repositories\Schedule\CharacteristicRepository;
 

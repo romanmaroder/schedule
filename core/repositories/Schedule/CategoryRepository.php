@@ -4,7 +4,7 @@
 namespace core\repositories\Schedule;
 
 
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use core\repositories\NotFoundException;
 
 class CategoryRepository

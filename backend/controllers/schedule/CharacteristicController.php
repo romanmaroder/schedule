@@ -3,7 +3,7 @@
 namespace backend\controllers\schedule;
 
 use backend\forms\Schedule\CharacteristicSearch;
-use core\entities\Schedule\Characteristic;
+use core\entities\CommonUses\Characteristic;
 use core\forms\manage\Schedule\CharacteristicForm;
 use core\services\manage\Schedule\CharacteristicManageService;
 use Yii;

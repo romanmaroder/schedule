@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\DataProviderInterface */
-/* @var $brand \core\entities\Schedule\Brand */
+/* @var $brand \core\entities\CommonUses\Brand */
 
 use yii\helpers\Html;
 

@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
 
 /**
  * Class CategoryAssignments
- * @package core\entities\core\Service
+ * @package core\entities\Schedule\Service
  *
  * @property int $service_id [int(11)]
  * @property int $category_id [int(11)]

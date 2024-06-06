@@ -5,7 +5,7 @@ namespace core\services\manage\Schedule;
 
 
 use core\entities\Meta;
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use core\forms\manage\Schedule\CategoryForm;
 use core\repositories\Schedule\CategoryRepository;
 use core\repositories\Schedule\ServiceRepository;
@@ -23,7 +23,7 @@ class CategoryManageService
 
     /**
      * @param CategoryForm $form
-     * @return Category
+     * @return \core\entities\Schedule\Service\Category
      */
     public function create(CategoryForm $form):Category
     {
@@ -101,7 +101,7 @@ class CategoryManageService
     }
 
     /**
-     * @param Category $category
+     * @param \core\entities\Schedule\Service\Category $category
      */
     private function assertIsNotRoot(Category $category): void
     {

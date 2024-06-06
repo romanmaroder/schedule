@@ -7,7 +7,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \core\forms\manage\Schedule\Product\ProductCreateForm */
+/* @var $model \core\forms\manage\Shop\Product\ProductCreateForm */
 
 $this->title = 'Create Product';
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];

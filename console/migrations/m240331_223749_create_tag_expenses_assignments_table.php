@@ -47,7 +47,7 @@ class m240331_223749_create_tag_expenses_assignments_table extends Migration
             '{{%fk-tag_expenses_assignments-tag_id}}',
             '{{%tag_expenses_assignments}}',
             'tag_id',
-            '{{%schedule_tags}}',
+            '{{%schedule_service_tags}}',
             'id',
             'CASCADE',
             'RESTRICT'

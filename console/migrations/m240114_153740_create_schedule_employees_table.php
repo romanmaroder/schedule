@@ -1,6 +1,5 @@
 <?php
 
-use schedule\entities\User\Employee\Employee;
 use yii\db\Migration;
 
 /**
@@ -53,13 +52,6 @@ class m240114_153740_create_schedule_employees_table extends Migration
             'CASCADE'
         );
 
-        /*$admin = new Employee();
-        $admin->user_id = '1';
-        $admin->first_name = 'Admin';
-        $admin->last_name = 'Admin';
-        $admin->status = '1';
-        $admin->phone = '+7 (999) 999-99-99';
-        $admin->save();*/
     }
 
     /**

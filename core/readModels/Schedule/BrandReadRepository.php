@@ -4,7 +4,7 @@
 namespace core\readModels\Schedule;
 
 
-use core\entities\Schedule\Brand;
+use core\entities\CommonUses\Brand;
 
 class BrandReadRepository
 {

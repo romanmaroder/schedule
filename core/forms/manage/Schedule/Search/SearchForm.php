@@ -4,11 +4,11 @@
 namespace core\forms\manage\Schedule\Search;
 
 
-use core\entities\Schedule\Brand;
+use core\entities\CommonUses\Brand;
 use core\entities\Schedule\Category;
 use core\entities\Schedule\Characteristic;
 use core\forms\CompositeForm;
-use core\forms\manage\Schedule\Product\ValueForm;
+use core\forms\manage\Shop\Product\ValueForm;
 use yii\helpers\ArrayHelper;
 
 class SearchForm extends CompositeForm

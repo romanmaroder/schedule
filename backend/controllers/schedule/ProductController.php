@@ -5,12 +5,12 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\ProductSearch;
-use core\entities\Schedule\Product\Modification;
-use core\entities\Schedule\Product\Product;
-use core\forms\manage\Schedule\Product\PhotosForm;
-use core\forms\manage\Schedule\Product\PriceForm;
-use core\forms\manage\Schedule\Product\ProductCreateForm;
-use core\forms\manage\Schedule\Product\ProductEditForm;
+use core\entities\Shop\Product\Modification;
+use core\entities\Shop\Product\Product;
+use core\forms\manage\Shop\Product\PhotosForm;
+use core\forms\manage\Shop\Product\PriceForm;
+use core\forms\manage\Shop\Product\ProductCreateForm;
+use core\forms\manage\Shop\Product\ProductEditForm;
 use core\services\manage\Schedule\ProductManageService;
 use Yii;
 use yii\data\ActiveDataProvider;

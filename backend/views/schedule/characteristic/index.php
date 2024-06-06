@@ -1,7 +1,7 @@
 <?php
 
 use hail812\adminlte3\assets\PluginAsset;
-use core\entities\Schedule\Characteristic;
+use core\entities\CommonUses\Characteristic;
 use core\helpers\CharacteristicHelper;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;

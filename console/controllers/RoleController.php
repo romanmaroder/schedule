@@ -4,8 +4,9 @@
 namespace console\controllers;
 
 
+use core\entities\User\User;
+use core\services\manage\UserManageService;
 use Exception;
-use core\entities\User\Employee\Employee;
 use core\services\manage\EmployeeManageService;
 use Yii;
 use yii\console\Controller;
@@ -15,7 +16,7 @@ class RoleController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module, EmployeeManageService $service, $config = [])
+    public function __construct($id, $module, UserManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
@@ -27,15 +28,15 @@ class RoleController extends Controller
     public function actionAssign(): void
     {
         $phone = $this->prompt('Phone employee: +X (XXX) XXX-XX-XX', ['required' => true]);
-        $employee= $this->findModel($phone);
+        $user= $this->findModel($phone);
         $role = $this->select('Role:', ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description'));
-        $this->service->assignRole($employee->id, $role);
+        $this->service->assignRole($user->id, $role);
         $this->stdout('Done!' . PHP_EOL);
     }
 
-    private function findModel($phone): Employee
+    private function findModel($phone): User
     {
-        if (!$model = Employee::findOne(['phone' => $phone])) {
+        if (!$model = User::findOne(['phone' => $phone])) {
             throw new Exception('Employee is not found');
         }
         return $model;

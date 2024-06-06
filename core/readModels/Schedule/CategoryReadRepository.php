@@ -5,7 +5,7 @@ namespace core\readModels\Schedule;
 
 
 
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use yii\helpers\ArrayHelper;
 
 class CategoryReadRepository

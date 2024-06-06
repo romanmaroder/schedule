@@ -3,10 +3,9 @@
 namespace core\entities\User;
 
 use core\entities\Schedule;
+use core\entities\Schedule\Event\Event;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use core\entities\behaviors\ScheduleWorkBehavior;
-use core\entities\core;
-use core\entities\core\Event\Event;
 use core\entities\User\Employee\Employee;
 use Yii;
 use yii\behaviors\TimestampBehavior;

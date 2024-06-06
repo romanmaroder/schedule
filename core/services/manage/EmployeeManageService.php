@@ -84,8 +84,8 @@ class EmployeeManageService
             $user->status = $form->user->status,
             new Schedule(
                 $form->schedule->hoursWork,
-                $form->core->weekends,
-                $form->core->week,
+                $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $user->notice = $form->user->notice,
         );
@@ -107,10 +107,10 @@ class EmployeeManageService
                 $form->address->home,
                 $form->address->apartment,
             ),
-            new core(
-                $form->core->hoursWork,
-                $form->core->weekends,
-                $form->core->week,
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->color,
             $form->roleId,
@@ -132,10 +132,10 @@ class EmployeeManageService
             $form->user->email,
             $form->phone,
             $form->user->password,
-            new core(
-                $form->core->hoursWork,
-                $form->core->weekends,
-                $form->core->week,
+            new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->user->notice,
         );
@@ -153,10 +153,10 @@ class EmployeeManageService
                 $form->address->street,
                 $form->address->home,
                 $form->address->apartment,
-            ),new core(
-                $form->core->hoursWork,
-                $form->core->weekends,
-                $form->core->week,
+            ),new Schedule(
+                $form->schedule->hoursWork,
+                $form->schedule->weekends,
+                $form->schedule->week,
             ),
             $form->color,
             $form->roleId,

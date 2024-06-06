@@ -4,8 +4,8 @@
 namespace backend\controllers\schedule;
 
 
-use core\entities\Schedule\Product\Product;
-use core\forms\manage\Schedule\Product\ModificationForm;
+use core\entities\Shop\Product\Product;
+use core\forms\manage\Shop\Product\ModificationForm;
 use core\services\manage\Schedule\ProductManageService;
 use Yii;
 use yii\filters\VerbFilter;

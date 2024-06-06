@@ -13,6 +13,7 @@ class m231013_184754_rename_user_table extends Migration
     public function Up()
     {
         $this->renameTable('{{%user}}', '{{%users}}');
+
     }
 
     /**

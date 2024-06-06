@@ -10,7 +10,7 @@ class m240411_125725_add_schedule_field_to_schedule_employees_table extends Migr
 
     public function up()
     {
-        $this->addColumn('{{%schedule_employees}}','schedule_json',$this->json()->notNull()->after('address_json'));
+        $this->addColumn('{{%schedule_employees}}','schedule_json',$this->json()->after('address_json'));
     }
 
     public function down()

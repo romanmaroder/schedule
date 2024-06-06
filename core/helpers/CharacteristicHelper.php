@@ -4,7 +4,7 @@
 namespace core\helpers;
 
 
-use core\entities\Schedule\Characteristic;
+use core\entities\CommonUses\Characteristic;
 use yii\helpers\ArrayHelper;
 
 class CharacteristicHelper

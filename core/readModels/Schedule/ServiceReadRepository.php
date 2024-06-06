@@ -4,7 +4,6 @@
 namespace core\readModels\Schedule;
 
 
-use core\entities\Schedule\Brand;
 use core\entities\Schedule\Category;
 use core\entities\Schedule\Service\Service;
 use core\entities\Schedule\Tag;
@@ -32,7 +31,7 @@ class ServiceReadRepository
     }
 
 
-    public function getAllByBrand(Brand $brand): DataProviderInterface
+    public function getAllByBrand(\core\entities\CommonUses\Brand $brand): DataProviderInterface
     {
         $query = Service::find()->alias('s')->active('s');
         $query->andWhere(['s.brand_id' => $brand->id]);

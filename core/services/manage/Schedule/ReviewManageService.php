@@ -4,7 +4,7 @@
 namespace core\services\manage\Schedule;
 
 
-use core\forms\manage\Schedule\Product\ReviewEditForm;
+use core\forms\manage\Shop\Product\ReviewEditForm;
 use core\repositories\Schedule\ProductRepository;
 
 class ReviewManageService

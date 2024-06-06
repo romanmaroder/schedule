@@ -47,7 +47,7 @@ class m231025_080515_create_schedule_tag_service_assignments_table extends Migra
             '{{%fk-schedule_tag_service_assignments-tag_id}}',
             '{{%schedule_tag_service_assignments}}',
             'tag_id',
-            '{{%schedule_tags}}',
+            '{{%schedule_service_tags}}',
             'id',
             'CASCADE',
             'RESTRICT'

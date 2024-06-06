@@ -4,7 +4,7 @@
 namespace frontend\urls;
 
 
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use core\readModels\Schedule\CategoryReadRepository;
 use yii\base\BaseObject;
 use yii\caching\Cache;

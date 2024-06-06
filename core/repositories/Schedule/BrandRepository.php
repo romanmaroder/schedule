@@ -4,7 +4,7 @@
 namespace core\repositories\Schedule;
 
 
-use core\entities\Schedule\Brand;
+use core\entities\CommonUses\Brand;
 use core\repositories\NotFoundException;
 
 class BrandRepository
@@ -12,9 +12,9 @@ class BrandRepository
 
     /**
      * @param $id
-     * @return Brand
+     * @return \core\entities\CommonUses\Brand
      */
-    public function get($id): Brand
+    public function get($id): \core\entities\CommonUses\Brand
     {
         if (!$brand = Brand::findOne($id)){
             throw new NotFoundException('Brand is not found.');
@@ -22,7 +22,7 @@ class BrandRepository
         return $brand;
     }
 
-    public function save(Brand $brand):void
+    public function save(\core\entities\CommonUses\Brand $brand):void
     {
         if (!$brand->save()){
             throw new \RuntimeException('Saving error.');

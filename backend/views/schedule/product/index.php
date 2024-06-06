@@ -1,9 +1,9 @@
 <?php
 
-use core\entities\Schedule\Product\Product;
-use hail812\adminlte3\assets\PluginAsset;
+use core\entities\Shop\Product\Product;
 use core\helpers\PriceHelper;
 use core\helpers\ProductHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

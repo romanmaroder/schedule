@@ -4,7 +4,7 @@
 namespace core\forms\manage\Schedule;
 
 
-use core\entities\Schedule\Tag;
+use core\entities\Shop\Product\Tag;
 use core\validators\SlugValidator;
 use yii\base\Model;
 

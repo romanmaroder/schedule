@@ -28,7 +28,7 @@ class m231021_195710_create_schedule_services_table extends Migration
 
         $this->createIndex('{{%idx-schedule_services-category_id}}', '{{%schedule_services}}', 'category_id');
 
-        $this->addForeignKey('{{%fk-schedule_services-category_id}}', '{{%schedule_services}}', 'category_id', '{{%schedule_categories}}', 'id');
+        $this->addForeignKey('{{%fk-schedule_services-category_id}}', '{{%schedule_services}}', 'category_id', '{{%schedule_service_categories}}', 'id');
     }
 
     /**

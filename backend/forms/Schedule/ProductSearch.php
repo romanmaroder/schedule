@@ -4,8 +4,8 @@
 namespace backend\forms\Schedule;
 
 
-use core\entities\Schedule\Category;
-use core\entities\Schedule\Product\Product;
+use core\entities\Schedule\Service\Category;
+use core\entities\Shop\Product\Product;
 use core\helpers\ProductHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

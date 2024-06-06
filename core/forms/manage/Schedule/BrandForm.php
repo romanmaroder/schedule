@@ -4,7 +4,7 @@
 namespace core\forms\manage\Schedule;
 
 
-use core\entities\Schedule\Brand;
+use core\entities\CommonUses\Brand;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
 use core\validators\SlugValidator;
@@ -24,7 +24,7 @@ class BrandForm extends CompositeForm
      * @param Brand|null $brand
      * @param array $config
      */
-    public function __construct(Brand $brand = null, $config = [])
+    public function __construct(\core\entities\CommonUses\Brand $brand = null, $config = [])
     {
         if ($brand){
             $this->name = $brand->name;
@@ -43,7 +43,7 @@ class BrandForm extends CompositeForm
             [['name', 'slug'], 'required'],
             [['name', 'slug'], 'string', 'max' => 255],
             ['slug', SlugValidator::class],
-            [['name', 'slug'], 'unique', 'targetClass' => Brand::class, 'filter' => $this->_brand ? ['<>', 'id', $this->_brand->id] : null]
+            [['name', 'slug'], 'unique', 'targetClass' => \core\entities\CommonUses\Brand::class, 'filter' => $this->_brand ? ['<>', 'id', $this->_brand->id] : null]
         ];
     }
 

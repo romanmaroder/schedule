@@ -5,7 +5,7 @@ namespace backend\controllers\schedule;
 
 
 use backend\forms\Schedule\BrandSearch;
-use core\entities\Schedule\Brand;
+use core\entities\CommonUses\Brand;
 use core\forms\manage\Schedule\BrandForm;
 use core\services\manage\Schedule\BrandManageService;
 use Yii;
@@ -139,7 +139,7 @@ class BrandController extends Controller
      * @return Brand the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id): Brand
+    protected function findModel($id): \core\entities\CommonUses\Brand
     {
         if (($model = Brand::findOne($id)) !== null) {
             return $model;

@@ -4,8 +4,8 @@
 namespace core\services\manage\Schedule;
 
 
+use core\entities\CommonUses\Brand;
 use core\entities\Meta;
-use core\entities\Schedule\Brand;
 use core\forms\manage\Schedule\BrandForm;
 use core\repositories\Schedule\BrandRepository;
 use core\repositories\Schedule\ProductRepository;
@@ -28,11 +28,11 @@ class BrandManageService
 
     /**
      * @param BrandForm $form
-     * @return Brand
+     * @return \core\entities\CommonUses\Brand
      */
-    public function create(BrandForm $form): Brand
+    public function create(BrandForm $form): \core\entities\CommonUses\Brand
     {
-        $brand = Brand::create(
+        $brand = \core\entities\CommonUses\Brand::create(
             $form->name,
             $form->slug,
             new Meta(

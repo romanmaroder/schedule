@@ -4,7 +4,7 @@
 namespace core\helpers;
 
 
-use core\entities\Schedule\Product\Product;
+use core\entities\Shop\Product\Product;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 

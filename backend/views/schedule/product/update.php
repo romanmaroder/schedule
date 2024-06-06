@@ -1,12 +1,12 @@
 <?php
 
 use mihaildev\ckeditor\CKEditor;
-use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $product core\entities\Schedule\Product\Product */
-/* @var $model core\forms\manage\Schedule\Product\ProductEditForm */
+/* @var $product \core\entities\Shop\Product\Product */
+/* @var $model \core\forms\manage\Shop\Product\ProductEditForm */
 
 $this->title = 'Update Product: ' . $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];

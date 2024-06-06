@@ -5,13 +5,13 @@ namespace core\services\manage\Schedule;
 
 
 use core\entities\Meta;
-use core\entities\Schedule\Product\Product;
 use core\entities\Schedule\Tag;
-use core\forms\manage\Schedule\Product\ModificationForm;
-use core\forms\manage\Schedule\Product\PhotosForm;
-use core\forms\manage\Schedule\Product\PriceForm;
-use core\forms\manage\Schedule\Product\ProductCreateForm;
-use core\forms\manage\Schedule\Product\ProductEditForm;
+use core\entities\Shop\Product\Product;
+use core\forms\manage\Shop\Product\ModificationForm;
+use core\forms\manage\Shop\Product\PhotosForm;
+use core\forms\manage\Shop\Product\PriceForm;
+use core\forms\manage\Shop\Product\ProductCreateForm;
+use core\forms\manage\Shop\Product\ProductEditForm;
 use core\repositories\Schedule\BrandRepository;
 use core\repositories\Schedule\CategoryRepository;
 use core\repositories\Schedule\ProductRepository;
@@ -42,7 +42,7 @@ class ProductManageService
 
     /**
      * @param ProductCreateForm $form
-     * @return Product
+     * @return \core\entities\Shop\Product\Product
      */
     public function create(ProductCreateForm $form): Product
     {
