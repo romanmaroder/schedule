@@ -5,8 +5,8 @@ namespace core\readModels\Schedule;
 
 
 use core\entities\CommonUses\Brand;
-use core\entities\Schedule\Category;
-use core\entities\Schedule\Tag;
+use core\entities\Shop\Product\Category;
+use core\entities\Shop\Product\Tag;
 use core\entities\Shop\Product\Product;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;

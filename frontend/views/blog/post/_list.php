@@ -13,7 +13,12 @@
         'itemView' => '_post',
         'itemOptions' => [
             'tag' => false,
+            'class'=>'text-center'
         ],
+        'emptyTextOptions'=>[
+            'class'=>'text-center'
+        ],
+        'emptyText' => 'There are no articles',
     ]
 ) ?>
 
