@@ -1138,3 +1138,6 @@ h1, h2, h3,
 .half-post-entry-shadow{
     box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important;
 }
+.blockquote-shadow {
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45);
+}
