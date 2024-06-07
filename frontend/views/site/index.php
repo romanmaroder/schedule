@@ -7,6 +7,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 
 $this->params['user'] = $user;
 ?>
+
 <!--<div class="container-fluid">
     <div class="row">
         <div class="col-lg-6">
