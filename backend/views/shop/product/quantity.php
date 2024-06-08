@@ -5,7 +5,7 @@ use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $product \core\entities\Shop\Product\Product */
-/* @var $model shop\forms\manage\Shop\Product\QuantityForm */
+/* @var $model \core\forms\manage\Shop\Product\QuantityForm */
 
 $this->title = 'Price for Product: ' . $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
@@ -17,14 +17,13 @@ $this->params['breadcrumbs'][] = 'Price';
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="box box-default">
-        <div class="box-header with-border">Quantity</div>
         <div class="box-body">
             <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-sm btn-gradient btn-shadow btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -5,7 +5,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model core\forms\manage\core\CategoryForm */
+/* @var $model \core\forms\manage\Shop\CategoryForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

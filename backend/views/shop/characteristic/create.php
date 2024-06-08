@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model core\forms\manage\Schedule\CharacteristicForm */
+/* @var $model \core\forms\manage\Shop\CharacteristicForm */
 
 $this->title = 'Create Characteristic';
 $this->params['breadcrumbs'][] = ['label' => 'Characteristics', 'url' => ['index']];

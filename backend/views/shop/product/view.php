@@ -121,7 +121,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     <p>
                         <?= Html::a('Change Price', ['price', 'id' => $product->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
                         <?php if ($product->canChangeQuantity()): ?>
-                            <?= Html::a('Change Quantity', ['quantity', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Change Quantity', ['quantity', 'id' => $product->id], ['class' => 'btn btn-sm btn-gradient btn-shadow btn-primary']) ?>
                         <?php endif; ?>
                     </p>
                 </div>

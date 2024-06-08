@@ -7,7 +7,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $characteristic core\entities\Schedule\Characteristic */
+/* @var $characteristic \core\entities\CommonUses\Characteristic */
 
 $this->title = $characteristic->name;
 $this->params['breadcrumbs'][] = ['label' => 'Characteristic', 'url' => ['index']];

@@ -110,7 +110,7 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
-                                    'label' => 'Product',
+                                    'label' => 'Shop',
                                     'icon' => 'fas fa-folder-plus',
                                     'items' => [
                                         [
