@@ -6,7 +6,6 @@ namespace core\services\Shop;
 
 use core\cart\shop\Cart;
 use core\cart\shop\CartItem;
-use core\forms\Shop\AddToCartForm;
 use core\repositories\Shop\ProductRepository;
 
 class CartService
@@ -25,11 +24,11 @@ class CartService
         return $this->cart;
     }
 
-    public function add($productId, AddToCartForm $form): void
+    public function add($productId, $modificationId, $quantity): void
     {
         $product = $this->products->get($productId);
-        $modification = $product->getModification($form->modification);
-        $this->cart->add(new CartItem($product, $modification->id, $form->quantity));
+        $modId = $modificationId ? $product->getModification($modificationId)->id : null;
+        $this->cart->add(new CartItem($product, $modId, $quantity));
     }
 
     public function set($id, $quantity): void
