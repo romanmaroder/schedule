@@ -5,12 +5,12 @@ namespace frontend\controllers\shop;
 
 
 use core\entities\User\User;
-use core\forms\manage\Schedule\AddToCartForm;
 use core\forms\manage\Schedule\ReviewForm;
-use core\readModels\Shop\TagReadRepository;
+use core\forms\Shop\AddToCartForm;
 use core\readModels\Shop\BrandReadRepository;
 use core\readModels\Shop\CategoryReadRepository;
 use core\readModels\Shop\ProductReadRepository;
+use core\readModels\Shop\TagReadRepository;
 use core\readModels\User\UserReadRepository;
 use core\repositories\NotFoundException;
 use yii\web\Controller;

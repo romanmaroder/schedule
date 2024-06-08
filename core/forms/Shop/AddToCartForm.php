@@ -1,7 +1,7 @@
 <?php
 
 
-namespace core\forms\manage\Schedule;
+namespace core\forms\Shop;
 
 
 use core\entities\Shop\Product\Modification;

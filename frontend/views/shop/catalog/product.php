@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $product \core\entities\Shop\Product\Product */
-/* @var $cartForm \core\forms\manage\Schedule\AddToCartForm */
+/* @var $cartForm \core\forms\Shop\AddToCartForm */
 /* @var $reviewForm \core\forms\manage\Schedule\ReviewForm*/
 
 
@@ -130,38 +130,50 @@ MagnificPopupAsset::register($this);
                     <h2><?= PriceHelper::format($product->price_new) ?></h2>
                 </li>
             </ul>
-            <!--<div id="product">
+            <div id="product">
 
-                <?php /*if ($product->isAvailable()): */?>
+                <?php
+                if ($product->isAvailable()): ?>
 
                     <hr>
                     <h3>Available Options</h3>
 
-                    <?php /*$form = ActiveForm::begin([
-                                                        'action' => ['/shop/cart/add', 'id' => $product->id],
-                                                    ]) */?>
+                    <?php
+                $form = ActiveForm::begin(
+                    [
+                        'action' => ['/shop/cart/add', 'id' => $product->id],
+                    ]
+                ) ?>
 
-                    <?php /*if ($modifications = $cartForm->modificationsList()): */?>
-                        <?/*= $form->field($cartForm, 'modification')->dropDownList($modifications, ['prompt' => '--- Select ---']) */?>
-                    <?php /*endif; */?>
+                    <?php
+                    if ($modifications = $cartForm->modificationsList()): ?>
+                        <?= $form->field($cartForm, 'modification')->dropDownList(
+                            $modifications,
+                            ['prompt' => '--- Select ---']
+                        ) ?>
+                    <?php
+                    endif; ?>
 
-                    <?/*= $form->field($cartForm, 'quantity')->textInput() */?>
+                    <?= $form->field($cartForm, 'quantity')->textInput() ?>
 
                     <div class="form-group">
-                        <?/*= Html::submitButton('Add to Cart', ['class' => 'btn btn-primary btn-lg btn-block']) */?>
+                        <?= Html::submitButton('Add to Cart', ['class' => 'btn btn-sm btn-primary btn-block btn-shadow']) ?>
                     </div>
 
-                    <?php /*ActiveForm::end() */?>
+                    <?php
+                    ActiveForm::end() ?>
 
-                <?php /*else: */?>
+                <?php
+                else: ?>
 
                     <div class="alert alert-danger">
-                        The product is not available for purchasing right now.<br />Add it to your wishlist.
+                        The product is not available for purchasing right now.<br/>Add it to your wishlist.
                     </div>
 
-                <?php /*endif; */?>
+                <?php
+                endif; ?>
 
-            </div>-->
+            </div>
             <div class="rating">
                 <p>
                     <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
@@ -169,7 +181,9 @@ MagnificPopupAsset::register($this);
                     <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
                     <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
                     <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                    <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a></p>
+                    <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews</a> / <a
+                            href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a
+                        review</a></p>
                 <hr>
                 <!-- AddThis Button BEGIN -->
                 <div class="addthis_toolbox addthis_default_style" data-url="/index.php?route=product/product&amp;product_id=47"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
