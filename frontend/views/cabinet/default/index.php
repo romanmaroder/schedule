@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 
-/* @var $user \core\entities\User\User */
+
 
 /* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $provider \core\entities\core\Event\Event */
+/* @var $provider \core\entities\Schedule\Event\Event */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
@@ -15,7 +15,6 @@ use yii\helpers\Html;
 
 $this->title = 'Cabinet';
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['user'] = $user;
 
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']

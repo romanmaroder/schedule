@@ -267,6 +267,10 @@ class User extends ActiveRecord
         return $this->hasMany(Event::class, ['client_id' => 'id']);
     }
 
+    public function getWishlistItems(): ActiveQuery
+    {
+        return $this->hasMany(WishlistItem::class, ['user_id' => 'id']);
+    }
 
     public function parseFullName($fullName)
     {
@@ -317,7 +321,7 @@ class User extends ActiveRecord
             TimestampBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['networks', 'employee'],
+                'relations' => ['networks', 'employee','wishlistItems'],
             ],
             ScheduleWorkBehavior::class
         ];

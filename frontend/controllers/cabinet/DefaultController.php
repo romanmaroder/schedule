@@ -8,12 +8,15 @@ use core\forms\user\ProfileEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\readModels\Schedule\EducationReadRepository;
 use core\readModels\Schedule\EventReadRepository;
+use core\readModels\Shop\ProductReadRepository;
 use core\readModels\User\UserReadRepository;
+use core\services\cabinet\WishlistService;
 use core\services\manage\EmployeeManageService;
 use core\useCases\cabinet\ProfileService;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class DefaultController extends Controller
@@ -31,6 +34,8 @@ class DefaultController extends Controller
     private $employees;
     private $education;
     private $profile;
+    private $wishList;
+    private $products;
 
     private EmployeeManageService $employeeService;
 
@@ -43,6 +48,8 @@ class DefaultController extends Controller
         EducationReadRepository $education,
         EmployeeManageService $employeeManageService,
         ProfileService $profile,
+        WishlistService $wishList,
+        ProductReadRepository $products,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
@@ -62,6 +69,8 @@ class DefaultController extends Controller
             $this->employee = $this->employees->find($this->user->employee);
         }
         $this->profile = $profile;
+        $this->wishList = $wishList;
+        $this->products = $products;
     }
 
     public function behaviors(): array
@@ -74,6 +83,13 @@ class DefaultController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ]
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'add' => ['POST'],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -97,7 +113,6 @@ class DefaultController extends Controller
         return $this->render(
             'index',
             [
-                'user' => $this->user,
                 'provider' => $provider,
             ]
         );
@@ -113,7 +128,6 @@ class DefaultController extends Controller
             'timeline',
             [
                 'employee' => $this->employee,
-                'user' => $this->user,
                 'events' => $events,
                 'educations' => $educations,
             ]
@@ -140,10 +154,49 @@ class DefaultController extends Controller
             'profile',
             [
                 'employee' => $this->employee,
-                'user' => $this->user,
                 'model' => $form,
             ]
         );
+    }
+
+    public function actionWishlist()
+    {
+        $dataProvider = $this->products->getWishList($this->user);
+
+        return $this->render('wishlist', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function actionWishlistAdd($id)
+    {
+        try {
+            $this->wishList->add(Yii::$app->user->id, $id);
+            Yii::$app->session->setFlash('success', 'Success!');
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(Yii::$app->request->referrer ?: ['index']);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function actionWishlistDelete($id)
+    {
+        try {
+            $this->wishList->remove(Yii::$app->user->id, $id);
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(['wishlist']);
     }
 
 }

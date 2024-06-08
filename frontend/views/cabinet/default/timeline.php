@@ -5,8 +5,6 @@
 
 /* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $user \core\entities\User\User */
-
 /* @var $events \core\entities\Schedule\Event\Event */
 
 /* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
@@ -20,7 +18,6 @@ use yii\helpers\Url;
 
 $this->title = 'Timeline';
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['user'] = $user;
 
 $emptyEvents = 'recordings';
 $emptyEducations = 'lesson';

@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$user = $this->params['user'];
+//$user = $this->params['user'];
 $active ='active';
 
 
@@ -29,9 +29,9 @@ $active ='active';
                                 ) ?>
                             </div>
 
-                            <h3 class="profile-username text-center"><?= $user->username ?></h3>
+                            <h3 class="profile-username text-center"><?= $this->context->user->username ?></h3>
 
-                            <p class="text-muted text-center"><?= $user->employee->role->name ?></p>
+                            <p class="text-muted text-center"><?= $this->context->user->employee->role->name ?></p>
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <? if ($this->context->totalCount) :?>
@@ -72,35 +72,35 @@ $active ='active';
                             <strong><i class="fas fa-phone mr-1"></i> Phone</strong>
 
                             <p class="text-muted">
-                                <?= $user->employee->phone ?>
+                                <?= $this->context->user->employee->phone ?>
                             </p>
 
                             <hr>
 
                             <strong><i class="fas fa-envelope mr-1"></i> Email</strong>
 
-                            <p class="text-muted"><?= $user->email ?></p>
+                            <p class="text-muted"><?= $this->context->user->email ?></p>
 
                             <hr>
                             <?
-                            if ($user->employee->issetBirthday($user->employee->birthday)): ?>
+                            if ($this->context->user->employee->issetBirthday($this->context->user->employee->birthday)): ?>
                                 <strong><i class="fas fa-birthday-cake mr-1"></i> Birthday</strong>
 
-                                <p class="text-muted"><?= $user->employee->birthday ?></p>
+                                <p class="text-muted"><?= $this->context->user->employee->birthday ?></p>
                                 <hr>
                             <?
                             endif; ?>
                             <?
-                            if ($user->employee->issetAddress(
-                                $user->employee->address->town ||
-                                $user->employee->address->borough ||
-                                $user->employee->address->street ||
-                                $user->employee->address->home ||
-                                $user->employee->address->apartment
+                            if ($this->context->user->employee->issetAddress(
+                                $this->context->user->employee->address->town ||
+                                $this->context->user->employee->address->borough ||
+                                $this->context->user->employee->address->street ||
+                                $this->context->user->employee->address->home ||
+                                $this->context->user->employee->address->apartment
                             )): ?>
                                 <strong><i class="fas fa-map-marker-alt"></i> Address</strong>
 
-                                <p class="text-muted"><?= $user->employee->getFullAddress() ?></p>
+                                <p class="text-muted"><?= $this->context->user->employee->getFullAddress() ?></p>
                                 <hr>
                             <?
                             endif; ?>
@@ -127,6 +127,8 @@ $active ='active';
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active': '' ]])?>
                                 <?=Html::a(Html::encode('Timeline'),Url::to(['/cabinet/default/timeline']),
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/timeline' ? 'active': '' ]])?>
+                                <?=Html::a(Html::encode('Wish List'),Url::to(['/cabinet/default/wishlist']),
+                                           ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/wishlist' ? 'active': '' ]])?>
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -150,7 +152,10 @@ $active ='active';
                                 <li class="nav-item">
                                     <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/default/profile']),
                                         ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active btn-shadow': '' ]])?>
-
+                                </li>
+                                <li class="nav-item">
+                                    <?=Html::a(Html::encode('Wishlist'),Url::to(['/cabinet/default/wishlist']),
+                                               ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/wishlist' ? 'active btn-shadow': '' ]])?>
                                 </li>
                             </ul>
                         </div><!-- /.card-header -->

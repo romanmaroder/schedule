@@ -4,8 +4,6 @@
 
 /* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $user \core\entities\User\User */
-
 /* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
 
 use kartik\date\DatePicker;
@@ -15,7 +13,6 @@ use yii\widgets\MaskedInput;
 
 $this->title = 'Profile';
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['user'] = $user;
 $this->params['employee'] = $employee;
 
 ?>
