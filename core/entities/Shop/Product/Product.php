@@ -208,6 +208,11 @@ class Product extends ActiveRecord
         return $this->status == self::STATUS_DRAFT;
     }
 
+    public function getSeoTitle(): string
+    {
+        return $this->meta->title ?: $this->name;
+    }
+
     public function isAvailable(): bool
     {
         return $this->quantity > 0;
