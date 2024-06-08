@@ -22,7 +22,7 @@ class TagsForm extends Model
      * @param Product|null $product
      * @param array $config
      */
-    public function __construct(\core\entities\Shop\Product\Product $product=null, $config = [])
+    public function __construct(Product $product=null, $config = [])
     {
         if ($product) {
             $this->existing = ArrayHelper::getColumn($product->tagAssignments, 'tag_id');

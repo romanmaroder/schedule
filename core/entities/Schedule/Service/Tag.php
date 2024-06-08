@@ -20,7 +20,7 @@ class Tag extends ActiveRecord
      * @param $slug
      * @return static
      */
-    public static function create($name, $slug): \core\entities\Shop\Product\self
+    public static function create($name, $slug): self
     {
         $tag = new static();
         $tag->name = $name;

@@ -32,7 +32,6 @@ $this->beginContent('@frontend/views/layouts/main.php') ?>
                     )  ?>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

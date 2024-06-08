@@ -22,10 +22,10 @@ $this->beginContent('@frontend/views/layouts/main.php') ?>
                 <a href="/product/category&amp;path=34" class="list-group-item">MP3 Players (4)</a>
             </div>
         </aside>-->
-        <div id="content" class="col">
-            <?= $content ?>
-        </div>
     </div>
+            <?= $content ?>
+
+
 
 <?php
 $this->endContent() ?>

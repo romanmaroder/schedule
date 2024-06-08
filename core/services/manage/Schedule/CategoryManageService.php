@@ -101,7 +101,7 @@ class CategoryManageService
     }
 
     /**
-     * @param \core\entities\Schedule\Service\Category $category
+     * @param Category $category
      */
     private function assertIsNotRoot(Category $category): void
     {

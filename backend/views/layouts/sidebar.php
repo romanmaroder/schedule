@@ -71,12 +71,6 @@ use yii\helpers\Html;
                                     'icon' => 'fas fa-folder-plus',
                                     'items' => [
                                         [
-                                            'label' => 'Products',
-                                            'icon' => 'fas fa-parking',
-                                            'url' => ['/schedule/product/index'],
-                                            'active' => $this->context->id == 'schedule/product'
-                                        ],
-                                        [
                                             'label' => 'Events',
                                             'icon' => 'far fa-file-alt',
                                             'url' => ['/schedule/event/index'],
@@ -94,28 +88,65 @@ use yii\helpers\Html;
                                             'url' => ['/schedule/calendar/calendar'],
                                             'active' => $this->context->id == 'schedule/calendar'
                                         ],
+
                                         [
-                                            'label' => 'Brands',
-                                            'icon' => 'fa-solid fa-copyright',
-                                            'url' => ['/schedule/brand/index'],
-                                            'active' => $this->context->id == 'schedule/brand'
-                                        ],
-                                        [
-                                            'label' => 'Tags',
-                                            'icon' => 'fa-solid fa-tags',
-                                            'url' => ['/schedule/tag/index'],
-                                            'active' => $this->context->id == 'schedule/tag'
-                                        ],
-                                        [
-                                            'label' => 'Characteristics',
-                                            'icon' => 'fas fa-thermometer-quarter',
-                                            'url' => ['/schedule/characteristic/index'],
-                                            'active' => $this->context->id == 'schedule/characteristic'
+                                            'label' => 'Service',
+                                            'icon' => 'fas fa-hand-spock',
+                                            'items' => [
+                                                [
+                                                    'label' => 'Service',
+                                                    'icon' => 'fas fa-clipboard-list',
+                                                    'url' => ['/schedule/service/index'],
+                                                    'active' => $this->context->id == 'schedule/service'
+                                                ],
+                                                [
+                                                    'label' => 'Categories',
+                                                    'icon' => 'fa-solid fa-list',
+                                                    'url' => ['/schedule/category/index'],
+                                                    'active' => $this->context->id == 'schedule/category'
+                                                ],
+                                            ]
                                         ],
                                     ]
                                 ],
                                 [
-                                    'label' => 'Expense Management',
+                                    'label' => 'Product',
+                                    'icon' => 'fas fa-folder-plus',
+                                    'items' => [
+                                        [
+                                            'label' => 'Products',
+                                            'icon' => 'fas fa-parking',
+                                            'url' => ['/shop/product/index'],
+                                            'active' => $this->context->id == 'shop/product'
+                                        ],
+                                        [
+                                            'label' => 'Categories',
+                                            'icon' => 'fa-solid fa-list',
+                                            'url' => ['/shop/category/index'],
+                                            'active' => $this->context->id == 'shop/category'
+                                        ],
+                                        [
+                                            'label' => 'Brands',
+                                            'icon' => 'fa-solid fa-copyright',
+                                            'url' => ['/shop/brand/index'],
+                                            'active' => $this->context->id == 'shop/brand'
+                                        ],
+                                        [
+                                            'label' => 'Tags',
+                                            'icon' => 'fa-solid fa-tags',
+                                            'url' => ['/shop/tag/index'],
+                                            'active' => $this->context->id == 'shop/tag'
+                                        ],
+                                        [
+                                            'label' => 'Characteristics',
+                                            'icon' => 'fas fa-thermometer-quarter',
+                                            'url' => ['/shop/characteristic/index'],
+                                            'active' => $this->context->id == 'shop/characteristic'
+                                        ],
+                                    ]
+                                ],
+                                [
+                                    'label' => 'Expense',
                                     'icon' => 'fas fa-balance-scale',
                                     'items' => [
                                         [
@@ -133,25 +164,7 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
-                                    'label' => 'Service Management',
-                                    'icon' => 'fas fa-hand-spock',
-                                    'items' => [
-                                        [
-                                            'label' => 'Service',
-                                            'icon' => 'fas fa-clipboard-list',
-                                            'url' => ['/schedule/service/index'],
-                                            'active' => $this->context->id == 'schedule/service'
-                                        ],
-                                        [
-                                            'label' => 'Categories',
-                                            'icon' => 'fa-solid fa-list',
-                                            'url' => ['/schedule/category/index'],
-                                            'active' => $this->context->id == 'schedule/category'
-                                        ],
-                                    ]
-                                ],
-                                [
-                                    'label' => 'Users Management',
+                                    'label' => 'Users',
                                     'icon' => 'fas fa-users-cog',
                                     'items' => [
                                         [

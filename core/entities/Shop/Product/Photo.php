@@ -40,7 +40,7 @@ class Photo extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_photos}}';
+        return '{{%shop_photos}}';
     }
     public function behaviors():array
     {

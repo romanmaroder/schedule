@@ -18,6 +18,7 @@ $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?php if ($dataProvider->getModels() != null) :?>
 <!-- Default box -->
 <div class="card card-solid">
     <div class="card-header">
@@ -156,3 +157,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- /.card-footer -->
 </div>
 <!-- /.card -->
+
+<?php endif; ?>

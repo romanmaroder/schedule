@@ -7,7 +7,6 @@ namespace backend\controllers\schedule;
 use backend\forms\Schedule\TagSearch;
 use core\entities\Shop\Product\Tag;
 use core\forms\manage\Schedule\TagForm;
-use core\services\manage\Schedule\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -17,7 +16,7 @@ class TagController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module, TagManageService $service, $config = [])
+    public function __construct($id, $module, \core\services\manage\Shop\TagManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;

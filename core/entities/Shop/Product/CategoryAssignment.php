@@ -34,6 +34,6 @@ class CategoryAssignment extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_category_assignments}}';
+        return '{{%shop_category_assignments}}';
     }
 }

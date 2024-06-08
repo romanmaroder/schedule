@@ -192,8 +192,8 @@ class EventController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $employee = $this->employees->findEmployee($id);
 
-        $hours = $employee->core->disabledHours($employee->core->hoursWork);
-        $weekends = $employee->core->weekends;
+        $hours = $employee->schedule->disabledHours($employee->schedule->hoursWork);
+        $weekends = $employee->schedule->weekends;
 
         return [
             'hours' => $hours,

@@ -61,6 +61,6 @@ class Review extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_reviews}}';
+        return '{{%shop_reviews}}';
     }
 }

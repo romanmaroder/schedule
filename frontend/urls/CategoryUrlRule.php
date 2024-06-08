@@ -5,7 +5,7 @@ namespace frontend\urls;
 
 
 use core\entities\Schedule\Service\Category;
-use core\readModels\Schedule\CategoryReadRepository;
+use core\readModels\Shop\CategoryReadRepository;
 use yii\base\BaseObject;
 use yii\caching\Cache;
 use yii\helpers\ArrayHelper;

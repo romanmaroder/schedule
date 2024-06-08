@@ -2,6 +2,8 @@
 
 use frontend\assets\BlogAsset;
 use frontend\widgets\Blog\LastPostsWidget;
+use frontend\widgets\Product\FeaturedProductsWidget;
+
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -18,6 +20,10 @@ $this->beginContent('@frontend/views/layouts/main.php') ?>
         'limit' => 4,
     ]
 ) ?>
+
+<?= FeaturedProductsWidget::widget([
+                                       'limit' => 4,
+                                   ]) ?>
 <?= $content ?>
 
 

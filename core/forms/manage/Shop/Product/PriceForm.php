@@ -18,8 +18,6 @@ class PriceForm extends Model
 {
     public $old;
     public $new;
-    public $intern;
-    public $employee;
 
     /**n
      *
@@ -32,8 +30,6 @@ class PriceForm extends Model
         if ($product){
             $this->new = $product->price_new;
             $this->old = $product->price_old;
-            $this->intern = $product->price_intern;
-            $this->employee = $product->price_employee;
         }
         parent::__construct($config);
     }
@@ -42,7 +38,7 @@ class PriceForm extends Model
     {
         return [
             [['new'],'required'],
-            [['new','old','intern','employee'],'integer','min' => 0],
+            [['new','old'],'integer','min' => 0],
         ];
     }
 }

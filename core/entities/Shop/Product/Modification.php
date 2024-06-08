@@ -43,6 +43,6 @@ class Modification extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_modifications}}';
+        return '{{%shop_modifications}}';
     }
 }

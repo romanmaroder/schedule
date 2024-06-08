@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use frontend\assets\AppAsset;
+use frontend\assets\OwlCarouselAsset;
 use hail812\adminlte3\assets\AdminLteAsset;
 use hail812\adminlte3\assets\FontAwesomeAsset;
 use yii\helpers\Html;
@@ -11,6 +12,8 @@ use yii\helpers\Html;
 AppAsset::register($this);
 FontAwesomeAsset::register($this);
 AdminLteAsset::register($this);
+OwlCarouselAsset::register($this);
+
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
@@ -55,5 +58,31 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
 
 <?php $this->endBody() ?>
 </body>
+
+<!--Plug-in connection owlCarousel-->
+<!--<script>
+    $('#slideshow0').owlCarousel({
+        items: 1,
+        autoplay:true,
+        autoplayTimeout:1000,
+        autoplayHoverPause:true,
+        nav: true,
+        navText: ['<i class="fa fa-chevron-left fa-5x"></i>', '<i class="fa fa-chevron-right fa-5x"></i>'],
+        dots: true
+    });
+</script>
+<script>
+    $('#carousel0').owlCarousel({
+        items: 6,
+        autoplay:true,
+        autoplayTimeout:1000,
+        autoplayHoverPause:true,
+        nav: true,
+        navText: ['<i class="fa fa-chevron-left fa-5x"></i>', '<i class="fa fa-chevron-right fa-5x"></i>'],
+        dots: true
+    });
+</script>-->
+
+
 </html>
 <?php $this->endPage() ?>

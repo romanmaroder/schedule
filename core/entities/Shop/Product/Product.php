@@ -7,7 +7,7 @@ namespace core\entities\Shop\Product;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\CommonUses\Brand;
 use core\entities\Meta;
-use core\entities\Schedule\Service\Category;
+use core\entities\Shop\Product\Category;
 use core\entities\Shop\Product\queries\ProductQuery;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
@@ -24,8 +24,6 @@ use yii\web\UploadedFile;
  * @property int $brand_id
  * @property int $price_old
  * @property int $price_new
- * @property int $price_intern [int(11)]
- * @property int $price_employee [int(11)]
  * @property int $rating
  * @property int $main_photo_id
  * @property int $status
@@ -34,7 +32,7 @@ use yii\web\UploadedFile;
  * @property Meta $meta
  * @property Brand $brand
  * @property Category $category
- * @property \core\entities\Schedule\Service\Category[] $categories
+ * @property Category[] $categories
  * @property CategoryAssignment[] $categoryAssignments
  * @property TagAssignment[] $tagAssignments
  * @property Tag[] $tags
@@ -74,12 +72,10 @@ class Product extends ActiveRecord
      * @param $intern
      * @param $employee
      */
-    public function setPrice($new, $old, $intern, $employee): void
+    public function setPrice($new, $old): void
     {
         $this->price_new = $new;
         $this->price_old = $old;
-        $this->price_intern = $intern;
-        $this->price_employee = $employee;
     }
 
     public function edit($brandId, $code, $name,$description, Meta $meta): void

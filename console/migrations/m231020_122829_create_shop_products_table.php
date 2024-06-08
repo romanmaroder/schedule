@@ -23,8 +23,6 @@ class m231020_122829_create_shop_products_table extends Migration
             'name' => $this->string()->notNull(),
             'price_old' => $this->integer(),
             'price_new' => $this->integer(),
-            'price_intern' => $this->integer(),
-            'price_employee' => $this->integer(),
             'rating' => $this->decimal(3, 2),
             'meta_json' => $this->text(),
         ], $tableOptions);

@@ -4,7 +4,7 @@
 namespace core\forms\manage\Shop\Product;
 
 
-use core\entities\Schedule\Service\Category;
+use core\entities\Shop\Product\Category;
 use core\entities\Shop\Product\Product;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;

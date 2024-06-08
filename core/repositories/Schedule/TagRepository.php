@@ -4,7 +4,7 @@
 namespace core\repositories\Schedule;
 
 
-use core\entities\Schedule\Tag;
+use core\entities\Schedule\Service\Tag;
 use core\repositories\NotFoundException;
 
 class TagRepository

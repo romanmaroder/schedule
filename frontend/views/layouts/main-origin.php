@@ -12,6 +12,8 @@ use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
+
+$user = \core\entities\User\User::findOne(Yii::$app->user->identity->getId());
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -54,7 +56,7 @@ AppAsset::register($this);
             echo Html::tag('div', Html::a('Cabinet', ['/cabinet/default/index'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
             echo Html::beginForm(['/auth/auth/logout'], 'post', ['class' => 'd-flex'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Logout (' . $user->username. ')',
                     ['class' => 'btn btn-link logout text-decoration-none']
                 )
                 . Html::endForm();

@@ -26,6 +26,6 @@ class TagAssignment extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_tag_assignments}}';
+        return '{{%shop_tag_assignments}}';
     }
 }

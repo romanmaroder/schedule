@@ -4,7 +4,7 @@
 namespace core\readModels\Schedule;
 
 
-use core\entities\Schedule\Tag;
+use core\entities\Schedule\Service\Tag;
 
 class TagReadRepository
 {

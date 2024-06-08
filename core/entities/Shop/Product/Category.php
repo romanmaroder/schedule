@@ -22,11 +22,11 @@ use yii\db\ActiveRecord;
  * @property int $depth
  * @property Meta $meta
  * @property string $meta_json [json]
- * @property \core\entities\Schedule\Service\Category $parent
- * @property \core\entities\Schedule\Service\Category[] $children
- * @property \core\entities\Schedule\Service\Category[] $parents
- * @property \core\entities\Schedule\Service\Category $prev
- * @property \core\entities\Schedule\Service\Category $next
+ * @property Category $parent
+ * @property Category[] $children
+ * @property Category[] $parents
+ * @property Category $prev
+ * @property Category $next
  * @mixin NestedSetsBehavior
  */
 class Category extends ActiveRecord
@@ -41,7 +41,7 @@ class Category extends ActiveRecord
      * @param Meta $meta
      * @return static
      */
-    public static function create($name, $slug, $title, $description, Meta $meta): \core\entities\Schedule\Service\self
+    public static function create($name, $slug, $title, $description, Meta $meta): self
     {
         $category = new static();
         $category->name = $name;

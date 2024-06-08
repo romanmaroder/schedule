@@ -9,6 +9,7 @@
 
 
 use backend\widgets\grid\RoleColumn;
+use core\helpers\EmployeeHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use core\entities\User\Employee\Employee;
 use yii\grid\ActionColumn;
@@ -111,7 +112,7 @@ PluginAsset::register($this)->add(
                     [
                         'attribute' => 'status',
                         'value' => function ($model) {
-                            return \core\helpers\EmployeeHelper::statusLabel($model->status);
+                            return EmployeeHelper::statusLabel($model->status);
                         },
                         'contentOptions' => [
                                 'class'=>'text-center'

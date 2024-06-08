@@ -77,7 +77,7 @@ use yii\helpers\Url;
                     </ul>
                 </li>
                 <li class="dropdown-divider"></li>
-                <li><?= Html::a('Sign out', ['/auth/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?></li>
+                <li><?= Html::a('Sign out', ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?></li>
                 <!-- End Level two -->
             </ul>
         </li>

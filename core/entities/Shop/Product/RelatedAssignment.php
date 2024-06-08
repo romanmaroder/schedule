@@ -31,6 +31,6 @@ class RelatedAssignment extends ActiveRecord
 
     public static function tableName(): string
     {
-        return '{{%schedule_related_assignments}}';
+        return '{{%shop_related_assignments}}';
     }
 }

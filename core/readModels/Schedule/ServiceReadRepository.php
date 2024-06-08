@@ -4,9 +4,9 @@
 namespace core\readModels\Schedule;
 
 
-use core\entities\Schedule\Category;
+use core\entities\Schedule\Service\Category;
 use core\entities\Schedule\Service\Service;
-use core\entities\Schedule\Tag;
+use core\entities\Schedule\Service\Tag;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\db\ActiveQuery;

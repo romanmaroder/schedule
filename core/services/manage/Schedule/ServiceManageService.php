@@ -6,7 +6,7 @@ namespace core\services\manage\Schedule;
 
 use core\entities\Meta;
 use core\entities\Schedule\Service\Service;
-use core\entities\Schedule\Tag;
+use core\entities\Schedule\Service\Tag;
 use core\forms\manage\Schedule\Service\PriceForm;
 use core\forms\manage\Schedule\Service\ServiceCreateForm;
 use core\forms\manage\Schedule\Service\ServiceEditForm;
