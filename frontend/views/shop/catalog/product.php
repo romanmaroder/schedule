@@ -7,6 +7,7 @@
 
 
 use core\helpers\PriceHelper;
+use frontend\assets\MagnificPopupAsset;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -27,7 +28,7 @@ $this->params['breadcrumbs'][] = $product->name;
 
 $this->params['active_category'] = $product->category;
 
-//MagnificPopupAsset::register($this);
+MagnificPopupAsset::register($this);
 ?>
 
     <div class="row" xmlns:fb="http://www.w3.org/1999/xhtml">
