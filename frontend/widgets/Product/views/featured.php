@@ -1,7 +1,5 @@
 <?php
 
-
-
 /* @var $this \yii\web\View */
 /* @var $products  */
 
@@ -10,6 +8,12 @@ use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 ?>
+<div class="site-section">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center text-warning">Thinking about the right placement of the featured widget</h1>
+        </div>
+    </div>
 
 <div class="row">
     <?php foreach ($products as $product): ?>
@@ -43,4 +47,5 @@ use yii\helpers\Url;
             </div>
         </div>
     <?php endforeach; ?>
+</div>
 </div>
