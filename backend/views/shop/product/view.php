@@ -89,6 +89,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 ],
                                 'code',
                                 'name',
+                                'quantity',
+                                [
+                                    'attribute' => 'weight',
+                                    'value' => $product->weight / 1000 . ' kg',
+                                ],
                                 [
                                     'attribute' => 'price_new',
                                     'value' => PriceHelper::format($product->price_new),
@@ -115,6 +120,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     <br/>
                     <p>
                         <?= Html::a('Change Price', ['price', 'id' => $product->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
+                        <?php if ($product->canChangeQuantity()): ?>
+                            <?= Html::a('Change Quantity', ['quantity', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
+                        <?php endif; ?>
                     </p>
                 </div>
             </div>
@@ -205,6 +213,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 return PriceHelper::format($model->price);
                             },
                         ],
+                        'quantity',
                         [
                             'class' => ActionColumn::class,
                             'controller' => 'shop/modification',

@@ -127,7 +127,6 @@ $active ='active';
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active': '' ]])?>
                                 <?=Html::a(Html::encode('Timeline'),Url::to(['/cabinet/default/timeline']),
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/timeline' ? 'active': '' ]])?>
-
                             </div>
                         </div>
                         <!-- /.card-body -->

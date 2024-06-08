@@ -53,6 +53,33 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
+                Warehouse
+            </h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+            </div>
+            <!--Footer-->
+        </div>
+        <!-- /.card-footer-->
+    </div>
+
+    <div class="card card-secondary">
+        <div class="card-header">
+            <h3 class="card-title ">
                 Categories
             </h3>
             <div class="card-tools">

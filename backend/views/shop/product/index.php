@@ -46,6 +46,9 @@ PluginAsset::register($this)->add(
                             'class' => 'table table-striped table-bordered',
                             'id' => 'product'
                         ],
+                            'rowOptions' => function (Product $model) {
+                                return $model->quantity <= 0 ? ['style' => 'background: #fdc'] : [];
+                            },
                         'columns' => [
                             /*[
                                 'value' => function (Product $model) {
@@ -75,6 +78,7 @@ PluginAsset::register($this)->add(
                                     return PriceHelper::format($model->price_new);
                                 },
                             ],
+                            'quantity',
                             [
                                 'attribute' => 'status',
                                 'filter' => $searchModel->statusList(),

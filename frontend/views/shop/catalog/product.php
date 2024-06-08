@@ -132,8 +132,7 @@ MagnificPopupAsset::register($this);
             </ul>
             <div id="product">
 
-                <?php
-                if ($product->isAvailable()): ?>
+                <?php if ($product->isAvailable()): ?>
 
                     <hr>
                     <h3>Available Options</h3>

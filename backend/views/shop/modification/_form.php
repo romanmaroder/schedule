@@ -4,7 +4,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model core\forms\manage\core\Product\ModificationForm */
+/* @var $model \core\forms\manage\Shop\Product\ModificationForm*/
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -31,6 +31,9 @@ use yii\helpers\Html;
             </div>
             <div class="form-group">
                 <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="form-group">
+                <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
             </div>
         </div>
         <div class="card-footer">

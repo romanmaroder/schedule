@@ -29,6 +29,7 @@ use yii\db\ActiveRecord;
  * @property int $updated_at
  * @property string $password
  * @property Network[] $networks
+ * @property WishlistItem[] $wishlistItems
  * @property Employee $employee
  * @property Schedule $schedule
  * @property string $notice [varchar(255)]
@@ -146,6 +147,31 @@ class User extends ActiveRecord
         }
         $networks[] = Network::create($networks, $identity);
         $this->networks = $networks;
+    }
+
+    public function addToWishList($productId): void
+    {
+        $items = $this->wishlistItems;
+        foreach ($items as $item) {
+            if ($item->isForProduct($productId)) {
+                throw new \DomainException('Item is already added.');
+            }
+        }
+        $items[] = WishlistItem::create($productId);
+        $this->wishlistItems = $items;
+    }
+
+    public function removeFromWishList($productId): void
+    {
+        $items = $this->wishlistItems;
+        foreach ($items as $i => $item) {
+            if ($item->isForProduct($productId)) {
+                unset($items[$i]);
+                $this->wishlistItems = $items;
+                return;
+            }
+        }
+        throw new \DomainException('Item is not found.');
     }
 
     public function attachEmployee(

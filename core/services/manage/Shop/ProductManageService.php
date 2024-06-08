@@ -12,6 +12,7 @@ use core\forms\manage\Shop\Product\PhotosForm;
 use core\forms\manage\Shop\Product\PriceForm;
 use core\forms\manage\Shop\Product\ProductCreateForm;
 use core\forms\manage\Shop\Product\ProductEditForm;
+use core\forms\manage\Shop\Product\QuantityForm;
 use core\repositories\Shop\BrandRepository;
 use core\repositories\Shop\CategoryRepository;
 use core\repositories\Shop\TagRepository;
@@ -54,6 +55,8 @@ class ProductManageService
             $form->code,
             $form->name,
             $form->description,
+            $form->weight,
+            $form->quantity->quantity,
             new Meta(
                 $form->meta->title,
                 $form->meta->description,
@@ -108,6 +111,7 @@ class ProductManageService
             $form->code,
             $form->name,
             $form->description,
+            $form->weight,
             new Meta(
                 $form->meta->title,
                 $form->meta->description,
@@ -152,6 +156,14 @@ class ProductManageService
             }
         );
     }
+
+    public function changeQuantity($id, QuantityForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->setQuantity($form->quantity);
+        $this->products->save($product);
+    }
+
 
     public function changePrice($id, PriceForm $form): void
     {
@@ -228,7 +240,8 @@ class ProductManageService
         $product->addModification(
             $form->code,
             $form->name,
-            $form->price
+            $form->price,
+            $form->quantity
         );
         $this->products->save($product);
     }
@@ -240,7 +253,8 @@ class ProductManageService
             $modificationId,
             $form->code,
             $form->name,
-            $form->price
+            $form->price,
+            $form->quantity
         );
         $this->products->save($product);
     }
