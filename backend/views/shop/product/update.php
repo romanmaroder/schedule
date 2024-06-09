@@ -65,13 +65,14 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
         </div>
         <div class="card-body">
-            <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
-            </div>
             <!--Footer-->
         </div>
         <!-- /.card-footer-->

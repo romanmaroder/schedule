@@ -176,8 +176,9 @@ class ProductController extends Controller
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionQuantity($id)
     {

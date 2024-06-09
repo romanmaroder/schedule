@@ -7,8 +7,9 @@ namespace backend\bootstrap;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
 use yii\base\Application;
+use yii\base\BootstrapInterface;
 
-class SetUp implements \yii\base\BootstrapInterface
+class SetUp implements BootstrapInterface
 {
 
     /**

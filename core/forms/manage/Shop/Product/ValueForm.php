@@ -9,7 +9,7 @@ use core\entities\Shop\Product\Value;
 use yii\base\Model;
 
 /**
- * @property integer $id
+ * @property int $id
  */
 class ValueForm extends Model
 {

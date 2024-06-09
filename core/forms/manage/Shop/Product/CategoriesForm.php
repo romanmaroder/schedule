@@ -16,10 +16,10 @@ class CategoriesForm extends Model
 
     /**
      * CategoriesForm constructor.
-     * @param \core\entities\Shop\Product\Product|null $product
+     * @param Product|null $product
      * @param array $config
      */
-    public function __construct(\core\entities\Shop\Product\Product $product = null, $config = [])
+    public function __construct(Product $product = null, $config = [])
     {
         if ($product) {
             $this->main = $product->category_id;

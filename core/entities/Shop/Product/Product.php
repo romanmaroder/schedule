@@ -7,7 +7,6 @@ namespace core\entities\Shop\Product;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\CommonUses\Brand;
 use core\entities\Meta;
-use core\entities\Shop\Product\Category;
 use core\entities\Shop\Product\queries\ProductQuery;
 use core\entities\User\WishlistItem;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
@@ -74,8 +73,6 @@ class Product extends ActiveRecord
     /**
      * @param $new
      * @param $old
-     * @param $intern
-     * @param $employee
      */
     public function setPrice($new, $old): void
     {

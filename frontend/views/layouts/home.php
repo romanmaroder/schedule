@@ -3,6 +3,7 @@
 use frontend\assets\BlogAsset;
 use frontend\widgets\Blog\LastPostsWidget;
 use frontend\widgets\Product\FeaturedProductsWidget;
+use frontend\widgets\Cart\Shop\CartWidget;
 
 
 /* @var $this \yii\web\View */
@@ -24,6 +25,8 @@ $this->beginContent('@frontend/views/layouts/main.php') ?>
 <?= FeaturedProductsWidget::widget([
                                        'limit' => 4,
                                    ]) ?>
+
+<?= CartWidget::widget() ?>
 <?= $content ?>
 
 

@@ -88,38 +88,39 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <?= $form->field($model->quantity, 'quantity')->textInput(['maxlength' => true]) ?>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model->quantity, 'quantity')->textInput(['maxlength' => true]) ?>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'>Price</h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
+        <div class="card card-secondary">
+            <div class='card-header'>
+                <h3 class='card-title'>Price</h3>
+                <div class='card-tools'>
+                    <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                    </button>
                 <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
                 </button>
             </div>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="form-group">
                         <?= $form->field($model->price, 'new')->textInput(
                             ['maxlength' => true, 'placeholder' => $model->price->getAttributeLabel('new')]
                         )->label($model->price->getAttributeLabel('new')) ?>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="form-group">
                         <?= $form->field($model->price, 'old')->textInput(
                             [

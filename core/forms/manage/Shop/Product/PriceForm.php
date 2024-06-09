@@ -22,7 +22,7 @@ class PriceForm extends Model
     /**n
      *
      * PriceForm constructor.
-     * @param \core\entities\Shop\Product\Product|null $product
+     * @param Product|null $product
      * @param array $config
      */
     public function __construct(Product $product = null, $config = [])

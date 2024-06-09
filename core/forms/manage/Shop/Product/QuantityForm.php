@@ -22,7 +22,7 @@ class QuantityForm extends Model
     public function rules(): array
     {
         return [
-            [['quantity'], 'required'],
+            //[['quantity'], 'required'],
             [['quantity'], 'integer', 'min' => 0],
         ];
     }

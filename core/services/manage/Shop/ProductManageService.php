@@ -144,7 +144,6 @@ class ProductManageService
                     $product->assignTag($tag->id);
                 }
 
-
                 foreach ($form->tags->newNames as $tagName) {
                     if (!$tag = $this->tags->findByName($tagName)) {
                         $tag = Tag::create($tagName, $tagName);
