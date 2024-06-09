@@ -7,7 +7,8 @@ namespace common\bootstrap;
 use core\cart\shop\Cart as ShopCart;
 use core\cart\Cart;
 use core\cart\shop\cost\calculator\SimpleCost;
-use core\cart\shop\storage\SessionStorage;
+use core\cart\shop\cost\calculator\DynamicCost;
+use core\cart\shop\storage\CookieStorage;
 use core\cart\storage\DbStorage;
 use core\services\auth\SignupService;
 use core\services\ContactService;
@@ -51,7 +52,7 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(
             ShopCart::class, function () {
             return new ShopCart(
-                new SessionStorage('cart',\Yii::$app->session),
+                new CookieStorage('cart', 3600),
                 new DynamicCost(new SimpleCost())
             );
         });

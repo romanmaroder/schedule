@@ -28,6 +28,11 @@ class CartItem
         return md5(serialize([$this->product->id, $this->modificationId]));
     }
 
+    public function getProductId(): int
+    {
+        return $this->product->id;
+    }
+
     public function getProduct(): Product
     {
         return $this->product;
