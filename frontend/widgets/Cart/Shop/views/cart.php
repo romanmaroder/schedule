@@ -23,7 +23,6 @@ use yii\helpers\Url;
                     <?php
                     $product = $item->getProduct();
                     $modification = $item->getModification();
-                    $cost = $cart->getCost();
                     $url = Url::to(['/shop/catalog/product', 'id' => $product->id]);
                     ?>
                     <tr>
@@ -49,6 +48,7 @@ use yii\helpers\Url;
         </li>
         <li>
             <div>
+                <?php $cost = $cart->getCost(); ?>
                 <table class="table table-bordered">
 
                     <tr>
