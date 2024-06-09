@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+
 /** @var $user \core\entities\User\User*/
 
 
@@ -142,6 +143,12 @@ use yii\helpers\Html;
                                             'icon' => 'fas fa-thermometer-quarter',
                                             'url' => ['/shop/characteristic/index'],
                                             'active' => $this->context->id == 'shop/characteristic'
+                                        ],
+                                        [
+                                            'label' => 'Delivery Methods',
+                                            'icon' => 'fas fa-truck',
+                                            'url' => ['/shop/delivery/index'],
+                                            'active' => $this->context->id == 'shop/delivery'
                                         ],
                                     ]
                                 ],
