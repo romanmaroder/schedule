@@ -5,6 +5,7 @@ use core\entities\Shop\Product\Modification;
 use core\entities\Shop\Product\Value;
 use core\helpers\PriceHelper;
 use core\helpers\ProductHelper;
+use core\helpers\WeightHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use kartik\file\FileInput;
 use yii\bootstrap4\ActiveForm;
@@ -92,7 +93,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 'quantity',
                                 [
                                     'attribute' => 'weight',
-                                    'value' => $product->weight / 1000 . ' kg',
+                                    'value' => WeightHelper::format($product->weight),
                                 ],
                                 [
                                     'attribute' => 'price_new',
