@@ -150,6 +150,12 @@ use yii\helpers\Html;
                                             'url' => ['/shop/delivery/index'],
                                             'active' => $this->context->id == 'shop/delivery'
                                         ],
+                                        [
+                                            'label' => 'Orders',
+                                            'icon' => 'fas fa-barcode',
+                                            'url' => ['/shop/order/index'],
+                                            'active' => $this->context->id == 'shop/order'
+                                        ],
                                     ]
                                 ],
                                 [
