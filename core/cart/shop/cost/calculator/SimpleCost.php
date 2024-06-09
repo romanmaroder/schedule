@@ -4,7 +4,7 @@
 namespace core\cart\shop\cost\calculator;
 
 
-use core\cart\shop\CartItem;
+
 use core\cart\shop\cost\Cost;
 
 class SimpleCost implements CalculatorInterface

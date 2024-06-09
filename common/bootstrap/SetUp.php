@@ -52,7 +52,7 @@ class SetUp implements BootstrapInterface
             ShopCart::class, function () {
             return new ShopCart(
                 new SessionStorage('cart',\Yii::$app->session),
-                new SimpleCost()
+                new DynamicCost(new SimpleCost())
             );
         });
     }
