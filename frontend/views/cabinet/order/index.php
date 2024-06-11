@@ -46,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                             'format' => 'raw',
                         ],
-                        ['class' => ActionColumn::class],
+                        ['class' => ActionColumn::class,
+                            'template' => '{view} {delete}'],
                     ],
                 ]
             ); ?>

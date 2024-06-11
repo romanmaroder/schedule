@@ -6,6 +6,7 @@ namespace backend\controllers\shop;
 
 use backend\forms\Shop\OrderSearch;
 use core\entities\Shop\Order\Order;
+use core\forms\manage\Shop\Order\OrderEditForm;
 use core\services\manage\Shop\OrderManageService;
 use Yii;
 use yii\filters\VerbFilter;
@@ -49,7 +50,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      * @return mixed
      */
     public function actionView($id)
