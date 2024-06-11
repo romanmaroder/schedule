@@ -23,6 +23,7 @@ class HybridStorage implements StorageInterface
         $this->cookieKey = $cookieKey;
         $this->cookieTimeout = $cookieTimeout;
         $this->db = $db;
+
     }
 
     public function load(): array
