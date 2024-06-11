@@ -8,7 +8,6 @@ use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
 use core\entities\Schedule\Event\ServiceAssignment;
 use core\entities\Schedule\Service\queries\ServiceQuery;
-use core\entities\Shop\Product\Tag;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -29,7 +28,7 @@ use yii\db\ActiveRecord;
  * @property CategoryAssignment[] $categoryAssignments
  * @property Category[] $categories
  * @property TagAssignment[] $tagAssignments
- * @property \core\entities\Shop\Product\Tag[] $tags
+ * @property Tag[] $tags
  */
 class Service extends ActiveRecord
 {

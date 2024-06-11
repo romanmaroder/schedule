@@ -22,10 +22,7 @@ PluginAsset::register($this)->add(
 <div class="category-index">
     <div class="card card-secondary">
         <div class="card-header">
-            <h3 class="card-title">
-                <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
-            </h3>
-
+            <h3 class="card-title"> </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>

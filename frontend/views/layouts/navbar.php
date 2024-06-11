@@ -1,5 +1,6 @@
 <?php
 
+use frontend\widgets\Cart\Shop\CartWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -210,7 +211,8 @@ use yii\helpers\Url;
         </li>-->
         <li class="nav-item">
             <?= Html::a('<i class="fa fa-shopping-cart"></i>', ['/shop/cart/index'], ['data-method' => 'post', 'class' => 'nav-link','title'=>'Shopping Cart']) ?>
-        </li><li class="nav-item">
+        </li>
+        <li class="nav-item">
             <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'nav-link','title'=>'logout']) ?>
         </li>
         <!--<li class="nav-item">

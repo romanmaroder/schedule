@@ -4,7 +4,9 @@
 namespace core\forms\Shop\Order;
 
 
-class OrderForm extends \core\forms\CompositeForm
+use core\forms\CompositeForm;
+
+class OrderForm extends CompositeForm
 {
 
     public $note;

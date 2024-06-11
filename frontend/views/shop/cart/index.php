@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="input-group btn-block" style="max-width: 200px;">
                             <input type="text" name="quantity" value="<?= $item->getQuantity() ?>" size="1" class="form-control" />
                             <span class="input-group-btn">
-                                    <button type="submit" title="" class="btn btn-primary" data-original-title="Update"><i class="fa fa-refresh"></i></button>
+                                    <button type="submit" title="" class="btn btn-primary" data-original-title="Update"><i class="fas fa-sync-alt"></i></button>
                                     <a title="Remove" class="btn btn-danger" href="<?= Url::to(['remove', 'id' => $item->getId()]) ?>" data-method="post"><i class="fa fa-times-circle"></i></a>
                                 </span>
                         </div>
@@ -95,10 +95,11 @@ $this->params['breadcrumbs'][] = $this->title;
             </table>
         </div>
     </div>
-    <div class="buttons clearfix">
-        <div class="pull-left"><a href="<?= Url::to('/shop/catalog/index') ?>" class="btn btn-default">Continue Shopping</a></div>
+
+    <div class="buttons clearfix row">
+        <div class="pull-left col-6"><a href="<?= Url::to('/shop/catalog/index') ?>" class="btn btn-default">Continue Shopping</a></div>
         <?php if ($cart->getItems()): ?>
-            <div class="pull-right"><a href="<?= Url::to('/shop/checkout/index') ?>" class="btn btn-primary">Checkout</a></div>
+            <div class="pull-right col-6"><a href="<?= Url::to('/shop/checkout/index') ?>" class="btn btn-primary">Checkout</a></div>
         <?php endif; ?>
     </div>
 </div>
