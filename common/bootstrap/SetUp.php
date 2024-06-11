@@ -8,7 +8,7 @@ use core\cart\shop\Cart as ShopCart;
 use core\cart\Cart;
 use core\cart\shop\cost\calculator\SimpleCost;
 use core\cart\shop\cost\calculator\DynamicCost;
-use core\cart\shop\storage\CookieStorage;
+use core\cart\shop\storage\HybridStorage;
 use core\cart\storage\DbStorage;
 use core\services\auth\SignupService;
 use core\services\ContactService;
@@ -50,9 +50,9 @@ class SetUp implements BootstrapInterface
         });
 
         $container->setSingleton(
-            ShopCart::class, function () {
+            ShopCart::class, function () use ($app) {
             return new ShopCart(
-                new CookieStorage('cart', 3600),
+                new HybridStorage($app->get('user'), 'cart', 3600 * 24, $app->db),
                 new DynamicCost(new SimpleCost())
             );
         });
