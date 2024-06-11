@@ -6,7 +6,6 @@ namespace core\entities\Expenses\Expenses;
 
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\queries\ExpensesQuery;
-use core\entities\Schedule\Service\Tag;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;

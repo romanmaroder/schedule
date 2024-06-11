@@ -1,19 +1,19 @@
 <?php
 
 
-use core\entities\Schedule\Service\Tag;
+
+/* @var $this \yii\web\View */
+/* @var $searchModel \backend\forms\Expenses\TagSearch */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
+
+
+use core\entities\Expenses\Expenses\Tag;
 use yii\grid\GridView;
 use yii\helpers\Html;
-
-/* @var $this yii\web\View */
-/* @var $searchModel backend\forms\Schedule\TagSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Tags';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">

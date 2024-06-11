@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <div class="card card-secondary">
         <div class="card-header">
-            <h3 class="card-title ">
+            <h3 class="card-title">
                 Warehouse
             </h3>
             <div class="card-tools">

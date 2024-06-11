@@ -1,10 +1,10 @@
 <?php
 
 
-namespace backend\forms\Schedule;
+namespace backend\forms\Expenses;
 
 
-use core\entities\Schedule\Service\Tag;
+use core\entities\Expenses\Expenses\Tag;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

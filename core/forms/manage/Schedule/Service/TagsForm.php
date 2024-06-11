@@ -5,7 +5,7 @@ namespace core\forms\manage\Schedule\Service;
 
 
 use core\entities\Schedule\Service\Service;
-use core\entities\Shop\Product\Tag;
+use core\entities\Schedule\Service\Tag;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 

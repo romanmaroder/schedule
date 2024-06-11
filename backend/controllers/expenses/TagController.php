@@ -1,13 +1,13 @@
 <?php
 
 
-namespace backend\controllers\schedule;
+namespace backend\controllers\expenses;
 
 
-use backend\forms\Schedule\TagSearch;
-use core\entities\Schedule\Service\Tag;
-use core\forms\manage\Schedule\TagForm;
-use core\services\manage\Schedule\TagManageService;
+use backend\forms\Expenses\TagSearch;
+use core\entities\Expenses\Expenses\Tag;
+use core\forms\manage\Expenses\TagForm;
+use core\services\manage\Expenses\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -17,7 +17,7 @@ class TagController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module,TagManageService $service, $config = [])
+    public function __construct($id, $module, TagManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
@@ -52,7 +52,6 @@ class TagController extends Controller
     /**
      * @param int $id
      * @return mixed
-     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {

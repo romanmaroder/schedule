@@ -1,10 +1,11 @@
 <?php
 
 
-namespace core\repositories\Schedule;
+namespace core\repositories\Expenses;
 
 
-use core\entities\Schedule\Service\Tag;
+
+use core\entities\Expenses\Expenses\Tag;
 use core\repositories\NotFoundException;
 
 class TagRepository

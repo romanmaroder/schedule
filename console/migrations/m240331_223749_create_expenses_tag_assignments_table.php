@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%tag_expenses_assignments}}`.
+ * Handles the creation of table `{{%expenses_tag_assignments}}`.
  */
-class m240331_223749_create_tag_expenses_assignments_table extends Migration
+class m240331_223749_create_expenses_tag_assignments_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -14,7 +14,7 @@ class m240331_223749_create_tag_expenses_assignments_table extends Migration
     {
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         $this->createTable(
-            '{{%tag_expenses_assignments}}',
+            '{{%expenses_tag_assignments}}',
             [
                 'expense_id' => $this->integer()->notNull(),
                 'tag_id' => $this->integer()->notNull(),
@@ -22,21 +22,23 @@ class m240331_223749_create_tag_expenses_assignments_table extends Migration
             $tableOptions
         );
         $this->addPrimaryKey(
-            '{{%pk-tag_expenses_assignments}}',
-            '{{%tag_expenses_assignments}}',
+            '{{%pk-expenses_tag_assignments}}',
+            '{{%expenses_tag_assignments}}',
             ['expense_id', 'tag_id']
         );
 
         $this->createIndex(
-            '{{%idx-tag_expenses_assignments-expense_id}}',
-            '{{%tag_expenses_assignments}}',
+            '{{%idx-expenses_tag_assignments-expense_id}}',
+            '{{%expenses_tag_assignments}}',
             'expense_id'
         );
-        $this->createIndex('{{%idx-tag_expenses_assignments-tag_id}}', '{{%tag_expenses_assignments}}', 'tag_id');
+        $this->createIndex('{{%idx-expenses_tag_assignments-tag_id}}',
+                           '{{%expenses_tag_assignments}}',
+                           'tag_id');
 
         $this->addForeignKey(
-            '{{%fk-tag_expenses_assignments-expense_id}}',
-            '{{%tag_expenses_assignments}}',
+            '{{%fk-expenses_tag_assignments-expense_id}}',
+            '{{%expenses_tag_assignments}}',
             'expense_id',
             '{{%expenses}}',
             'id',
@@ -44,10 +46,10 @@ class m240331_223749_create_tag_expenses_assignments_table extends Migration
             'RESTRICT'
         );
         $this->addForeignKey(
-            '{{%fk-tag_expenses_assignments-tag_id}}',
-            '{{%tag_expenses_assignments}}',
+            '{{%fk-expenses_tag_assignments-tag_id}}',
+            '{{%expenses_tag_assignments}}',
             'tag_id',
-            '{{%schedule_service_tags}}',
+            '{{%expenses_tags}}',
             'id',
             'CASCADE',
             'RESTRICT'
@@ -59,6 +61,6 @@ class m240331_223749_create_tag_expenses_assignments_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('{{%tag_expenses_assignments}}');
+        $this->dropTable('{{%expenses_tag_assignments}}');
     }
 }

@@ -20,7 +20,7 @@ class ValueForm extends Model
     /**
      * ValueForm constructor.
      * @param Characteristic $characteristic
-     * @param \core\entities\Shop\Product\Value|null $value
+     * @param Value|null $value
      * @param array $config
      */
     public function __construct(Characteristic $characteristic, Value $value = null, $config = [])

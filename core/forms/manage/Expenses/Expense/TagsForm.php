@@ -5,7 +5,7 @@ namespace core\forms\manage\Expenses\Expense;
 
 
 use core\entities\Expenses\Expenses\Expenses;
-use core\entities\Shop\Product\Tag;
+use core\entities\Expenses\Expenses\Tag;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
