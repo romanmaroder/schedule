@@ -106,6 +106,12 @@ use yii\helpers\Html;
                                                     'url' => ['/schedule/category/index'],
                                                     'active' => $this->context->id == 'schedule/category'
                                                 ],
+                                                [
+                                                    'label' => 'Tags',
+                                                    'icon' => 'fa-solid fa-tags',
+                                                    'url' => ['/schedule/tag/index'],
+                                                    'active' => $this->context->id == 'expenses/tag'
+                                                ],
                                             ]
                                         ],
                                     ]

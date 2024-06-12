@@ -102,7 +102,28 @@ $this->params['breadcrumbs'][] = 'Update';
         </div>
         <!-- /.card-footer-->
     </div>
-
+    <div class="card card-secondary">
+        <div class="card-header">
+            <h3 class="card-title ">
+                Tags
+            </h3>
+            <div class='card-tools'>
+                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                </button>
+                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <?= $form->field($model->tags, 'existing')->checkboxList($model->tags->tagsList()) ?>
+            <?= $form->field($model->tags, 'textNew')->textInput() ?>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <!--Footer-->
+        </div>
+        <!-- /.card-footer-->
+    </div>
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">

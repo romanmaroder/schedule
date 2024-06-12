@@ -139,6 +139,7 @@ class ProductManageService
                     $product->setValue($value->id, $value->value);
                 }
 
+
                 foreach ($form->tags->existing as $tagId) {
                     $tag = $this->tags->get($tagId);
                     $product->assignTag($tag->id);
