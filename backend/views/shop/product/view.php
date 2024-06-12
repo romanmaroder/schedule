@@ -129,7 +129,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
         </div>
         <div class="col-md-6">
-
             <div class="card card-secondary">
                 <div class='card-header'>
                     <h3 class='card-title'>Characteristics</h3>
@@ -160,29 +159,62 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ) ?>
                 </div>
             </div>
+            <div class="card card-secondary">
+                <div class='card-header'>
+                    <h3 class='card-title'>Description</h3>
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <?= Yii::$app->formatter->asHtml($product->description, [
+                        'Attr.AllowedRel' => array('nofollow'),
+                        'HTML.SafeObject' => true,
+                        'Output.FlashCompat' => true,
+                        'HTML.SafeIframe' => true,
+                        'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+                    ]) ?>
+                </div>
+            </div>
+            <div class="card card-secondary">
+                <div class='card-header'>
+                    <h3 class='card-title'>SEO</h3>
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <?= DetailView::widget(
+                        [
+                            'model' => $product,
+                            'attributes' => [
+                                [
+                                    'attribute' => 'meta.title',
+                                    'value' => $product->meta->title,
+                                ],
+                                [
+                                    'attribute' => 'meta.description',
+                                    'value' => $product->meta->description,
+                                ],
+                                [
+                                    'attribute' => 'meta.keywords',
+                                    'value' => $product->meta->keywords,
+                                ],
+                            ],
+                        ]
+                    ) ?>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'>Description</h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
-            <?= Yii::$app->formatter->asHtml($product->description, [
-                'Attr.AllowedRel' => array('nofollow'),
-                'HTML.SafeObject' => true,
-                'Output.FlashCompat' => true,
-                'HTML.SafeIframe' => true,
-                'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
-            ]) ?>
-        </div>
-    </div>
+
 
     <div class="card card-secondary" id="modifications">
         <div class='card-header'>
@@ -223,39 +255,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ],
                 ]
             ); ?>
-        </div>
-    </div>
-
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'>SEO</h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
-            <?= DetailView::widget(
-                [
-                    'model' => $product,
-                    'attributes' => [
-                        [
-                            'attribute' => 'meta.title',
-                            'value' => $product->meta->title,
-                        ],
-                        [
-                            'attribute' => 'meta.description',
-                            'value' => $product->meta->description,
-                        ],
-                        [
-                            'attribute' => 'meta.keywords',
-                            'value' => $product->meta->keywords,
-                        ],
-                    ],
-                ]
-            ) ?>
         </div>
     </div>
 
