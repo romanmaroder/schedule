@@ -84,6 +84,9 @@ class CartController extends Controller
                 }, $cost->getDiscounts()),
                 'total' => $cost->getTotal(),
             ],
+            '_links' => [
+                'checkout' => ['href' => Url::to(['/shop/checkout/index'], true)],
+            ],
         ];
     }
 
