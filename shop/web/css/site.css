@@ -1,0 +1,196 @@
+main > .container, main > .container-fluid
+{
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    font-size: .9em;
+    height: 60px;
+}
+
+.footer > .container, .footer > .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    content: '';
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 2px 4px;
+    background: transparent;
+}
+
+a.asc:after {
+    border-bottom: solid 7px #212529;
+    border-top-width: 0;
+}
+
+a.desc:after {
+    border-top: solid 7px #212529;
+    border-bottom-width: 0;
+}
+
+.grid-view th,
+.grid-view td:last-child {
+    /*white-space: nowrap;*/
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.navbar form > button.logout {
+    padding-top: 7px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+@media(max-width:767px) {
+    .navbar form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+.navbar form > button.logout:focus,
+.navbar form > button.logout:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar form > button.logout:focus {
+    outline: none;
+}
+
+/* style breadcrumb widget as in previous bootstrap versions */
+.breadcrumb {
+    background-color: var(--bs-gray-200);
+    border-radius: .25rem;
+    padding: .75rem 1rem;
+}
+
+.breadcrumb-item > a
+{
+    text-decoration: none;
+}
+
+.auth-clients {
+    padding: 0 0 20px 0;
+}
+
+.fc-event {
+    box-shadow: 0 0.5rem 0.95rem rgba(0, 0, 0, .55) !important;
+}
+
+.fc-event-service-container,
+.fc-event-notice-container {
+    word-break: break-word;
+    white-space: normal;
+}
+
+.fc-event-service-container,
+.fc-event-time-container,
+.fc-event-title-container {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}
+.fc-event-service-container{
+    white-space: break-spaces;
+}
+.fc-event-title-container{
+    word-break: break-word;
+}
+
+@media (max-width: 544px), (orientation: portrait) {
+    .fc-event-time-start.dayGridMonth,
+    .fc-event-time-end.dayGridMonth {
+        font-size: 12px;
+        font-weight: 500;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    }
+}
+
+.fc-icon.fc-icon-fas,
+.fc-icon.fc-icon-far,
+.fc-icon.fc-icon-fab,
+.fc-icon.fc-icon-fal,
+.fc-icon.fc-icon-fad,
+.fc-icon.fc-icon-fa {
+    font-family: "Font Awesome 5 Free", serif !important;
+    font-weight: bold !important;
+}
+
+.user-panel p {
+    height: auto;
+    /*width: 2.1rem;*/
+    padding: 5px;
+    background-color: #c2c7d0;
+    font-weight: 700;
+    /*font-size: 12px;*/
+    text-align: center;
+    vertical-align: middle;
+}
+
+.text-shadow {
+    text-shadow: 1px 1px black;
+}
+
+.box-shadow {
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+/*Blog*/
+.nav-link {
+    color: rgba(0,0,0,.5);
+}
+
+.nav-link.active {
+    color: rgba(0,0,0,1);
+}
+
+.nav-link.aside-menu{
+    color: #6c757d;
+}
+.nav-link.aside-menu.active {
+    color: #000;
+}
+.blog-posts-item {
+    margin: 20px 0;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+}
+.btn-shadow{
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important
+}
+
+.img-shadow{
+    box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)
+}

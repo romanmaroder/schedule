@@ -4,14 +4,16 @@
 
 /* @var $content string */
 
+use frontend\widgets\Product\FeaturedProductsWidget;
+
 
 ?>
 <?php
 $this->beginContent('@frontend/views/layouts/main.php') ?>
 
-    <div class="row">
-        <!--<aside id="column-left" class="col-sm-3 hidden-xs mb-2 mb-md-0">
-            <<div class="list-group">
+    <!--<div class="row">
+        <aside id="column-left" class="col-sm-3 hidden-xs mb-2 mb-md-0">
+            <div class="list-group">
                 <a href="/product/category&amp;path=20" class="list-group-item">Desktops (13)</a>
                 <a href="/product/category&amp;path=18" class="list-group-item">Laptops &amp; Notebooks (5)</a>
                 <a href="/product/category&amp;path=25" class="list-group-item">Components (2)</a>
@@ -21,11 +23,13 @@ $this->beginContent('@frontend/views/layouts/main.php') ?>
                 <a href="/product/category&amp;path=33" class="list-group-item">Cameras (2)</a>
                 <a href="/product/category&amp;path=34" class="list-group-item">MP3 Players (4)</a>
             </div>
-        </aside>-->
-    </div>
+        </aside>
+    </div>-->
             <?= $content ?>
 
-
+<?= FeaturedProductsWidget::widget([
+                                       'limit' => 4,
+                                   ]) ?>
 
 <?php
 $this->endContent() ?>
