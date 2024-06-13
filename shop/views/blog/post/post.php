@@ -4,7 +4,7 @@
 
 /* @var $post core\entities\Blog\Post\Post */
 
-use frontend\widgets\Blog\CommentsWidget;
+use shop\widgets\Blog\CommentsWidget;
 use yii\helpers\Html;
 
 //$this->title = $post->getSeoTitle();

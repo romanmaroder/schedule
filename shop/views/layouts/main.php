@@ -45,7 +45,7 @@ OwlCarouselAsset::register($this);
     <?/*= $this->render('sidebar', ['assetDir' => $assetDir]) */?>
 
     <!-- Content Wrapper. Contains page content -->
-    <?= $this->render('content', ['content' => $content, 'assetDir' => '']) ?>
+    <?= $this->render('content', ['content' => $content, 'url' => Yii::$app->requestedRoute]) ?>
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
