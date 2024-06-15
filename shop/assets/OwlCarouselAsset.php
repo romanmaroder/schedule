@@ -19,6 +19,7 @@ class OwlCarouselAsset extends AssetBundle
         'media' => 'screen',
     ];
     public $depends = [
+
         'yii\web\JqueryAsset',
     ];
 }

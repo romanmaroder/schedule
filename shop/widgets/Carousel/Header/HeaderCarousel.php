@@ -5,7 +5,6 @@ namespace shop\widgets\Carousel\Header;
 
 
 use yii\base\Widget;
-use yii\helpers\Url;
 
 class HeaderCarousel extends Widget
 {

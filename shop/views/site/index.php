@@ -2,7 +2,7 @@
 
 /* @var $user \core\entities\User\User */
 
-$this->title = 'Starter Page';
+$this->title = 'Yebuchacha';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 
 $this->params['user'] = $user;

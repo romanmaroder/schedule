@@ -12,32 +12,48 @@ $url = Url::to(['product', 'id' =>$product->id]);
 
 ?>
 
-<div class="product-layout product-list col-xs-12">
-    <div class="product-thumb">
-        <?php if ($product->mainPhoto): ?>
-            <div class="image">
-                <a href="<?= Html::encode($url) ?>">
-                    <!--<img src="<?/*= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'catalog_list')) */?>" alt="" class="img-responsive" />-->
-                    <img src="<?= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'catalog_product_additional')) ?>" alt="" class="img-responsive" />
-                </a>
+
+<div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+    <div class="card product-item border-0 mb-4">
+        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+            <?php if ($product->mainPhoto): ?>
+            <img class="img-fluid w-100" src="<?= Html::encode($product->mainPhoto->getThumbFileUrl('file', 'catalog_product_additional')) ?>" alt="">
+            <?php endif; ?>
+        </div>
+        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+            <h6 class="text-truncate mb-3"><?= Html::encode($product->name) ?></h6>
+            <div class="d-flex justify-content-center">
+                <h6>$<?= PriceHelper::format($product->price_new) ?></h6>
+                <? if($product->price_old):?>
+                <h6 class="text-muted ml-2"><del>$<?= PriceHelper::format($product->price_old) ?></del></h6>
+                <? endif;?>
             </div>
-        <?php endif; ?>
-        <div>
-            <div class="caption">
-                <h4><a href="<?= Html::encode($url) ?>"><?= Html::encode($product->name) ?></a></h4>
-                <p><?= Html::encode(StringHelper::truncateWords(strip_tags($product->description), 20)) ?></p>
-                <p class="price">
-                    <span class="price-new">$<?= PriceHelper::format($product->price_new) ?></span>
-                    <?php if ($product->price_old): ?>
-                        <span class="price-old">$<?= PriceHelper::format($product->price_old) ?></span>
-                    <?php endif; ?>
-                </p>
-            </div>
-            <div class="button-group">
-                <button type="button" href="<?= Url::to(['/shop/cart/add', 'id' => $product->id]) ?>" data-method="post"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span></button>
-                <button type="button" data-toggle="tooltip" title="Add to Wish List" href="<?= Url::to(['/cabinet/default/wishlist-add', 'id' => $product->id]) ?>" data-method="post"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('<?= $product->id ?>');"><i class="fa fa-exchange"></i></button>
-            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between bg-light border">
+            <button type="button"
+                    data-toggle="tooltip"
+                    title="View Detail"
+                    href="<?= Html::encode($url) ?>"
+                    data-method="post"
+                    class="btn btn-sm text-dark p-0">
+                <i class="fas fa-eye text-primary mr-1"></i>
+                <span class="hidden-xs hidden-sm hidden-md">View Detail</span>
+            </button>
+            <button type="button"
+                    data-toggle="tooltip"
+                    title="Add to Wish List"
+                    href="<?= Url::to(['/cabinet/default/wishlist-add', 'id' => $product->id]) ?>"
+                    data-method="post"
+                    class="btn btn-sm text-dark p-0">
+                <i class="fas fa-heart text-primary mr-1"></i>
+            </button>
+            <button type="button"
+                    href="<?= Url::to(['/shop/cart/add', 'id' => $product->id]) ?>"
+                    data-method="post"
+                    class="btn btn-sm text-dark p-0">
+                <i class="fas fa-shopping-cart text-primary mr-1"></i>
+                <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span>
+            </button>
         </div>
     </div>
 </div>

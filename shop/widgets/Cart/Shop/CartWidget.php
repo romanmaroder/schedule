@@ -19,7 +19,7 @@ class CartWidget extends Widget
 
     public function run(): string
     {
-        return $this->render('cart', [
+        return $this->render('quantity', [
             'cart' => $this->cart,
         ]);
     }

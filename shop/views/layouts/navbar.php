@@ -1,8 +1,9 @@
 <?php
 
-use frontend\widgets\Cart\Shop\CartWidget;
+use shop\widgets\Wishlist\Header\WishlistWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use shop\widgets\Cart\Shop\CartWidget;
 
 ?>
 <!-- Topbar Start -->
@@ -56,14 +57,13 @@ use yii\helpers\Url;
             </form>
         </div>
         <div class="col-lg-3 col-6 text-right">
-            <a href="" class="btn border">
-                <i class="fas fa-heart text-primary"></i>
-                <span class="badge">0</span>
-            </a>
-            <a href="" class="btn border">
-                <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
-            </a>
+            <?= Html::a('<i class="fas fa-heart text-primary text-primary"></i> <span class="badge">'. WishlistWidget::widget(['userId' => Yii::$app->user->identity->getId()]).'</span>',
+                        ['/cabinet/default/wishlist'],
+                        ['data-method' => 'post', 'class' => 'btn border','title'=>'Wishlist']) ?>
+
+            <?= Html::a('<i class="fas fa-shopping-cart text-primary"></i> <span class="badge">'.CartWidget::widget().'</span>',
+                        ['/shop/cart/index'],
+                        ['data-method' => 'post', 'class' => 'btn border','title'=>'Shopping Cart']) ?>
         </div>
     </div>
 </div>

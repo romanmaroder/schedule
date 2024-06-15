@@ -37,6 +37,15 @@ class Identity implements IdentityInterface, UserCredentialsInterface
         return $this->user->id;
     }
 
+    public function getUsername(): string
+    {
+        return $this->user->username;
+    }
+    public function wishlistQuantity(): string
+    {
+        return $this->user->wishListQuantity();
+    }
+
     public function checkUserCredentials($username, $password): bool
     {
         if (!$user = self::getRepository()->findActiveByUsername($username)) {

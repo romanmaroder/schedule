@@ -100,13 +100,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
-
-        <div class="card card-secondary">
-            <div class='card-header'>
-                <h3 class='card-title'>Price</h3>
-                <div class='card-tools'>
-                    <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                    </button>
+    </div>
+    <div class="card card-secondary">
+        <div class='card-header'>
+            <h3 class='card-title'>Price</h3>
+            <div class='card-tools'>
+                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                </button>
                 <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
                 </button>
             </div>
@@ -201,43 +201,48 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'>Characteristics</h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
-
-            <?php foreach ($model->values as $i => $value): ?>
-            <div class="form-group">
-                <?php if ($variants = $value->variantsList()): ?>
-                    <?= $form->field($value, '[' . $i . ']value')->dropDownList($variants, ['prompt' => '']) ?>
-                <?php else: ?>
-                    <?= $form->field($value, '[' . $i . ']value')->textInput() ?>
-                <?php endif ?>
-            </div>
-            <?php endforeach; ?>
+</div>
+<div class="card card-secondary">
+    <div class='card-header'>
+        <h3 class='card-title'>Characteristics</h3>
+        <div class='card-tools'>
+            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+            </button>
+            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+            </button>
         </div>
     </div>
+    <div class="card-body">
 
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'>Photos</h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
+        <?php
+        foreach ($model->values as $i => $value): ?>
             <div class="form-group">
+                <?php
+                if ($variants = $value->variantsList()): ?>
+                    <?= $form->field($value, '[' . $i . ']value')->dropDownList($variants, ['prompt' => '']) ?>
+                <?php
+                else: ?>
+                    <?= $form->field($value, '[' . $i . ']value')->textInput() ?>
+                <?php
+                endif ?>
+            </div>
+        <?php
+        endforeach; ?>
+    </div>
+</div>
+
+<div class="card card-secondary">
+    <div class='card-header'>
+        <h3 class='card-title'>Photos</h3>
+        <div class='card-tools'>
+            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+            </button>
+            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
             <?= $form->field($model->photos, 'files[]')->widget(FileInput::class, [
                 'options' => [
                     'accept' => 'image/*',
@@ -245,18 +250,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ]) ?>
         </div>
-        </div>
     </div>
+</div>
 
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'>SEO</h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
+<div class="card card-secondary">
+    <div class='card-header'>
+        <h3 class='card-title'>SEO</h3>
+        <div class='card-tools'>
+            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+            </button>
+            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+            </button>
+        </div>
         </div>
         <div class="card-body">
             <div class="form-group">
@@ -275,13 +280,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 )->label($model->getAttributeLabel('keywords')) ?>
             </div>
         </div>
-    </div>
+
 
     <div class="card-footer bg-secondary form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
     </div>
-
-    <?php
-    ActiveForm::end(); ?>
+</div>
+<?php
+ActiveForm::end(); ?>
 
 </div>

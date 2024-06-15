@@ -3,16 +3,16 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use frontend\assets\AppAsset;
-use frontend\assets\OwlCarouselAsset;
+use shop\assets\OwlCarouselAsset;
+use shop\assets\AppAsset;
 use hail812\adminlte3\assets\AdminLteAsset;
 use hail812\adminlte3\assets\FontAwesomeAsset;
 use yii\helpers\Html;
 
+OwlCarouselAsset::register($this);
 AppAsset::register($this);
 FontAwesomeAsset::register($this);
 //AdminLteAsset::register($this);
-OwlCarouselAsset::register($this);
 
 //$this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 

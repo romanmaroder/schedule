@@ -26,6 +26,12 @@ class WishlistService
         $this->users->save($user);
     }
 
+    public function quantity($userId)
+    {
+        $user = $this->users->get($userId);
+        $user->wishListQuantity();
+    }
+
     public function remove($userId, $productId): void
     {
         $user = $this->users->get($userId);

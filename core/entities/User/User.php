@@ -174,6 +174,11 @@ class User extends ActiveRecord
         throw new \DomainException('Item is not found.');
     }
 
+    public function wishListQuantity():int
+    {
+        return count($this->wishlistItems);
+    }
+
     public function attachEmployee(
         $rateId,
         $priceId,
