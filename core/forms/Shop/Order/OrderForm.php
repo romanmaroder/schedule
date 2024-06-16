@@ -10,6 +10,8 @@ class OrderForm extends CompositeForm
 {
 
     public $note;
+    public $delivery;
+    public $customer;
 
     public function __construct(int $weight, array $config = [])
     {

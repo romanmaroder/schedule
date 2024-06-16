@@ -1,6 +1,7 @@
 <?php
 
 use core\entities\Shop\DeliveryMethod;
+use core\helpers\WeightHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -50,8 +51,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'id',
                         'name',
                         'cost',
-                        'min_weight',
-                        'max_weight',
+                        [
+                                'attribute' => 'min_weight',
+                            'value' => WeightHelper::format($method->min_weight),
+                        ],
+                        [
+                            'attribute' => 'max_weight',
+                            'value' => WeightHelper::format($method->max_weight),
+                        ],
                     ],
                 ]
             ) ?>

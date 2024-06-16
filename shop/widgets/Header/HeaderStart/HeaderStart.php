@@ -10,13 +10,11 @@ class HeaderStart extends Widget
 {
     public $title;
     public $url;
-    public $category;
 
-    public function __construct($title, $url, $category, $config = [])
+    public function __construct($title, $url, $config = [])
     {
         $this->title = $title;
         $this->url = $url;
-        $this->category = $category;
         parent::__construct($config);
     }
 
@@ -25,7 +23,6 @@ class HeaderStart extends Widget
         return $this->render('header-start',[
             'title'=>$this->title,
             'url'=>$this->url,
-            'category'=>$this->category
         ]);
     }
 }
