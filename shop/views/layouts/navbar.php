@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use shop\widgets\Cart\Shop\CartWidget;
 
+
 ?>
 <!-- Topbar Start -->
 <div class="container-fluid">
@@ -57,7 +58,7 @@ use shop\widgets\Cart\Shop\CartWidget;
             </form>
         </div>
         <div class="col-lg-3 col-6 text-right">
-            <?= Html::a('<i class="fas fa-heart text-primary text-primary"></i> <span class="badge">'. WishlistWidget::widget(['userId' => Yii::$app->user->identity->getId()]).'</span>',
+            <?= Html::a('<i class="fas fa-heart text-primary text-primary"></i> <span class="badge">'. WishlistWidget::widget(['userId' =>Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->getId() ]).'</span>',
                         ['/cabinet/default/wishlist'],
                         ['data-method' => 'post', 'class' => 'btn border','title'=>'Wishlist']) ?>
 

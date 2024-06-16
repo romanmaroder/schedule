@@ -13,7 +13,7 @@ class WishlistWidget extends Widget
 
     private $users;
 
-    public function __construct($userId, UserReadRepository $users, $config = [])
+    public function __construct(UserReadRepository $users, $userId = null, $config = [])
     {
         $this->userId = $userId;
         $this->users = $users;
@@ -22,8 +22,9 @@ class WishlistWidget extends Widget
 
     private function quantity(): int
     {
-        $user = $this->users->find($this->userId);
-
+        if (!$user = $this->users->find($this->userId)) {
+            return 0;
+        }
         return $user->wishListQuantity();
     }
 
