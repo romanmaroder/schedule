@@ -5,7 +5,10 @@
 /* @var $this \yii\web\View */
 /* @var $title  */
 /* @var $url */
+/* @var $category */
 
+use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\helpers\Url;
 
 ?>
@@ -19,6 +22,11 @@ use yii\helpers\Url;
                 <p class="m-0"><a href=<?= Url::home()?>>Home</a></p>
                 <p class="m-0 px-2">-</p>
                 <p class="m-0"><?=$title?></p>
+            </div>
+            <div class=""><small>
+                    <?=Html::encode( StringHelper::truncateWords(strip_tags( $category->description), 10) );?>
+
+                </small>
             </div>
         </div>
     </div>

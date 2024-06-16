@@ -9,13 +9,8 @@ use shop\widgets\Header\HeaderStart\HeaderStart;
 use shop\widgets\Header\NavbarMain\NavbarMain;
 use shop\widgets\Header\NavbarOther\NavbarOther;
 
-$classNavbarShow = '';
-$classMarginBottom = '';
+$category = Yii::$app->view->params['active_category'];
 
-if ($url == 'site/index') {
-    $classNavbarShow = 'show';
-    $classMarginBottom = 'mb-5';
-}
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -53,7 +48,8 @@ if ($url == 'site/index') {
         <?= NavbarOther::widget(['url' => $url]) ?>
     <? endif; ?>
 
-    <?= HeaderStart::widget(['url' => $url, 'title' => Yii::$app->getView()->title]) ?>
+    <?= HeaderStart::widget(['url' => $url, 'title' => Yii::$app->getView()->title,'category'=>$category]) ?>
+    <?/*='<pre>'; var_dump($category->description) */?>
     <!-- Main content -->
     <div class="content">
         <?= $content ?><!-- /.container-fluid -->

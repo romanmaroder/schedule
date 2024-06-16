@@ -42,7 +42,7 @@ class MainNavCategoriesWidget extends Widget
                     echo Html::beginTag('li', ['class' => $category->children ? 'hassubs' : '']);
 
                     echo Html::a(Html::encode($category->name) . ($category->children ? "<i class='fas fa-chevron-right'></i>" : ''),
-                        ['/core/catalog/category', 'id' => $category->id],['class' => $active ? 'active' : '']
+                        ['/shop/catalog/category', 'id' => $category->id],['class' => $active ? 'active' : '']
                     );
 
                     if ($category->children) {

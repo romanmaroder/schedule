@@ -5,7 +5,8 @@
 /* @var $post core\entities\Blog\Post\Post */
 
 use frontend\widgets\Blog\CommentsWidget;
-use yii\helpers\Html;use yii\helpers\StringHelper;
+use yii\helpers\Html;
+use yii\helpers\StringHelper;
 
 //$this->title = $post->getSeoTitle();
 $this->title = Html::encode( StringHelper::truncateWords(strip_tags($post->title), 5) );
