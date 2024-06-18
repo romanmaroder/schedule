@@ -5,6 +5,7 @@
 /* @var $model \core\forms\Shop\AddToCartForm */
 
 use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Html;
 
 $this->title = 'Add ' . $model->product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Catalog', 'url' => ['/shop/catalog/index']];
@@ -15,14 +16,22 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- Shop Detail Start -->
 <div class="container-fluid py-md-5">
     <div class="row px-xl-5">
-        <div class="col-lg-5 pb-5">
+        <div class="col-md-5 pb-5">
 
-    </div>
-        <div class="col-lg-7 pb-5">
-        <?php
-        $form = ActiveForm::begin() ?>
+        </div>
+        <div class="col-md-7 pb-5">
+            <?php
+            $form = ActiveForm::begin(
+                [
+                    'fieldConfig' => [
+                        'options' => [
+                            'class' => 'mb-0'
+                        ]
+                    ]
+                ]
+            ) ?>
 
-            <h3 class="font-weight-semi-bold"><?= $model->product->name?></h3>
+            <h3 class="font-weight-semi-bold"><?= $model->product->name ?></h3>
             <div class="d-flex mb-3">
                 <div class="text-primary mr-2">
                     <small class="fas fa-star"></small>
@@ -47,24 +56,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
             <div class="d-flex align-items-center mb-4 pt-2">
-                <div class="input-group quantity-add mr-3" style="width: 130px;">
+                <?= $form->field(
+                    $model,
+                    'quantity',
+                    [
+                        'template' => '<div class="input-group quantity-add mr-3" style="width: 150px;">
+                                            <div class="input-group-btn">
+                                                <span class="btn btn-primary btn-minus">
+                                                    <i class="fa fa-minus"></i>
+                                                </span>
+                                            </div>
+                                            {input}
+                                            <div class="input-group-btn">
+                                                <span class="btn btn-primary btn-plus">
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
+                                            </div>
+                                            {error}
+                                        </div>'
+                    ]
+                )->textInput(['class'=>'form-control text-center'])->label(false) ?>
 
-                    <div class="input-group-btn">
-                        <span class="btn btn-primary btn-minus">
-                            <i class="fa fa-minus"></i>
-                        </span>
-                    </div>
 
-                    <input type="text" name="AddToCartForm[quantity]" class="form-control bg-secondary text-center" value="1">
 
-                    <div class="input-group-btn">
-                        <span class="btn btn-primary btn-plus">
-                            <i class="fa fa-plus"></i>
-                        </span>
-                    </div>
 
-                </div>
-                <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                <?= Html::submitButton(
+                    '<i class="fa fa-shopping-cart mr-1"></i> Add to Cart',
+                    ['class' => 'btn btn-primary px-3 align-self-start']
+                ) ?>
             </div>
             <!--<div class="d-flex pt-2">
                 <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
