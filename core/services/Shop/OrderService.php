@@ -66,7 +66,7 @@ class OrderService
             $user->id,
             new CustomerData(
                 $form->customer->phone,
-                $form->customer->name
+                $form->customer->name = $form->customer->fullName(),
             ),
             $items,
             $this->cart->getCost()->getTotal(),

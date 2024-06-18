@@ -4,8 +4,10 @@
 namespace shop\controllers\shop;
 
 
+use common\auth\Identity;
 use core\cart\shop\Cart;
 use core\forms\Shop\Order\OrderForm;
+use core\readModels\User\UserReadRepository;
 use core\services\Shop\OrderService;
 use Yii;
 use yii\filters\AccessControl;
@@ -14,16 +16,25 @@ use yii\web\Controller;
 class CheckoutController extends Controller
 {
     public $layout = 'blank';
+    public $user;
 
     private $service;
     private $cart;
 
-    public function __construct($id, $module, OrderService $service, Cart $cart, $config = [])
+    private $users;
+
+
+    public function __construct($id, $module, OrderService $service, Cart $cart, UserReadRepository $users, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->cart = $cart;
-    }
+        $this->users = $users;
+        if (!Yii::$app->user->isGuest) {
+            $this->user = $this->users->find(Yii::$app->user->getId());
+        }
+
+        }
 
     public function behaviors(): array
     {
@@ -33,7 +44,7 @@ class CheckoutController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@','?'],
                     ],
                 ],
             ],
@@ -60,6 +71,7 @@ class CheckoutController extends Controller
         return $this->render('index', [
             'cart' => $this->cart,
             'model' => $form,
+            'user'=>$this->user,
         ]);
     }
 }

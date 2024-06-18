@@ -56,7 +56,7 @@ class CatalogController extends Controller
         return $this->render('index', [
             'category' => $category,
             'dataProvider' => $dataProvider,
-            'user' => $this->findModel(),
+            //'user' => $this->findModel(),
         ]);
     }
 
