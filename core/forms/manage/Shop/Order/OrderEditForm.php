@@ -12,9 +12,9 @@ class OrderEditForm extends CompositeForm
 
     public $note;
 
-    private DeliveryForm $delivery;
+    public DeliveryForm $delivery;
 
-    private CustomerForm $customer;
+    public CustomerForm $customer;
 
     public function __construct(Order $order, array $config = [])
     {

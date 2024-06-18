@@ -170,7 +170,7 @@ class Order extends ActiveRecord
     {
         return [
             [
-                'class' => SaveRelationsBehavior::className(),
+                'class' => SaveRelationsBehavior::class,
                 'relations' => ['items'],
             ],
         ];

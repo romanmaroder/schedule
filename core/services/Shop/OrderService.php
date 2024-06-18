@@ -16,6 +16,7 @@ use core\repositories\Shop\OrderRepository;
 use core\repositories\Shop\ProductRepository;
 use core\repositories\UserRepository;
 use core\services\TransactionManager;
+use yii\helpers\VarDumper;
 
 class OrderService
 {
@@ -71,7 +72,6 @@ class OrderService
             $this->cart->getCost()->getTotal(),
             $form->note
         );
-
         $order->setDeliveryInfo(
             $this->deliveryMethods->get($form->delivery->method),
             new DeliveryData(

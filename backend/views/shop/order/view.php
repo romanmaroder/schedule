@@ -49,7 +49,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                                'value' => OrderHelper::statusLabel($order->current_status),
                                                'format' => 'raw',
                                            ],
-                                           'user_id',
+                                           [
+                                               'attribute' => 'user_id',
+                                               'value' => function ($order) {
+                                                   return $order->customer_name;
+                                               },
+                                           ],
                                            'delivery_method_name',
                                            'deliveryData.index',
                                            'deliveryData.address',
