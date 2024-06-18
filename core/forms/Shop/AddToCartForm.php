@@ -14,12 +14,14 @@ class AddToCartForm extends Model
 {
     public $modification;
     public $quantity;
+    public $product;
 
     private $_product;
 
     public function __construct(Product $product, $config = [])
     {
         $this->_product = $product;
+        $this->product = $product;
         $this->quantity = 1;
         parent::__construct($config);
     }
