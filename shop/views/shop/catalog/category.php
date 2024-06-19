@@ -4,8 +4,6 @@
 /* @var $dataProvider yii\data\DataProviderInterface */
 /* @var $category \core\entities\Shop\Product\Category*/
 
-use yii\helpers\Html;
-
 $this->title = $category->getSeoTitle();
 
 $this->registerMetaTag(['name' =>'description', 'content' => $category->meta->description]);
@@ -21,27 +19,18 @@ $this->params['breadcrumbs'][] = $category->name;
 
 $this->params['active_category'] = $category;
 ?>
+<div class="container-fluid pt-5">
 
-    <!--<h1><?/*= Html::encode($category->getHeadingTile()) */?></h1>-->
+    <div class="row px-xl-5">
 
-<?= $this->render('_subcategories', [
+        <?= $this->render('_subcategories', [
     'category' => $category
 ]) ?>
 
-<?php if (trim($category->description)): ?>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <?= Yii::$app->formatter->asHtml($category->description, [
-                'Attr.AllowedRel' => array('nofollow'),
-                'HTML.SafeObject' => true,
-                'Output.FlashCompat' => true,
-                'HTML.SafeIframe' => true,
-                'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
-            ]) ?>
-        </div>
-    </div>
-<?php endif; ?>
 
 <?= $this->render('_list', [
-    'dataProvider' => $dataProvider
+    'dataProvider' => $dataProvider,
+
 ]) ?>
+    </div>
+</div>

@@ -4,14 +4,19 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+
 ?>
 
 <?php if ($category->children): ?>
-    <div class="panel panel-default">
-        <div class="panel-body">
+
+    <div class="col-lg-2 col-md-2">
+        <nav class="navbar-vertical">
+            <div class="navbar-nav w-100 overflow-hidden"></div>
             <?php foreach ($category->children as $child): ?>
-                <a href="<?= Html::encode(Url::to(['/shop/catalog/category', 'id' => $child->id])) ?>"><?= Html::encode($child->name) ?></a> &nbsp;
+                <a href="<?= Html::encode(Url::to(['/shop/catalog/category', 'id' => $child->id])) ?>" class="nav-item nav-link"><?= Html::encode($child->name) ?></a>
             <?php endforeach; ?>
-        </div>
+        </nav>
     </div>
+
+
 <?php endif; ?>

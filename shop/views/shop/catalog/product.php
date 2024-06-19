@@ -30,7 +30,6 @@ $this->params['active_category'] = $product->category;
 
 MagnificPopupAsset::register($this);
 ?>
-
     <div class="row" xmlns:fb="http://www.w3.org/1999/xhtml">
         <div class="col-sm-8">
             <ul class="thumbnails">

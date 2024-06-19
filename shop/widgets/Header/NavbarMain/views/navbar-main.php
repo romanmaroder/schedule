@@ -23,7 +23,7 @@ $active = Yii::$app->controller->id;
                     <h6 class="m-0">Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0" id="navbar-vertical">
                     <?= NavbarCategories::widget()?>
                 </nav>
             </div>
