@@ -59,13 +59,14 @@ class MainNavCategoriesWidget extends Widget
                             'div',
                             ['class' => 'dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0']
                         );
-                        if (!$category->children) {
+
+                        //if (!$category->children) { Uncomment if you do not want to display the main category
                             echo Html::a(
                                 Html::encode($category->name),
                                 ['/shop/catalog/category', 'id' => $category->id],
                                 ['class' =>$active ? 'dropdown-item active' : 'dropdown-item']
                             );
-                       }
+                       //}  Uncomment if you do not want to display the main category
                             $this->printNode($category->children, ++$category->depth);
                         echo Html::endTag('div');
                         echo Html::endTag('div');
