@@ -9,7 +9,7 @@ use yii\helpers\Url;
 
 <?php if ($category->children): ?>
 
-    <div class="col-lg-2 col-md-2">
+    <div class="col-lg-3 col-md-12">
         <nav class="navbar-vertical">
             <div class="navbar-nav w-100 overflow-hidden"></div>
             <?php foreach ($category->children as $child): ?>
