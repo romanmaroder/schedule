@@ -4,8 +4,8 @@
 namespace frontend\widgets;
 
 
-use core\entities\core\Category;
-use core\readModels\core\CategoryReadRepository;
+use core\entities\Shop\Product\Category;
+use core\readModels\Shop\CategoryReadRepository;
 use yii\base\Widget;
 use yii\helpers\Html;
 

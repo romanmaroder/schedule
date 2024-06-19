@@ -40,9 +40,10 @@ class CategoryReadRepository
         return $query->all();
     }
 
-    public function getTreeForMainMenu(): array
+    public function getTreeForMainMenu()
     {
         return $this->getRoot()->getDescendants()->all();
+
 
     }
 }
