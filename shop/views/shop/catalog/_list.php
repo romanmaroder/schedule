@@ -10,7 +10,11 @@ use yii\helpers\Url;
 ?>
 
 <!-- Shop Product Start -->
-
+<?php if (!$dataProvider->getModels()):?>
+    <div class="col-12 text-center">
+        <h2 class="text-primary">There are no products in the category</h2>
+    </div>
+<?php else :?>
         <div class="col-lg-9 col-md-12">
             <div class="row pb-3">
                 <div class="col-12 pb-1">
@@ -55,11 +59,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                 </div>
-                <?php if (!$dataProvider->getModels()):?>
-                <div class="col-12 text-center">
-                    <h2 class="text-primary">There are no products in the category</h2>
-                </div>
-                <?php else :?>
+
                 <?php
                 foreach ($dataProvider->getModels() as $product): ?>
                     <?= $this->render(
@@ -97,9 +97,7 @@ use yii\helpers\Url;
                         ) ?>
                     </nav>
                 </div>
-                <?php endif;?>
             </div>
-
         </div>
-
+<?php endif;?>
 <!-- Shop Product End -->

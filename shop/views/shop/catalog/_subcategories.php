@@ -18,5 +18,4 @@ use yii\helpers\Url;
         </nav>
     </div>
 
-
 <?php endif; ?>
