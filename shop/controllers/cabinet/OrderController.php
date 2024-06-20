@@ -9,13 +9,14 @@ use core\readModels\Schedule\EventReadRepository;
 use core\readModels\Shop\OrderReadRepository;
 use core\readModels\User\UserReadRepository;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class OrderController extends Controller
 {
-    public $layout = 'blank';
-    //public $layout = 'cabinet';
+    //public $layout = 'blank';
+    public $layout = 'shop-cabinet';
 
     public $user;
     public $totalCount;
@@ -38,14 +39,7 @@ class OrderController extends Controller
         parent::__construct($id, $module, $config);
         $this->orders = $orders;
         $this->users = $users;
-        $this->events = $events;
-        $this->education = $education;
 
-        $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
-        $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
-
-        $this->totalLessonCount = $this->education->getLessonCount(\Yii::$app->user->getId());
-        $this->todayLessonCount = $this->education->getLessonCountToday(\Yii::$app->user->getId());
         $this->user = $this->users->find(\Yii::$app->user->getId());
     }
 
@@ -59,6 +53,12 @@ class OrderController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'delete' => ['POST'],
                 ],
             ],
         ];

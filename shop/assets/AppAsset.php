@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
         'js/shop/lib/easing/easing.js',
         'js/shop/mail/contact.js',
         'js/shop/mail/jqBootstrapValidation.min.js',
+        'js/deletion_notice.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

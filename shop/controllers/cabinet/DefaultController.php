@@ -21,7 +21,7 @@ use yii\web\Controller;
 
 class DefaultController extends Controller
 {
-    public $layout = 'cabinet';
+    public $layout = 'shop-cabinet';
     public $totalCount;
     public $todayCount;
     public $totalLessonCount;
@@ -118,7 +118,7 @@ class DefaultController extends Controller
         );
     }
 
-    public function actionTimeline()
+    /*public function actionTimeline()
     {
         $events = $this->events->getAllDayById($this->employee->user_id);
 
@@ -132,7 +132,7 @@ class DefaultController extends Controller
                 'educations' => $educations,
             ]
         );
-    }
+    }*/
 
 
     public function actionProfile()

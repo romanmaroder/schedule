@@ -63,8 +63,8 @@ $active = Yii::$app->controller->id;
             <div class="navbar-nav ml-auto py-0">
                 <?= Html::a(
                     Html::encode('Cabinet ('. Yii::$app->user->identity->getUsername() .')'),
-                    Url::to(['/cabinet/default/index']),
-                    ['class' => $active == 'cabinet/default' ? 'nav-item nav-link active' : 'nav-item nav-link']
+                    Url::to(['/cabinet/order/index']),
+                    ['class' => $active == 'cabinet/order' ? 'nav-item nav-link active' : 'nav-item nav-link']
                 ) ?>
                 <?= Html::a(
                     'Logout',
