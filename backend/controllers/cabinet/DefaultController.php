@@ -6,8 +6,8 @@ namespace backend\controllers\cabinet;
 
 use core\forms\manage\User\Employee\EmployeeEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
-use core\readModels\core\EducationReadRepository;
-use core\readModels\core\EventReadRepository;
+use core\readModels\Schedule\EducationReadRepository;
+use core\readModels\Schedule\EventReadRepository;
 use core\readModels\User\UserReadRepository;
 use core\services\manage\EmployeeManageService;
 use Yii;
@@ -117,7 +117,7 @@ class DefaultController extends Controller
 
     public function actionProfile()
     {
-        $employee = $this->employee->find($this->user->employee);
+        $employee = $this->employee->find($this->user->id);
 
         $form = new EmployeeEditForm($employee);
 

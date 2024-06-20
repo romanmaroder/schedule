@@ -54,7 +54,7 @@ class EmployeeEditForm extends CompositeForm
             $this->_employee = $employee;
         }else{
             $this->address = new AddressForm();
-            $this->core = new ScheduleForm();
+            $this->schedule = new ScheduleForm();
         }
         parent::__construct($config);
     }

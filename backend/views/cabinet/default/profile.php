@@ -10,7 +10,7 @@
 
 use kartik\date\DatePicker;
 use kartik\widgets\Select2;
-use core\helpers\coreHelper;
+use core\helpers\ScheduleHelper;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
@@ -102,12 +102,12 @@ $this->params['employee'] = $employee;
         <?= $form->field($model, 'color')->hiddenInput()->label(false) ?>
         <?= $form->field($model, 'roleId')->hiddenInput()->label(false)  ?>
 
-        <?= $form->field($model->core, 'hoursWork')->widget(
+        <?= $form->field($model->schedule, 'hoursWork')->widget(
             Select2::class,
             [
                 'name' => 'hoursWork',
                 'language' => 'ru',
-                'data' => coreHelper::hours(),
+                'data' => ScheduleHelper::hours(),
                 'theme' => Select2::THEME_BOOTSTRAP,
                 'options' => [
                     'id' => 'hoursWork',
@@ -122,12 +122,12 @@ $this->params['employee'] = $employee;
                 ],
             ]
         ) ?>
-        <?= $form->field($model->core, 'weekends')->widget(
+        <?= $form->field($model->schedule, 'weekends')->widget(
             Select2::class,
             [
                 'name' => 'weekends',
                 'language' => 'ru',
-                'data' => coreHelper::days(),
+                'data' => ScheduleHelper::days(),
                 'theme' => Select2::THEME_BOOTSTRAP,
                 'options' => [
                     'id' => 'weekends',

@@ -10,7 +10,7 @@ class EmployeeRepository
 {
     public function get($id): Employee
     {
-        return Employee::find()->andWhere(['id' => $id])->one();
+        return Employee::find()->where(['id' => $id])->one();
     }
 
     public function checkEvent($id):bool
