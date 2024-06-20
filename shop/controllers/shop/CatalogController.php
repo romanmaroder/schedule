@@ -5,7 +5,7 @@ namespace shop\controllers\shop;
 
 
 use core\entities\User\User;
-use core\forms\manage\Schedule\ReviewForm;
+use core\forms\Shop\ReviewForm;
 use core\forms\Shop\AddToCartForm;
 use core\readModels\Shop\BrandReadRepository;
 use core\readModels\Shop\CategoryReadRepository;

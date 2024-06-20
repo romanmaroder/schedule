@@ -84,7 +84,7 @@ PluginAsset::register($this)->add(
                 <?= Html::a(
                     'Pay via Robokassa',
                     ['/payment/robokassa/invoice', 'id' => $order->id],
-                    ['class' => 'btn btn-sm btn-gradient btn-shadow btn-success']
+                    ['class' => 'btn btn-sm btn-gradient shadow btn-success rounded']
                 ) ?>
             </p>
         <?php
