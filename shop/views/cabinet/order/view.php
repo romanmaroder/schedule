@@ -37,9 +37,10 @@ PluginAsset::register($this)->add(
                     ],
                     'delivery_method_name',
                     'deliveryData.index',
-                'deliveryData.address',
-                'cost',
-                'note:ntext',
+                    'deliveryData.address',
+                    'delivery_cost',
+                    'cost',
+                    'note:ntext',
             ],
         ]
     ) ?>
