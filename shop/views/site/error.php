@@ -9,32 +9,25 @@ use yii\helpers\Html;
 
 $this->title = $name;
 $this->params['breadcrumbs'] = [['label' => $this->title]];
+
 ?>
-<div class="error-page">
-    <div class="error-content" style="margin-left: auto;">
-        <h3><i class="fas fa-exclamation-triangle text-danger"></i> <?= Html::encode($name) ?></h3>
 
-        <p>
-            <?= nl2br(Html::encode($message)) ?>
-        </p>
+<!-- Main content -->
+<section class="container-fluid">
+    <div class="error-page">
+        <h2 class="headline text-warning"> 404</h2>
 
-        <p>
-            The above error occurred while the Web server was processing your request.
-            Please contact us if you think this is a server error. Thank you.
-            Meanwhile, you may <?= Html::a('return to dashboard', Yii::$app->homeUrl); ?>
-            or try using the search form.
-        </p>
+        <div class="error-content pl-md-3">
+            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! <?= nl2br(Html::encode($message)) ?>.</h3>
 
-        <form class="search-form" style="margin-right: 190px;">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Search">
+            <p class="text-center">
+                We could not find the page you were looking for.
+                Meanwhile, you may <?= Html::a('return to Home', Yii::$app->homeUrl); ?> or try using the search form.
+            </p>
 
-                <div class="input-group-append">
-                    <button type="submit" name="submit" class="btn btn-danger"><i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+        </div>
+        <!-- /.error-content -->
     </div>
-</div>
+</section>
+    <!-- /.error-page -->
 
