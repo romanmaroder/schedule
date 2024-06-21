@@ -7,12 +7,17 @@
 
 use core\helpers\OrderHelper;
 use core\helpers\PriceHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = 'Order ' . $order->id;
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+PluginAsset::register($this)->add(
+    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons','sweetalert2']
+);
 ?>
 <div class="user-view">
 

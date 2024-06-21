@@ -16,7 +16,7 @@ $this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
-    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
+    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons','sweetalert2']
 );
 ?>
 <div class="category-index">
