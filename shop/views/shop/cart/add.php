@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $model \core\forms\Shop\AddToCartForm */
+/* @var $product \core\entities\Shop\Product\Product */
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -17,7 +18,43 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="container-fluid py-md-5">
     <div class="row px-xl-5">
         <div class="col-md-5 pb-5">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner border">
+                    <?php
+                    foreach ($product->photos as $i => $photo): ?>
+                        <?php
+                        if ($i == 0): ?>
+                            <div class="carousel-item active">
+                                <a class="thumbnail"
+                                   href="<?= $photo->getThumbFileUrl('file', 'catalog_origin') ?>">
+                                    <img class="w-100 h-100"
+                                         src="<?= $photo->getThumbFileUrl('file', 'catalog_product_main') ?>"
+                                         alt="<?= Html::encode($product->name) ?>"/>
+                                </a>
+                            </div>
+                        <?php
+                        else: ?>
+                            <div class="carousel-item">
+                                <a class="thumbnail" href="<?= $photo->getThumbFileUrl('file', 'catalog_origin') ?>"
+                                   title="HP LP3065">
+                                    <img class="w-100 h-100"
+                                         src="<?= $photo->getThumbFileUrl('file', 'catalog_product_additional') ?>"
+                                         alt=""/>
+                                </a>
+                            </div>
+                        <?php
+                        endif; ?>
+                    <?php
+                    endforeach; ?>
 
+                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+                        <i class="fa fa-2x fa-angle-left text-dark"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+                        <i class="fa fa-2x fa-angle-right text-dark"></i>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="col-md-7 pb-5">
             <?php

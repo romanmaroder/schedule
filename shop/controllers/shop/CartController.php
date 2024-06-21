@@ -63,13 +63,14 @@ class CartController extends Controller
         }
 
         if (!$product->modifications) {
-            try {
-                $this->service->add($product->id, null, 1);
-                Yii::$app->session->setFlash('success', 'Success!');
-                return $this->redirect(Yii::$app->request->referrer);
-            } catch (\DomainException $e) {
-                Yii::$app->errorHandler->logException($e);
-                Yii::$app->session->setFlash('error', $e->getMessage());
+                try {
+                    $this->service->add($product->id, null, 1);
+                    Yii::$app->session->setFlash('success', 'Success!');
+                    return $this->redirect(Yii::$app->request->referrer);
+                } catch (\DomainException $e) {
+                    Yii::$app->errorHandler->logException($e);
+                    Yii::$app->session->setFlash('error', $e->getMessage());
+
             }
         }
 
@@ -91,6 +92,27 @@ class CartController extends Controller
             'product' => $product,
             'model' => $form,
         ]);
+    }
+
+    public function actionAddCatalog($id)
+    {
+        if (!$product = $this->products->find($id)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        $this->layout = 'blank';
+
+        $form = new AddToCartForm($product);
+
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->add($product->id, $form->modification, $form->quantity);
+                return $this->redirect(['index']);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
     }
 
     /**

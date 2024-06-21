@@ -22,7 +22,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 
             <p class="text-center">
                 We could not find the page you were looking for.
-                Meanwhile, you may <?= Html::a('return to Home', Yii::$app->homeUrl); ?> or try using the search form.
+                Meanwhile, you may <?= Html::a('return to Home', Yii::$app->homeUrl); ?>.
             </p>
 
         </div>

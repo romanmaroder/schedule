@@ -121,17 +121,18 @@ $this->params['active_category'] = $product->category;
                             <?php $form = ActiveForm::begin( [
                                                                  'fieldConfig' => [
                                                                      'options' => [
-                                                                         'class' => 'mb-0'
+                                                                         'class' => 'mb-0',
                                                                      ]
                                                                  ],
-                                'action' => ['/shop/cart/add', 'id' => $product->id],
+                                'action' => ['/shop/cart/add-catalog', 'id' => $product->id],
                             ] ) ?>
                     <div class="d-flex mb-4">
                                 <?php if ($modifications = $cartForm->modificationsList()): ?>
-                                <?= $form->field($cartForm, 'modification')->dropDownList(
+                                    <?= $form->field($cartForm, 'modification')->dropDownList(
                                         $modifications,
                                         ['prompt' => '--- Select ---']
                                     ) ?>
+
                                 <?php endif; ?>
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
@@ -153,6 +154,7 @@ $this->params['active_category'] = $product->category;
                                                 </div>'
                                     ]
                                 )->textInput(['class' => 'form-control text-center'])->label(false) ?>
+
                                 <?= Html::submitButton(
                                     '<i class="fa fa-shopping-cart mr-1"></i> Add To Cart',
                                     ['class' => 'btn btn-primary px-3']
