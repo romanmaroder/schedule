@@ -89,6 +89,12 @@ use yii\helpers\Html;
                                             'url' => ['/schedule/calendar/calendar'],
                                             'active' => $this->context->id == 'schedule/calendar'
                                         ],
+                                        [
+                                            'label' => 'Missed user',
+                                            'icon' => 'far fa-calendar-alt',
+                                            'url' => ['/schedule/missing-users/index'],
+                                            'active' => $this->context->id == 'schedule/missing-users'
+                                        ],
 
                                         [
                                             'label' => 'Service',
