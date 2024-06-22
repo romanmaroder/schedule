@@ -46,7 +46,7 @@ PluginAsset::register($this)->add(
                             'format' => 'raw',
                         ],
                         ['class' => ActionColumn::class,
-                            'template' => '{view} {delete}'],
+                            'template' => '{view}'],
                     ],
                 ]
             ); ?>

@@ -7,6 +7,7 @@ namespace core\readModels\User;
 use core\entities\User\User;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 class UserReadRepository
 {
@@ -25,6 +26,32 @@ class UserReadRepository
     public function findActiveByUsername($username): ?User
     {
         return User::findOne(['username' => $username, 'status' => User::STATUS_ACTIVE]);
+    }
+
+    public function findMissed($eventIdsUser): ActiveDataProvider
+    {
+        return $this->getProvider(
+            $this->findAllMissingUser(
+                array_diff(
+                    ArrayHelper::getColumn($this->findAllUser(), 'id'),
+                    ArrayHelper::getColumn($eventIdsUser, 'id')
+                )
+            )
+        );
+    }
+
+    private function findAllUser(): array
+    {
+        return User::find()->alias('u')->leftJoin('schedule_employees', 'schedule_employees.user_id = u.id')
+            ->select(['u.id', 'u.username'])
+            ->where(['is', 'schedule_employees.user_id', null])
+            ->asArray()
+            ->all();
+    }
+
+    private function findAllMissingUser($ids): ActiveQuery
+    {
+        return User::find()->where(['in', 'id', $ids]);
     }
 
     private function getProvider(ActiveQuery $query): ActiveDataProvider

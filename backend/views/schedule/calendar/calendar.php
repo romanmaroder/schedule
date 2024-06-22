@@ -222,7 +222,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         borderColor: $(this).attr('backgroundColor'),
                                                         className: 'event-custom-classes',
                                                         allDay : $(this).attr('allDay'),
-                                                        groupId : $(this).attr('groupId'),
+                                                        //groupId : $(this).attr('groupId'),
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         url:'/schedule/api/event-api/view',
                                                         });

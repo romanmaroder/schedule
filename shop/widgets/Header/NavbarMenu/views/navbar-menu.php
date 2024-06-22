@@ -30,7 +30,7 @@ $active = Yii::$app->controller->id;
                 Url::to(['/shop/catalog/index']),
                 ['class' => $active == 'shop/catalog' ? 'nav-item nav-link active' : 'nav-item nav-link ']
             ) ?>
-            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+            <!--<a href="detail.html" class="nav-item nav-link">Shop Detail</a>-->
             <div class="nav-item dropdown">
                 <a href="#" class="<?=$active == 'shop/cart' ? 'nav-link active': 'nav-link';?>" data-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu rounded-0 m-0">
@@ -39,7 +39,11 @@ $active = Yii::$app->controller->id;
                         Url::to(['/shop/cart/index']),
                         ['class' => $active == 'shop/cart' ? 'dropdown-item active' : 'dropdown-item']
                     ) ?>
-                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                    <?= Html::a(
+                        Html::encode('Checkout'),
+                        Url::to(['/shop/checkout/index']),
+                        ['class' => $active == 'shop/checkout' ? 'dropdown-item active' : 'dropdown-item']
+                    ) ?>
                 </div>
             </div>
             <a href="contact.html" class="nav-item nav-link">Contact</a>

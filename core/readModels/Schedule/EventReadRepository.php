@@ -52,6 +52,16 @@ class EventReadRepository
             ->andWhere(['master_id'=>$id])->count();
     }
 
+    public function findRecordsFromTodayDate(): array
+    {
+        return Event::find()
+            ->joinWith('client c')
+            ->select(['c.id', 'c.username'])
+            ->where(['>=','DATE(start)',new Expression('DATE(NOW() + INTERVAL 1 DAY)')])
+            ->asArray()
+            ->all();
+    }
+
     public function getUnpaidRecords(): array
     {
        return Event::find()->where(['status'=>0])->all();
