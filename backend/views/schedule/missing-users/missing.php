@@ -67,8 +67,8 @@ $js = <<< JS
  
     $('#missing').DataTable({
     
-       "paging": false,
-       "lengthChange": false,
+       "paging": true,
+       "lengthChange": true,
        "searching": true,
        "ordering": true,
        "info": false,
