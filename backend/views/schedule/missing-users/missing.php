@@ -43,6 +43,13 @@ PluginAsset::register($this)->add(
                     //'id',
                     'username',
                     [
+                        'attribute' => 'username',
+                        'value' => function (User $model) {
+                            return Html::a(Html::encode($model->username), ['user/view', 'id' => $model->id]);
+                        },
+                        'format' => 'raw'
+                    ],
+                    [
                         'attribute' => 'phone',
                         'value' => function (User $model) {
                             return Html::a(
