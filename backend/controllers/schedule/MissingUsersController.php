@@ -11,8 +11,8 @@ use yii\web\Controller;
 
 class MissingUsersController extends Controller
 {
-    private $users;
-    private $events;
+    private UserReadRepository $users;
+    private EventReadRepository $events;
 
     public function __construct($id, $module, UserReadRepository $users, EventReadRepository $events, $config = [])
     {

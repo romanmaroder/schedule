@@ -5,6 +5,7 @@
 
 /* @var $order \core\entities\Shop\Order\Order|null */
 
+use core\entities\Shop\Order\Order;
 use core\helpers\OrderHelper;
 use core\helpers\PriceHelper;
 use yii\helpers\Html;
@@ -34,6 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'deliveryData.index',
                 'deliveryData.address',
                 'cost',
+                [
+                    'attribute' => 'cost',
+                    'value' => function (Order $order) {
+                        return $order->getTotalCost();
+                    },
+                ],
                 'note:ntext',
             ],
         ]

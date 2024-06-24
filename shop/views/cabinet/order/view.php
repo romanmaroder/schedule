@@ -40,12 +40,18 @@ PluginAsset::register($this)->add(
                     'deliveryData.address',
                     'delivery_cost',
                     'cost',
+                    [
+                        'attribute' => 'Total cost',
+                        'value' => function ($order) {
+                            return $order->getTotalCost();
+                        },
+                    ],
                     'note:ntext',
-            ],
+                ],
         ]
     ) ?>
 
-    <div class="table-responsive">
+    <div class="table-responsive mb-3">
         <table class="table table-bordered" id="detail">
             <thead>
             <tr>
@@ -78,6 +84,32 @@ PluginAsset::register($this)->add(
             </tbody>
         </table>
     </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="delivery">
+                <thead>
+                <tr>
+                    <th class="text-left">Delivery Name</th>
+                    <th class="text-right">Delivery Cost</th>
+                   <!--<th class="text-right" colspan="2">Total</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left">
+                            <?= Html::encode($order->delivery_method_name) ?>
+                        </td>
+                        <td class="text-right" >
+                            <?= Html::encode($order->delivery_cost) ?>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <td>Total:</td>
+                    <td class="text-right" colspan="3"><?= PriceHelper::format($order->getTotalCost()) ?></td>
+                </tfoot>
+            </table>
+        </div>
 
         <?php
         if ($order->canBePaid()): ?>

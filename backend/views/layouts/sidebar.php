@@ -91,7 +91,7 @@ use yii\helpers\Html;
                                         ],
                                         [
                                             'label' => 'Missed user',
-                                            'icon' => 'far fa-calendar-alt',
+                                            'icon' => 'fas fa-user-clock',
                                             'url' => ['/schedule/missing-users/index'],
                                             'active' => $this->context->id == 'schedule/missing-users'
                                         ],

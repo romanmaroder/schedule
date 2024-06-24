@@ -64,6 +64,13 @@ PluginAsset::register($this)->add(
                                            'deliveryData.index',
                                            'deliveryData.address',
                                            'cost',
+                                           'delivery_cost',
+                                           [
+                                               'attribute' => 'Total cost',
+                                               'value' => function ( $order) {
+                                                   return $order->getTotalCost();
+                                               },
+                                           ],
                                            'note:ntext',
                                        ],
                                    ]) ?>
