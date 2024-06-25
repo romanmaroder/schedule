@@ -45,6 +45,7 @@ class UserReadRepository
         return User::find()->alias('u')->leftJoin('schedule_employees', 'schedule_employees.user_id = u.id')
             ->select(['u.id', 'u.username'])
             ->where(['is', 'schedule_employees.user_id', null])
+            ->andWhere(['u.status'=>User::STATUS_ACTIVE])
             ->asArray()
             ->all();
     }
