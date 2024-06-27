@@ -8,6 +8,7 @@
 /* @var $category */
 
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
 ?>
 <?php if ($url !== 'site/index'):?>
@@ -16,11 +17,19 @@ use yii\helpers\Url;
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3"><?= $title ?></h1>
-            <div class="d-inline-flex">
-                <p class="m-0"><a href=<?= Url::home() ?>>Home</a></p>
-                <p class="m-0 px-2">-</p>
-                <p class="m-0"><?= $title ?></p>
-            </div>
+                <?php
+                echo Breadcrumbs::widget(
+                    [
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        'tag' => 'div',
+                        'itemTemplate'=>"<p class=\"m-0\">{link}</p>\n<p class=\"m-0 px-2\">-</p>\n",
+                        'activeItemTemplate'=>"<p class=\"m-0\">{link}</p>\n",
+                        'options' => [
+                            'class' => 'd-inline-flex'
+                        ]
+                    ]
+                );
+                ?>
         </div>
     </div>
     <!-- Page Header End -->
