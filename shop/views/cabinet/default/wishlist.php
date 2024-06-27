@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="active tab-pane" id="wishlist">
-
     <?= GridView::widget(
         [
             'dataProvider' => $dataProvider,
@@ -33,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'value' => function (Product $model) {
                         return $model->mainPhoto ? Html::img(
-                            $model->mainPhoto->getThumbFileUrl('file', 'admin'),
+                            $model->mainPhoto->getThumbFileUrl('file', 'cart_list'),
                             ['class' => 'img-shadow']
                         ) : null;
                     },

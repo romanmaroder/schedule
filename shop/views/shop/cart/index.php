@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'Shopping Cart';
-$this->params['breadcrumbs'][] = ['label' => 'Catalog', 'url' => ['/shop/catalog/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/shop/cabinet/order/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- Cart Start -->
