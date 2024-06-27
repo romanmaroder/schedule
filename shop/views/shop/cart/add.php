@@ -9,9 +9,18 @@ use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
 $this->title = 'Add ' . $model->product->name;
-$this->params['breadcrumbs'][] = ['label' => 'Catalog', 'url' => ['/shop/catalog/index']];
-$this->params['breadcrumbs'][] = ['label' => 'Cart', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Catalog', 'url' => ['shop/catalog/index']];
+foreach ($product->category->parents as $parent) {
+    if (!$parent->isRoot()) {
+        $this->params['breadcrumbs'][] = ['label' => $parent->name, 'url' => ['shop/catalog/category', 'id' => $parent->id]];
+    }
+}
+$this->params['breadcrumbs'][] = [
+    'label' => $product->category->name,
+    'url' => ['shop/catalog/category', 'id' => $product->category->id]
+];
+$this->params['breadcrumbs'][] = $product->name;
+$this->params['active_category'] = $product->category;
 
 ?>
 <!-- Shop Detail Start -->
