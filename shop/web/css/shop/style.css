@@ -9627,3 +9627,15 @@ a.text-dark:hover, a.text-dark:focus {
     text-align: center;
   }
 }
+
+
+/*Star rating*/
+.rating-custom{
+  position: relative;
+}
+.rating-custom ~ .rating-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0%,50%);
+}

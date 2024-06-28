@@ -5,6 +5,7 @@ namespace core\services\manage\Shop;
 
 
 use core\forms\manage\Shop\Product\ReviewEditForm;
+use core\forms\Shop\ReviewForm;
 use core\repositories\Shop\ProductRepository;
 
 class ReviewManageService
@@ -15,6 +16,19 @@ class ReviewManageService
     {
         $this->products = $products;
     }
+
+
+    public function add($id,ReviewForm $form)
+    {
+        $product = $this->products->get($id);
+        $product->addReview(
+            $form->userId,
+            $form->vote,
+            $form->text
+        );
+        $this->products->save($product);
+    }
+
 
     public function edit($id, $reviewId, ReviewEditForm $form): void
     {

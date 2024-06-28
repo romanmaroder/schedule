@@ -7,6 +7,7 @@
 
 
 use core\helpers\PriceHelper;
+use kartik\widgets\StarRating;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -78,13 +79,26 @@ $this->params['active_category'] = $product->category;
                 <h3 class="font-weight-semi-bold"><?= Html::encode($product->name) ?></h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                        <?php
+                        echo StarRating::widget(
+                            [
+                                'name' => 'vidget',
+                                'value' => $product->rating,
+                                'pluginOptions' => [
+                                    'step' => 1,
+                                    'theme' => 'krajee-fas',
+                                    'size' => 'xs',
+                                    'readonly' => true,
+                                    'showClear' => false,
+                                    'showCaption' => false,
+                                    'filledStar' => '<i class="fas fa-star text-primary"></i>',
+                                    'emptyStar' => '<i class="far fa-star text-primary"></i>'
+                                ],
+
+                            ]
+                        ); ?>
                     </div>
-                    <small class="pt-1">(50 Reviews)</small>
+                    <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;"><small class="text-dark">(<?= $product->countReview() ?> reviews)</small></a>
                 </div>
                 <h3 class="font-weight-semi-bold mb-4"><?= PriceHelper::format($product->price_new) ?></h3>
                 <p class="mb-4"><?= Yii::$app->formatter->asHtml(
@@ -135,7 +149,7 @@ $this->params['active_category'] = $product->category;
 
                                 <?php endif; ?>
                     </div>
-                    <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="d-flex align-items-center mb-2 pt-2">
                                 <?= $form->field( $cartForm,'quantity',
                                     [
                                         'template' => '<div class="input-group quantity-add mr-3" style="width: 150px;">
@@ -168,22 +182,7 @@ $this->params['active_category'] = $product->category;
                             </div>
                         <?php  endif; ?>
                 </div>
-
-                <div class="">
-                    <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews</a> /
-                    <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a>
-
-                </div>
-                <!-- AddThis Button BEGIN -->
-                <!--<div class="addthis_toolbox addthis_default_style" data-url="/index.php?route=product/product&amp;product_id=47">
-                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                    <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a>
-                    <a class="addthis_counter addthis_pill_style"></a>
-                </div>
-                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script>-->
-                <!-- AddThis Button END -->
-
-                <div class="d-flex pt-2">
+                <div class="d-flex">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
                     <div class="d-inline-flex">
                         <a class="text-dark px-2" href="">
@@ -207,7 +206,7 @@ $this->params['active_category'] = $product->category;
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
                     <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
                     <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-review">Reviews (0)</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-review">Reviews (<?= $product->countReview() ?>)</a>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
@@ -246,43 +245,53 @@ $this->params['active_category'] = $product->category;
                         <div class="row">
                             <div class="col-md-6">
                                 <div id="review"></div>
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                <div class="media mb-4">
-                                    <?= Html::img(
-                                        ['/img/user.jpg'],
-                                        [
-                                            'alt' => 'Image',
-                                            'class' => 'img-fluid mr-3 mt-1',
-                                            'style' => 'width: 45px'
-                                        ]
-                                    ) ?>
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
+                                <h4 class="mb-4"><?= $product->countReview() ?> review for "<?= $product->name; ?>"</h4>
+                                <?php
+                                foreach ($product->reviews as $i => $review) : ?>
+                                    <div class="media mb-4">
+                                        <?= Html::img(
+                                            ['/img/user.jpg'],
+                                            [
+                                                'alt' => 'Image',
+                                                'class' => 'img-fluid mr-3 mt-1',
+                                                'style' => 'width: 45px'
+                                            ]
+                                        ) ?>
+                                        <div class="media-body">
+                                            <h6><?= $review->user->username; ?><small> -
+                                                    <i><?= Yii::$app->formatter->asDate(
+                                                            $review->created_at,
+                                                            'd MMM Y'
+                                                        ) ?></i></small></h6>
+                                            <div class="text-primary mb-2">
+                                                <?php
+                                                echo StarRating::widget(
+                                                    [
+                                                        'name' => 'vote',
+                                                        'value' => $review->vote,
+                                                        'pluginOptions' => [
+                                                            'step' => 1,
+                                                            'theme' => 'krajee-fas',
+                                                            'size' => 'xs',
+                                                            'readonly' => true,
+                                                            'showClear' => false,
+                                                            'showCaption' => false,
+                                                            'filledStar' => '<i class="fas fa-star text-primary"></i>',
+                                                            'emptyStar' => '<i class="far fa-star text-primary"></i>'
+                                                        ],
+
+                                                    ]
+                                                ); ?>
+                                            </div>
+                                            <p><?= $review->text; ?></p>
                                         </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum
-                                            et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
                                     </div>
-                                </div>
+                                <?php
+                                endforeach; ?>
                             </div>
                             <div class="col-md-6">
                                 <h4 class="mb-4">Leave a review</h4>
                                 <small>Your email address will not be published. Required fields are marked *</small>
-                                <div class="d-flex my-3">
-                                    <p class="mb-0 mr-2">Your Rating * :</p>
-                                    <!--<div class="text-primary">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>-->
-                                </div>
                                 <?php
                                 if (Yii::$app->user->isGuest): ?>
 
@@ -297,14 +306,45 @@ $this->params['active_category'] = $product->category;
 
                                     <?php
                                     $form = ActiveForm::begin(['id' => 'form-review']) ?>
-                                    <div class="form-group">
-                                        <?= $form->field($reviewForm, 'vote')->dropDownList(
-                                            $reviewForm->votesList(),
-                                            ['prompt' => 'Select']
-                                        )->label(false) ?>
+                                    <div class="d-flex my-3">
+                                        <p class="mb-0 mr-2">Your Rating * :
+                                            <span class="form-group">
+                                                <?/*= $form->field($reviewForm, 'vote')->dropDownList(
+                                                            $reviewForm->votesList(),
+                                                            ['prompt' => 'Select']
+                                                        )->label(false) */ ?>
+
+                                                <?= $form->field($reviewForm, 'vote',)->widget(
+                                                    StarRating::class,
+                                                    [
+                                                        'name' => 'vote',
+                                                        'pluginOptions' => [
+                                                            'step' => 1,
+                                                            'containerClass'=>'rating-custom',
+                                                            'stars' => count($reviewForm->votesList()),
+                                                            'theme' => 'krajee-fas',
+                                                            'size' => 'xs',
+                                                            'readonly' => false,
+                                                            'showClear' => false,
+                                                            'showCaption' => false,
+                                                            'filledStar' => '<i class="fas fa-star text-primary"></i>',
+                                                            'emptyStar' => '<i class="far fa-star text-primary"></i>',
+                                                        ],
+
+                                                    ]
+                                                )->label(false); ?>
+                                            </span>
+                                        </p>
                                     </div>
+
+
                                     <div class="form-group">
-                                        <?= $form->field($reviewForm, 'text')->textarea(['rows' => 5]) ?>
+                                        <?= $form->field($reviewForm, 'text')->textarea(['rows' => 5])->label(
+                                            'Your Review *'
+                                        ) ?>
+                                        <?= $form->field($reviewForm, 'userId')->hiddenInput(
+                                            ['value' => Yii::$app->user->id]
+                                        )->label(false) ?>
                                     </div>
                                     <div class="form-group mb-0">
                                         <?= Html::submitButton(

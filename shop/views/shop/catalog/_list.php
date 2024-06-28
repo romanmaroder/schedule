@@ -18,6 +18,21 @@ use yii\helpers\Url;
         <div class="col-lg-9 col-md-12">
             <div class="row pb-3">
                 <div class="col-12 pb-1">
+                    <?php if (Yii::$app->session->hasFlash('error')): ?>
+                        <div class="alert alert-danger alert-dismissible mt-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            <?php echo Yii::$app->session->getFlash('error'); ?>
+                        </div>
+                    <?php endif ;?>
+                    <?php if (Yii::$app->session->hasFlash('success')): ?>
+                        <div class="alert alert-success alert-dismissible mt-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            <?php echo Yii::$app->session->getFlash('success'); ?>
+                        </div>
+                    <?php endif ;?>
+
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <form action="">
                             <div class="input-group">

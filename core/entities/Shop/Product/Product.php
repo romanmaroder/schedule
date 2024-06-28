@@ -517,6 +517,21 @@ class Product extends ActiveRecord
         throw new \DomainException('Review is not found.');
     }
 
+    public function countReview()
+    {
+        return count($this->reviews);
+    }
+
+    public function getReview($id): Review
+    {
+        foreach ($this->reviews as $review) {
+            if ($review->isIdEqualTo($id)) {
+                return $review;
+            }
+        }
+        throw new \DomainException('Comment is not found.');
+    }
+
     private function updateReviews(array $reviews): void
     {
         $amount = 0;
@@ -637,6 +652,7 @@ class Product extends ActiveRecord
     {
         return $this->hasMany(Review::class, ['product_id' => 'id']);
     }
+
 
     public function getWishlistItems(): ActiveQuery
     {

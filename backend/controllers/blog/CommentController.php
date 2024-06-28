@@ -96,6 +96,7 @@ class CommentController extends Controller
      * @param $post_id
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionActivate($post_id, $id)
     {
