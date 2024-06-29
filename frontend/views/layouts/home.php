@@ -22,11 +22,11 @@ $this->beginContent('@frontend/views/layouts/main.php') ?>
     ]
 ) ?>
 
-<?= FeaturedProductsWidget::widget([
+<?/*= FeaturedProductsWidget::widget([
                                        'limit' => 4,
-                                   ]) ?>
+                                   ]) */?>
 
-<?= CartWidget::widget() ?>
+<?/*= CartWidget::widget() */?>
 <?= $content ?>
 
 
