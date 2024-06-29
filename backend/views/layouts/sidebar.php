@@ -168,6 +168,12 @@ use yii\helpers\Html;
                                             'url' => ['/shop/order/index'],
                                             'active' => $this->context->id == 'shop/order'
                                         ],
+                                        [
+                                            'label' => 'Reviews',
+                                            'icon' => 'fas fa-comment-alt',
+                                            'url' => ['/shop/review/index'],
+                                            'active' => $this->context->id == 'shop/review'
+                                        ],
                                     ]
                                 ],
                                 [
