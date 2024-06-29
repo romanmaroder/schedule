@@ -66,7 +66,7 @@ class DefaultController extends Controller
 
         $this->user = $this->users->find(\Yii::$app->user->getId());
         if ($this->user) {
-            $this->employee = $this->employees->find($this->user->employee);
+            $this->employee = $this->employees->find($this->user->id);
         }
         $this->profile = $profile;
         $this->wishList = $wishList;
