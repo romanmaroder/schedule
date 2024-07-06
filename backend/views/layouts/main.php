@@ -26,6 +26,7 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <?php $this->registerLinkTag(['rel' => 'icon','size' => '16x16','type' => 'image/svg+xml/ico', 'href' => '/favicon.ico']);?>
     <?php $this->head() ?>
 </head>
 <body class="hold-transition sidebar-mini">

@@ -7,7 +7,7 @@ namespace backend\controllers\cabinet;
 use core\entities\Expenses\Expenses\Expenses;
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
-use core\services\schedule\CartService;
+use core\services\Schedule\CartService;
 use yii\data\ArrayDataProvider;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;

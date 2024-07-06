@@ -1,7 +1,7 @@
 <?php
 
 
-namespace core\services\schedule;
+namespace core\services\Schedule;
 
 
 use core\cart\Cart;
