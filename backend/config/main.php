@@ -15,6 +15,7 @@ return [
     'aliases' => [
         '@staticRoot' => $params['staticPath'],
         '@static'   => $params['staticHostInfo'],
+        '@mihaildev/ckeditor' => '@vendor/mihaildev/yii2-ckeditor',
     ],
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
