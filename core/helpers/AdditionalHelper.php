@@ -4,17 +4,17 @@
 namespace core\helpers;
 
 
-use core\entities\Schedule\Service\Service;
+use core\entities\Schedule\Additional\Additional;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-class ServiceHelper
+class AdditionalHelper
 {
     public static function statusList(): array
     {
         return [
-            Service::STATUS_DRAFT => 'Draft',
-            Service::STATUS_ACTIVE => 'Active',
+            Additional::STATUS_DRAFT => 'Draft',
+            Additional::STATUS_ACTIVE => 'Active',
         ];
     }
 
@@ -27,15 +27,15 @@ class ServiceHelper
     {
         /* Match expression is only allowed since PHP 8.0
                match ($status) {
-                   0, Service::STATUS_DRAFT => $class ='badge badge-secondary',
-                   Service::STATUS_ACTIVE => $class = 'badge badge-success',
+                   0, Additional::STATUS_DRAFT => $class ='badge badge-secondary',
+                   Additional::STATUS_ACTIVE => $class = 'badge badge-success',
                };
        */
         switch ($status) {
-            case Service::STATUS_DRAFT:
+            case Additional::STATUS_DRAFT:
                 $class = 'badge badge-secondary';
                 break;
-            case Service::STATUS_ACTIVE:
+            case Additional::STATUS_ACTIVE:
                 $class = 'badge badge-success';
                 break;
             default:
