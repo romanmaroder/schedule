@@ -1,8 +1,11 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $category core\entities\Schedule\Service\Category */
-/* @var $model core\forms\manage\Schedule\CategoryForm */
+
+
+/* @var $this \yii\web\View */
+/* @var $model \core\forms\manage\Schedule\Additional\CategoryForm */
+/* @var $category \core\entities\Schedule\Additional\Category */
+
 
 $this->title = 'Update Category: ' . $category->name;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

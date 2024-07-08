@@ -16,7 +16,6 @@ class AdditionalManageService
 {
     private $services;
     private $categories;
-    private $tags;
     private $transaction;
 
     public function __construct(AdditionalRepository $services,
@@ -46,12 +45,6 @@ class AdditionalManageService
             )
         );
 
-        # Binding tags to the service
-        foreach ($form->tags->existing as $tagId) {
-            $tag = $this->tags->get($tagId);
-            $services->assignTag($tag->id);
-        }
-
         $this->transaction->wrap(
             function () use ($services, $form) {
 
@@ -79,7 +72,6 @@ class AdditionalManageService
         $this->transaction->wrap(
             function () use ($service, $form) {
                 $service->revokeCategories();
-                $service->revokeTags();
                 $this->services->save($service);
 
                 foreach ($form->categories->others as $otherId) {

@@ -6,7 +6,7 @@ namespace core\entities\Schedule\Additional;
 
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
-use core\entities\Schedule\Service\queries\CategoryQuery;
+use core\entities\Schedule\Additional\queries\CategoryQuery;
 use paulzi\nestedsets\NestedSetsBehavior;
 use yii\db\ActiveRecord;
 

@@ -1,12 +1,14 @@
 <?php
 
+
+
+/* @var $this \yii\web\View */
+/* @var $category \core\entities\Schedule\Additional\Category */
+
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
-
-/* @var $this yii\web\View */
-/* @var $category core\entities\Schedule\Service\Category */
 
 $this->title = $category->name;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

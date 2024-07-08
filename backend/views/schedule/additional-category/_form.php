@@ -1,14 +1,16 @@
 <?php
 
+
 use mihaildev\ckeditor\CKEditor;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model core\forms\manage\Schedule\CategoryForm */
+/* @var $model core\forms\manage\Schedule\Additional\CategoryForm */
 /* @var $form yii\widgets\ActiveForm */
-?>
 
+
+?>
 <div class="category-form">
 
     <?php

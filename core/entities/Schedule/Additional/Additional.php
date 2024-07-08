@@ -47,15 +47,6 @@ class Additional extends ActiveRecord
         return $service;
     }
 
-    /**
-     * @param $new
-     * @param $old
-     */
-    public function setPrice($new, $old): void
-    {
-        $this->price_new = $new;
-        $this->price_old = $old;
-    }
 
     public function edit($name, $description, Meta $meta): void
     {
@@ -135,37 +126,6 @@ class Additional extends ActiveRecord
         $this->categoryAssignments = [];
     }
 
-    # Tags
-
-    public function assignTag($id): void
-    {
-        $assignments = $this->tagAssignments;
-        foreach ($assignments as $assignment) {
-            if ($assignment->isForTag($id)) {
-                return;
-            }
-        }
-        $assignments[] = TagAssignment::create($id);
-        $this->tagAssignments = $assignments;
-    }
-
-    public function revokeTag($id): void
-    {
-        $assignments = $this->tagAssignments;
-        foreach ($assignments as $i => $assignment) {
-            if ($assignment->isForTag($id)) {
-                unset($assignments[$i]);
-                $this->tagAssignments = $assignments;
-                return;
-            }
-        }
-        throw new \DomainException('Assignment is not found.');
-    }
-
-    public function revokeTags(): void
-    {
-        $this->tagAssignments = [];
-    }
 
     /**
      * @return ActiveQuery
@@ -175,17 +135,13 @@ class Additional extends ActiveRecord
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
-    public function getEvent(): ActiveQuery
-    {
-        return $this->hasMany(ServiceAssignment::class, ['service_id' => 'id']);
-    }
 
     /**
      * @return ActiveQuery
      */
     public function getCategoryAssignments(): ActiveQuery
     {
-        return $this->hasMany(CategoryAssignment::class, ['service_id' => 'id']);
+        return $this->hasMany(CategoryAssignment::class, ['additional_id' => 'id']);
     }
 
     /**
@@ -197,22 +153,6 @@ class Additional extends ActiveRecord
     }
 
     /**
-     * @return ActiveQuery
-     */
-    public function getTagAssignments(): ActiveQuery
-    {
-        return $this->hasMany(TagAssignment::class, ['service_id' => 'id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getTags(): ActiveQuery
-    {
-        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
-    }
-
-    /**
      * @return string
      */
     public function getName(): string
@@ -221,21 +161,6 @@ class Additional extends ActiveRecord
     }
 
 
-    /**
-     * @return int
-     */
-    public function getPriceOld(): int
-    {
-        return $this->price_old;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPriceNew()
-    {
-        return $this->price_new;
-    }
 
     public static function tableName(): string
     {

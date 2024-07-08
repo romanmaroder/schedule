@@ -95,7 +95,6 @@ use yii\helpers\Html;
                                             'url' => ['/schedule/missing-users/index'],
                                             'active' => $this->context->id == 'schedule/missing-users'
                                         ],
-
                                         [
                                             'label' => 'Service',
                                             'icon' => 'fas fa-hand-spock',
@@ -118,6 +117,25 @@ use yii\helpers\Html;
                                                     'url' => ['/schedule/tag/index'],
                                                     'active' => $this->context->id == 'expenses/tag'
                                                 ],
+                                            ]
+                                        ],
+                                        [
+                                            'label' => 'Additional',
+                                            'icon' => 'fas fa-suitcase-rolling',
+                                            'items' => [
+                                                [
+                                                    'label' => 'Additional',
+                                                    'icon' => 'fas fa-subway',
+                                                    'url' => ['/schedule/additional/index'],
+                                                    'active' => $this->context->id == 'schedule/additional'
+                                                ],
+                                                [
+                                                    'label' => 'Categories',
+                                                    'icon' => 'fa-solid fa-list',
+                                                    'url' => ['/schedule/additional-category/index'],
+                                                    'active' => $this->context->id == 'schedule/additional-category'
+                                                ],
+
                                             ]
                                         ],
                                     ]

@@ -10,7 +10,7 @@ use yii\db\ActiveRecord;
  * Class CategoryAssignments
  * @package core\entities\Schedule\Additional
  *
- * @property int $service_id [int(11)]
+ * @property int $additional_id [int(11)]
  * @property int $category_id [int(11)]
  */
 class CategoryAssignment extends ActiveRecord
