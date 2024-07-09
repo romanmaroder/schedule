@@ -7,11 +7,13 @@
 
 /* @var $user \core\entities\User\User */
 
-/* @var $events \core\entities\core\Event\Event */
+/* @var $events \core\entities\schedule\Event\Event */
+
+/* @var $free \core\entities\Schedule\Event\FreeTime */
 
 /* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
 
-/* @var $educations \core\entities\core\Event\Education */
+/* @var $educations \core\entities\schedule\Event\Education */
 
 
 use yii\helpers\ArrayHelper;
@@ -31,7 +33,7 @@ $emptyEducations = 'lesson';
         <div class="time-label">
             <span class="bg-danger btn-shadow"><?=date('d-M-Y')?></span>
         </div>
-        <? if (!$events && !$educations):?>
+        <? if (!$events && !$educations && !$free):?>
             <div>
                 <i class="fas fa-exclamation-circle bg-warning btn-shadow"></i>
 
@@ -42,16 +44,16 @@ $emptyEducations = 'lesson';
                     </h3>
 
                     <div class="timeline-body">
-                        You have no <?= $events==null ? $emptyEvents : $emptyEducations?> today
+                        You have no <?= !$events ? $emptyEvents : $emptyEducations?> today
                     </div>
                 </div>
             </div>
         <?endif;?>
         <? foreach($events as $event) :?>
             <div>
-                <i class="fas fa-user bg-info"></i>
+                <i class="fas fa-user bg-info btn-shadow"></i>
 
-                <div class="timeline-item">
+                <div class="timeline-item btn-shadow">
                 <span class="time"><i class="far fa-clock"></i>
                     <?= date('H:i',strtotime($event->start))?>-<?= date('H:i',strtotime($event->end))?>
                 </span>
@@ -65,12 +67,30 @@ $emptyEducations = 'lesson';
             </div>
         <?endforeach;?>
 
+        <? foreach($free as $item) :?>
+            <div>
+                <i class="fas fa-user bg-info btn-shadow"></i>
+
+                <div class="timeline-item btn-shadow">
+                <span class="time"><i class="far fa-clock"></i>
+                    <?= date('H:i',strtotime($item->start))?>-<?= date('H:i',strtotime($item->end))?>
+                </span>
+
+                    <h3 class="timeline-header border-0">
+                        <?= Html::a(Html::encode($item->master->username),Url::toRoute(['user/view','id'=>$item->master->id]))?>
+                        <span class="d-block"><?=$item->additional->name?></span>
+                    </h3>
+
+                </div>
+            </div>
+        <?endforeach;?>
+
         <? foreach($educations as $education) :?>
 
             <div>
                 <i class="fas fa-comments bg-warning btn-shadow"></i>
 
-                <div class="timeline-item">
+                <div class="timeline-item btn-shadow">
                     <span class="time"><i class="far fa-clock"></i>
                         <?= date('H:i',strtotime($education->start))?>-<?= date('H:i',strtotime($education->end))?>
                     </span>

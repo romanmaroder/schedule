@@ -8,6 +8,7 @@ use core\forms\manage\User\Employee\EmployeeEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\readModels\Schedule\EducationReadRepository;
 use core\readModels\Schedule\EventReadRepository;
+use core\readModels\Schedule\FreeTimeReadRepository;
 use core\readModels\User\UserReadRepository;
 use core\services\manage\EmployeeManageService;
 use Yii;
@@ -28,6 +29,7 @@ class DefaultController extends Controller
     private $users;
     private $employee;
     private $education;
+    private $free;
 
     private EmployeeManageService $employeeService;
 
@@ -38,6 +40,7 @@ class DefaultController extends Controller
         UserReadRepository $users,
         EmployeeReadRepository $employee,
         EducationReadRepository $education,
+        FreeTimeReadRepository $free,
         EmployeeManageService $employeeManageService,
         $config = []
     ) {
@@ -46,6 +49,7 @@ class DefaultController extends Controller
         $this->users = $users;
         $this->employee = $employee;
         $this->education = $education;
+        $this->free = $free;
         $this->employeeService = $employeeManageService;
 
         $this->totalAllCount = $this->events->getAllEventsCount();
@@ -97,11 +101,13 @@ class DefaultController extends Controller
 
     public function actionTimeline()
     {
-        $employee = $this->employee->find($this->user->employee);
+        $employee = $this->employee->find($this->user->id);
 
         $events = $this->events->getAllDayById($employee->user_id);
 
         $educations = $this->education->getLessonDayById($this->user->id);
+
+        $free = $this->free->getAllDayById($employee->user_id);
 
 
         return $this->render(
@@ -111,6 +117,7 @@ class DefaultController extends Controller
                 'user' => $this->user,
                 'events' => $events,
                 'educations'=>$educations,
+                'free'=>$free
             ]
         );
     }

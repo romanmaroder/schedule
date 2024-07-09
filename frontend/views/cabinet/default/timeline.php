@@ -7,6 +7,8 @@
 
 /* @var $events \core\entities\Schedule\Event\Event */
 
+/* @var $free \core\entities\Schedule\Event\FreeTime */
+
 /* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
 
 /* @var $educations \core\entities\Schedule\Event\Education*/
@@ -21,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $emptyEvents = 'recordings';
 $emptyEducations = 'lesson';
+$emptyFree = 'Free day';
 ?>
 
 <div class="active tab-pane" id="timeline">
@@ -28,7 +31,7 @@ $emptyEducations = 'lesson';
         <div class="time-label">
             <span class="bg-danger btn-shadow"><?=date('d-M-Y')?></span>
         </div>
-        <? if (!$events && !$educations):?>
+        <? if (!$events && !$educations && !$free):?>
             <div>
                 <i class="fas fa-exclamation-circle bg-warning btn-shadow"></i>
 
@@ -61,7 +64,23 @@ $emptyEducations = 'lesson';
                 </div>
             </div>
         <?endforeach;?>
+        <? foreach($free as $item) :?>
+            <div>
+                <i class="fas fa-user bg-info btn-shadow"></i>
 
+                <div class="timeline-item btn-shadow">
+                <span class="time"><i class="far fa-clock"></i>
+                    <?= date('H:i',strtotime($item->start))?>-<?= date('H:i',strtotime($item->end))?>
+                </span>
+
+                    <h3 class="timeline-header border-0">
+                        <?= Html::a(Html::encode($item->master->username),Url::toRoute(['user/view','id'=>$item->master->id]))?>
+                        <span class="d-block"><?=$item->additional->name?></span>
+                    </h3>
+
+                </div>
+            </div>
+        <?endforeach;?>
         <? foreach($educations as $education) :?>
 
             <div>

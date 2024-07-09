@@ -8,6 +8,7 @@ use core\forms\user\ProfileEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\readModels\Schedule\EducationReadRepository;
 use core\readModels\Schedule\EventReadRepository;
+use core\readModels\Schedule\FreeTimeReadRepository;
 use core\readModels\Shop\ProductReadRepository;
 use core\readModels\User\UserReadRepository;
 use core\services\cabinet\WishlistService;
@@ -33,6 +34,7 @@ class DefaultController extends Controller
     private $users;
     private $employees;
     private $education;
+    private $free;
     private $profile;
     private $wishList;
     private $products;
@@ -46,6 +48,7 @@ class DefaultController extends Controller
         UserReadRepository $users,
         EmployeeReadRepository $employees,
         EducationReadRepository $education,
+        FreeTimeReadRepository $free,
         EmployeeManageService $employeeManageService,
         ProfileService $profile,
         WishlistService $wishList,
@@ -57,6 +60,7 @@ class DefaultController extends Controller
         $this->users = $users;
         $this->employees = $employees;
         $this->education = $education;
+        $this->free = $free;
         $this->employeeService = $employeeManageService;
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
@@ -124,12 +128,14 @@ class DefaultController extends Controller
 
         $educations = $this->education->getLessonDayById($this->user->id);
 
+        $free = $this->free->getAllDayById($this->user->id);
+
         return $this->render(
             'timeline',
             [
-                'employee' => $this->employee,
                 'events' => $events,
                 'educations' => $educations,
+                'free'=>$free
             ]
         );
     }
