@@ -21,6 +21,10 @@ return [
         'education/<id:\d+>' => 'schedule/education/view',
         'education/update/<id:\d+>' => 'schedule/education/update',
 
+        'free' => 'schedule/free-time/index',
+        'free/<id:\d+>' => 'schedule/free-time/view',
+        'free/update/<id:\d+>' => 'schedule/free-time/update',
+
         'missing'=>'schedule/missing-users/index',
 
         'cabinet' => 'cabinet/default/index',

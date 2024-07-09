@@ -84,6 +84,12 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'schedule/education'
                                         ],
                                         [
+                                            'label' => 'Free Time',
+                                            'icon' => 'fas fa-subway',
+                                            'url' => ['/schedule/free-time/index'],
+                                            'active' => $this->context->id == 'schedule/free-time'
+                                        ],
+                                        [
                                             'label' => 'Calendar',
                                             'icon' => 'far fa-calendar-alt',
                                             'url' => ['/schedule/calendar/calendar'],

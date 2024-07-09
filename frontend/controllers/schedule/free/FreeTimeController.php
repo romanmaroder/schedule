@@ -1,33 +1,43 @@
 <?php
 
 
-namespace frontend\controllers\schedule\education;
+namespace frontend\controllers\schedule\free;
+
 
 
 use core\entities\Schedule\Event\Calendar\Calendar;
-use core\entities\Schedule\Event\Education;
+use core\entities\Schedule\Event\FreeTime;
 use core\repositories\NotFoundException;
-use core\services\manage\Schedule\EducationManageService;
+use core\services\manage\Schedule\FreeTimeManageService;
 use yii\web\Controller;
 use yii\web\Response;
 
-class EducationController extends Controller
+class FreeTimeController extends Controller
 {
-    private EducationManageService $service;
+
+    private FreeTimeManageService $freeTime;
     private Calendar $calendar;
-    public function __construct($id, $module, EducationManageService $service,
-        Calendar $calendar,$config = [])
-    {
+
+
+    public function __construct(
+        $id,
+        $module,
+        FreeTimeManageService $freeTime,
+        Calendar $calendar,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
+        $this->freeTime = $freeTime;
         $this->calendar = $calendar;
     }
 
-    public function actionLessons()
+
+
+    public function actionFree()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
 
-        return $this->calendar->getEducations();
+        return $this->calendar->getFree();
     }
 
     public function actionView($id)
@@ -41,12 +51,11 @@ class EducationController extends Controller
         );
     }
 
-    protected function findModel($id): Education
+    protected function findModel($id): FreeTime
     {
-        if (($model = Education::findOne($id)) !== null) {
+        if (($model = FreeTime::findOne($id)) !== null) {
             return $model;
         }
         throw new NotFoundException('The requested page does not exist.');
     }
-
 }

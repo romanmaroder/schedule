@@ -123,6 +123,7 @@ div.required label:after {
     word-break: break-word;
 }
 
+
 @media (max-width: 544px), (orientation: portrait) {
     .fc-event-time-start.dayGridMonth,
     .fc-event-time-end.dayGridMonth {
@@ -144,6 +145,14 @@ div.required label:after {
 .fc-addEducation-button{
     position: fixed;
     bottom: 60px;
+    right: 25px;
+    transform: translatex(-5px);
+    cursor: pointer;
+    z-index: 4;
+}
+.fc-addFree-button {
+    position: fixed;
+    bottom: 120px;
     right: 25px;
     transform: translatex(-5px);
     cursor: pointer;

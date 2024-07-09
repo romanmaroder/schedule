@@ -301,7 +301,6 @@ class Event extends ActiveRecord
             return self::DEFAULT_COLOR;
     }
 
-
     public function getRate(): int|float
     {
         if ($this->employee){
@@ -309,7 +308,6 @@ class Event extends ActiveRecord
         }
         return $this->rate;
     }
-
 
     public function getPrice(): int|float
     {

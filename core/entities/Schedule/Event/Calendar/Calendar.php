@@ -6,33 +6,35 @@ namespace core\entities\Schedule\Event\Calendar;
 
 use core\readModels\Schedule\EducationReadRepository;
 use core\readModels\Schedule\EventReadRepository;
+use core\readModels\Schedule\FreeTimeReadRepository;
 use yii2fullcalendar6\models\Event;
 
 class Calendar
 {
     public EventReadRepository $events;
     public EducationReadRepository $educations;
+    public FreeTimeReadRepository $freeTime;
 
     /**
      * Calendar constructor.
      * @param EventReadRepository $events
      * @param EducationReadRepository $educations
+     * @param FreeTimeReadRepository $freeTime
      */
     public function __construct(
         EventReadRepository $events,
-        EducationReadRepository $educations
+        EducationReadRepository $educations,
+        FreeTimeReadRepository $freeTime
     ) {
         $this->events = $events; // TODO To think of a better way to do it
         $this->educations = $educations;
+        $this->freeTime = $freeTime;
     }
 
     public function getEvents(): array
     {
         $data = $this->events->getAll();
 
-        /*echo'<pre>';
-        var_dump($data);
-        die();*/
         $events = [];
         foreach ($data as $item) {
 
@@ -57,6 +59,37 @@ class Calendar
 
         return $events;
     }
+
+
+    public function getFree(): array
+    {
+        $data = $this->freeTime->getAll();
+
+        $free= [];
+        foreach ($data as $item) {
+
+            $free = new Event();
+            $free->id = $item->id;
+            $free->title = $item->master->username ?: $item->fullname;
+            $free->extendedProps = [
+                'notice' => $item->notice,
+                'master' => $item->master->username ?: $item->fullname,
+                'additional' => $item->additional->name,
+            ];
+            $free->backgroundColor = $item->employee->color ??  $item->default_color;
+            $free->borderColor = $item->employee->color ?? $item->default_color;
+            $free->start = $item->start;
+            $free->end = $item->end;
+            $free->groupId = $item->master->id;
+            $free->source = '/schedule/free-time/free';
+            $free->display = 'block';
+
+            $freeTime[] = $free;
+        }
+
+        return $freeTime;
+    }
+
 
     public function getEducations(): array
     {

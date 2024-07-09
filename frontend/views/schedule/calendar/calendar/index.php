@@ -133,6 +133,46 @@ $this->params['breadcrumbs'][] = $this->title;
                                         });
                                     }"
                             )
+                        ],
+                        [
+                            'id' => 'freeTime',
+                            'title' => 'Private Time',
+                            'className' => 'free-time-class',
+                            'backgroundColor'=>'#2c3e50',
+                            'textColor'=>'#F6F6F6',
+                            'events' => new JsExpression(
+                                "
+                                function (info, successCallback, failureCallback) {
+                                    $.ajax({
+                                        url: '/schedule/free/free-time/free',
+                                        type: 'GET',
+                                        crossDomain: true,
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
+                                            }, success: function (response) {
+                                                var event = [];
+                                                 $.each(response, function( index, value ) {
+                                                    event.push({
+                                                        id: $(this).attr('id'), 
+                                                        title: $(this).attr('title'),
+                                                        start: $(this).attr('start'),
+                                                        end: $(this).attr('end'),
+                                                        display: $(this).attr('display'),
+                                                        source: $(this).attr('source'),
+                                                        backgroundColor: $(this).attr('backgroundColor'),
+                                                        borderColor: $(this).attr('backgroundColor'),
+                                                        className: 'education-custom-classes',
+                                                        allDay : $(this).attr('allDay'),
+                                                        extendedProps:$(this).attr('extendedProps'),
+                                                        url:'/schedule/free/free-time/view',
+                                                        });
+                                                    });
+                                                    
+                                                    successCallback(event)
+                                                },
+                                            });
+                                        }"
+                            )
                         ]
                     ],
                     'clientOptions' => [

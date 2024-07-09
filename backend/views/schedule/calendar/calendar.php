@@ -272,6 +272,46 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                             });
                                         }"
                             )
+                        ],
+                        [
+                            'id' => 'freeTime',
+                            'title' => 'Private Time',
+                            'className' => 'free-time-class',
+                            'backgroundColor'=>'#2c3e50',
+                            'textColor'=>'#F6F6F6',
+                            'events' => new JsExpression(
+                                "
+                                function (info, successCallback, failureCallback) {
+                                    $.ajax({
+                                        url: '/schedule/free-time/free',
+                                        type: 'GET',
+                                        crossDomain: true,
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name=\'csrf-token\']').attr('content')
+                                            }, success: function (response) {
+                                                var event = [];
+                                                 $.each(response, function( index, value ) {
+                                                    event.push({
+                                                        id: $(this).attr('id'), 
+                                                        title: $(this).attr('title'),
+                                                        start: $(this).attr('start'),
+                                                        end: $(this).attr('end'),
+                                                        display: $(this).attr('display'),
+                                                        source: $(this).attr('source'),
+                                                        backgroundColor: $(this).attr('backgroundColor'),
+                                                        borderColor: $(this).attr('backgroundColor'),
+                                                        className: 'education-custom-classes',
+                                                        allDay : $(this).attr('allDay'),
+                                                        extendedProps:$(this).attr('extendedProps'),
+                                                        url:'/schedule/api/free-time-api/view',
+                                                        });
+                                                    });
+                                                    
+                                                    successCallback(event)
+                                                },
+                                            });
+                                        }"
+                            )
                         ]
                     ],
                     'clientOptions' => [
@@ -282,7 +322,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'right' => 'dayGridMonth,dayGridWeek,dayGridDay,timeGridDay' //TODO timeGridWeek think about displaying
                         ],
                         'footerToolbar' => [
-                            'right' => 'addEducation'
+                            'right' => 'addEducation',
+                            'left' => 'addFree',
                         ],
                         'initialView' =>  new JsExpression(
                             "
@@ -324,7 +365,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             //'listDay'=>'fas fas fa-calendar-check',
                             'timeGridDay' => 'far far fa-calendar',
                             'timeGridWeek' => 'fas fas fa-calendar-week',
-                            'addEducation' => 'fas fas fa-graduation-cap'
+                            'addEducation' => 'fas fas fa-graduation-cap',
+                            'addFree' => 'fas fa-umbrella-beach',
                         ],
                         'customButtons' => [
                             'addEducation' => [
@@ -354,8 +396,37 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     
                                     }"
                                 ),
+                            ],
+                            'addFree' => [
+                                'text' => 'Add free event',
+                                'click' => new JsExpression(
+                                    "
+                                    function(){
+                                        $.ajax({
+                                            url:'/schedule/api/free-time-api/create',
+                                            data:{'start':new Date().toISOString().slice(0, 10), 'end':new Date().toISOString().slice(0, 10)},
+                                            success:function (data) {
+                                                $('#modal').modal('show').find('.modal-body').html(data);
+                                            },
+                                            error:function(data){
+                                                var Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 5000,
+                                                });
+                                                Toast.fire({
+                                                    icon: 'error',
+                                                    title: data.responseText
+                                                });
+                                            },
+                                        });
+                                    
+                                    }"
+                                ),
                             ]
                         ],
+
                         'eventClassNames' => ['p-1', 'm-1'],
                         'eventDidMount' => new JsExpression(
                             "
