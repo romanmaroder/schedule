@@ -274,7 +274,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             )
                         ],
                         [
-                            'id' => 'freeTime',
+                            'id' => 'free-time',
                             'title' => 'Private Time',
                             'className' => 'free-time-class',
                             'backgroundColor'=>'#2c3e50',

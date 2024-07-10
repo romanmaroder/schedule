@@ -6,7 +6,6 @@
 /* @var $model \core\forms\manage\Schedule\Event\FreeTime\FreeTimeCreateForm */
 
 
-use core\helpers\FreeTimeStatusHelper;
 use kartik\widgets\DateTimePicker;
 use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
@@ -52,27 +51,27 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'allowClear' => true
                                 ],
                                 'pluginEvents' => [
-                                    "change" => 'function() {
-                                    let data_id = $(this).val();
-                                    $.ajax({
-                                        url: "/schedule/event/check",
-                                        method: "get",
-                                        dataType: "json",
-                                        data: {id: data_id},
-                                        success: function(data){
-                                           $("#eventcreateform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-                                           $("#eventcreateform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-                                           
-                                           $("#eventcreateform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           $("#eventcreateform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           
-                                           console.log(data)
-                                        },
-                                        error: function(data , jqXHR, exception){
-                                            console.log(exception)
-                                        }
-                                    });
-                                    }',
+//                                    "change" => 'function() {
+//                                    let data_id = $(this).val();
+//                                    $.ajax({
+//                                        url: "/schedule/event/check",
+//                                        method: "get",
+//                                        dataType: "json",
+//                                        data: {id: data_id},
+//                                        success: function(data){
+//                                           $("#eventcreateform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+//                                           $("#eventcreateform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+//
+//                                           $("#eventcreateform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+//                                           $("#eventcreateform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+//
+//                                           console.log(data)
+//                                        },
+//                                        error: function(data , jqXHR, exception){
+//                                            console.log(exception)
+//                                        }
+//                                    });
+//                                    }',
                                 ],
                             ]
                         ); ?></div>

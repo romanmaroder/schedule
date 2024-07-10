@@ -15,8 +15,6 @@ class FreeTimeCreateForm extends CompositeForm
     public $start;
     public $end;
     public $notice;
-    public $status;
-    public $color;
 
     public function __construct($config = [])
     {
@@ -28,9 +26,8 @@ class FreeTimeCreateForm extends CompositeForm
     public function rules():array
     {
         return [
-            [['status'], 'integer'],
             [['start', 'end'], 'required'],
-            [['notice', 'color'],'string'],
+            [['notice'],'string'],
         ];
     }
 

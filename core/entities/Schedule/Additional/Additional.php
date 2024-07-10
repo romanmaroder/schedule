@@ -6,7 +6,6 @@ namespace core\entities\Schedule\Additional;
 
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
-use core\entities\Schedule\Event\ServiceAssignment;
 use core\entities\Schedule\Additional\queries\AdditionalQuery;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;

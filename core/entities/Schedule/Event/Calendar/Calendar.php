@@ -65,7 +65,7 @@ class Calendar
     {
         $data = $this->freeTime->getAll();
 
-        $free= [];
+        $freeTime= [];
         foreach ($data as $item) {
 
             $free = new Event();
