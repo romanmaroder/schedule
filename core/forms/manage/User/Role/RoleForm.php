@@ -26,7 +26,12 @@ class RoleForm extends Model
     {
         return [
             [['name'], 'string'],
-            [['name'], 'unique', 'targetClass' => Role::class],
+            [
+                ['name'],
+                'unique',
+                'targetClass' => Role::class,
+                'filter' => $this->_role ? ['<>', 'id', $this->_role->id] : null
+            ],
         ];
     }
 }
