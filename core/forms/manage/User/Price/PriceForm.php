@@ -29,7 +29,12 @@ class PriceForm extends Model
         return [
             [['name'], 'string'],
             [['rate'], 'double'],
-            [['name'], 'unique', 'targetClass' => Price::class],
+            [
+                ['name'],
+                'unique',
+                'targetClass' => Price::class,
+                'filter' => $this->_rate ? ['<>', 'id', $this->_rate->id] : null
+            ],
         ];
     }
 }
