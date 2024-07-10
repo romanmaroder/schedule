@@ -29,7 +29,12 @@ class RateForm extends Model
         return [
             [['name'], 'string'],
             [['rate'], 'double'],
-            [['name'], 'unique', 'targetClass' => Rate::class],
+            [
+                ['name'],
+                'unique',
+                'targetClass' => Rate::class,
+                'filter' => $this->_rate ? ['<>', 'id', $this->_rate->id] : null
+            ],
         ];
     }
 }
