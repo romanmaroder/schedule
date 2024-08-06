@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $to_date
  * @property bool $active
  * @property int $sort
+ * @property int $id [int(11)]
  */
 class Discount extends ActiveRecord
 {

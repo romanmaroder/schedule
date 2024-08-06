@@ -108,7 +108,7 @@ PluginAsset::register($this)->add(
                         [
                             'attribute' => 'Cost With Discount',
                             'value' => function ($model) use ($cart) {
-                                return $model->getDiscountedPrice();
+                                    return $model->getDiscountedPrice();
                             },
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => [

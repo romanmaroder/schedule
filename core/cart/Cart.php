@@ -48,7 +48,7 @@ class Cart
     {
         $this->loadItems();
         return array_sum(array_map(function (CartItem $item) {
-            return $item->getProfit() ;
+            return $item->getTotalProfit() ;
         }, $this->items));
     }
 
@@ -57,7 +57,7 @@ class Cart
     {
         $this->loadItems();
         return array_sum(array_map(function (CartItem $item) {
-            return $item->getDiscountCost() ;
+            return $item->getDiscountedPrice();
         }, $this->items));
     }
 

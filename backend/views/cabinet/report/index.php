@@ -4,11 +4,13 @@
 
 /* @var $cart \core\cart\Cart */
 
+/* @var $model \core\cart\CartItem */
+
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
-use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\DiscountHelper;
 use core\helpers\EventPaymentStatusHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -20,7 +22,7 @@ PluginAsset::register($this)->add(
     [
         'datatables',
         'datatables-bs4',
-       'datatables-responsive',
+        'datatables-responsive',
         'datatables-buttons',
         'datatables-colreorder',
         'datatables-searchbuilder',
@@ -34,7 +36,12 @@ PluginAsset::register($this)->add(
 
         <div class="table-responsive ">
             <div class="container-fluid">
-
+<?php
+/*
+foreach ( $cart->getItems() as $item){
+    echo $item->getCost() . PHP_EOL .'<br>';
+}
+*/?>
                 <?php
                 echo GridView::widget(
                     [
@@ -77,7 +84,7 @@ PluginAsset::register($this)->add(
                                     return $model->getMasterName() . PHP_EOL.'<br>'.
                                         '<small>('. Html::a(
                                             Html::encode($model->getClientName()),
-                                            ['core/event/view', 'id' => $model->getId()]).')</small>';
+                                            ['core/event/view', 'id' => $model->getId()],['class'=>'text-secondary']).')</small>';
 
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
@@ -87,7 +94,7 @@ PluginAsset::register($this)->add(
                                'format' => 'raw'
                             ],
                             [
-                                'attribute' => 'Services',
+                                'attribute' => 'Service',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
                                     return $model->getServiceList();
@@ -95,6 +102,7 @@ PluginAsset::register($this)->add(
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
+                                'visible' => true,
                                 'format' => 'raw'
                             ],
                             [
@@ -106,24 +114,41 @@ PluginAsset::register($this)->add(
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
+                                'visible' => true,
                                 'format' => 'raw'
                             ],
+
                             [
-                                'attribute' => 'Price Master',
+                                'attribute' => 'Rate',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                   return $model->getMasterPrice();
+                                    return $model->getEmployeeRate();
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
+                                'visible' => false,
+                                'format' => 'raw'
+                            ],
+                            [
+                                'attribute' => 'Price',
+                                'headerOptions' => ['class' => 'text-center'],
+                                'value' => function ($model) {
+                                    return $model->getEmployeePrice();
+                                },
+                                'contentOptions' => [
+                                    'class' => ['text-center align-middle']
+                                ],
+                                'visible' => false,
                                 'format' => 'raw'
                             ],
                             [
                                 'attribute' => 'Discount',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getDiscount() .'%<br>' . DiscountHelper::discountLabel($model->getDiscountFrom());
+                                    return $model->getDiscount() . '%<br>' . DiscountHelper::discountLabel(
+                                            $model->getDiscountFrom()
+                                        );
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -131,7 +156,30 @@ PluginAsset::register($this)->add(
                                 'format' => 'raw'
                             ],
                             [
-                                'attribute' => 'Cost With Discount',
+                                'attribute' => 'Price',
+                                'headerOptions' => ['class' => 'text-center'],
+                                'value' => function ($model) {
+                                    return $model->getOriginalPrice();
+                                },
+                                'contentOptions' => [
+                                    'class' => ['text-center align-middle']
+                                ],
+                                'visible' => true,
+                                'format' => 'raw'
+                            ],
+                            [
+                                'attribute' => 'Price Masters',
+                                'headerOptions' => ['class' => 'text-center'],
+                                'value' => function ($model) {
+                                    return $model->getMasterPrice();
+                                },
+                                'contentOptions' => [
+                                    'class' => ['text-center align-middle']
+                                ],
+                                'format' => 'raw'
+                            ],
+                            [
+                                'attribute' => 'Discounted price',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
                                     return $model->getDiscountedPrice() .'<br>'. EventPaymentStatusHelper::statusLabel($model->getStatus());
@@ -208,6 +256,96 @@ $js = <<< JS
                 },
                 bStateSave: true,
                 dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
+                footerCallback: function ( row, data, start, end, display ) {
+                var api = this.api();
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                i : 0;
+                };
+                
+                // Total Discounted
+                
+                let  totalDiscounted = api
+                .column( 7 )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Total over this page
+              let  pageTotalDiscounted = api
+                .column( 7, { page: 'current'} )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Update footer
+                if ( pageTotalDiscounted === 0 ){
+                $( api.column( 7 ).footer() )
+                .html('-');
+                }else{
+                $( api.column( 7 ).footer() ).html(pageTotalDiscounted);
+                }
+                
+                $( api.column( 7 ).footer() )
+                .html( pageTotalDiscounted);
+                
+                
+                // Total Salary
+                
+                let  totalSalary = api
+                .column( 8 )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Total over this page
+              let  pageTotalSalary = api
+                .column( 8, { page: 'current'} )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Update footer
+                if ( pageTotalSalary === 0 ){
+                $( api.column( 8 ).footer() )
+                .html('-');
+                }else{
+                $( api.column( 8 ).footer() ).html(pageTotalSalary);
+                }
+                
+                $( api.column( 8 ).footer() )
+                .html( pageTotalSalary);
+                
+                // Total Profit
+                
+              let  totalProfit = api
+                .column( 9 )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Total over this page
+              let  pageTotalProfit = api
+                .column( 9, { page: 'current'} )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Update footer
+                if ( pageTotalProfit === 0 ){
+                $( api.column( 9 ).footer() )
+                .html('-');
+                }else{
+                $( api.column( 9 ).footer() ).html(pageTotalProfit);
+                }
+                
+                $( api.column( 9 ).footer() )
+                .html( pageTotalProfit);
+                
+                },
                 fnStateSave: function (oSettings, oData) {
                 localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
                 },

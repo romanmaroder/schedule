@@ -16,7 +16,7 @@ class DiscountHelper
             Discount::NO_DISCOUNT => 'NO DISCOUNT',
             Discount::MASTER_DISCOUNT => 'MASTER\'S DISCOUNT',
             Discount::STUDIO_DISCOUNT => 'STUDIO DISCOUNT',
-            Discount::STUDIO_DISCOUNT_WITH_MASTER => 'STUDIO_DISCOUNT_WITH_MASTER',
+            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => 'STUDIO DISCOUNT WITH MASTER WORK',
         ];
     }
 
@@ -37,7 +37,7 @@ class DiscountHelper
             case Discount::STUDIO_DISCOUNT:
                 $class = 'badge bg-warning bg-gradient text-shadow box-shadow';
                 break;
-            case Discount::STUDIO_DISCOUNT_WITH_MASTER:
+            case Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK:
                 $class = 'badge bg-primary bg-gradient text-shadow box-shadow';
                 break;
             default:
@@ -48,7 +48,7 @@ class DiscountHelper
             Discount::NO_DISCOUNT => 'badge bg-danger',
             Discount::MASTER_DISCOUNT => 'badge bg-info',
             Discount::STUDIO_DISCOUNT => 'badge bg-warning',
-            Discount::STUDIO_DISCOUNT_WITH_MASTER => 'badge bg-primary',
+            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => 'badge bg-primary',
             default => 'badge bg-danger',
         };*/
 

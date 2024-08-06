@@ -6,9 +6,9 @@ use core\cart\discount\Discount;
 use core\entities\Schedule\Event\ServiceAssignment;
 
 /**
- *
+ * If the rate and price are 100% (1), the foreman's wages are not included.
  */
-class CartItem
+class CartItemOrigin
 {
     private $item;
 
@@ -95,41 +95,27 @@ class CartItem
     {
         #Rounding up
         //return round($this->getOriginalPrice() * $this->getEmployeePrice(),-2,PHP_ROUND_HALF_EVEN);
-        return $this->getOriginalPrice() * $this->getEmployeePrice();
+       return $this->getOriginalPrice() * $this->getEmployeePrice();
     }
 
     /**
      * Discounted service price
      * @return float|int
      */
-
     public function getDiscountedPrice(): float|int
     {
-        switch ($this->getDiscountFrom()) {
-            case Discount::MASTER_DISCOUNT:
-                $discountedPrice = $this->getMasterPrice() - $this->masterDiscount();
-                break;
-            case Discount::STUDIO_DISCOUNT:
-                $discountedPrice = $this->getMasterPrice() - ($this->getMasterPrice() * $this->getDiscount() / 100);
-                break;
-            default:
-                $discountedPrice = ceil(
-                    $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
-                        ($this->getDiscount() / 100))
-                );
-        }
-
-        /*$discountedPrice = match ($this->getDiscountFrom()) {
-            Discount::MASTER_DISCOUNT => $this->getMasterPrice() - $this->masterDiscount(),
-            Discount::STUDIO_DISCOUNT => $this->getMasterPrice() - ($this->getMasterPrice() * $this->getDiscount(
-                    ) / 100),
-            default => ceil(
-                $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
-                    ($this->getDiscount() / 100))
-            ),
-        };*/
-
-        return $discountedPrice;
+        return ceil(
+            $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
+                ($this->getDiscount() / 100))
+        );
+    }
+    /**
+     * Discount cost
+     * @return float|int
+     */
+    public function getDiscountCost(): float|int
+    {
+        return $this->getMasterPrice() - $this->getDiscountedPrice();
     }
 
     public function getDiscountFrom(): float|int
@@ -138,71 +124,67 @@ class CartItem
     }
 
     /**
-     * Salary calculation
+     *
      * @return float|int
      */
     public function getCost(): float|int
     {
         switch ($this->getDiscountFrom()) {
             case Discount::NO_DISCOUNT:
-                $cost = $this->costNoDiscount();
+                $cost = $this->getWithOutDiscount();
                 break;
             case Discount::MASTER_DISCOUNT:
-                $cost = $this->costMasterDiscount();
+                $cost = $this->getDiscountFromEmployee();
                 break;
             case Discount::STUDIO_DISCOUNT:
-                $cost = $this->costStudioDiscount();
+                $cost = $this->getDiscountFromTheStudio();
                 break;
             case Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK :
                 $cost = $this->getCostDiscountFromTheStudioWithMaster();
                 break;
             default:
-                $cost = $this->costNoDiscount();
+                $cost = $this->getWithOutDiscount();
         }
 
         /* $cost = match ($this->getDiscountFrom()) {
-            Discount::NO_DISCOUNT => $this->costNoDiscount(),
-            Discount::MASTER_DISCOUNT => $this->costMasterDiscount(),
-            Discount::STUDIO_DISCOUNT => $this->costStudioDiscount(),
+            Discount::NO_DISCOUNT => $this->getWithOutDiscount(),
+            Discount::MASTER_DISCOUNT => $this->getDiscountFromEmployee(),
+            Discount::STUDIO_DISCOUNT => $this->getDiscountFromTheStudio(),
             Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => $this->getCostDiscountFromTheStudioWithMaster(),
-            default => $this->costNoDiscount(),
+            default => $this->getWithOutDiscount(),
         };*/
 
         return $cost;
     }
 
     /**
-     * Profit calculation
      * @return float|int
      */
     public function getProfit(): float|int
     {
         switch ($this->getDiscountFrom()) {
             case Discount::NO_DISCOUNT:
-                $profit = $this->profitNoDiscount();
-                break;
-            case Discount::MASTER_DISCOUNT:
-                $profit = $this->profitMasterDiscount();
+                $profit = $this->getProfitWithOutDiscount();
                 break;
             case Discount::STUDIO_DISCOUNT:
-                $profit = $this->profitStudioDiscount();
+                $profit =  $this->getProfitWithOutDiscountAndStudioDiscount();
+                break;
+            case Discount::MASTER_DISCOUNT:
+                $profit = $this->getProfitMasterDiscount();
                 break;
             case Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK:
                 $profit = $this->getProfitDiscountFromTheStudioWithMaster();
                 break;
             default:
-                $profit = $this->profitNoDiscount();
+                $profit = $this->getProfitWithOutDiscount();
         }
-        /* $profit = match ($this->getDiscountFrom()) {
-            Discount::NO_DISCOUNT => $this->profitNoDiscount(),
-            Discount::MASTER_DISCOUNT => $this->profitMasterDiscount(),
-            Discount::STUDIO_DISCOUNT => $this->profitStudioDiscount(),
-            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => $this->getProfitDiscountFromTheStudioWithMaster(),
-            default => $this->profitNoDiscount(),
-        };
-        };*/
-
         return $profit;
+        /* $profit = match ($this->getDiscountFrom()) {
+            Discount::NO_DISCOUNT, Discount::STUDIO_DISCOUNT => $this->getProfitWithOutDiscountAndStudioDiscount(),
+            Discount::MASTER_DISCOUNT => $this->getProfitMasterDiscount(),
+            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => $this->getProfitDiscountFromTheStudioWithMaster(),
+            default => $this->getWithOutDiscount(),
+        };*/
     }
 
 
@@ -228,7 +210,7 @@ class CartItem
 
     public function getEmployeeRate(): float|int
     {
-        return $this->item->events->getRate();
+        return  $this->item->events->getRate();
     }
 
     public function getEmployeePrice(): float|int
@@ -238,31 +220,10 @@ class CartItem
 
     /**
      * Discount from the master
-     * To calculate the price with a discount from the master
      * @return float|int
      */
-    private function masterDiscount(): float|int
+    private function getDiscountFromEmployee(): float|int
     {
-        if ($this->checkFullDiscount()) {
-            return $this->getMasterPrice() * $this->getEmployeeRate();
-        }
-        return $this->getMasterPrice() * $this->getEmployeeRate() -
-            ($this->getMasterPrice() * $this->getEmployeeRate() * ($this->getDiscount() / 100));
-    }
-
-    /**
-     * Discount from the master
-     * To calculate wages taking into account the discount from the master
-     * @return float|int
-     */
-    private function costMasterDiscount(): float|int
-    {
-        if ($this->checkFullDiscount()) {
-            return 0;
-        }
-        if ($this->fullPriceAndRate()) {
-            return 0;
-        }
         return $this->getMasterPrice() * $this->getEmployeeRate() -
             ($this->getMasterPrice() * $this->getEmployeeRate() * ($this->getDiscount() / 100));
     }
@@ -271,26 +232,36 @@ class CartItem
      * Studio discount
      * @return float|int
      */
-    private function costStudioDiscount(): float|int
+    private function getDiscountFromTheStudio(): float|int
     {
-        if ($this->fullPriceAndRate()) {
-            return 0;
-        }
         return $this->getDiscountedPrice() * $this->getEmployeeRate();
+        //return $this->getDiscount() * $this->getEmployeeRate();
     }
 
     /**
-     * Cost no discounts
-     * If the rate and price of the master == 100%, then the salary is not taken into account
+     * No discounts
      * @return float|int
      */
-    private function costNoDiscount(): float|int
+    private function getWithOutDiscount(): float|int
     {
-        if ($this->fullPriceAndRate()) {
+        if ($this->getEmployeeRate() == 1 && $this->getEmployeePrice() == 1) {
             return 0;
         }
         return $this->getMasterPrice() * $this->getEmployeeRate();
     }
+
+    /**
+     * No discounts
+     * @return float|int
+     */
+    private function getProfitWithOutDiscount(): float|int
+    {
+        if ($this->getEmployeeRate() == 1 && $this->getEmployeePrice() == 1) {
+        return $this->getMasterPrice() * $this->getEmployeeRate();
+        }
+            return $this->getDiscountedPrice() - $this->getSalary();
+    }
+
 
     /**
      * Studio discount - employee work
@@ -298,9 +269,6 @@ class CartItem
      */
     private function getCostDiscountFromTheStudioWithMaster(): float|int
     {
-        if ($this->fullPriceAndRate()) {
-            return 0;
-        }
         return $this->getMasterPrice() * $this->getEmployeeRate();
     }
 
@@ -310,65 +278,14 @@ class CartItem
                 $this->getEmployeeRate() * $this->getDiscount() / 100);
     }
 
-    /**
-     * No discounts
-     * Profit calculation without discounts
-     * @return float|int
-     */
-    private function profitNoDiscount(): float|int
+    private function getProfitMasterDiscount(): float|int
     {
-        if ($this->fullPriceAndRate()) {
-            return $this->getMasterPrice() * $this->getEmployeeRate();
-        }
-        return $this->getMasterPrice() - $this->getSalary();
-    }
-
-    /**
-     * Discount from the master
-     * Profit calculation with a discount from the master
-     * @return float|int
-     */
-    private function profitMasterDiscount(): float|int
-    {
-        if ($this->fullPriceAndRate()) {
-            if ($this->checkFullDiscount()) {
-                return 0;
-            }
-            return $this->getMasterPrice() - $this->getDiscountedPrice();
-        }
-
-        return $this->getMasterPrice() * $this->getEmployeeRate();
-    }
-
-    /**
-     * Discount from the studio
-     * @return float|int
-     * Calculation of profit with studio discount
-     */
-    private function profitStudioDiscount(): float|int
-    {
-        if ($this->fullPriceAndRate()) {
-            if ($this->checkFullDiscount()) {
-                return 0;
-            }
-            return $this->getDiscountedPrice();
-        }
         return $this->getDiscountedPrice() - $this->getSalary();
     }
 
-    private function fullPriceAndRate(): bool
+    private function getProfitWithOutDiscountAndStudioDiscount(): float|int
     {
-        if ($this->getEmployeeRate() == 1 && $this->getEmployeePrice() == 1) {
-            return true;
-        }
-        return false;
+        return $this->getDiscountedPrice() - $this->getSalary();
     }
 
-    private function checkFullDiscount(): bool
-    {
-        if ($this->getDiscount() == 100) {
-            return true;
-        }
-        return false;
-    }
 }

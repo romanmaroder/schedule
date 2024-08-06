@@ -61,7 +61,8 @@ PluginAsset::register($this)->add(
                                 'value' => function ($model) {
                                     return Html::a(
                                         Html::encode(DATE('Y-m-d', strtotime($model->start))),
-                                        ['core/event/view', 'id' => $model->id]
+                                        ['core/event/view', 'id' => $model->id],
+                                        ['class'=>'text-dark']
                                     );
                                 },
                                 'headerOptions' => ['class' => 'text-center'],

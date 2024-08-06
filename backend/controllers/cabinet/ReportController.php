@@ -4,13 +4,10 @@
 namespace backend\controllers\cabinet;
 
 
-use core\entities\Expenses\Expenses\Expenses;
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\services\Schedule\CartService;
 use yii\data\ArrayDataProvider;
-use yii\db\Expression;
-use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 
@@ -44,7 +41,6 @@ class ReportController extends Controller
                 'models' => $cart->getItems()
             ]
         );
-
         return $this->render(
             'index',
             [
