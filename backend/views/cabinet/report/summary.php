@@ -3,7 +3,7 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $cart \core\cart\Cart */
+/* @var $cart \core\cart\schedule\Cart */
 
 /* @var $expense core\forms\manage\Expenses\ */
 

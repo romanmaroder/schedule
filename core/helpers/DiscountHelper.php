@@ -4,7 +4,7 @@
 namespace core\helpers;
 
 
-use core\cart\discount\Discount;
+use core\cart\schedule\discount\Discount;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 

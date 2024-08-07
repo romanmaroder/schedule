@@ -5,11 +5,11 @@ namespace common\bootstrap;
 
 
 use core\cart\shop\Cart as ShopCart;
-use core\cart\Cart;
+use core\cart\schedule\Cart;
 use core\cart\shop\cost\calculator\SimpleCost;
 use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\storage\HybridStorage;
-use core\cart\storage\DbStorage;
+use core\cart\schedule\storage\DbStorage;
 use core\services\auth\SignupService;
 use core\services\ContactService;
 use yii\base\BootstrapInterface;

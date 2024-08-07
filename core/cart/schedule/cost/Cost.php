@@ -1,11 +1,11 @@
 <?php
 
 
-namespace core\cart\cost;
+namespace core\cart\schedule\cost;
 
 
 
-use core\cart\discount\Discount;
+use core\cart\schedule\discount\Discount;
 
 final class Cost
 {

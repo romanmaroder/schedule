@@ -7,13 +7,13 @@
 
 /* @var $user \core\entities\User\User */
 
-/* @var $events \core\entities\schedule\Event\Event */
+/* @var $events \core\entities\Schedule\Event\Event */
 
 /* @var $free \core\entities\Schedule\Event\FreeTime */
 
 /* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
 
-/* @var $educations \core\entities\schedule\Event\Education */
+/* @var $educations \core\entities\Schedule\Event\Education */
 
 
 use yii\helpers\ArrayHelper;

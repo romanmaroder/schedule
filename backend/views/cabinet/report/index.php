@@ -2,9 +2,9 @@
 
 /* @var $this yii\web\View */
 
-/* @var $cart \core\cart\Cart */
+/* @var $cart \core\cart\schedule\Cart */
 
-/* @var $model \core\cart\CartItem */
+/* @var $model \core\cart\schedule\CartItem */
 
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
@@ -354,9 +354,40 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,1,2,3]
+                    columns: [0,1,2]
                 },
-                buttons:  ['copy', 'csv', 'excel', 'pdf', 'print'],
+               buttons: [
+                {
+                    extend: 'copyHtml5',
+                    //title:'111111',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                /*{
+                    extend: 'csvHtml5',
+                    //title:'22222',
+                    exportOptions: {
+                        columns: [0,1,2,3,4,5,6,':visible']
+                    }
+                },*/
+                {
+                    extend: 'excelHtml5',
+                    // title:'33333',
+                    sheetName: 'Salary',
+                    exportOptions: {
+                        columns: [':visible']
+                    }
+                },
+                /*{
+                    extend: 'pdfHtml5',
+                    //title:'44444',
+                    exportOptions: {
+                        columns: [0,1,2,3,4,5,6,':visible']
+                    }
+                },*/
+                'colvis'
+            ],
                 language: {
                     searchBuilder: {
                         add: 'Add filter',

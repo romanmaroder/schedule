@@ -8,7 +8,6 @@ use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\services\Schedule\CartService;
 use yii\data\ArrayDataProvider;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class ReportController extends Controller

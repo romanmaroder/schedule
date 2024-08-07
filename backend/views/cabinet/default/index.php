@@ -6,7 +6,7 @@
 
 /* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $provider \core\entities\core\Event\Event */
+/* @var $provider \core\entities\Schedule\Event\Event */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;

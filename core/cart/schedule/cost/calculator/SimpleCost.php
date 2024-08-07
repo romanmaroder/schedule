@@ -1,10 +1,10 @@
 <?php
 
 
-namespace core\cart\cost\calculator;
+namespace core\cart\schedule\cost\calculator;
 
 
-use core\cart\cost\Cost;
+use core\cart\schedule\cost\Cost;
 
 class SimpleCost implements CalculatorInterface
 {

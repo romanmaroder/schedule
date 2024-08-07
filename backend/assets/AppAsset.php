@@ -21,7 +21,6 @@ class AppAsset extends AssetBundle
         'js/dataTable/jszip.min.js',
         'js/dataTable/pdfmake.min.js',
         'js/dataTable/vfs_fonts.js',
-        'js/dataTable/buttons.colVis.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

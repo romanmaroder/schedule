@@ -1,10 +1,10 @@
 <?php
 
 
-namespace core\cart\storage;
+namespace core\cart\schedule\storage;
 
 
-use core\cart\CartItem;
+use core\cart\schedule\CartItem;
 use core\entities\Schedule\Event\ServiceAssignment;
 use yii\db\Connection;
 use yii\db\Query;

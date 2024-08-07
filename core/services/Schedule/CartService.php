@@ -4,7 +4,7 @@
 namespace core\services\Schedule;
 
 
-use core\cart\Cart;
+use core\cart\schedule\Cart;
 
 class CartService
 {

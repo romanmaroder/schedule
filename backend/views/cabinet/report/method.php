@@ -3,10 +3,10 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $cash  \core\entities\core\Event\Event */
-/* @var $card  \core\entities\core\Event\Event */
+/* @var $cash  \core\entities\Schedule\Event\Event */
+/* @var $card  \core\entities\Schedule\Event\Event */
 
-/* @var $cart  \core\cart\Cart */
+/* @var $cart  \core\cart\schedule\Cart */
 
 use hail812\adminlte3\assets\PluginAsset;
 

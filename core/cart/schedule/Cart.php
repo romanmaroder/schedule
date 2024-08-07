@@ -1,11 +1,11 @@
 <?php
 
 
-namespace core\cart;
+namespace core\cart\schedule;
 
 
 
-use core\cart\storage\StorageInterface;
+use core\cart\schedule\storage\StorageInterface;
 
 class Cart
 {

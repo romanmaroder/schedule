@@ -22,7 +22,6 @@ class AppAsset extends AssetBundle
         //'js/searchBuilder.dataTables.js',
         //'js/buttons.dataTables.js',
         'js/dataTable/dataTables.dateTime.js',
-        //'js/dataTable/buttons.colVis.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

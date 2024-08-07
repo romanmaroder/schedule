@@ -1,13 +1,13 @@
 <?php
 
 
-namespace core\cart\cost\calculator;
+namespace core\cart\schedule\cost\calculator;
 
 
 
 
-use core\cart\CartItem;
-use core\cart\cost\Cost;
+use core\cart\schedule\CartItem;
+use core\cart\schedule\cost\Cost;
 
 interface CalculatorInterface
 {

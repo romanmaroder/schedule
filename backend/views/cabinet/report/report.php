@@ -3,7 +3,7 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $cart \core\cart\Cart */
+/* @var $cart \core\cart\schedule\Cart */
 
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
@@ -225,7 +225,7 @@ ordering: false,
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,1,2,3]
+                    columns: [0,1,2]
                 },
                buttons: [
                 {
@@ -235,27 +235,29 @@ ordering: false,
                         columns: [0, ':visible']
                     }
                 },
-                {
+                /*{
                     extend: 'csvHtml5',
                     //title:'22222',
                     exportOptions: {
                         columns: [0,1,2,3,4,5,6,':visible']
                     }
-                },
+                },*/
                 {
                     extend: 'excelHtml5',
-                    // title:'33333',
+                     title:'',
+                    //footer: true,
+                    sheetName: 'Report',
                     exportOptions: {
-                        columns: [':visible']
+                        columns: [0,1,2,3,4,5,6]
                     }
                 },
-                {
+                /*{
                     extend: 'pdfHtml5',
                     //title:'44444',
                     exportOptions: {
                         columns: [0,1,2,3,4,5,6,':visible']
                     }
-                },
+                },*/
                 'colvis'
             ],
                 

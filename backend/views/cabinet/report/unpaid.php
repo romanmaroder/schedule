@@ -6,7 +6,7 @@
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
 
-/* @var $cart \core\cart\Cart */
+/* @var $cart \core\cart\schedule\Cart */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;

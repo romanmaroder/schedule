@@ -1,8 +1,8 @@
 <?php
 
-namespace core\cart;
+namespace core\cart\schedule;
 
-use core\cart\discount\Discount;
+use core\cart\schedule\discount\Discount;
 use core\entities\Schedule\Event\ServiceAssignment;
 
 /**

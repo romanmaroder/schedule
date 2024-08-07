@@ -1,7 +1,7 @@
 <?php
 
 
-namespace core\cart\discount;
+namespace core\cart\schedule\discount;
 
 /**
  * Class Discount
