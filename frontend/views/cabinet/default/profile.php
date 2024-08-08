@@ -4,7 +4,7 @@
 
 /* @var $employee \core\entities\User\Employee\Employee */
 
-/* @var $model \core\forms\manage\User\Employee\EmployeeEditForm */
+/* @var $model \core\forms\user\ProfileEditForm */
 
 use kartik\date\DatePicker;
 use yii\bootstrap4\ActiveForm;

@@ -205,7 +205,7 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,5]
+                    columns: [0,4]
                 },
                language: {
                     searchBuilder: {

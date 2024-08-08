@@ -4,7 +4,7 @@
 namespace backend\forms\Shop;
 
 
-use core\entities\Shop\product\Category;
+use core\entities\Shop\Product\Category;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

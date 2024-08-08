@@ -4,13 +4,14 @@
 namespace backend\controllers\cabinet;
 
 
-use core\forms\manage\User\Employee\EmployeeEditForm;
+use core\forms\user\ProfileEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\readModels\Schedule\EducationReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\readModels\Schedule\FreeTimeReadRepository;
 use core\readModels\User\UserReadRepository;
 use core\services\manage\EmployeeManageService;
+use core\useCases\cabinet\ProfileService;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
@@ -30,6 +31,7 @@ class DefaultController extends Controller
     private $employee;
     private $education;
     private $free;
+    private $profile;
 
     private EmployeeManageService $employeeService;
 
@@ -42,6 +44,7 @@ class DefaultController extends Controller
         EducationReadRepository $education,
         FreeTimeReadRepository $free,
         EmployeeManageService $employeeManageService,
+        ProfileService $profile,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
@@ -50,6 +53,7 @@ class DefaultController extends Controller
         $this->employee = $employee;
         $this->education = $education;
         $this->free = $free;
+        $this->profile = $profile;
         $this->employeeService = $employeeManageService;
 
         $this->totalAllCount = $this->events->getAllEventsCount();
@@ -126,11 +130,11 @@ class DefaultController extends Controller
     {
         $employee = $this->employee->find($this->user->id);
 
-        $form = new EmployeeEditForm($employee);
+        $form = new ProfileEditForm($employee);
 
         if ($form->load($this->request->post()) && $form->validate()) {
             try {
-                $this->employeeService->edit($employee->id, $form);
+                $this->profile->edit($employee->id, $form);
                 return $this->redirect(['cabinet/default/profile',]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
