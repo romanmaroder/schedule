@@ -4,7 +4,7 @@
 namespace frontend\controllers\users;
 
 
-use backend\forms\UserSearch;
+use frontend\forms\UserSearch;
 use core\entities\User\User;
 use core\services\manage\UserManageService;
 use yii\filters\VerbFilter;

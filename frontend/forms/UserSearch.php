@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\forms;
+namespace frontend\forms;
 
 use core\helpers\UserHelper;
 use yii\base\Model;
@@ -47,7 +47,6 @@ class UserSearch extends Model
 
         $dataProvider = new ActiveDataProvider([
                                                    'query' => $query,
-                                                   'pagination' => false,
                                                ]);
 
         $this->load($params);

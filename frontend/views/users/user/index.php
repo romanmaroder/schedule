@@ -132,26 +132,31 @@ $this->params['breadcrumbs'][] = $this->title;
         <nav aria-label="Contacts Page Navigation">
             <?= LinkPager::widget(
                 [
+                    'pagination' => $dataProvider->getPagination(),
                     'options'=>[
                         'class'=>'pagination justify-content-center m-0'
                     ],
-                    'maxButtonCount'=>1,
-                    'linkContainerOptions'=>[
-                        'class'=>'page-item'
+                    'linkOptions' => [
+                        'class' => 'page-link',
                     ],
-                    'pagination' => $dataProvider->getPagination(),
+                    'linkContainerOptions' => [
+                        'class' => 'page-item'
+                    ],
+                    'prevPageCssClass' => 'page-item',
+                    'nextPageCssClass' => 'page-item',
+                    'prevPageLabel' => '<span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>',
+                    'nextPageLabel' => '<span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>',
+                    'hideOnSinglePage' => true,
+                    'disabledListItemSubTagOptions'=>[
+                        'tag'=>'a',
+                        'class'=>'page-link'
+                    ],
+                    'maxButtonCount'=>5
+
                 ]
             ) ?>
-            <!--<ul class="pagination justify-content-center m-0">
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">6</a></li>
-                <li class="page-item"><a class="page-link" href="#">7</a></li>
-                <li class="page-item"><a class="page-link" href="#">8</a></li>
-            </ul>-->
         </nav>
     </div>
     <!-- /.card-footer -->
