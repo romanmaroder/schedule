@@ -36,7 +36,7 @@ class DefaultController extends Controller
     private $education;
     private $free;
     private $profile;
-    private $wishList;
+//    private $wishList;
     private $products;
 
     private EmployeeManageService $employeeService;
@@ -51,7 +51,7 @@ class DefaultController extends Controller
         FreeTimeReadRepository $free,
         EmployeeManageService $employeeManageService,
         ProfileService $profile,
-        WishlistService $wishList,
+//        WishlistService $wishList,
         ProductReadRepository $products,
         $config = []
     ) {
@@ -73,7 +73,7 @@ class DefaultController extends Controller
             $this->employee = $this->employees->find($this->user->id);
         }
         $this->profile = $profile;
-        $this->wishList = $wishList;
+//        $this->wishList = $wishList;
         $this->products = $products;
     }
 
@@ -165,20 +165,20 @@ class DefaultController extends Controller
         );
     }
 
-    public function actionWishlist()
+    /*public function actionWishlist()
     {
         $dataProvider = $this->products->getWishList($this->user);
 
         return $this->render('wishlist', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
     /**
      * @param $id
      * @return mixed
      */
-    public function actionWishlistAdd($id)
+    /*public function actionWishlistAdd($id)
     {
         try {
             $this->wishList->add(Yii::$app->user->id, $id);
@@ -188,13 +188,13 @@ class DefaultController extends Controller
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(Yii::$app->request->referrer ?: ['index']);
-    }
+    }*/
 
     /**
      * @param $id
      * @return mixed
      */
-    public function actionWishlistDelete($id)
+    /*public function actionWishlistDelete($id)
     {
         try {
             $this->wishList->remove(Yii::$app->user->id, $id);
@@ -203,6 +203,6 @@ class DefaultController extends Controller
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['wishlist']);
-    }
+    }*/
 
 }

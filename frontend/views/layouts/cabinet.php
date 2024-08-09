@@ -127,8 +127,8 @@ $active ='active';
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active': '' ]])?>
                                 <?=Html::a(Html::encode('Timeline'),Url::to(['/cabinet/default/timeline']),
                                     ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/timeline' ? 'active': '' ]])?>
-                                <?=Html::a(Html::encode('Wish List'),Url::to(['/cabinet/default/wishlist']),
-                                           ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/wishlist' ? 'active': '' ]])?>
+                                <?/*=Html::a(Html::encode('Wish List'),Url::to(['/cabinet/default/wishlist']),
+                                           ['class' => ['list-group-item',  Yii::$app->controller->route == 'cabinet/default/wishlist' ? 'active': '' ]])*/?>
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -153,10 +153,10 @@ $active ='active';
                                     <?=Html::a(Html::encode('Profile'),Url::to(['/cabinet/default/profile']),
                                         ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/profile' ? 'active btn-shadow': '' ]])?>
                                 </li>
-                                <li class="nav-item">
-                                    <?=Html::a(Html::encode('Wishlist'),Url::to(['/cabinet/default/wishlist']),
-                                               ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/wishlist' ? 'active btn-shadow': '' ]])?>
-                                </li>
+                                <!--<li class="nav-item">
+                                    <?/*=Html::a(Html::encode('Wishlist'),Url::to(['/cabinet/default/wishlist']),
+                                               ['class' => ['nav-link btn-sm',  Yii::$app->controller->route == 'cabinet/default/wishlist' ? 'active btn-shadow': '' ]])*/?>
+                                </li>-->
                             </ul>
                         </div><!-- /.card-header -->
                         <div class="card-body">
