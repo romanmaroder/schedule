@@ -39,6 +39,7 @@ PluginAsset::register($this)->add(
                     [
                         'dataProvider' => $dataProvider,
                         //'filterModel' => $searchModel,
+                        'summary' => false,
                         'tableOptions' => [
                             'class' => 'table table-striped table-bordered',
                             'id' => 'service'
@@ -97,14 +98,16 @@ $js = <<< JS
  $(function () {
  
     $('#service').DataTable({
-    
-       "paging": false,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": false,
-       "autoWidth": false,
-       "responsive": true,
+    bDestroy: true,
+       pageLength: -1, 
+       paging: true,
+       lengthChange: true,
+       lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
+       searching: true,
+       ordering: false,
+       info: false,
+       autoWidth: false,
+       responsive: true,
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {

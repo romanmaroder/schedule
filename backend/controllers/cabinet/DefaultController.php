@@ -105,9 +105,9 @@ class DefaultController extends Controller
 
     public function actionTimeline()
     {
-        $employee = $this->employee->find($this->user->id);
+        $employee = $this->employee->findEmployee($this->user->id);
 
-        $events = $this->events->getAllDayById($employee->user_id);
+        $events = $this->events->getAllDayById($this->user->id);
 
         $educations = $this->education->getLessonDayById($this->user->id);
 
@@ -128,7 +128,7 @@ class DefaultController extends Controller
 
     public function actionProfile()
     {
-        $employee = $this->employee->find($this->user->id);
+        $employee = $this->employee->findEmployee($this->user->id);
 
         $form = new ProfileEditForm($employee);
 

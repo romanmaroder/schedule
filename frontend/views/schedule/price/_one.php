@@ -3,8 +3,8 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $service \core\entities\core\Service\Service */
-/* @var $category \core\entities\core\Category */
+/* @var $service \core\entities\Schedule\Service\Service */
+/* @var $category \core\entities\Schedule\Service\Category */
 
 use yii\helpers\Url;
 

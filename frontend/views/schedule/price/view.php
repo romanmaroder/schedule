@@ -2,11 +2,11 @@
 
 /* @var $this yii\web\View */
 
-/* @var $service \core\entities\core\Service\Service */
+/* @var $service \core\entities\Schedule\Service\Service */
 /* @var $user \core\entities\User\User */
 
-/* @var $category \core\entities\core\Category */
-/* @var $menu \core\entities\core\Category */
+/* @var $category \core\entities\Schedule\Service\Category */
+/* @var $menu \core\entities\Schedule\Service\Category */
 
 use yii\helpers\Html;
 use yii\helpers\Url;

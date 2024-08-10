@@ -9,7 +9,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $user \core\entities\User\User */
-/* @var $category \core\entities\Schedule\Category */
+/* @var $category \core\entities\Schedule\Service\Category */
 
 
 PluginAsset::register($this)->add(
