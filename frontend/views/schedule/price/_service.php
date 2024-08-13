@@ -114,7 +114,7 @@ $js = <<< JS
        "lengthChange": true,
        "lengthMenu": [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
        "searching": true,
-       "ordering": true,
+       "ordering": false,
        "info": true,
        "autoWidth": false,
        "responsive": true,

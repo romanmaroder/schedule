@@ -121,7 +121,7 @@ use yii\helpers\Html;
                                                     'label' => 'Tags',
                                                     'icon' => 'fa-solid fa-tags',
                                                     'url' => ['/schedule/tag/index'],
-                                                    'active' => $this->context->id == 'expenses/tag'
+                                                    'active' => $this->context->id == 'schedule/tag'
                                                 ],
                                             ]
                                         ],

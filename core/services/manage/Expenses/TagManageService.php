@@ -6,7 +6,7 @@ namespace core\services\manage\Expenses;
 
 
 use core\entities\Expenses\Expenses\Tag;
-use core\forms\manage\Schedule\TagForm;
+use core\forms\manage\Expenses\TagForm;
 use core\repositories\Expenses\TagRepository;
 
 class TagManageService

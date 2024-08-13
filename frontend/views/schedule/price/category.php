@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $user \core\entities\User\User */
-/* @var $category \core\entities\Schedule\Service\\Category */
+/* @var $category \core\entities\Schedule\Service\Category */
 
 
 $this->title =$category->name ;
@@ -40,6 +40,7 @@ PluginAsset::register($this)->add(
                     <?= GridView::widget(
                         [
                             'dataProvider' => $dataProvider,
+                            'summary' => false,
                             'tableOptions' => [
                                 'class' => 'table table-striped table-bordered',
                                 'id' => 'service'
@@ -87,13 +88,13 @@ $js = <<< JS
  $(function () {
  
     $('#service').DataTable({
-    
-       "pageLength": 3, 
+       "pageLength": -1, 
        "paging": true,
-       "lengthChange": false,
+       "lengthChange": true,
+       "lengthMenu": [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
        "searching": true,
-       "ordering": true,
-       "info": false,
+       "ordering": false,
+       "info": true,
        "autoWidth": false,
        "responsive": true,
        //"dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
