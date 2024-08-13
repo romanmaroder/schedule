@@ -46,7 +46,7 @@ PluginAsset::register($this)->add(
         <?= GridView::widget(
             [
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
+                //'filterModel' => $searchModel,
                 'summary' => false,
                 'tableOptions' => [
                     'class' => 'table table-striped table-bordered',

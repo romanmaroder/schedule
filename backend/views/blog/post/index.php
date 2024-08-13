@@ -2,6 +2,7 @@
 
 use core\entities\Blog\Post\Post;
 use core\helpers\PostHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -11,6 +12,15 @@ use yii\helpers\Html;
 
 $this->title = 'Posts';
 $this->params['breadcrumbs'][] = $this->title;
+
+PluginAsset::register($this)->add(['datatables',
+                                      'datatables-bs4',
+                                      'datatables-responsive',
+                                      'datatables-buttons',
+                                      'datatables-searchbuilder',
+                                      'datatables-fixedheader',
+                                      'sweetalert2']);
+
 ?>
 <div class="card card-secondary">
     <div class="card-header">
@@ -32,7 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card-body">
         <?= GridView::widget([
                                  'dataProvider' => $dataProvider,
-                                 'filterModel' => $searchModel,
+                                 // 'filterModel' => $searchModel,
+                                 'summary' => false,
+                                 'tableOptions' => [
+                                     'class' => 'table table-striped table-bordered',
+                                     'id' => 'posts'
+                                 ],
                                  'columns' => [
                                      [
                                          'value' => function (Post $model) {
@@ -72,3 +87,73 @@ $this->params['breadcrumbs'][] = $this->title;
         <!--Footer-->
     </div>
 </div>
+<?php
+$js = <<< JS
+$('#posts').DataTable({
+                bDestroy: true,
+                responsive: true,
+                pageLength: -1, 
+                paging: true,
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
+                searching: true,
+                ordering: false,
+                info: true,
+                autoWidth: false,
+                colReorder:{
+                    realtime:false
+                },
+                fixedHeader: {
+                    header: true,
+                    footer: true
+                },
+                bStateSave: true,
+                dom:'<"row"<"col-12"Q>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
+                fnStateSave: function (oSettings, oData) {
+                localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
+                },
+                fnStateLoad: function () {
+                var data = localStorage.getItem('DataTables_' + window.location.pathname);
+                return JSON.parse(data);
+                },
+                searchBuilder: {
+                    columns: [2,3,4,5]
+                },
+                language: {
+                    searchBuilder: {
+                        add: 'Add filter',
+                        //condition: 'Comparator',
+                        //clearAll: 'Reset',
+                        //delete: 'Delete',
+                        //deleteTitle: 'Delete Title',
+                        //data: 'Column',
+                        //left: 'Left',
+                        //leftTitle: 'Left Title',
+                        //logicAnd: 'AND',
+                        //logicOr: 'OR',
+                        //right: 'Right',
+                        //rightTitle: 'Right Title',
+                        title: {
+                            0: 'Filters',
+                            _: 'Filters (%d)'
+                        }
+                        //value: 'Option',
+                        //valueJoiner: 'et'
+                    },
+                    paginate: {
+                        first: "First",
+                        previous: '<i class="fas fa-backward"></i>',
+                        last: "Last",
+                        next: '<i class="fas fa-forward"></i>'
+                    }
+                }
+    }).buttons().container().appendTo('#review_wrapper .col-md-6:eq(0)');
+
+
+
+JS;
+
+
+$this->registerJs($js, $position = yii\web\View::POS_READY, $key = null);
+
+?>
