@@ -58,6 +58,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
+        SEO
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -81,6 +82,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
+        Description
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>

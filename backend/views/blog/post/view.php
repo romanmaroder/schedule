@@ -4,6 +4,7 @@ use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\PostHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
@@ -12,7 +13,7 @@ use yii\widgets\DetailView;
 /* @var $modificationsProvider yii\data\ActiveDataProvider */
 
 
-$this->title = $post->title;
+$this->title = Html::encode( StringHelper::truncateWords(strip_tags($post->title), 3) );
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 

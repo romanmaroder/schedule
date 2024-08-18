@@ -1,15 +1,13 @@
-POST http://api.core:8080/oauth2/token
+POST http://api.schedule:8080/oauth2/token
 Content-Type: application/json
 
 {
   "grant_type":"password",
-  "username":"Admin Roman",
+  "username":"Admin Admin",
   "password":"12345678",
   "client_id":"testclient",
   "client_secret":"testpass"
 }
-
-<> 2024-06-01T140401.200.json
 
 ###
 GET http://{{host}}/profile?accessToken={{accessToken}}

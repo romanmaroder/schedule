@@ -12,6 +12,8 @@ use core\cart\shop\storage\HybridStorage;
 use core\cart\schedule\storage\DbStorage;
 use core\services\auth\SignupService;
 use core\services\ContactService;
+use core\services\yandex\ShopInfo;
+use core\services\yandex\YandexMarket;
 use yii\base\BootstrapInterface;
 use yii\caching\Cache;
 use yii\mail\MailerInterface;
@@ -56,5 +58,9 @@ class SetUp implements BootstrapInterface
                 new DynamicCost(new SimpleCost())
             );
         });
+
+        $container->setSingleton(YandexMarket::class, [], [
+            new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo']),
+        ]);
     }
 }

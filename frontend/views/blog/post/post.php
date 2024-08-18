@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\StringHelper;
 
 //$this->title = $post->getSeoTitle();
-$this->title = Html::encode( StringHelper::truncateWords(strip_tags($post->title), 5) );
+$this->title = Html::encode( StringHelper::truncateWords(strip_tags($post->title), 3) );
 
 $this->registerMetaTag(['name' => 'description', 'content' => $post->meta->description]);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $post->meta->keywords]);

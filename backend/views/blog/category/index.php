@@ -129,7 +129,7 @@ $('#category').DataTable({
                         next: '<i class="fas fa-forward"></i>'
                     }
                 }
-    }).buttons().container().appendTo('#review_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#category_wrapper .col-md-6:eq(0)');
 
 
 
