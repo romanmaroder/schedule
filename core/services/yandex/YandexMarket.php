@@ -42,7 +42,7 @@ class YandexMarket
         $writer->endDTD();
 
         $writer->startElement('yml_catalog');
-        $writer->writeAttribute('date', date('Y-m-d H:i'));
+        $writer->writeAttribute('date', date('c'));
 
         $writer->startElement('shop');
         $writer->writeElement('name',Html::encode($this->shop->name));
