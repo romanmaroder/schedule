@@ -1,7 +1,7 @@
 <?php
 
 
-namespace frontend\controllers;
+namespace shop\controllers;
 
 
 use core\entities\Shop\Product\Product;
