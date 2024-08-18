@@ -60,7 +60,7 @@ class SetUp implements BootstrapInterface
         });
 
         $container->setSingleton(YandexMarket::class, [], [
-            new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo']),
+            new ShopInfo($app->name, $app->name, $app->params['shopHostInfo']),
         ]);
     }
 }
