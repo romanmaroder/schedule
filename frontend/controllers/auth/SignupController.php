@@ -5,7 +5,7 @@ namespace frontend\controllers\auth;
 
 
 use core\forms\auth\SignupForm;
-use core\services\auth\SignupService;
+use core\useCases\auth\SignupService;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;

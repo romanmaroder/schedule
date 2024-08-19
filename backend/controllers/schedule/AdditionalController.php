@@ -8,7 +8,7 @@ use backend\forms\Schedule\AdditionalSearch;
 use core\entities\Schedule\Additional\Additional;
 use core\forms\manage\Schedule\Additional\AdditionalCreateForm;
 use core\forms\manage\Schedule\Additional\AdditionalEditForm;
-use core\services\manage\Schedule\AdditionalManageService;
+use core\useCases\manage\Schedule\AdditionalManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

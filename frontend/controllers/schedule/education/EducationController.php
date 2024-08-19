@@ -7,7 +7,7 @@ namespace frontend\controllers\schedule\education;
 use core\entities\Schedule\Event\Calendar\Calendar;
 use core\entities\Schedule\Event\Education;
 use core\repositories\NotFoundException;
-use core\services\manage\Schedule\EducationManageService;
+use core\useCases\manage\Schedule\EducationManageService;
 use yii\web\Controller;
 use yii\web\Response;
 

@@ -7,7 +7,7 @@ namespace backend\controllers;
 use backend\forms\RateSearch;
 use core\entities\User\Rate;
 use core\forms\manage\User\Rate\RateForm;
-use core\services\manage\RateServiceManager;
+use core\useCases\manage\RateServiceManager;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

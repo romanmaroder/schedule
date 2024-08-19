@@ -7,7 +7,7 @@ namespace backend\controllers\shop;
 use backend\forms\Shop\TagSearch;
 use core\entities\Shop\Product\Tag;
 use core\forms\manage\Shop\TagForm;
-use core\services\manage\Shop\TagManageService;
+use core\useCases\manage\Shop\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

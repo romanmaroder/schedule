@@ -7,7 +7,6 @@ namespace backend\controllers\shop;
 use backend\forms\Shop\BrandSearch;
 use core\entities\CommonUses\Brand;
 use core\forms\manage\Shop\BrandForm;
-use core\services\manage\Shop\BrandManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -17,7 +16,7 @@ class BrandController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module, BrandManageService $service, $config = [])
+    public function __construct($id, $module, \core\useCases\manage\Shop\BrandManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;

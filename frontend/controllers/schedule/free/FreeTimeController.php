@@ -8,7 +8,7 @@ namespace frontend\controllers\schedule\free;
 use core\entities\Schedule\Event\Calendar\Calendar;
 use core\entities\Schedule\Event\FreeTime;
 use core\repositories\NotFoundException;
-use core\services\manage\Schedule\FreeTimeManageService;
+use core\useCases\manage\Schedule\FreeTimeManageService;
 use yii\web\Controller;
 use yii\web\Response;
 

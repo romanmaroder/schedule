@@ -5,9 +5,9 @@ namespace console\controllers;
 
 
 use core\entities\User\User;
-use core\services\manage\UserManageService;
+use core\useCases\manage\EmployeeManageService;
+use core\useCases\manage\UserManageService;
 use Exception;
-use core\services\manage\EmployeeManageService;
 use Yii;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;

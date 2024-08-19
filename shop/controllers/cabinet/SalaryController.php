@@ -4,7 +4,7 @@
 namespace shop\controllers\cabinet;
 
 
-use core\services\Schedule\CartService;
+use core\useCases\Schedule\CartService;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 

@@ -7,7 +7,6 @@ namespace backend\controllers\blog;
 use backend\forms\Blog\CategorySearch;
 use core\entities\Blog\Category;
 use core\forms\manage\Blog\CategoryForm;
-use core\services\manage\Blog\CategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -17,7 +16,7 @@ class CategoryController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module, CategoryManageService $service, $config = [])
+    public function __construct($id, $module, \core\useCases\manage\Blog\CategoryManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;

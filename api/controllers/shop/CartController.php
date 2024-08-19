@@ -8,7 +8,7 @@ use core\cart\shop\CartItem;
 use core\cart\shop\cost\Discount;
 use core\forms\Shop\AddToCartForm;
 use core\readModels\Shop\ProductReadRepository;
-use core\services\Shop\CartService;
+use core\useCases\Shop\CartService;
 use Yii;
 use yii\helpers\Url;
 use yii\rest\Controller;

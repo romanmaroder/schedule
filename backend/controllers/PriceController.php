@@ -7,7 +7,7 @@ namespace backend\controllers;
 use backend\forms\PriceSearch;
 use core\entities\User\Price;
 use core\forms\manage\User\Price\PriceForm;
-use core\services\manage\PriceServiceManager;
+use core\useCases\manage\PriceServiceManager;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

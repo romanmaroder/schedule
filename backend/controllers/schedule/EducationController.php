@@ -10,7 +10,7 @@ use core\entities\Schedule\Event\Education;
 use core\forms\manage\Schedule\Event\EducationCreateForm;
 use core\forms\manage\Schedule\Event\EducationEditForm;
 use core\repositories\NotFoundException;
-use core\services\manage\Schedule\EducationManageService;
+use core\useCases\manage\Schedule\EducationManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -18,7 +18,7 @@ use yii\web\Response;
 
 class EducationController extends Controller
 {
-    private EducationManageService $service;
+    private \core\useCases\manage\Schedule\EducationManageService $service;
     private Calendar $calendar;
 
     public function __construct($id, $module, EducationManageService $service, Calendar $calendar,$config = [])

@@ -5,7 +5,7 @@ namespace backend\controllers\shop;
 use backend\forms\Shop\CharacteristicSearch;
 use core\entities\CommonUses\Characteristic;
 use core\forms\manage\Shop\CharacteristicForm;
-use core\services\manage\Shop\CharacteristicManageService;
+use core\useCases\manage\Shop\CharacteristicManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

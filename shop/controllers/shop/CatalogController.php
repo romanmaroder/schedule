@@ -5,15 +5,15 @@ namespace shop\controllers\shop;
 
 
 use core\entities\User\User;
-use core\forms\Shop\ReviewForm;
 use core\forms\Shop\AddToCartForm;
+use core\forms\Shop\ReviewForm;
 use core\readModels\Shop\BrandReadRepository;
 use core\readModels\Shop\CategoryReadRepository;
 use core\readModels\Shop\ProductReadRepository;
 use core\readModels\Shop\TagReadRepository;
 use core\readModels\User\UserReadRepository;
 use core\repositories\NotFoundException;
-use core\services\manage\Shop\ReviewManageService;
+use core\useCases\manage\Shop\ReviewManageService;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

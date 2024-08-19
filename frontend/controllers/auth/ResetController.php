@@ -6,7 +6,7 @@ namespace frontend\controllers\auth;
 
 use core\forms\auth\PasswordResetRequestForm;
 use core\forms\auth\ResetPasswordForm;
-use core\services\auth\PasswordResetService;
+use core\useCases\auth\PasswordResetService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;

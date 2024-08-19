@@ -6,7 +6,7 @@ namespace frontend\controllers\auth;
 
 use common\auth\Identity;
 use core\forms\auth\LoginForm;
-use core\services\auth\AuthService;
+use core\useCases\auth\AuthService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

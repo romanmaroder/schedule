@@ -7,7 +7,7 @@ namespace backend\controllers\expenses;
 use backend\forms\Expenses\CategorySearch;
 use core\entities\Expenses\Category;
 use core\forms\manage\Expenses\CategoryForm;
-use core\services\manage\Expenses\CategoryManageService;
+use core\useCases\manage\Expenses\CategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

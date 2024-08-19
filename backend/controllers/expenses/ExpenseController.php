@@ -8,7 +8,7 @@ use backend\forms\Expenses\ExpenseSearch;
 use core\entities\Expenses\Expenses\Expenses;
 use core\forms\manage\Expenses\Expense\ExpenseCreateForm;
 use core\forms\manage\Expenses\Expense\ExpenseEditForm;
-use core\services\manage\Expenses\ExpenseManageService;
+use core\useCases\manage\Expenses\ExpenseManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

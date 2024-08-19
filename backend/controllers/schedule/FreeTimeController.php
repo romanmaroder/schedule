@@ -7,12 +7,12 @@ namespace backend\controllers\schedule;
 use backend\forms\Schedule\FreeTimeSearch;
 use core\entities\Schedule\Event\Calendar\Calendar;
 use core\entities\Schedule\Event\FreeTime;
+use core\forms\manage\Schedule\Event\FreeTime\FreeTimeCopyForm;
 use core\forms\manage\Schedule\Event\FreeTime\FreeTimeCreateForm;
 use core\forms\manage\Schedule\Event\FreeTime\FreeTimeEditForm;
-use core\forms\manage\Schedule\Event\FreeTime\FreeTimeCopyForm;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\repositories\NotFoundException;
-use core\services\manage\Schedule\FreeTimeManageService;
+use core\useCases\manage\Schedule\FreeTimeManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -21,7 +21,7 @@ use yii\web\Response;
 class FreeTimeController extends Controller
 {
 
-    private FreeTimeManageService $freeTime;
+    private \core\useCases\manage\Schedule\FreeTimeManageService $freeTime;
     private Calendar $calendar;
     private EmployeeReadRepository $employees;
 

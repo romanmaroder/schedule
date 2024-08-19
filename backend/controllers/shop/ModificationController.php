@@ -6,7 +6,7 @@ namespace backend\controllers\shop;
 
 use core\entities\Shop\Product\Product;
 use core\forms\manage\Shop\Product\ModificationForm;
-use core\services\manage\Shop\ProductManageService;
+use core\useCases\manage\Shop\ProductManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

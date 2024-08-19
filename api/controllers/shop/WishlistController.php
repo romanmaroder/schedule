@@ -7,7 +7,7 @@ namespace api\controllers\shop;
 use api\providers\MapDataProvider;
 use core\entities\Shop\Product\Product;
 use core\readModels\Shop\ProductReadRepository;
-use core\services\cabinet\WishlistService;
+use core\useCases\cabinet\WishlistService;
 use Yii;
 use yii\data\DataProviderInterface;
 use yii\helpers\Url;

@@ -10,7 +10,7 @@ use core\readModels\Schedule\EducationReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\readModels\Schedule\FreeTimeReadRepository;
 use core\readModels\User\UserReadRepository;
-use core\services\manage\EmployeeManageService;
+use core\useCases\manage\EmployeeManageService;
 use core\useCases\cabinet\ProfileService;
 use Yii;
 use yii\data\ArrayDataProvider;

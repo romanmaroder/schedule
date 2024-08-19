@@ -7,7 +7,7 @@ namespace backend\controllers\blog;
 use backend\forms\Blog\CommentSearch;
 use core\entities\Blog\Post\Post;
 use core\forms\manage\Blog\Post\CommentEditForm;
-use core\services\Blog\CommentManageService;
+use core\useCases\Blog\CommentManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

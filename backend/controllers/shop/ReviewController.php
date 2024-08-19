@@ -8,7 +8,7 @@ use backend\forms\Shop\ReviewSearch;
 use core\entities\Shop\Product\Product;
 use core\forms\manage\Shop\Product\ReviewEditForm;
 use core\readModels\Shop\ProductReadRepository;
-use core\services\manage\Shop\ReviewManageService;
+use core\useCases\manage\Shop\ReviewManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

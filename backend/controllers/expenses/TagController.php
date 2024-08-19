@@ -7,7 +7,7 @@ namespace backend\controllers\expenses;
 use backend\forms\Expenses\TagSearch;
 use core\entities\Expenses\Expenses\Tag;
 use core\forms\manage\Expenses\TagForm;
-use core\services\manage\Expenses\TagManageService;
+use core\useCases\manage\Expenses\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

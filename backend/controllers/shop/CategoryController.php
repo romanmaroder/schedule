@@ -7,7 +7,7 @@ namespace backend\controllers\shop;
 use backend\forms\Shop\CategorySearch;
 use core\entities\Shop\Product\Category;
 use core\forms\manage\Shop\CategoryForm;
-use core\services\manage\Shop\CategoryManageService;
+use core\useCases\manage\Shop\CategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

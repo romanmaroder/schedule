@@ -7,7 +7,7 @@ namespace backend\controllers;
 use backend\forms\PageSearch;
 use core\entities\Page;
 use core\forms\manage\PageForm;
-use core\services\manage\PageManageService;
+use core\useCases\manage\PageManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

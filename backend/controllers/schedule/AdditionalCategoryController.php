@@ -7,7 +7,7 @@ namespace backend\controllers\schedule;
 use backend\forms\Schedule\AdditionalCategorySearch;
 use core\entities\Schedule\Additional\Category;
 use core\forms\manage\Schedule\Additional\CategoryForm;
-use core\services\manage\Schedule\AdditionalCategoryManageService;
+use core\useCases\manage\Schedule\AdditionalCategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

@@ -12,7 +12,7 @@ use core\forms\manage\Shop\Product\PriceForm;
 use core\forms\manage\Shop\Product\ProductCreateForm;
 use core\forms\manage\Shop\Product\ProductEditForm;
 use core\forms\manage\Shop\Product\QuantityForm;
-use core\services\manage\Shop\ProductManageService;
+use core\useCases\manage\Shop\ProductManageService;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;

@@ -9,7 +9,7 @@ use core\entities\User\Employee\Employee;
 use core\forms\manage\User\Employee\EmployeeCreateForm;
 use core\forms\manage\User\Employee\EmployeeEditForm;
 use core\forms\manage\User\Employee\EmployeeExistCreateForm;
-use core\services\manage\EmployeeManageService;
+use core\useCases\manage\EmployeeManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

@@ -7,7 +7,7 @@ namespace backend\controllers\blog;
 use backend\forms\Blog\PostSearch;
 use core\entities\Blog\Post\Post;
 use core\forms\manage\Blog\Post\PostForm;
-use core\services\manage\Blog\PostManageService;
+use core\useCases\manage\Blog\PostManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

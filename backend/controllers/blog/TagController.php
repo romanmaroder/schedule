@@ -7,7 +7,6 @@ namespace backend\controllers\blog;
 use backend\forms\Blog\TagSearch;
 use core\entities\Blog\Tag;
 use core\forms\manage\Blog\TagForm;
-use core\services\manage\Blog\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -17,7 +16,7 @@ class TagController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module, TagManageService $service, $config = [])
+    public function __construct($id, $module, \core\useCases\manage\Blog\TagManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;

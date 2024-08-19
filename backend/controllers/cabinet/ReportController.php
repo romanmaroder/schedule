@@ -6,7 +6,7 @@ namespace backend\controllers\cabinet;
 
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
-use core\services\Schedule\CartService;
+use core\useCases\Schedule\CartService;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 

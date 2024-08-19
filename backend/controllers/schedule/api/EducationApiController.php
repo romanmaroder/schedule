@@ -9,7 +9,7 @@ use core\entities\Schedule\Event\Education;
 use core\forms\manage\Schedule\Event\EducationCreateForm;
 use core\forms\manage\Schedule\Event\EducationEditForm;
 use core\repositories\NotFoundException;
-use core\services\manage\Schedule\EducationManageService;
+use core\useCases\manage\Schedule\EducationManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
