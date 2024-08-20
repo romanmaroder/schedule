@@ -10,21 +10,34 @@ use core\forms\manage\User\UserCreateForm;
 use core\forms\manage\User\UserEditForm;
 use core\repositories\EmployeeRepository;
 use core\repositories\UserRepository;
+use core\services\newsletter\Newsletter;
 use core\services\RoleManager;
+use core\services\TransactionManager;
 
 class UserManageService
 {
     private UserRepository $users;
     private $employee;
     private $roles;
+    private $transaction;
+
+    /**
+     * @var Newsletter
+     */
+    private $newsletter;
 
     public function __construct(UserRepository $users,
         EmployeeRepository $employee,
-        RoleManager $roles)
+        RoleManager $roles,
+        TransactionManager $transaction,
+        /*Newsletter $newsletter*/
+    )
     {
         $this->users = $users;
         $this->employee = $employee;
+        $this->transaction = $transaction;
         $this->roles = $roles;
+        /*$this->newsletter = $newsletter;*/
     }
 
     /**
@@ -45,7 +58,10 @@ class UserManageService
             ),
             $form->notice,
         );
-        $this->users->save($user);
+        $this->transaction->wrap(function () use ($user, $form) {
+            $this->users->save($user);
+            //$this->newsletter->subscribe($user->email);
+        });
         return $user;
     }
 
@@ -69,7 +85,10 @@ class UserManageService
             ),
             $form->notice,
         );
-        $this->users->save($user);
+        $this->transaction->wrap(function () use ($user, $form) {
+            $this->users->save($user);
+        });
+
     }
 
     public function assignRole($id, $role): void
@@ -87,5 +106,6 @@ class UserManageService
     {
             $user = $this->users->get($id);
             $this->users->remove($user);
+            //$this->newsletter->unsubscribe($user->email);
     }
 }

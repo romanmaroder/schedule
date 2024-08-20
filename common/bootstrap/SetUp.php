@@ -10,10 +10,12 @@ use core\cart\shop\cost\calculator\SimpleCost;
 use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\storage\HybridStorage;
 use core\cart\schedule\storage\DbStorage;
+use core\services\newsletter\Newsletter;
 use core\useCases\auth\SignupService;
 use core\useCases\ContactService;
 use core\services\yandex\ShopInfo;
 use core\services\yandex\YandexMarket;
+use DrewM\MailChimp\MailChimp;
 use yii\base\BootstrapInterface;
 use yii\caching\Cache;
 use yii\mail\MailerInterface;
@@ -62,5 +64,12 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(YandexMarket::class, [], [
             new ShopInfo($app->name, $app->name, $app->params['shopHostInfo']),
         ]);
+
+        /*$container->setSingleton(Newsletter::class, function () use ($app) {
+            return new MailChimp(
+                new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
+                $app->params['mailChimpListId']
+            );
+        });*/
     }
 }

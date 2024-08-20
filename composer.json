@@ -35,7 +35,8 @@
         "bower-asset/owl.carousel": "2.3.4",
         "bower-asset/magnific-popup": "^1.1",
         "yii-cms/yii2-robokassa": "^1.1",
-        "zircote/swagger-php": "^2.0"
+        "zircote/swagger-php": "^2.0",
+        "drewm/mailchimp-api": "^2.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
