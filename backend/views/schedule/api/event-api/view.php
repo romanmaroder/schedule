@@ -1,6 +1,7 @@
 <?php
 
 use core\helpers\EventPaymentStatusHelper;
+use core\services\sms\simpleSms\SmsMessage;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -9,7 +10,8 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model \core\entities\Schedule\Event\Event */
-/* @var $cart \core\cart\Cart */
+/* @var $cart \core\cart\schedule\Cart */
+/* @var $sms \core\services\sms\SmsSender */
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
@@ -95,36 +97,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?php endif;?>
 
             <?php
+                echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
+                echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
+                echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
 
-            /*$options = [
-                'class' => 'btn btn-info btn-sm d-none',
-                'href'  => 'sms:' . $model->client->phone . Yii::$app->smsSender->checkOperatingSystem(
-                    ) . Yii::$app->smsSender->messageText(
-                        $model->event_time_start
-                    ),
-                'title' => 'Отправить смс',
-            ];
-
-            if ($model->client->phone) {
-                Html::removeCssClass($options, 'd-none');
-                Html::addCssClass($options, 'd-inline-block');
-            }
-            echo Html::tag('a', '<i class="far fa-envelope"></i>', $options);*/
-            ?>
-            <?php
-
-            /*$options = [
-                'class' => 'btn btn-info btn-sm d-none',
-                'href'  => 'sms:' . $model->client->phone . Yii::$app->smsSender->checkOperatingSystem(
-                    ) . Yii::$app->smsSender->messageAddress(),
-                'title' => 'Отправить адрес',
-            ];
-
-            if ($model->client->phone) {
-                Html::removeCssClass($options, 'd-none');
-                Html::addCssClass($options, 'd-inline-block');
-            }
-            echo Html::tag('a', '<i class="fas fa-map-marker-alt"></i>', $options);*/
             ?>
             <?= Html::a(
                 Yii::t('app', 'Copy'),
@@ -132,7 +108,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'id' => 'copy-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient'
+                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
+                    'title'=>'Copy'
                 ]
             ) ?>
             <?= Html::a(

@@ -9,6 +9,7 @@ use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
 use core\repositories\NotFoundException;
+use core\services\sms\SmsSender;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
 use Yii;
@@ -19,12 +20,18 @@ class EventApiController extends Controller
 {
     private EventManageService $service;
     private CartService $cart;
+    private SmsSender $sms;
 
-    public function __construct($id, $module, EventManageService $service,CartService $cart, $config = [])
+    public function __construct($id, $module,
+        EventManageService $service,
+        CartService $cart,
+        SmsSender $sms,
+        $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->cart = $cart;
+        $this->sms = $sms;
     }
     public function behaviors(): array
     {
@@ -46,6 +53,7 @@ class EventApiController extends Controller
             [
                 'model' => $this->findModel($id),
                 'cart'=>$cart,
+                'sms'=> $this->sms,
             ]
         );
     }

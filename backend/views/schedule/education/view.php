@@ -99,8 +99,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
                     /*$options = [
                         'class' => 'btn btn-info btn-sm d-none',
-                        'href'  => 'sms:' . $model->client->phone . Yii::$app->smsSender->checkOperatingSystem(
-                            ) . Yii::$app->smsSender->messageText(
+                        'href'  => 'sms:' . $model->client->phone . Yii::$app->sms->checkOperatingSystem(
+                            ) . Yii::$app->sms->messageText(
                                 $model->event_time_start
                             ),
                         'title' => 'Отправить смс',
@@ -116,8 +116,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
                     /*$options = [
                         'class' => 'btn btn-info btn-sm d-none',
-                        'href'  => 'sms:' . $model->client->phone . Yii::$app->smsSender->checkOperatingSystem(
-                            ) . Yii::$app->smsSender->messageAddress(),
+                        'href'  => 'sms:' . $model->client->phone . Yii::$app->sms->checkOperatingSystem(
+                            ) . Yii::$app->sms->messageAddress(),
                         'title' => 'Отправить адрес',
                     ];
 

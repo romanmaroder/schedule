@@ -11,6 +11,10 @@ use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\storage\HybridStorage;
 use core\cart\schedule\storage\DbStorage;
 use core\services\newsletter\Newsletter;
+use core\services\sms\simpleSms\SimpleSms;
+use core\services\sms\simpleSms\SmsMessage;
+use core\services\sms\simpleSms\SmsOs;
+use core\services\sms\SmsSender;
 use core\useCases\auth\SignupService;
 use core\useCases\ContactService;
 use core\services\yandex\ShopInfo;
@@ -71,5 +75,12 @@ class SetUp implements BootstrapInterface
                 $app->params['mailChimpListId']
             );
         });*/
+
+        $container->setSingleton(SmsSender::class, function () use ($app) {
+            return new SimpleSms(
+                new SmsOs(),
+                new SmsMessage()
+            );
+        });
     }
 }
