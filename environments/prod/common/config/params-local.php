@@ -7,5 +7,6 @@ return [
     'backendHostInfo' => 'http://backend.schedule',
     'staticHostInfo' => 'http://static.schedule',
     /*'mailChimpKey' => '',
-    'mailChimpListId' => '',*/
+    'mailChimpListId' => '',
+    'smsRuKey' => '',*/
 ];

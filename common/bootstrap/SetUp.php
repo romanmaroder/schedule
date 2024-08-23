@@ -10,7 +10,9 @@ use core\cart\shop\cost\calculator\SimpleCost;
 use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\storage\HybridStorage;
 use core\cart\schedule\storage\DbStorage;
-use core\services\newsletter\Newsletter;
+use core\services\sms\shop\LoggedSender;
+use core\services\sms\shop\SmsRu;
+use core\services\sms\shop\SmsSender as ShopSmsSender;
 use core\services\sms\simpleSms\SimpleSms;
 use core\services\sms\simpleSms\SmsMessage;
 use core\services\sms\simpleSms\SmsOs;
@@ -19,7 +21,6 @@ use core\useCases\auth\SignupService;
 use core\useCases\ContactService;
 use core\services\yandex\ShopInfo;
 use core\services\yandex\YandexMarket;
-use DrewM\MailChimp\MailChimp;
 use yii\base\BootstrapInterface;
 use yii\caching\Cache;
 use yii\mail\MailerInterface;
@@ -52,8 +53,8 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(Cart::class, function () use ($app) {
             return new Cart(
                 new DbStorage($app->get('user') ,$app->db)
-                //new HybridStorage($app->get('user'), 'cart', 3600 * 24, $app->db),
-                //new DynamicCost(new SimpleCost())
+            //new HybridStorage($app->get('user'), 'cart', 3600 * 24, $app->db),
+            //new DynamicCost(new SimpleCost())
             );
         });
 
@@ -70,9 +71,16 @@ class SetUp implements BootstrapInterface
         ]);
 
         /*$container->setSingleton(Newsletter::class, function () use ($app) {
-            return new MailChimp(
-                new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
-                $app->params['mailChimpListId']
+           return new MailChimp(
+               new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
+               $app->params['mailChimpListId']
+           );
+       });*/
+
+        /*$container->setSingleton(ShopSmsSender::class, function () use ($app) {
+            return new LoggedSender(
+                new SmsRu($app->params['smsRuKey']),
+                \Yii::getLogger()
             );
         });*/
 
