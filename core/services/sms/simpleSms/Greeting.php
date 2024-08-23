@@ -18,12 +18,10 @@ class Greeting
      * Checking the time of day for the greeting
      *
      * @return string
-     * @throws \yii\base\InvalidConfigException
      */
     public static function checkGreeting(): string
     {
-        $hour = date("H:i");
-
+        $hour = date("H A");
         switch ($hour) {
             case $hour >= 04;
                 return self::MORNING;
@@ -31,7 +29,7 @@ class Greeting
                 return self::DAY;
             case $hour >= 16;
                 return self::EVENING;
-            case ($hour >= 2 or $hour < 04);
+            case ($hour >= 02 or $hour <= 04);
                 return self::NIGHT;
         }
 

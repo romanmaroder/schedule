@@ -16,9 +16,9 @@ class SmsMessage
     public const ICON_CONFIRM = '<i class="far fa-question-circle"></i>';
 
 
-    public function message($ext,$data): string
+    public function message($text,$data): string
     {
-        switch ($ext) {
+        switch ($text) {
             case self::ADDRESS_MESSAGE;
                 return Greeting::checkGreeting() . self::ADDRESS_MESSAGE;
             case self::QUESTION_MESSAGE;
@@ -26,7 +26,7 @@ class SmsMessage
             default:
                 return Greeting::checkGreeting() . self::REMAINDER_MESSAGE . ' ' . date('d/M/Y H:i',strtotime($data->start));
         }
-        /*return match ($ext) {
+        /*return match ($text) {
             self::ADDRESS_MESSAGE => Greeting::checkGreeting() . self::ADDRESS_MESSAGE,
             self::QUESTION_MESSAGE => Greeting::checkGreeting() . ' ' . mb_substr(
                     $data->start,
