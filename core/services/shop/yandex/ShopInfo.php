@@ -1,7 +1,7 @@
 <?php
 
 
-namespace core\services\yandex;
+namespace core\services\shop\yandex;
 
 
 class ShopInfo

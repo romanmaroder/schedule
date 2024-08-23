@@ -4,23 +4,20 @@
 namespace common\bootstrap;
 
 
-use core\cart\shop\Cart as ShopCart;
 use core\cart\schedule\Cart;
-use core\cart\shop\cost\calculator\SimpleCost;
-use core\cart\shop\cost\calculator\DynamicCost;
-use core\cart\shop\storage\HybridStorage;
 use core\cart\schedule\storage\DbStorage;
-use core\services\sms\shop\LoggedSender;
-use core\services\sms\shop\SmsRu;
-use core\services\sms\shop\SmsSender as ShopSmsSender;
+use core\cart\shop\Cart as ShopCart;
+use core\cart\shop\cost\calculator\DynamicCost;
+use core\cart\shop\cost\calculator\SimpleCost;
+use core\cart\shop\storage\HybridStorage;
+use core\services\shop\yandex\ShopInfo;
+use core\services\shop\yandex\YandexMarket;
 use core\services\sms\simpleSms\SimpleSms;
 use core\services\sms\simpleSms\SmsMessage;
 use core\services\sms\simpleSms\SmsOs;
 use core\services\sms\SmsSender;
 use core\useCases\auth\SignupService;
 use core\useCases\ContactService;
-use core\services\yandex\ShopInfo;
-use core\services\yandex\YandexMarket;
 use yii\base\BootstrapInterface;
 use yii\caching\Cache;
 use yii\mail\MailerInterface;

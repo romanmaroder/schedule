@@ -5,7 +5,7 @@ namespace shop\controllers;
 
 
 use core\entities\Shop\Product\Product;
-use core\services\yandex\YandexMarket;
+use core\services\shop\yandex\YandexMarket;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;

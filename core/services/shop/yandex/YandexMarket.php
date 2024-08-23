@@ -1,7 +1,7 @@
 <?php
 
 
-namespace core\services\yandex;
+namespace core\services\shop\yandex;
 
 
 use core\entities\Shop\DeliveryMethod;
