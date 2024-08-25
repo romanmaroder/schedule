@@ -10,16 +10,23 @@ use core\cart\shop\Cart as ShopCart;
 use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\cost\calculator\SimpleCost;
 use core\cart\shop\storage\HybridStorage;
+use core\dispatchers\EventDispatcher;
+use core\dispatchers\SimpleEventDispatcher;
+use core\listeners\User\UserSignupConfirmedListener;
+use core\listeners\User\UserSignupRequestedListener;
 use core\services\shop\yandex\ShopInfo;
 use core\services\shop\yandex\YandexMarket;
 use core\services\sms\simpleSms\SimpleSms;
 use core\services\sms\simpleSms\SmsMessage;
 use core\services\sms\simpleSms\SmsOs;
 use core\services\sms\SmsSender;
+use core\useCases\auth\events\UserSignUpConfirmed;
+use core\useCases\auth\events\UserSignUpRequested;
 use core\useCases\auth\SignupService;
 use core\useCases\ContactService;
 use yii\base\BootstrapInterface;
 use yii\caching\Cache;
+use yii\di\Container;
 use yii\mail\MailerInterface;
 use yii\rbac\ManagerInterface;
 
@@ -81,11 +88,30 @@ class SetUp implements BootstrapInterface
             );
         });*/
 
-        $container->setSingleton(SmsSender::class, function () use ($app) {
-            return new SimpleSms(
-                new SmsOs(),
-                new SmsMessage()
-            );
-        });
+        $container->setSingleton(
+            SmsSender::class,
+            function () use ($app) {
+                return new SimpleSms(
+                    new SmsOs(),
+                    new SmsMessage()
+                );
+            }
+        );
+
+        $container->setSingleton(
+            EventDispatcher::class,
+            function (Container $container) {
+                return new SimpleEventDispatcher(
+                    [
+                        UserSignUpRequested::class => [
+                            [$container->get(UserSignupRequestedListener::class), 'handle'],
+                        ],
+                        /*UserSignUpConfirmed::class => [
+                            [$container->get(UserSignupConfirmedListener::class), 'handle'],
+                        ],*/
+                    ]
+                );
+            }
+        );
     }
 }

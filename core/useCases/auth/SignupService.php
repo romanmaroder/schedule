@@ -8,32 +8,24 @@ use core\dispatchers\EventDispatcher;
 use core\entities\User\User;
 use core\forms\auth\SignupForm;
 use core\repositories\UserRepository;
-use core\services\newsletter\Newsletter;
 use core\services\TransactionManager;
 use core\useCases\auth\events\UserSignUpConfirmed;
 use core\useCases\auth\events\UserSignUpRequested;
-use Yii;
 use yii\base\InvalidArgumentException;
-use yii\mail\MailerInterface;
 
 class SignupService
 {
-    private $mailer;
     private $users;
-    private $newsletter;
+    private $transaction;
     private $dispatcher;
 
     public function __construct(UserRepository $users,
-        MailerInterface $mailer,
         TransactionManager $transaction,
-        /*Newsletter $newsletter*/
         EventDispatcher $dispatcher
     )
     {
         $this->users = $users;
-        $this->mailer = $mailer;
         $this->transaction = $transaction;
-        /*$this->newsletter = $newsletter;*/
         $this->dispatcher = $dispatcher;
     }
 
@@ -51,22 +43,6 @@ class SignupService
 
         $this->dispatcher->dispatch(new UserSignUpRequested($user));
 
-
-        $sent = Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'auth/signup/emailVerify-html', 'text' => 'auth/signup/emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setTo($user->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
-
-        if (!$sent) {
-            throw new \RuntimeException('Email sending error.');
-        }
-
-
     }
 
     public function confirm($token): void
@@ -81,8 +57,5 @@ class SignupService
 
         $this->dispatcher->dispatch(new UserSignUpConfirmed($user));
 
-        /*Uncomment if you need a newsletter
-        $this->newsletter->subscribe($user->email);
-        */
     }
 }
