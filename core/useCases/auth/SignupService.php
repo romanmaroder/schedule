@@ -9,8 +9,6 @@ use core\entities\User\User;
 use core\forms\auth\SignupForm;
 use core\repositories\UserRepository;
 use core\services\TransactionManager;
-use core\useCases\auth\events\UserSignUpConfirmed;
-use core\useCases\auth\events\UserSignUpRequested;
 use yii\base\InvalidArgumentException;
 
 class SignupService
@@ -41,7 +39,7 @@ class SignupService
             $this->users->save($user);
         });
 
-        $this->dispatcher->dispatch(new UserSignUpRequested($user));
+        $this->dispatcher->dispatchAll($user->releaseEvents());
 
     }
 
@@ -55,7 +53,7 @@ class SignupService
         $user->verifyEmail();
         $this->users->save($user);
 
-        $this->dispatcher->dispatch(new UserSignUpConfirmed($user));
+        $this->dispatcher->dispatchAll($user->releaseEvents());
 
     }
 }

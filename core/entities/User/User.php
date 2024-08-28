@@ -2,11 +2,15 @@
 
 namespace core\entities\User;
 
+use core\entities\AggregateRoot;
+use core\entities\behaviors\ScheduleWorkBehavior;
+use core\entities\EventTrait;
 use core\entities\Schedule;
 use core\entities\Schedule\Event\Event;
-use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
-use core\entities\behaviors\ScheduleWorkBehavior;
 use core\entities\User\Employee\Employee;
+use core\entities\User\events\UserSignUpConfirmed;
+use core\entities\User\events\UserSignUpRequested;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -34,8 +38,10 @@ use yii\db\ActiveRecord;
  * @property Schedule $schedule
  * @property string $notice [varchar(255)]
  */
-class User extends ActiveRecord
+class User extends ActiveRecord implements AggregateRoot
 {
+    use EventTrait;
+
     public const STATUS_DELETED = 0;
     public const STATUS_INACTIVE = 9;
     public const STATUS_ACTIVE = 10;
@@ -104,6 +110,7 @@ class User extends ActiveRecord
         $user->status = self::STATUS_INACTIVE;
         $user->generateEmailVerificationToken();
         $user->generateAuthKey();
+        $user->recordEvent(new UserSignUpRequested($user));
         return $user;
     }
 
@@ -119,6 +126,7 @@ class User extends ActiveRecord
         }
         $this->status = self::STATUS_ACTIVE;
         $this->removeEmailVerificationToken();
+        $this->recordEvent(new UserSignUpConfirmed($this));
     }
 
     /**

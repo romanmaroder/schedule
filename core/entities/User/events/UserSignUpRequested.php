@@ -1,12 +1,12 @@
 <?php
 
 
-namespace core\useCases\auth\events;
+namespace core\entities\User\events;
 
 
 use core\entities\User\User;
 
-class UserSignUpConfirmed
+class UserSignUpRequested
 {
     public $user;
 
