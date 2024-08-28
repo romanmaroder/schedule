@@ -10,6 +10,7 @@ use core\cart\shop\Cart as ShopCart;
 use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\cost\calculator\SimpleCost;
 use core\cart\shop\storage\HybridStorage;
+use core\dispatchers\DeferredEventDispatcher;
 use core\dispatchers\EventDispatcher;
 use core\dispatchers\SimpleEventDispatcher;
 use core\entities\User\events\UserSignUpConfirmed;
@@ -97,14 +98,18 @@ class SetUp implements BootstrapInterface
                 );
             }
         );
-
+        $container->setSingleton(EventDispatcher::class, DeferredEventDispatcher::class);
         $container->setSingleton(
-            EventDispatcher::class,
+            DeferredEventDispatcher::class,
             function (Container $container) {
-                return new SimpleEventDispatcher($container, [
-                    UserSignUpRequested::class => [UserSignupRequestedListener::class],
-                    UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
-                ]);
+                return new DeferredEventDispatcher(
+                    new SimpleEventDispatcher(
+                        $container, [
+                        UserSignUpRequested::class => [UserSignupRequestedListener::class],
+                        UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
+                    ]
+                    )
+                );
             }
         );
     }
