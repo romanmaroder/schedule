@@ -4,10 +4,20 @@
 namespace core\repositories;
 
 
+use core\dispatchers\EventDispatcher;
 use core\entities\User\User;
 
 class UserRepository
 {
+
+    private $dispatcher;
+
+
+    public function __construct(EventDispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     /**
      * @param $value
      * @return User|null
@@ -129,6 +139,7 @@ class UserRepository
         if (!$user->save()) {
             throw new \RuntimeException('Saving error.');
         }
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 
     /**
@@ -146,6 +157,7 @@ class UserRepository
         if (!$user->delete()) {
             throw new \RuntimeException('Removing error.');
         }
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 
     /**
