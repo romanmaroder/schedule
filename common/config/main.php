@@ -5,6 +5,9 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'bootstrap' => [
+        'queue',
+    ],
     'components' => [
         'formatter' => [
             //'locale' => 'ru-RU',
@@ -26,6 +29,10 @@ return [
             'itemChildTable' => '{{%auth_item_children}}',
             'assignmentTable' => '{{%auth_assignments}}',
             'ruleTable' => '{{%auth_rules}}',
+        ],
+        'queue' => [
+            'class' => 'yii\queue\redis\Queue',
+            'as log' => 'yii\queue\LogBehavior',
         ],
     ],
 ];
