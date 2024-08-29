@@ -36,6 +36,9 @@ add-apt-repository -y ppa:ondrej/php
 info "Install additional software"
 apt-get install -y php7.4-curl php7.4-cli php7.4-intl php7.4-mysqlnd php7.4-gd php7.4-fpm php7.4-mbstring php7.4-xml unzip nginx mysql-server-5.7 php7.4-xdebug
 
+info "Install Redis"
+apt-get install -y redis-server
+
 info "Configure MySQL"
 sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
 mysql -uroot <<< "CREATE USER 'root'@'%' IDENTIFIED BY ''"
