@@ -4,9 +4,12 @@
 namespace core\entities\Shop\Product;
 
 
+use core\entities\AggregateRoot;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\CommonUses\Brand;
+use core\entities\EventTrait;
 use core\entities\Meta;
+use core\entities\Shop\Product\events\ProductAppearedInStock;
 use core\entities\Shop\Product\queries\ProductQuery;
 use core\entities\User\WishlistItem;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
@@ -45,8 +48,10 @@ use yii\web\UploadedFile;
  * @property Photo $mainPhoto
  * @property Review[] $reviews
  */
-class Product extends ActiveRecord
+class Product extends ActiveRecord implements AggregateRoot
 {
+
+    use EventTrait;
 
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
@@ -80,12 +85,12 @@ class Product extends ActiveRecord
         $this->price_old = $old;
     }
 
-    public function setQuantity($quantity): void
+    public function changeQuantity($quantity): void
     {
         if ($this->modifications) {
             throw new \DomainException('Change modifications quantity.');
         }
-        $this->quantity = $quantity;
+        $this->setQuantity($quantity);
     }
 
     public function edit($brandId, $code, $name,$description, $weight, Meta $meta): void
@@ -197,9 +202,9 @@ class Product extends ActiveRecord
     private function updateModifications(array $modifications): void
     {
         $this->modifications = $modifications;
-        $this->quantity = array_sum(array_map(function (Modification $modification) {
+        $this->setQuantity(array_sum(array_map(function (Modification $modification) {
             return $modification->quantity;
-        }, $this->modifications));
+        }, $this->modifications)));
     }
 
     # Category methods
@@ -276,7 +281,15 @@ class Product extends ActiveRecord
         if ($quantity > $this->quantity) {
             throw new \DomainException('Only ' . $this->quantity . ' items are available.');
         }
-        $this->quantity -= $quantity;
+        $this->setQuantity($this->quantity - $quantity);
+    }
+
+    private function setQuantity($quantity): void
+    {
+        if ($this->quantity == 0 && $quantity > 0) {
+            $this->recordEvent(new ProductAppearedInStock($this));
+        }
+        $this->quantity = $quantity;
     }
 
     /**

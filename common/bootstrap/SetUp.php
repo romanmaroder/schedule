@@ -13,8 +13,10 @@ use core\cart\shop\storage\HybridStorage;
 use core\dispatchers\DeferredEventDispatcher;
 use core\dispatchers\EventDispatcher;
 use core\dispatchers\SimpleEventDispatcher;
+use core\entities\Shop\Product\events\ProductAppearedInStock;
 use core\entities\User\events\UserSignUpConfirmed;
 use core\entities\User\events\UserSignUpRequested;
+use core\listeners\Shop\Product\ProductAppearedInStockListener;
 use core\listeners\User\UserSignupConfirmedListener;
 use core\listeners\User\UserSignupRequestedListener;
 use core\services\shop\yandex\ShopInfo;
@@ -107,6 +109,7 @@ class SetUp implements BootstrapInterface
                         $container, [
                         UserSignUpRequested::class => [UserSignupRequestedListener::class],
                         UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
+                        ProductAppearedInStock::class => [ProductAppearedInStockListener::class],
                     ]
                     )
                 );
