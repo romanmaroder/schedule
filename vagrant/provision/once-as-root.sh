@@ -39,6 +39,9 @@ apt-get install -y php7.4-curl php7.4-cli php7.4-intl php7.4-mysqlnd php7.4-gd p
 info "Install Redis"
 apt-get install -y redis-server
 
+info "Install Supervisor"
+apt-get install -y supervisor
+
 info "Configure MySQL"
 sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
 mysql -uroot <<< "CREATE USER 'root'@'%' IDENTIFIED BY ''"
@@ -71,6 +74,10 @@ echo "Done!"
 info "Initailize databases for MySQL"
 mysql -uroot <<< "CREATE DATABASE yii2advanced"
 mysql -uroot <<< "CREATE DATABASE yii2advanced_test"
+echo "Done!"
+
+info "Enabling supervisor processes"
+ln -s /app/vagrant/supervisor/queue.conf /etc/supervisor/conf.d/queue.conf
 echo "Done!"
 
 info "Install composer"
