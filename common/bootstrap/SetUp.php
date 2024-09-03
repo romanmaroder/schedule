@@ -18,9 +18,12 @@ use core\entities\Shop\Product\events\ProductAppearedInStock;
 use core\entities\User\events\UserSignUpConfirmed;
 use core\entities\User\events\UserSignUpRequested;
 use core\jobs\AsyncEventJobHandler;
+use core\listeners\Shop\Category\CategoryPersistenceListener;
 use core\listeners\Shop\Product\ProductAppearedInStockListener;
 use core\listeners\User\UserSignupConfirmedListener;
 use core\listeners\User\UserSignupRequestedListener;
+use core\repositories\events\EntityPersisted;
+use core\repositories\events\EntityRemoved;
 use core\services\shop\yandex\ShopInfo;
 use core\services\shop\yandex\YandexMarket;
 use core\services\sms\simpleSms\SimpleSms;
@@ -127,6 +130,14 @@ class SetUp implements BootstrapInterface
                 UserSignUpRequested::class => [UserSignupRequestedListener::class],
                 UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
                 ProductAppearedInStock::class => [ProductAppearedInStockListener::class],
+                EntityPersisted::class => [
+                    //ProductSearchPersistListener::class,
+                    CategoryPersistenceListener::class,
+                ],
+                EntityRemoved::class => [
+                   //ProductSearchRemoveListener::class,
+                    CategoryPersistenceListener::class,
+                ],
             ]);
         });
 

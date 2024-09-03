@@ -8,6 +8,7 @@ use core\entities\Schedule\Service\Category;
 use core\readModels\Shop\CategoryReadRepository;
 use yii\base\BaseObject;
 use yii\caching\Cache;
+use yii\caching\TagDependency;
 use yii\helpers\ArrayHelper;
 use yii\web\UrlNormalizerRedirectException;
 use yii\web\UrlRuleInterface;
@@ -37,7 +38,7 @@ class CategoryUrlRule extends BaseObject implements UrlRuleInterface
                     return ['id' => null, 'path' => null];
                 }
                 return ['id' => $category->id, 'path' => $this->getCategoryPath($category)];
-            });
+            }, null, new TagDependency(['tags' => ['categories']]));
 
             if (empty($result['id'])) {
                 return false;
@@ -64,7 +65,7 @@ class CategoryUrlRule extends BaseObject implements UrlRuleInterface
                     return null;
                 }
                 return $this->getCategoryPath($category);
-            });
+            }, null, new TagDependency(['tags' => ['categories']]));
 
 
             if (!$url) {

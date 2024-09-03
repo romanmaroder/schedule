@@ -1,12 +1,14 @@
 <?php
 
 
-namespace shop\urls;
+namespace frontend\urls;
 
-use core\entities\Shop\Product\Category;
+
+use core\entities\Schedule\Service\Category;
 use core\readModels\Shop\CategoryReadRepository;
 use yii\base\BaseObject;
 use yii\caching\Cache;
+use yii\caching\TagDependency;
 use yii\helpers\ArrayHelper;
 use yii\web\UrlNormalizerRedirectException;
 use yii\web\UrlRuleInterface;
@@ -36,22 +38,22 @@ class CategoryUrlRule extends BaseObject implements UrlRuleInterface
                     return ['id' => null, 'path' => null];
                 }
                 return ['id' => $category->id, 'path' => $this->getCategoryPath($category)];
-            });
+            }, null, new TagDependency(['tags' => ['categories']]));
 
             if (empty($result['id'])) {
                 return false;
             }
             if ($path != $result['path']) {
-                throw new UrlNormalizerRedirectException(['shop/catalog/category', 'id' => $result['id']], 301);
+                throw new UrlNormalizerRedirectException(['core/catalog/category', 'id' => $result['id']], 301);
             }
-            return ['shop/catalog/category', ['id' => $result['id']]];
+            return ['core/catalog/category', ['id' => $result['id']]];
         }
         return false;
     }
 
     public function createUrl($manager, $route, $params)
     {
-        if ($route == 'shop/catalog/category') {
+        if ($route == 'core/catalog/category') {
             if (empty($params['id'])) {
                 throw new \InvalidArgumentException('Empty id.');
             }
@@ -63,7 +65,7 @@ class CategoryUrlRule extends BaseObject implements UrlRuleInterface
                     return null;
                 }
                 return $this->getCategoryPath($category);
-            });
+            }, null, new TagDependency(['tags' => ['categories']]));
 
 
             if (!$url) {

@@ -6,6 +6,7 @@ namespace shop\controllers;
 
 use core\entities\Shop\Product\Product;
 use core\services\shop\yandex\YandexMarket;
+use yii\caching\TagDependency;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
@@ -26,7 +27,7 @@ class MarketController extends Controller
             return $this->generator->generate(function (Product $product) {
                 return Url::to(['/shop/catalog/product', 'id' => $product->id], true);
             });
-        });
+        }, null, new TagDependency(['tags' => ['categories']]));
 
         return \Yii::$app->response->sendContentAsFile($xml, 'yandex-market.xml', [
             'mimeType' => 'application/xml',

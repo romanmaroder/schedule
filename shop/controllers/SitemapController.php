@@ -17,6 +17,8 @@ use core\readModels\Shop\ProductReadRepository;
 use core\services\sitemap\IndexItem;
 use core\services\sitemap\MapItem;
 use core\services\sitemap\Sitemap;
+use yii\caching\Dependency;
+use yii\caching\TagDependency;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
@@ -124,7 +126,7 @@ class SitemapController extends Controller
                     MapItem::WEEKLY
                 );
             }, $this->shopCategories->getAll()));
-        });
+        }, new TagDependency(['tags' => ['categories']]));
     }
 
     public function actionShopProductsIndex(): Response
@@ -149,11 +151,15 @@ class SitemapController extends Controller
         });
     }
 
-    private function renderSitemap($key, callable $callback): Response
+    private function renderSitemap($key, callable $callback, Dependency $dependency = null): Response
     {
-        return \Yii::$app->response->sendContentAsFile(\Yii::$app->cache->getOrSet($key, $callback), Url::canonical(), [
-            'mimeType' => 'application/xml',
-            'inline' => true
-        ]);
+        return \Yii::$app->response->sendContentAsFile(
+            \Yii::$app->cache->getOrSet($key, $callback, null, $dependency),
+            Url::canonical(),
+            [
+                'mimeType' => 'application/xml',
+                'inline' => true
+            ]
+        );
     }
 }
