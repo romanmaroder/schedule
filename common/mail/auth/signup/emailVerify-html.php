@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var core\entities\User\User $user */
 
-$verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['auth/signup/verify-email', 'token' => $user->verification_token]);
+$verifyLink = Yii::$app->get('frontendUrlManager')->createAbsoluteUrl(['auth/signup/verify-email', 'token' => $user->verification_token]);
 ?>
 <div class="verify-email">
     <p>Hello <?= Html::encode($user->username) ?>,</p>

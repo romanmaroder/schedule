@@ -10,12 +10,14 @@ use core\cart\shop\Cart as ShopCart;
 use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\cost\calculator\SimpleCost;
 use core\cart\shop\storage\HybridStorage;
+use core\dispatchers\AsyncEventDispatcher;
 use core\dispatchers\DeferredEventDispatcher;
 use core\dispatchers\EventDispatcher;
 use core\dispatchers\SimpleEventDispatcher;
 use core\entities\Shop\Product\events\ProductAppearedInStock;
 use core\entities\User\events\UserSignUpConfirmed;
 use core\entities\User\events\UserSignUpRequested;
+use core\jobs\AsyncEventJobHandler;
 use core\listeners\Shop\Product\ProductAppearedInStockListener;
 use core\listeners\User\UserSignupConfirmedListener;
 use core\listeners\User\UserSignupRequestedListener;
@@ -31,6 +33,7 @@ use yii\base\BootstrapInterface;
 use yii\base\ErrorHandler;
 use yii\caching\Cache;
 use yii\di\Container;
+use yii\di\Instance;
 use yii\mail\MailerInterface;
 use yii\queue\Queue;
 use yii\rbac\ManagerInterface;
@@ -112,20 +115,23 @@ class SetUp implements BootstrapInterface
                 );
             }
         );
+
         $container->setSingleton(EventDispatcher::class, DeferredEventDispatcher::class);
-        $container->setSingleton(
-            DeferredEventDispatcher::class,
-            function (Container $container) {
-                return new DeferredEventDispatcher(
-                    new SimpleEventDispatcher(
-                        $container, [
-                        UserSignUpRequested::class => [UserSignupRequestedListener::class],
-                        UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
-                        ProductAppearedInStock::class => [ProductAppearedInStockListener::class],
-                    ]
-                    )
-                );
-            }
-        );
+
+        $container->setSingleton(DeferredEventDispatcher::class, function (Container $container) {
+            return new DeferredEventDispatcher(new AsyncEventDispatcher($container->get(Queue::class)));
+        });
+
+        $container->setSingleton(SimpleEventDispatcher::class, function (Container $container) {
+            return new SimpleEventDispatcher($container, [
+                UserSignUpRequested::class => [UserSignupRequestedListener::class],
+                UserSignUpConfirmed::class => [UserSignupConfirmedListener::class],
+                ProductAppearedInStock::class => [ProductAppearedInStockListener::class],
+            ]);
+        });
+
+        $container->setSingleton(AsyncEventJobHandler::class, [], [
+            Instance::of(SimpleEventDispatcher::class)
+        ]);
     }
 }
