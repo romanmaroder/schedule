@@ -28,9 +28,11 @@ use core\services\sms\SmsSender;
 use core\useCases\auth\SignupService;
 use core\useCases\ContactService;
 use yii\base\BootstrapInterface;
+use yii\base\ErrorHandler;
 use yii\caching\Cache;
 use yii\di\Container;
 use yii\mail\MailerInterface;
+use yii\queue\Queue;
 use yii\rbac\ManagerInterface;
 
 class SetUp implements BootstrapInterface
@@ -46,6 +48,16 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(MailerInterface::class, function () use ($app){
             return $app->mailer;
         });
+
+        $container->setSingleton(ErrorHandler::class, function () use ($app) {
+            return $app->errorHandler;
+        });
+
+        $container->setSingleton(Queue::class, function () use ($app) {
+            return $app->get('queue');
+        });
+
+
         $container->setSingleton(Cache::class,function () use ($app){
             return $app->cache;
         });

@@ -5,53 +5,24 @@ namespace core\listeners\Shop\Product;
 
 
 use core\entities\Shop\Product\events\ProductAppearedInStock;
-use core\entities\Shop\Product\Product;
-use core\entities\User\User;
+use core\jobs\Shop\Product\ProductAvailabilityNotification;
 use core\repositories\UserRepository;
-use yii\base\ErrorHandler;
-use yii\mail\MailerInterface;
+use yii\queue\Queue;
 
 class ProductAppearedInStockListener
 {
 
-    private $users;
-    private $mailer;
-    private $errorHandler;
+    private $queue;
 
-    public function __construct(UserRepository $users, MailerInterface $mailer, ErrorHandler $errorHandler)
+    public function __construct(UserRepository $users, Queue $queue)
     {
-        $this->users = $users;
-        $this->mailer = $mailer;
-        $this->errorHandler = $errorHandler;
+        $this->queue = $queue;
     }
 
     public function handle(ProductAppearedInStock $event): void
     {
         if ($event->product->isActive()) {
-            foreach ($this->users->getAllByProductInWishList($event->product->id) as $user) {
-                if ($user->isActive()) {
-                    try {
-                        $this->sendEmailNotification($user, $event->product);
-                    }catch (\Exception $e){
-                        $this->errorHandler->handleException($e);
-                    }
-                }
-            }
-        }
-    }
-
-    private function sendEmailNotification(User $user, Product $product)
-    {
-        $sent = $this->mailer
-            ->compose(
-                ['html' => 'shop/wishlist/available-html', 'text' => 'shop/wishlist/available-text'],
-                ['user' => $user, 'product' => $product]
-            )
-            ->setTo($user->email)
-            ->setSubject('Product is available')
-            ->send();
-        if (!$sent){
-            throw new \RuntimeException('Email sending error to ' . $user->email);
+            $this->queue->push(new ProductAvailabilityNotification($event->product));
         }
     }
 }
