@@ -25,7 +25,7 @@ class EmailResendService
         $user = $this->users->getByEmail($form->email);
         $user->generateEmailVerificationToken();
 
-        if (!$user->isInactive()){
+        if ($user->isActive()){
             throw new \DomainException('User is active.');
         }
 

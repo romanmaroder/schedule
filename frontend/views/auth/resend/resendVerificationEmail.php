@@ -1,6 +1,6 @@
 <?php
 
-/** @var yii\web\View$this  */
+/** @var yii\web\View $this  */
 /** @var yii\bootstrap5\ActiveForm $form */
 
 /** @var \core\forms\auth\ResendVerificationEmailForm $model */
@@ -12,6 +12,16 @@ $this->title = 'Resend verification email';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-resend-verification-email">
+    <div class="">
+        <?php if (Yii::$app->getSession()->hasFlash('success')): ?>
+            <?php
+            echo '<p class="text-success text-center"><b>' . Yii::$app->session->getFlash('success') . '</b></p>'; ?>
+        <?php
+        else: ?>
+            <?php echo '<p class="text-danger text-center"><b>' . Yii::$app->session->getFlash('error') . '</b></p>'; ?>
+        <?php
+        endif; ?>
+    </div>
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">

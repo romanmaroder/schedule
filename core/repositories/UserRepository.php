@@ -152,7 +152,7 @@ class UserRepository
         if (!$user->save()) {
             throw new \RuntimeException('Saving error.');
         }
-        $this->dispatcher->dispatchAll($user->releaseEvents());
+        //$this->dispatcher->dispatchAll($user->releaseEvents());
     }
 
     /**
@@ -179,7 +179,7 @@ class UserRepository
      */
     private function getBy(array $condition): User
     {
-        if (!$user = User::find()->andWhere($condition)->limit(1)->one()) {
+        if (!$user = User::find()->where($condition)->limit(1)->one()) {
             throw new NotFoundException('User not found.');
         }
         return $user;

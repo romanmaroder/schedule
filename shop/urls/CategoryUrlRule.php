@@ -1,10 +1,10 @@
 <?php
 
 
-namespace frontend\urls;
+namespace shop\urls;
 
 
-use core\entities\Schedule\Service\Category;
+use core\entities\Shop\Product\Category;
 use core\readModels\Shop\CategoryReadRepository;
 use yii\base\BaseObject;
 use yii\caching\Cache;

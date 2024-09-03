@@ -68,6 +68,7 @@ class SignupController extends Controller
      */
     public function actionVerifyEmail($token)
     {
+
         try {
             $this->service->confirm($token);
             Yii::$app->session->setFlash('success', 'Your email is confirmed.');

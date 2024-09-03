@@ -39,6 +39,7 @@ return [
             'console/runtime',
             'frontend/runtime',
             'frontend/web/assets',
+            'shop/runtime',
             'shop/web/assets',
         ],
         'setExecutable' => [

@@ -121,7 +121,7 @@ class User extends ActiveRecord implements AggregateRoot
      */
     public function verifyEmail(): void
     {
-        if (!$this->isInactive()) {
+        if ($this->isActive()) {
             throw new \DomainException('User is already active.');
         }
         $this->status = self::STATUS_ACTIVE;

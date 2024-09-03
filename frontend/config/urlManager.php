@@ -14,7 +14,7 @@ return [
         '<_a:about>' => 'site/<_a>',
         'contact' => 'contact/index',
         'signup' => 'auth/signup/signup',
-        'signup/<_a:[\w-]+>' => 'auth/signup/<_a>',
+        //'signup/<_a:[\w-]+>' => 'auth/signup/<_a>',
         '<_a:login|logout>' => 'auth/auth/<_a>',
 
         'blog' => 'blog/post/index',

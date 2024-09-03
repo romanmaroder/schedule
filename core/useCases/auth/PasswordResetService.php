@@ -25,7 +25,7 @@ class PasswordResetService
     {
         $user = $this->users->getByEmail($form->email);
 
-        if (!$user->isActive()) {
+        if ($user->isInactive()) {
             throw new \DomainException('User is not active.');
         }
         $user->requestPasswordReset();

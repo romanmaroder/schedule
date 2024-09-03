@@ -5,7 +5,7 @@ namespace shop\controllers\auth;
 
 
 use core\forms\auth\ResendVerificationEmailForm;
-use core\services\auth\EmailResendService;
+use core\useCases\auth\EmailResendService;
 use Yii;
 use yii\web\Controller;
 

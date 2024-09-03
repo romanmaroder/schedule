@@ -60,6 +60,7 @@ return [
             'auth/resend/resend-verification-email',
             'auth/reset/reset-password',
             'auth/reset/request-password-reset',
+            'auth/signup/verify-email',
             'site/error'
         ],
         'rules' => [
