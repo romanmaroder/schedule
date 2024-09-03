@@ -135,7 +135,7 @@ class SitemapController extends Controller
             return $this->sitemap->generateIndex(array_map(function ($start) {
                 return new IndexItem(Url::to(['shop-products', 'start' => $start * self::ITEMS_PER_PAGE], true));
             }, range(0, (int)($this->products->count() / self::ITEMS_PER_PAGE))));
-        });
+        }, new TagDependency(['tags' => ['products']]));
     }
 
     public function actionShopProducts($start = 0): Response
@@ -148,7 +148,7 @@ class SitemapController extends Controller
                     MapItem::DAILY
                 );
             }, $this->products->getAllByRange($start, self::ITEMS_PER_PAGE)));
-        });
+        }, new TagDependency(['tags' => ['products']]));
     }
 
     private function renderSitemap($key, callable $callback, Dependency $dependency = null): Response
