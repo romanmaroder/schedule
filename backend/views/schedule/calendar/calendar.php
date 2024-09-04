@@ -460,6 +460,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 let wrapNotice = document.createElement('div');
                                 let wrapTools = document.createElement('div');
                                 let wrapDescription = document.createElement('div');
+                                let wrapAdditional = document.createElement('div');
                                 let wrapStartTime = document.createElement('span');
                                 let wrapEndTime = document.createElement('span');
                                 let wrapTime = document.createElement('div');
@@ -474,12 +475,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 let teacher = arg.event.extendedProps.teacher;
                                 let student = arg.event.extendedProps.student;
                                 let description = arg.event.extendedProps.description;
+                                let additional = arg.event.extendedProps.additional;
                                 
                                 wrapTitle.classList.add('fc-event-title-container','mb-2','d-none','d-md-block','text-wrap');
                                 wrapService.classList.add('fc-event-service-container','mb-2','d-none', 'd-md-block');
-                                wrapNotice.classList.add('fc-event-notice-container', 'mb-2','d-none','d-md-inline','text-wrap');
+                                wrapNotice.classList.add('fc-event-notice-container', 'mb-2','d-none','d-md-block','text-wrap');
                                 wrapTools.classList.add('fc-event-tools-container', 'mb-2','d-none','d-md-block','text-wrap');
                                 wrapDescription.classList.add('fc-event-description-container', 'mb-2','d-none','d-md-inline','text-wrap');
+                                wrapAdditional.classList.add('fc-event-description-container', 'mb-2','d-none','d-md-block','text-wrap');
                                 wrapStartTime.classList.add('fc-event-time-start','dayGridMonth');
                                 wrapEndTime.classList.add('fc-event-time-end','dayGridMonth');
                                 wrapTime.classList.add('fc-event-time-container','text-center','text-md-left','d-flex','flex-column','flex-sm-row');
@@ -491,6 +494,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 wrapNotice.innerHTML = notice;
                                 wrapTools.innerHTML = tools;
                                 wrapDescription.innerHTML = description;
+                                wrapAdditional.innerHTML = additional;
                                 wrapStartTime.innerHTML = start;
                                 wrapEndTime.innerHTML = end;
                                 wrapTime.appendChild(wrapStartTime);
@@ -503,8 +507,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                  if(arg.view.type == 'dayGridMonth' ){
                                         arrayOfDomNodes.push(wrapTime);
                                         arrayOfDomNodes.push(wrapTitle);
-                                                                                arrayOfDomNodes.push(wrapTools);
-
+                                         if (arg.event.source.id ==='event'){
+                                            arrayOfDomNodes.push(wrapTools);
+                                            }
+                                            if (arg.event.source.id ==='free-time'){
+                                            arrayOfDomNodes.push(wrapAdditional);
+                                            }
                                  }
                                  if(arg.view.type == 'dayGridDay' || arg.view.type == 'timeGridDay' || arg.view.type == 'timeGridWeek'){
                                         wrapTitle.classList.remove('d-none','text-wrap');
@@ -514,6 +522,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         wrapNotice.classList.remove('d-none');
                                         wrapTools.classList.remove('d-none');
                                         wrapDescription.classList.remove('d-none');
+                                        wrapAdditional.classList.remove('d-none');
                                         wrapStartTime.classList.remove('d-none','dayGridMonth');
                                         wrapEndTime.classList.remove('d-none','dayGridMonth');
                                         wrapTime.classList.remove('d-none','text-center','text-md-left','flex-column');
@@ -530,6 +539,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                              arrayOfDomNodes.push(wrapTeacher);
                                              arrayOfDomNodes.push(wrapStudent);
                                              arrayOfDomNodes.push(wrapDescription);
+                                        }
+                                        if (arg.event.source.id ==='free-time'){
+                                             arrayOfDomNodes.push(wrapNotice);
+                                             arrayOfDomNodes.push(wrapAdditional);
                                         }
                                         
                                         arrayOfDomNodes.push(wrapTime);
