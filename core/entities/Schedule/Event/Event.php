@@ -33,6 +33,7 @@ use yii\db\ActiveRecord;
  * @property int $price [int(11)]
  * @property string $fullname [varchar(255)]
  * @property string $default_color [varchar(255)]
+ * @property int $tools [smallint(6)]
  */
 class Event extends ActiveRecord
 {
@@ -42,6 +43,9 @@ class Event extends ActiveRecord
     public const STATUS_CARD = 3;
     public const DEFAULT_COLOR = '#747d8c';
     public const EX_EMPLOYEE = ' <small><i class="fas fa-user-slash"></i></small>';
+
+    public const TOOLS_ARE_NOT_READY = 0;
+    public const TOOLS_READY = 1;
 
     public static function create(
         $masterId,
@@ -73,6 +77,7 @@ class Event extends ActiveRecord
         $event->price = $price;
         $event->fullname = $fullname;
         $event->default_color = self::DEFAULT_COLOR;
+        $event->tools = self::TOOLS_ARE_NOT_READY;
         return $event;
     }
 
@@ -90,6 +95,7 @@ class Event extends ActiveRecord
         $rate,
         $price,
         $fullname,
+        $tools,
     ): void {
         $this->master_id = $masterId;
         $this->client_id = $clientId;
@@ -108,6 +114,7 @@ class Event extends ActiveRecord
         $this->rate = $rate;
         $this->price = $price;
         $this->fullname = $fullname;
+        $this->tools = $tools;
     }
 
     public static function copy(
@@ -125,6 +132,7 @@ class Event extends ActiveRecord
         $rate,
         $price,
         $fullname,
+        $tools,
     ): self {
         $event = new static();
         $event->id = $id;
@@ -141,6 +149,7 @@ class Event extends ActiveRecord
         $event->rate = $rate;
         $event->price = $price;
         $event->fullname = $fullname;
+        $event->tools = $tools;
         return $event;
     }
 
@@ -158,7 +167,7 @@ class Event extends ActiveRecord
     {
         return $this->status == self::STATUS_NOT_PAYED;
     }
-
+    
     public function toPay(): int
     {
         return $this->status = self::STATUS_PAYED;
@@ -187,6 +196,16 @@ class Event extends ActiveRecord
     public function cashPayment(): int
     {
         return $this->payment = self::STATUS_CASH;
+    }
+
+    public function isToolsAreNotReady():bool
+    {
+        return $this->tools == self::TOOLS_ARE_NOT_READY;
+    }
+
+    public function toolsReady():int
+    {
+        return $this->tools = self::TOOLS_READY;
     }
 
     public function assignService($id, $price): void

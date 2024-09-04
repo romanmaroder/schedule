@@ -105,10 +105,11 @@ class User extends ActiveRecord implements AggregateRoot
         $user = new User();
         $user->username = $username;
         $user->email = $email;
+        $user->phone = '';
         $user->setPassword($password);
         $user->created_at = time();
         $user->status = self::STATUS_INACTIVE;
-        $user->generateEmailVerificationToken();
+        $user->verification_token = Yii::$app->security->generateRandomString();
         $user->generateAuthKey();
         $user->recordEvent(new UserSignUpRequested($user));
         return $user;

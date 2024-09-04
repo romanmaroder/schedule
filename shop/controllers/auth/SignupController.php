@@ -23,7 +23,7 @@ class SignupController extends Controller
         $this->service = $service;
     }
 
-    public function behaviors(): array
+    /*public function behaviors(): array
     {
         return [
             'access' => [
@@ -38,7 +38,7 @@ class SignupController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * @return mixed

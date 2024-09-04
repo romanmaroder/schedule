@@ -458,6 +458,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 let wrapTitle = document.createElement('div');
                                 let wrapService = document.createElement('div');
                                 let wrapNotice = document.createElement('div');
+                                let wrapTools = document.createElement('div');
                                 let wrapDescription = document.createElement('div');
                                 let wrapStartTime = document.createElement('span');
                                 let wrapEndTime = document.createElement('span');
@@ -467,6 +468,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 let title = arg.event.title;
                                 let service = arg.event.extendedProps.service;
                                 let notice = arg.event.extendedProps.notice;
+                                let tools = arg.event.extendedProps.tools;
                                 let start = '&nbsp;' + startTime + '&nbsp;';
                                 let end = '&nbsp;' + endTime + '&nbsp;';
                                 let teacher = arg.event.extendedProps.teacher;
@@ -476,6 +478,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 wrapTitle.classList.add('fc-event-title-container','mb-2','d-none','d-md-block','text-wrap');
                                 wrapService.classList.add('fc-event-service-container','mb-2','d-none', 'd-md-block');
                                 wrapNotice.classList.add('fc-event-notice-container', 'mb-2','d-none','d-md-inline','text-wrap');
+                                wrapTools.classList.add('fc-event-tools-container', 'mb-2','d-none','d-md-block','text-wrap');
                                 wrapDescription.classList.add('fc-event-description-container', 'mb-2','d-none','d-md-inline','text-wrap');
                                 wrapStartTime.classList.add('fc-event-time-start','dayGridMonth');
                                 wrapEndTime.classList.add('fc-event-time-end','dayGridMonth');
@@ -486,6 +489,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 wrapTitle.innerHTML = title;
                                 wrapService.innerHTML = service;
                                 wrapNotice.innerHTML = notice;
+                                wrapTools.innerHTML = tools;
                                 wrapDescription.innerHTML = description;
                                 wrapStartTime.innerHTML = start;
                                 wrapEndTime.innerHTML = end;
@@ -499,6 +503,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                  if(arg.view.type == 'dayGridMonth' ){
                                         arrayOfDomNodes.push(wrapTime);
                                         arrayOfDomNodes.push(wrapTitle);
+                                                                                arrayOfDomNodes.push(wrapTools);
+
                                  }
                                  if(arg.view.type == 'dayGridDay' || arg.view.type == 'timeGridDay' || arg.view.type == 'timeGridWeek'){
                                         wrapTitle.classList.remove('d-none','text-wrap');
@@ -506,6 +512,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         wrapStudent.classList.remove('d-none','text-wrap');
                                         wrapService.classList.remove('d-none','text-wrap');
                                         wrapNotice.classList.remove('d-none');
+                                        wrapTools.classList.remove('d-none');
                                         wrapDescription.classList.remove('d-none');
                                         wrapStartTime.classList.remove('d-none','dayGridMonth');
                                         wrapEndTime.classList.remove('d-none','dayGridMonth');
@@ -517,6 +524,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         if (arg.event.source.id ==='event'){
                                             arrayOfDomNodes.push(wrapService);
                                             arrayOfDomNodes.push(wrapNotice);
+                                            arrayOfDomNodes.push(wrapTools);
                                         }
                                         if (arg.event.source.id ==='education'){
                                              arrayOfDomNodes.push(wrapTeacher);

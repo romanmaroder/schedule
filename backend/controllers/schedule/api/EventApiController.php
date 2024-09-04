@@ -108,6 +108,19 @@ class EventApiController extends Controller
         );
     }
 
+    public function actionTools($id)
+    {
+        $event = $this->findModel($id);
+            try {
+                $this->service->tools($event->id);
+                Yii::$app->session->setFlash('msg', "Tools are ready.");
+                return $this->redirect('/schedule/calendar/calendar');
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+    }
+
     public function actionCopy($id)
     {
         $event = $this->findModel($id);

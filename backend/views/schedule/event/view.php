@@ -1,5 +1,6 @@
 <?php
 
+use core\helpers\ToolsHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
@@ -10,7 +11,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model \core\entities\Schedule\Event\Event */
-/* @var $cart \core\cart\Cart */
+/* @var $cart \core\cart\schedule\Cart*/
 
 $this->title = $model->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
@@ -99,7 +100,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'visible' => $model->notice ?: false,
                             'format' => 'raw',
 
-                        ]
+                        ],
+                        [
+                            'attribute' => 'tools',
+                            'value' => ToolsHelper::statusLabel($model->tools),
+                            'format' => 'raw',
+                        ],
                     ],
                 ]
             ) ?>
@@ -116,6 +122,19 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
                         ]
                     ) ?>
+
+                    <?php
+                    if ($model->isToolsAreNotReady()):?>
+                        <?= Html::a(
+                            'Tools',
+                            ['tools', 'id' => $model->id],
+                            [
+                                'id' => 'tools-link',
+                                //'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                                'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
+                            ]
+                        ) ?>
+                    <?php endif;?>
                     <?php
 
                     /*$options = [

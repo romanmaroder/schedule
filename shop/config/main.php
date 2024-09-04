@@ -47,13 +47,14 @@ return [
             'errorAction' => 'site/error',
         ],
         'backendUrlManager' => require __DIR__ . '/../../backend/config/urlManager.php',
+        'frontendUrlManager' => require __DIR__ . '/../../frontend/config/urlManager.php',
         'shopUrlManager' => require __DIR__ . '/urlManager.php',
         'urlManager' => function () {
             return Yii::$app->get('shopUrlManager');
         },
 
     ],
-    'as access' => [
+    /*'as access' => [
         'class' => 'yii\filters\AccessControl',
         'except' => [
             'auth/auth/login',
@@ -71,6 +72,6 @@ return [
             ],
         ],
 
-    ],
+    ],*/
     'params' => $params,
 ];

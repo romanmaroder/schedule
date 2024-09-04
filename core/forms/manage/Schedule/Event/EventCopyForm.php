@@ -26,6 +26,7 @@ class EventCopyForm extends CompositeForm
     public $rate;
     public $price;
     public $fullname;
+    public $tools;
     private $_event;
 
     public function __construct(Event $event, $config = [])
@@ -45,6 +46,7 @@ class EventCopyForm extends CompositeForm
         $this->rate = $clone->rate;
         $this->price = $clone->price;
         $this->fullname = $clone->fullname;
+        $this->tools = $clone->tools;
         $this->services = new ServicesForm($clone);
         $this->_event = $clone;
         parent::__construct($config);
@@ -53,7 +55,7 @@ class EventCopyForm extends CompositeForm
     public function rules():array
     {
         return [
-            [['discount_from','status','amount','payment'], 'integer'],
+            [['discount_from','status','amount','payment','tools'], 'integer'],
             [['start', 'end'], 'required'],
             ['notice', 'string'],
             ['discount', 'required', 'when' => function($model) {

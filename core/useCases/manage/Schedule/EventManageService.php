@@ -88,6 +88,7 @@ class EventManageService
             $form->rate,
             $form->price,
             $form->fullname,
+            $form->tools,
         );
         $this->transaction->wrap(
             function () use ($event, $form) {
@@ -127,6 +128,7 @@ class EventManageService
             $form->rate,
             $form->price,
             $form->fullname,
+            $form->tools,
         );
 
         $amount = 0;
@@ -155,6 +157,7 @@ class EventManageService
         $this->events->save($event);
     }
 
+
     public function unpay($id)
     {
         $event = $this->events->get($id);
@@ -175,6 +178,13 @@ class EventManageService
     {
         $event = $this->events->get($id);
         $event->payment = $event->cardPayment();
+        $this->events->save($event);
+    }
+
+    public function tools($id)
+    {
+        $event = $this->events->get($id);
+        $event->tools = $event->toolsReady();
         $this->events->save($event);
     }
 

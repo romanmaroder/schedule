@@ -1,6 +1,7 @@
 <?php
 
 use core\helpers\EventPaymentStatusHelper;
+use core\helpers\ToolsHelper;
 use core\services\sms\simpleSms\SmsMessage;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;
@@ -77,6 +78,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'visible' => $model->issetNotice($model->notice),
                     'format' => 'ntext',
                 ],
+                [
+                    'attribute' => 'tools',
+                    'value' => ToolsHelper::statusLabel($model->tools),
+                    'format' => 'raw',
+                ],
             ],
         ]
     ) ?>
@@ -95,6 +101,22 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ]
             ) ?>
             <?php endif;?>
+
+            <?php
+            if ($model->isToolsAreNotReady()):?>
+
+
+                <?= Html::a(
+                    'Tools',
+                    ['tools', 'id' => $model->id],
+                    [
+                        'id' => 'tools-link',
+                        'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                        'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
+                    ]
+                ) ?>
+            <?php endif;?>
+
 
             <?php
                 echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);

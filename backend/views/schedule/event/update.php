@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $event \core\entities\Schedule\Event\Event */
 /* @var $model \core\forms\manage\Schedule\Event\EventEditForm */
-/* @var $cart \core\cart\Cart */
+/* @var $cart \core\cart\schedule\Cart*/
 
 $this->title = 'Update Event: ' . $event->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
@@ -383,6 +383,31 @@ $this->params['breadcrumbs'][] = 'update';
             <div class="row">
                 <div class="col-12">
                     <div class="form-group"> <?= $form->field($model, 'amount')->hiddenInput()->label(false) ;?></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <?= $form->field($model, 'tools')->widget(
+                            Select2::class,
+                            [
+                                'name' => 'tools',
+                                'language' => 'ru',
+                                'data' => \core\helpers\ToolsHelper::statusList(),
+                                'theme' => Select2::THEME_BOOTSTRAP,
+                                'options' => [
+                                    'id' => 'tools',
+                                    'placeholder' => 'Select',
+                                    'multiple' => false,
+                                    'autocomplete' => 'on',
+                                ],
+                                'pluginOptions' => [
+                                    'tags' => false,
+                                    'allowClear' => false,
+                                ],
+                            ]
+                        ) ?>
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@
 namespace core\entities\Schedule\Event\Calendar;
 
 
+use core\helpers\ToolsHelper;
 use core\readModels\Schedule\EducationReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\readModels\Schedule\FreeTimeReadRepository;
@@ -45,6 +46,7 @@ class Calendar
                 'notice' => $item->notice,
                 'master' => $item->master->username ?: $item->fullname,
                 'service' => $this->serviceNameList($item->services),
+                'tools' => ToolsHelper::statusLabel($item->tools),
             ];
             $event->backgroundColor = $item->employee->color ??  $item->default_color;
             $event->borderColor = $item->employee->color ?? $item->default_color;

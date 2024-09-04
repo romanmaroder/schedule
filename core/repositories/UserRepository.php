@@ -152,7 +152,7 @@ class UserRepository
         if (!$user->save()) {
             throw new \RuntimeException('Saving error.');
         }
-        //$this->dispatcher->dispatchAll($user->releaseEvents());
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 
     /**
