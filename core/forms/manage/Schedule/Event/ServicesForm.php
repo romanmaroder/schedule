@@ -23,7 +23,12 @@ class ServicesForm extends Model
 
     public function servicesList(): array
     {
-        return ArrayHelper::map(Service::find()->active()->all(), 'id', 'name');
+        return ArrayHelper::map(Service::find()->joinWith('category')->active()->all(),
+                                'id',
+                                'name',
+                                'category.parent.name'
+        );
+
     }
 
     public function rules()
