@@ -559,9 +559,16 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         ),
                         'dateClick' => new JsExpression(
                             "function(info){
+                            let dateTime= new Date(info.dateStr).toISOString().slice(0,10);
+                                             
+                                            if(info.view.type =='timeGridDay'){
+                                                let date =  new Date(info.dateStr).toISOString().slice(0,10);  
+                                                let time =  new Date(info.dateStr).toTimeString().slice(0,8);
+                                             dateTime = date + ' ' + time; 
+                                            }
                                     $.ajax({
                                         url:'/schedule/api/event-api/create',
-                                        data:{'start':info.dateStr, 'end':info.dateStr},
+                                        data:{'start':dateTime, 'end':dateTime},
                                         success:function (data) {
                                             $('#modal').modal('show').find('.modal-body').html(data);
                                             $('#modal').modal('show').find('#modal-label').html(info.view.title);
