@@ -90,7 +90,7 @@ $js = <<< JS
        "paging": true,
        "lengthChange": false,
        "searching": true,
-       "ordering": true,
+       "ordering": false,
        "info": false,
        "autoWidth": false,
        "responsive": true,

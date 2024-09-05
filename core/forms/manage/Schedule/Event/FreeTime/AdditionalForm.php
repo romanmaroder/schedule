@@ -23,7 +23,10 @@ class AdditionalForm extends Model
 
     public function additionalList(): array
     {
-        return ArrayHelper::map(Additional::find()->active()->all(), 'id', 'name');
+        return ArrayHelper::map(Additional::find()->with('category')->active()->all(),
+                                'id',
+                                'name',
+        'category.parent.name');
     }
 
     public function rules()
