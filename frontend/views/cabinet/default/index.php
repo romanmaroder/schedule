@@ -26,6 +26,7 @@ PluginAsset::register($this)->add(
             [
                 'dataProvider' => $provider,
                 //'filterModel' => $searchModel,
+                'summary' => false,
                 'tableOptions' => [
                     'class' => 'table table-striped table-bordered',
                     'id' => 'event'
@@ -62,9 +63,9 @@ PluginAsset::register($this)->add(
                     [
                         'attribute' => 'notice',
                         'contentOptions' => [
-                            'class'=>'text-center'
+                            'class'=>'text-center',
+                            'style'=>'max-width:150px'
                         ],
-                        'headerOptions' => ['class' => 'text-center'],
                         'format' => 'ntext'
                     ],
 
@@ -107,7 +108,7 @@ $js = <<< JS
  
     $('#event').DataTable({
     
-       "paging": false,
+       "paging": true,
        "lengthChange": false,
        "searching": true,
        "ordering": true,

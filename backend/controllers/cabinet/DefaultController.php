@@ -87,9 +87,7 @@ class DefaultController extends Controller
         $provider = new ArrayDataProvider(
             [
                 'allModels' => $event,
-                'pagination' => [
-                    'pageSize' => 10,
-                ],
+                'pagination' => false,
 
             ]
         );

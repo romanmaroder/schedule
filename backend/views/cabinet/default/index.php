@@ -27,6 +27,7 @@ PluginAsset::register($this)->add(
             [
                 'dataProvider' => $provider,
                 //'filterModel' => $searchModel,
+                'summary' => false,
                 'tableOptions' => [
                     'class' => 'table table-striped table-bordered',
                     'id' => 'event'
@@ -52,8 +53,20 @@ PluginAsset::register($this)->add(
                             return implode(', ', ArrayHelper::getColumn($provider->services, 'name'));
                         },
                     ],
-                    'notice:ntext',
-
+                    [
+                        'attribute' => 'notice',
+                        'contentOptions' => [
+                            'class'=>'text-center',
+                            'style'=>'max-width:150px'
+                        ],
+                        'format' => 'ntext'
+                    ],
+                    [
+                        'attribute' => 'start',
+                        'value'=>function ($model){
+                            return substr($model['start'],10,6) . ' - ' . substr($model['end'],10,6);
+                        },
+                    ],/*
                     [
                         'attribute' => 'start',
                         'format' => ['datetime', 'php: H:i']
@@ -61,7 +74,7 @@ PluginAsset::register($this)->add(
                     [
                         'attribute' => 'end',
                         'format' => ['datetime', 'php: H:i']
-                    ],
+                    ],*/
 
                 ],
             ]
@@ -85,8 +98,8 @@ $js = <<< JS
  
     $('#event').DataTable({
     
-       "paging": false,
-       "lengthChange": false,
+       "paging": true,
+       "lengthChange": true,
        "searching": true,
        "ordering": true,
        //"order": [[0, 'desc']],
