@@ -13,7 +13,11 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 PluginAsset::register($this)->add(
-    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
+    ['datatables',
+        'datatables-bs4',
+        'datatables-responsive',
+        'datatables-searchbuilder',
+        'datatables-buttons']
 );
 
 $this->title = 'Event';
@@ -194,14 +198,24 @@ $js = <<< JS
  $(function () {
  
     $('#event').DataTable({
-    
-       "paging": true,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": true,
-       "autoWidth": false,
-       "responsive": true,
+        bDestroy: true,
+        pageLength: -1, 
+        paging: true,
+        lengthChange: true,
+        lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
+        searching: true,
+        ordering: false,
+        info: true,
+        autoWidth: false,
+        responsive: true,
+        bStateSave: true,
+        fnStateSave: function (oSettings, oData) {
+                localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
+                },
+                fnStateLoad: function () {
+                var data = localStorage.getItem('DataTables_' + window.location.pathname);
+                return JSON.parse(data);
+                },
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {
