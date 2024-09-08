@@ -22,13 +22,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <div class="card-header">
             <?= Html::a('Update', ['update', 'id' => $price->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app', 'Delete'),
                 ['delete', 'id' => $price->id],
                 [
-                    'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient',
+                    'id' => 'delete',
+                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient',
                     'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
-                        'method' => 'post',
+                        'confirm' => Yii::t('app', 'Delete file?'),
+                        'method' => 'POST',
                     ],
                 ]
             ) ?>

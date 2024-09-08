@@ -95,7 +95,8 @@ class CartItem
     {
         #Rounding up
         //return round($this->getOriginalPrice() * $this->getEmployeePrice(),-2,PHP_ROUND_HALF_EVEN);
-        return $this->getOriginalPrice() * $this->getEmployeePrice();
+        //return $this->getOriginalPrice() * $this->getEmployeePrice();
+        return $this->getOriginalPrice() - $this->getEmployeePrice();
     }
 
     /**
@@ -231,7 +232,7 @@ class CartItem
         return $this->item->events->getRate();
     }
 
-    public function getEmployeePrice(): float|int
+    public function getEmployeePrice(): int
     {
         return $this->item->events->getPrice();
     }
@@ -358,7 +359,8 @@ class CartItem
 
     private function fullPriceAndRate(): bool
     {
-        if ($this->getEmployeeRate() == 1 && $this->getEmployeePrice() == 1) {
+        //if ($this->getEmployeeRate() == 1 && $this->getEmployeePrice() == 1) {
+        if ($this->getEmployeeRate() == 1 && $this->getEmployeePrice() == 0) {
             return true;
         }
         return false;

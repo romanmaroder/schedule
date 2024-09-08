@@ -98,7 +98,7 @@ $js = <<< JS
  $(function () {
  
     $('#service').DataTable({
-    bDestroy: true,
+        bDestroy: true,
        pageLength: -1, 
        paging: true,
        lengthChange: true,
@@ -108,6 +108,7 @@ $js = <<< JS
        info: false,
        autoWidth: false,
        responsive: true,
+       bStateSave: true,
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {

@@ -4,8 +4,8 @@
 
 /* @var $content string */
 
-use frontend\assets\BlogAsset;
-use frontend\widgets\Blog\CategoriesWidget;
+use shop\assets\BlogAsset;
+use shop\widgets\Blog\CategoriesWidget;
 
 BlogAsset::register($this);
 

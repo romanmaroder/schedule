@@ -28,7 +28,8 @@ class PriceForm extends Model
     {
         return [
             [['name'], 'string'],
-            [['rate'], 'double'],
+            [['rate'], 'integer'],
+           // [['rate'], 'double'],
             [
                 ['name'],
                 'unique',

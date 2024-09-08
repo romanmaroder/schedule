@@ -71,7 +71,7 @@ PluginAsset::register($this)->add(
                                     'attribute' => 'price_new',
                                     'value' => function (Service $model) use( $user){
                                         //return PriceHelper::format($model->price_new);
-                                        return $model->price_new * $user->employee->rate->rate; // TODO подумать ставка или прайс
+                                        return $model->price_new - $user->employee->price->rate; // TODO подумать ставка или прайс
                                     },
                                 ],
                                 /*[
@@ -118,6 +118,7 @@ $js = <<< JS
        "info": true,
        "autoWidth": false,
        "responsive": true,
+       "bStateSave": true,
        //"dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {

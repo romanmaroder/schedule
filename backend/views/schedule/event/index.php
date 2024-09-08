@@ -81,8 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'attribute' => 'service',
                                     'value' => function ($model) {
-                                        return implode(', ', ArrayHelper::getColumn($model->services, 'name'));
+                                        return implode(', </br>', ArrayHelper::getColumn($model->services, 'name'));
                                     },
+                                    'format' => 'raw'
                                 ],
                                 'amount',
                                 [

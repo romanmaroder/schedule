@@ -50,8 +50,9 @@ PluginAsset::register($this)->add(
                     [
                         'label' => 'Service',
                         'value' => function ($provider) {
-                            return implode(', ', ArrayHelper::getColumn($provider->services, 'name'));
+                            return implode(', </br>', ArrayHelper::getColumn($provider->services, 'name'));
                         },
+                        'format' => 'raw'
                     ],
                     [
                         'attribute' => 'notice',
@@ -97,15 +98,23 @@ $js = <<< JS
  $(function () {
  
     $('#event').DataTable({
-    
-       "paging": true,
-       "lengthChange": true,
-       "searching": true,
-       "ordering": true,
+      bDestroy: true,
+       paging: true,
+       lengthChange: true,
+       searching: true,
+       ordering: true,
        //"order": [[0, 'desc']],
-       "info": false,
-       "autoWidth": false,
-       "responsive": true,
+       info: false,
+       autoWidth: false,
+       responsive: true,
+        bStateSave: true,
+        fnStateSave: function (oSettings, oData) {
+                localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
+                },
+                fnStateLoad: function () {
+                var data = localStorage.getItem('DataTables_' + window.location.pathname);
+                return JSON.parse(data);
+                },
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {

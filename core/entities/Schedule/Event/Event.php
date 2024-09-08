@@ -328,7 +328,7 @@ class Event extends ActiveRecord
         return $this->rate;
     }
 
-    public function getPrice(): int|float
+    public function getPrice(): int
     {
         /*if ($this->employee){
             return $this->employee->price->rate;
