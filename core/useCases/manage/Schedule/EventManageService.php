@@ -22,7 +22,8 @@ class EventManageService
         EventRepository $events,
         ServiceRepository $services,
         TransactionManager $transaction,
-    ) {
+    )
+    {
         $this->events = $events;
         $this->services = $services;
         $this->transaction = $transaction;
@@ -56,6 +57,7 @@ class EventManageService
 
         $event->rate = $event->employee->rate->rate;
         $event->price = $event->employee->price->rate;
+
         $event->fullname = $event->employee->getFullName();
 
         $this->transaction->wrap(
@@ -70,7 +72,7 @@ class EventManageService
     {
         $event = $this->events->get($id);
 
-        if ($form->discount_from == 0){
+        if ($form->discount_from == 0) {
             $form->discount = 0;
         }
 
@@ -103,7 +105,9 @@ class EventManageService
                 }
                 $event->getAmount($amount);
                 $event->rate = $event->employee->rate->rate;
+
                 $event->price = $event->employee->price->rate;
+
                 $event->fullname = $event->employee->getFullName();
                 $this->events->save($event);
             }

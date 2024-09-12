@@ -12,6 +12,7 @@ use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\repositories\NotFoundException;
+use core\repositories\PriceRepository;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
 use Yii;
@@ -26,6 +27,7 @@ class EventController extends Controller
     private Calendar $calendar;
     private CartService $cart;
     private EmployeeReadRepository $employees;
+    private PriceRepository $prices;
 
     public function __construct(
         $id,
@@ -34,6 +36,7 @@ class EventController extends Controller
         Calendar $calendar,
         CartService $cart,
         EmployeeReadRepository $employees,
+        PriceRepository $prices,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
@@ -41,6 +44,7 @@ class EventController extends Controller
         $this->calendar = $calendar;
         $this->cart = $cart;
         $this->employees = $employees;
+        $this->prices = $prices;
     }
 
     public function behaviors(): array
@@ -59,12 +63,14 @@ class EventController extends Controller
     {
         $searchModel = new EventSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        $cart = $this->cart->getCart();
 
         return $this->render(
             'index',
             [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'cart'=>$cart,
             ]
         );
     }
@@ -116,6 +122,8 @@ class EventController extends Controller
     {
         $event = $this->findModel($id);
         $cart = $this->cart->getCart();
+        $price = $this->prices->getByValue($event->price);
+        $event->price = $price->id;
 
         $form = new EventEditForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {

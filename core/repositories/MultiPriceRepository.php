@@ -4,29 +4,29 @@
 namespace core\repositories;
 
 
-use core\entities\User\Price;
+use core\entities\User\MultiPrice;
 
-class PriceRepository
+class MultiPriceRepository
 {
     /**
      * @param $id
-     * @return Price
+     * @return MultiPrice
      */
-    public function get($id): Price
+    public function get($id): MultiPrice
     {
         return $this->getBy(['id' => $id]);
     }
 
-    public function getByValue($value):Price
+    public function getByValue($value):MultiPrice
     {
         return $this->getBy(['rate' => $value]);
     }
 
     /**
-     * @param Price $price
+     * @param MultiPrice $price
      * @throws \yii\db\Exception
      */
-    public function save(Price $price): void
+    public function save(MultiPrice $price): void
     {
         if (!$price->save()) {
             throw new \RuntimeException('Saving error.');
@@ -34,11 +34,11 @@ class PriceRepository
     }
 
     /**
-     * @param Price $price
+     * @param MultiPrice $price
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
      */
-    public function remove(Price $price):void
+    public function remove(MultiPrice $price):void
     {
         if (!$price->delete()) {
             throw new \RuntimeException('Removing error.');
@@ -47,11 +47,11 @@ class PriceRepository
 
     /**
      * @param array $condition
-     * @return Price
+     * @return MultiPrice
      */
-    private function getBy(array $condition): Price
+    private function getBy(array $condition): MultiPrice
     {
-        if (!$price = Price::find()->where($condition)->limit(1)->one()) {
+        if (!$price = MultiPrice::find()->where($condition)->limit(1)->one()) {
             throw new NotFoundException('Price not found.');
         }
         return $price;

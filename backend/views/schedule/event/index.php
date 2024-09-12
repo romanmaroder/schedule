@@ -1,5 +1,6 @@
 <?php
 
+use core\entities\Schedule\Event\Event;
 use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
@@ -11,6 +12,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Schedule\EventSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $cart \core\cart\schedule\Cart */
 
 PluginAsset::register($this)->add(
     ['datatables',
@@ -85,7 +87,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     },
                                     'format' => 'raw'
                                 ],
-                                'amount',
+                                //'amount',
+                                [
+                                    'attribute' => 'Cost',
+                                    'value' => function (Event $models) use ($cart) {
+                                       return $models->getDiscountedPrice($models, $cart);
+                                    }
+                                ],
                                 [
                                     'attribute' => 'status',
                                     'value' => function ($model) {
@@ -115,13 +123,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     //'header' => '<i class="fas fa-cash-register"></i>',
                                     'header' => 'Cash register',
                                     'headerOptions' => [
-                                            'class'=>'text-center'
+                                        'class' => 'text-center'
                                     ],
                                     'contentOptions' => [
                                         'class' => ['text-center align-middle']
                                     ],
                                     'buttonOptions' => [
-                                            'class'=>'text-center'
+                                        'class' => 'text-center'
                                     ],
                                     'visibleButtons' => [
                                         'status' => true,
@@ -142,7 +150,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             );
                                         },
                                         'payment' => function ($url, $model, $key) {
-                                            return  $model->payment == 2 ? Html::a(
+                                            return $model->payment == 2 ? Html::a(
                                                 'CARD',
                                                 Url::to(['schedule/event/card', 'id' => $model->id]),
                                                 ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
@@ -160,13 +168,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     //'header' => '<i class="fas fa-cash-register"></i>',
                                     'header' => 'Copy',
                                     'headerOptions' => [
-                                        'class'=>'text-center'
+                                        'class' => 'text-center'
                                     ],
                                     'contentOptions' => [
                                         'class' => ['text-center align-middle']
                                     ],
                                     'buttonOptions' => [
-                                        'class'=>'text-center'
+                                        'class' => 'text-center'
                                     ],
                                     'visibleButtons' => [
                                         'status' => true,
@@ -176,7 +184,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
                                     'buttons' => [
                                         'copy' => function ($url, $model, $key) {
-                                            return  Html::a(
+                                            return Html::a(
                                                 'COPY',
                                                 Url::to(['schedule/event/copy', 'id' => $model->id]),
                                                 ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']

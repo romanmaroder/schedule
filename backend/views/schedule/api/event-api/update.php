@@ -1,5 +1,6 @@
 <?php
 
+use core\helpers\PriceHelper;
 use kartik\datetime\DateTimePicker;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;

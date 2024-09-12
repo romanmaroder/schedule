@@ -9,6 +9,7 @@ use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
 use core\repositories\NotFoundException;
+use core\repositories\PriceRepository;
 use core\services\sms\SmsSender;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
@@ -21,18 +22,22 @@ class EventApiController extends Controller
     private EventManageService $service;
     private CartService $cart;
     private SmsSender $sms;
+    private PriceRepository $prices;
 
     public function __construct($id, $module,
-        EventManageService $service,
-        CartService $cart,
-        SmsSender $sms,
-        $config = [])
+                                EventManageService $service,
+                                CartService $cart,
+                                SmsSender $sms,
+                                PriceRepository $prices,
+                                $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->cart = $cart;
         $this->sms = $sms;
+        $this->prices = $prices;
     }
+
     public function behaviors(): array
     {
         return [
@@ -52,8 +57,8 @@ class EventApiController extends Controller
             'view',
             [
                 'model' => $this->findModel($id),
-                'cart'=>$cart,
-                'sms'=> $this->sms,
+                'cart' => $cart,
+                'sms' => $this->sms,
             ]
         );
     }
@@ -87,6 +92,8 @@ class EventApiController extends Controller
     public function actionUpdate($id)
     {
         $event = $this->findModel($id);
+        $price = $this->prices->getByValue($event->price);
+        $event->price = $price->id;
 
         $form = new EventEditForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
@@ -111,14 +118,14 @@ class EventApiController extends Controller
     public function actionTools($id)
     {
         $event = $this->findModel($id);
-            try {
-                $this->service->tools($event->id);
-                Yii::$app->session->setFlash('msg', "Tools are ready.");
-                return $this->redirect('/schedule/calendar/calendar');
-            } catch (\DomainException $e) {
-                Yii::$app->errorHandler->logException($e);
-                Yii::$app->session->setFlash('error', $e->getMessage());
-            }
+        try {
+            $this->service->tools($event->id);
+            Yii::$app->session->setFlash('msg', "Tools are ready.");
+            return $this->redirect('/schedule/calendar/calendar');
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
     }
 
     public function actionCopy($id)
@@ -129,7 +136,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->copy($form);
-                Yii::$app->session->setFlash('msg', "The entry " . $event->client->username ." copied.");
+                Yii::$app->session->setFlash('msg', "The entry " . $event->client->username . " copied.");
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

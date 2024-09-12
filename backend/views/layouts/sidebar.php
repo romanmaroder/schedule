@@ -258,6 +258,12 @@ use yii\helpers\Html;
                                             'url' => ['/price/index'],
                                             'active' => $this->context->id == 'price'
                                         ],
+                                        [
+                                            'label' => 'Multi Price',
+                                            'icon' => 'fas fa-money-check-alt',
+                                            'url' => ['/multiprice/index'],
+                                            'active' => $this->context->id == 'multiprice'
+                                        ]
                                     ]
                                 ],
                                 [
