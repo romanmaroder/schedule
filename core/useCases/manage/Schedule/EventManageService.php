@@ -57,10 +57,7 @@ class EventManageService
         }
         $event->getAmount($amount);
 
-        $event->rate = $event->employee->rate->rate; //TODO Надо ли оно вообще?
-        $event->price = $event->employee->multiPrice->rate; //TODO Надо ли оно вообще?
-
-
+        $event->rate = $event->employee->rate->rate;
 
         $event->fullname = $event->employee->getFullName();
 
@@ -92,7 +89,6 @@ class EventManageService
             $form->payment,
             $form->amount,
             $form->rate,
-            $form->price,
             $form->fullname,
             $form->tools,
         );
@@ -109,9 +105,7 @@ class EventManageService
                     $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
                 }
                 $event->getAmount($amount);
-                $event->rate = $event->employee->rate->rate;//TODO Надо ли оно вообще?
-
-                $event->price = $event->employee->multiPrice->rate;//TODO Надо ли оно вообще?
+                $event->rate = $event->employee->rate->rate;
 
                 $event->fullname = $event->employee->getFullName();
                 $this->events->save($event);
@@ -135,7 +129,6 @@ class EventManageService
             $form->payment,
             $form->amount,
             $form->rate,
-            $form->price,
             $form->fullname,
             $form->tools,
         );
@@ -143,12 +136,12 @@ class EventManageService
         $amount = 0;
         foreach ($form->services->lists as $listId) {
             $service = $this->services->get($listId);
-            $amount += $service->price_new;
-            $event->assignService($service->id, $service->price_new);
+            $price = $event->employee->multiPrice->getService($event->employee->multiPrice->id, $service->id);
+            $amount += $price->cost;
+            $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
         }
         $event->getAmount($amount);
         $event->rate = $event->employee->rate->rate;
-        $event->price = $event->employee->price->rate;
         $event->fullname = $event->employee->getFullName();
         $this->transaction->wrap(
             function () use ($event, $form) {

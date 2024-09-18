@@ -30,7 +30,6 @@ use yii\db\ActiveRecord;
  * @property Employee $employee
  *
  * @property int $rate [int(11)]
- * @property int $price [int(11)]
  * @property string $fullname [varchar(255)]
  * @property string $default_color [varchar(255)]
  * @property int $tools [smallint(6)]
@@ -59,7 +58,6 @@ class Event extends ActiveRecord
         $payment,
         $amount,
         $rate,
-        $price,
         $fullname,
     ): self {
         $event = new static();
@@ -74,7 +72,6 @@ class Event extends ActiveRecord
         $event->payment = self::STATUS_CASH;
         $event->amount = $amount;
         $event->rate = $rate;
-        $event->price = $price;
         $event->fullname = $fullname;
         $event->default_color = self::DEFAULT_COLOR;
         $event->tools = self::TOOLS_ARE_NOT_READY;
@@ -93,7 +90,6 @@ class Event extends ActiveRecord
         $payment,
         $amount,
         $rate,
-        $price,
         $fullname,
         $tools,
     ): void {
@@ -112,7 +108,6 @@ class Event extends ActiveRecord
             $this->payment = null;
         }
         $this->rate = $rate;
-        $this->price = $price;
         $this->fullname = $fullname;
         $this->tools = $tools;
     }
@@ -130,7 +125,6 @@ class Event extends ActiveRecord
         $payment,
         $amount,
         $rate,
-        $price,
         $fullname,
         $tools,
     ): self {
@@ -147,7 +141,6 @@ class Event extends ActiveRecord
         $event->payment = self::STATUS_CASH;
         $event->amount = $amount;
         $event->rate = $rate;
-        $event->price = $price;
         $event->fullname = $fullname;
         $event->tools = $tools;
         return $event;
@@ -327,14 +320,6 @@ class Event extends ActiveRecord
             return $this->employee->rate->rate;
         }*/
         return $this->rate;
-    }
-
-    public function getPrice(): int
-    {
-        /*if ($this->employee){
-            return $this->employee->price->rate;
-        }*/
-        return $this->price;
     }
 
     public static function tableName(): string

@@ -137,6 +137,19 @@ use yii\helpers\Html;
                                             console.log(exception)
                                         }
                                     });
+                                     $.ajax({
+                                        url: "/employee/price-list",
+                                        method: "get",
+                                        dataType: "json",
+                                        data: {id: data_id},
+                                        success: function(data){
+                                          
+                                           $("select#lists").html(data.out).attr("disabled", false);
+                                        },
+                                        error: function(data , jqXHR, exception){
+                                            console.log(exception)
+                                        }
+                                    });
                                     }',
                         ],
                     ]
@@ -165,7 +178,7 @@ use yii\helpers\Html;
                     [
                         'name' => 'lists',
                         'language' => 'ru',
-                        'data' => $model->services->servicesList(),
+                        'data' => $model->services->updateList(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'lists',

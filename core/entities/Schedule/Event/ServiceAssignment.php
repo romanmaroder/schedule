@@ -14,18 +14,22 @@ use yii\db\ActiveRecord;
  *
  * @property int $event_id [int(11)]
  * @property int $service_id [int(11)]
- * @property int $cost [int(11)]
+ * @property int $original_cost [int(11)]
+ * @property int $price_rate [int(11)]
+ * @property int $price_cost [int(11)]
  * @property Service $services
  * @property Event $events
  */
 class ServiceAssignment extends ActiveRecord
 {
 
-    public static function create($serviceId,$price): self
+    public static function create($serviceId,$serviceCost,$priceRate,$priceCost): self
     {
         $assignment = new static();
         $assignment->service_id = $serviceId;
-        $assignment->cost = $price;
+        $assignment->original_cost = $serviceCost;
+        $assignment->price_rate = $priceRate;
+        $assignment->price_cost = $priceCost;
         return $assignment;
     }
 
