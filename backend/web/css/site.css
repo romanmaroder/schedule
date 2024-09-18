@@ -158,6 +158,9 @@ div.required label:after {
     cursor: pointer;
     z-index: 4;
 }
+.fc-popover-body {
+    background-color: #aaa69d;
+}
 .btn-shadow{
     box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)!important
 }

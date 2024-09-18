@@ -146,7 +146,9 @@ a.desc:after {
     font-family: "Font Awesome 5 Free", serif !important;
     font-weight: bold !important;
 }
-
+.fc-popover-body {
+    background-color: #aaa69d;
+}
 .user-panel p {
     height: auto;
     /*width: 2.1rem;*/
