@@ -17,6 +17,7 @@ use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -206,20 +207,6 @@ class EventController extends Controller
     {
         $this->service->card($id);
         return $this->redirect('index');
-    }
-
-    public function actionCheck($id)
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $employee = $this->employees->findEmployee($id);
-
-        $hours = $employee->schedule->disabledHours($employee->schedule->hoursWork);
-        $weekends = $employee->schedule->weekends;
-
-        return [
-            'hours' => $hours,
-            'weekends' => $weekends
-        ];
     }
 
     public function actionDelete($id)

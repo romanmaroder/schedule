@@ -111,10 +111,7 @@ use yii\helpers\Html;
                         'name' => 'master',
                         'language' => 'ru',
                         'data' => $model->master->masterList(),
-                        'options' => [
-                            'id' => 'master',
-                            'autocomplete' => 'off',
-                        ],
+                        'options' => ['placeholder' => 'Select'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
@@ -122,23 +119,37 @@ use yii\helpers\Html;
                             "change" => 'function() {
                                     let data_id = $(this).val();
                                     $.ajax({
-                                        url: "/schedule/event/check",
+                                        url: "/employee/schedule",
                                         method: "get",
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                           $("#eventeditform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventcreateform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventcreateform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
                                            
-                                           $("#eventeditform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           
-                                           console.log(data)
+                                           $("#eventcreateform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventcreateform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                        
                                         },
                                         error: function(data , jqXHR, exception){
                                             console.log(exception)
                                         }
                                     });
+                                    $.ajax({
+                                        url: "/employee/price-list",
+                                        method: "get",
+                                        dataType: "json",
+                                        data: {id: data_id},
+                                        success: function(data){
+                                          
+                                           $("select#lists").html(data.out).attr("disabled", false);
+                                        },
+                                        error: function(data , jqXHR, exception){
+                                            console.log(exception)
+                                        }
+                                    });
+                                    
+                                    
                                     }',
                         ],
                     ]
@@ -166,8 +177,8 @@ use yii\helpers\Html;
                     Select2::class,
                     [
                         'name' => 'lists',
-                        'language' => 'ru',
                         'data' => $model->services->servicesList(),
+                        'language' => 'ru',
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'lists',

@@ -40,7 +40,7 @@ use yii\helpers\Html;
                             "change" => 'function() {
                                     let data_id = $(this).val();
                                     $.ajax({
-                                        url: "/schedule/event/check",
+                                        url: "/employee/schedule",
                                         method: "get",
                                         dataType: "json",
                                         data: {id: data_id},
@@ -50,13 +50,27 @@ use yii\helpers\Html;
                                            
                                            $("#eventcreateform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
                                            $("#eventcreateform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           
-                                           console.log(data)
+                                        
                                         },
                                         error: function(data , jqXHR, exception){
                                             console.log(exception)
                                         }
                                     });
+                                    $.ajax({
+                                        url: "/employee/price-list",
+                                        method: "get",
+                                        dataType: "json",
+                                        data: {id: data_id},
+                                        success: function(data){
+                                          
+                                           $("select#lists").html(data.out).attr("disabled", false);
+                                        },
+                                        error: function(data , jqXHR, exception){
+                                            console.log(exception)
+                                        }
+                                    });
+                                    
+                                    
                                     }',
                         ],
                     ]
@@ -144,12 +158,12 @@ use yii\helpers\Html;
     <div class="row">
         <div class="col-12">
             <div class="form-group">
+
                 <?= $form->field($model->services, 'lists')->widget(
                     Select2::class,
                     [
                         'name' => 'lists',
                         'language' => 'ru',
-                        'data' => $model->services->servicesList(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'lists',
@@ -162,7 +176,8 @@ use yii\helpers\Html;
                             'allowClear' => true,
                         ],
                     ]
-                ) ?></div>
+                ) ?>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -222,50 +237,50 @@ use yii\helpers\Html;
             </div>
         </div>
     </div>
-<!--    <div class="row">-->
-<!--        <div class="col-12">-->
-<!--            <div class="form-group">-->
-<!--                --><?//= $form->field($model, 'status')->widget(
-//                    Select2::class,
-//                    [
-//                        'name' => 'status',
-//                        'language' => 'ru',
-//                        'data' => \core\helpers\EventHelper::statusList(),
-//                        'theme' => Select2::THEME_BOOTSTRAP,
-//                        'options' => [
-//                            'id' => 'status',
-//                            'placeholder' => 'Select',
-//                            'value' => 0,
-//                            'multiple' => false,
-//                            'autocomplete' => 'on',
-//                        ],
-//                        'pluginOptions' => [
-//                            'tags' => false,
-//                            'allowClear' => false,
-//                        ],
-//                        /*'pluginEvents' => [
-//                            "change" => 'function() {
-//                                    let data_id = $(this).val();
-//                                    let discount = $(".discount");
-//
-//                                    if(data_id > 0) {
-//                                        discount.each(function() {
-//                                                $(this).removeClass( "d-none");
-//                                                $(this).attr( "required" );
-//                                            });
-//                                    }else{
-//                                        discount.each(function() {
-//                                                $(this).addClass( "d-none");
-//                                            });
-//                                    }
-//
-//                                    }',
-//                        ],*/
-//                    ]
-//                ) ?>
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    <div class="row">-->
+    <!--        <div class="col-12">-->
+    <!--            <div class="form-group">-->
+    <!--                --><? //= $form->field($model, 'status')->widget(
+    //                    Select2::class,
+    //                    [
+    //                        'name' => 'status',
+    //                        'language' => 'ru',
+    //                        'data' => \core\helpers\EventHelper::statusList(),
+    //                        'theme' => Select2::THEME_BOOTSTRAP,
+    //                        'options' => [
+    //                            'id' => 'status',
+    //                            'placeholder' => 'Select',
+    //                            'value' => 0,
+    //                            'multiple' => false,
+    //                            'autocomplete' => 'on',
+    //                        ],
+    //                        'pluginOptions' => [
+    //                            'tags' => false,
+    //                            'allowClear' => false,
+    //                        ],
+    //                        /*'pluginEvents' => [
+    //                            "change" => 'function() {
+    //                                    let data_id = $(this).val();
+    //                                    let discount = $(".discount");
+    //
+    //                                    if(data_id > 0) {
+    //                                        discount.each(function() {
+    //                                                $(this).removeClass( "d-none");
+    //                                                $(this).attr( "required" );
+    //                                            });
+    //                                    }else{
+    //                                        discount.each(function() {
+    //                                                $(this).addClass( "d-none");
+    //                                            });
+    //                                    }
+    //
+    //                                    }',
+    //                        ],*/
+    //                    ]
+    //                ) ?>
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
     <div class="row">
         <div class="col-12">
             <div class="form-group"><?= $form->field($model, 'notice')->textarea(

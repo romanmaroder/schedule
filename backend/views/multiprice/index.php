@@ -13,10 +13,12 @@ use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\YiiAsset;
 
 $this->title = 'Multi Prices';
 $this->params['breadcrumbs'][] = $this->title;
 
+PluginAsset::register($this)->add(['sweetalert2']);
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
@@ -92,39 +94,37 @@ PluginAsset::register($this)->add(
                             'format' => 'raw'
                         ],
                         [
-                            'attribute' => 'Add',
-                            'value' => function (MultiPrice $model) {
-                                return Html::a('Add',['multiprice/add','id'=>$model->id]);
-                            },
-                            'format' => 'raw'
-                        ],
-                        [
                             'class' => 'yii\grid\ActionColumn',
-                            'template' => '{edit}',
-                            //'header' => '<i class="fas fa-cash-register"></i>',
-                            'header' => 'Edit',
+                            'template' => '{revoke}',
+                            'header' => 'Revoke',
                             'headerOptions' => [
                                 'class' => 'text-center'
                             ],
                             'contentOptions' => [
-                                'class' => ['text-center align-middle']
+                                'class' => ['text-center ']
                             ],
                             'buttonOptions' => [
                                 'class' => 'text-center'
                             ],
                             'visibleButtons' => true,
                             'buttons' => [
-                                'edit' => function ($url, MultiPrice $model, $key) {
+                                'revoke' => function ($url, MultiPrice $model, $key) {
                                     $result = ArrayHelper::getColumn(
                                         $model->serviceAssignments,
                                         function ($element) use ($model) {
                                             return Html::a(
-                                                'Edit',
+                                                Yii::t('app', '<i class="fas fa-trash"></i>'),
                                                 [
-                                                    'multiprice/edit',
+                                                    'multiprice/revoke',
                                                     'id' => $model->id,
-                                                    //'price_id' => $element['price_id'],
                                                     'service_id' => $element['service_id']
+                                                ],
+                                                [
+                                                    'id' => 'delete',
+                                                    'data' => [
+                                                        'confirm' => Yii::t('app', 'Delete file?'),
+                                                        'method' => 'POST',
+                                                    ],
                                                 ]
                                             );
                                         }
@@ -136,6 +136,22 @@ PluginAsset::register($this)->add(
                                     return $link;
                                 },
                             ],
+                        ],
+                        [
+                            'attribute' => 'Add',
+                            'value' => function (MultiPrice $model) {
+                                return Html::a(
+                                    '<i class="fas fa-plus-square fa-rotate-270 fa-lg" style="color: #28a745;"></i>',
+                                    ['multiprice/add', 'id' => $model->id]
+                                );
+                            },
+                            'headerOptions' => [
+                                'class' => 'text-center'
+                            ],
+                            'contentOptions' => [
+                                'class' => ['text-center align-middle']
+                            ],
+                            'format' => 'raw'
                         ],
                     ],
                 ]

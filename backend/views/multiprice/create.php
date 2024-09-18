@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \core\forms\manage\User\MultiPrice\MultiPriceCreateForm */
+/* @var $model \core\forms\manage\User\MultiPrice\CreateForm */
 
 use kartik\select2\Select2;
 use yii\helpers\Html;

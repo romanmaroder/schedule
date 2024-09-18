@@ -22,7 +22,7 @@ use yii\db\ActiveRecord;
 class ServiceAssignment extends ActiveRecord
 {
 
-    public static function create($serviceId,$rate,$price): self
+    public static function create($serviceId, $rate, $price): self
     {
         $assignment = new static();
         $assignment->service_id = $serviceId;
@@ -32,17 +32,24 @@ class ServiceAssignment extends ActiveRecord
     }
 
 
+    public function edit($serviceId, $rate, $price, $cost): self
+    {
+        $this->service_id = $serviceId;
+        $this->rate = $rate;
+        $this->price_id = $price;
+        $this->cost = $cost;
+    }
 
     /**
      * @param $id
      * @return bool
      */
-    public function isForEvent($id): bool
+    public function isForPrice($id): bool
     {
-        return $this->service_id == $id;
+        return $this->price_id == $id;
     }
 
-    public function isIdEqualTo($id): bool
+    public function isForService($id): bool
     {
         return $this->service_id == $id;
     }
@@ -57,11 +64,17 @@ class ServiceAssignment extends ActiveRecord
         return $this->hasOne(Service::class, ['id' => 'service_id']);
     }
 
+    public function getAssignments($priceId, $serviceId)
+    {
+        if ($this->isForPrice($priceId) && $this->isForService($serviceId)) {
+            return $this;
+        }
+    }
+
     public static function tableName(): string
     {
         return '{{%schedule_multiprice_assignments}}';
     }
-
 
 
 }

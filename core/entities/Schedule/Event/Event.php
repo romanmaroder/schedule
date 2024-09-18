@@ -5,9 +5,9 @@ namespace core\entities\Schedule\Event;
 
 
 use core\entities\Schedule\Service\Service;
-use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use core\entities\User\Employee\Employee;
 use core\entities\User\User;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -208,15 +208,15 @@ class Event extends ActiveRecord
         return $this->tools = self::TOOLS_READY;
     }
 
-    public function assignService($id, $price): void
+    public function assignService($serviceId, $serviceCost, $priceRate, $priceCost): void
     {
         $assignments = $this->serviceAssignments;
         foreach ($assignments as $assignment) {
-            if ($assignment->isForEvent($id)) {
+            if ($assignment->isForEvent($serviceId)) {
                 return;
             }
         }
-        $assignments[] = ServiceAssignment::create($id, $price);
+        $assignments[] = ServiceAssignment::create($serviceId, $serviceCost, $priceRate, $priceCost);
         $this->serviceAssignments = $assignments;
     }
 
@@ -295,6 +295,7 @@ class Event extends ActiveRecord
     {
         return $this->hasOne(Employee::class,['user_id'=>'master_id']);
     }
+
 
     public function issetNotice($notice):bool
     {

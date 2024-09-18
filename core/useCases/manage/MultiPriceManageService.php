@@ -5,10 +5,9 @@ namespace core\useCases\manage;
 
 
 use core\entities\User\MultiPrice;
-use core\forms\manage\User\MultiPrice\MultiPriceAddSimpleServiceForm;
-use core\forms\manage\User\MultiPrice\MultiPriceCreateForm;
-use core\forms\manage\User\MultiPrice\MultiPriceEditForm;
-use core\forms\manage\User\MultiPrice\MultiPriceSimpleEditForm;
+use core\forms\manage\User\MultiPrice\SimpleAddForm;
+use core\forms\manage\User\MultiPrice\CreateForm;
+use core\forms\manage\User\MultiPrice\EditForm;
 use core\repositories\MultiPriceRepository;
 use core\repositories\Schedule\ServiceRepository;
 use core\services\TransactionManager;
@@ -29,7 +28,7 @@ class MultiPriceManageService
         $this->transaction = $transaction;
     }
 
-    public function create(MultiPriceCreateForm $form): MultiPrice
+    public function create(CreateForm $form): MultiPrice
     {
         $price = MultiPrice::create(
             $form->name,
@@ -50,7 +49,7 @@ class MultiPriceManageService
         return $price;
     }
 
-    public function edit($id, MultiPriceEditForm $form): void
+    public function edit($id, EditForm $form): void
     {
         $price = $this->prices->get($id);
 
@@ -74,7 +73,7 @@ class MultiPriceManageService
         );
     }
 
-    public function add($id,MultiPriceAddSimpleServiceForm $form)
+    public function add($id,SimpleAddForm $form)
     {
         $price = $this->prices->get($id);
 
@@ -84,13 +83,29 @@ class MultiPriceManageService
                 foreach ($form->services->lists as $listId) {
                     $service = $this->services->get($listId);
                     $cost = $price->cost($service->price_new,$form->rate);
-                    $price->assignService($service->id, $form->rate, $cost);
+                    $price->assignService($service->id, $price->checkRate($service->price_new, $form->rate), $cost);
                 }
 
                 $this->prices->save($price);
             }
         );
     }
+
+
+    public function revokeService($id,$service_id)
+    {
+        $price = $this->prices->get($id);
+        $service = $this->services->get($service_id);
+
+        $this->transaction->wrap(
+            function () use ($price, $service) {
+                $price->revokeService($price->id,$service->id);
+                $this->prices->save($price);
+
+            }
+        );
+    }
+
 
     public function remove($id): void
     {

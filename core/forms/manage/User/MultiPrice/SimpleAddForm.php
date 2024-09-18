@@ -11,7 +11,7 @@ use core\forms\CompositeForm;
 /**
  * @property ServicesForm $services
  */
-class MultiPriceAddSimpleServiceForm extends CompositeForm
+class SimpleAddForm extends CompositeForm
 {
     public $price;
     public $rate;

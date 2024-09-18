@@ -69,7 +69,7 @@ return [
                 'css' => 'sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'
             ],
             'sweetalert2' => [
-                'js' => 'sweetalert2/sweetalert2.all.js'
+                'js' => ['sweetalert2/sweetalert2.all.js']
             ],
             'toastr' => [
                 'css' => ['toastr/toastr.min.css'],

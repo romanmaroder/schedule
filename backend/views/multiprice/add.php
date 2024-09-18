@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \core\forms\manage\User\MultiPrice\MultiPriceAddSimpleServiceForm*/
+/* @var $model \core\forms\manage\User\MultiPrice\SimpleAddForm*/
 /* @var $price null|\core\entities\User\MultiPrice */
 
 use kartik\select2\Select2;
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Update';
         <div class="card-body">
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group"> <?= $form->field($model, 'price')->textInput() ?></div>
+                    <div class="form-group"> <?= $form->field($model, 'price')->hiddenInput()->label(false) ?></div>
                 </div>
             </div>
             <div class="row">

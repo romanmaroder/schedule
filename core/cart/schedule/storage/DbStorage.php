@@ -46,7 +46,9 @@ class DbStorage implements StorageInterface
                         [
                             'event_id',
                             'service_id',
-                            'cost',
+                            'original_cost',
+                            'price_rate',
+                            'price_cost',
                             'DATE(schedule_events.start) as start'
                         ]
                     )
@@ -60,7 +62,6 @@ class DbStorage implements StorageInterface
                             'events.employee' => function ($q) {
                                 $q->select(['color', 'rate_id', 'price_id','first_name','last_name']);
                                 $q->joinWith('rate r');
-                                $q->joinWith('price p');
                             },
                             'events.master'=> function ($q) {
                                 $q->select(['username']);

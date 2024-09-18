@@ -17,7 +17,7 @@ class EmployeeReadRepository
 
     public function findEmployee($id)
     {
-        return Employee::find()->with('role')->andWhere(['user_id' => $id])->one();
+        return Employee::find()->with(['role','multiPrice'])->andWhere(['user_id' => $id])->one();
     }
 
     private function getProvider(ActiveQuery $query): ActiveDataProvider

@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \core\forms\manage\User\MultiPrice\MultiPriceEditForm*/
+/* @var $model \core\forms\manage\User\MultiPrice\EditForm*/
 /* @var $price null|\core\entities\User\MultiPrice */
 
 use hail812\adminlte3\assets\PluginAsset;

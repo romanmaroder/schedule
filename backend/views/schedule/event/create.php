@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     "change" => 'function() {
                                     let data_id = $(this).val();
                                     $.ajax({
-                                        url: "/schedule/event/check",
+                                        url: "/employee/schedule",
                                         method: "get",
                                         dataType: "json",
                                         data: {id: data_id},
@@ -64,13 +64,27 @@ $this->params['breadcrumbs'][] = $this->title;
                                            
                                            $("#eventcreateform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
                                            $("#eventcreateform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           
-                                           console.log(data)
+                                        
                                         },
                                         error: function(data , jqXHR, exception){
                                             console.log(exception)
                                         }
                                     });
+                                    $.ajax({
+                                        url: "/employee/price-list",
+                                        method: "get",
+                                        dataType: "json",
+                                        data: {id: data_id},
+                                        success: function(data){
+                                          
+                                           $("select#lists").html(data.out).attr("disabled", false);
+                                        },
+                                        error: function(data , jqXHR, exception){
+                                            console.log(exception)
+                                        }
+                                    });
+                                    
+                                    
                                     }',
                                 ],
                             ]
@@ -158,12 +172,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
+
                         <?= $form->field($model->services, 'lists')->widget(
                             Select2::class,
                             [
                                 'name' => 'lists',
                                 'language' => 'ru',
-                                'data' => $model->services->servicesList(),
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [
                                     'id' => 'lists',
@@ -176,7 +190,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'allowClear' => true,
                                 ],
                             ]
-                        ) ?></div>
+                        ) ?>
+                    </div>
                 </div>
             </div>
             <div class="row">

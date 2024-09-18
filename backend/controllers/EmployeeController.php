@@ -9,6 +9,8 @@ use core\entities\User\Employee\Employee;
 use core\forms\manage\User\Employee\EmployeeCreateForm;
 use core\forms\manage\User\Employee\EmployeeEditForm;
 use core\forms\manage\User\Employee\EmployeeExistCreateForm;
+use core\helpers\MultiPriceHelper;
+use core\readModels\Employee\EmployeeReadRepository;
 use core\useCases\manage\EmployeeManageService;
 use Yii;
 use yii\filters\VerbFilter;
@@ -18,11 +20,18 @@ use yii\web\NotFoundHttpException;
 class EmployeeController extends Controller
 {
     private $service;
+    private EmployeeReadRepository $employees;
 
-    public function __construct($id, $module, EmployeeManageService $service, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        EmployeeManageService $service,
+        EmployeeReadRepository $employees,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
         $this->service = $service;
+        $this->employees = $employees;
     }
 
     public function behaviors()
@@ -125,6 +134,47 @@ class EmployeeController extends Controller
         }
 
         return $this->redirect(['index']);
+    }
+
+
+    public function actionPriceList($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+
+        $employee = $this->employees->findEmployee($id);
+
+        $results = array_map(
+            function ($service) {
+                $data['id'] = $service->id;
+                $data['name'] = $service->name;
+                $data['category'] = $service->category->id;
+                $data['category_parent'] = $service->category->parent->id;
+                $data['category_parent_name'] = $service->category->parent->name;
+
+                return $data;
+            },
+            $employee->multiPrice->services
+        );
+        $out = MultiPriceHelper::renderPrice($results);
+        return [
+            'out' => $out
+        ];
+    }
+
+    public function actionSchedule($id)
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $employee = $this->employees->findEmployee($id);
+
+
+        $hours = $employee->schedule->disabledHours($employee->schedule->hoursWork);
+        $weekends = $employee->schedule->weekends;
+
+        return [
+            'hours' => $hours,
+            'weekends' => $weekends,
+        ];
     }
 
     protected function findModel($id)

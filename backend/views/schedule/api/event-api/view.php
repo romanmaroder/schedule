@@ -43,7 +43,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'value' => function ($model) {
                         return Html::a(
                             Html::encode($model->client->username),
-                            ['/user/view','id'=>$model->client->id]
+                            ['/user/view', 'id' => $model->client->id]
 
                         );
                     }
@@ -60,12 +60,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'label' => 'Service',
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
-                    'contentOptions' => ['class'=>'text-break'],
+                    'contentOptions' => ['class' => 'text-break'],
                 ],
                 //'amount',
                 [
                     'attribute' => 'Cost',
-                    'value' => $model->getDiscountedPrice($model,$cart),
+                    'value' => $model->getDiscountedPrice($model, $cart),
                     'visible' => $model->isNotPayed(),
                 ],
                 [
@@ -83,12 +83,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'value' => ToolsHelper::statusLabel($model->tools),
                     'format' => 'raw',
                 ],
+
             ],
         ]
     ) ?>
-        <p>
-            <?php
-            if ($model->isNotPayed()):?>
+    <p>
+        <?php
+        if ($model->isNotPayed()):?>
 
 
             <?= Html::a(
@@ -100,53 +101,53 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
                 ]
             ) ?>
-            <?php endif;?>
+        <?php endif; ?>
 
-            <?php
-            if ($model->isToolsAreNotReady()):?>
-
-
-                <?= Html::a(
-                    'Tools',
-                    ['tools', 'id' => $model->id],
-                    [
-                        'id' => 'tools-link',
-                        'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                        'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
-                    ]
-                ) ?>
-            <?php endif;?>
+        <?php
+        if ($model->isToolsAreNotReady()):?>
 
 
-            <?php
-                echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
-                echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
-                echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
-
-            ?>
             <?= Html::a(
-                Yii::t('app', 'Copy'),
-                ['copy', 'id' => $model->id],
+                'Tools',
+                ['tools', 'id' => $model->id],
                 [
-                    'id' => 'copy-link',
+                    'id' => 'tools-link',
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
-                    'title'=>'Copy'
+                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
                 ]
             ) ?>
-            <?= Html::a(
-                Yii::t('app', 'Delete'),
-                ['delete', 'id' => $model->id],
-                [
-                    'id' => 'delete',
-                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-5',
-                    'data' => [
-                        'confirm' => Yii::t('app', 'Delete file?'),
-                        'method' => 'post',
-                    ],
-                ]
-            ) ?>
+        <?php endif; ?>
 
 
-        </p>
+        <?php
+        echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
+        echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
+        echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
+
+        ?>
+        <?= Html::a(
+            Yii::t('app', 'Copy'),
+            ['copy', 'id' => $model->id],
+            [
+                'id' => 'copy-link',
+                'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
+                'title' => 'Copy'
+            ]
+        ) ?>
+        <?= Html::a(
+            Yii::t('app', 'Delete'),
+            ['delete', 'id' => $model->id],
+            [
+                'id' => 'delete',
+                'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-5',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Delete file?'),
+                    'method' => 'post',
+                ],
+            ]
+        ) ?>
+
+
+    </p>
 </div>

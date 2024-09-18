@@ -159,7 +159,7 @@ foreach ( $cart->getItems() as $item){
                                 'attribute' => 'Price',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
-                                    return $model->getOriginalPrice();
+                                    return $model->getOriginalCost();
                                 },
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']

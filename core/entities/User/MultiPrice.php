@@ -8,6 +8,7 @@ use core\entities\Schedule\Service\Service;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
 
 /**
  * Class MultiPrice
@@ -15,7 +16,7 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property int $rate
  * @property ServiceAssignment[] $serviceAssignments
- * @property Service $services
+ * @property Service[] $services
  */
 class MultiPrice extends ActiveRecord
 {
@@ -33,29 +34,23 @@ class MultiPrice extends ActiveRecord
         $this->rate = $rate;
     }
 
-    public function simple( $rate): void
-    {
-        $this->rate = $rate;
-    }
-
-
     public function assignService($id, $rate, $price): void
     {
         $assignments = $this->serviceAssignments;
         foreach ($assignments as $assignment) {
-            if ($assignment->isIdEqualTo($id)) {
-                return ;
+            if ($assignment->isForService($id)) {
+                return;
             }
         }
         $assignments[] = ServiceAssignment::create($id, $rate, $price);
         $this->serviceAssignments = $assignments;
     }
 
-    public function revokeService($id): void
+    public function revokeService($id, $service_id): void
     {
         $assignments = $this->serviceAssignments;
         foreach ($assignments as $i => $assignment) {
-            if ($assignment->isForEvent($id)) {
+            if ($assignment->isForPrice($id) && $assignment->isForService($service_id)) {
                 unset($assignments[$i]);
                 $this->serviceAssignments = $assignments;
                 return;
@@ -69,15 +64,44 @@ class MultiPrice extends ActiveRecord
         $this->serviceAssignments = [];
     }
 
-    public function cost($serviceCost, $rate=null)
+    /*public function getService($id, $service_id)
     {
-        if(!$rate){
-
-            return $serviceCost - $this->rate;
+        $assignments = $this->serviceAssignments;
+        foreach ($assignments as $i => $assignment) {
+            if ($assignment->isForPrice($id) && $assignment->isForService($service_id)) {
+                return $assignment->getServices()->one();
+            }
         }
-        return $serviceCost - $rate;
+        throw new \DomainException('Assignment is not found.');
+    }*/
+
+    public function getService($id, $service_id)
+    {
+        $assignments = $this->serviceAssignments;
+        foreach ($assignments as $i => $assignment) {
+            if ($assignment->isForPrice($id) && $assignment->isForService($service_id)) {
+                return $assignment->getAssignments($id,$service_id);
+            }
+        }
+        throw new \DomainException('Assignment is not found.');
     }
 
+
+    public function cost($serviceCost, $rate = null)
+    {
+        return $serviceCost - $this->checkRate($serviceCost, $rate);
+    }
+
+    public function checkRate($serviceCost, $rate): int
+    {
+        if ($rate == null) {
+            $rate = $this->rate;
+        }
+        if ($rate >= $serviceCost) {
+            return 0;
+        }
+        return $rate;
+    }
 
 
     /**
