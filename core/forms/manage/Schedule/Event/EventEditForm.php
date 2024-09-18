@@ -23,7 +23,6 @@ class EventEditForm extends CompositeForm
     public $payment;
     public $amount;
     public $rate;
-    public $price;
     public $fullname;
     public $tools;
     private $_event;
@@ -41,7 +40,6 @@ class EventEditForm extends CompositeForm
         $this->payment = $event->payment;
         $this->amount = $event->amount;
         $this->rate = $event->rate;
-        $this->price = $event->price;
         $this->fullname = $event->fullname;
         $this->tools = $event->tools;
         $this->services = new ServicesForm($event);
@@ -62,7 +60,7 @@ class EventEditForm extends CompositeForm
             }"
             ],
             [['discount'], 'integer','max' => 100,'min'=>0],
-            [['amount','payment','rate', 'price','fullname'],'safe']
+            [['amount','payment','rate','fullname'],'safe']
         ];
     }
 

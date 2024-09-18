@@ -123,8 +123,6 @@ class EventController extends Controller
     {
         $event = $this->findModel($id);
         $cart = $this->cart->getCart();
-        $price = $this->prices->getByValue($event->price);
-        $event->price = $price->id;
 
         $form = new EventEditForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {

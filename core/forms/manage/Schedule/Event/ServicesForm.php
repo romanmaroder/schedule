@@ -23,12 +23,22 @@ class ServicesForm extends Model
 
     public function servicesList(): array
     {
-        return ArrayHelper::map(Service::find()->joinWith('category')->active()->all(),
-                                'id',
-                                'name',
-                                'category.parent.name'
+        return ArrayHelper::map(
+            Service::find()->joinWith('category')->active()->all(),
+            'id',
+            'name',
+            'category.parent.name'
         );
+    }
 
+    public function updateList()
+    {
+        return ArrayHelper::map(
+            Service::find()->joinWith('category')->active()->where(['schedule_services.id'=>$this->lists])->all(),
+            'id',
+            'name',
+            'category.parent.name'
+        );
     }
 
     public function rules()
@@ -36,7 +46,7 @@ class ServicesForm extends Model
         return [
             ['lists', 'each', 'rule' => ['integer']],
             ['lists', 'default', 'value' => []],
-            ['lists','required']
+            ['lists', 'required']
         ];
     }
 

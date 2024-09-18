@@ -24,7 +24,6 @@ class EventCopyForm extends CompositeForm
     public $payment;
     public $amount;
     public $rate;
-    public $price;
     public $fullname;
     public $tools;
     private $_event;
@@ -44,7 +43,6 @@ class EventCopyForm extends CompositeForm
         $this->payment = $clone->payment;
         $this->amount = $clone->amount;
         $this->rate = $clone->rate;
-        $this->price = $clone->price;
         $this->fullname = $clone->fullname;
         $this->tools = $clone->tools;
         $this->services = new ServicesForm($clone);
@@ -65,7 +63,7 @@ class EventCopyForm extends CompositeForm
             }"
             ],
             [['discount'], 'integer','max' => 100,'min'=>0],
-            [['amount','payment','rate','price','fullname'],'safe']
+            [['amount','payment','rate','fullname'],'safe']
         ];
     }
 

@@ -1,11 +1,10 @@
 <?php
 
-use core\helpers\PriceHelper;
+use core\helpers\DiscountHelper;
+use core\helpers\EventPaymentStatusHelper;
 use kartik\datetime\DateTimePicker;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
-use core\helpers\DiscountHelper;
-use core\helpers\EventPaymentStatusHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -111,7 +110,10 @@ use yii\helpers\Html;
                         'name' => 'master',
                         'language' => 'ru',
                         'data' => $model->master->masterList(),
-                        'options' => ['placeholder' => 'Select'],
+                        'options' => [
+                            //'id' => 'master',
+                            'placeholder' => 'Select'
+                        ],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
@@ -177,7 +179,7 @@ use yii\helpers\Html;
                     Select2::class,
                     [
                         'name' => 'lists',
-                        'data' => $model->services->servicesList(),
+                        'data' => $model->services->updateList(),
                         'language' => 'ru',
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [

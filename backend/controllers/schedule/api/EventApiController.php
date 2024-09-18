@@ -92,8 +92,6 @@ class EventApiController extends Controller
     public function actionUpdate($id)
     {
         $event = $this->findModel($id);
-        $price = $this->prices->getByValue($event->price);
-        $event->price = $price->id;
 
         $form = new EventEditForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
