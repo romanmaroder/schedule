@@ -9,11 +9,13 @@ use core\entities\User\Employee\Employee;
 use core\forms\manage\User\Employee\EmployeeCreateForm;
 use core\forms\manage\User\Employee\EmployeeEditForm;
 use core\forms\manage\User\Employee\EmployeeExistCreateForm;
-use core\helpers\MultiPriceHelper;
+use core\helpers\PricesHelper;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\useCases\manage\EmployeeManageService;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -28,7 +30,8 @@ class EmployeeController extends Controller
         EmployeeManageService $service,
         EmployeeReadRepository $employees,
         $config = []
-    ) {
+    )
+    {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->employees = $employees;
@@ -141,24 +144,10 @@ class EmployeeController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-
         $employee = $this->employees->findEmployee($id);
-
-        $results = array_map(
-            function ($service) {
-                $data['id'] = $service->id;
-                $data['name'] = $service->name;
-                $data['category'] = $service->category->id;
-                $data['category_parent'] = $service->category->parent->id;
-                $data['category_parent_name'] = $service->category->parent->name;
-
-                return $data;
-            },
-            $employee->multiPrice->services
-        );
-        $out = MultiPriceHelper::renderPrice($results);
+        $data = ArrayHelper::map($employee->price->services, 'id', 'name', 'category.parent.name');
         return [
-            'out' => $out
+            'out' => PricesHelper::renderPrice($data)
         ];
     }
 

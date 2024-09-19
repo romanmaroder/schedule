@@ -31,7 +31,7 @@ class PriceSearch extends Model
      */
     public function search(array $params): ActiveDataProvider
     {
-        $query = Price::find();
+        $query = Price::find()->with('serviceAssignments');
 
 
         $dataProvider = new ActiveDataProvider(

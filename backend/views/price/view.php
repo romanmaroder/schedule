@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $price null|\core\entities\User\Price */
+/* @var $price \core\entities\User\Price */
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;

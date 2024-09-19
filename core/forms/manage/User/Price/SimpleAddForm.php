@@ -1,10 +1,10 @@
 <?php
 
 
-namespace core\forms\manage\User\MultiPrice;
+namespace core\forms\manage\User\Price;
 
 
-use core\entities\User\MultiPrice;
+use core\entities\User\Price;
 use core\forms\CompositeForm;
 
 
@@ -16,7 +16,7 @@ class SimpleAddForm extends CompositeForm
     public $price;
     public $rate;
 
-    public function __construct(MultiPrice $price, $config = [])
+    public function __construct(Price $price, $config = [])
     {
         $this->price = $price;
         $this->services = new ServicesForm();

@@ -104,7 +104,8 @@ use yii\helpers\Html;
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="form-group"> <?= $form->field($model->master, 'master')->widget(
+            <div class="form-group">
+                <?= $form->field($model->master, 'master')->widget(
                     Select2::class,
                     [
                         'name' => 'master',
@@ -175,11 +176,12 @@ use yii\helpers\Html;
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="form-group"> <?= $form->field($model->services, 'lists')->widget(
+            <div class="form-group">
+                <?= $form->field($model->services, 'lists')->widget(
                     Select2::class,
                     [
                         'name' => 'lists',
-                        'data' => $model->services->updateList(),
+                        'data' => $model->services->servicesList(),
                         'language' => 'ru',
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
@@ -193,7 +195,8 @@ use yii\helpers\Html;
                             'allowClear' => true,
                         ],
                     ]
-                ) ?></div>
+                )?>
+            </div>
         </div>
     </div>
 

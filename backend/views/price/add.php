@@ -3,15 +3,15 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \core\forms\manage\User\MultiPrice\SimpleAddForm*/
-/* @var $price null|\core\entities\User\MultiPrice */
+/* @var $model \core\forms\manage\User\Price\SimpleAddForm*/
+/* @var $price null|\core\entities\User\Price */
 
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Add Multi price: ' . $price->name;
-$this->params['breadcrumbs'][] = ['label' => 'Multi Prices', 'url' => ['index']];
+$this->title = 'Add Price: ' . $price->name;
+$this->params['breadcrumbs'][] = ['label' => 'Prices', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $price->name, 'url' => ['view', 'id' => $price->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
