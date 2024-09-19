@@ -76,7 +76,7 @@ $form = ActiveForm::begin(); ?>
                 [
                     'bsVersion' => '4.x',
                     'name' => 'priceId',
-                    'data' => \core\helpers\MultiPriceHelper::priceList(),
+                    'data' => \core\helpers\PricesHelper::priceList(),
                     'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
                     'options' => ['placeholder' => 'Select a price ...'],
                     'pluginOptions' => [

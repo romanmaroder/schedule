@@ -10,7 +10,6 @@ use core\entities\behaviors\ScheduleWorkBehavior;
 use core\entities\Schedule;
 use core\entities\Schedule\Event\Event;
 use core\entities\User\Employee\queries\EmployeeQuery;
-use core\entities\User\MultiPrice;
 use core\entities\User\Price;
 use core\entities\User\Rate;
 use core\entities\User\Role;
@@ -40,7 +39,6 @@ use yii\helpers\ArrayHelper;
  * @property Role $role
  * @property Rate $rate
  * @property Price $price
- * @property MultiPrice $multiPrice
  * @property string $schedule_json [json]
  */
 class Employee extends ActiveRecord
@@ -228,11 +226,6 @@ class Employee extends ActiveRecord
     public function getPrice(): ActiveQuery
     {
         return $this->hasOne(Price::class, ['id' => 'price_id']);
-    }
-
-    public function getMultiPrice(): ActiveQuery
-    {
-        return $this->hasOne(MultiPrice::class, ['id' => 'price_id']);
     }
 
     public function getEvents(): ActiveQuery

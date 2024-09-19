@@ -178,7 +178,7 @@ use yii\helpers\Html;
                     [
                         'name' => 'lists',
                         'language' => 'ru',
-                        'data' => $model->services->updateList(),
+                        'data' => $model->services->servicesList(),
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'lists',

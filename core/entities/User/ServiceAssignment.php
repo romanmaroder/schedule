@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * @property int $rate [int(11)]
  * @property int $cost [int(11)]
  * @property Service $services
- * @property MultiPrice $multiPrice
+ * @property Price $price
  */
 class ServiceAssignment extends ActiveRecord
 {
@@ -54,9 +54,9 @@ class ServiceAssignment extends ActiveRecord
         return $this->service_id == $id;
     }
 
-    public function getMultiPrice(): ActiveQuery
+    public function getPrice(): ActiveQuery
     {
-        return $this->hasOne(MultiPrice::class, ['id' => 'price_id']);
+        return $this->hasOne(Price::class, ['id' => 'price_id']);
     }
 
     public function getServices(): ActiveQuery

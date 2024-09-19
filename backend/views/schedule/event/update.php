@@ -209,7 +209,7 @@ $this->params['breadcrumbs'][] = 'update';
                             Select2::class,
                             [
                                 'name' => 'lists',
-                                'data' => $model->services->updateList(),
+                                'data' => $model->services->servicesList(),
                                 'language' => 'ru',
                                 'theme' => Select2::THEME_BOOTSTRAP,
                                 'options' => [

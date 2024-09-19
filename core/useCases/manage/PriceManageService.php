@@ -4,22 +4,22 @@
 namespace core\useCases\manage;
 
 
-use core\entities\User\MultiPrice;
-use core\forms\manage\User\MultiPrice\SimpleAddForm;
-use core\forms\manage\User\MultiPrice\CreateForm;
-use core\forms\manage\User\MultiPrice\EditForm;
-use core\repositories\MultiPriceRepository;
+use core\entities\User\Price;
+use core\forms\manage\User\Price\SimpleAddForm;
+use core\forms\manage\User\Price\CreateForm;
+use core\forms\manage\User\Price\EditForm;
+use core\repositories\PriceRepository;
 use core\repositories\Schedule\ServiceRepository;
 use core\services\TransactionManager;
 
-class MultiPriceManageService
+class PriceManageService
 {
     private $prices;
     private $services;
     private $transaction;
 
     public function __construct(
-        MultiPriceRepository $prices,
+        PriceRepository $prices,
         ServiceRepository $services,
         TransactionManager $transaction,
     ) {
@@ -28,9 +28,9 @@ class MultiPriceManageService
         $this->transaction = $transaction;
     }
 
-    public function create(CreateForm $form): MultiPrice
+    public function create(CreateForm $form): Price
     {
-        $price = MultiPrice::create(
+        $price = Price::create(
             $form->name,
             $form->rate
         );

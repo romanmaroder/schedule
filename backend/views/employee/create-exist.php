@@ -1,7 +1,7 @@
 <?php
 
 
-use core\helpers\MultiPriceHelper;
+use core\helpers\PricesHelper;
 use kartik\color\ColorInput;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'bsVersion' => '4.x',
                         'name' => 'priceId',
-                        'data' => MultiPriceHelper::priceList(),
+                        'data' => PricesHelper::priceList(),
                         'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
                         'options' => ['placeholder' => 'Select a price ...'],
                         'pluginOptions' => [
