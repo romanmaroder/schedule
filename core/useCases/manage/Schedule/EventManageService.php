@@ -43,14 +43,13 @@ class EventManageService
             $form->payment,
             $form->amount,
             $form->rate,
-            $form->price,
             $form->fullname,
         );
 
         $amount = 0;
         foreach ($form->services->lists as $listId) {
             $service = $this->services->get($listId);
-            $price = $event->employee->multiPrice->getService($event->employee->multiPrice->id, $service->id);
+            $price = $event->employee->price->getService($event->employee->price->id, $service->id);
 
             $amount += $price->cost;
             $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
@@ -100,7 +99,7 @@ class EventManageService
                 $amount = 0;
                 foreach ($form->services->lists as $listId) {
                     $service = $this->services->get($listId);
-                    $price = $event->employee->multiPrice->getService($event->employee->multiPrice->id, $service->id);
+                    $price = $event->employee->price->getService($event->employee->price->id, $service->id);
                     $amount += $price->cost;
                     $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
                 }
@@ -136,7 +135,7 @@ class EventManageService
         $amount = 0;
         foreach ($form->services->lists as $listId) {
             $service = $this->services->get($listId);
-            $price = $event->employee->multiPrice->getService($event->employee->multiPrice->id, $service->id);
+            $price = $event->employee->price->getService($event->employee->price->id, $service->id);
             $amount += $price->cost;
             $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
         }
