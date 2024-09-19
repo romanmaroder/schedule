@@ -1,8 +1,6 @@
 <?php
 
-use core\entities\Schedule\Service\Service;
 use hail812\adminlte3\assets\PluginAsset;
-use core\helpers\ServiceHelper;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -43,52 +41,31 @@ PluginAsset::register($this)->add(
                                 'id' => 'service',
                             ],
                             'columns' => [
-                                /*[
-                                    'attribute' => 'parent category',
-                                    'value' => function (Service $model) use ($category) {
-                                        return Html::a(Html::encode($model->category->parent->parent->name),
-                                                       ['category', 'id' => $model->category->parent->id ]);
-                                        },
-                                    'format' => 'raw',
-                                ],*/
+                                'price_id',
                                 [
                                     'attribute' => 'parent category',
-                                    'value' => function (Service $model) {
-                                        return Html::a(Html::encode($model->category->parent->name),
-                                                       ['category', 'id' => $model->category->parent->id]);
-                                        },
-                                    'format' => 'raw',
-                                ],
-                                [
-                                    'attribute' => 'name',
-                                    'value' => function (Service $model) {
-                                        return Html::a(Html::encode($model->name),
-                                                       ['view', 'id' => $model->id]);
+                                    'value' => function ($model) use ($category) {
+                                        return $model->services->category->parent->name;
                                     },
                                     'format' => 'raw',
                                 ],
                                 [
-                                    'attribute' => 'price_new',
-                                    'value' => function (Service $model) use( $user){
-                                        //return PriceHelper::format($model->price_new);
-                                        return $model->price_new - $user->employee->price->rate; // TODO подумать ставка или прайс
+                                    'attribute' => 'service_id',
+                                    'value' => function ($model) {
+                                        return Html::a(
+                                            Html::encode($model->services->name),
+                                            ['view', 'id' => $model->services->id],
+                                            [
+                                                'category',
+                                                'id' => $model->services->category->id,
+                                            ]
+
+                                        );
                                     },
+                                    'format' => 'raw'
                                 ],
-                                /*[
-                                    'attribute' => 'price_old',
-                                    'value' => function (Service $model) {
-                                        return PriceHelper::format($model->price_old);
-                                    },
-                                ],*/
-                                [
-                                    'attribute' => 'status',
-                                    //'filter' => $searchModel->statusList(),
-                                    'value' => function (Service $model) {
-                                        return ServiceHelper::statusLabel($model->status);
-                                    },
-                                    'format' => 'raw',
-                                    'contentOptions' => ['style' => 'text-align:center'],
-                                ]
+                                'cost',
+
                             ],
                         ]
                     ); ?>
