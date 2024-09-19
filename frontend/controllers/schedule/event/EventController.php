@@ -8,6 +8,7 @@ use core\entities\Schedule\Event\Calendar\Calendar;
 use core\entities\Schedule\Event\Event;
 use core\repositories\NotFoundException;
 use core\useCases\manage\Schedule\EventManageService;
+use core\useCases\Schedule\CartService;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -15,12 +16,17 @@ class EventController extends Controller
 {
     private EventManageService $service;
     private Calendar $calendar;
+    private CartService $cart;
 
-    public function __construct($id, $module, EventManageService $service, Calendar $calendar, $config = [])
+    public function __construct($id, $module,
+        EventManageService $service,
+        Calendar $calendar,
+        CartService $cart,$config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->calendar = $calendar;
+        $this->cart = $cart;
     }
 
     public function actionIndex()
@@ -46,11 +52,12 @@ class EventController extends Controller
 
     public function actionView($id)
     {
-
+        $cart = $this->cart->getCart();
         return $this->renderAjax(
             'view',
             [
                 'model' => $this->findModel($id),
+                'cart' => $cart,
             ]
         );
     }

@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model \core\entities\Schedule\Event\Event */
+/* @var $cart \core\cart\schedule\Cart */
 
 $this->title = $model->client->username;
 $this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
@@ -71,6 +72,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'format' => 'raw',
                     'visible' => Yii::$app->user->identity->getId() != $model->master_id,
+                ],
+                [
+                    'attribute' => 'Cost',
+                    'value' => $model->getDiscountedPrice($model, $cart),
+                    'visible' => $model->isNotPayed(),
                 ],
             ],
         ]
