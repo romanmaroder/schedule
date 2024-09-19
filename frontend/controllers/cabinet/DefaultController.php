@@ -28,7 +28,6 @@ class DefaultController extends Controller
     public $totalLessonCount;
     public $todayLessonCount;
     public $user;
-    public $employee;
 
     private $events;
     private $users;
@@ -69,9 +68,6 @@ class DefaultController extends Controller
         $this->todayLessonCount = $this->education->getLessonCountToday(\Yii::$app->user->getId());
 
         $this->user = $this->users->find(\Yii::$app->user->getId());
-        if ($this->user) {
-            $this->employee = $this->employees->find($this->user->id);
-        }
         $this->profile = $profile;
 //        $this->wishList = $wishList;
         $this->products = $products;
@@ -124,15 +120,18 @@ class DefaultController extends Controller
 
     public function actionTimeline()
     {
-        $events = $this->events->getAllDayById($this->employee->user_id);
+        $employee = $this->employees->findEmployee($this->user->id);
+
+        $events = $this->events->getAllDayById($this->user->id);
 
         $educations = $this->education->getLessonDayById($this->user->id);
 
-        $free = $this->free->getAllDayById($this->user->id);
+        $free = $this->free->getAllDayById($employee->user_id);
 
         return $this->render(
             'timeline',
             [
+                'employee' => $employee,
                 'events' => $events,
                 'educations' => $educations,
                 'free'=>$free
@@ -143,11 +142,13 @@ class DefaultController extends Controller
 
     public function actionProfile()
     {
-        $form = new ProfileEditForm($this->employee);
+        $employee = $this->employees->findEmployee($this->user->id);
+
+        $form = new ProfileEditForm($employee);
 
         if ($form->load($this->request->post()) && $form->validate()) {
             try {
-                $this->profile->edit($this->employee->id, $form);
+                $this->profile->edit($employee->id, $form);
                 return $this->redirect(['cabinet/default/profile',]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -159,7 +160,7 @@ class DefaultController extends Controller
         return $this->render(
             'profile',
             [
-                'employee' => $this->employee,
+                'employee' => $employee,
                 'model' => $form,
             ]
         );
