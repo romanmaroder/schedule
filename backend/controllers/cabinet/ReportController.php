@@ -56,7 +56,7 @@ class ReportController extends Controller
 
         $dataProvider = new ArrayDataProvider(
             [
-                'models' => $cart->getItems()
+                'models' => $cart->getItems(),
             ]
         );
         return $this->render(

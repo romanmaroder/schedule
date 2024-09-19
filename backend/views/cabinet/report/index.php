@@ -84,7 +84,7 @@ foreach ( $cart->getItems() as $item){
                                     return $model->getMasterName() . PHP_EOL.'<br>'.
                                         '<small>('. Html::a(
                                             Html::encode($model->getClientName()),
-                                            ['core/event/view', 'id' => $model->getId()],['class'=>'text-secondary']).')</small>';
+                                            ['schedule/event/view', 'id' => $model->getId()],['class'=>'text-secondary']).')</small>';
 
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
