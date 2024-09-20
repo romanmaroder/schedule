@@ -515,6 +515,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                             arrayOfDomNodes.push(wrapAdditional);
                                             }
                                  }
+                                 
                                  if(arg.view.type == 'dayGridDay' || arg.view.type == 'timeGridDay' || arg.view.type == 'timeGridWeek'){
                                         wrapTitle.classList.remove('d-none','text-wrap');
                                         wrapTeacher.classList.remove('d-none','text-wrap');
@@ -546,7 +547,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                              arrayOfDomNodes.push(wrapAdditional);
                                         }
                                         
-                                        arrayOfDomNodes.push(wrapTime);
+                                        if(arg.view.type != 'timeGridDay'){
+                                            arrayOfDomNodes.push(wrapTime);
+                                        }
+                                        
                                  }
 
                                  if(arg.view.type == 'dayGridWeek'){

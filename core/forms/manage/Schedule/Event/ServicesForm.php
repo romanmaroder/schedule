@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 class ServicesForm extends Model
 {
     public array $lists = [];
-    private array $services;
+    private array $services=[];
 
     public function __construct(Event $event = null, $config = [])
     {

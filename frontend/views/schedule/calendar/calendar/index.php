@@ -337,7 +337,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                              arrayOfDomNodes.push(wrapAdditional);
                                         }
                                         
-                                        arrayOfDomNodes.push(wrapTime);
+                                       if(arg.view.type != 'timeGridDay'){
+                                            arrayOfDomNodes.push(wrapTime);
+                                        }
                                  }
 
                                  if(arg.view.type == 'dayGridWeek'){

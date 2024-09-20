@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'price_id',
                         'value' => function ($model) {
-                            return $model->multiPrice->name;
+                            return $model->price->name;
                         },
                     ],
                     [
