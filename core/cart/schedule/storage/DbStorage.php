@@ -33,7 +33,7 @@ class DbStorage implements StorageInterface
         if (\Yii::$app->id == 'app-frontend') {
             $query->where(['master_id' => $this->userId->id]);
         }
-        $rows = $query->orderBy('DATE(start)')
+        $rows = $query->orderBy(['DATE(start)'=>SORT_ASC,'event_id'=>SORT_ASC])
             ->all(\Yii::$app->db);
 
 
@@ -72,7 +72,9 @@ class DbStorage implements StorageInterface
                         ]
                     )
                     ->andWhere(['service_id' => $row['service_id'], 'event_id' => $row['event_id']])
-                    ->groupBy(['start', 'event_id', 'service_id'])
+                    //->groupBy(['start', 'event_id', 'service_id'])
+                    //->groupBy(['event_id' =>SORT_DESC ])
+
                     ->one()) {
                     return new CartItem($item);
                 }

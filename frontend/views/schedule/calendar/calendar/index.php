@@ -188,6 +188,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'contentHeight' => 'auto',
                         'locale' => 'ru',
                         'eventOrder' => 'start',
+                        'eventMinHeight'=>'150',
                         //'eventMaxStack' => 3,
                         //'dayMaxEventRows'=>3,
                         'showNonCurrentDates' => false,

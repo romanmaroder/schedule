@@ -36,12 +36,6 @@ PluginAsset::register($this)->add(
 
         <div class="table-responsive ">
             <div class="container-fluid">
-<?php
-/*
-foreach ( $cart->getItems() as $item){
-    echo $item->getCost() . PHP_EOL .'<br>';
-}
-*/?>
                 <?php
                 echo GridView::widget(
                     [
