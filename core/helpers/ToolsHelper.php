@@ -33,17 +33,26 @@ class ToolsHelper
        */
         switch ($tools) {
             case Event::TOOLS_ARE_NOT_READY:
-                $class = 'badge badge-warning';
+                $class = 'badge badge-secondary';
+                //$content = Event::TOOLS_ICON;
                 break;
             case Event::TOOLS_READY:
-                $class = 'badge badge-success';
+                $class = 'badge badge-warning';
+                //$content = Event::TOOLS_ICON;
                 break;
             default:
                 $class = 'badge badge-secondary';
+                //$content = Event::TOOLS_ICON;
         }
+        $out = '';
+        $out .= Html::beginTag('span',['class'=>$class]);
+            $out .= Html::tag('i',  Event::TOOLS_ICON, [
 
-        return Html::tag('span', ArrayHelper::getValue(self::statusList(), $tools), [
+            ]);
+        $out .= Html::endTag('span');
+return  $out;
+        /*return Html::tag('span', ArrayHelper::getValue(self::statusList(), $tools), [
             'class' => $class,
-        ]);
+        ]);*/
     }
 }

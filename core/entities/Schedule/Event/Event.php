@@ -45,6 +45,7 @@ class Event extends ActiveRecord
 
     public const TOOLS_ARE_NOT_READY = 0;
     public const TOOLS_READY = 1;
+    public const TOOLS_ICON = '<i class="fas fa-wrench"></i>';
 
     public static function create(
         $masterId,
