@@ -92,7 +92,7 @@ PluginAsset::register($this)->add(
                         [
                             'attribute' => 'Origin Price',
                             'value' => function ($model) use ($cart) {
-                                return $model->getOriginalPrice();
+                                return $model->getOriginalCost();
                             },
                             'headerOptions' => ['class' => 'text-center'],
                             'contentOptions' => [
@@ -107,13 +107,19 @@ PluginAsset::register($this)->add(
                         ],*/
                         [
                             'attribute' => 'Cost With Discount',
-                            'value' => function ($model) use ($cart) {
+                            'value' => function ($model) {
                                     return $model->getDiscountedPrice();
                             },
                             'headerOptions' => ['class' => 'text-center'],
-                            'contentOptions' => [
-                                'class' => ['text-center align-middle']
-                            ],
+                            'contentOptions' => function ($model) use ($cart) {
+                                return [
+                                    'data-total' => $model->getDiscountedPrice(),
+                                    'class' => ['text-center align-middle']
+                                ];
+                            },
+                            'footer' => $cart->getFullDiscountedCost(),
+                            'footerOptions'  => ['class' => 'text-center bg-info'],
+                            'format' => 'raw'
                         ],
                         /*[
                             'attribute' => 'Master Price',
@@ -129,13 +135,18 @@ PluginAsset::register($this)->add(
                         ],*/
                         [
                             'attribute' => 'Salary',
+                            'headerOptions' => ['class' => 'text-center '],
                             'value' => function ($model) use ($cart) {
                                 return $model->getSalary();
                             },
-                            'headerOptions' => ['class' => 'text-center'],
-                            'contentOptions' => [
-                                'class' => ['text-center align-middle']
-                            ],
+                            'contentOptions' => function ($model) use ($cart) {
+                                return [
+                                    'data-total' => $model->getSalary(),
+                                    'class' => ['text-center align-middle text-dark']
+                                ];
+                            },
+                            'footer' => $cart->getFullSalary(),
+                            'footerOptions'  => ['class' => 'bg-info text-center'],
                         ],
                         [
                             'attribute' => 'Profit',
@@ -181,42 +192,96 @@ ordering: false,
                 },
                 bStateSave: true,
                 dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col"l><"col"i><"col"p>> ',
-//                footerCallback: function ( row, data, start, end, display ) {
-//                            var api = this.api();
-//                            // Remove the formatting to get integer data for summation
-//                            var intVal = function ( i ) {
-//                                return typeof i === 'string' ?
-//                                    i.replace(/[\$,]/g, '')*1 :
-//                                    typeof i === 'number' ?
-//                                        i : 0;
-//                            };
-//                         
-//                            // Total over all pages
-//                            totalSalary = api
-//                                .column( 5 )
-//                                .nodes()
-//                                .reduce( function (a, b) {
-//                                    return intVal(a) + intVal($(b).attr('data-total'));
-//                                }, 0 );
-//                            // Total over this page
-//                            pageTotalSalary = api
-//                                .column( 5, { page: 'current'} )
-//                                .nodes()
-//                                .reduce( function (a, b) {
-//                                    return intVal(a) + intVal($(b).attr('data-total'));
-//                                }, 0 );
-//                            // Update footer
-//                            if ( pageTotalSalary === 0 ){
-//                                 $( api.column( 5 ).footer() )
-//                                 .html('-');
-//                            }else{
-//                                 $( api.column( 5 ).footer() ).html(pageTotalSalary);
-//                            }
-//                            
-//                            $( api.column( 0 ).footer() )
-//                            .html( pageTotalSalary);
-//
-//                        },
+                footerCallback: function ( row, data, start, end, display ) {
+                var api = this.api();
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                i : 0;
+                };
+                
+                // Total Discounted
+                
+                let  totalDiscounted = api
+                .column( 4 )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Total over this page
+              let  pageTotalDiscounted = api
+                .column( 4, { page: 'current'} )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Update footer
+                if ( pageTotalDiscounted === 0 ){
+                $( api.column( 4 ).footer() )
+                .html('-');
+                }else{
+                $( api.column( 4 ).footer() ).html(pageTotalDiscounted);
+                }
+                
+                $( api.column( 4 ).footer() )
+                .html( pageTotalDiscounted);
+                
+                
+                // Total Salary
+                
+                let  totalSalary = api
+                .column( 5 )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Total over this page
+              let  pageTotalSalary = api
+                .column( 5, { page: 'current'} )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Update footer
+                if ( pageTotalSalary === 0 ){
+                $( api.column( 5 ).footer() )
+                .html('-');
+                }else{
+                $( api.column( 5 ).footer() ).html(pageTotalSalary);
+                }
+                
+                $( api.column( 5 ).footer() )
+                .html( pageTotalSalary);
+                
+                // Total Profit
+                
+              let  totalProfit = api
+                .column( 6 )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Total over this page
+              let  pageTotalProfit = api
+                .column( 6, { page: 'current'} )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Update footer
+                if ( pageTotalProfit === 0 ){
+                $( api.column( 6 ).footer() )
+                .html('-');
+                }else{
+                $( api.column( 6 ).footer() ).html(pageTotalProfit);
+                }
+                
+                $( api.column( 6 ).footer() )
+                .html( pageTotalProfit);
+                
+                },
                 fnStateSave: function (oSettings, oData) {
                 localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
                 },
