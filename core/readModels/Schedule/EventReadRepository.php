@@ -5,35 +5,100 @@ namespace core\readModels\Schedule;
 
 
 use core\entities\Schedule\Event\Event;
+use core\useCases\Schedule\CacheService;
+use yii\caching\TagDependency;
 use yii\db\Expression;
 
 class EventReadRepository
 {
+    private $cacheService;
+
+    public function __construct(CacheService $cacheService)
+    {
+        $this->cacheService = $cacheService;
+    }
+
     public function getAll(): array
     {
-        return Event::find()->with('services', 'employee', 'master', 'client')->all();
+        $key = Event::CACHE_KEY;
+        $query = Event::find()->with('services', 'employee', 'master', 'client');
+
+        return $this->cacheService->cache->getOrSet($key, function () use ($query) {
+            return $query->all();
+        }, 0, new TagDependency([
+            'tags' => Event::CACHE_KEY
+        ]));
     }
+
+    /*public function getAll(): array
+    {
+        return Event::find()->with('services', 'employee', 'master', 'client')->all();
+    }*/
+
 
     public function getAllById($id): array
     {
-        return Event::find()->with('services', 'employee', 'master', 'client')->where(['master_id' => $id])->all();
+        $key = Event::CACHE_KEY;
+        $query = Event::find()->with('services', 'employee', 'master', 'client')->where(['master_id' => $id]);
+
+        return $this->cacheService->cache->getOrSet($key, function () use ($query) {
+            return $query->all();
+        }, 0, new TagDependency([
+            'tags' => Event::CACHE_KEY
+        ]));
     }
 
+    /*public function getAllById($id): array
+    {
+        return Event::find()->with('services', 'employee', 'master', 'client')->where(['master_id' => $id])->all();
+    }*/
+
     public function getAllDayById($id): array
+    {
+        $key = Event::CACHE_KEY;
+        $query = Event::find()->with('services', 'employee', 'master', 'client')
+            ->andwhere(['DATE(start)'=>new Expression('DATE(NOW())')])
+            ->andWhere(['master_id' => $id]);
+
+        return $this->cacheService->cache->getOrSet($key, function () use ($query) {
+            return $query->all();
+        }, 0, new TagDependency([
+            'tags' => Event::CACHE_KEY
+        ]));
+    }
+
+
+    /*public function getAllDayById($id): array
     {
         return Event::find()->with('services', 'employee', 'master', 'client')
             ->andwhere(['DATE(start)'=>new Expression('DATE(NOW())')])
             ->andWhere(['master_id' => $id])
             ->all();
+    }*/
+
+
+    public function getAllWeekById($id): array
+    {
+        $key = Event::CACHE_KEY;
+        $query = Event::find()->with('services', 'employee', 'master', 'client')
+            ->andwhere(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
+            ->andWhere(['master_id' => $id]);
+
+        return $this->cacheService->cache->getOrSet($key, function () use ($query) {
+            return $query->all();
+        }, 0, new TagDependency([
+            'tags' => Event::CACHE_KEY
+        ]));
     }
 
-    public function getAllWeekById($id):array
+
+    /*public function getAllWeekById($id):array
     {
         return Event::find()->with('services', 'employee', 'master', 'client')
             ->andwhere(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
             ->andWhere(['master_id' => $id])
             ->all();
-    }
+    }*/
 
     public function getAllEventsCount(): bool|int|string|null
     {

@@ -14,6 +14,7 @@ use core\services\sms\SmsSender;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
 use Yii;
+use yii\caching\TagDependency;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
@@ -49,6 +50,7 @@ class EventApiController extends Controller
             ],
         ];
     }
+
 
     public function actionView($id)
     {

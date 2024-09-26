@@ -5,7 +5,9 @@ namespace core\cart\schedule\storage;
 
 
 use core\cart\schedule\CartItem;
+use core\entities\Schedule\Event\Event;
 use core\entities\Schedule\Event\ServiceAssignment;
+use yii\caching\TagDependency;
 use yii\db\Connection;
 use yii\db\Query;
 
@@ -24,58 +26,36 @@ class DbStorage implements StorageInterface
         $this->db = $db;
     }
 
+
     public function load(): array
     {
         $query = (new Query())
-            ->select(['event_id', 'service_id', 'DATE(start) as start'])
+            ->select(['*',
+                'DATE(start) as start'])
             ->from('{{%schedule_service_assignments}}')
             ->leftJoin('{{%schedule_events}}', 'id=event_id');
         if (\Yii::$app->id == 'app-frontend') {
             $query->where(['master_id' => $this->userId->id]);
         }
-        $rows = $query->orderBy(['DATE(start)'=>SORT_ASC,'event_id'=>SORT_ASC])
-            ->all(\Yii::$app->db);
-
+        $rows = $query->orderBy(['DATE(start)'=>SORT_ASC])
+            ->all($this->db);
 
         return array_map(
             function (array $row) {
                 /** @var ServiceAssignment $item */
-                if ($item = ServiceAssignment::find()
-                    ->alias('sa')
-                    ->select(
-                        [
-                            'event_id',
-                            'service_id',
-                            'original_cost',
-                            'price_rate',
-                            'price_cost',
-                            'DATE(schedule_events.start) as start'
-                        ]
-                    )
-                    ->joinWith(
-                        [
-                            'events',
-                            'services s' => function ($q) {
-                                //$q->select(['s.id','name', 'price_new']);
-                                $q->joinWith('category ca');
-                            },
-                            'events.employee' => function ($q) {
-                                $q->select(['color', 'rate_id', 'price_id','first_name','last_name']);
-                                $q->joinWith('rate r');
-                            },
-                            'events.master'=> function ($q) {
-                                $q->select(['username']);
-                            },
-                            'events.client'=> function ($q) {
-                                $q->select(['username']);
-                            }
-                        ]
-                    )
-                    ->andWhere(['service_id' => $row['service_id'], 'event_id' => $row['event_id']])
-                    //->groupBy(['start', 'event_id', 'service_id'])
-                    //->groupBy(['event_id' =>SORT_DESC ])
 
-                    ->one()) {
+                /*
+                 * $item = ServiceAssignment::find()
+                    ->where(['service_id' => $row['service_id'],
+                                'event_id' => $row['event_id'],
+                            ])->one()*/
+
+                if ($item = ServiceAssignment::getDb()->cache(function ($db) use($row) {
+                    return  ServiceAssignment::find()
+                        ->where(['service_id' => $row['service_id'],
+                                    'event_id' => $row['event_id'],
+                                ])->one();
+                },0,new TagDependency(['tags' => Event::CACHE_KEY]))) {
                     return new CartItem($item);
                 }
                 return false;

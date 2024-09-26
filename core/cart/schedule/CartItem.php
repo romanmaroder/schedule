@@ -20,12 +20,13 @@ class CartItem
 
     public function getEvents(): ServiceAssignment
     {
+
         return $this->item;
     }
 
     public function getId(): int
     {
-        return $this->item->event_id;
+        return $this->item->events->id;
     }
 
     public function getColor(): string

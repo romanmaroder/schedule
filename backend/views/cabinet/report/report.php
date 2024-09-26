@@ -262,14 +262,14 @@ ordering: false,
                 .nodes()
                 .reduce( function (a, b) {
                 return intVal(a) + intVal($(b).attr('data-total'));
-                }, 0 );
+                }, 50 );
                 // Total over this page
               let  pageTotalProfit = api
                 .column( 6, { page: 'current'} )
                 .nodes()
                 .reduce( function (a, b) {
                 return intVal(a) + intVal($(b).attr('data-total'));
-                }, 0 );
+                }, 50 );
                 // Update footer
                 if ( pageTotalProfit === 0 ){
                 $( api.column( 6 ).footer() )

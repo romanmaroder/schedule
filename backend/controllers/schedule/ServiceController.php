@@ -9,6 +9,7 @@ use core\entities\Schedule\Service\Service;
 use core\forms\manage\Schedule\Service\PriceForm;
 use core\forms\manage\Schedule\Service\ServiceCreateForm;
 use core\forms\manage\Schedule\Service\ServiceEditForm;
+use core\useCases\manage\Schedule\ServiceManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -18,7 +19,7 @@ class ServiceController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module, \core\useCases\manage\Schedule\ServiceManageService $service, $config = [])
+    public function __construct($id, $module, ServiceManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;

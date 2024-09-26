@@ -35,6 +35,7 @@ class Service extends ActiveRecord
 
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
+    const CACHE_KEY = 'service';
 
     public $meta;
 

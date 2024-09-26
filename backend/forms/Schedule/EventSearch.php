@@ -17,11 +17,12 @@ class EventSearch extends Model
     public $notice;
     public $start;
     public $end;
+    public $amount;
 
     public function rules(): array
     {
         return [
-            [['id', 'client_id', 'master_id'], 'integer'],
+            [['id', 'client_id', 'master_id','amount'], 'integer'],
             [['notice'], 'string'],
             [['notice'], 'safe'],
             [['start', 'end'], 'safe'],
@@ -30,14 +31,14 @@ class EventSearch extends Model
 
     public function search(array $params): ActiveDataProvider
     {
-         $query = Event::find()->joinWith(['services','master','client']);
+         $query = Event::find()->with('services', 'employee', 'master', 'client');
 
         $dataProvider = new ActiveDataProvider(
             [
                 'query' => $query,
                 'pagination' => false,
                 'sort' => [
-                    'defaultOrder' => ['id' => SORT_DESC]
+                    'defaultOrder' => ['id' => SORT_ASC]
                 ]
             ]
         );
@@ -53,6 +54,7 @@ class EventSearch extends Model
                 'id' => $this->id,
                 'master_id' => \Yii::$app->id == 'app-backend' ? $this->master_id : \Yii::$app->user->getId(),
                 'client_id' => $this->client_id,
+                'amount' => $this->amount,
             ]
         );
 

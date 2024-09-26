@@ -4,6 +4,9 @@
 namespace backend\controllers\cabinet;
 
 
+use backend\forms\Schedule\EventSearch;
+use core\entities\Schedule\Event\Event;
+use core\entities\Schedule\Event\ServiceAssignment;
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\useCases\Schedule\CartService;
@@ -31,20 +34,38 @@ class ReportController extends Controller
         $this->expenses = $expenses;
     }
 
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['index'],
+                'duration' => 3600,
+                'dependency' => [
+                    'class' => 'yii\caching\TagDependency',
+                    'tags' => Event::CACHE_KEY,
+                ]
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
         $cart = $this->service->getCart();
-
+        $events = $this->repository->getAll();
         $dataProvider = new ArrayDataProvider(
             [
-                'models' => $cart->getItems()
+                'models' => $cart->getItems(),
             ]
         );
+
         return $this->render(
             'index',
             [
                 'cart' => $cart,
                 'dataProvider' => $dataProvider,
+                'events'=>$events,
             ]
         );
     }
@@ -54,9 +75,11 @@ class ReportController extends Controller
         $cart = $this->service->getCart();
 
 
+
         $dataProvider = new ArrayDataProvider(
             [
                 'models' => $cart->getItems(),
+
             ]
         );
         return $this->render(

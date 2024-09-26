@@ -47,6 +47,8 @@ class Event extends ActiveRecord
     public const TOOLS_READY = 1;
     public const TOOLS_ICON = '<i class="fas fa-wrench"></i>';
 
+    public const CACHE_KEY ='event';
+
     public static function create(
         $masterId,
         $clientId,

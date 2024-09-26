@@ -23,7 +23,8 @@ return [
         'common\bootstrap\SetUp',
         'backend\bootstrap\SetUp',
     ],
-    'modules' => [],
+    'modules' => [
+    ],
     'controllerMap' => [
         'elfinder' => [
             'class' => 'mihaildev\elfinder\Controller',

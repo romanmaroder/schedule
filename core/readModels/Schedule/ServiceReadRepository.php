@@ -7,6 +7,8 @@ namespace core\readModels\Schedule;
 use core\entities\Schedule\Service\Category;
 use core\entities\Schedule\Service\Service;
 use core\entities\Schedule\Service\Tag;
+use core\useCases\Schedule\CacheService;
+use yii\caching\TagDependency;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\db\ActiveQuery;
@@ -14,11 +16,37 @@ use yii\helpers\ArrayHelper;
 
 class ServiceReadRepository
 {
+    private $cacheService;
+
+    public function __construct(CacheService $cacheService)
+    {
+        $this->cacheService = $cacheService;
+    }
+
     public function getAll(): DataProviderInterface
+    {
+        $key = Service::CACHE_KEY;
+        $query = Service::find()->alias('s')->active('s');
+
+        return $this->cacheService->cache->getOrSet(
+            $key,
+            function () use ($query) {
+                return $this->getProvider($query);
+            },
+            0,
+            new TagDependency(
+                [
+                    'tags' => Service::CACHE_KEY
+                ]
+            )
+        );
+    }
+
+    /*public function getAll(): DataProviderInterface
     {
         $query = Service::find()->alias('s')->active('s');
         return $this->getProvider($query);
-    }
+    }*/
 
     public function getAllByCategory(Category $category): DataProviderInterface
     {
