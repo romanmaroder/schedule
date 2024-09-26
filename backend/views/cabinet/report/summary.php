@@ -11,6 +11,7 @@
 
 
 use hail812\adminlte3\assets\PluginAsset;
+use yii\helpers\Url;
 
 $this->title = 'Summary Report';
 $this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
@@ -64,6 +65,9 @@ PluginAsset::register($this)->add(
             </div>
         </div>
 <?php
+
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
+
 $js = <<< JS
  $(function () {
    let table= $('#report').DataTable({
@@ -104,6 +108,9 @@ $js = <<< JS
                             .html( pageTotalProfit );
 
                         },
+                        language: {
+                    url: '$ru',
+                },
     }); 
  });
 

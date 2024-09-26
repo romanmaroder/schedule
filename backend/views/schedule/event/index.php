@@ -203,6 +203,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
  $(function () {
  
@@ -239,8 +240,8 @@ $js = <<< JS
 		// 		}*/
       //   }
       //   ],
-        "language": {
-          "search":"Поиск"
+        language: {
+          url:"$ru"
          },
     }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
 

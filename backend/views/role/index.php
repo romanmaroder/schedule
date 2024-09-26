@@ -12,6 +12,7 @@ use core\entities\User\Role;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Roles';
 $this->params['breadcrumbs'][] = $this->title;
@@ -74,18 +75,19 @@ PluginAsset::register($this)->add(
 
 
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
  $(function () {
  
     $('#role').DataTable({
     
-       "paging": false,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": false,
-       "autoWidth": false,
-       "responsive": true,
+       paging: false,
+       lengthChange: false,
+       searching: true,
+       ordering: true,
+       info: false,
+       autoWidth: false,
+       responsive: true,
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {
@@ -100,8 +102,8 @@ $js = <<< JS
 		// 		}*/
       //   }
       //   ],
-        "language": {
-          "search":"Поиск"
+        language: {
+         url:"$ru"
          }
     }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
 

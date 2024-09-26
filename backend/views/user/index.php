@@ -7,6 +7,7 @@ use core\helpers\UserHelper;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var backend\forms\UserSearch $searchModel */
@@ -113,6 +114,7 @@ PluginAsset::register($this)->add(
 
 
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
  $(function () {
  
@@ -140,8 +142,8 @@ $js = <<< JS
 		// 		}*/
       //   }
       //   ],
-        "language": {
-          "search":"Search"
+        language: {
+          url:"$ru"
          },
     }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
 

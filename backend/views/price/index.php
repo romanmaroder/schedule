@@ -13,6 +13,7 @@ use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\YiiAsset;
 
 $this->title = 'Prices';
@@ -166,6 +167,7 @@ PluginAsset::register($this)->add(
 
 
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
  $(function () {
  
@@ -192,8 +194,8 @@ $js = <<< JS
 		// 		}*/
       //   }
       //   ],
-        "language": {
-          "search":"Поиск"
+        language: {
+          url:"$ru"
          }
     }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
 

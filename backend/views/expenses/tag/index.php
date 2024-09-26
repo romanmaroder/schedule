@@ -11,6 +11,7 @@ use core\entities\Expenses\Expenses\Tag;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Tags';
 $this->params['breadcrumbs'][] = $this->title;
@@ -67,19 +68,20 @@ PluginAsset::register($this)->add(
 
 
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
  $(function () {
  
     $('#expenses').DataTable({
        
-       "pageLength": 20, 
-       "paging": true,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": false,
-       "autoWidth": false,
-       "responsive": true,
+       pageLength: 20, 
+       paging: true,
+       lengthChange: false,
+       searching: true,
+       ordering: true,
+       info: false,
+       autoWidth: false,
+       responsive: true,
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {
@@ -94,9 +96,7 @@ $js = <<< JS
 		// 		}*/
       //   }
       //   ],
-        "language": {
-          "search":"Поиск"
-         },
+        language:{url:"$ru"}
     }).buttons().container().appendTo('#category_wrapper .col-md-6:eq(0)');
 
   });

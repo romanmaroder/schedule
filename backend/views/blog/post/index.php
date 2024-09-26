@@ -5,6 +5,7 @@ use core\helpers\PostHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Blog\PostSearch */
@@ -88,6 +89,7 @@ PluginAsset::register($this)->add(['datatables',
     </div>
 </div>
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
 $('#posts').DataTable({
                 bDestroy: true,
@@ -120,32 +122,7 @@ $('#posts').DataTable({
                     columns: [2,3,4,5]
                 },
                 language: {
-                    searchBuilder: {
-                        add: 'Add filter',
-                        //condition: 'Comparator',
-                        //clearAll: 'Reset',
-                        //delete: 'Delete',
-                        //deleteTitle: 'Delete Title',
-                        //data: 'Column',
-                        //left: 'Left',
-                        //leftTitle: 'Left Title',
-                        //logicAnd: 'AND',
-                        //logicOr: 'OR',
-                        //right: 'Right',
-                        //rightTitle: 'Right Title',
-                        title: {
-                            0: 'Filters',
-                            _: 'Filters (%d)'
-                        }
-                        //value: 'Option',
-                        //valueJoiner: 'et'
-                    },
-                    paginate: {
-                        first: "First",
-                        previous: '<i class="fas fa-backward"></i>',
-                        last: "Last",
-                        next: '<i class="fas fa-forward"></i>'
-                    }
+                    url:"$ru"
                 }
     }).buttons().container().appendTo('#review_wrapper .col-md-6:eq(0)');
 

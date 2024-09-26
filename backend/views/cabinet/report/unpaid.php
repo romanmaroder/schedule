@@ -11,6 +11,7 @@
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 
 $this->title = 'Unpaid';
@@ -130,6 +131,7 @@ PluginAsset::register($this)->add(
     </div>
 
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
 $(function () {
 let table= $('#unpaid').DataTable({
@@ -199,33 +201,8 @@ let table= $('#unpaid').DataTable({
         columns: [0,1,2,3]
         },
                        language: {
-                            searchBuilder: {
-                                add: 'Add filter',
-                                //condition: 'Comparator',
-                                //clearAll: 'Reset',
-                                //delete: 'Delete',
-                                //deleteTitle: 'Delete Title',
-                                //data: 'Column',
-                                //left: 'Left',
-                                //leftTitle: 'Left Title',
-                                //logicAnd: 'AND',
-                                //logicOr: 'OR',
-                                //right: 'Right',
-                                //rightTitle: 'Right Title',
-                                title: {
-                                    0: 'Filters',
-                                    _: 'Filters (%d)'
-                                }
-                                //value: 'Option',
-                                //valueJoiner: 'et'
-                            },
-                            paginate: {
-                        first: "First",
-                        previous: '<i class="fas fa-backward"></i>',
-                        last: "Last",
-                        next: '<i class="fas fa-forward"></i>'
-                        }
-                       }
+                    url: '$ru',
+                },
             }).buttons().container().appendTo('#unpaid_wrapper .col-md-6:eq(0)');
         
            /*table.on("column-reorder", function(e, settings, details){

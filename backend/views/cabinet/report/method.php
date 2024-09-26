@@ -9,6 +9,7 @@
 /* @var $cart  \core\cart\schedule\Cart */
 
 use hail812\adminlte3\assets\PluginAsset;
+use yii\helpers\Url;
 
 $this->title = 'Payments';
 $this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
@@ -68,6 +69,7 @@ PluginAsset::register($this)->add(
 
 
 <?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
 $(function () {
 let table= $('#payment').DataTable({
@@ -190,35 +192,9 @@ ordering: false,
                 },
                 'colvis'
             ],
-                
-               language: {
-                    searchBuilder: {
-                        add: 'Add filter',
-                        //condition: 'Comparator',
-                        //clearAll: 'Reset',
-                        //delete: 'Delete',
-                        //deleteTitle: 'Delete Title',
-                        //data: 'Column',
-                        //left: 'Left',
-                        //leftTitle: 'Left Title',
-                        //logicAnd: 'AND',
-                        //logicOr: 'OR',
-                        //right: 'Right',
-                        //rightTitle: 'Right Title',
-                        title: {
-                            0: 'Filters',
-                            _: 'Filters (%d)'
-                        }
-                        //value: 'Option',
-                        //valueJoiner: 'et'
-                    },
-                    paginate: {
-                first: "First",
-                previous: '<i class="fas fa-backward"></i>',
-                last: "Last",
-                next: '<i class="fas fa-forward"></i>'
-                }
-               }
+                language: {
+                    url: '$ru',
+                },
     }).buttons().container().appendTo('#report_wrapper .col-md-6:eq(0)');
 
    /*table.on("column-reorder", function(e, settings, details){
