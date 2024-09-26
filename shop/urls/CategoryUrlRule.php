@@ -44,16 +44,16 @@ class CategoryUrlRule extends BaseObject implements UrlRuleInterface
                 return false;
             }
             if ($path != $result['path']) {
-                throw new UrlNormalizerRedirectException(['core/catalog/category', 'id' => $result['id']], 301);
+                throw new UrlNormalizerRedirectException(['schedule/catalog/category', 'id' => $result['id']], 301);
             }
-            return ['core/catalog/category', ['id' => $result['id']]];
+            return ['schedule/catalog/category', ['id' => $result['id']]];
         }
         return false;
     }
 
     public function createUrl($manager, $route, $params)
     {
-        if ($route == 'core/catalog/category') {
+        if ($route == 'schedule/catalog/category') {
             if (empty($params['id'])) {
                 throw new \InvalidArgumentException('Empty id.');
             }

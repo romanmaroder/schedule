@@ -18,6 +18,9 @@ use core\entities\Shop\Product\events\ProductAppearedInStock;
 use core\entities\User\events\UserSignUpConfirmed;
 use core\entities\User\events\UserSignUpRequested;
 use core\jobs\AsyncEventJobHandler;
+use core\listeners\Schedule\Category\CategoryPersistenceListener as Schedule;
+use core\listeners\Schedule\Event\EventSearchPersistListener;
+use core\listeners\Schedule\Event\EventSearchRemoveListener;
 use core\listeners\Shop\Category\CategoryPersistenceListener;
 use core\listeners\Shop\Product\ProductAppearedInStockListener;
 use core\listeners\User\UserSignupConfirmedListener;
@@ -32,6 +35,7 @@ use core\services\sms\simpleSms\SmsOs;
 use core\services\sms\SmsSender;
 use core\useCases\auth\SignupService;
 use core\useCases\ContactService;
+use core\useCases\Schedule\CacheService;
 use yii\base\BootstrapInterface;
 use yii\base\ErrorHandler;
 use yii\caching\Cache;
@@ -132,11 +136,14 @@ class SetUp implements BootstrapInterface
                 ProductAppearedInStock::class => [ProductAppearedInStockListener::class],
                 EntityPersisted::class => [
                     //ProductSearchPersistListener::class,
+                    //EventSearchPersistListener::class,
                     CategoryPersistenceListener::class,
+                    Schedule::class,
                 ],
                 EntityRemoved::class => [
-                   //ProductSearchRemoveListener::class,
+                   // EventSearchRemoveListener::class,
                     CategoryPersistenceListener::class,
+                    Schedule::class,
                 ],
             ]);
         });
