@@ -8,8 +8,8 @@ use yii2fullcalendar6\yii2fullcalendar6;
 /* @var $events \core\entities\Schedule\Event\Calendar\Calendar */
 /* @var $education \core\entities\Schedule\Event\Calendar\Calendar */
 
-$this->title = 'Calendar';
-$this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['calendar']];
+$this->title = Yii::t('schedule/calendar','Calendar');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/calendar','Calendar'), 'url' => ['calendar']];
 $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(['sweetalert2']);
 
@@ -359,6 +359,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'displayEventTime' => true,
                         'displayEventEnd' => true,
                         'filterResourcesWithEvents'=>true,
+                        'buttonText'=>[
+                                'today'=>Yii::t('schedule/calendar','Today')
+                        ],
                         'buttonIcons' => [
                             'dayGridMonth' => 'fas fas fa-calendar-alt',
                             'dayGridDay' => 'far far fa-calendar-day',
@@ -368,6 +371,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'timeGridWeek' => 'fas fas fa-calendar-week',
                             'addEducation' => 'fas fas fa-graduation-cap',
                             'addFree' => 'fas fa-umbrella-beach',
+                            'today' => '',
                         ],
                         'customButtons' => [
                             'addEducation' => [
