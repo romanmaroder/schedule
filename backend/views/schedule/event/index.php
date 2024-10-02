@@ -22,7 +22,7 @@ PluginAsset::register($this)->add(
         'datatables-buttons']
 );
 
-$this->title = 'Event';
+$this->title = Yii::t('app','Events');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card card-secondary">
                 <div class='card-header'>
                     <h3 class='card-title'>
-                        <?= Html::a('Create Event', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+                        <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
                     </h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                                 //'amount',
                                 [
-                                    'attribute' => 'Cost',
+                                    'attribute' => 'cost',
                                     'value' => function (Event $models) use ($cart) {
                                        return $models->getDiscountedPrice($models, $cart);
                                     }
@@ -120,8 +120,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'class' => 'yii\grid\ActionColumn',
                                     'template' => '{status} {payment}',
-                                    //'header' => '<i class="fas fa-cash-register"></i>',
-                                    'header' => 'Cash register',
+                                    'header' => '<i class="far fa-credit-card"></i>',
+                                    //'header' => Yii::t('schedule/event','Cash register'),
                                     'headerOptions' => [
                                         'class' => 'text-center'
                                     ],
@@ -140,33 +140,41 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'buttons' => [
                                         'status' => function ($url, $model, $key) {
                                             return $model->status == 0 ? Html::a(
-                                                'PAY',
+                                                    '<i class="fas fa-ruble-sign"></i>',
+                                                //Yii::t('schedule/event','Pay'),
                                                 Url::to(['schedule/event/pay', 'id' => $model->id]),
-                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs']
+                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs',
+                                                        'title'=>Yii::t('schedule/event','Pay')]
                                             ) : Html::a(
-                                                'NO PAYED',
+                                                    '<i class="fas fa-ruble-sign"></i>',
+                                                //Yii::t('schedule/event','No pay'),
                                                 Url::to(['schedule/event/unpay', 'id' => $model->id]),
-                                                ['class' => 'btn bg-danger bg-gradient text-shadow box-shadow btn-xs']
+                                                ['class' => 'btn bg-danger bg-gradient text-shadow box-shadow btn-xs',
+                                                        'title'=>Yii::t('schedule/event','No pay')]
                                             );
                                         },
                                         'payment' => function ($url, $model, $key) {
                                             return $model->payment == 2 ? Html::a(
-                                                'CARD',
+                                                    '<i class="fab fa-cc-visa"></i>',
+
                                                 Url::to(['schedule/event/card', 'id' => $model->id]),
-                                                ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
+                                                ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs',
+                                                    'title'=>Yii::t('schedule/event','Card')]
                                             ) : Html::a(
-                                                'CASH',
+                                                    '<i class="fas fa-money-bill-wave-alt"></i>',
+                                                //Yii::t('schedule/event','Cash'),
                                                 Url::to(['schedule/event/cash', 'id' => $model->id]),
-                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs']
-                                            );;
+                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs',
+                                                        'title'=>Yii::t('schedule/event','Cash')]
+                                            );
                                         },
                                     ],
                                 ],
                                 [
                                     'class' => 'yii\grid\ActionColumn',
                                     'template' => '{copy}',
-                                    //'header' => '<i class="fas fa-cash-register"></i>',
-                                    'header' => 'Copy',
+                                    'header' => '<i class="far fa-copy"></i>',
+                                    //'header' => Yii::t('app','Copy'),
                                     'headerOptions' => [
                                         'class' => 'text-center'
                                     ],
@@ -185,7 +193,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'buttons' => [
                                         'copy' => function ($url, $model, $key) {
                                             return Html::a(
-                                                'COPY',
+                                                Yii::t('app','Copy'),
                                                 Url::to(['schedule/event/copy', 'id' => $model->id]),
                                                 ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
                                             );
