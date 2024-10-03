@@ -6,6 +6,7 @@ namespace core\forms\manage\Shop;
 
 use core\entities\CommonUses\Characteristic;
 use core\helpers\CharacteristicHelper;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 /**
@@ -54,6 +55,18 @@ class CharacteristicForm extends Model
                 'targetClass' => Characteristic::class,
                 'filter' => $this->_characteristic ? ['<>', 'id', $this->_characteristic->id] : null
             ]
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('shop/characteristic', 'name'),
+            'type' => tHelper::translate('shop/characteristic', 'type'),
+            'required' => tHelper::translate('shop/characteristic', 'required'),
+            'default' => tHelper::translate('shop/characteristic', 'default'),
+            'textVariants' => tHelper::translate('shop/characteristic', 'variants'),
+            'sort' => tHelper::translate('shop/characteristic', 'sort'),
         ];
     }
 

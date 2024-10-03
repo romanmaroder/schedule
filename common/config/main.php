@@ -84,15 +84,7 @@ return [
                         'shop' => 'shop/shop.php',
                         'shop/tag' => 'shop/tag/tag.php',
                         'shop/brand' => 'shop/brand/brand.php',
-                       /* 'schedule/service/price' => 'schedule/service/price.php',
-                        'schedule/service/category' => 'schedule/service/category.php',
-                        'schedule/additional' => 'schedule/additional/additional.php',
-                        'schedule/additional/category' => 'schedule/additional/category.php',
-                        'schedule/free' => 'schedule/free/free.php',
-                        'schedule/education' => 'schedule/education/education.php',
-                        'schedule/calendar' => 'schedule/calendar/calendar.php',
-                        'schedule/event' => 'schedule/event/event.php',
-                        'schedule/event/service' => 'schedule/event/service.php',*/
+                        'shop/characteristic' => 'shop/characteristic/characteristic.php',
                     ],
                 ],
                 'expenses*' => [

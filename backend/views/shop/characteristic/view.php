@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 /* @var $characteristic \core\entities\CommonUses\Characteristic */
 
 $this->title = $characteristic->name;
-$this->params['breadcrumbs'][] = ['label' => 'Characteristic', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/characteristic','Characteristic'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -20,9 +20,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-secondary">
         <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $characteristic->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
+            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $characteristic->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'id' => $characteristic->id],
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow btn-gradient',

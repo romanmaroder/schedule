@@ -4,6 +4,7 @@
 namespace core\entities\CommonUses;
 
 
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
@@ -93,6 +94,18 @@ class Characteristic extends ActiveRecord
     public function isSelect(): bool
     {
         return count($this->variants) > 0;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::translate('shop/characteristic','name'),
+            'type'=>tHelper::translate('shop/characteristic','type'),
+            'required'=>tHelper::translate('shop/characteristic','required'),
+            'default'=>tHelper::translate('shop/characteristic','default'),
+            'variants'=>tHelper::translate('shop/characteristic','variants'),
+            'sort'=>tHelper::translate('shop/characteristic','sort'),
+        ];
     }
 
     public static function tableName(): string

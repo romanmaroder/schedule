@@ -175,7 +175,7 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'shop/tag'
                                         ],
                                         [
-                                            'label' => 'Characteristics',
+                                            'label' => Yii::t('shop/characteristic','Characteristic'),
                                             'icon' => 'fas fa-thermometer-quarter',
                                             'url' => ['/shop/characteristic/index'],
                                             'active' => $this->context->id == 'shop/characteristic'

@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $searchModel \backend\forms\Shop\CharacteristicSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Characteristic';
+$this->title = Yii::t('shop/characteristic','Characteristic');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -22,7 +22,7 @@ PluginAsset::register($this)->add(
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">
-                <?= Html::a('Create characteristic', ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
+                <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
             </h3>
 
             <div class='card-tools'>
