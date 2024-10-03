@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $brand \core\entities\CommonUses\Brand */
 
 $this->title = $brand->name;
-$this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/brand','Brands'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -18,9 +18,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
 <div class="user-view">
     <div class="card card-secondary">
         <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $brand->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
+            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $brand->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'id' => $brand->id],
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow btn-gradient',

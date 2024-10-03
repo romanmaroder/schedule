@@ -147,7 +147,7 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
-                                    'label' => 'Shop',
+                                    'label' => Yii::t('shop','Shop'),
                                     'icon' => 'fas fa-folder-plus',
                                     'items' => [
                                         [
@@ -163,13 +163,13 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'shop/category'
                                         ],
                                         [
-                                            'label' => 'Brands',
+                                            'label' => Yii::t('shop/brand','Brands'),
                                             'icon' => 'fa-solid fa-copyright',
                                             'url' => ['/shop/brand/index'],
                                             'active' => $this->context->id == 'shop/brand'
                                         ],
                                         [
-                                            'label' => 'Tags',
+                                            'label' => Yii::t('shop/tag','Tags'),
                                             'icon' => 'fa-solid fa-tags',
                                             'url' => ['/shop/tag/index'],
                                             'active' => $this->context->id == 'shop/tag'

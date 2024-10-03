@@ -7,6 +7,7 @@ namespace core\forms\manage\Shop;
 use core\entities\CommonUses\Brand;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 
 /**
@@ -46,6 +47,13 @@ class BrandForm extends CompositeForm
             [['name', 'slug'], 'unique', 'targetClass' => Brand::class, 'filter' => $this->_brand ? ['<>', 'id', $this->_brand->id] : null]
         ];
     }
+public function attributeLabels()
+{
+    return [
+        'name' => tHelper::translate('shop/brand','name'),
+        'slug' => tHelper::translate('shop/brand','slug'),
+    ];
+}
 
     protected function internalForms(): array
     {

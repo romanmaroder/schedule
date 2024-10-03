@@ -6,6 +6,7 @@ namespace core\entities\CommonUses;
 
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -49,6 +50,17 @@ class Brand extends ActiveRecord
     public function getSeoTitle(): string
     {
         return $this->meta->title ?: $this->name;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('shop/brand','name'),
+            'slug' => tHelper::translate('shop/brand','slug'),
+            'meta.title' => tHelper::translate('meta','Title'),
+            'meta.description' => tHelper::translate('meta','Description'),
+            'meta.keywords' => tHelper::translate('meta','Keywords'),
+        ];
     }
 
     public static function tableName(): string

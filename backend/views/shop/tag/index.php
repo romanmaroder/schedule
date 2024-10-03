@@ -7,10 +7,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\forms\Schedule\TagSearch */
+/* @var $searchModel backend\forms\Shop\TagSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tags';
+$this->title = Yii::t('shop/tag','Tags');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -22,7 +22,7 @@ PluginAsset::register($this)->add(
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
+            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
         </h3>
 
         <div class='card-tools'>
