@@ -6,6 +6,7 @@ namespace core\forms\manage\Expenses;
 
 
 use core\entities\Expenses\Expenses\Tag;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 use yii\base\Model;
 
@@ -34,6 +35,14 @@ class TagForm extends Model
             ['slug', SlugValidator::class],
             [['name', 'slug'], 'unique', 'targetClass' => Tag::class, 'filter' => $this->_tag ? ['<>', 'id', $this->_tag->id] : null]
 
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return[
+            'name' => tHelper::translate('expenses/tag', 'Name'),
+            'slug' => tHelper::translate('expenses/tag', 'Slug'),
         ];
     }
 }

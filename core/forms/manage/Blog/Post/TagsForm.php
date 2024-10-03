@@ -6,6 +6,7 @@ namespace core\forms\manage\Blog\Post;
 
 use core\entities\Blog\Post\Post;
 use core\entities\Blog\Tag;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -35,6 +36,13 @@ class TagsForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return[
+            'existing' => tHelper::translate('blog/tag', 'Existing'),
+            'textNew' => tHelper::translate('blog/tag', 'Text new'),
+        ];
+    }
     public function tagsList(): array
     {
         return ArrayHelper::map(Tag::find()->orderBy('name')->asArray()->all(), 'id', 'name');

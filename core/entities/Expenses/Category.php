@@ -4,6 +4,7 @@
 namespace core\entities\Expenses;
 
 
+use core\helpers\tHelper;
 use paulzi\nestedsets\NestedSetsBehavior;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Expenses\queries\CategoryQuery;
@@ -66,6 +67,19 @@ class Category extends ActiveRecord
         $this->title = $title;
         $this->description = $description;
         $this->meta = $meta;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('expenses/category', 'Name'),
+            'slug' => tHelper::translate('expenses/category', 'Slug'),
+            'title' => tHelper::translate('expenses/category', 'Title'),
+            'description' => tHelper::translate('expenses/category', 'Description'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
     }
 
     /**

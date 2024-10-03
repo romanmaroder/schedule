@@ -4,6 +4,7 @@
 namespace core\entities\User;
 
 
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 
@@ -29,6 +30,14 @@ class Rate extends ActiveRecord
     {
         $this->name = $name;
         $this->rate = $rate;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::translate('rate','name'),
+            'rate'=>tHelper::translate('rate','rate'),
+        ];
     }
 
     public static function tableName(): string

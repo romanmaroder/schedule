@@ -9,12 +9,13 @@
 /* @var $comment \core\entities\Blog\Post\Comment */
 
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Update Post: ' . $post->title;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $post->title, 'url' => ['view', 'post_id'=>$post->id,'id' => $comment->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = Yii::t('blog','Update Post: ') .Html::encode( StringHelper::truncateWords(strip_tags($post->title), 3) );
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog','Posts'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Html::encode( StringHelper::truncateWords(strip_tags($post->title), 3) ), 'url' => ['view', 'post_id'=>$post->id,'id' => $comment->id]];
+$this->params['breadcrumbs'][] =  Yii::t('app','Update');
 ?>
 
 
@@ -27,7 +28,7 @@ $form = ActiveForm::begin(
 
 <div class="card card-secondary">
     <div class="card-header">
-        <h3 class="card-title">Common</h3>
+        <h3 class="card-title"><?= Yii::t('app','Common')?></h3>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -45,7 +46,7 @@ $form = ActiveForm::begin(
     </div>
     <div class="card-footer">
         <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-sm btn-success btn-shadow btn-gradient']) ?>
+            <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-sm btn-success btn-shadow btn-gradient']) ?>
         </div>
     </div>
 </div>

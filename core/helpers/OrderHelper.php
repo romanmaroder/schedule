@@ -14,12 +14,12 @@ class OrderHelper
     public static function statusList(): array
     {
         return [
-            Status::NEW => 'New',
-            Status::PAID => 'Paid',
-            Status::SENT => 'Sent',
-            Status::COMPLETED => 'Completed',
-            Status::CANCELLED => 'Cancelled',
-            Status::CANCELLED_BY_CUSTOMER => 'Cancelled by customer',
+            Status::NEW => \Yii::t('product/order','New'),
+            Status::PAID => \Yii::t('product/order','Paid'),
+            Status::SENT => \Yii::t('product/order','Sent'),
+            Status::COMPLETED => \Yii::t('product/order','Completed'),
+            Status::CANCELLED => \Yii::t('product/order','Cancelled'),
+            Status::CANCELLED_BY_CUSTOMER => \Yii::t('product/order','Cancelled by customer'),
         ];
     }
 

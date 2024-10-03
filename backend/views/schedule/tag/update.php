@@ -4,10 +4,10 @@
 /* @var $tag \core\entities\Schedule\Service\Tag */
 /* @var $model core\forms\manage\Schedule\TagForm */
 
-$this->title = 'Update Tag: ' . $tag->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tag', 'url' => ['index']];
+$this->title = Yii::t('schedule/service/tag','Update Tag: ') . $tag->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/service/tag','Tag'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $tag->name, 'url' => ['view', 'id' => $tag->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="brand-update">
 

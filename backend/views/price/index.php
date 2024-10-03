@@ -16,7 +16,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\YiiAsset;
 
-$this->title = 'Prices';
+$this->title = Yii::t('price','Prices');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(['sweetalert2']);
@@ -29,7 +29,7 @@ PluginAsset::register($this)->add(
         <div class="card-header">
             <h3 class="card-title">
                 <?= Html::a(
-                    'Create Price',
+                    Yii::t('app','Create'),
                     ['create'],
                     ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
                 ) ?>
@@ -65,7 +65,7 @@ PluginAsset::register($this)->add(
                         ],
                         //'rate',
                         [
-                            'attribute' => 'service',
+                            'attribute' => 'services',
                             'value' => function (Price $model) {
                                 return implode(' </br>', ArrayHelper::getColumn($model->services, 'name'));
                             },
@@ -74,21 +74,21 @@ PluginAsset::register($this)->add(
                         ],
 
                         [
-                            'attribute' => 'Price',
+                            'attribute' => 'price',
                             'value' => function (Price $model) {
                                 return implode(' </br>', ArrayHelper::getColumn($model->services, 'price_new'));
                             },
                             'format' => 'raw'
                         ],
                         [
-                            'attribute' => 'Rate',
+                            'attribute' => 'rate',
                             'value' => function (Price $model) {
                                 return implode(' </br>', ArrayHelper::getColumn($model->serviceAssignments, 'rate'));
                             },
                             'format' => 'raw'
                         ],
                         [
-                            'attribute' => 'Cost',
+                            'attribute' => 'cost',
                             'value' => function (Price $model) {
                                 return implode(' </br>', ArrayHelper::getColumn($model->serviceAssignments, 'cost'));
                             },
@@ -97,7 +97,7 @@ PluginAsset::register($this)->add(
                         [
                             'class' => 'yii\grid\ActionColumn',
                             'template' => '{revoke}',
-                            'header' => 'Revoke',
+                            'header' => Yii::t('price','Revoke'),
                             'headerOptions' => [
                                 'class' => 'text-center'
                             ],
@@ -122,6 +122,7 @@ PluginAsset::register($this)->add(
                                                 ],
                                                 [
                                                     'id' => 'delete',
+                                                    'title'=>Yii::t('app','Delete'),
                                                     'data' => [
                                                         'confirm' => Yii::t('app', 'Delete file?'),
                                                         'method' => 'POST',
@@ -143,7 +144,9 @@ PluginAsset::register($this)->add(
                             'value' => function (Price $model) {
                                 return Html::a(
                                     '<i class="fas fa-plus-square fa-rotate-270 fa-lg" style="color: #28a745;"></i>',
-                                    ['price/add', 'id' => $model->id]
+                                    ['price/add', 'id' => $model->id,],[
+                                        'title'=>Yii::t('price','Add'),
+                                    ]
                                 );
                             },
                             'headerOptions' => [

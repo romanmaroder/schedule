@@ -10,8 +10,8 @@ use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 
-$this->title = 'Create Lesson';
-$this->params['breadcrumbs'][] = ['label' => 'Lessons', 'url' => ['index']];
+$this->title = Yii::t('schedule/education','Create Lesson');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education','Lessons'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ); ?>
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>New lesson</h3>
+            <h3 class='card-title'><?=Yii::t('schedule/education','New lesson')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -101,7 +101,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             Select2::class,
                             [
                                 'name' => 'teacher',
-                                'language' => 'ru',
                                 'data' => $model->teacher->teacherList(),
                                 'options' => ['placeholder' => 'Select'],
                                 'pluginOptions' => [
@@ -186,7 +185,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']); ?>
+                        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']); ?>
                     </div>
                 </div>
             </div>

@@ -5,8 +5,8 @@
 
 /* @var $model \core\forms\manage\Expenses\TagForm */
 
-$this->title = 'Create Tag';
-$this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];
+$this->title = Yii::t('expenses/tag','Create Tag');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('expenses/tag','Tags'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

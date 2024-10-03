@@ -13,8 +13,8 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
-$this->title                   ='Services';
-$this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];
+$this->title = Yii::t('schedule/service','Services');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/service','Services'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -25,65 +25,67 @@ PluginAsset::register($this)->add(
         <div class="invoice p-3 mb-3">
             <div class="card card-secondary">
                 <div class="card-header">
-                <h3 class="card-title ">
-                    <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
-                </h3>
+                    <h3 class="card-title ">
+                        <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+                    </h3>
                     <div class='card-tools'>
-                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                    class='fas fa-expand'></i>
                         </button>
-                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                    class='fas fa-minus'></i>
                         </button>
                     </div>
-            </div>
-            <div class="card-body">
-                <?= GridView::widget(
-                    [
-                        'dataProvider' => $dataProvider,
-                        //'filterModel' => $searchModel,
-                        'summary' => false,
-                        'tableOptions' => [
-                            'class' => 'table table-striped table-bordered',
-                            'id' => 'service'
-                        ],
-                        'columns' => [
-                            'id',
-                            [
-                                'attribute' => 'name',
-                                'value' => function (Service $model) {
-                                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                                },
-                                'format' => 'raw',
+                </div>
+                <div class="card-body">
+                    <?= GridView::widget(
+                        [
+                            'dataProvider' => $dataProvider,
+                            //'filterModel' => $searchModel,
+                            'summary' => false,
+                            'tableOptions' => [
+                                'class' => 'table table-striped table-bordered',
+                                'id' => 'service'
                             ],
-                            [
-                                'attribute' => 'category_id',
-                                'filter' => $searchModel->categoriesList(),
-                                'value' => 'category.name',
+                            'columns' => [
+                                'id',
+                                [
+                                    'attribute' => 'name',
+                                    'value' => function (Service $model) {
+                                        return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                                    },
+                                    'format' => 'raw',
+                                ],
+                                [
+                                    'attribute' => 'category_id',
+                                    'filter' => $searchModel->categoriesList(),
+                                    'value' => 'category.name',
+                                ],
+                                [
+                                    'attribute' => 'price_new',
+                                    'value' => function (Service $model) {
+                                        return PriceHelper::format($model->price_new);
+                                    },
+                                ],
+                                [
+                                    'attribute' => 'price_old',
+                                    'value' => function (Service $model) {
+                                        return PriceHelper::format($model->price_old);
+                                    },
+                                ],
+                                [
+                                    'attribute' => 'status',
+                                    'filter' => $searchModel->statusList(),
+                                    'value' => function (Service $model) {
+                                        return ServiceHelper::statusLabel($model->status);
+                                    },
+                                    'format' => 'raw',
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                ]
                             ],
-                            [
-                                'attribute' => 'price_new',
-                                'value' => function (Service $model) {
-                                    return PriceHelper::format($model->price_new);
-                                },
-                            ],
-                            [
-                                'attribute' => 'price_old',
-                                'value' => function (Service $model) {
-                                    return PriceHelper::format($model->price_old);
-                                },
-                            ],
-                            [
-                                'attribute' => 'status',
-                                'filter' => $searchModel->statusList(),
-                                'value' => function (Service $model) {
-                                    return ServiceHelper::statusLabel($model->status);
-                                },
-                                'format' => 'raw',
-                                'contentOptions' => ['style' => 'text-align:center'],
-                            ]
-                        ],
-                    ]
-                ); ?>
-            </div>
+                        ]
+                    ); ?>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <!--Footer-->

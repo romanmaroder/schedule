@@ -11,8 +11,8 @@ use yii\widgets\MaskedInput;
 /** @var core\forms\manage\User\UserEditForm $model */
 /** @var core\entities\User\User $user */
 
-$this->title = 'Update User: ' . $user->username;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = Yii::t('user','Update User: ') . $user->username;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user','Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $user->username;
 ?>
 
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $user->username;
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-           Common
+          <?=Yii::t('app','Common')?>
         </h3>
 
         <div class='card-tools'>
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $user->username;
                         'allowClear' => true,
                     ],
                 ]
-            ) ->label('Days')?>
+            ) ->label($model->schedule->getAttributeLabel('weekends'))?>
         </div>
         <div class="form-group">
             <?= $form->field($model->schedule, 'week')->textInput(
@@ -114,7 +114,7 @@ $this->params['breadcrumbs'][] = $user->username;
     <!-- /.card-body -->
     <div class="card-footer">
         <!--Footer-->
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
     </div>
     <!-- /.card-footer-->
 </div>

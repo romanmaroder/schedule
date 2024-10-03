@@ -5,6 +5,7 @@ namespace core\forms\manage;
 
 
 use core\entities\Schedule;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 class ScheduleForm extends Model
@@ -29,6 +30,15 @@ class ScheduleForm extends Model
             ['hoursWork', 'each', 'rule' => ['integer']],
             ['weekends', 'each', 'rule' => ['integer']],
             [['week'],'string','max' => 255]
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'hoursWork'=>tHelper::t('user/schedule','Hours'),
+            'weekends'=>tHelper::t('user/schedule','Weekends'),
+            'week'=>tHelper::t('user/schedule','Week'),
         ];
     }
 }

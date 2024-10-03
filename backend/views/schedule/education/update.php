@@ -11,10 +11,10 @@ use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 
-$this->title = 'Update: ' .$model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Lesson', 'url' => ['index']];
+$this->title = Yii::t('schedule/education','Update: ') .$model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education','Lesson'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $education->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="education-update container-fluid">
     <?php
@@ -184,7 +184,7 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']); ?>
+                        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']); ?>
                     </div>
                 </div>
             </div>

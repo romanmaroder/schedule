@@ -5,6 +5,7 @@ namespace core\forms\manage\User\Price;
 
 
 use core\forms\CompositeForm;
+use core\helpers\tHelper;
 
 
 /**
@@ -30,6 +31,13 @@ class CreateForm extends CompositeForm
             ['rate', 'integer'],
         ];
     }
+public function attributeLabels()
+{
+    return [
+        'name'=>tHelper::translate('price','name'),
+        'rate'=>tHelper::translate('price','rate'),
+    ];
+}
 
     protected function internalForms(): array
     {

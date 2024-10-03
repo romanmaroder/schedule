@@ -13,7 +13,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Categories';
+$this->title = Yii::t('schedule/additional/category','Categories');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -24,7 +24,7 @@ PluginAsset::register($this)->add(
         <div class="card card-secondary">
             <div class="card-header">
                 <h3 class="card-title">
-                    <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
+                    <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
                 </h3>
 
                 <div class='card-tools'>

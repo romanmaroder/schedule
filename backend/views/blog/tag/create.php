@@ -2,8 +2,8 @@
 /* @var $this yii\web\View */
 /* @var $model core\forms\manage\Blog\TagForm */
 
-$this->title = 'Create Tag';
-$this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];
+$this->title = Yii::t('blog/tag','Create Tag');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog/tag','Tags'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

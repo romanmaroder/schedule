@@ -7,6 +7,7 @@ namespace core\forms\manage\Schedule\Service;
 use core\entities\Schedule\Service\Service;
 use core\forms\manage\MetaForm;
 use core\forms\manage\Shop\Product\TagsForm;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 /**
@@ -40,4 +41,13 @@ class PriceForm extends Model
             [['new', 'old',], 'integer', 'min' => 0],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'new' => tHelper::translate('schedule/service/price', 'Name'),
+            'old' => tHelper::translate('schedule/service/price', 'Description'),
+        ];
+    }
+
 }

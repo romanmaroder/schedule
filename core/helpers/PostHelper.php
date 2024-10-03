@@ -13,8 +13,8 @@ class PostHelper
     public static function statusList(): array
     {
         return [
-            Post::STATUS_DRAFT => 'Draft',
-            Post::STATUS_ACTIVE => 'Active',
+            Post::STATUS_DRAFT => \Yii::t('app','Draft'),
+            Post::STATUS_ACTIVE => \Yii::t('app','Active'),
         ];
     }
 

@@ -4,6 +4,7 @@
 namespace core\entities\Blog;
 
 
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -25,6 +26,14 @@ class Tag extends ActiveRecord
     {
         $this->name = $name;
         $this->slug = $slug;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('blog/tag', 'Name'),
+            'slug' => tHelper::translate('blog/tag', 'Slug'),
+        ];
     }
 
     public static function tableName(): string

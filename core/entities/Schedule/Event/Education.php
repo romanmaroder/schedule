@@ -5,6 +5,7 @@ namespace core\entities\Schedule\Event;
 
 
 use core\entities\User\User;
+use core\helpers\tHelper;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\Json;
@@ -65,6 +66,19 @@ class Education extends ActiveRecord
     public function getStudents(): ActiveQuery
     {
         return $this->hasMany(User::class, ['id' => 'studentsIds']);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'teacher_id' => tHelper::translate('schedule/education','Teacher'),
+            'student_ids' => tHelper::translate('schedule/education','Students'),
+            'title' => tHelper::translate('schedule/education','Title'),
+            'description' => tHelper::translate('schedule/education','Description'),
+            'color' => tHelper::translate('schedule/education','Color'),
+            'start' => tHelper::translate('schedule/education','Start'),
+            'end' => tHelper::translate('schedule/education','End'),
+        ];
     }
 
     public static function tableName(): string

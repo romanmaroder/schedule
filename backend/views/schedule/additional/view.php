@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
 /* @var $additional \core\entities\Schedule\Additional\Additional */
 
 $this->title = $additional->name;
-$this->params['breadcrumbs'][] = ['label' => 'Additional', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional','Additional'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -27,22 +27,22 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         <?php
                         if ($additional->isActive()) : ?>
                             <?= Html::a(
-                                'Draft',
+                                Yii::t('app','Draft'),
                                 ['draft', 'id' => $additional->id],
                                 ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow', 'data-method' => 'post']
                             ) ?>
                         <?php
                         else : ?>
                             <?= Html::a(
-                                'Activate',
+                                Yii::t('app','Activate'),
                                 ['activate', 'id' => $additional->id],
                                 ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient btn-shadow', 'data-method' => 'post']
                             ) ?>
                         <?php
                         endif; ?>
-                        <?= Html::a('Update', ['update', 'id' => $additional->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow']) ?>
+                        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $additional->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow']) ?>
                         <?= Html::a(
-                            'Delete',
+                            Yii::t('app','Delete'),
                             ['delete', 'id' => $additional->id],
                             [
                                 'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient btn-shadow',
@@ -80,7 +80,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     'value' => ArrayHelper::getValue($additional, 'category.name'),
                                 ],
                                 [
-                                    'label' => 'Other categories',
+                                    'attribute' => 'additional.categories',
+                                    //'label' => 'Other categories',
                                     'value' => implode(', ', ArrayHelper::getColumn($additional->categories, 'name')),
                                 ],
                             ],
@@ -94,7 +95,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-outline card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Description</h3>
+            <h3 class='card-title'><?=Yii::t('schedule/additional','Description')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>

@@ -5,6 +5,7 @@ namespace core\forms\manage\Expenses\Expense;
 
 
 use core\forms\CompositeForm;
+use core\helpers\tHelper;
 
 /**
  * @property CategoriesForm $categories
@@ -29,6 +30,15 @@ class ExpenseCreateForm extends CompositeForm
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
             [['value','status'], 'integer'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('expenses/expenses', 'Name'),
+            'value' => tHelper::translate('expenses/expenses', 'Value'),
+            'status' => tHelper::translate('expenses/expenses', 'Status'),
         ];
     }
 

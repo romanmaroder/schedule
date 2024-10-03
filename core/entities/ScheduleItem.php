@@ -4,6 +4,8 @@
 namespace core\entities;
 
 
+use core\helpers\tHelper;
+
 class ScheduleItem
 
 {
@@ -11,13 +13,13 @@ class ScheduleItem
     public function days(): array
     {
         return [
-            1 => 'Monday',
-            2 => 'Tuesday',
-            3 => 'Wednesday',
-            4 => 'Thursday',
-            5 => 'Friday',
-            6 => 'Saturday',
-            0 => 'Sunday',
+            1 => tHelper::translate('user/scheduleItem','Monday'),
+            2 => tHelper::translate('user/scheduleItem','Tuesday'),
+            3 => tHelper::translate('user/scheduleItem','Wednesday'),
+            4 => tHelper::translate('user/scheduleItem','Thursday'),
+            5 => tHelper::translate('user/scheduleItem','Friday'),
+            6 => tHelper::translate('user/scheduleItem','Saturday'),
+            0 => tHelper::translate('user/scheduleItem','Sunday'),
         ];
     }
 

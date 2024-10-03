@@ -7,6 +7,7 @@ namespace core\forms\manage\Schedule\Additional;
 use core\entities\Schedule\Additional\Category;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 use yii\helpers\ArrayHelper;
 
@@ -54,6 +55,17 @@ class CategoryForm extends CompositeForm
                 'targetClass' => Category::class,
                 'filter' => $this->_category ? ['<>', 'id', $this->_category->id] : null
             ]
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::t('schedule/additional/category','Name'),
+            'description'=>tHelper::t('schedule/additional/category','Description'),
+            'parentId'=>tHelper::t('schedule/additional/category','Parent Id'),
+            'slug'=>tHelper::t('schedule/additional/category','Slug'),
+            'title'=>tHelper::t('schedule/additional/category','Title'),
         ];
     }
 

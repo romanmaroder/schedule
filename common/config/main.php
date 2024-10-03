@@ -2,12 +2,14 @@
 return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'bootstrap' => [
         'queue',
     ],
+    'sourceLanguage' => 'en',
+    'language' => 'ru-Ru',
     'components' => [
         'formatter' => [
             //'locale' => 'ru-RU',
@@ -33,6 +35,119 @@ return [
         'queue' => [
             'class' => 'yii\queue\redis\Queue',
             'as log' => 'yii\queue\LogBehavior',
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app/app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+                'blog*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'blog' => 'blog/blog.php',
+                        'blog/tag' => 'blog/tag.php',
+                        'blog/category' => 'blog/category.php',
+                        'blog/comments' => 'blog/comments.php',
+                    ],
+                ],
+                'schedule*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'schedule/service' => 'schedule/service/service.php',
+                        'schedule/service/tag' => 'schedule/service/tag.php',
+                        'schedule/service/price' => 'schedule/service/price.php',
+                        'schedule/service/category' => 'schedule/service/category.php',
+                        'schedule/additional' => 'schedule/additional/additional.php',
+                        'schedule/additional/category' => 'schedule/additional/category.php',
+                        'schedule/free' => 'schedule/free/free.php',
+                        'schedule/education' => 'schedule/education/education.php',
+                        'schedule/calendar' => 'schedule/calendar/calendar.php',
+                        'schedule/event' => 'schedule/event/event.php',
+                        'schedule/event/service' => 'schedule/event/service.php',
+                    ],
+                ],
+                'expenses*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'expenses' => 'expenses/expenses.php',
+                        'expenses/category' => 'expenses/category.php',
+                        'expenses/tag' => 'expenses/tag.php',
+                    ],
+                ],
+                'user*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'user' => 'user/user.php',
+                        'user/employee' => 'user/employee.php',
+                        'user/schedule' => 'user/schedule.php',
+                        'user/address' => 'user/address.php',
+                    ],
+                ],
+                'product*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'product' => 'product/product.php',
+                        'product/order' => 'product/order.php',
+                    ],
+                ],
+                'role*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'role' => 'role/role.php',
+                    ],
+                ],
+                'rate*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'rate' => 'rate/rate.php',
+                    ],
+                ],
+                'price*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'price' => 'price/price.php',
+                        'price/category' => 'price/category.php',
+                    ],
+                ],
+                'meta' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'meta' => 'meta/meta.php',
+                    ],
+                ],
+                /*'tag' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'tag'       => 'tag/tag.php',
+                    ],
+                ],*/
+            ],
         ],
     ],
 ];

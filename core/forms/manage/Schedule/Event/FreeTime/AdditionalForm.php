@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Event\FreeTime;
 
 use core\entities\Schedule\Additional\Additional;
 use core\entities\Schedule\Event\FreeTime;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -34,6 +35,13 @@ class AdditionalForm extends Model
         return [
             //['additional','integer'],
             ['additional','required']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'additional' => tHelper::translate('schedule/free','Additional'),
         ];
     }
 

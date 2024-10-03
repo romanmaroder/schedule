@@ -14,7 +14,7 @@ use yii\widgets\DetailView;
 
 
 $this->title = Html::encode( StringHelper::truncateWords(strip_tags($post->title), 3) );
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog','Post'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -28,7 +28,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <?php
         if ($post->isActive()): ?>
             <?= Html::a(
-                'Draft',
+                Yii::t('app','Draft'),
                 ['draft', 'id' => $post->id],
                 [
                     'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow',
@@ -38,7 +38,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <?php
         else: ?>
             <?= Html::a(
-                'Activate',
+                Yii::t('app','Activate'),
                 ['activate', 'id' => $post->id],
                 [
                     'class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow',
@@ -48,7 +48,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <?php
         endif; ?>
         <?= Html::a(
-            'Update',
+            Yii::t('app','Update'),
             ['update', 'id' => $post->id],
             ['class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow']
         ) ?>
@@ -87,7 +87,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'value' => ArrayHelper::getValue($post, 'category.name'),
                     ],
                     [
-                        'label' => 'Tags',
+                        'attribute' => 'tags',
                         'value' => implode(', ', ArrayHelper::getColumn($post->tags, 'name')),
                     ],
                 ],
@@ -98,7 +98,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-        Photo
+        <?=Yii::t('blog','Photo')?>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -124,7 +124,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-        Description
+        <?=Yii::t('blog','Description')?>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -139,7 +139,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-       Content
+        <?=Yii::t('blog','Content')?>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -174,7 +174,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 'model' => $post,
                 'attributes' => [
                     [
-                        'attribute' => '.meta.title',
+                        'attribute' => 'meta.title',
                         'value' => $post->meta->title,
                     ],
                     [

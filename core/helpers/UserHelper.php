@@ -14,8 +14,8 @@ class UserHelper
     public static function statusList(): array
     {
         return [
-            User::STATUS_INACTIVE => 'Inactive',
-            User::STATUS_ACTIVE => 'Active',
+            User::STATUS_INACTIVE => \Yii::t('app','Inactive'),
+            User::STATUS_ACTIVE => \Yii::t('app','Active'),
         ];
     }
 

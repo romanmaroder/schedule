@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Event;
 
 use core\entities\Schedule\Event\Event;
 use core\entities\User\User;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -36,6 +37,13 @@ class ClientForm extends Model
         return [
             ['client','integer'],
             ['client','required']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'client' => tHelper::translate('schedule/event', 'Client'),
         ];
     }
 }

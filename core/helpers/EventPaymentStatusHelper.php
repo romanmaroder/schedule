@@ -13,8 +13,8 @@ class EventPaymentStatusHelper
     public static function statusList(): array
     {
         return [
-            Event::STATUS_NOT_PAYED => 'NO PAYED',
-            Event::STATUS_PAYED => 'PAYED',
+            Event::STATUS_NOT_PAYED => \Yii::t('schedule/event','No pay'),
+            Event::STATUS_PAYED => \Yii::t('schedule/event','Pay'),
         ];
     }
 

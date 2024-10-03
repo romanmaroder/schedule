@@ -9,11 +9,12 @@
 
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
-$this->title = $post->title;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->title =Html::encode( StringHelper::truncateWords(strip_tags($post->title), 3) );
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog','Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -24,14 +25,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
     <div class="card-header">
 
         <?= Html::a(
-            'Update',
+            Yii::t('app','Update'),
             ['update', 'post_id' => $post->id, 'id' => $comment->id],
             ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']
         ) ?>
         <?php
         if ($comment->isActive()): ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'post_id' => $post->id, 'id' => $comment->id],
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow btn-gradient',
@@ -44,7 +45,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <?php
         else: ?>
             <?= Html::a(
-                'Restore',
+                Yii::t('app','Restore'),
                 ['activate', 'post_id' => $post->id, 'id' => $comment->id],
                 [
                     'class' => 'btn btn-success btn-sm btn-shadow btn-gradient',
@@ -73,11 +74,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'id',
                         'created_at:boolean',
                         'active:boolean',
-                        'user_id',
+                        [
+                            'attribute' => 'user_id',
+                            'value' => $comment->employee->getFullName(),
+                        ],
                         'parent_id',
                         [
                             'attribute' => 'post_id',
-                            'value' => $post->title,
+                            'value' => Html::encode( StringHelper::truncateWords(strip_tags($post->title), 5) ),
                         ],
                         [
                             'attribute' => 'text',

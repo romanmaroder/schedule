@@ -7,6 +7,7 @@ namespace core\forms\manage\Expenses;
 use core\entities\Expenses\Category;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 use yii\helpers\ArrayHelper;
 
@@ -72,6 +73,20 @@ class CategoryForm extends CompositeForm
                         ) . ' ' : '') . $category['name'];
             }
         );
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('expenses/category', 'Name'),
+            'slug' => tHelper::translate('expenses/category', 'Slug'),
+            'title' => tHelper::translate('expenses/category', 'Title'),
+            'description' => tHelper::translate('expenses/category', 'Description'),
+            'parentId' => tHelper::translate('expenses/category', 'Parent Id'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
     }
 
     protected function internalForms(): array

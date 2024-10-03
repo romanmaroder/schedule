@@ -17,7 +17,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Employee';
+$this->title = Yii::t('user/employee','Employees');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -28,10 +28,10 @@ PluginAsset::register($this)->add(
 <div class="card card-secondary">
     <div class="card-header">
         <span class="card-title mb-2 mr-2 mb-md-0 ">
-                <span class=""><?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?></span>
+                <span class=""><?= Html::a(Yii::t('user/employee','Create Employee'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?></span>
         </span>
         <span class="card-title ">
-                <span class=""> <?= Html::a('Create Existing Employee', ['existing-user'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?></span>
+                <span class=""> <?= Html::a(Yii::t('user/employee','Create Existing Employee'), ['existing-user'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?></span>
         </span>
 
         <div class='card-tools'>

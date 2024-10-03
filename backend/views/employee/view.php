@@ -9,16 +9,16 @@ use yii\widgets\DetailView;
 /** @var core\entities\User\Employee\Employee $model */
 
 $this->title = $model->getFullName();
-$this->params['breadcrumbs'][] = ['label' => 'Employee', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user/employee','Employees'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
 <div class="card card-secondary">
     <div class="card-header">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
+        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
         <?= Html::a(
-            'Delete',
+            Yii::t('app','Delete'),
             ['delete', 'id' => $model->id],
             [
                 'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient delete',
@@ -81,7 +81,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     [
-                        'label' => 'Role',
+                        'attribute' => 'role',
+                        // 'label' => 'Role',
                         //'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->user_id), 'description')),
                         'value' => \core\helpers\EmployeeHelper::rolesLabel($model->user_id),
                         'format' => 'raw',
@@ -137,11 +138,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                     ],
                     [
-                        'attribute' => 'Hours',
+                        'attribute' => 'schedule.hours',
                         'value' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork),
                     ],
                     [
-                        'attribute' => 'Weekends',
+                        'attribute' => 'schedule.weekends',
                         'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                     ],
                     //'notice:ntext'

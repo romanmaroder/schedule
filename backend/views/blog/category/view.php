@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $category core\entities\Blog\Category */
 
 $this->title = $category->name;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog/category','Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -18,12 +18,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
 <div class="card card-secondary">
     <div class="card-header">
         <?= Html::a(
-            'Update',
+            Yii::t('app','Update'),
             ['update', 'id' => $category->id],
             ['class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow']
         ) ?>
         <?= Html::a(
-            'Delete',
+            Yii::t('app','Delete'),
             ['delete', 'id' => $category->id],
             [
                 'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadow',
@@ -82,7 +82,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-        Description
+       <?= Yii::t('blog/category','Description')?>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>

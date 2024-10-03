@@ -5,6 +5,7 @@ namespace core\forms\manage\Schedule\Event\FreeTime;
 
 
 use core\forms\CompositeForm;
+use core\helpers\tHelper;
 
 /**
  * @property AdditionalForm $additional
@@ -30,7 +31,14 @@ class FreeTimeCreateForm extends CompositeForm
             [['notice'],'string'],
         ];
     }
-
+    public function attributeLabels()
+    {
+        return [
+            'start' => tHelper::translate('schedule/free','Start'),
+            'end' => tHelper::translate('schedule/free','End'),
+            'notice' => tHelper::translate('schedule/free','Notice'),
+        ];
+    }
     protected function internalForms(): array
     {
         return ['additional','master'];

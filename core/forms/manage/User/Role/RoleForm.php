@@ -5,6 +5,7 @@ namespace core\forms\manage\User\Role;
 
 
 use core\entities\User\Role;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 class RoleForm extends Model
@@ -32,6 +33,12 @@ class RoleForm extends Model
                 'targetClass' => Role::class,
                 'filter' => $this->_role ? ['<>', 'id', $this->_role->id] : null
             ],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('role','name'),
         ];
     }
 }

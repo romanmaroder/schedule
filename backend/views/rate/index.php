@@ -13,7 +13,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Rates';
+$this->title = Yii::t('rate','rate');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -24,7 +24,7 @@ PluginAsset::register($this)->add(
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::a('Create Rate', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
         </h3>
 
         <div class='card-tools'>

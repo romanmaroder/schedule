@@ -16,9 +16,9 @@ class CharacteristicHelper
     public static function typeList():array
     {
         return[
-            Characteristic::TYPE_STRING => 'String',
-            Characteristic::TYPE_INTEGER => 'Integer',
-            Characteristic::TYPE_FLOAT => 'Float number',
+            Characteristic::TYPE_STRING => \Yii::t('product/product','String'),
+            Characteristic::TYPE_INTEGER => \Yii::t('product/product','Integer'),
+            Characteristic::TYPE_FLOAT => \Yii::t('product/product','Float number'),
         ];
     }
 

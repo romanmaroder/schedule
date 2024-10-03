@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Service;
 
 use core\entities\Schedule\Service\Category;
 use core\entities\Schedule\Service\Service;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -47,6 +48,14 @@ class CategoriesForm extends Model
             ['main', 'integer'],
             ['others', 'each', 'rule' => ['integer']],
             ['others', 'default', 'value' => []],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'main' => tHelper::translate('schedule/service/category', 'Main'),
+            'others' => tHelper::translate('schedule/service/category', 'Others'),
         ];
     }
 }

@@ -3,7 +3,7 @@
 
 
 /* @var $this \yii\web\View */
-/* @var $model \core\forms\manage\Schedule\Event\FreeTime\FreeTimeEditFormCopyForm */
+/* @var $model \core\forms\manage\Schedule\Event\FreeTime\FreeTimeCopyForm */
 /* @var $free \core\entities\Schedule\Event\FreeTime */
 
 
@@ -12,10 +12,10 @@ use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Copy Event: ' . $free->master->username;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->title = Yii::t('schedule/free','Copy Event: ') . $free->master->username;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $free->master->username, 'url' => ['view', 'id' => $free->id]];
-$this->params['breadcrumbs'][] = 'copying';
+$this->params['breadcrumbs'][] = Yii::t('app','Copy');
 
 ?>
 <div class="free-time-copy container-fluid">
@@ -187,7 +187,7 @@ $this->params['breadcrumbs'][] = 'copying';
             <div class="row">
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
-                            'Save',
+                            Yii::t('app','Save'),
                             ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']
                         ) ?></div>
                 </div>

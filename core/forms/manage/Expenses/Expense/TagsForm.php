@@ -6,6 +6,7 @@ namespace core\forms\manage\Expenses\Expense;
 
 use core\entities\Expenses\Expenses\Expenses;
 use core\entities\Expenses\Expenses\Tag;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -36,6 +37,14 @@ class TagsForm extends Model
             ['existing', 'each', 'rule' => ['integer']],
             ['existing', 'default', 'value' => []],
             ['textNew', 'string'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return[
+            'textNew' => tHelper::translate('expenses/tag', 'Text'),
+            'existing' => tHelper::translate('expenses/tag', 'Existing'),
         ];
     }
 

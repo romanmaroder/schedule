@@ -6,6 +6,7 @@ namespace core\forms\manage\User\Price;
 
 use core\entities\User\Price;
 use core\forms\CompositeForm;
+use core\helpers\tHelper;
 
 
 /**
@@ -29,6 +30,13 @@ class SimpleAddForm extends CompositeForm
            [ ['rate','price'], 'integer'],
             ['rate', 'safe'],
             ['price', 'safe'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'rate' => tHelper::translate('price','rate'),
         ];
     }
 

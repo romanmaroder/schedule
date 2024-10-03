@@ -4,10 +4,10 @@
 /* @var $tag core\entities\Blog\Tag */
 /* @var $model core\forms\manage\Blog\TagForm */
 
-$this->title = 'Update Tag: ' . $tag->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];
+$this->title = Yii::t('blog/tag','Update Tag: ') . $tag->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog/tag','Tags'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $tag->name, 'url' => ['view', 'id' => $tag->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="tag-update">
 

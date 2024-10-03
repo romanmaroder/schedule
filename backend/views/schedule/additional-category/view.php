@@ -11,7 +11,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $category->name;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional/category','Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -21,9 +21,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-secondary">
         <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $category->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
+            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $category->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'id' => $category->id],
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow btn-gradient',
@@ -63,7 +63,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-secondary">
         <div class="card-header">
-            Description
+            <?=Yii::t('schedule/additional/category','Description')?>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>

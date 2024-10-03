@@ -17,6 +17,8 @@ return [
     'Full Name'=>'Ф.И.О',
     'Default color'=>'Цвет',
     'Tools'=>'Набор',
+    'TOOLS READY'=>'Готов',
+    'TOOLS ARE NOT READY'=>'Не готов',
     'Cost'=>'Стоимость',
     'Cash register'=>'Вид оплаты касса',
     'Pay'=>'Оплатить',

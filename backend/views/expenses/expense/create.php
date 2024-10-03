@@ -9,8 +9,8 @@ use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Create Expense';
-$this->params['breadcrumbs'][] = ['label' => 'Expemses', 'url' => ['index']];
+$this->title = Yii::t('expenses/expenses','Create Expense');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('expenses/expenses','Expenses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="expense-create">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ); ?>
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Common</h3>
+            <h3 class='card-title'><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-12">
             <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Categories</h3>
+                    <h3 class='card-title'><?=Yii::t('expenses/category','Categories')?></h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
                                 class='fas fa-expand'></i>
@@ -118,7 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-12">
             <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Tags</h3>
+                    <h3 class='card-title'><?=Yii::t('expenses/tag','Tags')?></h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
                                 class='fas fa-expand'></i>
@@ -135,7 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="form-group">
                         <?= $form->field($model->tags, 'textNew')->textInput(
                             ['placeholder' => $model->getAttributeLabel('name')]
-                        )->label($model->getAttributeLabel('textNew')) ?>
+                        )->label($model->tags->getAttributeLabel('textNew')) ?>
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <div class="card-footer bg-secondary form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
     </div>
 
     <?php

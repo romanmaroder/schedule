@@ -11,7 +11,7 @@ use yii\widgets\DetailView;
 /** @var core\entities\user\User $model */
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user','Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -21,8 +21,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 <div class="card card-secondary">
     <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
-            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
+            <?= Html::a(Yii::t('app','Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient',
                 'id' => 'delete',
                 'data' => [

@@ -4,9 +4,9 @@
 namespace core\forms\manage\User\Price;
 
 
-use core\entities\Schedule\Event\Event;
 use core\entities\Schedule\Service\Service;
 use core\entities\User\Price;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -41,4 +41,10 @@ class ServicesForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'lists'=>tHelper::translate('price/category','lists')
+        ];
+    }
 }

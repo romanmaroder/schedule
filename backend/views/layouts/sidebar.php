@@ -60,7 +60,7 @@ use yii\helpers\Html;
                     ],
                     'items' => [
                         [
-                            'label' => 'Management',
+                            'label' => Yii::t('app','Management'),
                             'icon' => 'tachometer-alt',
                             'badge' => '<span class="right badge badge-info">2</span>',
                             'options' => ['class' => 'header'],
@@ -68,57 +68,57 @@ use yii\helpers\Html;
                                 //['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
                                 //['label' => 'Inactive Page', 'iconStyle' => 'far'],
                                 [
-                                    'label' => 'Schedule',
+                                    'label' => Yii::t('app','Schedule'),
                                     'icon' => 'fas fa-folder-plus',
                                     'items' => [
                                         [
-                                            'label' => 'Events',
+                                            'label' => Yii::t('app','Events'),
                                             'icon' => 'far fa-file-alt',
                                             'url' => ['/schedule/event/index'],
                                             'active' => $this->context->id == 'schedule/event'
                                         ],
                                         [
-                                            'label' => 'Education',
+                                            'label' => Yii::t('schedule/education','Education'),
                                             'icon' => 'fas fa-graduation-cap',
                                             'url' => ['/schedule/education/index'],
                                             'active' => $this->context->id == 'schedule/education'
                                         ],
                                         [
-                                            'label' => 'Free Time',
+                                            'label' => Yii::t('schedule/free','Free time'),
                                             'icon' => 'fas fa-subway',
                                             'url' => ['/schedule/free-time/index'],
                                             'active' => $this->context->id == 'schedule/free-time'
                                         ],
                                         [
-                                            'label' => 'Calendar',
+                                            'label' => Yii::t('schedule/calendar','Calendar'),
                                             'icon' => 'far fa-calendar-alt',
                                             'url' => ['/schedule/calendar/calendar'],
                                             'active' => $this->context->id == 'schedule/calendar'
                                         ],
                                         [
-                                            'label' => 'Missed user',
+                                            'label' => Yii::t('user','Missed users'),
                                             'icon' => 'fas fa-user-clock',
                                             'url' => ['/schedule/missing-users/index'],
                                             'active' => $this->context->id == 'schedule/missing-users'
                                         ],
                                         [
-                                            'label' => 'Service',
+                                            'label' => Yii::t('schedule/service','Services'),
                                             'icon' => 'fas fa-hand-spock',
                                             'items' => [
                                                 [
-                                                    'label' => 'Service',
+                                                    'label' => Yii::t('schedule/service','Service'),
                                                     'icon' => 'fas fa-clipboard-list',
                                                     'url' => ['/schedule/service/index'],
                                                     'active' => $this->context->id == 'schedule/service'
                                                 ],
                                                 [
-                                                    'label' => 'Categories',
+                                                    'label' => Yii::t('schedule/service/category','Categories'),
                                                     'icon' => 'fa-solid fa-list',
                                                     'url' => ['/schedule/category/index'],
                                                     'active' => $this->context->id == 'schedule/category'
                                                 ],
                                                 [
-                                                    'label' => 'Tags',
+                                                    'label' => Yii::t('schedule/service/tag','Tags'),
                                                     'icon' => 'fa-solid fa-tags',
                                                     'url' => ['/schedule/tag/index'],
                                                     'active' => $this->context->id == 'schedule/tag'
@@ -126,17 +126,17 @@ use yii\helpers\Html;
                                             ]
                                         ],
                                         [
-                                            'label' => 'Additional',
+                                            'label' => Yii::t('schedule/additional','Additional'),
                                             'icon' => 'fas fa-suitcase-rolling',
                                             'items' => [
                                                 [
-                                                    'label' => 'Additional',
+                                                    'label' => Yii::t('schedule/additional','Additional one'),
                                                     'icon' => 'fas fa-subway',
                                                     'url' => ['/schedule/additional/index'],
                                                     'active' => $this->context->id == 'schedule/additional'
                                                 ],
                                                 [
-                                                    'label' => 'Categories',
+                                                    'label' =>Yii::t('schedule/additional/category','Categories'),
                                                     'icon' => 'fa-solid fa-list',
                                                     'url' => ['/schedule/additional-category/index'],
                                                     'active' => $this->context->id == 'schedule/additional-category'
@@ -201,23 +201,23 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
-                                    'label' => 'Expense',
+                                    'label' =>  Yii::t('expenses/expenses','Expense'),
                                     'icon' => 'fas fa-balance-scale',
                                     'items' => [
                                         [
-                                            'label' => 'Expense',
+                                            'label' => Yii::t('expenses/expenses','Expenses'),
                                             'icon' => 'fas fa-clipboard-list',
                                             'url' => ['/expenses/expense/index'],
                                             'active' => $this->context->id == 'expenses/expense'
                                         ],
                                         [
-                                            'label' => 'Categories',
+                                            'label' => Yii::t('expenses/category','Categories'),
                                             'icon' => 'fas fa-clipboard-list',
                                             'url' => ['/expenses/category/index'],
                                             'active' => $this->context->id == 'expenses/category'
                                         ],
                                         [
-                                            'label' => 'Tags',
+                                            'label' => Yii::t('expenses/tag','Tags'),
                                             'icon' => 'fa-solid fa-tags',
                                             'url' => ['/expenses/tag/index'],
                                             'active' => $this->context->id == 'expenses/tag'
@@ -225,35 +225,35 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
-                                    'label' => 'Users',
+                                    'label' => Yii::t('user','Users'),
                                     'icon' => 'fas fa-users-cog',
                                     'items' => [
                                         [
-                                            'label' => 'Users',
+                                            'label' => Yii::t('user','Users'),
                                             'icon' => 'fas fa-users',
                                             'url' => ['/user/index'],
                                             'active' => $this->context->id == 'user'
                                         ],
                                         [
-                                            'label' => 'Employee',
+                                            'label' => Yii::t('user/employee','Employees'),
                                             'icon' => 'fas fa-user-tie',
                                             'url' => ['/employee/index'],
                                             'active' => $this->context->id == 'employee'
                                         ],
                                         [
-                                            'label' => 'Role',
+                                            'label' => Yii::t('role','Roles'),
                                             'icon' => 'fas fa-user-tag',
                                             'url' => ['/role/index'],
                                             'active' => $this->context->id == 'role'
                                         ],
                                         [
-                                            'label' => 'Rate',
+                                            'label' => Yii::t('rate','rate'),
                                             'icon' => 'fas fa-percent',
                                             'url' => ['/rate/index'],
                                             'active' => $this->context->id == 'rate'
                                         ],
                                         [
-                                            'label' => 'Price',
+                                            'label' => Yii::t('price','Prices'),
                                             'icon' => 'fas fa-money-check-alt',
                                             'url' => ['/price/index'],
                                             'active' => $this->context->id == 'price'
@@ -261,29 +261,29 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
-                                    'label' => 'Blog',
+                                    'label' => Yii::t('blog','Blog'),
                                     'icon' => 'fas fa-blog',
                                     'items' => [
                                         [
-                                            'label' => 'Posts',
+                                            'label' => Yii::t('blog','Posts'),
                                             'icon' => 'fas fa-keyboard',
                                             'url' => ['/blog/post/index'],
                                             'active' => $this->context->id == 'blog/post'
                                         ],
                                         [
-                                            'label' => 'Tags',
+                                            'label' => Yii::t('blog/tag','Tags'),
                                             'icon' => 'fa-solid fa-tags',
                                             'url' => ['/blog/tag/index'],
                                             'active' => $this->context->id == 'blog/tag'
                                         ],
                                         [
-                                            'label' => 'Categories',
+                                            'label' => Yii::t('blog/category','Categories'),
                                             'icon' => 'fas fa-clipboard-list',
                                             'url' => ['/blog/category/index'],
                                             'active' => $this->context->id == 'blog/category'
                                         ],
                                         [
-                                            'label' => 'Comments',
+                                            'label' => Yii::t('blog/comments','Comments'),
                                             'icon' => 'fas fa-comments',
                                             'url' => ['/blog/comment/index'],
                                             'active' => $this->context->id == 'blog/comment'

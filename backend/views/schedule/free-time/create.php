@@ -11,8 +11,8 @@ use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Create Event';
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->title = Yii::t('schedule/free','Create Event');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ); ?>
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>New event</h3>
+            <h3 class='card-title'><?=Yii::t('schedule/free','New event')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -175,7 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
+                        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
                     </div>
                 </div>
             </div>

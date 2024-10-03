@@ -5,6 +5,7 @@ namespace core\forms\manage\Blog\Post;
 
 
 use core\entities\Blog\Post\Comment;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 class CommentEditForm extends Model
@@ -25,6 +26,13 @@ class CommentEditForm extends Model
             [['text'], 'required'],
             ['text', 'string'],
             ['parentId', 'integer'],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return[
+            'text' => tHelper::translate('blog/comments', 'Text'),
+            'parentId' => tHelper::translate('blog/comments', 'Parent Id'),
         ];
     }
 }

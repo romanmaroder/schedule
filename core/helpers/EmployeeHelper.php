@@ -15,8 +15,8 @@ class EmployeeHelper
     public static function statusList(): array
     {
         return [
-            Employee::STATUS_INACTIVE => 'Inactive',
-            Employee::STATUS_ACTIVE => 'Active',
+            Employee::STATUS_INACTIVE => \Yii::t('app','Inactive'),
+            Employee::STATUS_ACTIVE => \Yii::t('app','Active'),
         ];
     }
 
@@ -57,9 +57,9 @@ class EmployeeHelper
     public static function rolesList(): array
     {
         return [
-            Rbac::ROLE_ADMIN => 'admin',
-            Rbac::ROLE_EMPLOYEE => 'employee',
-            Rbac::ROLE_MANAGER => 'manager',
+            Rbac::ROLE_ADMIN => Yii::t('role','admin'),
+            Rbac::ROLE_EMPLOYEE => Yii::t('role','employee'),
+            Rbac::ROLE_MANAGER => Yii::t('role','manager'),
         ];
     }
 

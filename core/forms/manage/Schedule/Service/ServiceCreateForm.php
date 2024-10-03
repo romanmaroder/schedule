@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Service;
 
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 
 /**
  * @property PriceForm $price
@@ -33,6 +34,14 @@ class ServiceCreateForm extends CompositeForm
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
             [['description'], 'string'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('schedule/service', 'Name'),
+            'description' => tHelper::translate('schedule/service', 'Description'),
         ];
     }
 

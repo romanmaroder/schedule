@@ -10,6 +10,7 @@ use core\entities\Schedule\Event\Event;
 use core\entities\User\Employee\Employee;
 use core\entities\User\events\UserSignUpConfirmed;
 use core\entities\User\events\UserSignUpRequested;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -316,6 +317,19 @@ class User extends ActiveRecord implements AggregateRoot
     public function getWeekends()
     {
         return $this->schedule->weekends;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' =>tHelper::translate('user','Username') ,
+            'email' =>tHelper::translate('user','Email') ,
+            'phone' =>tHelper::translate('user','Phone') ,
+            'status' =>tHelper::translate('user','Status'),
+            'notice' =>tHelper::translate('user','Notice') ,
+            'created_at' =>tHelper::translate('app','Created At') ,
+            'updated_at' =>tHelper::translate('app','Updated At') ,
+        ];
     }
 
     /**

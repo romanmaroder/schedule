@@ -8,6 +8,7 @@ use core\forms\CompositeForm;
 use core\forms\manage\AddressForm;
 use core\forms\manage\ScheduleForm;
 use core\forms\manage\User\UserEmployeeCreateForm;
+use core\helpers\tHelper;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -44,6 +45,23 @@ class EmployeeCreateForm extends CompositeForm
             [['firstName', 'lastName'], 'string', 'max' => 100],
             [['birthday', 'phone', 'color'], 'string'],
             [['status', 'roleId'], 'integer'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'userId' => tHelper::translate('user/employee', 'User Id'),
+            'rateId' => tHelper::translate('user/employee', 'Rate Id'),
+            'roleId' => tHelper::translate('user/employee', 'Role Id'),
+            'priceId' => tHelper::translate('user/employee', 'Price Id'),
+            'phone' => tHelper::translate('user/employee', 'Phone'),
+            'role' => tHelper::translate('user/employee', 'Role'),
+            'firstName' => tHelper::translate('user/employee', 'First Name'),
+            'lastName' => tHelper::translate('user/employee', 'Last Name'),
+            'birthday' => tHelper::translate('user/employee', 'Birthday'),
+            'status' => tHelper::translate('user/employee', 'Status'),
+            'color' => tHelper::translate('user/employee', 'Color'),
         ];
     }
 

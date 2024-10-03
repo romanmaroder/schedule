@@ -15,7 +15,7 @@ use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\web\YiiAsset;
 
-$this->title = 'Posts';
+$this->title = Yii::t('blog/comments','Comments');
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);

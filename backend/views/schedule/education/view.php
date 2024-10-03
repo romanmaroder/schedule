@@ -6,13 +6,12 @@
 /* @var $model \core\entities\Schedule\Event\Education */
 
 use hail812\adminlte3\assets\PluginAsset;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Lesson', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education','Lesson'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -88,7 +87,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             if (Yii::$app->id == 'app-backend'): ?>
                 <p>
                     <?= Html::a(
-                        'Update',
+                        Yii::t('app','Update'),
                         ['update', 'id' => $model->id],
                         [
                             'id' => 'edit-link',

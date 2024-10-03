@@ -5,13 +5,14 @@ namespace core\forms\manage\Schedule\Event;
 
 
 use core\entities\Schedule\Event\Event;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
 class ServicesForm extends Model
 {
     public array $lists = [];
-    private array $services=[];
+    private array $services = [];
 
     public function __construct(Event $event = null, $config = [])
     {
@@ -37,4 +38,12 @@ class ServicesForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'lists' => tHelper::translate('schedule/event/service', 'Lists'),
+            'services' => tHelper::translate('schedule/event/service', 'Services'),
+
+        ];
+    }
 }

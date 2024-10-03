@@ -13,8 +13,8 @@ class ToolsHelper
     public static function statusList(): array
     {
         return [
-            Event::TOOLS_ARE_NOT_READY => 'TOOLS ARE NOT READY',
-            Event::TOOLS_READY => 'TOOLS READY',
+            Event::TOOLS_ARE_NOT_READY => \Yii::t('schedule/event','TOOLS ARE NOT READY'),
+            Event::TOOLS_READY => \Yii::t('schedule/event','TOOLS READY'),
         ];
     }
 

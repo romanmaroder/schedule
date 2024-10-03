@@ -4,6 +4,7 @@
 namespace core\entities\Expenses\Expenses;
 
 
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -36,6 +37,17 @@ class Tag extends ActiveRecord
     {
         $this->name = $name;
         $this->slug = $slug;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('expenses/tag', 'Name'),
+            'slug' => tHelper::translate('expenses/tag', 'Slug'),
+            'meta.title' => tHelper::translate('meta', 'Title'),
+            'meta.description' => tHelper::translate('meta', 'Description'),
+            'meta.keywords' => tHelper::translate('meta', 'Keywords'),
+        ];
     }
 
     public static function tableName():string

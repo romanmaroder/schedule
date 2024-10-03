@@ -13,7 +13,7 @@ use yii\widgets\DetailView;
 /* @var $service core\entities\Schedule\Service\Service */
 
 $this->title = $service->name;
-$this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/service','Service'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -28,22 +28,22 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         <?php
                         if ($service->isActive()) : ?>
                             <?= Html::a(
-                                'Draft',
+                                Yii::t('app','Draft'),
                                 ['draft', 'id' => $service->id],
                                 ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow', 'data-method' => 'post']
                             ) ?>
                         <?php
                         else : ?>
                             <?= Html::a(
-                                'Activate',
+                                Yii::t('app','Activate'),
                                 ['activate', 'id' => $service->id],
                                 ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient btn-shadow', 'data-method' => 'post']
                             ) ?>
                         <?php
                         endif; ?>
-                        <?= Html::a('Update', ['update', 'id' => $service->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow']) ?>
+                        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $service->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient btn-shadow']) ?>
                         <?= Html::a(
-                            'Delete',
+                            Yii::t('app','Delete'),
                             ['delete', 'id' => $service->id],
                             [
                                 'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient btn-shadow',
@@ -89,11 +89,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     'value' => ArrayHelper::getValue($service, 'category.name'),
                                 ],
                                 [
-                                    'label' => 'Other categories',
+                                    'attribute' => 'category.others',
+                                    //'label' => 'Other categories',
                                     'value' => implode(', ', ArrayHelper::getColumn($service->categories, 'name')),
                                 ],
                                 [
-                                    'label' => 'Tags',
+                                    'attribute' => 'tags.name',
+                                    //'label' => 'Tags',
                                     'value' => implode(', ', ArrayHelper::getColumn($service->tags, 'name')),
                                 ],
                             ],
@@ -101,7 +103,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ) ?>
                     <br/>
                     <p>
-                        <?= Html::a('Change Price', ['price', 'id' => $service->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
+                        <?= Html::a(Yii::t('schedule/service/price','Change Price'), ['price', 'id' => $service->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
                     </p>
                 </div>
             </div>
@@ -111,7 +113,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-outline card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Description</h3>
+            <h3 class='card-title'><?=Yii::t('schedule/service','Description')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>

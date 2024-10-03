@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $tag core\entities\Blog\Tag */
 
 $this->title = $tag->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog/tag','Tags'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -18,9 +18,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
 <div class="tag-view">
     <div class="card card-secondary">
         <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $tag->id], ['class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow']) ?>
+            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $tag->id], ['class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow']) ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'id' => $tag->id],
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadow',

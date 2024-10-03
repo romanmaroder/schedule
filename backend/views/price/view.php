@@ -11,7 +11,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $price->name;
-$this->params['breadcrumbs'][] = ['label' => 'Price', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('price','Prices'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -20,7 +20,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 <div class="price-view">
     <div class="card card-secondary">
         <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $price->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
+            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $price->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
             <?= Html::a(
                 Yii::t('app', 'Delete'),
                 ['delete', 'id' => $price->id],

@@ -3,8 +3,8 @@
 /* @var $this yii\web\View */
 /* @var $model core\forms\manage\Blog\Post\PostForm */
 
-$this->title = 'Create Post';
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->title = Yii::t('blog','Create Post');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog','Post'),'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

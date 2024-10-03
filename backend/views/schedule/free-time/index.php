@@ -16,7 +16,7 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 
-$this->title = 'Free time';
+$this->title = Yii::t('schedule/free','Free time');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card card-secondary">
                 <div class='card-header'>
                     <h3 class='card-title'>
-                        <?= Html::a('Create Event', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+                        <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
                     </h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
@@ -79,9 +79,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'value' => function ($model) {
                                         return $model->notice;
                                     },
-                                    'headerOptions' => ['class' => 'text-center'],
+                                    'headerOptions' => ['class' => 'text-left'],
                                     'contentOptions' => [
-                                        'class' => ['text-center align-middle']
+                                        'class' => ['text-left align-middle']
                                     ],
                                     'format' => 'raw',
 
@@ -89,8 +89,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'class' => 'yii\grid\ActionColumn',
                                     'template' => '{copy}',
-                                    //'header' => '<i class="fas fa-cash-register"></i>',
-                                    'header' => 'Copy',
+                                    'header' => '<i class="far fa-copy"></i>',
+                                    //'header' => 'Copy',
                                     'headerOptions' => [
                                         'class'=>'text-center'
                                     ],
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'buttons' => [
                                         'copy' => function ($url, $model, $key) {
                                             return  Html::a(
-                                                'COPY',
+                                                Yii::t('app','Copy'),
                                                 Url::to(['schedule/free-time/copy', 'id' => $model->id]),
                                                 ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
                                             );

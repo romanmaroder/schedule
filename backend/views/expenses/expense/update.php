@@ -10,10 +10,10 @@
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Update Expense: ' . $expense->name;
-$this->params['breadcrumbs'][] = ['label' => 'Expenses', 'url' => ['index']];
+$this->title = Yii::t('expenses/expenses','Update Expense: ') . $expense->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('expenses/expenses','Expenses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $expense->name, 'url' => ['view', 'id' => $expense->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="expense-update">
 
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Common
+               <?=Yii::t('app',' Common')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -38,8 +38,10 @@ $this->params['breadcrumbs'][] = 'Update';
                 <div class="col-md-6">
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                 </div>
+                <div class="col-md-6">
+                    <?= $form->field($model, 'value')->textInput() ?>
+                </div>
             </div>
-            <?= $form->field($model, 'value')->textInput() ?>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -50,7 +52,8 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Categories
+                <?=Yii::t('expenses/category','Categories')?>
+
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -76,7 +79,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Tags
+             <?=Yii::t('expenses/tag','Tags')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -99,7 +102,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <!-- /.card-body -->
     <div class="card-footer">
         <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+            <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
         </div>
         <!--Footer-->
     </div>

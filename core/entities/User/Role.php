@@ -4,6 +4,7 @@
 namespace core\entities\User;
 
 
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -24,6 +25,13 @@ class Role extends ActiveRecord
     public function edit($name)
     {
         $this->name = $name;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::translate('role','name'),
+        ];
     }
 
     public static function tableName(): string

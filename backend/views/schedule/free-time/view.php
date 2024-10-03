@@ -11,7 +11,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $model->master->username;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -79,7 +79,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             if (Yii::$app->id == 'app-backend'): ?>
                 <p>
                     <?= Html::a(
-                        'Update',
+                        Yii::t('app','Update'),
                         ['update', 'id' => $model->id],
                         [
                             'id' => 'edit-link',

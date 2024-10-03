@@ -47,7 +47,7 @@ use yii\helpers\Html;
                                     let data_id = $("#master").val();
                                     console.log(data_id);
                                     $.ajax({
-                                        url: "/schedule/event/check",
+                                        url: "/employee/schedule",
                                         method: "get",
                                         dataType: "json",
                                         data: {id: data_id},
@@ -112,7 +112,7 @@ use yii\helpers\Html;
                         'language' => 'ru',
                         'data' => $model->master->masterList(),
                         'options' => [
-                            //'id' => 'master',
+                            'id' => 'master',
                             'placeholder' => 'Select'
                         ],
                         'pluginOptions' => [
@@ -127,11 +127,11 @@ use yii\helpers\Html;
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                           $("#eventcreateform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-                                           $("#eventcreateform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventeditform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
                                            
-                                           $("#eventcreateform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           $("#eventcreateform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventeditform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
                                         
                                         },
                                         error: function(data , jqXHR, exception){
@@ -333,7 +333,7 @@ use yii\helpers\Html;
     <div class="row">
         <div class="col-12">
             <div class="form-group"> <?= Html::submitButton(
-                    'Save',
+                    Yii::t('app','Save'),
                     ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']
                 ) ?></div>
         </div>

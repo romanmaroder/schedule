@@ -8,10 +8,10 @@ use yii\helpers\Html;
 /* @var $service \core\entities\Expenses\Expenses\Expenses */
 /* @var $model core\forms\manage\Schedule\Service\ServiceEditForm */
 
-$this->title = 'Update Service: ' . $service->name;
-$this->params['breadcrumbs'][] = ['label' => 'Services', 'url' => ['index']];
+$this->title = Yii::t('schedule/service','Update Service: ') . $service->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/service','Services'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $service->name, 'url' => ['view', 'id' => $service->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="service-update">
 
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Common
+                <?=Yii::t('app','Common')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -47,7 +47,8 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Categories
+                <?=Yii::t('schedule/service/category','Categories')?>
+
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -73,7 +74,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Tags
+                <?=Yii::t('schedule/service/tag','Tags')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -112,7 +113,7 @@ $this->params['breadcrumbs'][] = 'Update';
         <!-- /.card-body -->
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+                <?= Html::submitButton(Yii::t('schedule/service','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
             </div>
             <!--Footer-->
         </div>

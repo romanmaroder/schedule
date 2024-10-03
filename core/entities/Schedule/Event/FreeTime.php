@@ -7,6 +7,7 @@ namespace core\entities\Schedule\Event;
 use core\entities\Schedule\Additional\Additional;
 use core\entities\User\Employee\Employee;
 use core\entities\User\User;
+use core\helpers\tHelper;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 /**
@@ -87,6 +88,18 @@ class FreeTime extends ActiveRecord
     public function getAdditional(): ActiveQuery
     {
         return $this->hasOne(Additional::class,['id'=>'additional_id']);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'master_id' => tHelper::translate('schedule/free','Master'),
+            'additional_id' => tHelper::translate('schedule/free','Additional'),
+            'start' => tHelper::translate('schedule/free','Start'),
+            'end' => tHelper::translate('schedule/free','End'),
+            'notice' => tHelper::translate('schedule/free','Notice'),
+            'copy' => tHelper::translate('app','Copy'),
+        ];
     }
 
     public static function tableName(): string

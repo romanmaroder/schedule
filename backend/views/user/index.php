@@ -1,10 +1,9 @@
 <?php
 
-use hail812\adminlte3\assets\PluginAsset;
-use kartik\date\DatePicker;
 use core\entities\user\User;
 use core\helpers\UserHelper;
-use yii\grid\ActionColumn;
+use hail812\adminlte3\assets\PluginAsset;
+use kartik\date\DatePicker;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -13,7 +12,7 @@ use yii\helpers\Url;
 /** @var backend\forms\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Users';
+$this->title = Yii::t('user', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -24,7 +23,11 @@ PluginAsset::register($this)->add(
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+            <?= Html::a(
+                Yii::t('app', 'Create'),
+                ['create'],
+                ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
+            ) ?>
         </h3>
 
         <div class='card-tools'>
@@ -46,9 +49,8 @@ PluginAsset::register($this)->add(
                     'id' => 'user'
                 ],
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
-                     'id',
+                    // ['class' => 'yii\grid\SerialColumn'],
+                    //  'id',
                     [
                         'attribute' => 'username',
                         'value' => function (User $model) {
@@ -119,6 +121,7 @@ $js = <<< JS
  $(function () {
  
     $('#user').DataTable({
+        bStateSave: true,
         pageLength: -1, 
         paging: true,
         lengthChange: true,

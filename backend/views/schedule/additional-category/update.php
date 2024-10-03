@@ -7,10 +7,10 @@
 /* @var $category \core\entities\Schedule\Additional\Category */
 
 
-$this->title = 'Update Category: ' . $category->name;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->title = Yii::t('schedule/additional/category','Update Category: ') . $category->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional/category','Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['view', 'id' => $category->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="category-update">
 

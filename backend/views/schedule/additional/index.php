@@ -1,8 +1,8 @@
 <?php
 
 use core\entities\Schedule\Additional\Additional;
-use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\AdditionalHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -12,8 +12,8 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
-$this->title                   ='Additional';
-$this->params['breadcrumbs'][] = ['label' => 'Additional', 'url' => ['index']];
+$this->title = Yii::t('schedule/additional', 'Additional');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional', 'Additional'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -24,18 +24,24 @@ PluginAsset::register($this)->add(
         <div class="invoice p-3 mb-3">
             <div class="card card-secondary">
                 <div class="card-header">
-                <h3 class="card-title ">
-                    <?= Html::a('Create Additional', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
-                </h3>
+                    <h3 class="card-title ">
+                        <?= Html::a(
+                            Yii::t('app', 'Create'),
+                            ['create'],
+                            ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
+                        ) ?>
+                    </h3>
                     <div class='card-tools'>
-                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                    class='fas fa-expand'></i>
                         </button>
-                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                    class='fas fa-minus'></i>
                         </button>
                     </div>
-            </div>
-            <div class="card-body">
-                <?= GridView::widget(
+                </div>
+                <div class="card-body">
+                    <?= GridView::widget(
                     [
                         'dataProvider' => $dataProvider,
                         //'filterModel' => $searchModel,

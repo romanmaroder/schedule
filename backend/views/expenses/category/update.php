@@ -6,10 +6,10 @@
 /* @var $model \core\forms\manage\Expenses\CategoryForm */
 /* @var $category \core\entities\Expenses\Category */
 
-$this->title = 'Update Expenses categories: ' . $category->name;
-$this->params['breadcrumbs'][] = ['label' => 'Expenses categories', 'url' => ['index']];
+$this->title = Yii::t('expenses/category','Update Category: ') . $category->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('expenses/category','Categories expenses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['view', 'id' => $category->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="category-update">
 

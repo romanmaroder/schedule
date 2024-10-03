@@ -8,10 +8,10 @@ use yii\helpers\Html;
 /* @var $model core\forms\manage\Schedule\Additional\AdditionalEditForm */
 /* @var $additional  \core\entities\Schedule\Additional\Additional */
 
-$this->title = 'Update Additional: ' . $additional->name;
-$this->params['breadcrumbs'][] = ['label' => 'Additional', 'url' => ['index']];
+$this->title = Yii::t('schedule/additional','Update Additional: ') . $additional->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional','Additional'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $additional->name, 'url' => ['view', 'id' => $additional->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="service-update">
 
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Common
+                <?=Yii::t('app','Common')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Categories
+                <?=Yii::t('schedule/additional/category','Categories')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = 'Update';
         <!-- /.card-body -->
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
             </div>
             <!--Footer-->
         </div>

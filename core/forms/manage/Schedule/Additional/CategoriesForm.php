@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Additional;
 
 use core\entities\Schedule\Additional\Category;
 use core\entities\Schedule\Additional\Additional;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -47,6 +48,14 @@ class CategoriesForm extends Model
             ['main', 'integer'],
             ['others', 'each', 'rule' => ['integer']],
             ['others', 'default', 'value' => []],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'main'=>tHelper::t('schedule/additional/category','Main'),
+            'others'=>tHelper::t('schedule/additional/category','Others'),
         ];
     }
 }

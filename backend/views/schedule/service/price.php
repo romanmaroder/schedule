@@ -4,13 +4,13 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $service core\entities\Schedule\Service\Expenses */
+/* @var $service \core\entities\Schedule\Service\Service */
 /* @var $model core\forms\manage\Schedule\Service\PriceForm */
 
-$this->title                   ='Price for Service: ' . $service->name;
-$this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];
+$this->title                   =Yii::t('schedule/service/price','Price for Service: ') . $service->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/service','Service'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $service->name, 'url' => ['view', 'id' => $service->id]];
-$this->params['breadcrumbs'][] = 'Price';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="service-price">
 
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Price';
 
     <div class="card card-outline card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Common</h3>
+            <h3 class='card-title'><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Price';
         </div>
         <div class="card-footer bg-secondary">
             <div class='form-group'>
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
             </div>
         </div>
     </div>

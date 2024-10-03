@@ -7,6 +7,7 @@ namespace core\forms\manage\Schedule\Additional;
 use core\entities\Schedule\Additional\Additional;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 
 /**
  * @property MetaForm $meta
@@ -37,6 +38,13 @@ class AdditionalEditForm extends CompositeForm
             [[ 'name'], 'required'],
             [['name'], 'string', 'max' => 255],
             [['description'],'string'],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::t('schedule/additional','Name'),
+            'description'=>tHelper::t('schedule/additional','Description'),
         ];
     }
 

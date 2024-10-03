@@ -7,6 +7,7 @@ namespace core\entities\Schedule\Service;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
 use core\entities\Schedule\Service\queries\CategoryQuery;
+use core\helpers\tHelper;
 use paulzi\nestedsets\NestedSetsBehavior;
 use yii\db\ActiveRecord;
 
@@ -110,5 +111,18 @@ class Category extends ActiveRecord
     public static function find(): CategoryQuery
     {
         return new CategoryQuery(static::class);
+    }
+
+    public function attributeLabels()
+    {
+            return [
+                'name' => tHelper::translate('schedule/service/category', 'Name'),
+                'slug' => tHelper::translate('schedule/service/category', 'Slug'),
+                'title' => tHelper::translate('schedule/service/category', 'Title'),
+                'description' => tHelper::translate('schedule/service/category', 'Description'),
+                'meta.title' => tHelper::translate('meta', 'meta.title'),
+                'meta.description' => tHelper::translate('meta', 'meta.description'),
+                'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
     }
 }

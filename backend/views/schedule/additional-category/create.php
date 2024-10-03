@@ -6,8 +6,8 @@
 /* @var $model \core\forms\manage\Schedule\Additional\CategoryForm */
 
 
-$this->title = 'Create Category';
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->title = Yii::t('schedule/additional/category','Create Category');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional/category','Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-create">

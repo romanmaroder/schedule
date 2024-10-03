@@ -5,6 +5,7 @@ namespace core\entities\Blog\Post;
 
 
 use core\entities\User\Employee\Employee;
+use core\helpers\tHelper;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -77,6 +78,17 @@ class Comment extends ActiveRecord
     public function getEmployee()
     {
         return $this->hasOne(Employee::class, ['user_id' => 'user_id']);
+    }
+    public function attributeLabels()
+    {
+        return [
+            'created_at' => tHelper::translate('blog/comments', 'Created At'),
+            'post_id' => tHelper::translate('blog/comments', 'Post Id'),
+            'user_id' => tHelper::translate('blog/comments', 'User Id'),
+            'parent_id' => tHelper::translate('blog/comments', 'Parent Id'),
+            'text' => tHelper::translate('blog/comments', 'Text'),
+            'active' => tHelper::translate('blog/comments', 'Active'),
+        ];
     }
 
     public static function tableName(): string

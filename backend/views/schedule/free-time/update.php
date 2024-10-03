@@ -11,10 +11,10 @@ use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Update Event: ' . $free->master->username;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->title = Yii::t('schedule/free','Update Event: ') . $free->master->username;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $free->master->username, 'url' => ['view', 'id' => $free->id]];
-$this->params['breadcrumbs'][] = 'update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 
 ?>
 <div class="free-time-update container-fluid">
@@ -203,7 +203,7 @@ $this->params['breadcrumbs'][] = 'update';
             <div class="row">
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
-                            'Save',
+                            Yii::t('app','Save'),
                             ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']
                         ) ?></div>
                 </div>

@@ -14,6 +14,7 @@ use core\entities\User\Price;
 use core\entities\User\Rate;
 use core\entities\User\Role;
 use core\entities\User\User;
+use core\helpers\tHelper;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -231,6 +232,33 @@ class Employee extends ActiveRecord
     public function getEvents(): ActiveQuery
     {
         return $this->hasMany(Event::class, ['master_id' => 'user_id']);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'user_id'=>tHelper::translate('user/employee','User Id'),
+            'rate_id'=>tHelper::translate('user/employee','Rate Id'),
+            'price_id'=>tHelper::translate('user/employee','Price Id'),
+            'first_name'=>tHelper::translate('user/employee','First Name'),
+            'last_name'=>tHelper::translate('user/employee','Last Name'),
+            'phone'=>tHelper::translate('user/employee','Phone'),
+            'employee.phone'=>tHelper::translate('user/employee','Employee phone number'),
+            'birthday'=>tHelper::translate('user/employee','Birthday'),
+            'color'=>tHelper::translate('user/employee','Color'),
+            'role_id'=>tHelper::translate('user/employee','Role Id'),
+            'status'=>tHelper::translate('user/employee','Status'),
+            'role'=>tHelper::translate('user/employee','Role'),
+            'rate'=>tHelper::translate('user/employee','Rate'),
+            'price'=>tHelper::translate('user/employee','Price'),
+            'schedule.hours'=>tHelper::translate('user/schedule','Hours'),
+            'schedule.weekends'=>tHelper::translate('user/schedule','Weekends'),
+            'address.home'=>tHelper::translate('user/schedule','home'),
+            'address.town'=>tHelper::translate('user/address','town'),
+            'address.borough'=>tHelper::translate('user/address','borough'),
+            'address.apartment'=>tHelper::translate('user/address','apartment'),
+            'address.street'=>tHelper::translate('user/address','street'),
+        ];
     }
 
     public static function tableName(): string

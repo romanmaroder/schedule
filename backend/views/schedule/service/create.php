@@ -8,8 +8,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model core\forms\manage\Schedule\Service\ServiceCreateForm */
 
-$this->title = 'Create Service';
-$this->params['breadcrumbs'][] = ['label' => 'Service', 'url' => ['index']];
+$this->title = Yii::t('schedule/service','Create Service');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/service','Service'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="service-create">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ); ?>
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Common</h3>
+            <h3 class='card-title'><?= Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -159,7 +159,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="form-group">
                         <?= $form->field($model->tags, 'textNew')->textInput(
                             ['placeholder' => $model->getAttributeLabel('name')]
-                        )->label($model->getAttributeLabel('textNew')) ?>
+                        ) ?>
                     </div>
                 </div>
             </div>
@@ -180,23 +180,23 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <?= $form->field($model->meta, 'title')->textInput(
                     ['maxlength' => true, 'placeholder' => $model->getAttributeLabel('title')]
-                )->label($model->getAttributeLabel('title')) ?>
+                ) ?>
             </div>
             <div class="form-group">
                 <?= $form->field($model->meta, 'description')->textarea(
                     ['rows' => 2, 'placeholder' => $model->getAttributeLabel('description')]
-                )->label($model->getAttributeLabel('description')) ?>
+                )?>
             </div>
             <div class="form-group">
                 <?= $form->field($model->meta, 'keywords')->textInput(
                     ['maxlength' => true, 'placeholder' => $model->getAttributeLabel('keywords')]
-                )->label($model->getAttributeLabel('keywords')) ?>
+                ) ?>
             </div>
         </div>
     </div>
 
     <div class="card-footer bg-secondary form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
     </div>
 
     <?php

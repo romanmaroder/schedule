@@ -6,6 +6,7 @@ namespace core\entities\Blog;
 
 use core\entities\behaviors\MetaBehavior ;
 use core\entities\Meta;
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -53,6 +54,21 @@ class Category extends ActiveRecord
     {
         return $this->title ?: $this->name;
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'title' => tHelper::translate('blog/category', 'Title'),
+            'name' => tHelper::translate('blog/category', 'Name'),
+            'slug' => tHelper::translate('blog/category', 'Slug'),
+            'description' => tHelper::translate('blog/category', 'Description'),
+            'sort' => tHelper::translate('blog/category', 'Sort'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
+    }
+
 
     public static function tableName(): string
     {

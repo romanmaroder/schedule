@@ -11,10 +11,10 @@ use yii\helpers\Html;
 /* @var $event \core\entities\Schedule\Event\Event */
 /* @var $model\core\forms\manage\Schedule\Event\EventEditForm */
 
-$this->title = 'Copy Event: ' . $event->client->username;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->title = Yii::t('schedule/event','Copy Event: ') . $event->client->username;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $event->client->username, 'url' => ['view', 'id' => $event->id]];
-$this->params['breadcrumbs'][] = 'copying';
+$this->params['breadcrumbs'][] = Yii::t('app','Copy');
 
 ?>
 <div class="event-copy container-fluid">
@@ -322,7 +322,7 @@ $this->params['breadcrumbs'][] = 'copying';
             <div class="row">
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
-                            'Save',
+                            Yii::t('app','Save'),
                             ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']
                         ) ?></div>
                 </div>

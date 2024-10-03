@@ -13,8 +13,8 @@ class ProductHelper
     public static function statusList(): array
     {
         return [
-            Product::STATUS_DRAFT => 'Draft',
-            Product::STATUS_ACTIVE => 'Active',
+            Product::STATUS_DRAFT => \Yii::t('app','Draft'),
+            Product::STATUS_ACTIVE => \Yii::t('app','Active'),
         ];
     }
 

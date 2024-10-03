@@ -7,6 +7,7 @@ namespace core\forms\manage\Blog;
 use core\entities\Blog\Category;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 
 /**
@@ -48,6 +49,16 @@ class CategoryForm extends CompositeForm
             [['description'], 'string'],
             ['slug', SlugValidator::class],
             [['name', 'slug'], 'unique', 'targetClass' => Category::class, 'filter' => $this->_category ? ['<>', 'id', $this->_category->id] : null]
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'title' => tHelper::translate('blog/category', 'Title'),
+            'name' => tHelper::translate('blog/category', 'Name'),
+            'slug' => tHelper::translate('blog/category', 'Slug'),
+            'description' => tHelper::translate('blog/category', 'Description'),
+            'sort' => tHelper::translate('blog/category', 'Sort'),
         ];
     }
 

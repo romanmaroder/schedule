@@ -11,6 +11,10 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+
+$this->title = Yii::t('schedule/education','Education');
+$this->params['breadcrumbs'][] = $this->title;
+
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
@@ -21,7 +25,7 @@ PluginAsset::register($this)->add(
         <div class="card card-secondary">
             <div class='card-header'>
                 <h3 class='card-title'>
-                    <?= Html::a('Create lesson', ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
+                    <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
                 </h3>
                 <div class='card-tools'>
                     <button type='button' class='btn btn-tool' data-card-widget='maximize'><i

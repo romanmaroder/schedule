@@ -58,13 +58,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'format' => ['date', 'php:d-m-Y / H:i'],
                 ],
                 [
-                    'label' => 'Service',
+                    'attribute' => 'service',
+                    //'label' => 'Service',
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
                     'contentOptions' => ['class' => 'text-break'],
                 ],
                 //'amount',
                 [
-                    'attribute' => 'Cost',
+                    'attribute' => 'cost',
                     'value' => $model->getDiscountedPrice($model, $cart),
                     'visible' => $model->isNotPayed(),
                 ],
@@ -93,10 +94,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 
             <?= Html::a(
-                'Update',
+                '<i class="fas fa-pencil-alt"></i>',
                 ['update', 'id' => $model->id],
                 [
                     'id' => 'edit-link',
+                    'title'=>Yii::t('app','Update'),
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
                     'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
                 ]
@@ -108,12 +110,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 
             <?= Html::a(
-                'Tools',
+                '<i class="fas fa-wrench"></i>',
                 ['tools', 'id' => $model->id],
                 [
                     'id' => 'tools-link',
+                    'title'=>Yii::t('schedule/event','Tools'),
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
+                    'class' => 'btn btn-sm btn-secondary btn-shadow bg-gradient'
                 ]
             ) ?>
         <?php endif; ?>
@@ -126,20 +129,21 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
         ?>
         <?= Html::a(
-            Yii::t('app', 'Copy'),
+            '<i class="far fa-copy"></i>',
             ['copy', 'id' => $model->id],
             [
                 'id' => 'copy-link',
+                'title'=>Yii::t('app', 'Copy'),
                 'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
                 'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
-                'title' => 'Copy'
             ]
         ) ?>
         <?= Html::a(
-            Yii::t('app', 'Delete'),
+            '<i class="fas fa-trash-alt"></i>',
             ['delete', 'id' => $model->id],
             [
                 'id' => 'delete',
+                'title'=> Yii::t('app', 'Delete'),
                 'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-5',
                 'data' => [
                     'confirm' => Yii::t('app', 'Delete file?'),

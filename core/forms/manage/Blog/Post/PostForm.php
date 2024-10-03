@@ -7,6 +7,8 @@ use core\entities\Blog\Category;
 use core\entities\Blog\Post\Post;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 
@@ -54,6 +56,15 @@ class PostForm extends CompositeForm
         ];
     }
 
+    public function attributeLabels()
+    {
+        return[
+            'title' => tHelper::translate('blog', 'Title'),
+            'description' => tHelper::translate('blog', 'Description'),
+            'content' => tHelper::translate('blog', 'Content'),
+            'categoryId' => tHelper::translate('blog', 'Category'),
+        ];
+    }
     public function categoriesList(): array
     {
         return ArrayHelper::map(Category::find()->orderBy('sort')->asArray()->all(), 'id', 'name');

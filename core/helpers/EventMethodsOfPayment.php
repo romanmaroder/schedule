@@ -13,8 +13,8 @@ class EventMethodsOfPayment
     public static function statusList(): array
     {
         return [
-            Event::STATUS_CASH => 'CASH',
-            Event::STATUS_CARD=>'CARD'
+            Event::STATUS_CASH => \Yii::t('schedule/event','Cash'),
+            Event::STATUS_CARD=>\Yii::t('schedule/event','Card')
         ];
     }
 

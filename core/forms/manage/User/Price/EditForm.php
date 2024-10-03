@@ -6,6 +6,7 @@ namespace core\forms\manage\User\Price;
 
 use core\entities\User\Price;
 use core\forms\CompositeForm;
+use core\helpers\tHelper;
 
 
 /**
@@ -32,6 +33,14 @@ class EditForm extends CompositeForm
         return [
             ['name', 'string'],
             ['rate', 'integer']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::translate('price','name'),
+            'rate'=>tHelper::translate('price','rate'),
         ];
     }
 

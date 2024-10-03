@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Event;
 
 use core\entities\Schedule\Event\Education;
 use core\entities\User\Employee\Employee;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -31,6 +32,13 @@ class TeacherForm extends Model
         return [
             ['teacher','integer'],
             ['teacher','required']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'teacher' => tHelper::translate('schedule/education', 'Teacher'),
         ];
     }
 }

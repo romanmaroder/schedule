@@ -8,8 +8,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model core\forms\manage\Schedule\Additional\AdditionalCreateForm */
 
-$this->title = 'Create Additional';
-$this->params['breadcrumbs'][] = ['label' => 'Additional', 'url' => ['index']];
+$this->title = Yii::t('schedule/additional','Create Additional');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional','Additional'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="service-create">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ); ?>
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Common</h3>
+            <h3 class='card-title'><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-12">
             <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Categories</h3>
+                    <h3 class='card-title'><?=Yii::t('schedule/additional/category','Categories')?></h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
                                     class='fas fa-expand'></i>
@@ -121,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <?= $form->field($model->meta, 'title')->textInput(
                     ['maxlength' => true, 'placeholder' => $model->getAttributeLabel('title')]
-                )->label($model->getAttributeLabel('title')) ?>
+                )->label($model->meta->getAttributeLabel('title')) ?>
             </div>
             <div class="form-group">
                 <?= $form->field($model->meta, 'description')->textarea(
@@ -131,13 +131,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <?= $form->field($model->meta, 'keywords')->textInput(
                     ['maxlength' => true, 'placeholder' => $model->getAttributeLabel('keywords')]
-                )->label($model->getAttributeLabel('keywords')) ?>
+                )->label($model->meta->getAttributeLabel('keywords')) ?>
             </div>
         </div>
     </div>
 
     <div class="card-footer bg-secondary form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
     </div>
 
     <?php

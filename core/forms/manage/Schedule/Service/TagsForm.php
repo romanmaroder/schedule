@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Service;
 
 use core\entities\Schedule\Service\Service;
 use core\entities\Schedule\Service\Tag;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -51,4 +52,13 @@ class TagsForm extends Model
     {
         return array_filter(array_map('trim', preg_split('#\s,\s*#i', $this->textNew)));
     }
+
+    public function attributeLabels()
+    {
+        return[
+            'textNew' => tHelper::translate('schedule/service/tag', 'Text'),
+            'existing' => tHelper::translate('schedule/service/tag', 'Existing'),
+        ];
+    }
+
 }

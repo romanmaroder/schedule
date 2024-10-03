@@ -7,6 +7,7 @@ namespace core\entities\Schedule\Event;
 use core\entities\Schedule\Service\Service;
 use core\entities\User\Employee\Employee;
 use core\entities\User\User;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -323,6 +324,22 @@ class Event extends ActiveRecord
             return $this->employee->rate->rate;
         }*/
         return $this->rate;
+    }
+    public function attributeLabels()
+    {
+        return [
+            'master_id' => tHelper::translate('schedule/event','Master'),
+            'client_id' => tHelper::translate('schedule/event','Client'),
+            'service' => tHelper::translate('schedule/event','Services'),
+            'status' => tHelper::translate('schedule/event','Status'),
+            'start' => tHelper::translate('schedule/event','Start'),
+            'end' => tHelper::translate('schedule/event','End'),
+            'payment' => tHelper::translate('schedule/event','Payment'),
+            'cost' => tHelper::translate('schedule/event','Cost'),
+            'notice' => tHelper::translate('schedule/event','Notice'),
+            'amount' => tHelper::translate('schedule/event','Amount'),
+            'tools' => tHelper::translate('schedule/event','Tools'),
+        ];
     }
 
     public static function tableName(): string

@@ -4,6 +4,8 @@
 namespace core\entities;
 
 
+use core\helpers\tHelper;
+
 class Meta
 {
     public $title;
@@ -22,6 +24,13 @@ class Meta
         $this->description = $description;
         $this->keywords = $keywords;
     }
-
+    public function attributeLabels()
+    {
+        return [
+            'title' => tHelper::translate('meta', 'Title'),
+            'description' => tHelper::translate('meta', 'Description'),
+            'keywords' => tHelper::translate('meta', 'Keywords'),
+        ];
+    }
 
 }

@@ -6,6 +6,7 @@ namespace core\forms\manage\Schedule\Event\FreeTime;
 
 use core\entities\Schedule\Event\FreeTime;
 use core\entities\User\Employee\Employee;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -35,6 +36,13 @@ class MasterForm extends Model
         return [
             ['master','integer'],
             ['master','required']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'master' => tHelper::translate('schedule/free','Master'),
         ];
     }
 }

@@ -4,6 +4,7 @@
 namespace core\entities\Blog\Post;
 
 
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use romanmaroder\upload\ImageUploadBehavior;
 use core\entities\behaviors\MetaBehavior;
@@ -12,6 +13,7 @@ use core\entities\Blog\Post\queries\PostQuery;
 use core\entities\Blog\Tag;
 use core\entities\Meta;
 use core\services\WaterMarker;
+use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
@@ -297,5 +299,19 @@ class Post extends ActiveRecord
     public static function find(): PostQuery
     {
         return new PostQuery(static::class);
+    }
+    public function attributeLabels()
+    {
+        return [
+            'title' => tHelper::translate('blog', 'Title'),
+            'content' => tHelper::translate('blog', 'Content'),
+            'category_id' => tHelper::translate('blog', 'Category'),
+            'status' => tHelper::translate('blog', 'Status'),
+            'created_at' => tHelper::translate('blog', 'Created At'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+            'tags' => tHelper::translate('blog/tag', 'tags'),
+        ];
     }
 }

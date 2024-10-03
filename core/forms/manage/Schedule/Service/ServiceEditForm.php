@@ -7,6 +7,7 @@ namespace core\forms\manage\Schedule\Service;
 use core\entities\Schedule\Service\Service;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 
 /**
  * @property MetaForm $meta
@@ -41,7 +42,13 @@ class ServiceEditForm extends CompositeForm
             [['description'],'string'],
         ];
     }
-
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('schedule/service', 'Name'),
+            'description' => tHelper::translate('schedule/service', 'Description'),
+        ];
+    }
     protected function internalForms(): array
     {
         return ['meta', 'tags','categories'];

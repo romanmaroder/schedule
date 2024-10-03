@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\forms\Blog\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = Yii::t('blog','Posts');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(['datatables',
@@ -27,7 +27,7 @@ PluginAsset::register($this)->add(['datatables',
     <div class="card-header">
         <h3 class="card-title">
             <?= Html::a(
-                'Create Post',
+                Yii::t('app','Create'),
                 ['create'],
                 ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']
             ) ?>

@@ -13,10 +13,10 @@ class DiscountHelper
     public static function discountList(): array
     {
         return [
-            Discount::NO_DISCOUNT => 'NO DISCOUNT',
-            Discount::MASTER_DISCOUNT => 'MASTER\'S DISCOUNT',
-            Discount::STUDIO_DISCOUNT => 'STUDIO DISCOUNT',
-            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => 'STUDIO DISCOUNT WITH MASTER WORK',
+            Discount::NO_DISCOUNT => \Yii::t('schedule/event/discount','NO DISCOUNT'),
+            Discount::MASTER_DISCOUNT => \Yii::t('schedule/event/discount','MASTER\'S DISCOUNT'),
+            Discount::STUDIO_DISCOUNT => \Yii::t('schedule/event/discount','STUDIO DISCOUNT'),
+            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => \Yii::t('schedule/event/discount','STUDIO DISCOUNT WITH MASTER WORK'),
         ];
     }
 

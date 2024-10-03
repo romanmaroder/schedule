@@ -13,8 +13,8 @@ class ServiceHelper
     public static function statusList(): array
     {
         return [
-            Service::STATUS_DRAFT => 'Draft',
-            Service::STATUS_ACTIVE => 'Active',
+            Service::STATUS_DRAFT => \Yii::t('app','Draft'),
+            Service::STATUS_ACTIVE => \Yii::t('app','Active'),
         ];
     }
 

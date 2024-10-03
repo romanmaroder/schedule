@@ -7,6 +7,7 @@ namespace core\entities\Schedule\Additional;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
 use core\entities\Schedule\Additional\queries\AdditionalQuery;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -159,7 +160,18 @@ class Additional extends ActiveRecord
         return $this->name;
     }
 
-
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('schedule/additional', 'Name'),
+            'category_id' => tHelper::translate('schedule/additional', 'Category Id'),
+            'additional.categories' => tHelper::translate('schedule/additional', 'Other categories'),
+            'status' => tHelper::translate('schedule/additional', 'Status'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
+    }
 
     public static function tableName(): string
     {

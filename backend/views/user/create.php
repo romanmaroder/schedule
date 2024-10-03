@@ -9,17 +9,16 @@ use yii\widgets\MaskedInput;
 /** @var yii\web\View $this */
 /** @var core\forms\manage\User\UserCreateForm $model */
 
-$this->title = 'Create User';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = Yii::t('user','Create User');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user','Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            Common
+            <?=Yii::t('app','Common')?>
         </h3>
-
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -87,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'allowClear' => true,
                     ],
                 ]
-            )->label('Days') ?>
+            )->label($model->schedule->getAttributeLabel('weekends')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->schedule, 'week')->textInput(
@@ -96,13 +95,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="form-group">
             <?= $form->field($model, 'notice')->textarea(
-                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('notice'),'row'=>5,]
+                ['maxLength' => true, 'placeholder' => $model->schedule->getAttributeLabel('notice'),'row'=>5,]
             )->label($model->getAttributeLabel('notice')) ?>
         </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
     </div>
     <!-- /.card-footer-->
 </div>

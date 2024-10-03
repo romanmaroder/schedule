@@ -8,6 +8,7 @@ use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
 use core\entities\Schedule\Event\ServiceAssignment;
 use core\entities\Schedule\Service\queries\ServiceQuery;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -268,6 +269,24 @@ class Service extends ActiveRecord
     public static function find():ServiceQuery
     {
         return new ServiceQuery(static::class);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'category_id' => tHelper::translate('schedule/service', 'Category'),
+            'created_at' => tHelper::translate('app', 'Created At'),
+            'name' => tHelper::translate('schedule/service', 'Name'),
+            'description' => tHelper::translate('schedule/service', 'Description'),
+            'price_old' => tHelper::translate('schedule/service', 'Price old'),
+            'price_new' => tHelper::translate('schedule/service', 'Price new'),
+            'status' => tHelper::translate('schedule/service', 'Status'),
+            'tags.name' => tHelper::translate('schedule/service/tag', 'Tags'),
+            'category.others' => tHelper::translate('schedule/service/category', 'Others'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
     }
 
 }

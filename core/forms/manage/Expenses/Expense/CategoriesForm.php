@@ -6,6 +6,7 @@ namespace core\forms\manage\Expenses\Expense;
 
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\Expenses;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -47,6 +48,14 @@ class CategoriesForm extends Model
             ['main', 'integer'],
             ['others', 'each', 'rule' => ['integer']],
             ['others', 'default', 'value' => []],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'main' => tHelper::translate('expenses/category', 'Main'),
+            'others' => tHelper::translate('expenses/category', 'Others'),
         ];
     }
 }

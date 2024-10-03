@@ -5,6 +5,7 @@ namespace core\forms\manage\User\Rate;
 
 
 use core\entities\User\Rate;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 class RateForm extends Model
@@ -35,6 +36,13 @@ class RateForm extends Model
                 'targetClass' => Rate::class,
                 'filter' => $this->_rate ? ['<>', 'id', $this->_rate->id] : null
             ],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::translate('rate','name'),
+            'rate'=>tHelper::translate('rate','rate'),
         ];
     }
 }

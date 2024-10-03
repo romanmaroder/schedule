@@ -5,6 +5,7 @@ namespace core\entities\User;
 
 
 use core\entities\Schedule\Service\Service;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -133,6 +134,18 @@ class Price extends ActiveRecord
     {
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('price','name'),
+            'rate' => tHelper::translate('price','rate'),
+            'services' => tHelper::translate('price','services'),
+            'price' => tHelper::translate('price','price'),
+            'cost' => tHelper::translate('price','cost'),
+            'Add' => tHelper::translate('price','Add'),
         ];
     }
 

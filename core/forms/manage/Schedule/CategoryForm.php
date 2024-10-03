@@ -7,6 +7,7 @@ namespace core\forms\manage\Schedule;
 use core\entities\Schedule\Service\Category;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 use yii\helpers\ArrayHelper;
 
@@ -57,6 +58,19 @@ class CategoryForm extends CompositeForm
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('schedule/service/category', 'Name'),
+            'slug' => tHelper::translate('schedule/service/category', 'Slug'),
+            'title' => tHelper::translate('schedule/service/category', 'Title'),
+            'description' => tHelper::translate('schedule/service/category', 'Description'),
+            'parentId' => tHelper::translate('schedule/service/category', 'Parent Id'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
+    }
     /**
      * @return array
      */

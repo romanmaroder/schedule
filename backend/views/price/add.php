@@ -10,10 +10,10 @@ use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Add Price: ' . $price->name;
-$this->params['breadcrumbs'][] = ['label' => 'Prices', 'url' => ['index']];
+$this->title = Yii::t('price','Add Service: ');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('price','Prices'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $price->name, 'url' => ['view', 'id' => $price->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 
 <div class="multiprice-update container-fluid">
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="row">
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
-                            'Save',
+                            Yii::t('app','Save'),
                             ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']
                         ) ?></div>
                 </div>

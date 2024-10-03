@@ -6,10 +6,10 @@
 /* @var $model \core\forms\manage\User\Rate\RateForm */
 /* @var $rate  \core\entities\User\Rate*/
 
-$this->title = 'Update Rate: ' . $rate->name;
-$this->params['breadcrumbs'][] = ['label' => 'Rates', 'url' => ['index']];
+$this->title = Yii::t('rate','Update Rate: ') . $rate->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rate','rate'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $rate->name, 'url' => ['view', 'id' => $rate->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="rate-update">
 

@@ -6,15 +6,15 @@
 /* @var $searchModel \backend\forms\Expenses\ExpenseSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
-use hail812\adminlte3\assets\PluginAsset;
 use core\entities\Expenses\Expenses\Expenses;
 use core\helpers\PriceHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title                   ='Expenses';
-$this->params['breadcrumbs'][] = ['label' => 'Expenses', 'url' => ['index']];
+$this->title = Yii::t('expenses/expenses', 'Expenses');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('expenses/expenses', 'Expenses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -27,7 +27,7 @@ PluginAsset::register($this)->add(
             <div class="card card-secondary">
                 <div class="card-header">
                 <h3 class="card-title ">
-                    <?= Html::a('Create Expense', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+                    <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
                 </h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>

@@ -5,6 +5,7 @@ namespace core\forms\manage\Schedule;
 
 
 use core\entities\Schedule\Service\Tag;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 use yii\base\Model;
 
@@ -33,6 +34,13 @@ class TagForm extends Model
             ['slug', SlugValidator::class],
             [['name', 'slug'], 'unique', 'targetClass' => Tag::class, 'filter' => $this->_tag ? ['<>', 'id', $this->_tag->id] : null]
 
+        ];
+    }
+    public function attributeLabels()
+    {
+        return[
+            'name' => tHelper::translate('schedule/service/tag', 'Name'),
+            'slug' => tHelper::translate('schedule/service/tag', 'Slug'),
         ];
     }
 }

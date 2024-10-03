@@ -7,6 +7,7 @@ namespace core\entities\Schedule\Additional;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
 use core\entities\Schedule\Additional\queries\CategoryQuery;
+use core\helpers\tHelper;
 use paulzi\nestedsets\NestedSetsBehavior;
 use yii\db\ActiveRecord;
 
@@ -76,6 +77,19 @@ class Category extends ActiveRecord
     public function getHeadingTile(): string
     {
         return $this->title ?: $this->name;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name'=>tHelper::t('schedule/additional/category','Name'),
+            'slug'=>tHelper::t('schedule/additional/category','Slug'),
+            'title'=>tHelper::t('schedule/additional/category','Title'),
+            'description'=>tHelper::t('schedule/additional/category','Description'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
     }
 
     /**

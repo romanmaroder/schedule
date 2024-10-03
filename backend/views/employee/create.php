@@ -15,8 +15,8 @@ use yii\widgets\MaskedInput;
 /** @var $this \yii\web\View $this */
 /** @var $model \core\forms\manage\User\Employee\EmployeeCreateForm  */
 
-$this->title = 'Create Employee';
-$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
+$this->title = Yii::t('user/employee','Create Employee');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user/employee','Employees'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php
@@ -24,7 +24,7 @@ $form = ActiveForm::begin(); ?>
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            Common
+            <?=Yii::t('app','Common')?>
         </h3>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -119,28 +119,28 @@ $form = ActiveForm::begin(); ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->address, 'town')->textInput(
-                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('town')]
-            )->label($model->getAttributeLabel('town')) ?>
+                ['maxLength' => true, 'placeholder' => $model->address->getAttributeLabel('town')]
+            )->label($model->address->getAttributeLabel('town')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->address, 'borough')->textInput(
-                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('borough')]
-            )->label($model->getAttributeLabel('borough')) ?>
+                ['maxLength' => true, 'placeholder' => $model->address->getAttributeLabel('borough')]
+            )->label($model->address->getAttributeLabel('borough')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->address, 'street')->textInput(
-                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('street')]
-            )->label($model->getAttributeLabel('street')) ?>
+                ['maxLength' => true, 'placeholder' => $model->address->getAttributeLabel('street')]
+            )->label($model->address->getAttributeLabel('street')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->address, 'home')->textInput(
-                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('home')]
-            )->label($model->getAttributeLabel('home')) ?>
+                ['maxLength' => true, 'placeholder' => $model->address->getAttributeLabel('home')]
+            )->label($model->address->getAttributeLabel('home')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->address, 'apartment')->textInput(
-                ['maxLength' => true, 'placeholder' => $model->getAttributeLabel('apartment')]
-            )->label($model->getAttributeLabel('apartment')) ?>
+                ['maxLength' => true, 'placeholder' => $model->address->getAttributeLabel('apartment')]
+            )->label($model->address->getAttributeLabel('apartment')) ?>
         </div>
         <div class="form-group">
             <?= $form->field($model->schedule, 'hoursWork')->widget(
@@ -228,7 +228,7 @@ $form = ActiveForm::begin(); ?>
 </div>
 <!-- /.card-body -->
 <div class="card-footer">
-    <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+    <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
 </div>
 <!-- /.card-footer-->
 

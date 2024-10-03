@@ -6,6 +6,7 @@ namespace core\entities\Expenses\Expenses;
 
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\queries\ExpensesQuery;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -201,6 +202,21 @@ class Expenses extends ActiveRecord
         return $this->name;
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'category_id' => tHelper::translate('expenses/expenses', 'Category'),
+            'name' => tHelper::translate('expenses/expenses', 'Name'),
+            'value' => tHelper::translate('expenses/expenses', 'Value'),
+            'created_at' => tHelper::translate('app', 'Created At'),
+            'status' => tHelper::translate('expenses/expenses', 'Status'),
+            'tags.name' => tHelper::translate('expenses/tag', 'Tags'),
+            'category.others' => tHelper::translate('expenses/category', 'Others'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
+    }
 
     public static function tableName(): string
     {

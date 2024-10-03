@@ -13,8 +13,8 @@ class AdditionalHelper
     public static function statusList(): array
     {
         return [
-            Additional::STATUS_DRAFT => 'Draft',
-            Additional::STATUS_ACTIVE => 'Active',
+            Additional::STATUS_DRAFT => \Yii::t('app','Draft'),
+            Additional::STATUS_ACTIVE => \Yii::t('app','Active'),
         ];
     }
 

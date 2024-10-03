@@ -14,7 +14,7 @@ use yii\widgets\DetailView;
 /* @var $cart \core\cart\schedule\Cart*/
 
 $this->title = $model->client->username;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -73,7 +73,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'format' => ['date', 'php:d-m-Y / H:i'],
                         ],
                         [
-                            'label' => 'Service',
+                            'attribute' => 'service',
+                           // 'label' => 'Service',
                             'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
                         ],
                         'amount',
@@ -115,7 +116,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             if (Yii::$app->id == 'app-backend'): ?>
                 <p>
                     <?= Html::a(
-                        'Update',
+                        Yii::t('app','Update'),
                         ['update', 'id' => $model->id],
                         [
                             'id' => 'edit-link',
@@ -126,7 +127,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     <?php
                     if ($model->isToolsAreNotReady()):?>
                         <?= Html::a(
-                            'Tools',
+                            Yii::t('schedule/event','Tools'),
                             ['tools', 'id' => $model->id],
                             [
                                 'id' => 'tools-link',

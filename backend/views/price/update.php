@@ -12,10 +12,10 @@ use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Update price: ' . $price->name;
-$this->params['breadcrumbs'][] = ['label' => 'Prices', 'url' => ['index']];
+$this->title = Yii::t('price','Update price: ') . $price->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('price','Prices'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $price->name, 'url' => ['view', 'id' => $price->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
@@ -92,7 +92,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <div class="row">
                 <div class="col-12">
                     <div class="form-group"> <?= Html::submitButton(
-                            'Save',
+                            Yii::t('app','Save'),
                             ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']
                         ) ?></div>
                 </div>

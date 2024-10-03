@@ -15,7 +15,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $expense->name;
-$this->params['breadcrumbs'][] = ['label' => 'Expenses', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('expenses/expenses','Expenses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -30,26 +30,26 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         <?php
                         if ($expense->isActive()) : ?>
                             <?= Html::a(
-                                'Draft',
+                                Yii::t('app','Draft'),
                                 ['draft', 'id' => $expense->id],
                                 ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         else : ?>
                             <?= Html::a(
-                                'Activate',
+                                Yii::t('app','Activate'),
                                 ['activate', 'id' => $expense->id],
                                 ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         endif; ?>
                         <?= Html::a(
-                            'Update',
+                            Yii::t('app','Update'),
                             ['update', 'id' => $expense->id],
                             ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']
                         ) ?>
                         <?= Html::a(
-                            'Delete',
+                            Yii::t('app','Delete'),
                             ['delete', 'id' => $expense->id],
                             [
                                 'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient',
@@ -91,11 +91,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     'value' => ArrayHelper::getValue($expense, 'category.name'),
                                 ],
                                 [
-                                    'label' => 'Other categories',
+                                    'attribute' => 'category.others',
+                                    //'label' => 'Other categories',
                                     'value' => implode(', ', ArrayHelper::getColumn($expense->categories, 'name')),
                                 ],
                                 [
-                                    'label' => 'Tags',
+                                    'attribute' => 'tags.name',
+                                    //'label' => 'Tags',
                                     'value' => implode(', ', ArrayHelper::getColumn($expense->tags, 'name')),
                                 ],
                             ],

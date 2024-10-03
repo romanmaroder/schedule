@@ -4,6 +4,7 @@
 namespace core\entities\Schedule\Service;
 
 
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -38,7 +39,18 @@ class Tag extends ActiveRecord
         $this->slug = $slug;
     }
 
-    public static function tableName():string
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('schedule/service/tag', 'Name'),
+            'slug' => tHelper::translate('schedule/service/tag', 'Slug'),
+            'meta.title' => tHelper::translate('meta', 'Title'),
+            'meta.description' => tHelper::translate('meta', 'Description'),
+            'meta.keywords' => tHelper::translate('meta', 'Keywords'),
+        ];
+    }
+
+    public static function tableName(): string
     {
         return '{{%schedule_service_tags}}';
     }

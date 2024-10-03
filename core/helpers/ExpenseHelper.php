@@ -13,8 +13,8 @@ class ExpenseHelper
     public static function statusList(): array
     {
         return [
-            Expenses::STATUS_DRAFT => 'Draft',
-            Expenses::STATUS_ACTIVE => 'Active',
+            Expenses::STATUS_DRAFT => \Yii::t('app','Draft'),
+            Expenses::STATUS_ACTIVE => \Yii::t('app','Active'),
         ];
     }
 

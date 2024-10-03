@@ -12,7 +12,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Missed users';
+$this->title = Yii::t('user','Missed users');
 $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -74,12 +74,12 @@ $js = <<< JS
  $(function () {
  
     $('#missing').DataTable({
-    
+     bStateSave: true,
        paging: true,
        lengthChange: true,
        searching: true,
-       ordering: true,
-       info: false,
+       ordering: false,
+       info: true,
        autoWidth: false,
        responsive: true,
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
