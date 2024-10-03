@@ -13,7 +13,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\forms\Shop\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Orders';
+$this->title = Yii::t('shop/order','Orders');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(

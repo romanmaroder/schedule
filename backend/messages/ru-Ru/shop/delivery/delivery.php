@@ -8,4 +8,8 @@ return [
     'Delivery Methods'=>'Способы доставки',
     'Update Delivery Method: '=>'Обновить: ',
     'Create Delivery Method'=>'Новая: ',
+    'method'=>'Метод',
+    'index'=>'Индекс',
+    'address'=>'Адрес',
+    'Delivery'=>'Доставка',
 ];

@@ -8,10 +8,10 @@
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Update Order: ' . $order->id;
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+$this->title = Yii::t('shop/order','Update Order: ') . $order->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/order','Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $order->id, 'url' => ['view', 'id' => $order->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="order-update">
 
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">
-                Customer
+                <?=Yii::t('shop/customer','Customer')?>
             </h3>
 
             <div class='card-tools'>
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">
-                Delivery
+                <?=Yii::t('shop/delivery','Delivery')?>
             </h3>
 
             <div class='card-tools'>
@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">
-                Note
+                <?=Yii::t('shop/order','Note')?>
             </h3>
 
             <div class='card-tools'>
@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = 'Update';
         <!-- /.card-body -->
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-sm btn-shadow btn-gradient btn-success']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-sm btn-shadow btn-gradient btn-success']) ?>
             </div>
             <!--Footer-->
         </div>

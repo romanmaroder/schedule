@@ -6,14 +6,13 @@ namespace core\forms\manage\Shop\Order;
 
 use core\entities\Shop\Order\Order;
 use core\forms\CompositeForm;
+use core\helpers\tHelper;
 
 class OrderEditForm extends CompositeForm
 {
 
     public $note;
-
     public DeliveryForm $delivery;
-
     public CustomerForm $customer;
 
     public function __construct(Order $order, array $config = [])
@@ -28,6 +27,13 @@ class OrderEditForm extends CompositeForm
     {
         return [
             [['note'], 'string'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'note' => tHelper::translate('shop/order','note'),
         ];
     }
 

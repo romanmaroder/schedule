@@ -11,8 +11,8 @@ use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-$this->title = 'Order ' . $order->id;
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+$this->title = Yii::t('shop/order','Order ') . $order->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/order','Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -23,9 +23,9 @@ PluginAsset::register($this)->add(
 
     <div class="card card-secondary">
         <div class="card-header">
-            <?= Html::a('Update', ['update', 'id' => $order->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
+            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $order->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'id' => $order->id],
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow btn-gradient',
@@ -48,7 +48,10 @@ PluginAsset::register($this)->add(
                                        'model' => $order,
                                        'attributes' => [
                                            'id',
-                                           'created_at:datetime',
+                                           [
+                                               'attribute' => 'created_at',
+                                               'format' => 'datetime',
+                                           ],
                                            [
                                                'attribute' => 'current_status',
                                                'value' => OrderHelper::statusLabel($order->current_status),
@@ -60,14 +63,24 @@ PluginAsset::register($this)->add(
                                                    return $order->customer_name;
                                                },
                                            ],
-                                           'delivery_method_name',
-                                           'deliveryData.index',
-                                           'deliveryData.address',
-                                           'cost',
-                                           'delivery_cost',
                                            [
-                                               'attribute' => 'Total cost',
-                                               'value' => function ( $order) {
+                                               'attribute' => 'delivery_method_name',
+                                           ],
+                                           [
+                                               'attribute' => 'deliveryData.index',
+                                           ],
+                                           [
+                                               'attribute' => 'deliveryData.address',
+                                           ],
+                                           [
+                                               'attribute' => 'cost',
+                                           ],
+                                           [
+                                               'attribute' => 'delivery_cost',
+                                           ],
+                                           [
+                                               'attribute' => 'total_cost',
+                                               'value' => function ($order) {
                                                    return $order->getTotalCost();
                                                },
                                            ],
@@ -88,11 +101,11 @@ PluginAsset::register($this)->add(
                 <table class="table table-bordered" style="margin-bottom: 0">
                     <thead>
                     <tr>
-                        <th class="text-left">Product Name</th>
-                        <th class="text-left">Model</th>
-                        <th class="text-left">Quantity</th>
-                        <th class="text-right">Unit Price</th>
-                        <th class="text-right">Total</th>
+                        <th class="text-left"><?=Yii::t('shop','Product Name')?></th>
+                        <th class="text-left"><?=Yii::t('shop','Model')?></th>
+                        <th class="text-left"><?=Yii::t('shop','Quantity')?></th>
+                        <th class="text-right"><?=Yii::t('shop','Unit Price')?></th>
+                        <th class="text-right"><?=Yii::t('shop','Total')?></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -124,8 +137,8 @@ PluginAsset::register($this)->add(
                 <table class="table table-bordered" style="margin-bottom: 0">
                     <thead>
                     <tr>
-                        <th class="text-left">Date</th>
-                        <th class="text-left">Status</th>
+                        <th class="text-left"><?=Yii::t('shop','Date')?></th>
+                        <th class="text-left"><?=Yii::t('shop','Status')?></th>
                     </tr>
                     </thead>
                     <tbody>

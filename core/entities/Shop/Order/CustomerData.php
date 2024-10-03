@@ -4,6 +4,8 @@
 namespace core\entities\Shop\Order;
 
 
+use core\helpers\tHelper;
+
 class CustomerData
 {
     public $phone;
@@ -13,5 +15,13 @@ class CustomerData
     {
         $this->phone = $phone;
         $this->name = $name;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('shop/customer','name'),
+            'phone' => tHelper::translate('shop/customer','phone'),
+        ];
     }
 }

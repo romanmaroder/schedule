@@ -7,6 +7,7 @@ namespace core\forms\manage\Shop\Order;
 use core\entities\Shop\DeliveryMethod;
 use core\entities\Shop\Order\Order;
 use core\helpers\PriceHelper;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -33,6 +34,15 @@ class DeliveryForm extends Model
             [['index', 'address'], 'required'],
             [['index'], 'string', 'max' => 255],
             [['address'], 'string'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'method'=>tHelper::translate('shop/delivery','method'),
+            'index'=>tHelper::translate('shop/delivery','index'),
+            'address'=>tHelper::translate('shop/delivery','address'),
         ];
     }
 

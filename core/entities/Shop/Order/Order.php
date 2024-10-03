@@ -6,6 +6,7 @@ namespace core\entities\Shop\Order;
 
 use core\entities\Shop\DeliveryMethod;
 use core\entities\User\User;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -160,6 +161,28 @@ class Order extends ActiveRecord
     }
 
     ##########################
+
+    public function attributeLabels()
+    {
+        return [
+            'user_id'=>tHelper::translate('shop/order','user_id'),
+            'delivery_method_id'=>tHelper::translate('shop/order','delivery_method_id'),
+            'delivery_method_name'=>tHelper::translate('shop/order','delivery_method_name'),
+            'delivery_index'=>tHelper::translate('shop/order','delivery_index'),
+            'delivery_address'=>tHelper::translate('shop/order','delivery_address'),
+            'delivery_cost'=>tHelper::translate('shop/order','delivery_cost'),
+            'deliveryData.index'=>tHelper::translate('shop/order','delivery_index'),
+            'deliveryData.address'=>tHelper::translate('shop/order','delivery_address'),
+            'payment_method'=>tHelper::translate('shop/order','payment_method'),
+            'cost'=>tHelper::translate('shop/order','cost'),
+            'note'=>tHelper::translate('shop/order','note'),
+            'current_status'=>tHelper::translate('shop/order','current_status'),
+            'customer_phone'=>tHelper::translate('shop/order','customer_phone'),
+            'customer_name'=>tHelper::translate('shop/order','customer_name'),
+            'created_at'=>tHelper::translate('shop/order','created_at'),
+            'total_cost'=>tHelper::translate('shop/order','total_cost'),
+        ];
+    }
 
     public static function tableName(): string
     {

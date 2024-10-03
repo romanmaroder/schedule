@@ -86,6 +86,8 @@ return [
                         'shop/brand' => 'shop/brand/brand.php',
                         'shop/characteristic' => 'shop/characteristic/characteristic.php',
                         'shop/delivery' => 'shop/delivery/delivery.php',
+                        'shop/order' => 'shop/order/order.php',
+                        'shop/customer' => 'shop/customer/customer.php',
                     ],
                 ],
                 'expenses*' => [
@@ -160,7 +162,6 @@ return [
                         'meta' => 'meta/meta.php',
                     ],
                 ],
-
             ],
         ],
     ],

@@ -5,6 +5,7 @@ namespace core\forms\manage\Shop\Order;
 
 
 use core\entities\Shop\Order\Order;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 class CustomerForm extends Model
@@ -24,6 +25,14 @@ class CustomerForm extends Model
         return [
             [['phone', 'name'], 'required'],
             [['phone', 'name'], 'string', 'max' => 255],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('shop/customer','name'),
+            'phone' => tHelper::translate('shop/customer','phone'),
         ];
     }
 }

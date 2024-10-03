@@ -187,7 +187,7 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'shop/delivery'
                                         ],
                                         [
-                                            'label' => 'Orders',
+                                            'label' => Yii::t('shop/order','Orders'),
                                             'icon' => 'fas fa-barcode',
                                             'url' => ['/shop/order/index'],
                                             'active' => $this->context->id == 'shop/order'
