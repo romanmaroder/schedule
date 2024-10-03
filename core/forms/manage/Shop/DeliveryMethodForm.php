@@ -5,6 +5,7 @@ namespace core\forms\manage\Shop;
 
 
 use core\entities\Shop\DeliveryMethod;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 class DeliveryMethodForm extends Model
@@ -37,4 +38,15 @@ class DeliveryMethodForm extends Model
             [['cost', 'minWeight', 'maxWeight', 'sort'], 'integer'],
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('shop/delivery','name'),
+            'cost' => tHelper::translate('shop/delivery','cost'),
+            'minWeight' => tHelper::translate('shop/delivery','min_weight'),
+            'maxWeight' => tHelper::translate('shop/delivery','max_weight'),
+            'sort' => tHelper::translate('shop/delivery','sort'),
+        ];
+    }
+
 }

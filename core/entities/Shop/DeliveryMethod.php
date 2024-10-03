@@ -5,6 +5,7 @@ namespace core\entities\Shop;
 
 
 use core\entities\Shop\queries\DeliveryMethodQuery;
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -40,6 +41,17 @@ class DeliveryMethod extends ActiveRecord
     public function isAvailableForWeight($weight): bool
     {
         return (!$this->min_weight || $this->min_weight <= $weight) && (!$this->max_weight || $weight <= $this->max_weight);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => tHelper::translate('shop/delivery','name'),
+            'cost' => tHelper::translate('shop/delivery','cost'),
+            'min_weight' => tHelper::translate('shop/delivery','min_weight'),
+            'max_weight' => tHelper::translate('shop/delivery','max_weight'),
+            'sort' => tHelper::translate('shop/delivery','sort'),
+        ];
     }
 
     public static function tableName(): string

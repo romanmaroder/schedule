@@ -13,7 +13,7 @@ use yii\helpers\Url;
 /* @var $dataProvider */
 
 
-$this->title = 'Delivery Methods';
+$this->title = Yii::t('shop/delivery','Delivery Methods');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -25,7 +25,7 @@ PluginAsset::register($this)->add(
         <div class="card-header">
             <h3 class="card-title">
                 <?= Html::a(
-                    'Create Method',
+                    Yii::t('app','Create'),
                     ['create'],
                     ['class' => 'btn btn-sm btn-shadow btn-gradient btn-success']
                 ) ?>

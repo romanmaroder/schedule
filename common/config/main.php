@@ -85,6 +85,7 @@ return [
                         'shop/tag' => 'shop/tag/tag.php',
                         'shop/brand' => 'shop/brand/brand.php',
                         'shop/characteristic' => 'shop/characteristic/characteristic.php',
+                        'shop/delivery' => 'shop/delivery/delivery.php',
                     ],
                 ],
                 'expenses*' => [

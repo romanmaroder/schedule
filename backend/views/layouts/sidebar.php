@@ -181,7 +181,7 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'shop/characteristic'
                                         ],
                                         [
-                                            'label' => 'Delivery Methods',
+                                            'label' => Yii::t('shop/delivery','Delivery Methods'),
                                             'icon' => 'fas fa-truck',
                                             'url' => ['/shop/delivery/index'],
                                             'active' => $this->context->id == 'shop/delivery'
