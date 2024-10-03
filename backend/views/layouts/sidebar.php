@@ -291,17 +291,17 @@ use yii\helpers\Html;
                                     ]
                                 ],
                                 [
-                                    'label' => 'Content',
+                                    'label' => Yii::t('content/page','content'),
                                     'icon' => 'far fa-file-alt',
                                     'items' => [
                                         [
-                                            'label' => 'Pages',
+                                            'label' => Yii::t('content/page','Pages'),
                                             'icon' => 'fas fa-file-word',
                                             'url' => ['/page/index'],
                                             'active' => $this->context->id == 'page'
                                         ],
                                         [
-                                            'label' => 'Files',
+                                            'label' => Yii::t('content/file','Files'),
                                             'icon' => 'fas fa-file-upload',
                                             'url' => ['/file/index'],
                                             'active' => $this->context->id == 'file'

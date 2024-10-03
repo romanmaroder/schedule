@@ -2,12 +2,9 @@
 
 
 /* @var $this \yii\web\View */
-
 /* @var $searchModel \backend\forms\PageSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
-
 /* @var $searchModel backend\forms\PageSearch */
-
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use core\entities\Page;
@@ -17,7 +14,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Pages';
+$this->title = Yii::t('content/page','Pages');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(['datatables',
@@ -34,7 +31,7 @@ PluginAsset::register($this)->add(['datatables',
 <div class="card card-secondary">
     <div class="card-header">
         <h3 class="card-title">
-            <?= Html::a('Create Page', ['create'], ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
         </h3>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -89,7 +86,7 @@ PluginAsset::register($this)->add(['datatables',
     </div>
 </div>
 
-<?php$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
+<?php $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
 $('#pages').DataTable({
                 bDestroy: true,
@@ -125,11 +122,7 @@ $('#pages').DataTable({
                     url:"$ru"
                 }
     }).buttons().container().appendTo('#review_wrapper .col-md-6:eq(0)');
-
-
-
 JS;
-
 
 $this->registerJs($js, $position = yii\web\View::POS_READY, $key = null);
 

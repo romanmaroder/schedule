@@ -7,10 +7,10 @@
 /* @var $page \core\entities\Page */
 
 
-$this->title = 'Update Page: ' . $page->title;
-$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
+$this->title = Yii::t('content/page','Update Page: ') . $page->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('content/page','Pages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $page->title, 'url' => ['view', 'id' => $page->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('content/page','Update');
 ?>
 <div class="page-update">
 

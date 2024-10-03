@@ -131,6 +131,15 @@ return [
                         'price/category' => 'price/category.php',
                     ],
                 ],
+                'content*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'content/page' => 'content/page/page.php',
+                        'content/file' => 'content/file/file.php',
+                    ],
+                ],
                 'meta' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     //'basePath' => '@app/messages',

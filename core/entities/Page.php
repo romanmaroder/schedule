@@ -3,6 +3,7 @@
 
 namespace core\entities;
 
+use core\helpers\tHelper;
 use paulzi\nestedsets\NestedSetsBehavior;
 use core\entities\behaviors\MetaBehavior;
 use yii\db\ActiveRecord;
@@ -51,6 +52,15 @@ class Page extends ActiveRecord
     public function getSeoTitle(): string
     {
         return $this->meta->title ?: $this->title;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'title' => tHelper::translate('content/page','title'),
+            'slug' => tHelper::translate('content/page','slug'),
+            'content' => tHelper::translate('content/page','content'),
+        ];
     }
 
     public static function tableName(): string

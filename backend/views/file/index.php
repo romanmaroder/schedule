@@ -5,7 +5,7 @@
 
 use mihaildev\elfinder\ElFinder;
 
-$this->title = 'Files';
+$this->title = Yii::t('content/file','Files');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-index">

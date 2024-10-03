@@ -6,6 +6,7 @@ namespace core\forms\manage;
 
 use core\entities\Page;
 use core\forms\CompositeForm;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 use yii\helpers\ArrayHelper;
 
@@ -45,7 +46,22 @@ class PageForm extends CompositeForm
             [['title', 'slug'], 'string', 'max' => 255],
             [['content'], 'string'],
             ['slug', SlugValidator::class],
-            [['slug'], 'unique', 'targetClass' => Page::class, 'filter' => $this->_page ? ['<>', 'id', $this->_page->id] : null]
+            [
+                ['slug'],
+                'unique',
+                'targetClass' => Page::class,
+                'filter' => $this->_page ? ['<>', 'id', $this->_page->id] : null
+            ]
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'title'=>tHelper::translate('content/page','title'),
+            'slug'=>tHelper::translate('content/page','slug'),
+            'content'=>tHelper::translate('content/page','content'),
+            'parentId'=>tHelper::translate('content/page','parentId'),
         ];
     }
 

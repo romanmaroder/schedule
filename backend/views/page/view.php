@@ -10,16 +10,16 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = $page->title;
-$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('content/page','Pages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
 <div class="card card-secondary">
     <div class="card-header">
-        <?= Html::a('Update', ['update', 'id' => $page->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
+        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $page->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
         <?= Html::a(
-            'Delete',
+            Yii::t('app','Delete'),
             ['delete', 'id' => $page->id],
             [
                 'class' => 'btn btn-danger btn-sm btn-gradient btn-shadow',
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="card card-secondary">
     <div class="card-header">
-        Content
+        <?=Yii::t('content/page','content')?>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
