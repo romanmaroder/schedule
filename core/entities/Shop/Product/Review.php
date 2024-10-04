@@ -5,6 +5,7 @@ namespace core\entities\Shop\Product;
 
 
 use core\entities\User\User;
+use core\helpers\tHelper;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -77,6 +78,18 @@ class Review extends ActiveRecord
     public function getProduct(): ActiveQuery
     {
         return $this->hasOne(Product::class, ['id' => 'product_id']);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'product_id' => tHelper::translate('shop/review','product_id'),
+            'user_id' => tHelper::translate('shop/review','user_id'),
+            'vote' => tHelper::translate('shop/review','vote'),
+            'text' => tHelper::translate('shop/review','text'),
+            'active' => tHelper::translate('shop/review','active'),
+            'created_at' => tHelper::translate('shop/review','created_at'),
+        ];
     }
 
     public static function tableName(): string

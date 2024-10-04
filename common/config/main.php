@@ -88,6 +88,7 @@ return [
                         'shop/delivery' => 'shop/delivery/delivery.php',
                         'shop/order' => 'shop/order/order.php',
                         'shop/customer' => 'shop/customer/customer.php',
+                        'shop/review' => 'shop/review/review.php',
                     ],
                 ],
                 'expenses*' => [

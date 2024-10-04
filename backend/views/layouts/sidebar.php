@@ -193,7 +193,7 @@ use yii\helpers\Html;
                                             'active' => $this->context->id == 'shop/order'
                                         ],
                                         [
-                                            'label' => 'Reviews',
+                                            'label' => Yii::t('shop/review','Reviews'),
                                             'icon' => 'fas fa-comment-alt',
                                             'url' => ['/shop/review/index'],
                                             'active' => $this->context->id == 'shop/review'

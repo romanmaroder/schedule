@@ -12,7 +12,7 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $review->vote;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/review','Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -23,14 +23,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
     <div class="card-header">
 
         <?= Html::a(
-            'Update',
+            Yii::t('app','Update'),
             ['update', 'product_id'=>$product->id,'id' => $review->id],
             ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']
         ) ?>
         <?php
         if ($review->isActive()): ?>
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'product_id' => $product->id,'id' => $review->id],
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow btn-gradient',
@@ -43,7 +43,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <?php
         else: ?>
             <?= Html::a(
-                'Restore',
+                Yii::t('app','Restore'),
                 ['activate', 'product_id' => $product->id,'id' => $review->id],
                 [
                     'class' => 'btn btn-success btn-sm btn-shadow btn-gradient',

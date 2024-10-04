@@ -11,10 +11,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Update Review: ' . $review->vote;
-$this->params['breadcrumbs'][] = ['label' => 'Reviews', 'url' => ['index']];
+$this->title = Yii::t('shop/review','Update Review: ') . $review->vote;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/review','Reviews'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $review->vote, 'url' => ['view','product_id'=>$product->id ,'id'=>$review->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 
 
@@ -27,7 +27,7 @@ $form = ActiveForm::begin(
 
     <div class="card card-secondary">
         <div class="card-header">
-            <h3 class="card-title">Review</h3>
+            <h3 class="card-title"><?=Yii::t('shop/review','Review')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -45,7 +45,7 @@ $form = ActiveForm::begin(
         </div>
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-sm btn-success btn-shadow btn-gradient']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-sm btn-success btn-shadow btn-gradient']) ?>
             </div>
         </div>
     </div>

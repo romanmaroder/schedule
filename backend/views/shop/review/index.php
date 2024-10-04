@@ -12,7 +12,7 @@ use yii\helpers\Url;
 
 
 
-$this->title = 'Review';
+$this->title = Yii::t('shop/review','Reviews');
 $this->params['breadcrumbs'][] = $this->title;
 
 
