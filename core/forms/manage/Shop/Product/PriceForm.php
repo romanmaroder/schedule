@@ -6,6 +6,7 @@ namespace core\forms\manage\Shop\Product;
 
 use core\entities\Shop\Product\Product;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 /**
@@ -39,6 +40,14 @@ class PriceForm extends Model
         return [
             [['new'],'required'],
             [['new','old'],'integer','min' => 0],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'old'=>tHelper::translate('shop/product','price_old'),
+            'new'=>tHelper::translate('shop/product','price_new'),
         ];
     }
 }

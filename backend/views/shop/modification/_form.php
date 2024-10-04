@@ -14,7 +14,7 @@ use yii\helpers\Html;
     $form = ActiveForm::begin(); ?>
     <div class="card card-secondary">
         <div class="card-header">
-            <h3 class="card-title">Common</h3>
+            <h3 class="card-title"><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -38,7 +38,7 @@ use yii\helpers\Html;
         </div>
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
             </div>
         </div>
 

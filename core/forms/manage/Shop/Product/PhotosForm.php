@@ -4,6 +4,7 @@
 namespace core\forms\manage\Shop\Product;
 
 
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -28,5 +29,12 @@ class PhotosForm extends Model
             return true;
         }
         return false;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'files'=>tHelper::translate('shop/product','photos'),
+        ];
     }
 }

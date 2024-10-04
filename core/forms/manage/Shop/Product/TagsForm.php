@@ -6,6 +6,7 @@ namespace core\forms\manage\Shop\Product;
 
 use core\entities\Shop\Product\Product;
 use core\entities\Shop\Product\Tag;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -36,6 +37,14 @@ class TagsForm extends Model
             ['existing', 'each', 'rule' => ['integer']],
             ['existing', 'default', 'value' => []],
             ['textNew', 'string'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'existing'=>tHelper::translate('shop/tag','Existing'),
+            'textNew'=>tHelper::translate('shop/tag','Text'),
         ];
     }
 

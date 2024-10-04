@@ -5,6 +5,7 @@ namespace core\forms\manage\Shop\Product;
 
 
 use core\entities\Shop\Product\Modification;
+use core\helpers\tHelper;
 use yii\base\Model;
 
 class ModificationForm extends Model
@@ -35,6 +36,17 @@ class ModificationForm extends Model
         return [
             [['code', 'name','quantity'], 'required'],
             [['price'], 'integer'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'code'=>tHelper::translate('shop/product','code'),
+            'name'=>tHelper::translate('shop/product','name'),
+            'quantity'=>tHelper::translate('shop/product','quantity'),
+            'price'=>tHelper::translate('shop/product','price'),
+
         ];
     }
 

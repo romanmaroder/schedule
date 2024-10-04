@@ -12,6 +12,7 @@ use core\entities\Meta;
 use core\entities\Shop\Product\events\ProductAppearedInStock;
 use core\entities\Shop\Product\queries\ProductQuery;
 use core\entities\User\WishlistItem;
+use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -670,6 +671,38 @@ class Product extends ActiveRecord implements AggregateRoot
     public function getWishlistItems(): ActiveQuery
     {
         return $this->hasMany(WishlistItem::class, ['product_id' => 'id']);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'created_at'=>tHelper::translate('shop/product','created_at'),
+            'code'=>tHelper::translate('shop/product','code'),
+            'name'=>tHelper::translate('shop/product','name'),
+            'description'=>tHelper::translate('shop/product','description'),
+            'category_id'=>tHelper::translate('shop/product','category_id'),
+            'brand_id'=>tHelper::translate('shop/product','brand_id'),
+            'price_old'=>tHelper::translate('shop/product','price_old'),
+            'price_new'=>tHelper::translate('shop/product','price_new'),
+            'rating'=>tHelper::translate('shop/product','rating'),
+            'main_photo_id'=>tHelper::translate('shop/product','main_photo_id'),
+            'status'=>tHelper::translate('shop/product','status'),
+            'quantity'=>tHelper::translate('shop/product','quantity'),
+            'weight'=>tHelper::translate('shop/product','weight'),
+            'brand'=>tHelper::translate('shop/product','brand'),
+            'category'=>tHelper::translate('shop/product','category'),
+            'others_category'=>tHelper::translate('shop/product','others_category'),
+            'categories'=>tHelper::translate('shop/product','categories'),
+            'tags'=>tHelper::translate('shop/product','tags'),
+            'modifications'=>tHelper::translate('shop/product','modifications'),
+            'values'=>tHelper::translate('shop/product','values'),
+            'photos'=>tHelper::translate('shop/product','photos'),
+            'mainPhoto'=>tHelper::translate('shop/product','mainPhoto'),
+            'reviews'=>tHelper::translate('shop/product','reviews'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
     }
 
     public static function tableName(): string

@@ -151,13 +151,13 @@ use yii\helpers\Html;
                                     'icon' => 'fas fa-folder-plus',
                                     'items' => [
                                         [
-                                            'label' => 'Products',
+                                            'label' => Yii::t('shop/product','Products'),
                                             'icon' => 'fas fa-parking',
                                             'url' => ['/shop/product/index'],
                                             'active' => $this->context->id == 'shop/product'
                                         ],
                                         [
-                                            'label' => 'Categories',
+                                            'label' => Yii::t('shop/category','Categories'),
                                             'icon' => 'fa-solid fa-list',
                                             'url' => ['/shop/category/index'],
                                             'active' => $this->context->id == 'shop/category'

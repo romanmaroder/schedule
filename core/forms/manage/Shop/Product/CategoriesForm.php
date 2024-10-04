@@ -6,6 +6,7 @@ namespace core\forms\manage\Shop\Product;
 
 use core\entities\Shop\Product\Category;
 use core\entities\Shop\Product\Product;
+use core\helpers\tHelper;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -51,4 +52,13 @@ class CategoriesForm extends Model
             ['others', 'default', 'value' => []],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'main'=>tHelper::translate('shop/category','Main'),
+            'others'=>tHelper::translate('shop/category','Others'),
+        ];
+    }
+
 }

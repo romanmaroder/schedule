@@ -7,10 +7,10 @@ use yii\helpers\Html;
 /* @var $product \core\entities\Shop\Product\Product */
 /* @var $model \core\forms\manage\Shop\Product\PriceForm */
 
-$this->title                   = 'Price for Product: ' . $product->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = Yii::t('shop/product', 'price:') . $product->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/product', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => ['view', 'id' => $product->id]];
-$this->params['breadcrumbs'][] = 'Price';
+$this->params['breadcrumbs'][] = Yii::t('shop/product', 'price');
 ?>
 <div class="product-price">
 
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Price';
 
     <div class="card card-outline card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Common</h3>
+            <h3 class='card-title'><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Price';
         </div>
         <div class="card-footer bg-secondary">
             <div class='form-group'>
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
             </div>
         </div>
     </div>

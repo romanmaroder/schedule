@@ -89,6 +89,8 @@ return [
                         'shop/order' => 'shop/order/order.php',
                         'shop/customer' => 'shop/customer/customer.php',
                         'shop/review' => 'shop/review/review.php',
+                        'shop/product' => 'shop/product/product.php',
+                        'shop/category' => 'shop/category/category.php',
                     ],
                 ],
                 'expenses*' => [

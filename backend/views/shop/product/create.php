@@ -9,8 +9,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model \core\forms\manage\Shop\Product\ProductCreateForm */
 
-$this->title = 'Create Product';
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = Yii::t('shop/product','Create Product');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/product','Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-create">
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Common</h3>
+            <h3 class='card-title'><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Warehouse</h3>
+            <h3 class='card-title'><?=Yii::t('shop/product','Warehouse')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="card card-secondary">
         <div class='card-header'>
-            <h3 class='card-title'>Price</h3>
+            <h3 class='card-title'><?=Yii::t('shop/product','price')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -139,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-6">
             <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Categories</h3>
+                    <h3 class='card-title'><?=Yii::t('shop/category','Categories')?></h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
                                     class='fas fa-expand'></i>
@@ -178,7 +178,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-6">
             <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Tags</h3>
+                    <h3 class='card-title'><?=Yii::t('shop/tag','Tags')?></h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
                                     class='fas fa-expand'></i>
@@ -194,8 +194,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="form-group">
                         <?= $form->field($model->tags, 'textNew')->textInput(
-                            ['placeholder' => $model->getAttributeLabel('name')]
-                        )->label($model->getAttributeLabel('textNew')) ?>
+                            ['placeholder' => $model->tags->getAttributeLabel('name')]
+                        )->label($model->tags->getAttributeLabel('textNew')) ?>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="card card-secondary">
     <div class='card-header'>
-        <h3 class='card-title'>Characteristics</h3>
+        <h3 class='card-title'><?=Yii::t('shop/characteristic','Characteristic')?></h3>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -233,7 +233,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="card card-secondary">
     <div class='card-header'>
-        <h3 class='card-title'>Photos</h3>
+        <h3 class='card-title'><?=Yii::t('shop/product','photos')?></h3>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -277,13 +277,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <?= $form->field($model->meta, 'keywords')->textInput(
                     ['maxlength' => true, 'placeholder' => $model->meta->getAttributeLabel('keywords')]
-                )->label($model->getAttributeLabel('keywords')) ?>
+                )->label($model->meta->getAttributeLabel('keywords')) ?>
             </div>
         </div>
 
 
     <div class="card-footer bg-secondary form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
     </div>
 </div>
 <?php

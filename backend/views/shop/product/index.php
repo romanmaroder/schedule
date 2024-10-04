@@ -12,8 +12,8 @@ use yii\helpers\Url;
 /* @var $searchModel \backend\forms\Shop\ProductSearch*/
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product';
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = Yii::t('shop/product','Product');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/product','Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -27,7 +27,7 @@ PluginAsset::register($this)->add(
             <div class="card card-secondary">
                 <div class='card-header'>
                     <h3 class='card-title'>
-                    <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+                    <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
                     </h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i

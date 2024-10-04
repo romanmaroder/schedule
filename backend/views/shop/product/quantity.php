@@ -7,10 +7,10 @@ use yii\bootstrap4\ActiveForm;
 /* @var $product \core\entities\Shop\Product\Product */
 /* @var $model \core\forms\manage\Shop\Product\QuantityForm */
 
-$this->title = 'Price for Product: ' . $product->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = Yii::t('shop/product','price:') . $product->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/product','Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => ['view', 'id' => $product->id]];
-$this->params['breadcrumbs'][] = 'Price';
+$this->params['breadcrumbs'][] = Yii::t('shop/product','Price');
 ?>
 <div class="product-price">
 
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = 'Price';
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-sm btn-gradient btn-shadow btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-sm btn-gradient btn-shadow btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

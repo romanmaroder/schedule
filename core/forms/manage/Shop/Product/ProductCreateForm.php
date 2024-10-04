@@ -9,6 +9,7 @@ use core\entities\CommonUses\Characteristic;
 use core\entities\Shop\Product\Product;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -51,6 +52,18 @@ class ProductCreateForm extends CompositeForm
             [['code'], 'unique', 'targetClass' => Product::class],
             ['description', 'string'],
             ['weight', 'integer', 'min' => 0],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'code'=>tHelper::translate('shop/product','code'),
+            'name'=>tHelper::translate('shop/product','name'),
+            'weight'=>tHelper::translate('shop/product','weight'),
+            'description'=>tHelper::translate('shop/product','description'),
+            'brandId'=>tHelper::translate('shop/product','brand_id'),
+
         ];
     }
 

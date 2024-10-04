@@ -8,10 +8,10 @@ use yii\helpers\Html;
 /* @var $product \core\entities\Shop\Product\Product */
 /* @var $model \core\forms\manage\Shop\Product\ProductEditForm */
 
-$this->title = 'Update Product: ' . $product->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = Yii::t('shop/product','Update Product: ') . $product->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/product','Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => ['view', 'id' => $product->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="product-update">
 
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Common
+                <?=Yii::t('app','Common')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">
-                Warehouse
+                <?=Yii::t('shop/product','Warehouse')?>
             </h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Categories
+                <?=Yii::t('shop/product','categories')?>
             </h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Tags
+                <?=Yii::t('shop/product','tags')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title ">
-                Characteristics
+                <?=Yii::t('shop/characteristic','Characteristic')?>
             </h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -176,7 +176,7 @@ $this->params['breadcrumbs'][] = 'Update';
         <!-- /.card-body -->
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
             </div>
             <!--Footer-->
         </div>

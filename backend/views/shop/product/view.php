@@ -22,7 +22,7 @@ use yii\widgets\DetailView;
 /* @var $modificationsProvider yii\data\ActiveDataProvider */
 
 $this->title = $product->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('shop/product','Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
@@ -38,22 +38,22 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         <?php
                         if ($product->isActive()) : ?>
                             <?= Html::a(
-                                'Draft',
+                                Yii::t('app','Draft'),
                                 ['draft', 'id' => $product->id],
                                 ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         else : ?>
                             <?= Html::a(
-                                'Activate',
+                                Yii::t('app','Activate'),
                                 ['activate', 'id' => $product->id],
                                 ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient', 'data-method' => 'post']
                             ) ?>
                         <?php
                         endif; ?>
-                        <?= Html::a('Update', ['update', 'id' => $product->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
+                        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $product->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
                         <?= Html::a(
-                            'Delete',
+                            Yii::t('app','Delete'),
                             ['delete', 'id' => $product->id],
                             [
                                 'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient',
@@ -108,11 +108,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                     'value' => ArrayHelper::getValue($product, 'category.name'),
                                 ],
                                 [
-                                    'label' => 'Other categories',
+                                    'attribute' => 'others_category',
                                     'value' => implode(', ', ArrayHelper::getColumn($product->categories, 'name')),
                                 ],
                                 [
-                                    'label' => 'Tags',
+                                    'attribute' => 'tags',
                                     'value' => implode(', ', ArrayHelper::getColumn($product->tags, 'name')),
                                 ],
                             ],
@@ -120,9 +120,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ) ?>
                     <br/>
                     <p>
-                        <?= Html::a('Change Price', ['price', 'id' => $product->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
+                        <?= Html::a(Yii::t('shop/product','Change Price'), ['price', 'id' => $product->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
                         <?php if ($product->canChangeQuantity()): ?>
-                            <?= Html::a('Change Quantity', ['quantity', 'id' => $product->id], ['class' => 'btn btn-sm btn-gradient btn-shadow btn-primary']) ?>
+                            <?= Html::a(Yii::t('shop/product','Change Quantity'), ['quantity', 'id' => $product->id], ['class' => 'btn btn-sm btn-gradient btn-shadow btn-primary']) ?>
                         <?php endif; ?>
                     </p>
                 </div>
@@ -131,7 +131,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <div class="col-md-6">
             <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Characteristics</h3>
+                    <h3 class='card-title'><?=Yii::t('shop/characteristic','Characteristic')?></h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
                                     class='fas fa-expand'></i>
@@ -161,7 +161,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
             <div class="card card-secondary">
                 <div class='card-header'>
-                    <h3 class='card-title'>Description</h3>
+                    <h3 class='card-title'><?=Yii::t('shop/product','description')?></h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                         </button>
@@ -218,7 +218,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-secondary" id="modifications">
         <div class='card-header'>
-            <h3 class='card-title'>Modifications</h3>
+            <h3 class='card-title'><?=Yii::t('shop/product','modifications')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -229,7 +229,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         <div class="card-body">
             <p>
                 <?= Html::a(
-                    'Add Modification',
+                    Yii::t('app','Add'),
                     ['shop/modification/create', 'product_id' => $product->id],
                     ['class' => 'btn btn-success btn-gradient btn-sm btn-gradient btn-shadow']
                 ) ?>
@@ -260,7 +260,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     <div class="card card-secondary" id="photos">
         <div class='card-header'>
-            <h3 class='card-title'>Photos</h3>
+            <h3 class='card-title'><?=Yii::t('shop/product','photos')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -342,7 +342,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
             <div class='card-footer bg-secondary'>
                 <div class='form-group'>
-                    <?= Html::submitButton('Upload', ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+                    <?= Html::submitButton(Yii::t('app','Upload'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
                 </div>
 
                 <?php

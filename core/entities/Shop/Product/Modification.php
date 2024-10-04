@@ -4,6 +4,7 @@
 namespace core\entities\Shop\Product;
 
 
+use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 
 /**
@@ -50,6 +51,17 @@ class Modification extends ActiveRecord
     public function isCodeEqualTo($code): bool
     {
         return $this->code === $code;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'code'=>tHelper::translate('shop/product','code'),
+            'name'=>tHelper::translate('shop/product','name'),
+            'price'=>tHelper::translate('shop/product','price'),
+            'quantity'=>tHelper::translate('shop/product','quantity'),
+
+        ];
     }
 
     public static function tableName(): string
