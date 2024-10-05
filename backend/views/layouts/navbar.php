@@ -15,7 +15,7 @@ use yii\helpers\Url;
         echo Html::tag(
             'li',
             Html::a(
-                'Home',
+                Yii::t('navbar','Home'),
                  Url::home(),
                 ['class' => ['nav-link',  Yii::$app->controller->id == 'site' ? 'active': '' ]]
             ),
@@ -25,20 +25,20 @@ use yii\helpers\Url;
         echo Html::tag(
             'li',
             Html::a(
-                'Calendar',
+                Yii::t('navbar','Calendar'),
                 ['/schedule/calendar/calendar'],
                 ['class' => ['nav-link',  Yii::$app->controller->id == 'schedule/calendar' ? 'active': '' ]]
             ),
             ['class' => ['nav-item d-none d-sm-inline-block']]
         ); ?>
         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?=Yii::t('navbar','Dropdown')?></a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 <?
                 echo Html::tag(
                     'li',
                     Html::a(
-                        'Calendar',
+                        Yii::t('navbar','Calendar'),
                         ['/schedule/calendar/calendar'],
                         ['class' => ['dropdown-item',  Yii::$app->controller->id == 'schedule/calendar' ? 'active': '' ]]
                     ),
@@ -48,13 +48,13 @@ use yii\helpers\Url;
                 <li class="dropdown-submenu dropdown-hover">
                     <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"
-                       class="dropdown-item dropdown-toggle">Account</a>
+                       class="dropdown-item dropdown-toggle"><?=Yii::t('navbar','Account')?></a>
                     <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                         <?
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Cabinet',
+                                Yii::t('navbar','Cabinet'),
                                 ['/cabinet/default/index'],
                                 ['class' => ['dropdown-item', Yii::$app->controller->id == 'cabinet/default' ? 'active': ''],
                                 'tabindex'=>'-1']
@@ -65,7 +65,7 @@ use yii\helpers\Url;
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Report',
+                                Yii::t('navbar','Report'),
                                 ['/cabinet/report/report'],
                                 ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/report/report' ? 'active': '' ]]
                             ),
@@ -75,7 +75,7 @@ use yii\helpers\Url;
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Salary',
+                                Yii::t('navbar','Salary'),
                                 ['/cabinet/report/index'],
                                 ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/report/index' ? 'active': '' ]]
                             ),
@@ -85,7 +85,7 @@ use yii\helpers\Url;
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Unpaid',
+                                Yii::t('navbar','Unpaid'),
                                 ['/cabinet/report/unpaid'],
                                 ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/report/unpaid' ? 'active': '' ]]
                             ),
@@ -95,7 +95,7 @@ use yii\helpers\Url;
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Expenses',
+                                Yii::t('navbar','Expenses'),
                                 ['/cabinet/report/expenses'],
                                 ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/report/expenses' ? 'active': '' ]]
                             ),
@@ -105,7 +105,7 @@ use yii\helpers\Url;
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Summary Report',
+                                Yii::t('navbar','Summary Report'),
                                 ['/cabinet/report/summary-report'],
                                 ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/report/summary-report' ? 'active': '' ]]
                             ),
@@ -115,7 +115,7 @@ use yii\helpers\Url;
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Payment',
+                                Yii::t('navbar','Payment'),
                                 ['/cabinet/report/payment'],
                                 ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/report/payment' ? 'active': '' ]]
                             ),
@@ -124,7 +124,7 @@ use yii\helpers\Url;
                     </ul>
                 </li>
                 <li class="dropdown-divider"></li>
-                <li><?= Html::a('Sign out', ['/auth/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?></li>
+                <li><?= Html::a(Yii::t('navbar','Sign out'), ['/auth/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?></li>
                 <!-- End Level two -->
             </ul>
         </li>
