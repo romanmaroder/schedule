@@ -30,7 +30,7 @@ use yii\helpers\Url;
                 <h3><?= $item->comment->employee->getFullName() ?></h3>
             <?php
             else: ?>
-                <h3>Anonymous</h3>
+                <h3><?=Yii::t('app','Anonymous')?></h3>
             <?php
             endif; ?>
             <div class="meta"><?= Yii::$app->formatter->asDatetime($item->comment->created_at) ?></div>
@@ -39,10 +39,10 @@ use yii\helpers\Url;
                     <?= Yii::$app->formatter->asNtext($item->comment->text) ?>
                 <?php
                 else: ?>
-                    <i>Comment is deleted.</i>
+                    <i><?=Yii::t('blog/comments','Comment is deleted.')?></i>
                 <?php
                 endif; ?></p>
-            <p><a href="#" class="reply btn-shadow">Reply</a></p>
+            <p><a href="#" class="reply btn-shadow"><?=Yii::t('blog/comments','Reply')?></a></p>
         </div>
         <ul class="children reply-block">
             <li class="comment">

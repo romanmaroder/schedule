@@ -6,9 +6,9 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Posts with tag ' . ' "'. $tag->name . '"';
+$this->title = Yii::t('blog','Posts with tag ') . ' "'. $tag->name . '"';
 
-$this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog','Blog'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $tag->name;
 
 foreach ($dataProvider->getModels() as $model) {

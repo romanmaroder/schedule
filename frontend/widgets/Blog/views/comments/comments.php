@@ -18,7 +18,7 @@ use yii\helpers\Html;
 
     <div class="pt-5" id="comments">
         <div class="section-title">
-            <h2 class="mb-2">Comments</h2>
+            <h2 class="mb-2"><?=Yii::t('blog/comments','Comments')?></h2>
         </div>
         <?php
         foreach ($items as $item): ?>
@@ -28,7 +28,7 @@ use yii\helpers\Html;
     </div>
     <div class="comment-form-wrap pt-5" >
         <div class="section-title">
-            <h2 class="mb-2">Leave a comment</h2>
+            <h2 class="mb-2"><?=Yii::t('blog/comments','Leave a comment')?></h2>
         </div>
         <div class="mt-3" id="reply-block">
             <?php
@@ -53,10 +53,10 @@ use yii\helpers\Html;
             <div class="form-group">
                 <?= $form->field($commentForm, 'text')->textarea(
                     ['rows' => 10, 'cols' => '30', 'class' => 'form-control', 'id' => 'message']
-                )->label('Message') ?>
+                )->label(Yii::t('blog/comments','Message')) ?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton('Post Comment', ['class' => 'btn btn-sm btn-primary py-3 btn-shadow btn-gradient']) ?>
+                <?= Html::submitButton(Yii::t('blog/comments','Post Comment'), ['class' => 'btn btn-sm btn-primary py-3 btn-shadow btn-gradient']) ?>
             </div>
             <?php
             ActiveForm::end(); ?>

@@ -71,7 +71,7 @@ use yii\helpers\Html;
                         'active' => $this->context->id == 'schedule/calendar/calendar'
                     ],
                     [
-                        'label' => 'Blog',
+                        'label' => Yii::t('blog','Blog'),
                         'icon' => 'fas fa-keyboard',
                         'url' => ['/blog/post/index'],
                         'active' => $this->context->id == 'blog/post'

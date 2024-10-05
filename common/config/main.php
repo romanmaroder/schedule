@@ -165,6 +165,14 @@ return [
                         'meta' => 'meta/meta.php',
                     ],
                 ],
+                'navbar*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'navbar' => 'navbar/navbar.php',
+                    ],
+                ],
             ],
         ],
     ],

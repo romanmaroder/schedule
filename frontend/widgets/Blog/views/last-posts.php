@@ -12,7 +12,7 @@ if (!$posts): ?>
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center text-info">Articles are still being written</h2>
+                <h2 class="text-center text-info"><?=Yii::t('app','Articles are still being written')?></h2>
             </div>
         </div>
     </div>

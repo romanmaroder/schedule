@@ -69,7 +69,7 @@ class CategoriesWidget extends Widget
 
         }
         echo Html::beginTag('p');
-        echo Html::a('See All Popular <i class="fas fa-angle-right"></i>', ['/blog/post/index'],['class' => 'more']);
+        echo Html::a(\Yii::t('app','See All Popular').'<i class="fas fa-angle-right"></i>', ['/blog/post/index'],['class' => 'more']);
         echo Html::endTag('p');
 
     }

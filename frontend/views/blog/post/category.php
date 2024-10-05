@@ -9,7 +9,7 @@ $this->title = $category->getSeoTitle();
 $this->registerMetaTag(['name' =>'description', 'content' => $category->meta->description]);
 $this->registerMetaTag(['name' =>'keywords', 'content' => $category->meta->keywords]);
 
-$this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog','Blog'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $category->name;
 
 $this->params['active_category'] = $category;

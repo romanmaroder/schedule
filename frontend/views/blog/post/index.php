@@ -6,7 +6,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Blog';
+$this->title = Yii::t('blog','Blog');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

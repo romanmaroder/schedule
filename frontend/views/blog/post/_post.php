@@ -32,7 +32,7 @@ $url = Url::to(['post', 'id' => $model->id]);
     </p>
 
     <p>
-        <a href="<?= Html::encode($url) ?>" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Read more...</a>
+        <a href="<?= Html::encode($url) ?>" class="link-black text-sm"><i class="fas fa-link mr-1"></i><?=Yii::t('app','Read more...')?></a>
     </p>
 </div>
 

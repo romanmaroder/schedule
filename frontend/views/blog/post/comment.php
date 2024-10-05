@@ -8,9 +8,9 @@
 
 use yii\bootstrap4\ActiveForm;use yii\helpers\Html;
 
-$this->title = 'Comment';
+$this->title = Yii::t('blog/comments','Comments');
 
-$this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog','Blog'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $post->category->name, 'url' => ['category', 'slug' => $post->category->slug]];
 $this->params['breadcrumbs'][] = ['label' => $post->title, 'url' => ['post', 'id' => $post->id]];
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,7 +28,7 @@ $this->params['active_category'] = $post->category;
 <?= $form->field($model, 'text')->textarea(['rows' => 5]) ?>
 
 <div class="form-group">
-    <?= Html::submitButton('Send own comment', ['class' => 'btn btn-primary']) ?>
+    <?= Html::submitButton(Yii::t('blog/comments','Send own comment'), ['class' => 'btn btn-primary']) ?>
 </div>
 
 <?php ActiveForm::end(); ?>
