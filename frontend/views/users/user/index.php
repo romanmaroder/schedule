@@ -14,7 +14,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
 
-$this->title = 'Users';
+$this->title = Yii::t('user/user','Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -57,8 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         if ($user->phone): ?>
                                             <li class="mb-2">
                                                 <span class="fa-li"><i class="fas fa-phone"></i></span>
-                                                <a href="tel:<?= $user->phone; ?>"> Phone
-                                                    #: <?= $user->phone; ?></a>
+                                                <a href="tel:<?= $user->phone; ?>"> <?= $user->phone; ?></a>
                                             </li>
                                         <?
                                         endif; ?>
@@ -115,7 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <i class="fas fa-comments"></i>
                                 </a>-->
                                 <?= Html::a(
-                                    '<i class="fas fa-user"></i> View Profile',
+                                    '<i class="fas fa-user"></i>  ' . Yii::t('app','Profile'),
                                     ['user/view', 'id' => $user->id],
                                     ['class' => 'btn btn-sm btn-primary']
                                 ) ?>

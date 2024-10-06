@@ -83,6 +83,8 @@ class DefaultController extends Controller
     {
         $event = $this->events->getAllWeekById($this->user->id);
 
+        /*var_dump($this->user->id);
+        die();*/
 
         $provider = new ArrayDataProvider(
             [

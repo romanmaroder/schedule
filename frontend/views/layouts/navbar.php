@@ -13,18 +13,20 @@ use yii\helpers\Url;
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?= Url::home() ?>" class="nav-link">Home</a>
+            <a href="<?= Url::home() ?>" class="nav-link">
+                <?=Yii::t('navbar','Home')?>
+            </a>
         </li>
 
 
         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?=Yii::t('navbar','Dropdown')?></a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                 <?
                 echo Html::tag(
                     'li',
                     Html::a(
-                        'Calendar',
+                        Yii::t('navbar','Calendar'),
                         ['/schedule/calendar/calendar'],
                         ['class' => ['dropdown-item',  Yii::$app->controller->id == 'schedule/calendar' ? 'active': '' ]]
                     ),
@@ -34,7 +36,7 @@ use yii\helpers\Url;
                 echo Html::tag(
                     'li',
                     Html::a(
-                        'Service prices',
+                        Yii::t('navbar','Service prices'),
                         ['/schedule/price/index'],
                         ['class' => ['dropdown-item', Yii::$app->controller->id == 'schedule/price' ? 'active': '']]
                     ),
@@ -43,7 +45,7 @@ use yii\helpers\Url;
                 echo Html::tag(
                     'li',
                     Html::a(
-                        'User',
+                        Yii::t('navbar','Users'),
                         ['/users/user/index'],
                         ['class' => ['dropdown-item', Yii::$app->controller->id == 'users/user' ? 'active': '']]
                     ),
@@ -52,13 +54,13 @@ use yii\helpers\Url;
                 <li class="dropdown-submenu dropdown-hover">
                     <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"
-                       class="dropdown-item dropdown-toggle">Account</a>
+                       class="dropdown-item dropdown-toggle"><?=Yii::t('navbar','Account')?></a>
                     <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                         <?
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Cabinet',
+                                Yii::t('navbar','Cabinet'),
                                 ['/cabinet/default/index'],
                                 ['class' => ['dropdown-item', Yii::$app->controller->id == 'cabinet/default' ? 'active': ''],
                                     'tabindex'=>'-1']
@@ -69,7 +71,7 @@ use yii\helpers\Url;
                         echo Html::tag(
                             'li',
                             Html::a(
-                                'Salary',
+                                Yii::t('navbar','Salary'),
                                 ['/cabinet/salary/index'],
                                 ['class' => ['dropdown-item',  Yii::$app->controller->route == 'cabinet/salary/index' ? 'active': '' ]]
                             ),
@@ -78,7 +80,7 @@ use yii\helpers\Url;
                     </ul>
                 </li>
                 <li class="dropdown-divider"></li>
-                <li><?= Html::a('Sign out', ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?></li>
+                <li><?= Html::a(Yii::t('navbar','Sign out'), ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?></li>
                 <!-- End Level two -->
             </ul>
         </li>

@@ -10,8 +10,8 @@ use core\helpers\DiscountHelper;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
-$this->title = 'Salary';
-$this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report','Salary');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -59,6 +59,7 @@ PluginAsset::register($this)->add(
                         'columns' => [
                             [
                                 'attribute' => 'Date',
+                                'label' => Yii::t('cabinet/report','Date'),
                                 'headerOptions' => ['class' => ''],
                                 'value' => function ($model) {
                                     return DATE('Y-m-d', strtotime($model->getDate()));
@@ -74,6 +75,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Price',
+                                'label' => Yii::t('cabinet/report','Price'),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
                                     return $model->getMasterPrice();
@@ -85,6 +87,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Salary',
+                                'label' => Yii::t('cabinet/report','Salary'),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) use ($cart) {
                                     return $model->getSalary();
@@ -99,7 +102,8 @@ PluginAsset::register($this)->add(
                                 'footerOptions'  => ['class' => 'bg-info text-center '],*/
                             ],
                             [
-                                'attribute' => 'Price with discount',
+                                'attribute' => 'Discounted price',
+                                'label' => Yii::t('cabinet/report','Discounted price'),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
                                     return $model->getDiscountedPrice();
@@ -110,6 +114,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Service',
+                                'label' => Yii::t('cabinet/report','Service'),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
                                     return $model->getServiceList();
@@ -122,6 +127,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Discount',
+                                'label' => Yii::t('cabinet/report','Discount'),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'value' => function ($model) {
                                     return $model->getDiscount() .'%<br>' . DiscountHelper::discountLabel($model->getDiscountFrom());

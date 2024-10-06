@@ -20,31 +20,37 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Timeline';
+$this->title = Yii::t('cabinet','Timeline');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['user'] = $user;
 
-$emptyEvents = 'recordings';
-$emptyEducations = 'lesson';
+$emptyEvents = Yii::t('cabinet/error','recordings');
+$emptyEducations = Yii::t('cabinet/error','lesson');
 ?>
 
 <div class="active tab-pane" id="timeline">
     <div class="timeline timeline-inverse">
         <div class="time-label">
-            <span class="bg-danger btn-shadow"><?=date('d-M-Y')?></span>
+            <span class="bg-danger btn-shadow">
+                <?=\Yii::$app->formatter->asDate(date('d-M-Y'),'medium')?>
+            </span>
         </div>
         <? if (!$events && !$educations && !$free):?>
             <div>
                 <i class="fas fa-exclamation-circle bg-warning btn-shadow"></i>
 
                 <div class="timeline-item btn-shadow">
-                    <span class="time"><i class="far fa-clock"></i><?=date('H:i')?></span>
+                    <span class="time">
+                        <i class="far fa-clock"></i>
+                        <?=\Yii::$app->formatter->asTime(date('H:i'),'short')?>
+                    </span>
 
-                    <h3 class="timeline-header"><a href="#">Warning</a>
+                    <h3 class="timeline-header"><a href="#"><?=Yii::t('cabinet/error','Warning')?></a>
                     </h3>
 
                     <div class="timeline-body">
-                        You have no <?= !$events ? $emptyEvents : $emptyEducations?> today
+                        <?=Yii::t('cabinet/error','You have no')?> <?= !$events ? $emptyEvents : $emptyEducations?>
+                        <?=Yii::t('cabinet/error','today')?>
                     </div>
                 </div>
             </div>

@@ -324,6 +324,7 @@ class User extends ActiveRecord implements AggregateRoot
         return [
             'username' =>tHelper::translate('user','Username') ,
             'email' =>tHelper::translate('user','Email') ,
+            'password' =>tHelper::translate('user','Password') ,
             'phone' =>tHelper::translate('user','Phone') ,
             'status' =>tHelper::translate('user','Status'),
             'notice' =>tHelper::translate('user','Notice') ,

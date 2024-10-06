@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Cabinet';
+$this->title = Yii::t('cabinet','Cabinet');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['user'] = $user;
 
@@ -35,11 +35,12 @@ PluginAsset::register($this)->add(
                 ],
                 'columns' => [
                     [
-                        'attribute' => 'start',
+                        'attribute' => Yii::t('app','start'),
+                        'label' => Yii::t('app','Created At'),
                         'format' => ['datetime', 'php:d-m-Y']
                     ],
                     [
-                        'attribute' => 'client_id',
+                        'attribute' => Yii::t('schedule/event','Client'),
                         'value' => function ($model) {
                             return Html::a(
                                 Html::encode($model->client->username),
@@ -49,7 +50,7 @@ PluginAsset::register($this)->add(
                         'format' => 'raw',
                     ],
                     [
-                        'label' => 'Service',
+                        'label' => Yii::t('schedule/event','Services'),
                         'value' => function ($provider) {
                             return implode(', </br>', ArrayHelper::getColumn($provider->services, 'name'));
                         },
@@ -57,6 +58,7 @@ PluginAsset::register($this)->add(
                     ],
                     [
                         'attribute' => 'notice',
+                        'label' => Yii::t('schedule/event','Notice'),
                         'contentOptions' => [
                             'class'=>'text-center',
                             'style'=>'max-width:150px'
@@ -65,6 +67,7 @@ PluginAsset::register($this)->add(
                     ],
                     [
                         'attribute' => 'start',
+                        'label' => Yii::t('schedule/event','Time'),
                         'value'=>function ($model){
                             return substr($model['start'],10,6) . ' - ' . substr($model['end'],10,6);
                         },

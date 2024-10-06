@@ -19,6 +19,7 @@ return[
     'Schedule'=>'Планировщик',
     'Management'=>'Управление',
     'Add'=>'Добавить',
+    'Profile'=>'Профиль',
     'Education'=>'Образование',
     'Anonymous'=>'Аноним',
     'See All Popular'=>'Смотреть все ',

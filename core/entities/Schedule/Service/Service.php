@@ -186,6 +186,7 @@ class Service extends ActiveRecord
         return $this->hasMany(ServiceAssignment::class, ['service_id' => 'id']);
     }
 
+
     /**
      * @return ActiveQuery
      */

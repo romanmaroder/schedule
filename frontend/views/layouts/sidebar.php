@@ -64,7 +64,7 @@ use yii\helpers\Html;
                         ]
                     ],*/
                     [
-                        'label' => 'Calendar',
+                        'label' => Yii::t('schedule/calendar','Calendar'),
                         'icon' => 'far fa-calendar-alt',
                         //'badge'=>'<span class="float-right badge badge-warning">'.$this->context->totalCount.'</span>',
                         'url' => ['/schedule/calendar/calendar/index'],

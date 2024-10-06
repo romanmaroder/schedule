@@ -7,8 +7,8 @@ use yii2fullcalendar6\yii2fullcalendar6;
 /* @var $events \core\entities\Schedule\Event\Calendar\Calendar*/
 /* @var $education \core\entities\Schedule\Event\Calendar\Calendar */
 
-$this->title = 'Calendar';
-$this->params['breadcrumbs'][] = ['label' => 'Calendar', 'url' => ['index']];
+$this->title = Yii::t('schedule/calendar','Calendar');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/calendar','Calendar'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -204,6 +204,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'slotLabelInterval' => '01:00:00',
                         'displayEventTime' => true,
                         'displayEventEnd' => true,
+                        'buttonText'=>[
+                            'today'=>Yii::t('schedule/calendar','Today')
+                        ],
                         'buttonIcons' => [
                             'dayGridMonth' => 'fas fas fa-calendar-alt',
                             'dayGridDay' => 'far far fa-calendar-day',

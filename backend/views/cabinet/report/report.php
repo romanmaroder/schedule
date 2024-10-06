@@ -13,8 +13,8 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 
 
-$this->title = 'Report';
-$this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report','Report');
+$this->params['breadcrumbs'][] = ['label' =>  Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     [
@@ -59,12 +59,14 @@ PluginAsset::register($this)->add(
                     'columns' => [
                         [
                             'attribute' => 'Date',
+                            'label' => Yii::t('cabinet/report','Date'),
                             'value' => function ($model) use ($cart) {
                                 return DATE('Y-m-d', strtotime($model->getDate()));
                             }
                         ],
                         [
                             'attribute' => 'Master',
+                            'label' => Yii::t('cabinet/report','Master'),
                             'value' => function ($model) {
                                 return $model->getMasterName();
                             },
@@ -82,6 +84,7 @@ PluginAsset::register($this)->add(
                         ],*/
                         [
                             'attribute' => 'Service',
+                            'label' => Yii::t('cabinet/report','Service'),
                             'value' => function ($model) {
                                 return $model->getServiceList();
                             },
@@ -91,7 +94,8 @@ PluginAsset::register($this)->add(
                             ],
                         ],
                         [
-                            'attribute' => 'Origin Price',
+                            'attribute' => 'Price',
+                            'label' => Yii::t('cabinet/report','Price'),
                             'value' => function ($model) use ($cart) {
                                 return $model->getOriginalCost();
                             },
@@ -107,7 +111,8 @@ PluginAsset::register($this)->add(
                             },
                         ],*/
                         [
-                            'attribute' => 'Cost With Discount',
+                            'attribute' => 'Discounted price',
+                            'label' => Yii::t('cabinet/report','Discounted price'),
                             'value' => function ($model) {
                                     return $model->getDiscountedPrice();
                             },
@@ -136,6 +141,7 @@ PluginAsset::register($this)->add(
                         ],*/
                         [
                             'attribute' => 'Salary',
+                            'label' => Yii::t('cabinet/report','Salary'),
                             'headerOptions' => ['class' => 'text-center '],
                             'value' => function ($model) use ($cart) {
                                 return $model->getSalary();
@@ -151,6 +157,7 @@ PluginAsset::register($this)->add(
                         ],
                         [
                             'attribute' => 'Profit',
+                            'label' => Yii::t('cabinet/report','Profit'),
                             'headerOptions' => ['class' => 'text-right '],
                             'value' => function ($model) use ($cart) {
                                 return $model->getProfit();

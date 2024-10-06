@@ -10,6 +10,7 @@ return [
     'Status'=>'Статус',
     'Payment'=>'Оплата',
     'Start'=>'Старт',
+    'Time'=>'Время',
     'End'=>'Конец',
     'Services'=>'Услуги',
     'Employee'=>'Сотрудник',

@@ -20,8 +20,8 @@ use yii\helpers\Url;
 
 //use kartik\grid\GridView;
 
-$this->title = 'Salary';
-$this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report','Salary');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -68,7 +68,7 @@ PluginAsset::register($this)->add(
                                         'columns' => [
 
                                             [
-                                                'attribute' => 'Date',
+                                                'label' => Yii::t('cabinet/report','Date'),
                                                 'headerOptions' => ['class' => ''],
                                                 'value' => function ($model) {
                                                     return DATE('Y-m-d', strtotime($model->getDate()));
@@ -82,6 +82,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Master',
+                                                'label' => Yii::t('cabinet/report','Master'),
                                                 'value' => function ($model) {
                                                     return $model->getMasterName();
                                                 },
@@ -93,6 +94,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Service',
+                                                'label' => Yii::t('cabinet/report','Service'),
                                                 'headerOptions' => ['class' => 'text-center'],
                                                 'value' => function ($model) {
                                                     return $model->getServiceList();
@@ -105,6 +107,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Client',
+                                                'label' => Yii::t('cabinet/report','Client'),
                                                 'value' => function ($model) {
                                                     return Html::a(
                                                         Html::encode($model->getClientName()),
@@ -120,6 +123,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Discount',
+                                                'label' => Yii::t('cabinet/report','Discount'),
                                                 'headerOptions' => ['class' => 'text-center'],
                                                 'value' => function ($model) {
                                                     return $model->getDiscount() . '%<br>' . DiscountHelper::discountLabel(
@@ -133,6 +137,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Price',
+                                                'label' => Yii::t('cabinet/report','Price'),
                                                 'headerOptions' => ['class' => 'text-center'],
                                                 'value' => function ($model) {
                                                     return $model->getOriginalCost();
@@ -145,6 +150,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Price Masters',
+                                                'label' => Yii::t('cabinet/report','Price Masters'),
                                                 'headerOptions' => ['class' => 'text-center'],
                                                 'value' => function ($model) {
                                                     return $model->getMasterPrice();
@@ -156,6 +162,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Discounted price',
+                                                'label' => Yii::t('cabinet/report','Discounted price'),
                                                 'headerOptions' => ['class' => 'text-center'],
                                                 'value' => function ($model) {
                                                     return $model->getDiscountedPrice(
@@ -173,6 +180,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Salary',
+                                                'label' => Yii::t('cabinet/report','Salary'),
                                                 'headerOptions' => ['class' => 'text-center '],
                                                 'value' => function ($model) use ($cart) {
                                                     return $model->getSalary();
@@ -188,6 +196,7 @@ PluginAsset::register($this)->add(
                                             ],
                                             [
                                                 'attribute' => 'Profit',
+                                                'label' => Yii::t('cabinet/report','Profit'),
                                                 'headerOptions' => ['class' => 'text-right '],
                                                 'value' => function ($model) use ($cart) {
                                                     return $model->getProfit();

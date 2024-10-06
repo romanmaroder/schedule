@@ -11,8 +11,8 @@
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Url;
 
-$this->title = 'Payments';
-$this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report','Payments');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -36,9 +36,9 @@ PluginAsset::register($this)->add(
                     <table class='table table-bordered table-striped' id='payment'>
                         <thead>
                         <tr>
-                            <th class="text-left">Date</th>
-                            <th class="text-center">Card</th>
-                            <th class="text-center">Cash</th>
+                            <th class="text-left"><?=Yii::t('cabinet/report','Date')?></th>
+                            <th class="text-center"><?=Yii::t('cabinet/report','Card')?></th>
+                            <th class="text-center"><?=Yii::t('cabinet/report','Cash')?></th>
 
                         </tr>
                         </thead>

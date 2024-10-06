@@ -173,6 +173,17 @@ return [
                         'navbar' => 'navbar/navbar.php',
                     ],
                 ],
+                'cabinet*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'cabinet' => 'cabinet/cabinet.php',
+                        'cabinet/sidebar' => 'cabinet/sidebar.php',
+                        'cabinet/error' => 'cabinet/error.php',
+                        'cabinet/report' => 'cabinet/report.php',
+                    ],
+                ],
             ],
         ],
     ],

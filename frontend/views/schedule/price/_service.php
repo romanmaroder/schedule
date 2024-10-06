@@ -21,7 +21,6 @@ PluginAsset::register($this)->add(
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title ">
-                        Common
                     </h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -42,16 +41,23 @@ PluginAsset::register($this)->add(
                                 'id' => 'service',
                             ],
                             'columns' => [
-                                'price_id',
                                 [
-                                    'attribute' => 'parent category',
+                                    'attribute' => 'price.name',
+                                    'label' => Yii::t('price','Price'),
+                                    'value' => function ($model) {
+                                        return $model->price->name;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'services.category.parent.name',
+                                    'label' => Yii::t('schedule/service/category','Categories'),
                                     'value' => function ($model) use ($category) {
                                         return $model->services->category->parent->name;
                                     },
                                     'format' => 'raw',
                                 ],
                                 [
-                                    'attribute' => 'service_id',
+                                    'attribute' => 'services.name',
                                     'value' => function ($model) {
                                         return Html::a(
                                             Html::encode($model->services->name),
@@ -65,7 +71,12 @@ PluginAsset::register($this)->add(
                                     },
                                     'format' => 'raw'
                                 ],
-                                'cost',
+                                [
+                                    'attribute' => 'price.cost',
+                                    'value' => function ($model) {
+                                        return $model->cost;
+                                    }
+                                ]
 
                             ],
                         ]

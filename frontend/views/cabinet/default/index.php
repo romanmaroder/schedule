@@ -3,7 +3,6 @@
 /* @var $this yii\web\View */
 
 
-
 /* @var $employee \core\entities\User\Employee\Employee */
 
 /* @var $provider \core\entities\Schedule\Event\Event */
@@ -14,7 +13,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Cabinet';
+$this->title = Yii::t('cabinet','Cabinet');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -22,8 +21,8 @@ PluginAsset::register($this)->add(
 );
 ?>
 
-<div class="active tab-pane" id="events">
-    <?= GridView::widget(
+    <div class="active tab-pane" id="events">
+        <?= GridView::widget(
             [
                 'dataProvider' => $provider,
                 //'filterModel' => $searchModel,
@@ -34,67 +33,59 @@ PluginAsset::register($this)->add(
                 ],
                 'columns' => [
                     [
-                        'attribute' => 'start',
+                        'attribute' => Yii::t('app','start'),
+                        'label' => Yii::t('app','Created At'),
                         'format' => ['datetime', 'php:d-m-Y']
                     ],
                     [
-                        'attribute' => 'client_id',
+                        'attribute' => Yii::t('schedule/event','Client'),
                         'value' => function ($model) {
                             return Html::a(
                                 Html::encode($model->client->username),
                                 ['/user/view', 'id' => $model->client->id]
                             );
                         },
-                        'contentOptions' => [
-                            'class'=>'text-center'
-                        ],
-                        'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw',
                     ],
                     [
-                        'label' => 'Service',
-                       'value' => function ($provider) {
+                        'label' => Yii::t('schedule/event','Services'),
+                        'value' => function ($provider) {
                             return implode(', </br>', ArrayHelper::getColumn($provider->services, 'name'));
                         },
-                        'format' => 'raw',
-                        'contentOptions' => [
-                            'class'=>'text-center'
-                        ],
-                        'headerOptions' => ['class' => 'text-center'],
+                        'format' => 'raw'
                     ],
                     [
                         'attribute' => 'notice',
+                        'label' => Yii::t('schedule/event','Notice'),
                         'contentOptions' => [
                             'class'=>'text-center',
                             'style'=>'max-width:150px'
                         ],
                         'format' => 'ntext'
                     ],
-
                     [
                         'attribute' => 'start',
-                        'contentOptions' => [
-                            'class'=>'text-center'
-                        ],
-                        'headerOptions' => ['class' => 'text-center'],
+                        'label' => Yii::t('schedule/event','Time'),
+                        'value'=>function ($model){
+                            return substr($model['start'],10,6) . ' - ' . substr($model['end'],10,6);
+                        },
+                    ],/*
+                    [
+                        'attribute' => 'start',
                         'format' => ['datetime', 'php: H:i']
                     ],
                     [
                         'attribute' => 'end',
-                        'contentOptions' => [
-                            'class'=>'text-center'
-                        ],
-                        'headerOptions' => ['class' => 'text-center'],
                         'format' => ['datetime', 'php: H:i']
-                    ],
+                    ],*/
 
                 ],
             ]
         ); ?>
-</div>
+    </div>
 
 
-<!--<div class="cabinet-index">
+    <!--<div class="cabinet-index">
 
     <h2>Attach profile</h2>
     <?/*= yii\authclient\widgets\AuthChoice::widget(
@@ -105,12 +96,14 @@ PluginAsset::register($this)->add(
 </div>-->
 
 <?php
+
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
+
 $js = <<< JS
  $(function () {
  
     $('#event').DataTable({
-       bDestroy: true,
+      bDestroy: true,
        paging: true,
        lengthChange: true,
        searching: true,
@@ -142,8 +135,8 @@ $js = <<< JS
       //   }
       //   ],
         language: {
-         url:"$ru"
-         }
+                    url: '$ru',
+                },
     }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
 
   });

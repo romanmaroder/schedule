@@ -10,6 +10,7 @@ return [
     'Add'=>'Добавить',
     'Add Service: '=>'Добавить услугу',
     'Prices'=>'Прайсы',
+    'Price'=>'Прайс',
     'Create price'=>'Новый прайс',
     'Update price: '=>'Обновить: ',
 ];

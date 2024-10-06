@@ -1,0 +1,23 @@
+<?php
+return[
+    'Salary'=>'Зарплата',
+    'Date'=>'Дата',
+    'Master'=>'Мастер',
+    'Service'=>'Услуга',
+    'Client'=>'Клиент',
+    'Discount'=>'Скидка',
+    'Price'=>'Цена',
+    'Price Masters'=>'Цена мастера',
+    'Discounted price'=>'Цена со скидкой',
+    'Profit'=>'Доход',
+    'Report'=>'Отчет',
+    'Payments'=>'Платежи',
+    'Card'=>'Карта',
+    'Cash'=>'Наличка',
+    'Summary Report'=>'Сводный отчет',
+    'Expenses'=>'Затраты',
+    'Total with costs'=>'Итого с затратами',
+    'TOTAL'=>'Итого',
+    'Unpaid'=>'Неоплаченные',
+    'Debt'=>'Долг',
+];

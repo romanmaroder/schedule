@@ -14,8 +14,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 
-$this->title = 'Unpaid';
-$this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report','Unpaid');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     [
@@ -59,6 +59,7 @@ PluginAsset::register($this)->add(
                         'columns' => [
                             [
                                 'attribute' => 'Date',
+                                'label' => Yii::t('cabinet/report','Date'),
                                 'value' => function ($model) {
                                     return Html::a(
                                         Html::encode(DATE('Y-m-d', strtotime($model->start))),
@@ -74,6 +75,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Master',
+                                'label' => Yii::t('cabinet/report','Master'),
                                 'value' => function ($model) {
                                     return $model->getFullName();
                                 },
@@ -85,6 +87,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Client',
+                                'label' => Yii::t('cabinet/report','Client'),
                                 'value' => function ($model) {
                                     return $model->client->username;
                                 },
@@ -95,6 +98,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Service',
+                                'label' => Yii::t('cabinet/report','Service'),
                                 'value' => function ($model) {
                                     $name = '';
                                     foreach ($model->services as $item) {
@@ -109,6 +113,7 @@ PluginAsset::register($this)->add(
                             ],
                             [
                                 'attribute' => 'Debt',
+                                'label' => Yii::t('cabinet/report','Debt'),
                                 'value' => function ($model) use ($cart) {
                                     return $model->getDiscountedPrice($model, $cart);
                                 },

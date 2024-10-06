@@ -13,8 +13,8 @@
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Url;
 
-$this->title = 'Summary Report';
-$this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report','Summary Report');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -35,9 +35,9 @@ PluginAsset::register($this)->add(
                     <div class="col"> <table class='table table-bordered table-striped' id='report'>
                             <thead>
                             <tr>
-                                <th class="text-center">Profit</th>
-                                <th class="text-center">Expenses</th>
-                                <th class="text-left">Total with costs</th>
+                                <th class="text-center"><?=Yii::t('cabinet/report','Profit')?></th>
+                                <th class="text-center"><?=Yii::t('cabinet/report','Expenses')?></th>
+                                <th class="text-left"><?=Yii::t('cabinet/report','Total with costs')?></th>
 
                             </tr>
                             </thead>
@@ -53,7 +53,7 @@ PluginAsset::register($this)->add(
                             <tfoot>
                             <tr>
                                 <td></td>
-                                <td class="text-right">TOTAL:</td>
+                                <td class="text-right"><?=Yii::t('cabinet/report','TOTAL')?>:</td>
                                 <td class="text-left"><?= $cart->getTotalWithSubtractions($expense); ?></td>
                                 <!-- Задаем количество ячеек по горизонтали для объединения-->
                             </tr>
