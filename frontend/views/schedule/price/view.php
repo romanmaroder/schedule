@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = ['label' => $category->parent->name ?: $categor
 $this->params['breadcrumbs'][] = $this->title;
 
 
-
 ?>
 
 <!-- Main content -->
@@ -25,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Description</h3>
-
+            <h3 class="card-title"></h3>
+            <?= Yii::t('schedule/service/price', 'Description') ?>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
@@ -47,8 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 );
                 ?>
                 <div class="col-12 col-md-12 col-lg-4 order-2 order-md-2">
-                    <h3 class="text-primary"><i class="fas fa-paint-brush"></i> Services</h3>
-
+                    <h3 class="text-primary"><i class="fas fa-paint-brush"></i>
+                        <?= Yii::t('schedule/service/service', 'Services') ?>
+                    </h3>
                         <ul class="nav flex-column">
                         <?php foreach ($menu as $child): ?>
                             <?
