@@ -22,7 +22,7 @@ class m240606_142056_create_admin_user extends Migration
         $admin->phone = '+7 (999) 999-99-99';
         $admin->status        = 10;
 
-        $admin->schedule = new \core\entities\Schedule([8,9],[6,0],4);
+        $admin->schedule = new \core\entities\Schedule(["8","9"],["6","0"],"4");
         $admin->schedule->hoursWork;
         $admin->schedule->weekends;
         $admin->schedule->week;
