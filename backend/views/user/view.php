@@ -67,17 +67,17 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'format' => 'raw',
                 ],
                 [
-                    'attribute' => 'Hours',
+                    'attribute' => 'schedule.hours',
                     'value' => ScheduleHelper::getWorkingHours($model->schedule->hoursWork),
                     'visible' => $model->schedule->hoursWork ?: false,
                 ],
                 [
-                    'attribute' => 'Days',
+                    'attribute' => 'schedule.days',
                     'value' => ScheduleHelper::getWeekends($model->schedule->weekends),
                     'visible' => $model->schedule->weekends ?: false,
                 ],
                 [
-                    'attribute' => 'Week',
+                    'attribute' => 'schedule.week',
                     'value' => function ($model) {
                         return $model->schedule->week;
                     },

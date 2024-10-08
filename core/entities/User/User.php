@@ -330,6 +330,9 @@ class User extends ActiveRecord implements AggregateRoot
             'notice' =>tHelper::translate('user','Notice') ,
             'created_at' =>tHelper::translate('app','Created At') ,
             'updated_at' =>tHelper::translate('app','Updated At') ,
+            'schedule.hours'=>tHelper::translate('user/schedule','Hours'),
+            'schedule.days'=>tHelper::translate('user/schedule','Days'),
+            'schedule.week'=>tHelper::translate('user/schedule','Week'),
         ];
     }
 
