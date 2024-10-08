@@ -48,6 +48,7 @@ PluginAsset::register($this)->add(
                     'class' => 'table table-striped table-bordered',
                     'id' => 'user'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     // ['class' => 'yii\grid\SerialColumn'],
                     //  'id',

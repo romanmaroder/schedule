@@ -46,25 +46,21 @@ PluginAsset::register($this)->add(
                             'id' => 'unpaid'
                         ],
                         'headerRowOptions' => [
-                           // 'class' => 'table-light'
+                            // 'class' => 'table-light'
                         ],
                         'rowOptions' => function ($model) {
-                            return ['style' => 'background-color:' . $model->getDefaultColor() ];
+                            return ['style' => 'background-color:' . $model->getDefaultColor()];
                         },
-                        'emptyText' => 'No results found',
-                        'emptyTextOptions' => [
-                            'tag' => 'div',
-                            'class' => 'col-12 col-lg-6 mb-3 text-info'
-                        ],
+                        'emptyText' => false,
                         'columns' => [
                             [
                                 'attribute' => 'Date',
-                                'label' => Yii::t('cabinet/report','Date'),
+                                'label' => Yii::t('cabinet/report', 'Date'),
                                 'value' => function ($model) {
                                     return Html::a(
                                         Html::encode(DATE('Y-m-d', strtotime($model->start))),
                                         ['core/event/view', 'id' => $model->id],
-                                        ['class'=>'text-dark']
+                                        ['class' => 'text-dark']
                                     );
                                 },
                                 'headerOptions' => ['class' => 'text-center'],

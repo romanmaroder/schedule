@@ -6,9 +6,8 @@
 /* @var $searchModel \backend\forms\RateSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
-use hail812\adminlte3\assets\PluginAsset;
 use core\entities\User\Rate;
-use yii\grid\ActionColumn;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -44,6 +43,7 @@ PluginAsset::register($this)->add(
                     'class' => 'table table-striped table-bordered',
                     'id' => 'rate'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 

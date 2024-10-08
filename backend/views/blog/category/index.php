@@ -2,7 +2,6 @@
 
 use core\entities\Blog\Category;
 use hail812\adminlte3\assets\PluginAsset;
-use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -50,6 +49,7 @@ PluginAsset::register($this)->add(['datatables',
                     'class' => 'table table-striped table-bordered',
                     'id' => 'category'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     'sort',
                     [

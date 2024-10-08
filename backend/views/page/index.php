@@ -50,6 +50,7 @@ PluginAsset::register($this)->add(['datatables',
                     'class' => 'table table-striped table-bordered',
                     'id' => 'pages'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     [
                         'attribute' => 'title',

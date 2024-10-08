@@ -42,23 +42,24 @@ PluginAsset::register($this)->add(
                 </div>
                 <div class="card-body">
                     <?= GridView::widget(
-                    [
-                        'dataProvider' => $dataProvider,
-                        //'filterModel' => $searchModel,
-                        'tableOptions' => [
-                            'class' => 'table table-striped table-bordered',
-                            'id' => 'additional'
-                        ],
-                        'columns' => [
-                            'id',
-                            [
-                                'attribute' => 'name',
-                                'value' => function (Additional $model) {
-                                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                                },
-                                'format' => 'raw',
+                        [
+                            'dataProvider' => $dataProvider,
+                            //'filterModel' => $searchModel,
+                            'tableOptions' => [
+                                'class' => 'table table-striped table-bordered',
+                                'id' => 'additional'
                             ],
-                            [
+                            'emptyText' => false,
+                            'columns' => [
+                                'id',
+                                [
+                                    'attribute' => 'name',
+                                    'value' => function (Additional $model) {
+                                        return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
+                                    },
+                                    'format' => 'raw',
+                                ],
+                                [
                                 'attribute' => 'category_id',
                                 'filter' => $searchModel->categoriesList(),
                                 'value' => 'category.name',

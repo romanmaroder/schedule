@@ -9,9 +9,9 @@
 
 
 use backend\widgets\grid\RoleColumn;
+use core\entities\User\Employee\Employee;
 use core\helpers\EmployeeHelper;
 use hail812\adminlte3\assets\PluginAsset;
-use core\entities\User\Employee\Employee;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -52,6 +52,7 @@ PluginAsset::register($this)->add(
                     'class' => 'table table-striped table-bordered',
                     'id' => 'employee'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     //['class' => 'yii\grid\SerialColumn'],
 

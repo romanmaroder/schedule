@@ -46,6 +46,7 @@ PluginAsset::register($this)->add(['datatables',
                     'class' => 'table table-striped table-bordered',
                     'id' => 'tags'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     'id',
                     [

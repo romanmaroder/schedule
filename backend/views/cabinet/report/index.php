@@ -60,15 +60,11 @@ PluginAsset::register($this)->add(
                                         'rowOptions' => function ($model) {
                                             return ['style' => 'background-color:' . $model->getColor()];
                                         },
-                                        'emptyText' => 'No results found',
-                                        'emptyTextOptions' => [
-                                            'tag' => 'div',
-                                            'class' => 'col-12 col-lg-6 mb-3 text-info'
-                                        ],
+                                        'emptyText' => false,
                                         'columns' => [
 
                                             [
-                                                'label' => Yii::t('cabinet/report','Date'),
+                                                'label' => Yii::t('cabinet/report', 'Date'),
                                                 'headerOptions' => ['class' => ''],
                                                 'value' => function ($model) {
                                                     return DATE('Y-m-d', strtotime($model->getDate()));

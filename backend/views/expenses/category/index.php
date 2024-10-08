@@ -6,8 +6,8 @@
 /* @var $searchModel \backend\forms\Expenses\CategorySearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
-use hail812\adminlte3\assets\PluginAsset;
 use core\entities\Expenses\Category;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -43,6 +43,7 @@ PluginAsset::register($this)->add(
                             'class' => 'table table-striped table-bordered',
                             'id' => 'expenses'
                         ],
+                        'emptyText' => false,
                         'columns' => [
                             'id',
                             [

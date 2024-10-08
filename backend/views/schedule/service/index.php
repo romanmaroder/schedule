@@ -1,9 +1,9 @@
 <?php
 
-use hail812\adminlte3\assets\PluginAsset;
 use core\entities\Schedule\Service\Service;
 use core\helpers\PriceHelper;
 use core\helpers\ServiceHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -47,6 +47,7 @@ PluginAsset::register($this)->add(
                                 'class' => 'table table-striped table-bordered',
                                 'id' => 'service'
                             ],
+                            'emptyText' => false,
                             'columns' => [
                                 'id',
                                 [

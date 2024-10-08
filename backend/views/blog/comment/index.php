@@ -7,8 +7,8 @@
 
 /* @var $dataProvider */
 
-use hail812\adminlte3\assets\PluginAsset;
 use core\entities\Blog\Post\Comment;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\StringHelper;
@@ -50,6 +50,7 @@ PluginAsset::register($this)->add(['datatables',
                     'class' => 'table table-striped table-bordered',
                     'id' => 'comments'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     'id',
                     'created_at:datetime',

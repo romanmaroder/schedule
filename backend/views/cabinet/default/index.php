@@ -33,14 +33,15 @@ PluginAsset::register($this)->add(
                     'class' => 'table table-striped table-bordered',
                     'id' => 'event'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     [
-                        'attribute' => Yii::t('app','start'),
-                        'label' => Yii::t('app','Created At'),
+                        'attribute' => Yii::t('app', 'start'),
+                        'label' => Yii::t('app', 'Created At'),
                         'format' => ['datetime', 'php:d-m-Y']
                     ],
                     [
-                        'attribute' => Yii::t('schedule/event','Client'),
+                        'attribute' => Yii::t('schedule/event', 'Client'),
                         'value' => function ($model) {
                             return Html::a(
                                 Html::encode($model->client->username),

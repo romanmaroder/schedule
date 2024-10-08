@@ -14,7 +14,6 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\web\YiiAsset;
 
 $this->title = Yii::t('price','Prices');
 $this->params['breadcrumbs'][] = $this->title;
@@ -52,6 +51,7 @@ PluginAsset::register($this)->add(
                         'class' => 'table table-striped table-bordered',
                         'id' => 'price'
                     ],
+                    'emptyText' => false,
                     'columns' => [
                         ['class' => 'yii\grid\SerialColumn'],
 

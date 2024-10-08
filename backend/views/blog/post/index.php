@@ -49,6 +49,7 @@ PluginAsset::register($this)->add(['datatables',
                                      'class' => 'table table-striped table-bordered',
                                      'id' => 'posts'
                                  ],
+                                 'emptyText' => false,
                                  'columns' => [
                                      [
                                          'value' => function (Post $model) {

@@ -44,6 +44,7 @@ PluginAsset::register($this)->add(
                             'class' => 'table table-striped table-bordered',
                             'id' => 'category'
                         ],
+                        'emptyText' => false,
                         'columns' => [
                             'id',
                             [

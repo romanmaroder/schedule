@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'class' => 'table table-striped table-bordered',
                                 'id' => 'free'
                             ],
+                            'emptyText' => false,
                             'columns' => [
 
                                 //'id',
