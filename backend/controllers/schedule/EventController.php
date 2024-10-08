@@ -16,9 +16,7 @@ use core\repositories\PriceRepository;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
 use Yii;
-use yii\caching\TagDependency;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -58,7 +56,7 @@ class EventController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            /*[
+            [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index','view'],
                 'duration' => 3600,
@@ -66,7 +64,7 @@ class EventController extends Controller
                     'class' => 'yii\caching\TagDependency',
                     'tags' => [Event::CACHE_KEY],
                 ]
-            ]*/
+            ]
         ];
     }
 

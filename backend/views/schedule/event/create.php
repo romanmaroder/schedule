@@ -48,7 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data' => $model->master->masterList(),
                                 'options' => ['placeholder' => 'Select'],
                                 'pluginOptions' => [
-                                    'allowClear' => true
+                                    'allowClear' => true,
+                                    'id' => 'master',
                                 ],
                                 'pluginEvents' => [
                                     "change" => 'function() {

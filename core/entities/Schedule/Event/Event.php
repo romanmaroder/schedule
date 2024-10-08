@@ -9,8 +9,10 @@ use core\entities\User\Employee\Employee;
 use core\entities\User\User;
 use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * @property int $id
@@ -34,6 +36,8 @@ use yii\db\ActiveRecord;
  * @property string $fullname [varchar(255)]
  * @property string $default_color [varchar(255)]
  * @property int $tools [smallint(6)]
+ * @property int $created_at [int(11) unsigned]
+ * @property int $updated_at [int(11) unsigned]
  */
 class Event extends ActiveRecord
 {
@@ -355,6 +359,15 @@ class Event extends ActiveRecord
                 'relations' => [
                     'serviceAssignments',
                 ],
+            ],
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                //'value' => new Expression('NOW()'),
             ],
         ];
     }

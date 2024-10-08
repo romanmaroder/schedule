@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                                     let data_id = $("#master").val();
                                     console.log(data_id);
                                     $.ajax({
-                                        url: "/schedule/event/check",
+                                        url: "/employee/schedule",
                                         method: "get",
                                         dataType: "json",
                                         data: {id: data_id},
@@ -143,7 +143,10 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                                 'name' => 'master',
                                 'language' => 'ru',
                                 'data' => $model->master->masterList(),
-                                'options' => ['placeholder' => 'Select'],
+                                'options' => [
+                                    'placeholder' => 'Select',
+                                    'id' => 'master',
+                                ],
                                 'pluginOptions' => [
                                     'allowClear' => true
                                 ],
@@ -156,11 +159,11 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                           $("#eventcreateform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
-                                           $("#eventcreateform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventeditform-start-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
+                                           $("#eventeditform-end-datetime").datetimepicker("setDaysOfWeekDisabled", data.weekends);
                                            
-                                           $("#eventcreateform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
-                                           $("#eventcreateform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventeditform-start-datetime").datetimepicker("setHoursDisabled", data.hours);
+                                           $("#eventeditform-end-datetime").datetimepicker("setHoursDisabled", data.hours);
                                         
                                         },
                                         error: function(data , jqXHR, exception){

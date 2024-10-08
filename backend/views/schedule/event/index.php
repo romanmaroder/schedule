@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'dataProvider' => $dataProvider,
                             //'filterModel' => $searchModel,
                             'summary' => false,
+                            'emptyText' => false,
                             'tableOptions' => [
                                 'class' => 'table table-striped table-bordered',
                                 'id' => 'event'
