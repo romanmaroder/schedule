@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $user->username;
                         'allowClear' => true,
                     ],
                 ]
-            ) ->label($model->schedule->getAttributeLabel('weekends'))?>
+            ) ->label($model->schedule->getAttributeLabel('days'))?>
         </div>
         <div class="form-group">
             <?= $form->field($model->schedule, 'week')->textInput(

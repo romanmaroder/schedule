@@ -38,6 +38,7 @@ class ScheduleForm extends Model
         return [
             'hoursWork'=>tHelper::t('user/schedule','Hours'),
             'weekends'=>tHelper::t('user/schedule','Weekends'),
+            'days'=>tHelper::t('user/schedule','Days'),
             'week'=>tHelper::t('user/schedule','Week'),
         ];
     }
