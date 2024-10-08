@@ -129,17 +129,17 @@ class EventReadRepository
 
     public function getUnpaidRecords(): array
     {
-       return Event::find()->where(['status'=>0])->all();
+       return Event::find()->where(['status'=>Event::STATUS_NOT_PAYED])->all();
     }
 
     public function getCash()
     {
-        return Event::find()->where(['payment'=>2])->sum('amount');
+        return Event::find()->where(['payment'=>Event::STATUS_CASH])->sum('amount');
     }
 
     public function getCard()
     {
-        return Event::find()->where(['payment'=>3])->sum('amount');
+        return Event::find()->where(['payment'=>Event::STATUS_CARD])->sum('amount');
     }
 
     public function find($id): ?Event
