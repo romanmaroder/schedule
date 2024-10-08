@@ -46,7 +46,7 @@ PluginAsset::register($this)->add(
                             'id' => 'unpaid'
                         ],
                         'headerRowOptions' => [
-                            'class' => 'table-light'
+                           // 'class' => 'table-light'
                         ],
                         'rowOptions' => function ($model) {
                             return ['style' => 'background-color:' . $model->getDefaultColor() ];
