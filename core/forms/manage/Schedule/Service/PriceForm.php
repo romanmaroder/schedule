@@ -45,8 +45,8 @@ class PriceForm extends Model
     public function attributeLabels()
     {
         return [
-            'new' => tHelper::translate('schedule/service/price', 'Name'),
-            'old' => tHelper::translate('schedule/service/price', 'Description'),
+            'new' => tHelper::translate('schedule/service/price', 'New'),
+            'old' => tHelper::translate('schedule/service/price', 'Old'),
         ];
     }
 

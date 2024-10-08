@@ -31,6 +31,7 @@ PluginAsset::register($this)->add(
                     'class' => 'table table-striped table-bordered',
                     'id' => 'event'
                 ],
+                'emptyText' => false,
                 'columns' => [
                     [
                         'attribute' => Yii::t('app','start'),

@@ -1,10 +1,8 @@
 <?php
 
-use kartik\color\ColorInput;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use core\helpers\EmployeeHelper;
-use core\helpers\PriceHelper;
 use core\helpers\RateHelper;
 use core\helpers\RoleHelper;
 use core\helpers\ScheduleHelper;

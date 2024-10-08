@@ -11,7 +11,6 @@ use kartik\color\ColorInput;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use core\helpers\EmployeeHelper;
-use core\helpers\PriceHelper;
 use core\helpers\RateHelper;
 use core\helpers\RoleHelper;
 use core\helpers\ScheduleHelper;
@@ -190,9 +189,13 @@ $form = ActiveForm::begin(); ?>
             </div>
 
             <div class="form-group">
-                <?= $form->field($model, 'color')->widget(ColorInput::class, [
-                    'options' => ['placeholder' => 'Select color ...'],
-                ]) ?>
+                <?= $form->field($model, 'color')->widget(
+                    ColorInput::class,
+                    [
+                        'options' => ['placeholder' => 'Select color ...'],
+                    ]
+                ) ?>
+
             </div>
             <div class="form-group">
                 <?= $form->field($model, 'roleId')->widget(

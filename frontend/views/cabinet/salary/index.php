@@ -44,18 +44,11 @@ PluginAsset::register($this)->add(
                             'class' => 'table table-striped table-bordered',
                             'id' => 'salary'
                         ],
-                        'headerRowOptions' => [
-                            'class' => 'table-light'
-                        ],
+                        'emptyText' => false,
                         'rowOptions' => function ($model) {
                             return ['style' => 'background-color:' . $model->getColor()];
 
                         },
-                        'emptyText' => 'No results found',
-                        'emptyTextOptions' => [
-                            'tag' => 'div',
-                            'class' => 'col-12 col-lg-6 mb-3 text-info'
-                        ],
                         'columns' => [
                             [
                                 'attribute' => 'Date',

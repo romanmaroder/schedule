@@ -8,3 +8,21 @@ php vendor/bin/codecept run -c frontend
 
 ## Access Token
 "access_token": "4d7424165b62c3939e4167d22a0d5496baf29b9a"
+
+1
+To add the Admin role admin
+- console controller yii role/assign
+- Phone employee: +X (XXX) XXX-XX-XX +7 (999) 999-99-99
+- Role: (admin,employee,manager,?): admin
+
+2
+Добавить
+- категории услуг
+- теги (необязательно)
+- услуги
+- роли
+- ставки
+- прайсы
+
+3
+Добавить сотрудника

@@ -90,8 +90,6 @@ class EmployeeManageService
             $user->notice = $form->user->notice,
         );
 
-
-
         $employee = $this->repository->get($id);
         $employee->edit(
             $form->rateId,
@@ -118,9 +116,9 @@ class EmployeeManageService
         );
         $this->transaction->wrap(
             function () use ($employee, $form, $user) {
-                $this->repository->save($employee);
-                $this->roles->assign($employee->user_id, $form->role);
                 $this->users->save($user);
+                $this->roles->assign($employee->user_id, $form->role);
+                $this->repository->save($employee);
             }
         );
     }
