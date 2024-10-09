@@ -47,6 +47,14 @@ return [
                         'app/error' => 'error.php',
                     ],
                 ],
+                'login*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'login' => 'login/login.php',
+                    ],
+                ],
                 'blog*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     //'basePath' => '@app/messages',

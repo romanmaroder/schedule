@@ -19,7 +19,7 @@ use yii\helpers\Html;
 </div>
 <div class="card">
     <div class="card-body login-card-body">
-        <p class="login-box-msg">Login to start your session</p>
+        <p class="login-box-msg"><?=Yii::t('login','Login to start your session')?></p>
 
         <?php
         $form = ActiveForm::begin(['id' => 'login-form']) ?>
@@ -35,7 +35,7 @@ use yii\helpers\Html;
             ]
         )
             ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+            ->textInput(['placeholder' => $model->getAttributeLabel(Yii::t('user','Username'))]) ?>
 
         <?= $form->field(
             $model,
@@ -48,10 +48,10 @@ use yii\helpers\Html;
             ]
         )
             ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+            ->passwordInput(['placeholder' => $model->getAttributeLabel(Yii::t('user','Password'))]) ?>
 
         <div class="row">
-           <!-- <div class="col-8">
+            <div class="col-8">
                 <?/*= $form->field($model, 'rememberMe')->checkbox(
                     [
                         'template' => '<div class="icheck-primary">{input}{label}</div>',
@@ -61,9 +61,9 @@ use yii\helpers\Html;
                         'uncheck' => null
                     ]
                 ) */?>
-            </div>-->
+            </div>
             <div class="col-4">
-                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block','name'=>'Sign In']) ?>
+                <?= Html::submitButton(Yii::t('login','Sign In'), ['class' => 'btn btn-primary btn-block','name'=>'Sign In']) ?>
             </div>
         </div>
 

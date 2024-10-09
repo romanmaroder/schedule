@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 /** @var \core\forms\auth\LoginForm $model */
 
-$this->title = 'Login';
+$this->title = Yii::t('login','login');
 ?>
 <div class="">
     <?php if (Yii::$app->getSession()->hasFlash('success')): ?>
@@ -19,7 +19,7 @@ $this->title = 'Login';
 </div>
 <div class="card">
     <div class="card-body login-card-body">
-        <p class="login-box-msg">Login to start your session</p>
+        <p class="login-box-msg"><?=Yii::t('login','Login to start your session')?></p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form']) ?>
 
@@ -30,7 +30,7 @@ $this->title = 'Login';
             'wrapperOptions' => ['class' => 'input-group mb-3']
         ])
             ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+            ->textInput(['placeholder' => $model->getAttributeLabel(Yii::t('user','Username'))]) ?>
 
         <?= $form->field($model, 'password', [
             'options' => ['class' => 'form-group has-feedback'],
@@ -39,7 +39,7 @@ $this->title = 'Login';
             'wrapperOptions' => ['class' => 'input-group mb-3']
         ])
             ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+            ->passwordInput(['placeholder' => $model->getAttributeLabel(Yii::t('user','Password'))]) ?>
 
         <div class="row">
             <div class="col-8">
@@ -48,10 +48,10 @@ $this->title = 'Login';
                         ['template' => '<div class="icheck-primary">{input}{label}</div>',
                         'labelOptions' => ['class' => ''],
                         'uncheck' => null],
-                    ])->checkbox([])->label(false) ?>
+                    ])->checkbox([])->label(Yii::t('login','Remember Me')) ?>
             </div>
             <div class="col-4">
-                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block','name'=>'submitButton']) ?>
+                <?= Html::submitButton(Yii::t('login','Sign In'), ['class' => 'btn btn-primary btn-block','name'=>'submitButton']) ?>
             </div>
         </div>
 
@@ -68,10 +68,10 @@ $this->title = 'Login';
         <!-- /.social-auth-links -->
 
         <p class="mb-1">
-            <?= Html::a('I forgot my password', ['auth/reset/request-password-reset']) ?>
+            <?= Html::a(Yii::t('login','I forgot my password'), ['auth/reset/request-password-reset']) ?>
         </p>
         <p class="mb-0">
-            <?= Html::a('Need new verification email?', ['auth/resend/resend-verification-email']) ?>
+            <?= Html::a(Yii::t('login','Need new verification email?'), ['auth/resend/resend-verification-email']) ?>
         </p>
     </div>
     <!-- /.login-card-body -->
