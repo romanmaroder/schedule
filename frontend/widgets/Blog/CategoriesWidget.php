@@ -6,6 +6,8 @@ namespace frontend\widgets\Blog;
 
 use core\entities\Blog\Category;
 use core\readModels\Blog\CategoryReadRepository;
+use core\readModels\Blog\PostReadRepository;
+use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -15,15 +17,21 @@ class CategoriesWidget extends Widget
     public $active;
 
     private $categories;
+    private $posts;
 
-    public function __construct(CategoryReadRepository $categories, $config = [])
-    {
+    public function __construct(
+        CategoryReadRepository $categories,
+        PostReadRepository $posts,
+        $config = []
+    ) {
         parent::__construct($config);
         $this->categories = $categories;
+        $this->posts = $posts;
     }
 
     public function run()
     {
+        $post = $this->posts->count();
         /*return Html::tag(
             'ul',
             implode(
@@ -44,14 +52,19 @@ class CategoriesWidget extends Widget
             ]
         );*/
 
-
-
-        $this->categoryList();
+        if ($post > 0) {
+            $this->categoryList();
+        }
     }
 
     private function categoryList()
     {
         $count = 0;
+        echo Html::beginTag('div', ['class' => 'section-title']);
+              echo Html::beginTag('h2');
+                echo Yii::t('blog','Popular Posts');
+              echo Html::endTag('h2');
+        echo Html::endTag('div');
         foreach ($this->categories->getAll() as $category) {
             $active = $this->active && ($this->active->id == $category->id);
             $count++;

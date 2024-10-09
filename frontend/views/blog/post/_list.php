@@ -16,9 +16,9 @@
             'class'=>'text-center'
         ],
         'emptyTextOptions'=>[
-            'class'=>'text-center'
+            'class'=>'text-center text-uppercase'
         ],
-        'emptyText' => 'There are no articles',
+        'emptyText' => Yii::t('app','Articles are still being written'),
     ]
 ) ?>
 
