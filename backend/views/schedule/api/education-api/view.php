@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Lesson', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education','Lesson'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
     if (Yii::$app->id == 'app-backend'): ?>
         <p>
             <?= Html::a(
-                'Update',
+                Yii::t('app','Update'),
                 ['update', 'id' => $model->id],
                 [
                     'id' => 'edit-link',
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
 
             <?= Html::a(
-                'Delete',
+                Yii::t('app','Delete'),
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',

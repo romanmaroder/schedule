@@ -62,7 +62,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
     ) ?>
     <p>
           <?= Html::a(
-                'Update',
+              Yii::t('app', 'Update'),
                 ['update', 'id' => $model->id],
                 [
                     'id' => 'edit-link',

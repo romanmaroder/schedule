@@ -10,8 +10,8 @@ use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 
-$this->title = 'Create Lesson';
-$this->params['breadcrumbs'][] = ['label' => 'Lessons', 'url' => ['index']];
+$this->title = Yii::t('schedule/education','Create Lesson');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education','Lessons'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -169,7 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-12">
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']); ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']); ?>
             </div>
         </div>
     </div>
