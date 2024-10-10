@@ -129,8 +129,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     });
                                                     Toast.fire({
                                                         icon: 'success',
-                                                        title: `<h6>Event changed</h6>`,
-                                                        html:`<i> start: `+ data.start +`</i>` + `</br>` + `<i> end: ` + data.end + `</i>`,
+                                                        title: `<h6>`+data.content.resize+`</h6>`,
+                                                        html:`<i>`+ data.content.start+`: `+ data.event.start +`</i>` + `</br>` + `<i>`+ data.content.end+`: ` + data.event.end + `</i>`,
                                                     });
                                          },
                                          error:function(data){
@@ -156,6 +156,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
              */
             $eventDrop = new JsExpression(
                 "function(eventDropInfo ){
+console.log(eventDropInfo.event.source.id);
                                             $.ajax({
                                                 url:'/schedule/api/'+ eventDropInfo.event.source.id +'-api/dragging-resizing',
                                                 data:{'id':eventDropInfo.event.id,'start':eventDropInfo.event.startStr,'end':eventDropInfo.event.endStr},
@@ -168,8 +169,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     });
                                                     Toast.fire({
                                                         icon: 'success',
-                                                        title: `<h6>The event has been moved to</h6>`,
-                                                        html:`<i> start: `+ data.start +`</i>` + `</br>` + `<i> end: ` + data.end + `</i>`,
+                                                        title: `<h6>`+data.content.drop+`</h6>`,
+                                                       html:`<i>`+ data.content.start+`: `+ data.event.start +`</i>` + `</br>` + `<i>`+ data.content.end+`: ` + data.event.end + `</i>`,
                                                     });
                                                 },
                                                 error:function(data){

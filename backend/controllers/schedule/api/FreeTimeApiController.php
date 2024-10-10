@@ -123,7 +123,7 @@ class FreeTimeApiController extends Controller
     }
 
 
-    public function actionDraggingResizing($id, $start, $end): FreeTime
+    public function actionDraggingResizing($id, $start, $end)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -133,7 +133,15 @@ class FreeTimeApiController extends Controller
         $free->end = date('Y-m-d H:i', strtotime($end));
 
         $this->freeTime->save($free);
-        return $free;
+        return [
+            'event' => $free,
+            'content' => [
+                'start' => Yii::t('schedule/event','Start'),
+                'end' => Yii::t('schedule/event','End'),
+                'resize' => Yii::t('schedule/event','resize'),
+                'drop' => Yii::t('schedule/event','drop'),
+            ]
+        ];
     }
 
     public function actionDelete($id)

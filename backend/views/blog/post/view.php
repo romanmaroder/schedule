@@ -53,7 +53,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             ['class' => 'btn btn-primary btn-sm btn-shadow bg-gradient text-shadow']
         ) ?>
         <?= Html::a(
-            'Delete',
+            Yii::t('app','Delete'),
             ['delete', 'id' => $post->id],
             [
                 'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadow',

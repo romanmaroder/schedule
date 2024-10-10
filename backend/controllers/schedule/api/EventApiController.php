@@ -14,7 +14,6 @@ use core\services\sms\SmsSender;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
 use Yii;
-use yii\caching\TagDependency;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
@@ -153,7 +152,7 @@ class EventApiController extends Controller
     }
 
 
-    public function actionDraggingResizing($id, $start, $end): Event
+    public function actionDraggingResizing($id, $start, $end)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -163,7 +162,15 @@ class EventApiController extends Controller
         $event->end = date('Y-m-d H:i', strtotime($end));
 
         $this->service->save($event);
-        return $event;
+        return [
+            'event' => $event,
+            'content' => [
+                'start' => Yii::t('schedule/event','Start'),
+                'end' => Yii::t('schedule/event','End'),
+                'resize' => Yii::t('schedule/event','resize'),
+                'drop' => Yii::t('schedule/event','drop'),
+            ]
+        ];
     }
 
     public function actionDelete($id)

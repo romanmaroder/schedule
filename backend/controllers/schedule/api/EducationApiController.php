@@ -95,7 +95,7 @@ class EducationApiController extends Controller
         );
     }
 
-    public function actionDraggingResizing($id, $start, $end): Education
+    public function actionDraggingResizing($id, $start, $end)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -105,7 +105,15 @@ class EducationApiController extends Controller
         $education->end = date('Y-m-d H:i', strtotime($end));
 
         $this->service->save($education);
-        return $education;
+        return [
+            'event' => $education,
+            'content' => [
+                'start' => Yii::t('schedule/event','Start'),
+                'end' => Yii::t('schedule/event','End'),
+                'resize' => Yii::t('schedule/event','resize'),
+                'drop' => Yii::t('schedule/event','drop'),
+            ]
+        ];
     }
 
     public function actionDelete($id)
