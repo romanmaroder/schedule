@@ -56,7 +56,7 @@ class EducationApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('msg', "Запись " . $form->start . '-' . $form->end . " сохранена");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -80,7 +80,7 @@ class EducationApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($education->id, $form);
-                Yii::$app->session->setFlash('msg', "Lesson " . $form->start . '-' . $form->end . " saved");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

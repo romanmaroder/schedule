@@ -73,7 +73,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('msg', "Event " . $form->start . '-' . $form->end . " saved.");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -98,7 +98,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($event->id, $form);
-                Yii::$app->session->setFlash('msg', "Event " . $form->start . '-' . $form->end . " saved.");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -119,7 +119,7 @@ class EventApiController extends Controller
         $event = $this->findModel($id);
         try {
             $this->service->tools($event->id);
-            Yii::$app->session->setFlash('msg', "Tools are ready.");
+            Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Ready'));
             return $this->redirect('/schedule/calendar/calendar');
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);
@@ -135,7 +135,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->copy($form);
-                Yii::$app->session->setFlash('msg', "The entry " . $event->client->username . " copied.");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Copied'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

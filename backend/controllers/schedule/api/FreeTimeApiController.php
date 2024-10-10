@@ -57,7 +57,7 @@ class FreeTimeApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->freeTime->create($form);
-                Yii::$app->session->setFlash('msg', "Event " . $form->start . '-' . $form->end . " saved.");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -82,7 +82,7 @@ class FreeTimeApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->freeTime->edit($free->id, $form);
-                Yii::$app->session->setFlash('msg', "Event " . $form->start . '-' . $form->end . " saved.");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -106,7 +106,7 @@ class FreeTimeApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->freeTime->copy($form);
-                Yii::$app->session->setFlash('msg', "The entry " . $free->master->username ." copied.");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Copied'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

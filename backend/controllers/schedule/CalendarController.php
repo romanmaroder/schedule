@@ -9,7 +9,7 @@ use yii\web\Controller;
 
 class CalendarController extends Controller
 {
-    /*public function behaviors()
+    public function behaviors()
     {
         return [
             [
@@ -22,7 +22,7 @@ class CalendarController extends Controller
                 ]
             ]
         ];
-    }*/
+    }
 
     public function actionCalendar(): string
     {
