@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = $model->master->username;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/event','Events'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

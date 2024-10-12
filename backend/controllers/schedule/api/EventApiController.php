@@ -119,7 +119,7 @@ class EventApiController extends Controller
         $event = $this->findModel($id);
         try {
             $this->service->tools($event->id);
-            Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Ready'));
+            Yii::$app->session->setFlash('msg', Yii::t('schedule/event','TOOLS READY'));
             return $this->redirect('/schedule/calendar/calendar');
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);

@@ -113,7 +113,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
         <!-- /.card-body -->
         <div class="card-footer">
             <div class="form-group">
-                <?= Html::submitButton(Yii::t('schedule/service','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
+                <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
             </div>
             <!--Footer-->
         </div>

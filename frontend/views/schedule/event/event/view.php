@@ -42,7 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
 
                 [
-                    'label' => 'Service',
+                    'attribute' => 'service',
+                    //'label' => 'service',
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
                     'contentOptions' => ['class'=>'text-break'],
                 ],

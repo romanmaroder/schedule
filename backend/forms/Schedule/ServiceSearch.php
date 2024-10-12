@@ -38,7 +38,7 @@ class ServiceSearch extends Model
                 'query' => $query,
                 'pagination' => false,
                 'sort' => [
-                    'defaultOrder' => ['id' => SORT_DESC]
+                    'defaultOrder' => ['id' => SORT_ASC]
                 ]
             ]
         );
