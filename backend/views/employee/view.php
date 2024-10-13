@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'btn btn-danger btn-shadow btn-sm btn-gradient delete',
                 'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
+                    'confirm' => Yii::t('app', 'Delete file?'),
                     'method' => 'post',
                     'id' => $model->id
                 ],

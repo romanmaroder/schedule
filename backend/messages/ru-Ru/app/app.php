@@ -7,6 +7,7 @@ return[
     'Update'=>'Обновить',
     'Upload'=>'Загрузить',
     'Delete'=>'Удалить',
+    'Delete file?'=>'Удалить?',
     'Activate'=>'Активировать',
     'Inactive'=>'Не активный',
     'Active'=>'Активный',

@@ -28,7 +28,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient text-shadow',
                     'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
+                        'confirm' => Yii::t('app', 'Delete file?'),
                         'method' => 'post',
                     ],
                 ]
