@@ -199,7 +199,7 @@ PluginAsset::register($this)->add(
                                                 },
                                                 'contentOptions' => function ($model) use ($cart) {
                                                     return [
-                                                        'data-total' => $model->getProfit(),
+                                                        'data-total' => $model->getTotalProfit(),
                                                         'class' => ['text-right align-middle text-dark']
                                                     ];
                                                 },

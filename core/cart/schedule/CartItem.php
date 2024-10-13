@@ -94,10 +94,6 @@ class CartItem
      */
     public function getMasterPrice(): float|int
     {
-        #Rounding up
-        //return round($this->getOriginalCost() * $this->getEmployeePrice(),-2,PHP_ROUND_HALF_EVEN);
-        //return $this->getOriginalCost() * $this->getEmployeePrice();
-        //return $this->getOriginalCost() - $this->getEmployeePrice();
         return $this->item->price_cost;
     }
 
@@ -116,20 +112,17 @@ class CartItem
                 $discountedPrice = $this->getMasterPrice() - ($this->getMasterPrice() * $this->getDiscount() / 100);
                 break;
             default:
-                $discountedPrice = ceil(
+                $discountedPrice =
                     $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
-                        ($this->getDiscount() / 100))
-                );
+                        ($this->getDiscount() / 100));
         }
 
-        /*$discountedPrice = match ($this->getDiscountFrom()) {
+        /* $discountedPrice = match ($this->getDiscountFrom()) {
             Discount::MASTER_DISCOUNT => $this->getMasterPrice() - $this->masterDiscount(),
             Discount::STUDIO_DISCOUNT => $this->getMasterPrice() - ($this->getMasterPrice() * $this->getDiscount(
                     ) / 100),
-            default => ceil(
-                $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
-                    ($this->getDiscount() / 100))
-            ),
+            default => $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
+                    ($this->getDiscount() / 100)),
         };*/
 
         return $discountedPrice;

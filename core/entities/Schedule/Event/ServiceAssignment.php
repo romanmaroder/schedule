@@ -19,6 +19,7 @@ use yii\db\ActiveRecord;
  * @property int $price_cost [int(11)]
  * @property Service $services
  * @property Event $events
+ * @property int $cost [int(11)]
  */
 class ServiceAssignment extends ActiveRecord
 {
