@@ -9,7 +9,7 @@ return [
     'Amount'=>'Сумма',
     'Status'=>'Статус',
     'Payment'=>'Оплата',
-    'Start'=>'Старт',
+    'Start'=>'Начало',
     'Time'=>'Время',
     'End'=>'Конец',
     'Services'=>'Услуги',

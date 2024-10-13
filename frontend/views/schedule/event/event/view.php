@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                 ],*/
                 [
-                    'attribute' => 'Phone',
+                    'attribute' => 'client.phone',
                     'value' => function ($model) {
                         return Html::a(
                             Html::encode($model->client->phone),
@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'visible' => Yii::$app->user->identity->getId() != $model->master_id,
                 ],
                 [
-                    'attribute' => 'Cost',
+                    'attribute' => 'cost',
                     'value' => $model->getDiscountedPrice($model, $cart),
                     'visible' => Yii::$app->user->identity->getId() == $model->master_id,
                 ],
