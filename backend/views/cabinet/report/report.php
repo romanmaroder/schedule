@@ -22,7 +22,6 @@ PluginAsset::register($this)->add(
         'datatables-bs4',
         'datatables-responsive',
         'datatables-buttons',
-        'datatables-colreorder',
         'datatables-searchbuilder',
         'datatables-fixedheader',
     ]
@@ -186,14 +185,12 @@ let table= $('#report').DataTable({
                 info: true,
                 autoWidth: false,
                 responsive: true,
-                colReorder:{
-                    realtime:false
-                },
                 fixedHeader: {
                     header: true,
                     footer: true
                 },
                 bStateSave: true,
+                bDestroy: true,
                 dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col"l><"col"i><"col"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                 var api = this.api();

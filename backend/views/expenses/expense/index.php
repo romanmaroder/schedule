@@ -24,6 +24,7 @@ PluginAsset::register($this)->add(
         'datatables-responsive',
         'datatables-buttons',
         'datatables-searchbuilder',
+        'datatables-fixedheader',
     ]
 );
 ?>
@@ -58,8 +59,10 @@ PluginAsset::register($this)->add(
                             //'id',
                             [
                                 'attribute' => 'category_id',
-                                'filter' => $searchModel->categoriesList(),
-                                'value' => 'category.name',
+                                'value' => function (Expenses $model) {
+                                    return Html::a(Html::encode($model->category->name), ['expenses/category/view', 'id' => $model->category_id]);
+                                },
+                                'format' => 'raw',
                             ],
                             [
                                 'attribute' => 'name',
@@ -169,6 +172,9 @@ $js = <<< JS
                 },
                 searchBuilder: {
                     columns: [0,1,3]
+                },fixedHeader: {
+                    header: true,
+                    footer: true
                 },
         language:{url:"$ru"}
     }).buttons().container().appendTo('#expense_wrapper .col-md-6:eq(0)');

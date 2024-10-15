@@ -47,7 +47,7 @@ PluginAsset::register($this)->add(
                                 <td class="text-center"><?= $expense ?></td>
                                 <td class="text-left"
                                     data-total="<?= $cart->getTotalWithSubtractions($expense); ?>"><?= $cart->getFullProfit() ?>
-                                    - <?= $expense ?></td>
+                                    - <?= $expense ?> - <?= $cart->getFullSalary() ?>" </td>
                             </tr>
                             </tbody>
                             <tfoot>
