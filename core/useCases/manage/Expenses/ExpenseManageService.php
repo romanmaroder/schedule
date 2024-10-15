@@ -43,6 +43,7 @@ class ExpenseManageService
             $form->name,
             $form->value,
             $form->status,
+            $form->created_at,
         );
 
         # Binding of additional categories to the service
@@ -76,10 +77,12 @@ class ExpenseManageService
     {
         $service = $this->services->get($id);
         $category = $this->categories->get($form->categories->main);
+
         $service->edit(
             $form->name,
             $form->value,
-            $form->status
+            $form->status,
+            $form->created_at,
         );
         $service->changeMainCategory($category->id);
 

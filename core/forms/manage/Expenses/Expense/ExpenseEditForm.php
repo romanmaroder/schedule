@@ -17,6 +17,7 @@ class ExpenseEditForm extends CompositeForm
     public $name;
     public $value;
     public $status;
+    public $created_at;
 
     private $_service;
 
@@ -25,6 +26,7 @@ class ExpenseEditForm extends CompositeForm
         $this->name = $service->name;
         $this->value = $service->value;
         $this->status = $service->status;
+        $this->created_at = $service->created_at;
         $this->categories = new CategoriesForm($service);
         $this->tags = new TagsForm($service);
 
@@ -39,6 +41,7 @@ class ExpenseEditForm extends CompositeForm
             [[ 'name'], 'required'],
             [['name'], 'string', 'max' => 255],
             [['value','status'],'integer'],
+            [['created_at'],'safe']
         ];
     }
 
@@ -48,6 +51,7 @@ class ExpenseEditForm extends CompositeForm
             'name' => tHelper::translate('expenses/expenses', 'Name'),
             'value' => tHelper::translate('expenses/expenses', 'Value'),
             'status' => tHelper::translate('expenses/expenses', 'Status'),
+            'created_at' => tHelper::translate('app', 'Created At'),
         ];
     }
 

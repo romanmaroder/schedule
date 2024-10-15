@@ -7,6 +7,7 @@
 
 /* @var $expense \core\entities\Expenses\Expenses\Expenses */
 
+use kartik\date\DatePicker;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -40,6 +41,37 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                 </div>
                 <div class="col-md-6">
                     <?= $form->field($model, 'value')->textInput() ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <?= $form->field($model, 'created_at')->widget(
+                            DatePicker::class,
+                            [
+                                'options' => [
+                                    'type' => 'text',
+                                    'readonly' => true,
+                                    'convertFormat' => true,
+                                    'value'=>date('Y-m-d',$model->created_at),
+                                ],
+                                'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+                                'layout' => '{picker} {remove} {input}',
+                                'pickerIcon' => '<i class="fa fa-calendar"></i>',
+                                'removeIcon' => '<i class="fa fa-times"></i>',
+                                'pluginOptions' => [
+                                    'autoclose' => true,
+                                    'format' => 'yyyy-mm-dd',
+                                    'todayHighlight' => true,
+                                    'todayBtn' => true,
+                                    //'daysOfWeekDisabled' => [0,6],
+                                    //'hoursDisabled' => [0, 1, 2, 3, 4, 5, 6, 22, 23],
+                                ],
+                                'language' => 'ru',
+                                'size' => 'xs'
+                            ]
+                        ) ?>
+                    </div>
                 </div>
             </div>
         </div>

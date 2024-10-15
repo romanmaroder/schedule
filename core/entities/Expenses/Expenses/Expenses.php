@@ -32,23 +32,24 @@ class Expenses extends ActiveRecord
     const STATUS_ACTIVE = 1;
 
 
-    public static function create($categoryId, $name,$value,$status): self
+    public static function create($categoryId, $name, $value, $status, $created_at): self
     {
         $expense = new static();
         $expense->category_id = $categoryId;
         $expense->name = $name;
         $expense->value = $value;
         $expense->status = self::STATUS_ACTIVE;
-        $expense->created_at = time();
+        $expense->created_at = strtotime($created_at);
         return $expense;
     }
 
 
-    public function edit($name, $value,$status): void
+    public function edit($name, $value, $status, $created_at): void
     {
         $this->name = $name;
         $this->value = $value;
-        $this->status =$status;
+        $this->status = $status;
+        $this->created_at =  strtotime($created_at);
     }
     # Category methods
 
@@ -212,9 +213,6 @@ class Expenses extends ActiveRecord
             'status' => tHelper::translate('expenses/expenses', 'Status'),
             'tags.name' => tHelper::translate('expenses/tag', 'Tags'),
             'category.others' => tHelper::translate('expenses/category', 'Others'),
-            'meta.title' => tHelper::translate('meta', 'meta.title'),
-            'meta.description' => tHelper::translate('meta', 'meta.description'),
-            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
         ];
     }
 

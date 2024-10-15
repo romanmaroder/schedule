@@ -62,18 +62,18 @@ use yii\helpers\Html;
         <div class="card-body">
             <div class="form-group">
                 <?= $form->field($model->meta, 'title')->textInput(
-                    ['maxlength' => true, 'placeholder' => $model->getAttributeLabel('title')]
-                )->label($model->getAttributeLabel('title')) ?>
+                    ['maxlength' => true, 'placeholder' => $model->meta->getAttributeLabel('title')]
+                )->label($model->meta->getAttributeLabel('title')) ?>
             </div>
             <div class="form-group">
                 <?= $form->field($model->meta, 'description')->textarea(
-                    ['rows' => 2, 'placeholder' => $model->getAttributeLabel('description')]
-                )->label($model->getAttributeLabel('description')) ?>
+                    ['rows' => 2, 'placeholder' => $model->meta->getAttributeLabel('description')]
+                )->label($model->meta->getAttributeLabel('description')) ?>
             </div>
             <div class="form-group">
                 <?= $form->field($model->meta, 'keywords')->textInput(
-                    ['maxlength' => true, 'placeholder' => $model->getAttributeLabel('keywords')]
-                )->label($model->getAttributeLabel('keywords')) ?>
+                    ['maxlength' => true, 'placeholder' => $model->meta->getAttributeLabel('keywords')]
+                )->label($model->meta->getAttributeLabel('keywords')) ?>
             </div>
         </div>
         <!-- /.card-body -->

@@ -16,6 +16,7 @@ class ExpenseCreateForm extends CompositeForm
     public $name;
     public $value;
     public $status;
+    public $created_at;
 
     public function __construct($config = [])
     {
@@ -30,6 +31,7 @@ class ExpenseCreateForm extends CompositeForm
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
             [['value','status'], 'integer'],
+            [['created_at'],'safe']
         ];
     }
 
@@ -39,6 +41,7 @@ class ExpenseCreateForm extends CompositeForm
             'name' => tHelper::translate('expenses/expenses', 'Name'),
             'value' => tHelper::translate('expenses/expenses', 'Value'),
             'status' => tHelper::translate('expenses/expenses', 'Status'),
+            'created_at' => tHelper::translate('app', 'Created At'),
         ];
     }
 
