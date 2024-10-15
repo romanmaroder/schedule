@@ -8,9 +8,9 @@ use core\entities\Expenses\Expenses\Expenses;
 use core\entities\Expenses\Expenses\Tag;
 use core\forms\manage\Expenses\Expense\ExpenseCreateForm;
 use core\forms\manage\Expenses\Expense\ExpenseEditForm;
-use core\repositories\Expenses\CategoryRepository;
 use core\repositories\Expenses\ExpenseRepository;
 use core\repositories\Expenses\TagRepository;
+use core\repositories\Expenses\CategoryRepository;
 use core\services\TransactionManager;
 
 class ExpenseManageService

@@ -6,7 +6,6 @@
 /* @var $model \core\forms\manage\Expenses\Expense\ExpenseCreateForm */
 
 use kartik\widgets\DatePicker;
-use kartik\widgets\DateTimePicker;
 use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;

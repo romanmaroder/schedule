@@ -178,16 +178,14 @@ $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.jso
 $js = <<< JS
 $(function () {
 let table= $('#report').DataTable({
-bDestroy: true,
-responsive: true,
-pageLength: -1, 
-paging: true,
-lengthChange: true,
-lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
-searching: true,
-ordering: false,
+                paging: true,
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
+                searching: true,
+                ordering: false,
                 info: true,
                 autoWidth: false,
+                responsive: true,
                 colReorder:{
                     realtime:false
                 },

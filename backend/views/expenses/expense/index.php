@@ -18,7 +18,13 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('expenses/expenses', 'Expens
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
-    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
+    [
+        'datatables',
+        'datatables-bs4',
+        'datatables-responsive',
+        'datatables-buttons',
+        'datatables-searchbuilder',
+    ]
 );
 ?>
 
@@ -41,6 +47,8 @@ PluginAsset::register($this)->add(
                     [
                         'dataProvider' => $dataProvider,
                         //'filterModel' => $searchModel,
+                        'summary' => false,
+                        'showFooter' => true,
                         'tableOptions' => [
                             'class' => 'table table-striped table-bordered',
                             'id' => 'expense'
@@ -65,6 +73,14 @@ PluginAsset::register($this)->add(
                                 'value' => function (Expenses $model) {
                                     return PriceHelper::format($model->value);
                                 },
+                                'contentOptions' => function ($model) {
+                                    return [
+                                        'data-total' => $model->value,
+                                        'class' => ['text-center align-middle']
+                                    ];
+                                },
+                                'footer' => '',
+                                'footerOptions' => ['class' => 'text-center bg-info'],
                             ],
                             'created_at:date'
                             /*[
@@ -96,30 +112,66 @@ $js = <<< JS
  $(function () {
  
     $('#expense').DataTable({
-    
-       "paging": false,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": false,
-       "autoWidth": false,
-       "responsive": true,
-        // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
-      // "buttons": [
-      //   {
-		// 		"text": "Добавить категорию",
-		// 		"className":"btn btn-success",
-		// 		"tag":"a",
-		// 		"attr":{
-		// 		//"href":create
-		// 		},
-		// 		/*"action": function ( e, dt, node, config ) {
-		// 		  $(location).attr('href',config.attr.href);
-		// 		}*/
-      //   }
-      //   ],
+       paging: true,
+       pageLength: -1,
+       lengthChange: true,
+       lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
+       searching: true,
+       ordering: false,
+       info: true,
+       autoWidth: false,
+       responsive: true,
+       bStateSave: true,
+       bDestroy: true,
+       dom:'<"row"<"col-12"Q>> t <"row"<"col"l><"col"i><"col"p>> ',
+                footerCallback: function ( row, data, start, end, display ) {
+                var api = this.api();
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                i : 0;
+                };
+                
+               // Total Expenses
+               
+              let  totalExpenses = api
+                .column( 2 )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+              
+                // Total over this page
+              let  pageTotalExpenses = api
+                .column( 2, { page: 'current'} )
+                .nodes()
+                .reduce( function (a, b) {
+                return intVal(a) + intVal($(b).attr('data-total'));
+                }, 0 );
+                // Update footer
+                if ( pageTotalExpenses === 0 ){
+                $( api.column( 2 ).footer() )
+                .html('-');
+                }else{
+                    $( api.column( 2 ).footer() ).html(pageTotalExpenses);
+                }
+                $( api.column( 2 ).footer() ).html( pageTotalExpenses);
+                
+                },
+                fnStateSave: function (oSettings, oData) {
+                localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
+                },
+                fnStateLoad: function () {
+                var data = localStorage.getItem('DataTables_' + window.location.pathname);
+                return JSON.parse(data);
+                },
+                searchBuilder: {
+                    columns: [0,1,3]
+                },
         language:{url:"$ru"}
-    }).buttons().container().appendTo('#service_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#expense_wrapper .col-md-6:eq(0)');
 
   });
 

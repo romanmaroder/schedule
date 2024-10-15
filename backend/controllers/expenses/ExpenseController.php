@@ -45,7 +45,6 @@ class ExpenseController extends Controller
     {
         $searchModel = new ExpenseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render(
             'index',
             [
