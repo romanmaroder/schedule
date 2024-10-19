@@ -57,11 +57,7 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Date',
                                 'label' => Yii::t('cabinet/report', 'Date'),
                                 'value' => function ($model) {
-                                    return Html::a(
-                                        Html::encode(DATE('Y-m-d', strtotime($model->start))),
-                                        ['schedule/event/view', 'id' => $model->id],
-                                        ['class' => 'text-dark']
-                                    );
+                                    return DATE('Y-m-d', strtotime($model->start));
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
@@ -73,7 +69,11 @@ PluginAsset::register($this)->add(
                                 'attribute' => 'Master',
                                 'label' => Yii::t('cabinet/report','Master'),
                                 'value' => function ($model) {
-                                    return $model->getFullName();
+                                    return Html::a(
+                                        Html::encode($model->getFullName()),
+                                        ['schedule/event/view', 'id' => $model->id],
+                                        ['class' => 'text-dark']
+                                    );
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
