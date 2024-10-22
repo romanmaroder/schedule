@@ -2,6 +2,7 @@
 
 namespace core\forms\auth;
 
+use core\helpers\tHelper;
 use yii\base\Model;
 
 /**
@@ -26,4 +27,12 @@ class LoginForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'username' => tHelper::translate('user', 'Username'),
+            'password' => tHelper::translate('user', 'Password'),
+
+        ];
+    }
 }
