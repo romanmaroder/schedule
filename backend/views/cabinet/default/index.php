@@ -46,7 +46,7 @@ PluginAsset::register($this)->add(
                             return Html::a(
                                 Html::encode($model->client->username),
                                 ['/user/view', 'id' => $model->client->id]
-                            ). ' / '. $model->master->username;
+                            );
                         },
                         'format' => 'raw',
                     ],
