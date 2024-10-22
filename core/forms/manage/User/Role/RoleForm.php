@@ -27,6 +27,7 @@ class RoleForm extends Model
     {
         return [
             [['name'], 'string'],
+            [['name'], 'required'],
             [
                 ['name'],
                 'unique',

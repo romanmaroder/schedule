@@ -18,6 +18,7 @@ class ServicesForm extends Model
     {
         if ($event) {
             $this->lists = ArrayHelper::getColumn($event->serviceAssignments, 'service_id');
+
             $this->services = $event->employee->price->services;
         }
         parent::__construct($config);
@@ -32,9 +33,9 @@ class ServicesForm extends Model
     public function rules()
     {
         return [
+            ['lists', 'required'],
             ['lists', 'each', 'rule' => ['integer']],
             ['lists', 'default', 'value' => []],
-            ['lists', 'required']
         ];
     }
 

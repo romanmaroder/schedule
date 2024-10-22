@@ -29,6 +29,7 @@ class RateForm extends Model
     {
         return [
             [['name'], 'string'],
+            [['name'], 'required'],
             [['rate'], 'double'],
             [
                 ['name'],
