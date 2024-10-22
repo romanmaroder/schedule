@@ -355,7 +355,7 @@ console.log(eventDropInfo.event.source.id);
                         'slotEventOverlap' => true,
                         'slotMinTime' => '07:00:00',
                         'slotMaxTime' => '20:00:00',
-                        'slotDuration' => '0:05:00',
+                        'slotDuration' => '0:15:00',
                         'slotLabelInterval' => '01:00:00',
                         'displayEventTime' => true,
                         'displayEventEnd' => true,
