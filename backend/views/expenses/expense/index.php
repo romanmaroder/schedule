@@ -85,7 +85,17 @@ PluginAsset::register($this)->add(
                                 'footer' => '',
                                 'footerOptions' => ['class' => 'text-center bg-info'],
                             ],
-                            'created_at:date'
+                            [
+                                'attribute' => 'created_at',
+                                'value' => function ($model) {
+                                    return DATE('Y-m-d', strtotime($model->created_at));
+                                },
+                                'headerOptions' => ['class' => 'text-center'],
+                                'contentOptions' => [
+                                    'class' => ['text-center align-middle']
+                                ],
+                                'format' => 'raw',
+                            ],
                             /*[
                                 'attribute' => 'status',
                                 'filter' => $searchModel->statusList(),
