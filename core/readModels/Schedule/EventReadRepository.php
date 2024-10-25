@@ -53,35 +53,11 @@ class EventReadRepository
         return Event::find()->with('services', 'employee', 'master', 'client')->where(['master_id' => $id])->all();
     }*/
 
-    public function getAllDayById($id): array
-    {
-        $key = Event::CACHE_KEY;
-        $query = Event::find()->with('services', 'employee', 'master', 'client')
-            ->andwhere(['DATE(start)'=>new Expression('DATE(NOW())')])
-            ->andWhere(['master_id' => $id]);
-
-        return $this->cacheService->cache->getOrSet($key, function () use ($query) {
-            return $query->all();
-        }, 0, new TagDependency([
-            'tags' => Event::CACHE_KEY
-        ]));
-    }
-
-
     /*public function getAllDayById($id): array
     {
-        return Event::find()->with('services', 'employee', 'master', 'client')
-            ->andwhere(['DATE(start)'=>new Expression('DATE(NOW())')])
-            ->andWhere(['master_id' => $id])
-            ->all();
-    }*/
-
-
-    public function getAllWeekById($id): array
-    {
         $key = Event::CACHE_KEY;
         $query = Event::find()->with('services', 'employee', 'master', 'client')
-            ->andwhere(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
+            ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
             ->andWhere(['master_id' => $id]);
 
         return $this->cacheService->cache->getOrSet($key, function () use ($query) {
@@ -89,16 +65,40 @@ class EventReadRepository
         }, 0, new TagDependency([
             'tags' => Event::CACHE_KEY
         ]));
+    }*/
+
+
+    public function getAllDayById($id): array
+    {
+        return Event::find()->with('services', 'employee', 'master', 'client')
+            ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
+            ->andWhere(['master_id' => $id])
+            ->all();
     }
 
 
-    /*public function getAllWeekById($id):array
+    /*public function getAllWeekById($id): array
+    {
+        $key = Event::CACHE_KEY;
+        $query = Event::find()->with('services', 'employee', 'master', 'client')
+            ->where(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
+            ->andWhere(['master_id' => $id]);
+
+        return $this->cacheService->cache->getOrSet($key, function () use ($query) {
+            return $query->all();
+        }, 0, new TagDependency([
+            'tags' => Event::CACHE_KEY
+        ]));
+    }*/
+
+
+    public function getAllWeekById($id):array
     {
         return Event::find()->with('services', 'employee', 'master', 'client')
-            ->andwhere(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
+            ->where(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
             ->andWhere(['master_id' => $id])
             ->all();
-    }*/
+    }
 
     public function getAllEventsCount(): bool|int|string|null
     {
@@ -129,7 +129,9 @@ class EventReadRepository
 
     public function getUnpaidRecords(): array
     {
-       return Event::find()->where(['status'=>Event::STATUS_NOT_PAYED])->all();
+       return Event::find()->where(['status'=>Event::STATUS_NOT_PAYED])
+           ->orderBy(['start' => SORT_ASC])
+           ->all();
     }
 
     public function getCash()
