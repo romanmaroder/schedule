@@ -58,7 +58,7 @@ class EventController extends Controller
             ],
             [
                 'class' => 'yii\filters\PageCache',
-                'only' => ['index','view'],
+                'only' => ['index'],
                 'duration' => 3600,
                 'dependency' => [
                     'class' => 'yii\caching\TagDependency',
