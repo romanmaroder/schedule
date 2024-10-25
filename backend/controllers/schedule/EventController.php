@@ -194,25 +194,25 @@ class EventController extends Controller
     public function actionPay($id)
     {
         $this->service->pay($id);
-        return $this->redirect('index');
+        return $this->redirect(['index']);
     }
 
     public function actionUnpay($id)
     {
         $this->service->unpay($id);
-        return $this->redirect('index');
+        return $this->redirect(['index']);
     }
 
     public function actionCash($id)
     {
         $this->service->cash($id);
-        return $this->redirect('index');
+        return $this->redirect(['index']);
     }
 
     public function actionCard($id)
     {
         $this->service->card($id);
-        return $this->redirect('index');
+        return $this->redirect(['index']);
     }
 
     public function actionDelete($id)
