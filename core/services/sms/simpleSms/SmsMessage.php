@@ -4,27 +4,42 @@
 namespace core\services\sms\simpleSms;
 
 
+use core\helpers\DateHelper;
+use core\helpers\ServiceHelper;
+use core\helpers\tHelper;
+use yii\helpers\ArrayHelper;
+
 class SmsMessage
 {
 
-    public const ADDRESS_MESSAGE = ' Our address: Razdolnaya st. 11, entrance 4, apt. 142, floor 9 ';
-    public const REMAINDER_MESSAGE = ' You have the following entry ';
-    public const QUESTION_MESSAGE = ' You have a recording. Will you?';
+    public const ADDRESS_MESSAGE = 'Address';
+    public const REMAINDER_MESSAGE = 'Remind';
+    public const QUESTION_MESSAGE = 'Question';
+    public const PRICE_MESSAGE = 'Price';
 
     public const ICON_LOCATION = '<i class="fas fa-map-marker-alt"></i>';
     public const ICON_ENVELOPE = '<i class="far fa-envelope"></i>';
     public const ICON_CONFIRM = '<i class="far fa-question-circle"></i>';
+    public const ICON_PRICE = '<i class="fas fa-dollar-sign"></i>';
 
 
-    public function message($text,$data): string
+    public function message($text, $data): string
     {
         switch ($text) {
             case self::ADDRESS_MESSAGE;
-                return Greeting::checkGreeting() . self::ADDRESS_MESSAGE;
+                return Greeting::checkGreeting() . tHelper::translate('sms', self::ADDRESS_MESSAGE);
             case self::QUESTION_MESSAGE;
-                return Greeting::checkGreeting() . ' '.  date('d/M/Y H:i',strtotime($data->start)) . ' ' . self::QUESTION_MESSAGE;
+                return Greeting::checkGreeting() . ' ' . DateHelper::formatter(
+                        $data->start
+                    ) . '. ' . tHelper::translate('sms', self::QUESTION_MESSAGE);
+            case self::PRICE_MESSAGE;
+                return Greeting::checkGreeting() . ' ' . tHelper::translate('sms', self::PRICE_MESSAGE) . ' ' .
+                        ServiceHelper::priceList($data->serviceAssignments);
             default:
-                return Greeting::checkGreeting() . self::REMAINDER_MESSAGE . ' ' . date('d/M/Y H:i',strtotime($data->start));
+                return Greeting::checkGreeting() . tHelper::translate(
+                        'sms',
+                        self::REMAINDER_MESSAGE
+                    ) . ' ' . DateHelper::formatter($data->start);
         }
         /*return match ($text) {
             self::ADDRESS_MESSAGE => Greeting::checkGreeting() . self::ADDRESS_MESSAGE,
@@ -44,6 +59,8 @@ class SmsMessage
                 return SmsMessage::ICON_LOCATION;
             case SmsMessage::QUESTION_MESSAGE:
                 return SmsMessage::ICON_CONFIRM;
+            case SmsMessage::PRICE_MESSAGE;
+                return SmsMessage::ICON_PRICE;
             default:
                 return SmsMessage::ICON_ENVELOPE;
         }

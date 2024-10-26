@@ -4,14 +4,15 @@
 namespace core\services\sms\simpleSms;
 
 
+use core\helpers\tHelper;
 use Yii;
 
 class Greeting
 {
-    protected const MORNING = "Good morning." . PHP_EOL;
-    protected const DAY = "Good afternoon." . PHP_EOL;
-    protected const EVENING = "Good evening." . PHP_EOL;
-    protected const NIGHT = "Good night." . PHP_EOL;
+    protected const MORNING = "Morning";
+    protected const DAY = "Afternoon";
+    protected const EVENING = "Evening";
+    protected const NIGHT = "Night";
 
 
     /**
@@ -24,13 +25,13 @@ class Greeting
         $hour = date("H A");
         switch ($hour) {
             case $hour >= 04;
-                return self::MORNING;
+                return tHelper::translate('sms/greeting',self::MORNING);
             case $hour >= 10;
-                return self::DAY;
+                return tHelper::translate('sms/greeting',self::DAY);
             case $hour >= 16;
-                return self::EVENING;
+                return tHelper::translate('sms/greeting',self::EVENING);
             case ($hour >= 02 or $hour <= 04);
-                return self::NIGHT;
+                return tHelper::translate('sms/greeting',self::NIGHT);
         }
 
     }

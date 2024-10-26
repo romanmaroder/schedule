@@ -4,6 +4,7 @@
 namespace core\services\sms\simpleSms;
 
 
+use core\helpers\tHelper;
 use core\services\sms\SmsSender;
 use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
@@ -44,9 +45,10 @@ class SimpleSms implements SmsSender
     private static function titleList(): array
     {
         return [
-            SmsMessage::ADDRESS_MESSAGE => 'Address',
-            SmsMessage::REMAINDER_MESSAGE => 'Event',
-            SmsMessage::QUESTION_MESSAGE => 'Confirmation',
+            SmsMessage::ADDRESS_MESSAGE => tHelper::translate('sms','AddressTitle'),
+            SmsMessage::REMAINDER_MESSAGE => tHelper::translate('sms','EventTitle'),
+            SmsMessage::QUESTION_MESSAGE => tHelper::translate('sms','ConfirmationTitle'),
+            SmsMessage::PRICE_MESSAGE => tHelper::translate('sms','PriceTitle'),
         ];
     }
 

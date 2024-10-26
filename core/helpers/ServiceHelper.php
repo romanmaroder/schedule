@@ -46,4 +46,11 @@ class ServiceHelper
             'class' => $class,
         ]);
     }
+
+    public static function priceList($services): string
+    {
+        return implode(', ', ArrayHelper::getColumn($services, function ($element) {
+            return $element['services']['name'] . ' - '. $element['price_cost'];
+        }));
+    }
 }

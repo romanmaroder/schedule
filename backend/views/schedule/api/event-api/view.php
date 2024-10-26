@@ -126,6 +126,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
         echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
         echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
         echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
+        echo $sms->send($model, SmsMessage::PRICE_MESSAGE);
 
         ?>
         <?= Html::a(

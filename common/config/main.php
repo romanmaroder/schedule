@@ -192,6 +192,15 @@ return [
                         'cabinet/report' => 'cabinet/report.php',
                     ],
                 ],
+                'sms*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'sms' => 'sms/sms.php',
+                        'sms/greeting' => 'sms/greeting.php',
+                    ],
+                ],
             ],
         ],
     ],
