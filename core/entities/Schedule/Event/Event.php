@@ -113,7 +113,7 @@ class Event extends ActiveRecord
             $this->payment = $payment;
             $this->amount = $amount;
         } else {
-            $this->payment = null;
+            $this->payment = self::STATUS_CASH;
         }
         $this->rate = $rate;
         $this->fullname = $fullname;
