@@ -73,6 +73,7 @@ class EventReadRepository
         return Event::find()->with('services', 'employee', 'master', 'client')
             ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
             ->andWhere(['master_id' => $id])
+            ->orderBy(['start'=>SORT_ASC])
             ->all();
     }
 
@@ -97,6 +98,7 @@ class EventReadRepository
         return Event::find()->with('services', 'employee', 'master', 'client')
             ->where(['between','start',new Expression('CURDATE()'),new Expression('DATE_ADD(CURDATE(), INTERVAL 1 WEEK)')])
             ->andWhere(['master_id' => $id])
+            ->orderBy(['start'=>SORT_ASC])
             ->all();
     }
 

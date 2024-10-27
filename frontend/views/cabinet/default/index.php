@@ -108,7 +108,7 @@ $js = <<< JS
        paging: true,
        lengthChange: true,
        searching: true,
-       ordering: true,
+       ordering: false,
        //"order": [[0, 'desc']],
        info: false,
        autoWidth: false,
