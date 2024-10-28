@@ -18,18 +18,18 @@ $this->params['active_category'] = $category;
 <!--<h1><?/*= Html::encode($category->getHeadingTile()) */?></h1>-->
 
 <?php //if (trim($category->description)): ?>
-<?php if ($category->description): ?>
+<?php /*if ($category->description): */?><!--
 
     <blockquote class="blockquote blockquote-shadow mb-5 text-center text-secondary">
-        <?= Yii::$app->formatter->asHtml($category->description, [
+        <?/*= Yii::$app->formatter->asHtml($category->description, [
                 'Attr.AllowedRel' => array('nofollow'),
                 'HTML.SafeObject' => true,
                 'Output.FlashCompat' => true,
                 'HTML.SafeIframe' => true,
                 'URI.SafeIframeRegexp'=>'%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
-            ]) ?>
+            ]) */?>
     </blockquote>
-<?php endif; ?>
+--><?php /*endif; */?>
 
 <?= $this->render('_list', [
     'dataProvider' => $dataProvider

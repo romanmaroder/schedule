@@ -24,7 +24,7 @@ $active ='active';
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <?= Html::img(
-                                    '@web/img/user3-128x128.jpg',
+                                    '@web/img/avatar.jpg',
                                     ['alt' => 'avatar', 'class' => 'profile-user-img img-fluid img-circle img-shadow']
                                 ) ?>
                             </div>

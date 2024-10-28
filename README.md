@@ -77,7 +77,7 @@ When you delete an employee, he automatically goes into the clients' category, w
   * The client pays the cost of the service at a discount.
   
 - STUDIO DISCOUNT
-  * The discount is divided in half between the master and the salon.
+  * The discount is divided in half between the mилкина набора нетaster and the salon.
   * It is deducted from the master’s salary and the salon’s income.
   * The client pays the cost of the service at a discount.
   

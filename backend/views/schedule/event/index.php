@@ -18,8 +18,8 @@ PluginAsset::register($this)->add(
     ['datatables',
         'datatables-bs4',
         'datatables-responsive',
-        'datatables-searchbuilder',
-        'datatables-buttons']
+        'datatables-searchbuilder'
+    ]
 );
 
 $this->title = Yii::t('app','Events');
@@ -55,11 +55,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'id' => 'event'
                             ],
                             'columns' => [
-
-                                //'id',
                                 [
                                     'attribute' => 'start',
-                                    'format' => ['date', 'php:d-m-Y'],
+                                    'value' => function ($model) {
+                                        return DATE('Y-m-d', strtotime($model->start));
+                                    },
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => [
+                                        'class' => ['text-center align-middle']
+                                    ],
+                                    'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'master_id',
@@ -235,20 +240,7 @@ $js = <<< JS
                 var data = localStorage.getItem('DataTables_' + window.location.pathname);
                 return JSON.parse(data);
                 },
-        // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
-      // "buttons": [
-      //   {
-		// 		"text": "Добавить категорию",
-		// 		"className":"btn btn-success",
-		// 		"tag":"a",
-		// 		"attr":{
-		// 		//"href":create
-		// 		},
-		// 		/*"action": function ( e, dt, node, config ) {
-		// 		  $(location).attr('href',config.attr.href);
-		// 		}*/
-      //   }
-      //   ],
+         dom:'<"row"<"col-12"Q>> t <"row"<"col"l><"col"i><"col"p>> ',
         language: {
           url:"$ru"
          },

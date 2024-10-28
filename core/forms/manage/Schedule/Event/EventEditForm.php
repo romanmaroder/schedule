@@ -52,7 +52,7 @@ class EventEditForm extends CompositeForm
     {
         return [
             [['discount_from','status','amount','payment','tools'], 'integer'],
-            [['start', 'end'], 'required'], [[], 'safe'],
+            [['start', 'end'], 'required'],
             ['notice', 'string'],
             ['discount', 'required', 'when' => function($model) {
                 return $model->discount_from > 0;

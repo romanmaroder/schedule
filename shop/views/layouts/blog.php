@@ -4,14 +4,12 @@
 
 /* @var $content string */
 
-use shop\assets\BlogAsset;
 use shop\widgets\Blog\CategoriesWidget;
 
-BlogAsset::register($this);
 
 ?>
 <?php
-$this->beginContent('@shop/views/layouts/main.php') ?>
+$this->beginContent('@shop/views/layouts/main-blog.php') ?>
 
 <div class="site-section pt-4">
     <div class="container">
@@ -22,7 +20,7 @@ $this->beginContent('@shop/views/layouts/main.php') ?>
 
             <div class="col-lg-3 ml-auto mt-3 mt-lg-0">
                 <div class="sticky-top pt-2">
-                    <div class="section-title">
+                    <div class="section-title-blog">
                         <h2>Popular Posts</h2>
                     </div>
                     <?= CategoriesWidget::widget(

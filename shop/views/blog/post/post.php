@@ -6,19 +6,20 @@
 
 use shop\widgets\Blog\CommentsWidget;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 
 //$this->title = $post->getSeoTitle();
-$this->title = $post->title;
+$this->title = StringHelper::truncateWords(strip_tags($post->title), 7);
 
 $this->registerMetaTag(['name' => 'description', 'content' => $post->meta->description]);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $post->meta->keywords]);
 
 $this->params['breadcrumbs'][] = ['label' => 'Blog', 'url' => ['index']];
-$this->params['breadcrumbs'][] = [
+/*$this->params['breadcrumbs'][] = [
     'label' => $post->category->name,
     'url' => ['category', 'slug' => $post->category->slug]
-];
-$this->params['breadcrumbs'][] = $post->title;
+];*/
+$this->params['breadcrumbs'][] = StringHelper::truncateWords(strip_tags($post->title), 3);
 
 $this->params['active_category'] = $post->category;
 

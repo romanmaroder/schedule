@@ -159,7 +159,7 @@ class EventController extends Controller
         $event = $this->findModel($id);
         try {
             $this->service->tools($event->id);
-            Yii::$app->session->setFlash('msg', "Tools are ready.");
+            Yii::$app->session->setFlash('msg', Yii::t('schedule/event','TOOLS READY'));
             return $this->redirect(['view', 'id' => $event->id]);
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);
@@ -175,7 +175,7 @@ class EventController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->copy($form);
-                Yii::$app->session->setFlash('msg', "The entry " . $event->client->username ." copied.");
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Copied'));
                 return $this->redirect(['index']);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

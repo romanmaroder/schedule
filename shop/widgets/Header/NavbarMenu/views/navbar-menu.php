@@ -44,6 +44,11 @@ $active = Yii::$app->controller->id;
                         Url::to(['/shop/checkout/index']),
                         ['class' => $active == 'shop/checkout' ? 'dropdown-item active' : 'dropdown-item']
                     ) ?>
+                    <?= Html::a(
+                        Html::encode('Blog'),
+                        Url::to(['/blog/post/index']),
+                        ['class' => $active == 'blog/post' ? 'dropdown-item active' : 'dropdown-item']
+                    ) ?>
                 </div>
             </div>
             <a href="contact.html" class="nav-item nav-link">Contact</a>

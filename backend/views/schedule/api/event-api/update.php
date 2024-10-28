@@ -144,7 +144,7 @@ use yii\helpers\Html;
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                          
+                                          $("select#lists").html("");
                                            $("select#lists").html(data.out).attr("disabled", false);
                                         },
                                         error: function(data , jqXHR, exception){
@@ -186,7 +186,7 @@ use yii\helpers\Html;
                         'theme' => Select2::THEME_BOOTSTRAP,
                         'options' => [
                             'id' => 'lists',
-                            'placeholder' => 'Select',
+                            //'placeholder' => 'Select',
                             'multiple' => true,
                             'autocomplete' => 'off',
                         ],

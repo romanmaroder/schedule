@@ -103,16 +103,16 @@ lengthChange: true,
 lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
 searching: true,
 ordering: false,
-                info: true,
-                autoWidth: false,
-                colReorder:{
-                    realtime:false
-                },
-                fixedHeader: {
-                    header: true,
-                    footer: true
-                },
-                bStateSave: true,
+info: true,
+autoWidth: false,
+colReorder:{
+   realtime:false
+},
+fixedHeader: {
+  header: true,
+  footer: true
+},
+bStateSave: true,
                 dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col"l><"col"i><"col"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                             var api = this.api();

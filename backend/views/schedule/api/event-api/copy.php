@@ -143,7 +143,7 @@ use yii\helpers\Html;
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                          
+                                          $("select#lists").html("");
                                            $("select#lists").html(data.out).attr("disabled", false);
                                         },
                                         error: function(data , jqXHR, exception){

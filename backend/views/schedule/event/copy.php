@@ -158,7 +158,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Copy');
                                         dataType: "json",
                                         data: {id: data_id},
                                         success: function(data){
-                                          
+                                          $("select#lists").html("");
                                            $("select#lists").html(data.out).attr("disabled", false);
                                         },
                                         error: function(data , jqXHR, exception){

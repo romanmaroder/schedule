@@ -17,7 +17,7 @@ use yii\helpers\Html;
 
 
     <div class="pt-5" id="comments">
-        <div class="section-title">
+        <div class="section-title-blog">
             <h2 class="mb-2">Comments</h2>
         </div>
         <?php
@@ -27,7 +27,7 @@ use yii\helpers\Html;
         endforeach; ?>
     </div>
     <div class="comment-form-wrap pt-5" >
-        <div class="section-title">
+        <div class="section-title-blog">
             <h2 class="mb-2">Leave a comment</h2>
         </div>
         <div class="mt-3" id="reply-block">
