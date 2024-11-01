@@ -7,6 +7,7 @@ namespace core\readModels\Employee;
 use core\entities\User\Employee\Employee;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
+use yii\db\Expression;
 
 class EmployeeReadRepository
 {
@@ -17,7 +18,12 @@ class EmployeeReadRepository
 
     public function findEmployee($id)
     {
-        return Employee::find()->with(['role','price'])->andWhere(['user_id' => $id])->one();
+        return Employee::find()->with(['role', 'price'])->andWhere(['user_id' => $id])->one();
+    }
+
+    public function findAll(): array
+    {
+        return Employee::find()->all();
     }
 
     private function getProvider(ActiveQuery $query): ActiveDataProvider

@@ -15,6 +15,7 @@ use yii\helpers\Html;
         <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">AdminLTE 3</span>
+
     </a>
 
     <!-- Sidebar -->
@@ -32,7 +33,12 @@ use yii\helpers\Html;
                         ['/cabinet/default/index'],
                         ['class' => ['d-block']]
                     ); ?>
-
+                <?
+                if ($user->employee->isBirthday()): ?>
+                    <span class="holiday">HAPPY BIRTHDAY</span>
+                    <span><i class="fas fa-birthday-cake" style="color: #FFD43B;"></i></span>
+                <?
+                endif; ?>
             </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use core\readModels\Employee\EmployeeReadRepository;
 use yii\web\Controller;
 
 /**
@@ -9,6 +10,13 @@ use yii\web\Controller;
  */
 class SiteController extends Controller
 {
+    public $employees;
+
+    public function __construct($id, $module, EmployeeReadRepository $employees, $config = [])
+    {
+        $this->employees = $employees;
+        parent::__construct($id, $module, $config);
+    }
 
     /**
      * {@inheritdoc}
@@ -29,7 +37,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index' );
+        $employees = $this->employees->findAll();
+
+        return $this->render('index', ['employees' => $employees]);
     }
 
 }
