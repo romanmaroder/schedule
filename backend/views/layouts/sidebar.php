@@ -13,7 +13,8 @@ use yii\helpers\Html;
     <a href="index3.html" class="brand-link">
         <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">AdminLTE 3 </span>
+
     </a>
 
     <!-- Sidebar -->
@@ -21,16 +22,18 @@ use yii\helpers\Html;
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <!--<img src="<?/*= $assetDir */?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
-                <p class="img-circle elevation-2"><?=$user->getInitials()?></p>
+                <!--<img src="<?
+                /*= $assetDir */ ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
+                <p class="img-circle elevation-2"><?= $user->getInitials() ?></p>
             </div>
             <div class="info">
                 <?=
                 Html::a(
-                    $user->username ?? '' ,
+                    $user->username ?? ''  ,
                     ['/cabinet/default/index'],
                     ['class' => ['d-block']]
                 ); ?>
+                <?=\backend\widgets\birthday\BirthdayWidget::widget(['user'=>$user->employee])?>
             </div>
         </div>
 

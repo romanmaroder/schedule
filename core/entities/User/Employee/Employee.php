@@ -14,10 +14,10 @@ use core\entities\User\Price;
 use core\entities\User\Rate;
 use core\entities\User\Role;
 use core\entities\User\User;
+use core\helpers\DateHelper;
 use core\helpers\tHelper;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 /**
  * Employee model
@@ -182,6 +182,16 @@ class Employee extends ActiveRecord
             return false;
         }
         return true;
+    }
+
+    public function isBirthday(): bool
+    {
+        $today = DateHelper::formatterDate(new \DateTime());
+        $birthday = DateHelper::formatterDate($this->birthday);
+        if ($today === $birthday) {
+            return true;
+        }
+        return false;
     }
 
     public function getHours()

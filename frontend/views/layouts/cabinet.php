@@ -30,6 +30,10 @@ $active ='active';
                             </div>
 
                             <h3 class="profile-username text-center"><?= $this->context->user->username ?></h3>
+                            <h5 class="profile-username text-center"><?= \backend\widgets\birthday\BirthdayWidget::widget([
+                                                                                                                              'user'=>$this->context->user->employee
+                                                                                                                          ]) ?>
+                            </h5>
 
                             <p class="text-muted text-center"><?= $this->context->user->employee->role->name ?></p>
 
