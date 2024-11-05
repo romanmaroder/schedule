@@ -39,6 +39,7 @@ class SiteController extends Controller
     {
         $employees = $this->employees->findAll();
 
+
         return $this->render('index', ['employees' => $employees]);
     }
 

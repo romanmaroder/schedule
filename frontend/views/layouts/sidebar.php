@@ -33,12 +33,7 @@ use yii\helpers\Html;
                         ['/cabinet/default/index'],
                         ['class' => ['d-block']]
                     ); ?>
-                <?
-                if ($user->employee->isBirthday()): ?>
-                    <span class="holiday">HAPPY BIRTHDAY</span>
-                    <span><i class="fas fa-birthday-cake" style="color: #FFD43B;"></i></span>
-                <?
-                endif; ?>
+                <?=\backend\widgets\birthday\BirthdayWidget::widget(['user'=>$user->employee])?>
             </div>
         </div>
 

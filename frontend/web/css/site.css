@@ -196,3 +196,26 @@ a.desc:after {
 .img-shadow{
     box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)
 }
+
+.holiday{
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #dadb68 33%, #bc3fca 66%, #25c615);
+    -webkit-mask-image: linear-gradient(-75deg, rgba(0, 0, 0, .6) 30%, #000 50%, rgba(0, 0, 0, .6) 70%);
+    -webkit-mask-size: 200%;
+    animation: wave 2s infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #0B2349;
+    display: inline-block;
+    font-weight: bold;
+    position: relative;
+}
+
+@-webkit-keyframes wave {
+    from {
+        -webkit-mask-position: 150%;
+    }
+    to {
+        -webkit-mask-position: -50%;
+    }
+}

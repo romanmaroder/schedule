@@ -6,7 +6,7 @@ use yii\web\JsExpression;
 use yii2fullcalendar6\yii2fullcalendar6;
 
 /* @var $events \core\entities\Schedule\Event\Calendar\Calendar */
-/* @var $education \core\entities\Schedule\Event\Calendar\Calendar */
+/* @var http://host1827487.hostland.pro/shop/ \core\entities\Schedule\Event\Calendar\Calendar */
 
 $this->title = Yii::t('schedule/calendar','Calendar');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/calendar','Calendar'), 'url' => ['calendar']];

@@ -12,4 +12,9 @@ class DateHelper
     {
        return Yii::$app->formatter->asDatetime($data, 'medium');
     }
+
+    public static function formatterDate($data): ?string
+    {
+        return Yii::$app->formatter->asDate($data, 'php:d-M');
+    }
 }
