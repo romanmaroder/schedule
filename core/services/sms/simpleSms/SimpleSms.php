@@ -6,7 +6,6 @@ namespace core\services\sms\simpleSms;
 
 use core\helpers\tHelper;
 use core\services\sms\SmsSender;
-use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -28,7 +27,15 @@ class SimpleSms implements SmsSender
 
     private function smsLink($data, $text): string
     {
-
+        if ($text == SmsMessage::INFO){
+            $options = [
+                'class' => 'btn btn-info btn-sm d-inline-block mr-1',
+                'id'=>SmsMessage::INFO,
+                'href' => '#' ,
+                'title' => self::title($text),
+            ];
+            return Html::tag('a', $this->smsMessage->icon($text), $options);
+        }
         if ($data->client->phone) {
             $options = [
                 'class' => 'btn btn-info btn-sm d-inline-block mr-1',
@@ -49,6 +56,7 @@ class SimpleSms implements SmsSender
             SmsMessage::REMAINDER_MESSAGE => tHelper::translate('sms','EventTitle'),
             SmsMessage::QUESTION_MESSAGE => tHelper::translate('sms','ConfirmationTitle'),
             SmsMessage::PRICE_MESSAGE => tHelper::translate('sms','PriceTitle'),
+            SmsMessage::INFO => tHelper::translate('sms','InfoTitle'),
         ];
     }
 

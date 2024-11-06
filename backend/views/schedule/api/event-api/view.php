@@ -88,71 +88,89 @@ PluginAsset::register($this)->add(['sweetalert2']);
             ],
         ]
     ) ?>
-    <p>
+    <div class="row">
         <?php
-        if ($model->isNotPayed()):?>
-
-
+        if ($model->isNotPayed()): ?>
+            <div class="col-auto">
+                <?= Html::a(
+                    '<i class="fas fa-pencil-alt"></i>',
+                    ['update', 'id' => $model->id],
+                    [
+                        'id' => 'edit-link',
+                        'title' => Yii::t('app', 'Update'),
+                        'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                        'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
+                    ]
+                ) ?>
+            </div>
+        <?php
+        endif; ?>
+        <?php
+        if ($model->isToolsAreNotReady()): ?>
+            <div class="col-auto">
+                <?= Html::a(
+                    '<i class="fas fa-wrench"></i>',
+                    ['tools', 'id' => $model->id],
+                    [
+                        'id' => 'tools-link',
+                        'title' => Yii::t('schedule/event', 'Tools'),
+                        'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                        'class' => 'btn btn-sm btn-secondary btn-shadow bg-gradient'
+                    ]
+                ) ?>
+            </div>
+        <?php
+        endif; ?>
+        <div class="col-auto"><?= $sms->send($model, SmsMessage::INFO) ?></div>
+        <div class="col-auto" id="<?= SmsMessage::GROUP ?>">
+            <?php
+            echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
+            echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
+            echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
+            echo $sms->send($model, SmsMessage::PRICE_MESSAGE);
+            ?>
+        </div>
+        <div class="col-auto">
             <?= Html::a(
-                '<i class="fas fa-pencil-alt"></i>',
-                ['update', 'id' => $model->id],
+                '<i class="far fa-copy"></i>',
+                ['copy', 'id' => $model->id],
                 [
-                    'id' => 'edit-link',
-                    'title'=>Yii::t('app','Update'),
+                    'id' => 'copy-link',
+                    'title' => Yii::t('app', 'Copy'),
                     'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
+                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
                 ]
             ) ?>
-        <?php endif; ?>
-
-        <?php
-        if ($model->isToolsAreNotReady()):?>
-
-
             <?= Html::a(
-                '<i class="fas fa-wrench"></i>',
-                ['tools', 'id' => $model->id],
+                '<i class="fas fa-trash-alt"></i>',
+                ['delete', 'id' => $model->id],
                 [
-                    'id' => 'tools-link',
-                    'title'=>Yii::t('schedule/event','Tools'),
-                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-sm btn-secondary btn-shadow bg-gradient'
+                    'id' => 'delete',
+                    'title' => Yii::t('app', 'Delete'),
+                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-3',
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Delete file?'),
+                        'method' => 'post',
+                    ],
                 ]
             ) ?>
-        <?php endif; ?>
+        </div>
 
-
-        <?php
-        echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
-        echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
-        echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
-        echo $sms->send($model, SmsMessage::PRICE_MESSAGE);
-
-        ?>
-        <?= Html::a(
-            '<i class="far fa-copy"></i>',
-            ['copy', 'id' => $model->id],
-            [
-                'id' => 'copy-link',
-                'title'=>Yii::t('app', 'Copy'),
-                'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
-            ]
-        ) ?>
-        <?= Html::a(
-            '<i class="fas fa-trash-alt"></i>',
-            ['delete', 'id' => $model->id],
-            [
-                'id' => 'delete',
-                'title'=> Yii::t('app', 'Delete'),
-                'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-5',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Delete file?'),
-                    'method' => 'post',
-                ],
-            ]
-        ) ?>
-
-
-    </p>
+    </div>
 </div>
+
+<?php
+$button = SmsMessage::INFO;
+$group = SmsMessage::GROUP;
+$sms = <<< JS
+ $('#$group').addClass('d-none');
+
+   $( "#$button" ).on( "click", function() {
+       
+  $('#$group').animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
+
+       
+})
+JS;
+$this->registerJs($sms);
+?>

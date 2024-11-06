@@ -9,4 +9,5 @@ return [
     'EventTitle'=>'Напоминание',
     'ConfirmationTitle'=>'Подтверждение',
     'PriceTitle'=>'Прайс',
+    'InfoTitle'=>'Инфо',
 ];
