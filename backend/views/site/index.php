@@ -1,33 +1,25 @@
 <?php
-/* @var $employees \core\entities\User\Employee\Employee*/
+/* @var $employees \core\entities\User\Employee\Employee */
 
 $this->title = 'Starter Page';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 
 ?>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-6">
-            <?= \hail812\adminlte\widgets\Alert::widget([
-                'type' => 'success',
-                'body' => \backend\widgets\birthday\BirthdayWidget::widget(['user'=>$employees,'text' => 'С днюхой']),
-            ]) ?>
-            <?/*= \hail812\adminlte\widgets\Callout::widget([
-                'type' => 'danger',
-                'head' => '',
-                'body' =>  \backend\widgets\birthday\BirthdayWidget::widget(['user'=>$employees,'text' => 'С днюхой',
-                                                                                'icon'=>'fas fa-glass-cheers']),
-            ]) */?>
+        <div class="row">
+            <div class="col-lg-6">
+                <?= \backend\widgets\birthday\BirthdayWidget::widget(['user' => $employees, 'text' => 'С днюхой']) ?>
+            </div>
         </div>
-    </div>
-
     <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
-            <?= \hail812\adminlte\widgets\InfoBox::widget([
-                'text' => 'CPU Traffic',
-                'number' => '10 <small>%</small>',
-                'icon' => 'fas fa-cog',
-            ]) ?>
+            <?= \hail812\adminlte\widgets\InfoBox::widget(
+                [
+                    'text' => 'CPU Traffic',
+                    'number' => '10 <small>%</small>',
+                    'icon' => 'fas fa-cog',
+                ]
+            ) ?>
         </div>
     </div>
 

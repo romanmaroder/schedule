@@ -175,6 +175,7 @@ class Order extends ActiveRecord
             'deliveryData.address'=>tHelper::translate('shop/order','delivery_address'),
             'payment_method'=>tHelper::translate('shop/order','payment_method'),
             'cost'=>tHelper::translate('shop/order','cost'),
+            'status'=>tHelper::translate('shop/order','status'),
             'note'=>tHelper::translate('shop/order','note'),
             'current_status'=>tHelper::translate('shop/order','current_status'),
             'customer_phone'=>tHelper::translate('shop/order','customer_phone'),

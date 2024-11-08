@@ -19,4 +19,5 @@ return [
     'Order' => 'Заказ',
     'Orders' => 'Заказы',
     'Update Order: ' => 'Обновить: ',
+    'status' => 'Статус',
 ];

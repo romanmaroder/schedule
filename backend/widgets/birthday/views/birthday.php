@@ -15,7 +15,7 @@
     <? if (is_array($user)): ?>
         <? foreach ($user as $item): ?>
             <? if ($item != null): ?>
-                <p> <?= $item->getFullName() ?></p>
+                <p class="text-warning"> <?= $item->getFullName() ?></p>
             <? endif; ?>
         <? endforeach; ?>
     <? endif; ?>
