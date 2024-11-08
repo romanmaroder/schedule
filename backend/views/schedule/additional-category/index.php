@@ -20,11 +20,13 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 ?>
-    <div class="category-index">
-        <div class="card card-secondary">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
                 </h3>
 
                 <div class='card-tools'>
@@ -74,11 +76,13 @@ PluginAsset::register($this)->add(
                     ]
                 ); ?>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                <!--Footer-->
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <!--Footer-->
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
             </div>
-            <!-- /.card-footer-->
         </div>
     </div>
 

@@ -21,9 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="expense-view">
-    <div class="row">
-        <div class="col-md-12">
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
             <div class="card card-secondary">
                 <div class='card-header'>
                     <h3 class='card-title'>

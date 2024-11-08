@@ -19,11 +19,13 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 ?>
-
-<div class="card card-secondary">
-    <div class="card-header">
-        <h3 class="card-title">
-            <?= Html::a(
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <?= Html::a(
                 Yii::t('app', 'Create'),
                 ['create'],
                 ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
@@ -112,10 +114,12 @@ PluginAsset::register($this)->add(
             ]
         ); ?>
     </div>
-    <!-- /.card-body -->
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+    </div>
 </div>
-
-
 <?php
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS

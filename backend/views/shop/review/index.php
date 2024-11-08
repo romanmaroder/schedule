@@ -29,10 +29,12 @@ PluginAsset::register($this)->add(
 );
 
 ?>
-
-<div class="card card-secondary">
-    <div class="card-header">
-        <!--<h3 class="card-title">
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <!--<h3 class="card-title">
             <?/*=$this->title*/?>
         </h3>-->
 
@@ -43,46 +45,49 @@ PluginAsset::register($this)->add(
             </button>
         </div>
     </div>
-    <div class="card-body">
-        <?= GridView::widget(
-            [
-                'dataProvider' => $dataProvider,
-                //'filterModel' => $searchModel,
-                'summary' => false,
-                'tableOptions' => [
-                    'class' => 'table table-striped table-bordered',
-                    'id' => 'review'
-                ],
-                'columns' => [
-                    'id',
-                    [
-                        'attribute' => 'user_id',
-                        'value' => function($review){
-                            return $review->user->username;
-                        }
-                    ],
-                    [
-                        'attribute' => 'product_id',
-                        'value' => function($review){
-                            return $review->product->name;
-                        }
-                    ],
-                    'created_at:datetime',
-                    /*[
-                        'attribute' => 'text',
-                        'value' => function (Review $model) {
-                            return StringHelper::truncate(strip_tags($model->text), 100);
-                        },
-                    ],*/
-                    /*[
-                        'attribute' => 'active',
-                        'filter' => $searchModel->activeList(),
-                        'format' => 'boolean',
-                    ],*/
-                    ['class' => ActionColumn::class],
-                ],
-            ]
-        ); ?>
+                <div class="card-body">
+                    <?= GridView::widget(
+                        [
+                            'dataProvider' => $dataProvider,
+                            //'filterModel' => $searchModel,
+                            'summary' => false,
+                            'tableOptions' => [
+                                'class' => 'table table-striped table-bordered',
+                                'id' => 'review'
+                            ],
+                            'columns' => [
+                                'id',
+                                [
+                                    'attribute' => 'user_id',
+                                    'value' => function($review){
+                                        return $review->user->username;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'product_id',
+                                    'value' => function($review){
+                                        return $review->product->name;
+                                    }
+                                ],
+                                'created_at:datetime',
+                                /*[
+                                    'attribute' => 'text',
+                                    'value' => function (Review $model) {
+                                        return StringHelper::truncate(strip_tags($model->text), 100);
+                                    },
+                                ],*/
+                                /*[
+                                    'attribute' => 'active',
+                                    'filter' => $searchModel->activeList(),
+                                    'format' => 'boolean',
+                                ],*/
+                                ['class' => ActionColumn::class],
+                            ],
+                        ]
+                    ); ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

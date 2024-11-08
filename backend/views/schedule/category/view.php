@@ -15,11 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="category-view">
-
-    <div class="card card-secondary">
-        <div class="card-header">
-            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $category->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $category->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
                 Yii::t('app','Delete'),
                 ['delete', 'id' => $category->id],
@@ -58,7 +59,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
         </div>
         <!-- /.card-footer-->
     </div>
-
     <div class="card card-secondary">
         <div class="card-header">
             <?=Yii::t('schedule/service/category','Description')?>
@@ -82,8 +82,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
             ) ?>
         </div>
     </div>
-
-
     <div class="card card-secondary">
         <div class="card-header">
             SEO
@@ -112,6 +110,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
         </div>
         <!-- /.card-footer-->
     </div>
-
-
+        </div>
+    </div>
 </div>

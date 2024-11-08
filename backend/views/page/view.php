@@ -14,10 +14,12 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('content/page','Pages'), 'ur
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
-<div class="card card-secondary">
-    <div class="card-header">
-        <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $page->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $page->id], ['class' => 'btn btn-primary btn-sm btn-gradient btn-shadow']) ?>
         <?= Html::a(
             Yii::t('app','Delete'),
             ['delete', 'id' => $page->id],
@@ -92,5 +94,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]
         ) ?>
+    </div>
+</div>
+        </div>
     </div>
 </div>

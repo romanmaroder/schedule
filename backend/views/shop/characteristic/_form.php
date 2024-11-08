@@ -9,15 +9,14 @@ use yii\helpers\Html;
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
-
-<div class="characteristic-form">
-
     <?php
     $form = ActiveForm::begin(); ?>
-
-    <div class="card card-secondary">
-        <div class="card-header">
-            <h3 class="card-title"><?=Yii::t('app','Common')?></h3>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title"><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -66,10 +65,11 @@ use yii\helpers\Html;
             <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
             <!--Footer-->
         </div>
-        <!-- /.card-footer-->
+                <!-- /.card-footer-->
+            </div>
+        </div>
     </div>
-
-
-    <?php
-    ActiveForm::end(); ?>
 </div>
+<?php
+    ActiveForm::end(); ?>
+

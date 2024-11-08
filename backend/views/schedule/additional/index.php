@@ -20,12 +20,13 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 ?>
-    <div class="service-index">
-        <div class="invoice p-3 mb-3">
-            <div class="card card-secondary">
-                <div class="card-header">
-                    <h3 class="card-title ">
-                        <?= Html::a(
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title ">
+                            <?= Html::a(
                             Yii::t('app', 'Create'),
                             ['create'],
                             ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
@@ -76,14 +77,14 @@ PluginAsset::register($this)->add(
                         ],
                     ]
                 ); ?>
-            </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <!--Footer-->
                 </div>
-                <!-- /.card-footer-->
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <!--Footer-->
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
             </div>
-
         </div>
     </div>
 

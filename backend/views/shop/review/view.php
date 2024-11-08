@@ -18,11 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
 
-<div class="card card-secondary">
-    <div class="card-header">
-
-        <?= Html::a(
+                    <?= Html::a(
             Yii::t('app','Update'),
             ['update', 'product_id'=>$product->id,'id' => $review->id],
             ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']
@@ -99,6 +101,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ],
                 ]
             ) ?>
+        </div>
+    </div>
+            </div>
         </div>
     </div>
 </div>

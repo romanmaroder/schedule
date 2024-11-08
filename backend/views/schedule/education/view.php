@@ -11,28 +11,31 @@ use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education','Lesson'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education', 'Lesson'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
 
-<div class="education-view container-fluid">
-
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'><?=$model->title?></h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
-            <?= DetailView::widget(
-                [
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class='card-header'>
+                    <h3 class='card-title'><?= $model->title ?></h3>
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                    class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                    class='fas fa-minus'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <?= DetailView::widget(
+                        [
                     'model' => $model,
                     'attributes' => [
                         [
@@ -143,6 +146,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?php
             endif; ?>
         </div>
+            </div>
+        </div>
     </div>
-
 </div>

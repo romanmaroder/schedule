@@ -12,14 +12,14 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/service','Service'
 $this->params['breadcrumbs'][] = ['label' => $service->name, 'url' => ['view', 'id' => $service->id]];
 $this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
-<div class="service-price">
-
     <?php
     $form = ActiveForm::begin(); ?>
-
-    <div class="card card-outline card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'><?=Yii::t('app','Common')?></h3>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card card-outline card-secondary">
+                    <div class='card-header'>
+                        <h3 class='card-title'><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -36,9 +36,9 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                 <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
             </div>
         </div>
+                </div>
+            </div>
+        </div>
     </div>
-
     <?php
     ActiveForm::end(); ?>
-
-</div>

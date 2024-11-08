@@ -121,13 +121,14 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
         <?php
         endif; ?>
-        <div class="col-auto"><?= $sms->send($model, SmsMessage::INFO) ?></div>
-        <div class="col-auto" id="<?= SmsMessage::GROUP ?>">
+        <div class="col-auto"><?= $sms->triggerButton(SmsMessage::INFO) ?></div>
+        <div class="col-auto mb-2" id="<?= SmsMessage::GROUP ?>">
             <?php
             echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
             echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
             echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
             echo $sms->send($model, SmsMessage::PRICE_MESSAGE);
+            echo $sms->send($model, SmsMessage::FLAG_TELEGRAM,SmsMessage::FLAG_TELEGRAM);
             ?>
         </div>
         <div class="col-auto">

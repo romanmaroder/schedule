@@ -17,10 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="price-view">
-    <div class="card card-secondary">
-        <div class="card-header">
-            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $price->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $price->id], ['class' => 'btn btn-primary btn-shadow btn-sm btn-gradient']) ?>
             <?= Html::a(
                 Yii::t('app', 'Delete'),
                 ['delete', 'id' => $price->id],
@@ -52,10 +54,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ]
             ) ?>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <!-- Footer-->
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <!-- Footer-->
+                </div>
+                <!-- /.card-footer-->
+            </div>
         </div>
-        <!-- /.card-footer-->
     </div>
 </div>

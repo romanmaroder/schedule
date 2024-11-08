@@ -1,7 +1,7 @@
 <?php
 
-use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\CharacteristicHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
 use yii\widgets\DetailView;
@@ -16,11 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="characteristic-view">
-
-    <div class="card card-secondary">
-        <div class="card-header">
-            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $characteristic->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $characteristic->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
                 Yii::t('app','Delete'),
                 ['delete', 'id' => $characteristic->id],
@@ -62,11 +63,13 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ]
             ) ?>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <!-- Footer-->
-        </div>
-        <!-- /.card-footer-->
-    </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <!-- Footer-->
+                </div>
+                <!-- /.card-footer-->
+            </div>
 
+        </div>
+    </div>
 </div>

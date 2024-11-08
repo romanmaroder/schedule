@@ -19,11 +19,12 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons','sweetalert2']
 );
 ?>
-<div class="user-view">
-
-    <div class="card card-secondary">
-        <div class="card-header">
-            <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $order->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <?= Html::a(Yii::t('app','Update'), ['update', 'id' => $order->id], ['class' => 'btn btn-primary btn-sm btn-shadow btn-gradient']) ?>
             <?= Html::a(
                 Yii::t('app','Delete'),
                 ['delete', 'id' => $order->id],
@@ -94,68 +95,67 @@ PluginAsset::register($this)->add(
         </div>
         <!-- /.card-footer-->
     </div>
-
-    <div class="card card-secondary">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" style="margin-bottom: 0">
-                    <thead>
-                    <tr>
-                        <th class="text-left"><?=Yii::t('shop','Product Name')?></th>
-                        <th class="text-left"><?=Yii::t('shop','Model')?></th>
-                        <th class="text-left"><?=Yii::t('shop','Quantity')?></th>
-                        <th class="text-right"><?=Yii::t('shop','Unit Price')?></th>
-                        <th class="text-right"><?=Yii::t('shop','Total')?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($order->items as $item): ?>
-                        <tr>
-                            <td class="text-left">
-                                <?= Html::encode($item->product_code) ?><br />
-                            </td>
-                            <td class="text-left">
-                                <?= Html::encode($item->modification_code) ?><br />
-                                <?= Html::encode($item->modification_name) ?>
-                            </td>
-                            <td class="text-left">
-                                <?= $item->quantity ?>
-                            </td>
-                            <td class="text-right"><?= PriceHelper::format($item->price) ?></td>
-                            <td class="text-right"><?= PriceHelper::format($item->getCost()) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <div class="card card-secondary">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="margin-bottom: 0">
+                            <thead>
+                            <tr>
+                                <th class="text-left"><?=Yii::t('shop','Product Name')?></th>
+                                <th class="text-left"><?=Yii::t('shop','Model')?></th>
+                                <th class="text-left"><?=Yii::t('shop','Quantity')?></th>
+                                <th class="text-right"><?=Yii::t('shop','Unit Price')?></th>
+                                <th class="text-right"><?=Yii::t('shop','Total')?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($order->items as $item): ?>
+                                <tr>
+                                    <td class="text-left">
+                                        <?= Html::encode($item->product_code) ?><br />
+                                    </td>
+                                    <td class="text-left">
+                                        <?= Html::encode($item->modification_code) ?><br />
+                                        <?= Html::encode($item->modification_name) ?>
+                                    </td>
+                                    <td class="text-left">
+                                        <?= $item->quantity ?>
+                                    </td>
+                                    <td class="text-right"><?= PriceHelper::format($item->price) ?></td>
+                                    <td class="text-right"><?= PriceHelper::format($item->getCost()) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-secondary">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="margin-bottom: 0">
+                            <thead>
+                            <tr>
+                                <th class="text-left"><?=Yii::t('shop','Date')?></th>
+                                <th class="text-left"><?=Yii::t('shop','Status')?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($order->statuses as $status): ?>
+                                <tr>
+                                    <td class="text-left">
+                                        <?= Yii::$app->formatter->asDatetime($status->created_at) ?>
+                                    </td>
+                                    <td class="text-left">
+                                        <?= OrderHelper::statusLabel($status->value) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="card card-secondary">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" style="margin-bottom: 0">
-                    <thead>
-                    <tr>
-                        <th class="text-left"><?=Yii::t('shop','Date')?></th>
-                        <th class="text-left"><?=Yii::t('shop','Status')?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($order->statuses as $status): ?>
-                        <tr>
-                            <td class="text-left">
-                                <?= Yii::$app->formatter->asDatetime($status->created_at) ?>
-                            </td>
-                            <td class="text-left">
-                                <?= OrderHelper::statusLabel($status->value) ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
 </div>

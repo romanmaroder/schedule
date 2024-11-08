@@ -9,11 +9,13 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="category-form">
 
-    <?php
+            <?php
     $form = ActiveForm::begin(); ?>
 
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
     <div class="card card-secondary">
         <div class="card-header">
             <h3 class="card-title">Common</h3>
@@ -71,7 +73,8 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
     </div>
 
+        </div>
+    </div>
+</div>
     <?php
     ActiveForm::end(); ?>
-
-</div>

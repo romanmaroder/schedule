@@ -1,9 +1,9 @@
 <?php
 
-use core\helpers\ToolsHelper;
-use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
+use core\helpers\ToolsHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -11,7 +11,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model \core\entities\Schedule\Event\Event */
-/* @var $cart \core\cart\schedule\Cart*/
+/* @var $cart \core\cart\schedule\Cart */
 
 $this->title = $model->client->username;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Events'), 'url' => ['index']];
@@ -20,10 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="event-view container-fluid">
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'><?= $model->client->username ?></h3>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class='card-header'>
+                    <h3 class='card-title'><?= $model->client->username ?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -192,6 +194,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?php
             endif; ?>
         </div>
+            </div>
+        </div>
     </div>
-
 </div>

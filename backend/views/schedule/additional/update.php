@@ -13,15 +13,15 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/additional','Addit
 $this->params['breadcrumbs'][] = ['label' => $additional->name, 'url' => ['view', 'id' => $additional->id]];
 $this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
-<div class="service-update">
 
     <?php $form = ActiveForm::begin(); ?>
-
-
-    <div class="card card-secondary">
-        <div class="card-header">
-            <h3 class="card-title ">
-                <?=Yii::t('app','Common')?>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title ">
+                        <?=Yii::t('app','Common')?>
             </h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -96,8 +96,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
         </div>
         <!-- /.card-footer-->
     </div>
-
-    <?php ActiveForm::end(); ?>
-
-
+        </div>
+    </div>
 </div>
+<?php ActiveForm::end(); ?>

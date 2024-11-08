@@ -3,8 +3,8 @@
 /* @var $this yii\web\View */
 /* @var $model core\forms\manage\Blog\CategoryForm */
 
-$this->title = 'Create Category';
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->title = Yii::t('blog/category','Create Category');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('blog/category','Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-create">

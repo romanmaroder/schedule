@@ -1,9 +1,9 @@
 <?php
 
 use core\entities\Schedule\Event\Event;
-use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
+use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -27,12 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-    <div class="event-index">
-        <div class="invoice p-3 mb-3">
-            <div class="card card-secondary">
-                <div class='card-header'>
-                    <h3 class='card-title'>
-                        <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card card-secondary">
+                    <div class='card-header'>
+                        <h3 class='card-title'>
+                            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
                     </h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
@@ -210,10 +211,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]
                     ); ?>
                 </div>
+                </div>
             </div>
-
         </div>
-
     </div>
 
 <?php

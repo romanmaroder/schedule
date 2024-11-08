@@ -9,8 +9,6 @@ use yii\helpers\Html;
 /* @var $model core\forms\manage\Blog\Post\PostForm */
 ?>
 
-<div class="post-form">
-
     <?php
     $form = ActiveForm::begin(
         [
@@ -18,10 +16,12 @@ use yii\helpers\Html;
             'options' => ['enctype' => 'multipart/form-data']
         ]
     ); ?>
-
-    <div class="card card-secondary">
-        <div class="card-header">
-            <h3 class="card-title"><?= Yii::t('app','Common')?></h3>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title"><?= Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -79,8 +79,8 @@ use yii\helpers\Html;
     <div class="card-footer">
         <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
     </div>
-
-    <?php
-    ActiveForm::end(); ?>
-
+        </div>
+    </div>
 </div>
+<?php
+    ActiveForm::end(); ?>

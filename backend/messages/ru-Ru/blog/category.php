@@ -7,4 +7,5 @@ return[
     'Sort'=>'Сортировка',
     'Categories'=>'Категории',
     'Update Category: '=>'Обновить: ',
+    'Create Category'=>'Новая',
 ];

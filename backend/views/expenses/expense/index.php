@@ -29,12 +29,13 @@ PluginAsset::register($this)->add(
 );
 ?>
 
- <div class="expense-index">
-        <div class="invoice p-3 mb-3">
-            <div class="card card-secondary">
-                <div class="card-header">
-                <h3 class="card-title ">
-                    <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title ">
+                                <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
                 </h3>
                     <div class='card-tools'>
                         <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
@@ -109,15 +110,16 @@ PluginAsset::register($this)->add(
                     ]
                 ); ?>
             </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <!--Footer-->
-                </div>
-                <!-- /.card-footer-->
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <!--Footer-->
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
             </div>
-
         </div>
     </div>
+
 
 <?php
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');

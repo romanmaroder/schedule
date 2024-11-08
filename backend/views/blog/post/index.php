@@ -23,72 +23,78 @@ PluginAsset::register($this)->add(['datatables',
                                       'sweetalert2']);
 
 ?>
-<div class="card card-secondary">
-    <div class="card-header">
-        <h3 class="card-title">
-            <?= Html::a(
-                Yii::t('app','Create'),
-                ['create'],
-                ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']
-            ) ?>
-        </h3>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <?= Html::a(
+                                Yii::t('app','Create'),
+                                ['create'],
+                                ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']
+                            ) ?>
+                        </h3>
 
-        <div class='card-tools'>
-            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-            </button>
-            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-            </button>
+                        <div class='card-tools'>
+                            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                            </button>
+                            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <?= GridView::widget([
+                                                 'dataProvider' => $dataProvider,
+                                                 // 'filterModel' => $searchModel,
+                                                 'summary' => false,
+                                                 'tableOptions' => [
+                                                     'class' => 'table table-striped table-bordered',
+                                                     'id' => 'posts'
+                                                 ],
+                                                 'emptyText' => false,
+                                                 'columns' => [
+                                                     [
+                                                         'value' => function (Post $model) {
+                                                             return $model->files ? Html::img(
+                                                                 $model->getThumbFileUrl('files', 'admin')
+                                                             ) : '';
+                                                         },
+                                                         'format' => 'raw',
+                                                         'contentOptions' => ['style' => 'width: 100px'],
+                                                     ],
+                                                     'id',
+                                                     'created_at:datetime',
+                                                     [
+                                                         'attribute' => 'title',
+                                                         'value' => function (Post $model) {
+                                                             return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
+                                                         },
+                                                         'format' => 'raw',
+                                                     ],
+                                                     [
+                                                         'attribute' => 'category_id',
+                                                         'filter' => $searchModel->categoriesList(),
+                                                         'value' => 'category.name',
+                                                     ],
+                                                     [
+                                                         'attribute' => 'status',
+                                                         'filter' => $searchModel->statusList(),
+                                                         'value' => function (Post $model) {
+                                                             return PostHelper::statusLabel($model->status);
+                                                         },
+                                                         'format' => 'raw',
+                                                     ],
+                                                 ],
+                                             ]); ?>
+                    </div>
+                    <div class="card-footer">
+                        <!--Footer-->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="card-body">
-        <?= GridView::widget([
-                                 'dataProvider' => $dataProvider,
-                                 // 'filterModel' => $searchModel,
-                                 'summary' => false,
-                                 'tableOptions' => [
-                                     'class' => 'table table-striped table-bordered',
-                                     'id' => 'posts'
-                                 ],
-                                 'emptyText' => false,
-                                 'columns' => [
-                                     [
-                                         'value' => function (Post $model) {
-                                             return $model->files ? Html::img(
-                                                 $model->getThumbFileUrl('files', 'admin')
-                                             ) : '';
-                                         },
-                                         'format' => 'raw',
-                                         'contentOptions' => ['style' => 'width: 100px'],
-                                     ],
-                                     'id',
-                                     'created_at:datetime',
-                                     [
-                                         'attribute' => 'title',
-                                         'value' => function (Post $model) {
-                                             return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
-                                         },
-                                         'format' => 'raw',
-                                     ],
-                                     [
-                                         'attribute' => 'category_id',
-                                         'filter' => $searchModel->categoriesList(),
-                                         'value' => 'category.name',
-                                     ],
-                                     [
-                                         'attribute' => 'status',
-                                         'filter' => $searchModel->statusList(),
-                                         'value' => function (Post $model) {
-                                             return PostHelper::statusLabel($model->status);
-                                         },
-                                         'format' => 'raw',
-                                     ],
-                                 ],
-                             ]); ?>
-    </div>
-    <div class="card-footer">
-        <!--Footer-->
-    </div>
-</div>
 <?php
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS

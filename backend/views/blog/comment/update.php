@@ -25,10 +25,12 @@ $form = ActiveForm::begin(
         'options' => ['enctype' => 'multipart/form-data']
     ]
 ); ?>
-
-<div class="card card-secondary">
-    <div class="card-header">
-        <h3 class="card-title"><?= Yii::t('app','Common')?></h3>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title"><?= Yii::t('app','Common')?></h3>
         <div class='card-tools'>
             <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
             </button>
@@ -47,6 +49,9 @@ $form = ActiveForm::begin(
     <div class="card-footer">
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-sm btn-success btn-shadow btn-gradient']) ?>
+        </div>
+    </div>
+            </div>
         </div>
     </div>
 </div>

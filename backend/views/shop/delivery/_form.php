@@ -8,14 +8,14 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="method-form">
-
     <?php
     $form = ActiveForm::begin(); ?>
-
-    <div class="card card-secondary">
-        <div class="card-header">
-            <h3 class="card-title"><?=Yii::t('app','Common')?></h3>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><?=Yii::t('app','Common')?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -23,33 +23,28 @@ use yii\widgets\ActiveForm;
                 </button>
             </div>
         </div>
-        <div class="card-body">
-            <div class="form-group">
-                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            </div>
-            <div class="form-group">
-                <?= $form->field($model, 'cost')->textInput() ?>
-            </div>
-            <div class="form-group">
-                <?= $form->field($model, 'minWeight')->textInput() ?>
-            </div>
-            <div class="form-group">
-                <?= $form->field($model, 'maxWeight')->textInput() ?>
-            </div>
-            <div class="form-group">
-                <?= $form->field($model, 'sort')->textInput() ?>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $form->field($model, 'cost')->textInput() ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $form->field($model, 'minWeight')->textInput() ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $form->field($model, 'maxWeight')->textInput() ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $form->field($model, 'sort')->textInput() ?>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- /.card-body -->
-    <div class="card-footer">
-        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
-        <!--Footer-->
-    </div>
-    <!-- /.card-footer-->
-
-    <?php
-    ActiveForm::end(); ?>
-
-</div>
+    <?php ActiveForm::end(); ?>

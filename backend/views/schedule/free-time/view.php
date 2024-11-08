@@ -17,10 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 ?>
-<div class="free-time-view container-fluid">
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'><?= $model->master->username ?></h3>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class='card-header'>
+                    <h3 class='card-title'><?= $model->master->username ?></h3>
             <div class='card-tools'>
                 <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
                 </button>
@@ -142,6 +144,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?php
             endif; ?>
         </div>
+            </div>
+        </div>
     </div>
-
 </div>

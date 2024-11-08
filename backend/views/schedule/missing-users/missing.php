@@ -20,17 +20,21 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 ?>
-
-<div class="card card-secondary">
-    <div class="card-header">
-        <div class='card-tools'>
-            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-            </button>
-            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                    class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                    class='fas fa-minus'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
         <?= GridView::widget(
             [
                 'dataProvider' => $dataProvider,
@@ -65,9 +69,11 @@ PluginAsset::register($this)->add(
             ]
         );
         ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 
 <?php
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');

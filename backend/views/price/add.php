@@ -16,52 +16,55 @@ $this->params['breadcrumbs'][] = ['label' => $price->name, 'url' => ['view', 'id
 $this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 
-<div class="multiprice-update container-fluid">
+
 
     <?php
     $form = ActiveForm::begin(); ?>
-    <div class="card card-secondary">
-        <div class='card-header'>
-            <h3 class='card-title'><?= $price->name; ?></h3>
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group"> <?= $form->field($model, 'price')->hiddenInput()->label(false) ?></div>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card card-secondary">
+                <div class='card-header'>
+                    <h3 class='card-title'><?= $price->name; ?></h3>
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group"> <?= $form->field($model, 'rate')->textInput() ?></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group"> <?= $form->field($model->services, 'lists')->widget(
-                            Select2::class,
-                            [
-                                'name' => 'lists',
-                                'language' => 'ru',
-                                'data' => $model->services->servicesList(),
-                                'theme' => Select2::THEME_BOOTSTRAP,
-                                'options' => [
-                                    'id' => 'lists',
-                                    'placeholder' => 'Select',
-                                    'multiple' => true,
-                                    'autocomplete' => 'off',
-                                ],
-                                'pluginOptions' => [
-                                    'tags' => true,
-                                    'allowClear' => true,
-                                ],
-                                'pluginEvents' => [
-                                    "change" => 'function() { 
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group"> <?= $form->field($model, 'price')->hiddenInput()->label(false) ?></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group"> <?= $form->field($model, 'rate')->textInput() ?></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group"> <?= $form->field($model->services, 'lists')->widget(
+                                    Select2::class,
+                                    [
+                                        'name' => 'lists',
+                                        'language' => 'ru',
+                                        'data' => $model->services->servicesList(),
+                                        'theme' => Select2::THEME_BOOTSTRAP,
+                                        'options' => [
+                                            'id' => 'lists',
+                                            'placeholder' => 'Select',
+                                            'multiple' => true,
+                                            'autocomplete' => 'off',
+                                        ],
+                                        'pluginOptions' => [
+                                            'tags' => true,
+                                            'allowClear' => true,
+                                        ],
+                                        'pluginEvents' => [
+                                            "change" => 'function() { 
                                             let data_id = $(this).val();
                                             let discount = $(".discount");
                                             
@@ -77,25 +80,26 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                                             }
                                             
                                             }',
-                                ],
-                            ]
-                        ) ?></div>
+                                        ],
+                                    ]
+                                ) ?></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group"> <?= Html::submitButton(
-                            Yii::t('app','Save'),
-                            ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']
-                        ) ?></div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group"> <?= Html::submitButton(
+                                    Yii::t('app','Save'),
+                                    ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient']
+                                ) ?></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <?php
+</div>
+<?php
     ActiveForm::end(); ?>
 
-</div>

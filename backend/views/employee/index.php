@@ -24,9 +24,11 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 ?>
-
-<div class="card card-secondary">
-    <div class="card-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="card card-secondary">
+                    <div class="card-header">
         <span class="card-title mb-2 mr-2 mb-md-0 ">
                 <span class=""><?= Html::a(Yii::t('user/employee','Create Employee'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?></span>
         </span>
@@ -132,13 +134,15 @@ PluginAsset::register($this)->add(
             ]
         ); ?>
     </div>
-    <!-- /.card-body -->
-    <div class="card-footer">
-        <!--Footer-->
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <!--Footer-->
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.card-footer-->
-</div>
-
 <?php
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
