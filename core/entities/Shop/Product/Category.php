@@ -7,6 +7,7 @@ namespace core\entities\Shop\Product;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
 use core\entities\Shop\Product\queries\CategoryQuery;
+use core\helpers\tHelper;
 use paulzi\nestedsets\NestedSetsBehavior;
 use yii\db\ActiveRecord;
 
@@ -76,6 +77,20 @@ class Category extends ActiveRecord
     public function getHeadingTile(): string
     {
         return $this->title ?: $this->name;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'title' => tHelper::translate('shop/category', 'Title'),
+            'name' => tHelper::translate('shop/category', 'Name'),
+            'slug' => tHelper::translate('shop/category', 'Slug'),
+            'description' => tHelper::translate('shop/category', 'Description'),
+            'sort' => tHelper::translate('shop/category', 'Sort'),
+            'meta.title' => tHelper::translate('meta', 'meta.title'),
+            'meta.description' => tHelper::translate('meta', 'meta.description'),
+            'meta.keywords' => tHelper::translate('meta', 'meta.keywords'),
+        ];
     }
 
     /**
