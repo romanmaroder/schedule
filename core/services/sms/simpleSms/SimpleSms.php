@@ -20,27 +20,40 @@ class SimpleSms implements SmsSender
         $this->smsMessage = $smsMessage;
     }
 
-    public function send($data, $text): string
+    public function send($data, $text, $flag = null): string
     {
-        return $this->smsLink($data, $text);
+        return $this->smsLink($data, $text, $flag);
     }
 
-    private function smsLink($data, $text): string
+    public function triggerButton($text)
     {
-        if ($text == SmsMessage::INFO){
+        if ($text == SmsMessage::INFO) {
             $options = [
                 'class' => 'btn btn-info btn-sm d-inline-block mr-1',
-                'id'=>SmsMessage::INFO,
-                'href' => '#' ,
+                'id' => SmsMessage::INFO,
                 'title' => self::title($text),
             ];
+            return Html::tag('button', $this->smsMessage->icon($text), $options);
+        }
+    }
+
+    private function smsLink($data, $text, $flag): string
+    {
+        if ($flag == SmsMessage::FLAG_TELEGRAM) {
+            $options = [
+                'class' => 'btn btn-info btn-sm d-inline-block mr-1',
+                'href'  => 'https://t.me/share/url?url='.rawurlencode( $this->smsMessage->message($text, $data)),
+                'title' => self::title($text),
+            ];
+
             return Html::tag('a', $this->smsMessage->icon($text), $options);
         }
+
         if ($data->client->phone) {
             $options = [
                 'class' => 'btn btn-info btn-sm d-inline-block mr-1',
                 'href' => 'sms:' . $data->client->phone . $this->smsOs->checkOperatingSystem() .
-                    $this->smsMessage->message($text,$data) ,
+                    $this->smsMessage->message($text, $data),
                 'title' => self::title($text),
             ];
 
@@ -57,6 +70,7 @@ class SimpleSms implements SmsSender
             SmsMessage::QUESTION_MESSAGE => tHelper::translate('sms','ConfirmationTitle'),
             SmsMessage::PRICE_MESSAGE => tHelper::translate('sms','PriceTitle'),
             SmsMessage::INFO => tHelper::translate('sms','InfoTitle'),
+            SmsMessage::FLAG_TELEGRAM => tHelper::translate('sms','Telegram'),
         ];
     }
 

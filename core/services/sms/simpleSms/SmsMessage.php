@@ -15,14 +15,17 @@ class SmsMessage
     public const REMAINDER_MESSAGE = 'Remind';
     public const QUESTION_MESSAGE = 'Question';
     public const PRICE_MESSAGE = 'Price';
+    public const TOTAL_PRICE_MESSAGE = 'Total';
     public const INFO = 'info';
     public const GROUP = 'group';
+    public const FLAG_TELEGRAM = 'telegram';
 
     public const ICON_LOCATION = '<i class="fas fa-map-marker-alt"></i>';
     public const ICON_ENVELOPE = '<i class="far fa-envelope"></i>';
     public const ICON_CONFIRM = '<i class="far fa-question-circle"></i>';
     public const ICON_PRICE = '<i class="fas fa-dollar-sign"></i>';
     public const ICON_INFO = '<i class="fas fa-sms"></i>';
+    public const ICON_TELEGRAM = '<i class="fab fa-telegram-plane"></i>';
 
 
     public function message($text, $data): string
@@ -36,9 +39,10 @@ class SmsMessage
                 return Greeting::checkGreeting() . ' ' . DateHelper::formatter(
                         $data->start
                     ) . '. ' . tHelper::translate('sms', self::QUESTION_MESSAGE);
+            case self::FLAG_TELEGRAM:
             case self::PRICE_MESSAGE;
                 return Greeting::checkGreeting() . ' ' . tHelper::translate('sms', self::PRICE_MESSAGE) . ' ' .
-                        ServiceHelper::priceList($data->serviceAssignments);
+                        ServiceHelper::detailedPriceList($data->serviceAssignments).' '. tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE) . ' ' . ServiceHelper::priceList($data->serviceAssignments);
             default:
                 return Greeting::checkGreeting() . tHelper::translate(
                         'sms',
@@ -74,6 +78,8 @@ class SmsMessage
                 return SmsMessage::ICON_CONFIRM;
             case SmsMessage::PRICE_MESSAGE;
                 return SmsMessage::ICON_PRICE;
+                case SmsMessage::FLAG_TELEGRAM;
+                return SmsMessage::ICON_TELEGRAM;
             default:
                 return SmsMessage::ICON_INFO;
         }

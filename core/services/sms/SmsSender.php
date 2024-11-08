@@ -6,5 +6,5 @@ namespace core\services\sms;
 
 interface SmsSender
 {
-    public function send($data, $text);
+    public function send($data, $text,$flag =null);
 }
