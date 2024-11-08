@@ -7,6 +7,7 @@ namespace core\forms\manage\Shop;
 use core\entities\Shop\Product\Category;
 use core\forms\CompositeForm;
 use core\forms\manage\MetaForm;
+use core\helpers\tHelper;
 use core\validators\SlugValidator;
 use yii\helpers\ArrayHelper;
 
@@ -54,6 +55,18 @@ class CategoryForm extends CompositeForm
                 'targetClass' => Category::class,
                 'filter' => $this->_category ? ['<>', 'id', $this->_category->id] : null
             ]
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'title' => tHelper::translate('shop/category', 'Title'),
+            'name' => tHelper::translate('shop/category', 'Name'),
+            'slug' => tHelper::translate('shop/category', 'Slug'),
+            'description' => tHelper::translate('shop/category', 'Description'),
+            'sort' => tHelper::translate('shop/category', 'Sort'),
+            'parentId' => tHelper::translate('shop/category', 'Parent Id'),
         ];
     }
 
