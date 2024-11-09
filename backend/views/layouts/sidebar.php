@@ -33,7 +33,10 @@ use yii\helpers\Html;
                     ['/cabinet/default/index'],
                     ['class' => ['d-block']]
                 ); ?>
-                <?=\backend\widgets\birthday\BirthdayWidget::widget(['user'=>$user->employee,'text' => 'С днем рождения!'])?>
+                <?=\backend\widgets\birthday\BirthdayWidget::widget(['user'=>$user->employee,
+                                                                        'text' => 'С днем рождения!',
+                                                                        'myClass' => '',
+                                                                    ])?>
             </div>
         </div>
 
