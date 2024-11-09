@@ -27,7 +27,6 @@ PluginAsset::register($this)->add(
     ]
 );
 ?>
-<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
     <div class="payments">
 
         <div class="container-fluid">

@@ -22,16 +22,16 @@ use yii\helpers\Url;
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?=Yii::t('navbar','Dropdown')?></a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <?
+               <!-- --><?/*
                 echo Html::tag(
                     'li',
                     Html::a(
                         Yii::t('navbar','Calendar'),
-                        ['/schedule/calendar/calendar'],
-                        ['class' => ['dropdown-item',  Yii::$app->controller->id == 'schedule/calendar' ? 'active': '' ]]
+                        ['/schedule/calendar/calendar/index'],
+                        ['class' => ['dropdown-item',  Yii::$app->controller->id == 'schedule/calendar/calendar' ? 'active': '' ]]
                     ),
                     ['class' => ['d-sm-none']]
-                ); ?>
+                ); */?>
                 <?
                 echo Html::tag(
                     'li',

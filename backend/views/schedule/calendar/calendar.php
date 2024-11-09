@@ -15,7 +15,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
 
 ?>
-<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
 
 <div class="row">
     <div class="col-12">

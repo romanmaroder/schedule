@@ -16,4 +16,7 @@ class PreloaderAsset extends AssetBundle
     public $js = [
         'js/preloader.js'
     ];
+    public $jsOptions = [
+        'position' => \yii\web\View::POS_HEAD
+    ];
 }
