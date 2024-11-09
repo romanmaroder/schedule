@@ -4,6 +4,7 @@
 namespace backend\widgets\birthday;
 
 
+use backend\widgets\birthday\assets\BirthdayAsset;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
@@ -45,6 +46,7 @@ class BirthdayWidget extends Widget
 
     public function run(): string
     {
+        BirthdayAsset::register($this->view);
         return $this->render(
             'birthday',
             [
