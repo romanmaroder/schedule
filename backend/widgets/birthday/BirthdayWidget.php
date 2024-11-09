@@ -15,7 +15,9 @@ class BirthdayWidget extends Widget
      * @var $text string - congratulation text
      * @var $icon string - your own icon for congratulations
      * @var $myClass string - your own block wrapper class
+     *
      */
+
     public $user;
     public $text;
     public $icon;
