@@ -28,6 +28,7 @@ PluginAsset::register($this)->add(
 
 
 ?>
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
     <div class="report-summary">
 
             <div class="container-fluid">

@@ -27,6 +27,7 @@ PluginAsset::register($this)->add(
     ]
 );
 ?>
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
 <div class="report-index">
 
     <div class="table-responsive ">

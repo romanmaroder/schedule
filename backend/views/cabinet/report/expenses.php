@@ -26,6 +26,7 @@ PluginAsset::register($this)->add(
     ]
 );
 ?>
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
     <div class="expenses-index">
 
         <div class="table-responsive ">

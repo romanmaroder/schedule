@@ -20,7 +20,7 @@ PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
 ?>
-
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
     <div class="active tab-pane" id="events">
         <?= GridView::widget(
             [

@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/calendar','Calenda
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
 <div class="row">
     <div class="col-12">
         <div id="resp"></div>

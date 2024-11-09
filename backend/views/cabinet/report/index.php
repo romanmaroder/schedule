@@ -36,8 +36,8 @@ PluginAsset::register($this)->add(
     ]
 );
 
-
 ?>
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
     <div class="salary-index">
 
         <div class="table-responsive ">

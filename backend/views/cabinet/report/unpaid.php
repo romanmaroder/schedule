@@ -30,6 +30,7 @@ PluginAsset::register($this)->add(
 );
 
 ?>
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
     <div class="unpaid-index">
 
         <div class="table-responsive ">

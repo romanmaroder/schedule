@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $emptyEvents = Yii::t('cabinet/error','recordings');
 $emptyEducations = Yii::t('cabinet/error','lesson');
 ?>
-
+<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
 <div class="active tab-pane" id="timeline">
     <div class="timeline timeline-inverse">
         <div class="time-label">
