@@ -7,6 +7,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
+use backend\assets\DataTableAsset;
 use core\entities\Expenses\Expenses\Tag;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
-
+DataTableAsset::register($this);
 ?>
     <div class="container-fluid">
         <div class="row mb-2">
@@ -79,7 +80,7 @@ $js = <<< JS
  $(function () {
  
     $('#expenses').DataTable({
-       
+       bStateSave:true,
        pageLength: 20, 
        paging: true,
        lengthChange: false,

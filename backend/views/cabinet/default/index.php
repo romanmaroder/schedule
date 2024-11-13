@@ -8,6 +8,7 @@
 
 /* @var $provider \core\entities\Schedule\Event\Event */
 
+use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -21,6 +22,7 @@ $this->params['user'] = $user;
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
+DataTableAsset::register($this);
 ?>
 
     <div class="active tab-pane" id="events">
@@ -106,7 +108,6 @@ $js = <<< JS
  $(function () {
  
     $('#event').DataTable({
-      bDestroy: true,
        paging: true,
        lengthChange: true,
        searching: true,

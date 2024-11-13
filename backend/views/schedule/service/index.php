@@ -1,5 +1,6 @@
 <?php
 
+use backend\assets\DataTableAsset;
 use core\entities\Schedule\Service\Service;
 use core\helpers\PriceHelper;
 use core\helpers\ServiceHelper;
@@ -20,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
+DataTableAsset::register($this);
 ?>
     <div class="container-fluid">
         <div class="row mb-2">
@@ -104,7 +106,6 @@ $js = <<< JS
  $(function () {
  
     $('#service').DataTable({
-        bDestroy: true,
        pageLength: -1, 
        paging: true,
        lengthChange: true,

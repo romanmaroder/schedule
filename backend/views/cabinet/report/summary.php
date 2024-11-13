@@ -10,6 +10,7 @@
 /* @var $merg */
 
 
+use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Url;
 
@@ -25,7 +26,7 @@ PluginAsset::register($this)->add(
         'datatables-responsive',
     ]
 );
-
+DataTableAsset::register($this);
 
 ?>
     <div class="report-summary">

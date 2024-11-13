@@ -6,6 +6,7 @@
 /* @var $searchModel \backend\forms\Expenses\ExpenseSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
+use backend\assets\DataTableAsset;
 use core\entities\Expenses\Expenses\Expenses;
 use core\helpers\PriceHelper;
 use hail812\adminlte3\assets\PluginAsset;
@@ -27,6 +28,7 @@ PluginAsset::register($this)->add(
         'datatables-fixedheader',
     ]
 );
+DataTableAsset::register($this);
 ?>
 
     <div class="container-fluid">
@@ -137,7 +139,6 @@ $js = <<< JS
        autoWidth: false,
        responsive: true,
        bStateSave: true,
-       bDestroy: true,
        dom:'<"row"<"col-12"Q>> t <"row"<"col"l><"col"i><"col"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                 var api = this.api();

@@ -8,6 +8,7 @@
 
 /* @var $cart  \core\cart\schedule\Cart */
 
+use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Url;
 
@@ -26,6 +27,7 @@ PluginAsset::register($this)->add(
         'datatables-fixedheader',
     ]
 );
+DataTableAsset::register($this);
 ?>
     <div class="payments">
 
@@ -72,7 +74,6 @@ $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.jso
 $js = <<< JS
 $(function () {
 let table= $('#payment').DataTable({
-bDestroy: true,
 responsive: true,
 pageLength: -1, 
 paging: true,
@@ -161,20 +162,20 @@ ordering: false,
                     columns: [0,1,2]
                 },
                buttons: [
-                {
+                /*{
                     extend: 'copyHtml5',
                     //title:'111111',
                     exportOptions: {
                         columns: [0, ':visible']
                     }
-                },
-                {
+                },*/
+                /*{
                     extend: 'csvHtml5',
                     //title:'22222',
                     exportOptions: {
                         columns: [0,1,2,':visible']
                     }
-                },
+                },*/
                 {
                     extend: 'excelHtml5',
                     // title:'33333',
@@ -182,13 +183,13 @@ ordering: false,
                         columns: [':visible']
                     }
                 },
-                {
+               /* {
                     extend: 'pdfHtml5',
                     //title:'44444',
                     exportOptions: {
                         columns: [0,1,2,':visible']
                     }
-                },
+                },*/
                 'colvis'
             ],
                 language: {

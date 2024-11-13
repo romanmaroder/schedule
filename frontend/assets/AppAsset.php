@@ -13,16 +13,8 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        //'css/dataTables.dataTables.css',
-        //'css/searchBuilder.dataTables.css',
-        //'css/buttons.dataTables.css',
-        'css/dataTable/dataTables.dateTime.css',
     ];
     public $js = [
-        //'js/searchBuilder.dataTables.js',
-        //'js/buttons.dataTables.js',
-        'js/dataTable/dataTables.dateTime.js',
-        'js/dataTable/dark_mode.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

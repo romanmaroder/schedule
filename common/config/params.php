@@ -34,42 +34,42 @@ return [
                 ]
             ],
             'datatables-buttons' => [
-                'css' => 'datatables-buttons/css/buttons.bootstrap4.css',
+                'css' => 'datatables-buttons/css/buttons.bootstrap4.min.css',
                 'js' => [
                     'datatables-buttons/js/dataTables.buttons.min.js',
-                    'datatables-buttons/js/buttons.bootstrap4.js',
+                    'datatables-buttons/js/buttons.bootstrap4.min.js',
                     'datatables-buttons/js/buttons.colVis.min.js',
-                    'datatables-buttons/js/buttons.flash.js',
+                    'datatables-buttons/js/buttons.flash.min.js',
                     'datatables-buttons/js/buttons.html5.min.js',
-                    'datatables-buttons/js/buttons.print.js',
+                    'datatables-buttons/js/buttons.print.min.js',
                 ]
             ],
             'datatables-colreorder' => [
                 'css' => 'datatables-colreorder/css/colReorder.bootstrap4.min.css',
                 'js' => [
-                    'datatables-colreorder/js/colReorder.bootstrap4.js',
-                    'datatables-colreorder/js/dataTables.colReorder.js'
+                    'datatables-colreorder/js/colReorder.bootstrap4.min.js',
+                    'datatables-colreorder/js/dataTables.colReorder.min.js'
                 ]
             ],
             'datatables-searchbuilder' => [
                 'css' => 'datatables-searchbuilder/css/searchBuilder.bootstrap4.min.css',
                 'js' => [
-                    'datatables-searchbuilder/js/dataTables.searchBuilder.js',
-                    'datatables-searchbuilder/js/searchBuilder.bootstrap4.js'
+                    'datatables-searchbuilder/js/dataTables.searchBuilder.min.js',
+                    'datatables-searchbuilder/js/searchBuilder.bootstrap4.min.js'
                 ]
             ],
             'datatables-fixedheader' => [
                 'css' => 'datatables-fixedheader/css/fixedHeader.bootstrap4.min.css',
                 'js' => [
-                    'datatables-fixedheader/js/dataTables.fixedHeader.js',
-                    'datatables-fixedheader/js/fixedHeader.bootstrap4.js'
+                    'datatables-fixedheader/js/dataTables.fixedHeader.min.js',
+                    'datatables-fixedheader/js/fixedHeader.bootstrap4.min.js'
                 ]
             ],
             'sweetalert2-theme-bootstrap-4' => [
                 'css' => 'sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'
             ],
             'sweetalert2' => [
-                'js' => ['sweetalert2/sweetalert2.all.js']
+                'js' => ['sweetalert2/sweetalert2.all.min.js']
             ],
             'toastr' => [
                 'css' => ['toastr/toastr.min.css'],

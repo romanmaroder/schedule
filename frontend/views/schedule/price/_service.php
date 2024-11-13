@@ -1,5 +1,6 @@
 <?php
 
+use frontend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -14,6 +15,7 @@ use yii\helpers\Url;
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
+DataTableAsset::register($this);
 ?>
     <div class="service-index">
 

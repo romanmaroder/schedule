@@ -8,6 +8,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
+use backend\assets\DataTableAsset;
 use backend\widgets\grid\RoleColumn;
 use core\entities\User\Employee\Employee;
 use core\helpers\EmployeeHelper;
@@ -23,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
+DataTableAsset::register($this);
 ?>
     <div class="container-fluid">
         <div class="row mb-2">
@@ -149,6 +151,7 @@ $js = <<< JS
  $(function () {
  
     $('#employee').DataTable({
+        bStateSave:true,
         pageLength: -1, 
         paging: true,
         lengthChange: true,

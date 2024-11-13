@@ -11,6 +11,7 @@
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
 
+use backend\assets\DataTableAsset;
 use core\helpers\DiscountHelper;
 use core\helpers\EventPaymentStatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
@@ -35,7 +36,7 @@ PluginAsset::register($this)->add(
         'datatables-fixedheader',
     ]
 );
-
+DataTableAsset::register($this);
 ?>
     <div class="salary-index">
 
@@ -207,7 +208,8 @@ PluginAsset::register($this)->add(
                                             ],
                                         ],
                                     ]
-                                )  ?>
+                                ) ?>
+
             </div>
 
         </div>
@@ -217,11 +219,12 @@ PluginAsset::register($this)->add(
 <?php
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 
+
+
 $js = <<< JS
  $(function () {
   
    let table= $('#salary').DataTable({
-                bDestroy: true,
                 responsive: true,
                 pageLength: -1,
                 paging: true,
@@ -341,13 +344,13 @@ $js = <<< JS
                     columns: [0,1,2,3]
                 },
                buttons: [
-                {
+               /* {
                     extend: 'copyHtml5',
                     //title:'111111',
                     exportOptions: {
                         columns: [0, ':visible']
                     }
-                },
+                },*/
                 /*{
                     extend: 'csvHtml5',
                     //title:'22222',

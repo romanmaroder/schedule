@@ -7,6 +7,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
+use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -15,7 +16,7 @@ use yii\helpers\Url;
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
-
+DataTableAsset::register($this);
 $this->title = Yii::t('schedule/free','Free time');
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -127,7 +128,7 @@ $js = <<< JS
  $(function () {
  
     $('#free').DataTable({
-    
+        bStateSave:true,
        paging: true,
        lengthChange: false,
        searching: true,

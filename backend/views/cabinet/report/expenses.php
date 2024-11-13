@@ -6,6 +6,7 @@
 /* @var $expenses \yii\data\DataProviderInterface */
 
 
+use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -20,11 +21,11 @@ PluginAsset::register($this)->add(
         'datatables-bs4',
         'datatables-responsive',
         'datatables-buttons',
-        'datatables-colreorder',
         'datatables-searchbuilder',
         'datatables-fixedheader',
     ]
 );
+DataTableAsset::register($this);
 ?>
     <div class="expenses-index">
 
@@ -95,7 +96,6 @@ $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.jso
 $js = <<< JS
 $(function () {
 let table= $('#expenses').DataTable({
-bDestroy: true,
 responsive: true,
 pageLength: -1, 
 paging: true,
@@ -161,20 +161,20 @@ bStateSave: true,
                     columns: [0,1,2,3]
                 },
                buttons: [
-                {
+                /*{
                     extend: 'copyHtml5',
                     //title:'111111',
                     exportOptions: {
                         columns: [0, ':visible']
                     }
-                },
-                {
+                },*/
+                /*{
                     extend: 'csvHtml5',
                     //title:'22222',
                     exportOptions: {
                         columns: [0,1,2,3,':visible']
                     }
-                },
+                },*/
                 {
                     extend: 'excelHtml5',
                     // title:'33333',
@@ -182,13 +182,13 @@ bStateSave: true,
                         columns: [':visible']
                     }
                 },
-                {
+                /*{
                     extend: 'pdfHtml5',
                     //title:'44444',
                     exportOptions: {
                         columns: [0,1,2,3,':visible']
                     }
-                },
+                },*/
                 'colvis'
             ],
             language: {

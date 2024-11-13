@@ -8,6 +8,7 @@
 
 /* @var $cart \core\cart\schedule\Cart */
 
+use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -23,12 +24,11 @@ PluginAsset::register($this)->add(
         'datatables-bs4',
         'datatables-responsive',
         'datatables-buttons',
-        'datatables-colreorder',
         'datatables-searchbuilder',
         'datatables-fixedheader',
     ]
 );
-
+DataTableAsset::register($this);
 ?>
     <div class="unpaid-index">
 
@@ -136,7 +136,6 @@ $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.jso
 $js = <<< JS
 $(function () {
 let table= $('#unpaid').DataTable({
-        bDestroy: true,
         responsive: true,
         pageLength: -1, 
         paging: true,

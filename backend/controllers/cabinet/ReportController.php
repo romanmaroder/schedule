@@ -35,7 +35,7 @@ class ReportController extends Controller
     }
 
 
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             [
@@ -48,7 +48,7 @@ class ReportController extends Controller
                 ]
             ]
         ];
-    }
+    }*/
 
     public function actionIndex()
     {

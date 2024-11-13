@@ -1,5 +1,6 @@
 <?php
 
+use backend\assets\DataTableAsset;
 use core\entities\Shop\Product\Product;
 use core\helpers\PriceHelper;
 use core\helpers\ProductHelper;
@@ -19,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
+DataTableAsset::register($this);
 ?>
 
     <div class="container-fluid">
@@ -104,7 +106,7 @@ $js = <<< JS
  $(function () {
  
     $('#product').DataTable({
-    
+        bStateSave:true,
        paging: false,
        lengthChange: false,
        searching: true,

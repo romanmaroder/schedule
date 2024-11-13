@@ -1,5 +1,6 @@
 <?php
 
+use backend\assets\DataTableAsset;
 use core\entities\Blog\Post\Post;
 use core\helpers\PostHelper;
 use hail812\adminlte3\assets\PluginAsset;
@@ -21,7 +22,7 @@ PluginAsset::register($this)->add(['datatables',
                                       'datatables-searchbuilder',
                                       'datatables-fixedheader',
                                       'sweetalert2']);
-
+DataTableAsset::register($this);
 ?>
     <div class="container-fluid">
         <div class="row mb-2">
@@ -99,7 +100,6 @@ PluginAsset::register($this)->add(['datatables',
 $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
 $('#posts').DataTable({
-                bDestroy: true,
                 responsive: true,
                 pageLength: -1, 
                 paging: true,

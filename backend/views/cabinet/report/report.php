@@ -8,6 +8,7 @@
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
 
+use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -26,6 +27,7 @@ PluginAsset::register($this)->add(
         'datatables-fixedheader',
     ]
 );
+DataTableAsset::register($this);
 ?>
 <div class="report-index">
 
@@ -190,7 +192,6 @@ let table= $('#report').DataTable({
                     footer: true
                 },
                 bStateSave: true,
-                bDestroy: true,
                 dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col"l><"col"i><"col"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                 var api = this.api();
@@ -293,13 +294,13 @@ let table= $('#report').DataTable({
                     columns: [0,1,2]
                 },
                buttons: [
-                {
+                /*{
                     extend: 'copyHtml5',
                     //title:'111111',
                     exportOptions: {
                         columns: [0, ':visible']
                     }
-                },
+                },*/
                 /*{
                     extend: 'csvHtml5',
                     //title:'22222',

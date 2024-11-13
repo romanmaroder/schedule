@@ -8,6 +8,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 
+use backend\assets\DataTableAsset;
 use core\entities\User\Price;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
@@ -22,6 +23,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
 PluginAsset::register($this)->add(
     ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons']
 );
+DataTableAsset::register($this);
 ?>
     <div class="container-fluid">
         <div class="row mb-2">
@@ -179,14 +181,14 @@ $js = <<< JS
  $(function () {
  
     $('#price').DataTable({
-    
-       "paging": false,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": false,
-       "autoWidth": false,
-       "responsive": true,
+    bStateSave:true,
+       paging: false,
+       lengthChange: false,
+       searching: true,
+       ordering: true,
+       info: false,
+       autoWidth: false,
+       responsive: true,
         // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {

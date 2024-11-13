@@ -1,5 +1,6 @@
 <?php
 
+use backend\assets\DataTableAsset;
 use core\entities\Schedule\Event\Event;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
@@ -21,6 +22,7 @@ PluginAsset::register($this)->add(
         'datatables-searchbuilder'
     ]
 );
+DataTableAsset::register($this);
 
 $this->title = Yii::t('app','Events');
 $this->params['breadcrumbs'][] = $this->title;
@@ -221,7 +223,6 @@ $js = <<< JS
  $(function () {
  
     $('#event').DataTable({
-        bDestroy: true,
         pageLength: -1, 
         paging: true,
         lengthChange: true,

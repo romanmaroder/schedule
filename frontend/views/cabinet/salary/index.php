@@ -5,6 +5,7 @@
 
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
+use frontend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\DiscountHelper;
 use yii\grid\GridView;
@@ -25,7 +26,7 @@ PluginAsset::register($this)->add(
         'datatables-fixedheader',
     ]
 );
-
+DataTableAsset::register($this);
 
 ?>
     <div class="salary-index">
@@ -143,7 +144,6 @@ $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.jso
 $js = <<< JS
  $(function () {
    let table= $('#salary').DataTable({
-                bDestroy: true,
                 responsive: true,
                 pageLength: -1,
                 paging: true,
