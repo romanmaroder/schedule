@@ -185,3 +185,20 @@ div.required label:after {
 .img-shadow{
     box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)
 }
+
+/*datatables-searchbuilder*/
+
+.dark-mode .table.fixedHeader-floating thead th{
+    color: #726e6e;
+}
+
+@media (max-width: 548px) {
+    div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria .form-control{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .dtsb-buttonContainer{
+        margin-top: 13px;
+        margin-bottom: 13px;
+    }
+}
