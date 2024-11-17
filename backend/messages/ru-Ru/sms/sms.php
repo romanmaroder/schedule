@@ -5,7 +5,7 @@ return [
     'Remind' => ' Следующая запись ',
     'Question' => ' У вас есть запись. Вы будете? ',
     'Price'=>' Стоимость: ',
-    'Total'=>'.Итого:',
+    'Total'=>' Итого:',
     'AddressTitle'=>'Адрес',
     'EventTitle'=>'Напоминание',
     'ConfirmationTitle'=>'Подтверждение',

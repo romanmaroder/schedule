@@ -21,7 +21,7 @@ PluginAsset::register($this)->add(
         'datatables-bs4',
         'datatables-responsive',
         'datatables-buttons',
-        'datatables-colreorder',
+        //'datatables-colreorder',
         'datatables-searchbuilder',
         'datatables-fixedheader',
     ]
@@ -145,7 +145,8 @@ $js = <<< JS
  $(function () {
    let table= $('#salary').DataTable({
                 responsive: true,
-                pageLength: -1,
+                deferRender:true,
+                pageLength: 10,
                 paging: true,
                 searching: true,
                 ordering: false,
@@ -161,7 +162,7 @@ $js = <<< JS
                     footer: true
                 },
                 bStateSave: true,
-                dom:'<"row"<"col-12"Q>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
+                dom:'<"row"<"col-12"Q>> t <"row"<"col-auto"l><"col-auto"i><"col-auto"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                             var api = this.api();
                             // Remove the formatting to get integer data for summation

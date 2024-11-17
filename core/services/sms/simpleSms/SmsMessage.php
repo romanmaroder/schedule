@@ -42,7 +42,9 @@ class SmsMessage
             case self::FLAG_TELEGRAM:
             case self::PRICE_MESSAGE;
                 return Greeting::checkGreeting() . ' ' . tHelper::translate('sms', self::PRICE_MESSAGE) . ' ' .
-                        ServiceHelper::detailedPriceList($data->serviceAssignments).' '. tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE) . ' ' . ServiceHelper::priceList($data->serviceAssignments);
+                        ServiceHelper::detailedPriceList($data->serviceAssignments).' '
+                    . tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE) . ' '
+                    . ServiceHelper::priceList($data->serviceAssignments);
             default:
                 return Greeting::checkGreeting() . tHelper::translate(
                         'sms',

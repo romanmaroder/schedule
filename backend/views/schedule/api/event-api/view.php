@@ -2,6 +2,7 @@
 
 use core\helpers\EventPaymentStatusHelper;
 use core\helpers\ToolsHelper;
+use core\services\messengers\FlagsTemplates;
 use core\services\sms\simpleSms\SmsMessage;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;
@@ -13,6 +14,7 @@ use yii\widgets\DetailView;
 /* @var $model \core\entities\Schedule\Event\Event */
 /* @var $cart \core\cart\schedule\Cart */
 /* @var $sms \core\services\sms\SmsSender */
+/* @var $messengers \core\services\messengers\MessengerFactory */
 
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
@@ -121,14 +123,29 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
         <?php
         endif; ?>
-        <div class="col-auto"><?= $sms->triggerButton(SmsMessage::INFO) ?></div>
-        <div class="col-auto mb-2" id="<?= SmsMessage::GROUP ?>">
+        <div class="col-auto">
+            <?= $messengers->build('sms',FlagsTemplates::SMS)->buildTrigger()->render()?>
+        </div>
+        <div class="col-auto mb-2" id="<?=FlagsTemplates::GROUP_SMS?>">
             <?php
-            echo $sms->send($model, SmsMessage::REMAINDER_MESSAGE);
-            echo $sms->send($model, SmsMessage::ADDRESS_MESSAGE);
-            echo $sms->send($model, SmsMessage::QUESTION_MESSAGE);
-            echo $sms->send($model, SmsMessage::PRICE_MESSAGE);
-            echo $sms->send($model, SmsMessage::FLAG_TELEGRAM,SmsMessage::FLAG_TELEGRAM);
+            echo $messengers->build('sms', FlagsTemplates::ADDRESS,$model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::PRICE, $model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::TOTAL_PRICE, $model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::QUESTION, $model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::REMAINDER, $model)->buildRender()->render();
+            ?>
+        </div>
+
+        <div class="col-auto">
+            <?= $messengers->build('telegram',FlagsTemplates::TELEGRAM)->buildTrigger()->render()?>
+        </div>
+        <div class="col-auto mb-2" id="<?=FlagsTemplates::GROUP_TELEGRAM?>">
+            <?php
+            echo $messengers->build('telegram', FlagsTemplates::ADDRESS,$model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::PRICE, $model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::TOTAL_PRICE, $model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::QUESTION, $model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::REMAINDER, $model)->buildRender()->render();
             ?>
         </div>
         <div class="col-auto">
@@ -156,19 +173,26 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ]
             ) ?>
         </div>
-
     </div>
 </div>
 
 <?php
-$button = SmsMessage::INFO;
-$group = SmsMessage::GROUP;
+$buttonSms = FlagsTemplates::SMS;
+$buttonTelegram = FlagsTemplates::TELEGRAM;
+$groupSms = FlagsTemplates::GROUP_SMS;
+$groupTelegram = FlagsTemplates::GROUP_TELEGRAM;
 $sms = <<< JS
- $('#$group').addClass('d-none');
+ $('#$groupSms,#$groupTelegram').addClass('d-none');
 
-   $( "#$button" ).on( "click", function() {
+   $("#$buttonSms").on( "click", function() {
        
-  $('#$group').animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
+  $('#$groupSms').animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
+
+})
+
+   $("#$buttonTelegram").on( "click", function() {
+       
+  $('#$groupTelegram').animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
 
        
 })

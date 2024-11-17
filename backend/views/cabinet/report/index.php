@@ -31,7 +31,7 @@ PluginAsset::register($this)->add(
         'datatables-bs4',
         'datatables-responsive',
         'datatables-buttons',
-        'datatables-colreorder',
+        //'datatables-colreorder',
         'datatables-searchbuilder',
         'datatables-fixedheader',
     ]
@@ -226,7 +226,8 @@ $js = <<< JS
   
    let table= $('#salary').DataTable({
                 responsive: true,
-                pageLength: -1,
+                deferRender:true,
+                pageLength: 10,
                 paging: true,
                 lengthChange: true,
                 lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
@@ -242,7 +243,7 @@ $js = <<< JS
                     footer: true
                 },
                 bStateSave: true,
-                dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
+                dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col-auto"l><"col-auto"i><"col-auto"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                 var api = this.api();
                 // Remove the formatting to get integer data for summation
@@ -380,9 +381,9 @@ $js = <<< JS
                 },
     }).buttons().container().appendTo('#salary_wrapper .col-md-6:eq(0)');
 
-   table.on("column-reorder", function(e, settings, details){
+   /*table.on("column-reorder", function(e, settings, details){
        let order = table.order();
-   });
+   });*/
 
  });
 

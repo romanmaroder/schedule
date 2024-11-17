@@ -10,6 +10,7 @@ use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
 use core\repositories\NotFoundException;
 use core\repositories\PriceRepository;
+use core\services\messengers\MessengerFactory;
 use core\services\sms\SmsSender;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
@@ -22,19 +23,24 @@ class EventApiController extends Controller
     private EventManageService $service;
     private CartService $cart;
     private SmsSender $sms;
+    private MessengerFactory $messengers;
     private PriceRepository $prices;
 
-    public function __construct($id, $module,
-                                EventManageService $service,
-                                CartService $cart,
-                                SmsSender $sms,
-                                PriceRepository $prices,
-                                $config = [])
+    public function __construct(
+        $id,
+        $module,
+        EventManageService $service,
+        CartService $cart,
+        SmsSender $sms,
+        MessengerFactory $messengers,
+        PriceRepository $prices,
+        $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->cart = $cart;
         $this->sms = $sms;
+        $this->messengers = $messengers;
         $this->prices = $prices;
     }
 
@@ -60,6 +66,7 @@ class EventApiController extends Controller
                 'model' => $this->findModel($id),
                 'cart' => $cart,
                 'sms' => $this->sms,
+                'messengers' => $this->messengers,
             ]
         );
     }
