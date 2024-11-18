@@ -4,7 +4,7 @@
 namespace core\services\messengers;
 
 
-use yii\helpers\Html;
+use core\services\messengers\interfaces\RenderInterface;
 
 class TriggerButton implements RenderInterface
 {
@@ -29,6 +29,6 @@ class TriggerButton implements RenderInterface
             'id' => $this->flag,
 
         ];
-        return Html::tag('button', $this->buildIcon, $options);
+        return '<button class="'.$options['class'].'" id="'.$options['id'].'">'.$this->buildIcon.'</button>';
     }
 }

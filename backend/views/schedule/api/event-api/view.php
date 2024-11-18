@@ -197,5 +197,5 @@ $sms = <<< JS
        
 })
 JS;
-$this->registerJs($sms);
+$this->registerJs($sms,$position = yii\web\View::POS_READY, $key = null);
 ?>
