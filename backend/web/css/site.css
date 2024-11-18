@@ -122,6 +122,11 @@ div.required label:after {
 .fc-event-title-container{
     word-break: break-word;
 }
+.fc-event-tools-container{
+    position: absolute;
+    top:3px;
+    right: 3px;
+}
 
 
 @media (max-width: 544px), (orientation: portrait) {
@@ -185,7 +190,9 @@ div.required label:after {
 .img-shadow{
     box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)
 }
-
+a.event-custom-classes.fc-timegrid-event {
+    overflow: auto;
+}
 /*datatables-searchbuilder*/
 
 .dark-mode .table.fixedHeader-floating thead th{
@@ -201,4 +208,7 @@ div.required label:after {
         margin-top: 13px;
         margin-bottom: 13px;
     }
+
 }
+
+
