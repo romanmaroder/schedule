@@ -65,3 +65,4 @@ yii.confirm = function (message, okCallback, cancelCallback) {
             }
         })
     };*/
+

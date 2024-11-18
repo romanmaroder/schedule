@@ -562,6 +562,7 @@ console.log(eventDropInfo.event.source.id);
                                        arrayOfDomNodes.push(wrapTime);
                                  }
 
+    
                                 return { domNodes: arrayOfDomNodes }
                                 
                                 }"

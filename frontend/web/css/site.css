@@ -196,7 +196,11 @@ a.desc:after {
 .img-shadow{
     box-shadow: 0 .25rem 0.8rem rgba(0,0,0,.45)
 }
-
+.fc-timegrid-event > .fc-event-main >.fc-event-notice-container {
+    white-space: nowrap!important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 /*datatables-searchbuilder*/
 
 .dark-mode .table.fixedHeader-floating thead th{
