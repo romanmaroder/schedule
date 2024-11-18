@@ -11,25 +11,24 @@ use core\services\messengers\interfaces\RenderInterface;
  * Button to hide a group of messenger buttons
  * Implementation example
  * @example
- * <div class="col-auto">
+    <div class="col-auto trigger-button">
         <?= $messengers->build('sms',FlagsTemplates::SMS)->buildTrigger()->render()?>
- * </div>
- *       <div class="col-auto mb-2" id="<?=FlagsTemplates::GROUP_SMS?>">
-            <?php
+    </div>
+    <div class="col-auto mb-2 group-button" id="<?=FlagsTemplates::GROUP_SMS?>">
+        <?php
             echo $messengers->build('sms', FlagsTemplates::ADDRESS,$model)->buildRender()->render();
             echo $messengers->build('sms', FlagsTemplates::PRICE, $model)->buildRender()->render();
             echo $messengers->build('sms', FlagsTemplates::TOTAL_PRICE, $model)->buildRender()->render();
             echo $messengers->build('sms', FlagsTemplates::QUESTION, $model)->buildRender()->render();
             echo $messengers->build('sms', FlagsTemplates::REMAINDER, $model)->buildRender()->render();
-            ?>
- *       </div>
- * <script>
-        $('idGroup').addClass('d-none');
-        $('idButton').on("click", function() {
-            $('idGroup').animate({width: 'toggle'}).removeClass('d-none').css('display', 'flex');
+        ?>
+    </div>
+    <script>
+        $('.group-button').addClass('d-none');
+        $(".trigger-button").on("click", function() {
+            $(this).next().animate({width: 'toggle'}).removeClass('d-none').css('display', 'flex');
         })
- * </script>
- *
+    </script>
 */
 class RenderButton implements RenderInterface
 {

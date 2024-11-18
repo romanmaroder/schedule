@@ -123,10 +123,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
             </div>
         <?php
         endif; ?>
-        <div class="col-auto">
+        <div class="col-auto trigger-button">
             <?= $messengers->build('sms',FlagsTemplates::SMS)->buildTrigger()->render()?>
         </div>
-        <div class="col-auto mb-2" id="<?=FlagsTemplates::GROUP_SMS?>">
+        <div class="col-auto mb-2 group-button" id="<?=FlagsTemplates::GROUP_SMS?>">
             <?php
             echo $messengers->build('sms', FlagsTemplates::ADDRESS,$model)->buildRender()->render();
             echo $messengers->build('sms', FlagsTemplates::PRICE, $model)->buildRender()->render();
@@ -136,10 +136,10 @@ PluginAsset::register($this)->add(['sweetalert2']);
             ?>
         </div>
 
-        <div class="col-auto">
+        <div class="col-auto trigger-button">
             <?= $messengers->build('telegram',FlagsTemplates::TELEGRAM)->buildTrigger()->render()?>
         </div>
-        <div class="col-auto mb-2" id="<?=FlagsTemplates::GROUP_TELEGRAM?>">
+        <div class="col-auto mb-2 group-button" id="<?=FlagsTemplates::GROUP_TELEGRAM?>">
             <?php
             echo $messengers->build('telegram', FlagsTemplates::ADDRESS,$model)->buildRender()->render();
             echo $messengers->build('telegram', FlagsTemplates::PRICE, $model)->buildRender()->render();
@@ -177,25 +177,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
 </div>
 
 <?php
-$buttonSms = FlagsTemplates::SMS;
-$buttonTelegram = FlagsTemplates::TELEGRAM;
-$groupSms = FlagsTemplates::GROUP_SMS;
-$groupTelegram = FlagsTemplates::GROUP_TELEGRAM;
 $sms = <<< JS
- $('#$groupSms,#$groupTelegram').addClass('d-none');
-
-   $("#$buttonSms").on( "click", function() {
-       
-  $('#$groupSms').animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
-
-})
-
-   $("#$buttonTelegram").on( "click", function() {
-       
-  $('#$groupTelegram').animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
-
-       
-})
+    $('.group-button').addClass('d-none');
+    $('.trigger-button').on( 'click', function() {
+      $(this).next().animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
+    })
 JS;
 $this->registerJs($sms,$position = yii\web\View::POS_READY, $key = null);
 ?>
