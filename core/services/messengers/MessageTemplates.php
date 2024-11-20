@@ -23,26 +23,17 @@ class MessageTemplates
     {
         switch ($flag) {
             case FlagsTemplates::REMAINDER:
-                return Greeting::checkGreeting() . tHelper::translate(
-                        'sms',
-                        self::REMAINDER_MESSAGE
-                    ) . DateHelper::formatter(
-                        $data->start
-                    );
+                return $this->RemindMessage($data);
             case FlagsTemplates::ADDRESS:
-                return Greeting::checkGreeting() . tHelper::translate('sms', self::ADDRESS_MESSAGE);
+                return $this->AddressMessage();
             case FlagsTemplates::QUESTION:
-                return Greeting::checkGreeting() . DateHelper::formatter(
-                        $data->start
-                    ) . tHelper::translate('sms', self::QUESTION_MESSAGE);
+                return $this->QuestionMessage($data);
             case FlagsTemplates::PRICE;
-                return Greeting::checkGreeting() . tHelper::translate('sms', self::PRICE_MESSAGE). ' ' .
-                    ServiceHelper::detailedPriceList($data->serviceAssignments);
+                return $this->PriceMessage($data);
             case FlagsTemplates::TOTAL_PRICE;
-                return Greeting::checkGreeting() . tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE). ' '
-                    . ServiceHelper::priceList($data->serviceAssignments);
+                return $this->PriceTotalMessage($data);
             default:
-                return '';
+                throw new \Exception('No such template exists.');
         }
         /*return match ($flag) {
             FlagsTemplates::REMAINDER => Greeting::checkGreeting() . tHelper::translate(
@@ -84,5 +75,39 @@ class MessageTemplates
             FlagsTemplates::TELEGRAM => tHelper::translate('sms', 'Total'),
             FlagsTemplates::SMS => tHelper::translate('sms', 'Total'),
         ];
+    }
+
+    private function AddressMessage():string
+    {
+        return Greeting::checkGreeting() . tHelper::translate('sms', self::ADDRESS_MESSAGE);
+    }
+
+    private function RemindMessage($data):string
+    {
+        return Greeting::checkGreeting() . tHelper::translate(
+                'sms',
+                self::REMAINDER_MESSAGE
+            ) . DateHelper::formatter(
+                $data->start
+            );
+    }
+
+    private function QuestionMessage($data):string
+    {
+        return Greeting::checkGreeting() . DateHelper::formatter(
+                $data->start
+            ) . tHelper::translate('sms', self::QUESTION_MESSAGE);
+    }
+
+    private function PriceMessage($data):string
+    {
+        return Greeting::checkGreeting() . tHelper::translate('sms', self::PRICE_MESSAGE). ' ' .
+            ServiceHelper::detailedPriceList($data->serviceAssignments);
+    }
+
+    private function PriceTotalMessage($data):string
+    {
+        return Greeting::checkGreeting() . tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE). ' '
+            . ServiceHelper::priceList($data->serviceAssignments);
     }
 }
