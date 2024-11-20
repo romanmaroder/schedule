@@ -6,8 +6,8 @@ namespace core\readModels\Expenses;
 
 use core\entities\CommonUses\Brand;
 use core\entities\Expenses\Expenses\Expenses;
-use core\entities\Schedule\Category;
-use core\entities\Schedule\Tag;
+use core\entities\Expenses\Category;
+use core\entities\Expenses\Expenses\Tag;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\db\ActiveQuery;
