@@ -29,7 +29,6 @@ class SmsMessenger implements MessengerFactoryInterface
         $this->data = $data;
     }
 
-
     public function buildMessage(): MessageInterface
     {
         return new Message($this->flag,$this->data);
@@ -49,7 +48,6 @@ class SmsMessenger implements MessengerFactoryInterface
             $this->data
         );
     }
-
 
     public function buildTrigger(): RenderInterface
     {
