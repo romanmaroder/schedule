@@ -26,10 +26,10 @@ class RenderSms implements RenderInterface
 
     public function render()
     {
-        return $this->smsLink();
+        return $this->link();
     }
 
-    private function smsLink(): string
+    private function link(): string
     {
         if ($this->data->client->phone) {
             $options = [

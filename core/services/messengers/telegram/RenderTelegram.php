@@ -30,10 +30,10 @@ class RenderTelegram implements RenderInterface
 
     public function render()
     {
-        return $this->telegramLink();
+        return $this->link();
     }
 
-    private function telegramLink(): string
+    private function link(): string
     {
             $options = [
                 'class' => 'btn btn-info btn-sm d-inline-block mr-1',
