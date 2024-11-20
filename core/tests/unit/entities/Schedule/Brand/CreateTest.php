@@ -1,12 +1,12 @@
 <?php
 
 
-namespace core\tests\unit\entities\core\Brand;
+namespace core\tests\unit\entities\Schedule\Brand;
 
 
 use Codeception\Test\Unit;
+use core\entities\CommonUses\Brand;
 use core\entities\Meta;
-use core\entities\core\Brand;
 
 class CreateTest extends Unit
 {

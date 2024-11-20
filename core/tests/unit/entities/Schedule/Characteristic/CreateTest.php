@@ -1,11 +1,11 @@
 <?php
 
 
-namespace core\tests\unit\entities\core\Characteristic;
+namespace core\tests\unit\entities\Schedule\Characteristic;
 
 
 use Codeception\Test\Unit;
-use core\entities\core\Characteristic;
+use core\entities\CommonUses\Characteristic;
 
 class CreateTest extends Unit
 {

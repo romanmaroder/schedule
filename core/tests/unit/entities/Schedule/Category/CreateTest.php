@@ -1,12 +1,12 @@
 <?php
 
 
-namespace core\tests\unit\entities\core\Category;
+namespace core\tests\unit\entities\Schedule\Category;
 
 
 use Codeception\Test\Unit;
 use core\entities\Meta;
-use core\entities\core\Category;
+use core\entities\Schedule\Service\Category;
 
 class CreateTest extends Unit
 {

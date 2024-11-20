@@ -1,11 +1,11 @@
 <?php
 
 
-namespace core\tests\unit\entities\core\Tag;
+namespace core\tests\unit\entities\Schedule\Tag;
 
 
 use Codeception\Test\Unit;
-use core\entities\core\Tag;
+use core\entities\Schedule\Service\Tag;
 
 class CreateTest extends Unit
 {
