@@ -36,24 +36,12 @@ class MessageTemplates
                 throw new \Exception('No such template exists.');
         }
         /*return match ($flag) {
-            FlagsTemplates::REMAINDER => Greeting::checkGreeting() . tHelper::translate(
-                    'sms',
-                    self::REMAINDER_MESSAGE
-                ) . DateHelper::formatter(
-                    $data->start
-                ),
-            FlagsTemplates::ADDRESS => Greeting::checkGreeting() . tHelper::translate('sms', self::ADDRESS_MESSAGE),
-            FlagsTemplates::QUESTION => Greeting::checkGreeting() . DateHelper::formatter(
-                    $data->start
-                ) . tHelper::translate('sms', self::QUESTION_MESSAGE),
-            FlagsTemplates::PRICE => Greeting::checkGreeting() . tHelper::translate('sms', self::PRICE_MESSAGE) . ' ' .
-                ServiceHelper::detailedPriceList($data->serviceAssignments),
-            FlagsTemplates::TOTAL_PRICE => Greeting::checkGreeting() . tHelper::translate(
-                    'sms',
-                    self::TOTAL_PRICE_MESSAGE
-                ) . ' '
-                . ServiceHelper::priceList($data->serviceAssignments),
-            default => '',
+            FlagsTemplates::REMAINDER => $this->RemindMessage($data),
+            FlagsTemplates::ADDRESS => $this->AddressMessage(),
+            FlagsTemplates::QUESTION => $this->QuestionMessage($data),
+            FlagsTemplates::PRICE => $this->PriceMessage($data),
+            FlagsTemplates::TOTAL_PRICE => $this->PriceTotalMessage($data),
+            default => throw new \Exception('No such template exists.'),
         };*/
     }
 
