@@ -38,6 +38,8 @@ use yii\db\ActiveRecord;
  * @property Employee $employee
  * @property Schedule $schedule
  * @property string $notice [varchar(255)]
+ * @property int $t_chat_id [int(11)]
+ * @property string $t_name [varchar(255)]
  */
 class User extends ActiveRecord implements AggregateRoot
 {
@@ -99,6 +101,12 @@ class User extends ActiveRecord implements AggregateRoot
         } else {
             $this->password_hash;
         }
+    }
+
+    public function attachTelegram($tChatId, $tName)
+    {
+        $this->t_chat_id = $tChatId;
+        $this->t_name = $tName;
     }
 
     public static function requestSignup(string $username, string $email, string $password): self
@@ -257,6 +265,11 @@ class User extends ActiveRecord implements AggregateRoot
     public function isInactive(): bool
     {
         return $this->status === self::STATUS_INACTIVE;
+    }
+
+    public function isChatId(): bool
+    {
+        return $this->t_chat_id !== null;
     }
 
     /**

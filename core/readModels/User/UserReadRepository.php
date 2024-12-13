@@ -18,6 +18,18 @@ class UserReadRepository
         return User::find()->with(['employee'])->andWhere(['id' => $id])->one();
     }
 
+    public function findByChatId($chatId): ?User
+    {
+        return User::find()->where(['t_chat_id'=>$chatId])->one();
+    }
+
+    public function findByUserPhone($phone): ?User
+    {
+        return User::find()
+            ->where(['phone' => $phone])
+            ->one();
+    }
+
     public function findActiveById($id): ?User
     {
         return User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
@@ -85,4 +97,6 @@ class UserReadRepository
             ]
         );
     }
+
+
 }

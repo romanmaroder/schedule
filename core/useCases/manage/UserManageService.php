@@ -88,7 +88,18 @@ class UserManageService
         $this->transaction->wrap(function () use ($user, $form) {
             $this->users->save($user);
         });
+    }
 
+    public function attachTelegram($id,$tChatId,$tName)
+    {
+        $user = $this->users->get($id);
+        $user->attachTelegram(
+            $tChatId,
+            $tName
+        );
+        $this->transaction->wrap(function () use ($user) {
+            $this->users->save($user);
+        });
     }
 
     public function assignRole($id, $role): void

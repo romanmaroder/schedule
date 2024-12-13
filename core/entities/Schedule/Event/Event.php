@@ -8,11 +8,12 @@ use core\entities\Schedule\Service\Service;
 use core\entities\User\Employee\Employee;
 use core\entities\User\User;
 use core\helpers\tHelper;
+use core\services\bots\classes\BotMessenger;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use Telegram\Bot\Exceptions\TelegramSDKException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\db\Expression;
 
 /**
  * @property int $id
@@ -52,7 +53,24 @@ class Event extends ActiveRecord
     public const TOOLS_READY = 1;
     public const TOOLS_ICON = '<i class="fas fa-wrench"></i>';
 
-    public const CACHE_KEY ='event';
+    public const CACHE_KEY = 'event';
+
+
+    public function __construct($config = [])
+    {
+        parent::__construct($config);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifyUser']);
+        $this->on(self::EVENT_AFTER_UPDATE, [$this, 'notifyUser']);
+    }
+
+    public function notifyUser()
+    {
+
+            $notify = new BotMessenger();
+            $notify->Telegram()->send($this);
+            //$notify->toViber()->send($data);
+    }
+
 
     public static function create(
         $masterId,

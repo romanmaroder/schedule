@@ -14,6 +14,7 @@ return [
         '<_a:login|logout>' => 'auth/<_a>',
 
         'event' => 'schedule/event/index',
+        'event/m' => 'schedule/event/m',
         'event/<id:\d+>' => 'schedule/event/view',
         'event/update/<id:\d+>' => 'schedule/event/update',
         'calendar' => 'schedule/calendar/calendar',

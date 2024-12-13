@@ -8,6 +8,7 @@ use core\entities\Schedule\Event\Event;
 use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
+use core\helpers\BotLogger;
 use core\repositories\NotFoundException;
 use core\repositories\PriceRepository;
 use core\services\messengers\MessengerFactory;
@@ -34,8 +35,8 @@ class EventApiController extends Controller
         SmsSender $sms,
         MessengerFactory $messengers,
         PriceRepository $prices,
-        $config = [])
-    {
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->cart = $cart;
@@ -43,6 +44,7 @@ class EventApiController extends Controller
         $this->messengers = $messengers;
         $this->prices = $prices;
     }
+
 
     public function behaviors(): array
     {
@@ -55,7 +57,6 @@ class EventApiController extends Controller
             ],
         ];
     }
-
 
     public function actionView($id)
     {
@@ -168,15 +169,29 @@ class EventApiController extends Controller
         $event->start = date('Y-m-d H:i', strtotime($start));
         $event->end = date('Y-m-d H:i', strtotime($end));
 
-        $this->service->save($event);
+        /* Receiving errors from the bot */
+        if ($event->client->isChatId()) {
+            $log = Yii::getAlias('@core/services/bots/') . 'log.txt';
+            $error = BotLogger::getLog($log);
+        }
+        /* bot error */
+
+        try {
+            $this->service->save($event);
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
         return [
             'event' => $event,
             'content' => [
-                'start' => Yii::t('schedule/event','Start'),
-                'end' => Yii::t('schedule/event','End'),
-                'resize' => Yii::t('schedule/event','resize'),
-                'drop' => Yii::t('schedule/event','drop'),
-            ]
+                'start' => Yii::t('schedule/event', 'Start'),
+                'end' => Yii::t('schedule/event', 'End'),
+                'resize' => Yii::t('schedule/event', 'resize'),
+                'drop' => Yii::t('schedule/event', 'drop'),
+            ],
+            'error' => $error ?? null,
         ];
     }
 

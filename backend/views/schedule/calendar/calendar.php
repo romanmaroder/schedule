@@ -46,10 +46,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
 							});
 							Toast.fire({
 									icon: 'success',
-									title: '" . Yii::$app->session->getFlash('msg') . "'
+									title: '". \yii\helpers\Html::tag('h6',Yii::$app->session->getFlash('msg'),['class'=>'text-info'] )."',
 							});	  
-				})
-		";
+				})";
 
                 $this->registerJs($js, $position = yii\web\View::POS_READY, $key = null);
             }; ?>
@@ -120,6 +119,16 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                          url:'/schedule/api/'+ eventResizeInfo.event.source.id +'-api/dragging-resizing',
                                          data:{'id':eventResizeInfo.event.id,'start':eventResizeInfo.event.startStr,'end':eventResizeInfo.event.endStr},
                                          success:function (data) {
+                                         
+                                         if( data.error){
+                                                            var error =`<span class='text-warning'>`+ data.error.code+`</span>`+`&nbsp;&nbsp;`+
+                                                            `<span class='text-warning'>`+ data.error.message+`</span>`;
+                                                         }else{
+                                                         var error =`<span class='text-warning'>`-`</span>`+`&nbsp;&nbsp;`+
+                                                            `<span class='text-warning'>`-`</span>`;
+                                                      
+                                                         }
+                                         
                                                     var Toast = Swal.mixin({
                                                                         toast: true,
                                                                         position: 'top-end',
@@ -128,8 +137,9 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                     });
                                                     Toast.fire({
                                                         icon: 'success',
-                                                        title: `<h6>`+data.content.resize+`</h6>`,
-                                                        html:`<i>`+ data.content.start+`: `+ data.event.start +`</i>` + `</br>` + `<i>`+ data.content.end+`: ` + data.event.end + `</i>`,
+                                                        title: `<h6 class='text-info'>`+data.content.resize+`</h6>`,
+                                                        html:`<i class='text-info'>`+ data.content.start+`: `+ data.event.start +`</i>` + `</br>` + `<i class='text-info'>`+ data.content.end+`: ` + data.event.end + `</i>`,
+                                                        footer: error,
                                                     });
                                          },
                                          error:function(data){
@@ -155,11 +165,19 @@ PluginAsset::register($this)->add(['sweetalert2']);
              */
             $eventDrop = new JsExpression(
                 "function(eventDropInfo ){
-console.log(eventDropInfo.event.source.id);
                                             $.ajax({
                                                 url:'/schedule/api/'+ eventDropInfo.event.source.id +'-api/dragging-resizing',
                                                 data:{'id':eventDropInfo.event.id,'start':eventDropInfo.event.startStr,'end':eventDropInfo.event.endStr},
                                                 success:function (data) {
+                                                console.log(data)
+                                                         if( data.error){
+                                                            var error =`<span class='text-warning'>`+ data.error.code+`</span>`+`&nbsp;&nbsp;`+
+                                                            `<span class='text-warning'>`+ data.error.message+`</span>`;
+                                                         }else{
+                                                         var error =`<span class='text-warning'>`-`</span>`+`&nbsp;&nbsp;`+
+                                                            `<span class='text-warning'>`-`</span>`;
+                                                         
+                                                         }
                                                     var Toast = Swal.mixin({
                                                                         toast: true,
                                                                         position: 'top-end',
@@ -168,20 +186,24 @@ console.log(eventDropInfo.event.source.id);
                                                     });
                                                     Toast.fire({
                                                         icon: 'success',
-                                                        title: `<h6>`+data.content.drop+`</h6>`,
-                                                       html:`<i>`+ data.content.start+`: `+ data.event.start +`</i>` + `</br>` + `<i>`+ data.content.end+`: ` + data.event.end + `</i>`,
+                                                        title: `<h6 class='text-info'>`+data.content.drop+`</h6>`,
+                                                        html:`<i class='text-info'>`+ data.content.start+`: `+ data.event.start +`</i>` + `</br>` + `<i class='text-info'>`+ data.content.end+`: ` + data.event.end + `</i>`,
+                                                        footer:error,
                                                     });
                                                 },
                                                 error:function(data){
+                                               console.log(data)
                                                     var Toast = Swal.mixin({
                                                                         toast: true,
-                                                                        position: 'top-end',
+                                                                        position: 'top-start',
                                                                         showConfirmButton: false,
                                                                         timer: 5000,
                                                     });
                                                     Toast.fire({
                                                         icon: 'error',
-                                                        title: data.responseText
+                                                        title: `<h6 class='text-info'>`+data.error.code+`</h6>`,
+                                                       html:`<i class='text-info'>`+ data.error.message + `</i>` ,
+                                                        
                                                     });
                                                 },
                                             });

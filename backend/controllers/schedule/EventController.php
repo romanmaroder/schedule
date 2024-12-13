@@ -13,6 +13,8 @@ use core\forms\manage\Schedule\Event\EventEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
 use core\repositories\NotFoundException;
 use core\repositories\PriceRepository;
+use core\services\bots\classes\Bot;
+use core\services\bots\classes\telegram\TelegramBot;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
 use Yii;
@@ -56,7 +58,7 @@ class EventController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            [
+            /*[
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index'],
                 'duration' => 3600,
@@ -64,7 +66,7 @@ class EventController extends Controller
                     'class' => 'yii\caching\TagDependency',
                     'tags' => [Event::CACHE_KEY],
                 ]
-            ]
+            ]*/
         ];
     }
 
@@ -84,15 +86,12 @@ class EventController extends Controller
         );
     }
 
-
     public function actionEvents()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
 
         return $this->calendar->getEvents();
     }
-
-
 
     public function actionView($id)
     {

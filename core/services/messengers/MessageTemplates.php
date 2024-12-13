@@ -19,7 +19,7 @@ class MessageTemplates
     public const INFO = 'info';
 
 
-    public function checkMessage($flag, $data): string
+    public function checkMessage($flag, $data, $greeting = true): string
     {
         switch ($flag) {
             case FlagsTemplates::REMAINDER:
@@ -29,9 +29,9 @@ class MessageTemplates
             case FlagsTemplates::QUESTION:
                 return $this->QuestionMessage($data);
             case FlagsTemplates::PRICE;
-                return $this->PriceMessage($data);
+                return $this->PriceMessage($data,$greeting);
             case FlagsTemplates::TOTAL_PRICE;
-                return $this->PriceTotalMessage($data);
+                return $this->PriceTotalMessage($data,$greeting);
             default:
                 throw new \Exception('No such template exists.');
         }
@@ -87,15 +87,23 @@ class MessageTemplates
             ) . tHelper::translate('sms', self::QUESTION_MESSAGE);
     }
 
-    private function PriceMessage($data):string
+    private function PriceMessage($data, $greeting = true): string
     {
-        return Greeting::checkGreeting() . tHelper::translate('sms', self::PRICE_MESSAGE). ' ' .
+        if ($greeting == false) {
+            return tHelper::translate('sms', self::PRICE_MESSAGE) . ' ' .
+                ServiceHelper::detailedPriceList($data->serviceAssignments);
+        }
+        return Greeting::checkGreeting() . tHelper::translate('sms', self::PRICE_MESSAGE) . ' ' .
             ServiceHelper::detailedPriceList($data->serviceAssignments);
     }
 
-    private function PriceTotalMessage($data):string
+    private function PriceTotalMessage($data, $greeting = true): string
     {
-        return Greeting::checkGreeting() . tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE). ' '
+        if ($greeting == false) {
+            return tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE) . ' '
+                . ServiceHelper::priceList($data->serviceAssignments);
+        }
+        return Greeting::checkGreeting() . tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE) . ' '
             . ServiceHelper::priceList($data->serviceAssignments);
     }
 }

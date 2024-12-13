@@ -7,7 +7,11 @@ namespace core\services\messengers;
 use core\services\messengers\interfaces\MessengerFactoryInterface;
 use core\services\messengers\sms\SmsMessenger;
 use core\services\messengers\telegram\TelegramMessenger;
-
+/**
+ * Class MessengerFactory
+ *
+ * Class for creating factories for drawing SMS or telegram notification buttons
+ */
 class MessengerFactory
 {
     /**

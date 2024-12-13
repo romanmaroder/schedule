@@ -5,6 +5,7 @@ namespace core\services;
 
 
 use core\dispatchers\DeferredEventDispatcher;
+use Telegram\Bot\Exceptions\TelegramSDKException;
 
 class TransactionManager
 {

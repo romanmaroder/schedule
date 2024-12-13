@@ -143,11 +143,30 @@ class EventReadRepository
 
     public function getCard()
     {
-        return Event::find()->where(['payment'=>Event::STATUS_CARD])->sum('amount');
+        return Event::find()->where(['payment' => Event::STATUS_CARD])->sum('amount');
     }
 
     public function find($id): ?Event
     {
         return Event::find()->andWhere(['master_id' => $id])->one();
+    }
+
+    public function findAllClientEvents($userId): array
+    {
+        return Event::find()
+            ->select('id, start,')
+            ->where(['client_id' => $userId])
+            ->andWhere(['>', 'start', new Expression('CURDATE()')])
+            ->orderBy(['start' => SORT_ASC])
+            ->asArray()
+            ->all();
+    }
+
+    public function findOneClientEvent($id)
+    {
+        return Event::find()
+            ->with('services', 'employee', 'master', 'client')
+            ->where(['schedule_events.id' => $id])
+            ->asArray()->one();
     }
 }
