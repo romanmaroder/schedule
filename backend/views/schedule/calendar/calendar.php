@@ -29,6 +29,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'title' => $this->title,
                     'size' => 'SIZE_SMALL',
                     'id' => 'modal',
+                    'scrollable'=>true,
+                    'centerVertical'=>true,
                     'options' => ['tabindex' => '']
                 ]
             );
