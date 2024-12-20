@@ -56,7 +56,7 @@ class CartItem
 
     public function getCash(): float|int
     {
-        if ($this->item->events->isCashPayment()) {
+        if ($this->item->events->isCashPayment() && $this->item->events->isPayed()) {
             return $this->getDiscountedPrice();
         }
         return false;
@@ -64,7 +64,7 @@ class CartItem
 
     public function getCard(): float|int
     {
-        if ($this->item->events->isCardPayment()) {
+        if ($this->item->events->isCardPayment() && $this->item->events->isPayed()) {
             return $this->getDiscountedPrice();
         }
         return false;
