@@ -15,7 +15,7 @@ use yii\db\Query;
 /**
  * A class for loading and storing events in the database
  */
-class DbStorage implements StorageInterface
+class DbStorageWithParams implements StorageInterface
 {
     private $userId;
     private $db;
@@ -28,24 +28,26 @@ class DbStorage implements StorageInterface
 
 
     public function load(): array
-    {
-        $query = (new Query())
-            ->select(['*',
-                'DATE(start) as start'])
-            ->from('{{%schedule_service_assignments}}')
-            ->leftJoin('{{%schedule_events}}', 'id=event_id');
-        if (\Yii::$app->id == 'app-frontend') {
-            $query->where(['master_id' => $this->userId->id]);
-        }
-        $rows = $query->orderBy(['DATE(start)'=>SORT_ASC])
-            ->all($this->db);
+    { }
 
+    public function loadWithParams(array $params): array
+    {
+        if (!empty($params['from_date']) || !empty($params['to_date'])) {
+            $query = (new Query())
+                ->select(['*', 'DATE(schedule_events.start) as start', 'DATE(schedule_events.end) as end'])
+                ->from('{{%schedule_service_assignments}}')
+                ->leftJoin('{{%schedule_events}}', 'id=event_id')
+                ->andFilterWhere(['between', 'DATE(start)', $params['from_date'], $params['to_date']]);
+            $rows = $query->orderBy(['DATE(start)' => SORT_ASC])
+                ->all($this->db);
+        }else{
+        $rows = [];
+        }
         return array_map(
             function (array $row) {
                 /** @var ServiceAssignment $item */
 
-                /*
-                 * $item = ServiceAssignment::find()
+                /* $item = ServiceAssignment::find()
                     ->where(['service_id' => $row['service_id'],
                                 'event_id' => $row['event_id'],
                             ])->one()*/
@@ -63,9 +65,6 @@ class DbStorage implements StorageInterface
             $rows
         );
     }
-
-    public function loadWithParams(array $params): array
-    {}
 
     public function save(array $items): void
     {

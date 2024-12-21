@@ -4,8 +4,8 @@
 namespace backend\forms\Expenses;
 
 
-use core\entities\Expenses\Expenses\Expenses;
 use core\entities\Expenses\Category;
+use core\entities\Expenses\Expenses\Expenses;
 use core\helpers\ExpenseHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -17,12 +17,14 @@ class ExpenseSearch extends Model
     public $name;
     public $category_id;
     public $status;
+    public $created_at;
 
     public function rules(): array
     {
         return [
-            [['id', 'category_id','status'], 'integer'],
+            [['id', 'category_id', 'status'], 'integer'],
             [['name'], 'safe'],
+
         ];
     }
     /**
@@ -38,7 +40,7 @@ class ExpenseSearch extends Model
                 'query' => $query,
                 'pagination' => false,
                 'sort' => [
-                    'defaultOrder' => ['id' => SORT_DESC]
+                    'defaultOrder' => ['id' => SORT_ASC]
                 ]
             ]
         );
@@ -54,13 +56,11 @@ class ExpenseSearch extends Model
             [
                 'id' => $this->id,
                 'category_id' => $this->category_id,
-                'status'=>$this->status,
+                'status' => $this->status,
             ]
         );
 
-        $query
-            ->andFilterWhere(['like', 'name', $this->name]);
-
+        $query->andFilterWhere(['like', 'name', $this->name]);
         return $dataProvider;
     }
 

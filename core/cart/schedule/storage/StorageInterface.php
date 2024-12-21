@@ -13,6 +13,8 @@ interface StorageInterface
      */
     public function load(): array;
 
+    public function loadWithParams(array $params): array;
+
     /**
      * @param \core\cart\schedule\CartItem[] $items
      */

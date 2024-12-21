@@ -38,6 +38,14 @@ class ExpenseReadRepository
         return $this->getProvider($query);
     }
 
+    public function getSumByDate($date)
+    {
+        $query = Expenses::find()->alias('s')->active('s');
+        $query->andFilterWhere(['>=', 'created_at', strtotime($date['from_date'] ?? 0)])
+            ->andFilterWhere(['<=', 'created_at',strtotime($date['to_date'] ?? 0)]);
+        return $query->sum('value');
+    }
+
     public function getAllByTag(Tag $tag): DataProviderInterface
     {
         $query = Expenses::find()->alias('s')->active('s');

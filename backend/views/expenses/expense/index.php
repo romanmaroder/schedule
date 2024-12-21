@@ -91,7 +91,7 @@ DataTableAsset::register($this);
                             [
                                 'attribute' => 'created_at',
                                 'value' => function ($model) {
-                                    return DATE('Y-m-d', strtotime($model->created_at));
+                                    return DATE('Y-m-d', $model->created_at);
                                 },
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [

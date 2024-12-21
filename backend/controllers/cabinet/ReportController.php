@@ -4,18 +4,18 @@
 namespace backend\controllers\cabinet;
 
 
-use backend\forms\Schedule\EventSearch;
 use core\entities\Schedule\Event\Event;
-use core\entities\Schedule\Event\ServiceAssignment;
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\useCases\Schedule\CartService;
+use core\useCases\Schedule\CartWithParamsService;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 
 class ReportController extends Controller
 {
     private CartService $service;
+    private CartWithParamsService $serviceWithParams;
     private EventReadRepository $repository;
     private ExpenseReadRepository $expenses;
 
@@ -23,6 +23,7 @@ class ReportController extends Controller
         $id,
         $module,
         CartService $service,
+        CartWithParamsService $serviceWithParams,
         EventReadRepository $repository,
         ExpenseReadRepository $expenses,
         $config = []
@@ -30,6 +31,7 @@ class ReportController extends Controller
         parent::__construct($id, $module, $config);
 
         $this->service = $service;
+        $this->serviceWithParams = $serviceWithParams;
         $this->repository = $repository;
         $this->expenses = $expenses;
     }
@@ -73,8 +75,6 @@ class ReportController extends Controller
     public function actionReport()
     {
         $cart = $this->service->getCart();
-
-
 
         $dataProvider = new ArrayDataProvider(
             [
@@ -140,15 +140,29 @@ class ReportController extends Controller
 
     public function actionSummaryReport()
     {
-        $cart = $this->service->getCart();
-        $expense = $this->expenses->summ();
+        if ($request = \Yii::$app->request->post()) {
+            $params = [
+                'from_date' => $request['from_date'],
+                'to_date' => $request['to_date']
+            ];
+        } else {
+            $params = [
+                'from_date' => null,
+                'to_date' => null
+            ];
+        }
+
+        $this->serviceWithParams->setParams($params);
+        $cart = $this->serviceWithParams->getCart();
+        $amountOfExpenses = $this->expenses->getSumByDate($params);
 
 
         return $this->render(
             'summary',
             [
                 'cart' => $cart,
-                'expense' => $expense
+                'amountOfExpenses' => $amountOfExpenses,
+                'params' => $params,
             ]
         );
     }

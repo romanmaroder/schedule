@@ -5,7 +5,9 @@ namespace common\bootstrap;
 
 
 use core\cart\schedule\Cart;
+use core\cart\schedule\CartWithParams;
 use core\cart\schedule\storage\DbStorage;
+use core\cart\schedule\storage\DbStorageWithParams;
 use core\cart\shop\Cart as ShopCart;
 use core\cart\shop\cost\calculator\DynamicCost;
 use core\cart\shop\cost\calculator\SimpleCost;
@@ -82,6 +84,13 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(Cart::class, function () use ($app) {
             return new Cart(
                 new DbStorage($app->get('user') ,$app->db)
+            //new HybridStorage($app->get('user'), 'cart', 3600 * 24, $app->db),
+            //new DynamicCost(new SimpleCost())
+            );
+        });
+        $container->setSingleton(CartWithParams::class, function () use ($app) {
+            return new CartWithParams(
+                new DbStorageWithParams($app->get('user') ,$app->db)
             //new HybridStorage($app->get('user'), 'cart', 3600 * 24, $app->db),
             //new DynamicCost(new SimpleCost())
             );

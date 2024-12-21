@@ -62,7 +62,6 @@ DataTableAsset::register($this);
                                         },
                                         'emptyText' => false,
                                         'columns' => [
-
                                             [
                                                 'label' => Yii::t('cabinet/report', 'Date'),
                                                 'headerOptions' => ['class' => ''],

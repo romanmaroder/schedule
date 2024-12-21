@@ -4,10 +4,9 @@
 namespace core\cart\schedule;
 
 
-
 use core\cart\schedule\storage\StorageInterface;
 
-class Cart
+class CartWithParams
 {
 
     private $storage;
@@ -15,8 +14,9 @@ class Cart
      * @var CartItem[]
      * */
     private $items;
+    private $params;
 
-    public function __construct( StorageInterface $storage,)
+    public function __construct(StorageInterface $storage,)
     {
         $this->storage = $storage;
     }
@@ -39,48 +39,73 @@ class Cart
     public function getFullSalary(): int|float
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getSalary() ;
-        }, $this->items));
+        return array_sum(
+            array_map(
+                function (CartItem $item) {
+                    return $item->getSalary();
+                },
+                $this->items
+            )
+        );
     }
 
     public function getFullProfit(): int|float
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getTotalProfit() ;
-        }, $this->items));
+        return array_sum(
+            array_map(
+                function (CartItem $item) {
+                    return $item->getTotalProfit();
+                },
+                $this->items
+            )
+        );
     }
 
 
     public function getFullDiscountedCost(): float|int
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getDiscountedPrice();
-        }, $this->items));
+        return array_sum(
+            array_map(
+                function (CartItem $item) {
+                    return $item->getDiscountedPrice();
+                },
+                $this->items
+            )
+        );
     }
 
     public function getTotalWithSubtractions($expense): float|int
     {
-        return $this->getFullProfit() - $expense ;
+        return $this->getFullProfit() - $expense;
     }
 
 
     public function getCash(): float|int
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getCash() ;
-        }, $this->items));
+        return array_sum(
+            array_map(
+                function (CartItem $item) {
+                    return $item->getCash();
+                },
+                $this->items
+            )
+        );
     }
 
     public function getCard(): float|int
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getCard() ;
-        }, $this->items));
+        return array_sum(
+            array_map(
+                function (CartItem $item) {
+                    return $item->getCard();
+                },
+                $this->items
+            )
+        );
     }
 
     /*public function getCost(): Cost
@@ -134,17 +159,21 @@ class Cart
         $this->items = [];
         $this->saveItems();
     }*/
+    public function setParams(array $params): array
+    {
+        return $this->params = $params;
+    }
 
     private function loadItems(): void
     {
         if ($this->items === null) {
-            $this->items = $this->storage->load();
+            $this->items = $this->storage->loadWithParams($this->params);
         }
     }
 
     private function saveItems(): void
     {
-       // $this->storage->save($this->items);
+        // $this->storage->save($this->items);
     }
 
 }
