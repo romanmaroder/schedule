@@ -12,6 +12,7 @@ return [
     'Menu'=>'Меню',
     'Events'=>'Записи',
     'Report'=>'Отчет',
+    'Salary'=>'Зарплата',
     'Profile'=>'Профиль',
     'Timeline'=>'Сегодня',
 ];

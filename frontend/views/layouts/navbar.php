@@ -211,9 +211,9 @@ use yii\helpers\Url;
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>-->
-        <li class="nav-item">
-            <?= Html::a('<i class="fa fa-shopping-cart"></i>', ['/shop/cart/index'], ['data-method' => 'post', 'class' => 'nav-link','title'=>'Shopping Cart']) ?>
-        </li>
+        <!--<li class="nav-item">
+            <?/*= Html::a('<i class="fa fa-shopping-cart"></i>', ['/shop/cart/index'], ['data-method' => 'post', 'class' => 'nav-link','title'=>'Shopping Cart']) */?>
+        </li>-->
         <li class="nav-item">
             <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/auth/auth/logout'], ['data-method' => 'post', 'class' => 'nav-link','title'=>'logout']) ?>
         </li>
