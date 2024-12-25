@@ -8,4 +8,5 @@ return [
     'I forgot my password'=>'Забыли пароль?',
     'Need new verification email?'=>'Новая почта для подтверждения?',
     'error'=>'Пользователь или пароль не найден',
+    'permission'=>'Нет прав доступа',
 ];

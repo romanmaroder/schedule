@@ -92,7 +92,7 @@ DataTableAsset::register($this);
                                 <td class="text-center"><?= $amountOfExpenses ?? '0'  ?></td>
                                 <td class="text-right"
                                     data-total="<?= $cart->getTotalWithSubtractions($amountOfExpenses);  ?>"><?= $cart->getFullProfit()  ?>
-                                    - <?= $amountOfExpenses  ?> </td>
+                                    - <?= $amountOfExpenses ?? '0' ?> </td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -101,7 +101,6 @@ DataTableAsset::register($this);
                                 <td></td>
                                 <td class="text-center"><?=Yii::t('cabinet/report','TOTAL') ?>:</td>
                                 <td class="text-right bg-primary" data-total="<?= $cart->getTotalWithSubtractions($amountOfExpenses);  ?>"><?= $cart->getTotalWithSubtractions($amountOfExpenses);  ?></td>
-
                             </tr>
                             </tfoot>
                         </table></div>

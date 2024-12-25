@@ -4,6 +4,7 @@ namespace core\cart\schedule;
 
 use core\cart\schedule\discount\Discount;
 use core\entities\Schedule\Event\ServiceAssignment;
+use JetBrains\PhpStorm\Pure;
 
 /**
  *

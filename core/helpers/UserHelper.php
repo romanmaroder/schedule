@@ -59,5 +59,9 @@ class UserHelper
             ->where(['is', 'schedule_employees.user_id', null]);
     }
 
+    public static function hasRole($roleName, $userId) {
+        $authManager = \Yii::$app->getAuthManager();
+        return $authManager->getAssignment($roleName, $userId) ? true : false;
+    }
 
 }

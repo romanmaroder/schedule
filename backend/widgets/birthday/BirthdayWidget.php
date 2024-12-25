@@ -52,7 +52,7 @@ class BirthdayWidget extends Widget
                     }
                 }
             ), fn ($item) => !is_null($item));
-        }elseif ($this->user->isBirthday()){
+        }elseif ($this->user?->isBirthday()){
             $this->_user = $this->user;
         }
 

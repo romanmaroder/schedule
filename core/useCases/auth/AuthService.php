@@ -7,6 +7,7 @@ namespace core\useCases\auth;
 use core\entities\User\User;
 use core\forms\auth\LoginForm;
 use core\helpers\tHelper;
+use core\helpers\UserHelper;
 use core\repositories\UserRepository;
 
 class AuthService
@@ -21,8 +22,21 @@ class AuthService
     public function auth(LoginForm $form): User
     {
         $user = $this->users->findByUsernameOrEmail($form->username);
-        if (!$user || !$user->isActive() || !$user->validatePassword($form->password)) {
-            throw new \DomainException(tHelper::translate('login','error'));
+
+        if (!$user || !$user->employee || !$user->isActive() || !$user->validatePassword($form->password)) {
+            throw new \DomainException(tHelper::translate('login', 'error'));
+        }
+        return $user;
+    }
+
+    public function authAdmin(LoginForm $form): User
+    {
+        $user = $this->users->findByUsernameOrEmail($form->username);
+
+        $role = UserHelper::hasRole('admin',$user->id);
+
+        if (!$user || !$user->employee || !$role || !$user->isActive() || !$user->validatePassword($form->password)) {
+            throw new \DomainException(tHelper::translate('login', 'permission'));
         }
         return $user;
     }
