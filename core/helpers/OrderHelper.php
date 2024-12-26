@@ -6,12 +6,20 @@ namespace core\helpers;
 
 use core\entities\Shop\Order\Status;
 use core\entities\Shop\Product\Product;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class OrderHelper
 {
-    public static function statusList(): array
+    #[ArrayShape([
+        Status::NEW => "string",
+        Status::PAID => "string",
+        Status::SENT => "string",
+        Status::COMPLETED => "string",
+        Status::CANCELLED => "string",
+        Status::CANCELLED_BY_CUSTOMER => "string"
+    ])] public static function statusList(): array
     {
         return [
             Status::NEW => \Yii::t('product/order','New'),
@@ -30,23 +38,11 @@ class OrderHelper
 
     public static function statusLabel($status): string
     {
-        switch ($status) {
-            case Product::STATUS_DRAFT:
-                $class = 'badge bg-secondary bg-gradient text-shadow box-shadow';
-                break;
-            case Product::STATUS_ACTIVE:
-                $class = 'badge bg-success bg-gradient text-shadow box-shadow';
-                break;
-            default:
-                $class = 'badge bg-secondary bg-gradient text-shadow box-shadow';
-        }
-
-       /* $class = match ($status) {
+        $class = match ($status) {
             Product::STATUS_DRAFT => 'badge bg-secondary bg-gradient text-shadow box-shadow',
             Product::STATUS_ACTIVE => 'badge bg-success bg-gradient text-shadow box-shadow',
             default => 'badge bg-secondary bg-gradient text-shadow box-shadow',
-        };*/
-
+        };
         return Html::tag('span', ArrayHelper::getValue(self::statusList(), $status), [
             'class' => $class,
         ]);

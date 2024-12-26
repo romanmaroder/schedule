@@ -19,7 +19,7 @@ class PricesHelper
         );
     }
 
-    public static function renderPrice($data)
+    public static function renderPrice($data): string
     {
         $out = '';
         foreach ($data as $i => $service) {

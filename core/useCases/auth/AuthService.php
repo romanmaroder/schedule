@@ -33,7 +33,12 @@ class AuthService
     {
         $user = $this->users->findByUsernameOrEmail($form->username);
 
-        $role = UserHelper::hasRole('admin',$user->id);
+        foreach (['admin', 'manager'] as $item) {
+            $role = UserHelper::hasRole($item, $user->id);
+            if ($item == $role) {
+                return $user;
+            }
+        }
 
         if (!$user || !$user->employee || !$role || !$user->isActive() || !$user->validatePassword($form->password)) {
             throw new \DomainException(tHelper::translate('login', 'permission'));

@@ -5,11 +5,13 @@ namespace core\helpers;
 
 
 use core\entities\Blog\Post\Post;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class PostHelper
 {
+    #[ArrayShape([Post::STATUS_DRAFT => "string", Post::STATUS_ACTIVE => "string"])]
     public static function statusList(): array
     {
         return [
@@ -25,22 +27,11 @@ class PostHelper
 
     public static function statusLabel($status): string
     {
-        switch ($status) {
-            case Post::STATUS_DRAFT:
-                $class = 'badge bg-secondary bg-gradient text-shadow box-shadow';
-                break;
-            case Post::STATUS_ACTIVE:
-                $class = 'badge bg-success bg-gradient text-shadow box-shadow';
-                break;
-            default:
-                $class = 'badge bg-secondary bg-gradient text-shadow box-shadow';
-        }
-
-        /*$class = match ($status) {
-            Post::STATUS_DRAFT => 'badge bg-default bg-gradient text-shadow box-shadow',
+        $class = match ($status) {
+            Post::STATUS_DRAFT => 'badge bg-secondary bg-gradient text-shadow box-shadow',
             Post::STATUS_ACTIVE => 'badge bg-success bg-gradient text-shadow box-shadow',
-            default => 'badge bg-default bg-gradient text-shadow box-shadow',
-        };*/
+            default => 'badge bg-secondary bg-gradient text-shadow box-shadow',
+        };
 
         return Html::tag('span', ArrayHelper::getValue(self::statusList(), $status), [
             'class' => $class,
