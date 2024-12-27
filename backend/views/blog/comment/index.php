@@ -100,7 +100,7 @@ $('#comments').DataTable({
                     footer: true
                 },
                 bStateSave: true,
-                dom:'<"row"<"col-12"Q>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
+                dom:'<"row"<"col-12 btn-sm"Q>> t <"row"<"col-4"l><"col-4"i><"col-4"p>> ',
                 fnStateSave: function (oSettings, oData) {
                 localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
                 },

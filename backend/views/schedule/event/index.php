@@ -1,6 +1,7 @@
 <?php
 
 use backend\assets\DataTableAsset;
+use backend\widgets\grid\ServiceColumn;
 use core\entities\Schedule\Event\Event;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
@@ -75,7 +76,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                             Html::encode($model->master->username),
                                             ['view', 'id' => $model->id]
                                         );
-                                    },
+                                    },'contentOptions' => [
+                                    'class' => ['text-center align-middle']
+                                ],
                                     'format' => 'raw',
                                 ],
                                 [
@@ -85,7 +88,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                             Html::encode($model->client->username),
                                             ['/user/view', 'id' => $model->client->id]
                                         );
-                                    },
+                                    },'contentOptions' => [
+                                    'class' => ['text-center align-middle']
+                                ],
                                     'format' => 'raw',
                                 ],
                                 [
@@ -93,13 +98,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'value' => function ($model) {
                                         return implode(', </br>', ArrayHelper::getColumn($model->services, 'name'));
                                     },
+                                    'contentOptions' => [
+                                        'class' => ['text-center align-middle']
+                                    ],
                                     'format' => 'raw'
                                 ],
                                 //'amount',
                                 [
                                     'attribute' => 'cost',
                                     'value' => function (Event $models) use ($cart) {
-                                       return $models->getDiscountedPrice($models, $cart);
+                                        return $models->getDiscountedPrice($models, $cart);
                                     }
                                 ],
                                 [
@@ -240,7 +248,7 @@ $js = <<< JS
                 var data = localStorage.getItem('DataTables_' + window.location.pathname);
                 return JSON.parse(data);
                 },
-         dom:'<"row"<"col-12"Q>> t <"row"<"col"l><"col"i><"col"p>> ',
+         dom:'<"row"<"col-12 btn-sm"Q>> t <"row"<"col"l><"col"i><"col"p>> ',
         language: {
           url:"$ru"
          },

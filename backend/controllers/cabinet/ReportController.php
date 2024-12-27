@@ -9,6 +9,7 @@ use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\useCases\Schedule\CartService;
 use core\useCases\Schedule\CartWithParamsService;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 
@@ -55,6 +56,7 @@ class ReportController extends Controller
     public function actionIndex()
     {
         $cart = $this->service->getCart();
+
         $events = $this->repository->getAll();
         $dataProvider = new ArrayDataProvider(
             [
@@ -140,6 +142,24 @@ class ReportController extends Controller
 
     public function actionSummaryReport()
     {
+        $this->serviceWithParams->setParams($this->request());
+        $cart = $this->serviceWithParams->getCart();
+        $amountOfExpenses = $this->expenses->getSumByDate($this->request());
+
+
+        return $this->render(
+            'summary',
+            [
+                'cart' => $cart,
+                'amountOfExpenses' => $amountOfExpenses,
+                'params' => $this->request(),
+            ]
+        );
+    }
+
+    #[ArrayShape(['from_date' => "mixed|null", 'to_date' => "mixed|null"])]
+    private function request(): array
+    {
         if ($request = \Yii::$app->request->post()) {
             $params = [
                 'from_date' => $request['from_date'],
@@ -151,20 +171,7 @@ class ReportController extends Controller
                 'to_date' => null
             ];
         }
-
-        $this->serviceWithParams->setParams($params);
-        $cart = $this->serviceWithParams->getCart();
-        $amountOfExpenses = $this->expenses->getSumByDate($params);
-
-
-        return $this->render(
-            'summary',
-            [
-                'cart' => $cart,
-                'amountOfExpenses' => $amountOfExpenses,
-                'params' => $params,
-            ]
-        );
+        return $params;
     }
 
 }
