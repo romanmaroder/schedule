@@ -15,6 +15,8 @@ use backend\assets\DataTableAsset;
 use core\helpers\DiscountHelper;
 use core\helpers\EventPaymentStatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
+use kartik\widgets\DatePicker;
+use yii\bootstrap4\ActiveForm;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -42,172 +44,176 @@ DataTableAsset::register($this);
 
         <div class="table-responsive ">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
 
-                <?php
-                                echo GridView::widget(
+                        <?php
+                        echo GridView::widget(
+                            [
+                                'dataProvider' => $dataProvider,
+                                'summary' => false,
+                                'showFooter' => true,
+                                'showHeader' => true,
+                                'tableOptions' => [
+                                    'class' => 'table table-bordered',
+                                    'id' => 'salary'
+                                ],
+                                'headerRowOptions' => [
+                                    //'class' => 'table-light'
+                                ],
+                                'rowOptions' => function ($model) {
+                                    return ['style' => 'background-color:' . $model->getColor()];
+                                },
+                                'emptyText' => false,
+                                'columns' => [
                                     [
-                                        'dataProvider' => $dataProvider,
-                                        'summary' => false,
-                                        'showFooter' => true,
-                                        'showHeader' => true,
-                                        'tableOptions' => [
-                                            'class' => 'table table-bordered',
-                                            'id' => 'salary'
-                                        ],
-                                        'headerRowOptions' => [
-                                            //'class' => 'table-light'
-                                        ],
-                                        'rowOptions' => function ($model) {
-                                            return ['style' => 'background-color:' . $model->getColor()];
+                                        'label' => Yii::t('cabinet/report', 'Date'),
+                                        'headerOptions' => ['class' => ''],
+                                        'value' => function ($model) {
+                                            return DATE('Y-m-d', strtotime($model->getDate()));
                                         },
-                                        'emptyText' => false,
-                                        'columns' => [
-                                            [
-                                                'label' => Yii::t('cabinet/report', 'Date'),
-                                                'headerOptions' => ['class' => ''],
-                                                'value' => function ($model) {
-                                                    return DATE('Y-m-d', strtotime($model->getDate()));
-                                                },
-                                                'contentOptions' => [
-                                                    'class' => ['align-middle']
-                                                ],
-                                                'footer' => $cart->getFullProfit() - $cart->getFullSalary(),
-                                                'footerOptions' => ['class' => 'bg-info text-left'],
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Master',
-                                                'label' => Yii::t('cabinet/report','Master'),
-                                                'value' => function ($model) {
-                                                    return $model->getMasterName();
-                                                },
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'contentOptions' => [
-                                                    'class' => ['text-center align-middle']
-                                                ],
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Service',
-                                                'label' => Yii::t('cabinet/report','Service'),
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'value' => function ($model) {
-                                                    return $model->getServiceList();
-                                                },
-                                                'contentOptions' => [
-                                                    'class' => ['text-center align-middle']
-                                                ],
-                                                'visible' => true,
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Client',
-                                                'label' => Yii::t('cabinet/report','Client'),
-                                                'value' => function ($model) {
-                                                    return Html::a(
-                                                        Html::encode($model->getClientName()),
-                                                        ['schedule/event/view', 'id' => $model->getId()],
-                                                        ['class' => 'text-secondary']
-                                                    );
-                                                },
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'contentOptions' => [
-                                                    'class' => ['text-center align-middle']
-                                                ],
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Discount',
-                                                'label' => Yii::t('cabinet/report','Discount'),
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'value' => function ($model) {
-                                                    return $model->getDiscount() . '%<br>' . DiscountHelper::discountLabel(
-                                                            $model->getDiscountFrom()
-                                                        );
-                                                },
-                                                'contentOptions' => [
-                                                    'class' => ['text-center align-middle']
-                                                ],
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Price',
-                                                'label' => Yii::t('cabinet/report','Price'),
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'value' => function ($model) {
-                                                    return $model->getOriginalCost();
-                                                },
-                                                'contentOptions' => [
-                                                    'class' => ['text-center align-middle']
-                                                ],
-                                                'visible' => false,
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Price Masters',
-                                                'label' => Yii::t('cabinet/report','Price Masters'),
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'value' => function ($model) {
-                                                    return $model->getMasterPrice();
-                                                },
-                                                'contentOptions' => [
-                                                    'class' => ['text-center align-middle']
-                                                ],
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Discounted price',
-                                                'label' => Yii::t('cabinet/report','Discounted price'),
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'value' => function ($model) {
-                                                    return $model->getDiscountedPrice(
-                                                        ) . '<br>' . EventPaymentStatusHelper::statusLabel($model->getStatus());
-                                                },
-                                                'contentOptions' => function ($model) use ($cart) {
-                                                    return [
-                                                        'data-total' => $model->getDiscountedPrice(),
-                                                        'class' => ['text-center align-middle']
-                                                    ];
-                                                },
-                                                'footer' => $cart->getFullDiscountedCost(),
-                                                'footerOptions' => ['class' => 'text-center bg-info'],
-                                                'format' => 'raw'
-                                            ],
-                                            [
-                                                'attribute' => 'Salary',
-                                                'label' => Yii::t('cabinet/report','Salary'),
-                                                'headerOptions' => ['class' => 'text-center '],
-                                                'value' => function ($model) use ($cart) {
-                                                    return $model->getSalary();
-                                                },
-                                                'contentOptions' => function ($model) use ($cart) {
-                                                    return [
-                                                        'data-total' => $model->getSalary(),
-                                                        'class' => ['text-center align-middle text-dark']
-                                                    ];
-                                                },
-                                                'footer' => $cart->getFullSalary(),
-                                                'footerOptions'  => ['class' => 'bg-info text-center'],
-                                            ],
-                                            [
-                                                'attribute' => 'Profit',
-                                                'label' => Yii::t('cabinet/report','Profit'),
-                                                'headerOptions' => ['class' => 'text-right '],
-                                                'value' => function ($model) use ($cart) {
-                                                    return $model->getProfit();
-                                                },
-                                                'contentOptions' => function ($model) use ($cart) {
-                                                    return [
-                                                        'data-total' => $model->getTotalProfit(),
-                                                        'class' => ['text-right align-middle text-dark']
-                                                    ];
-                                                },
-                                                'footer' => $cart->getFullProfit(),
-                                                'footerOptions' => ['class' => 'bg-info text-right '],
-                                            ],
+                                        'contentOptions' => [
+                                            'class' => ['align-middle']
                                         ],
-                                    ]
-                                ) ?>
+                                        'footer' => $cart->getFullProfit() - $cart->getFullSalary(),
+                                        'footerOptions' => ['class' => 'bg-info text-left'],
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Master',
+                                        'label' => Yii::t('cabinet/report','Master'),
+                                        'value' => function ($model) {
+                                            return $model->getMasterName();
+                                        },
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Service',
+                                        'label' => Yii::t('cabinet/report','Service'),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'value' => function ($model) {
+                                            return $model->getServiceList();
+                                        },
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'visible' => true,
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Client',
+                                        'label' => Yii::t('cabinet/report','Client'),
+                                        'value' => function ($model) {
+                                            return Html::a(
+                                                Html::encode($model->getClientName()),
+                                                ['schedule/event/view', 'id' => $model->getId()],
+                                                ['class' => 'text-secondary']
+                                            );
+                                        },
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Discount',
+                                        'label' => Yii::t('cabinet/report','Discount'),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'value' => function ($model) {
+                                            return $model->getDiscount() . '%<br>' . DiscountHelper::discountLabel(
+                                                    $model->getDiscountFrom()
+                                                );
+                                        },
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Price',
+                                        'label' => Yii::t('cabinet/report','Price'),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'value' => function ($model) {
+                                            return $model->getOriginalCost();
+                                        },
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'visible' => false,
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Price Masters',
+                                        'label' => Yii::t('cabinet/report','Price Masters'),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'value' => function ($model) {
+                                            return $model->getMasterPrice();
+                                        },
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Discounted price',
+                                        'label' => Yii::t('cabinet/report','Discounted price'),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'value' => function ($model) {
+                                            return $model->getDiscountedPrice(
+                                                ) . '<br>' . EventPaymentStatusHelper::statusLabel($model->getStatus());
+                                        },
+                                        'contentOptions' => function ($model) use ($cart) {
+                                            return [
+                                                'data-total' => $model->getDiscountedPrice(),
+                                                'class' => ['text-center align-middle']
+                                            ];
+                                        },
+                                        'footer' => $cart->getFullDiscountedCost(),
+                                        'footerOptions' => ['class' => 'text-center bg-info'],
+                                        'format' => 'raw'
+                                    ],
+                                    [
+                                        'attribute' => 'Salary',
+                                        'label' => Yii::t('cabinet/report','Salary'),
+                                        'headerOptions' => ['class' => 'text-center '],
+                                        'value' => function ($model) use ($cart) {
+                                            return $model->getSalary();
+                                        },
+                                        'contentOptions' => function ($model) use ($cart) {
+                                            return [
+                                                'data-total' => $model->getSalary(),
+                                                'class' => ['text-center align-middle text-dark']
+                                            ];
+                                        },
+                                        'footer' => $cart->getFullSalary(),
+                                        'footerOptions'  => ['class' => 'bg-info text-center'],
+                                    ],
+                                    [
+                                        'attribute' => 'Profit',
+                                        'label' => Yii::t('cabinet/report','Profit'),
+                                        'headerOptions' => ['class' => 'text-right '],
+                                        'value' => function ($model) use ($cart) {
+                                            return $model->getProfit();
+                                        },
+                                        'contentOptions' => function ($model) use ($cart) {
+                                            return [
+                                                'data-total' => $model->getTotalProfit(),
+                                                'class' => ['text-right align-middle text-dark']
+                                            ];
+                                        },
+                                        'footer' => $cart->getFullProfit(),
+                                        'footerOptions' => ['class' => 'bg-info text-right '],
+                                    ],
+                                ],
+                            ]
+                        ) ?></div>
+                </div>
+
 
             </div>
 
@@ -242,7 +248,7 @@ $js = <<< JS
                     footer: true
                 },
                 bStateSave: true,
-                dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col-auto"l><"col-auto"i><"col-auto"p>> ',
+                dom:'<"row"<"col-12  btn-sm"Q><"col-12"B>> t <"row"<"col-auto"l><"col-auto"i><"col-auto"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                 var api = this.api();
                 // Remove the formatting to get integer data for summation

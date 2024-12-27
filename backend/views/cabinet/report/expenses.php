@@ -113,7 +113,7 @@ fixedHeader: {
   footer: true
 },
 bStateSave: true,
-                dom:'<"row"<"col-12"Q><"col-12"B>> t <"row"<"col"l><"col"i><"col"p>> ',
+                dom:'<"row"<"col-12  btn-sm"Q><"col-12"B>> t <"row"<"col"l><"col"i><"col"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                             var api = this.api();
                             // Remove the formatting to get integer data for summation
