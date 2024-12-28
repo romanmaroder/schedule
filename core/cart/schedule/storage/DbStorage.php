@@ -44,11 +44,11 @@ class DbStorage implements StorageInterface
             function (array $row) {
                 /** @var ServiceAssignment $item */
 
-                /*
-                 * $item = ServiceAssignment::find()
+                /* $item = ServiceAssignment::find()
                     ->where(['service_id' => $row['service_id'],
                                 'event_id' => $row['event_id'],
-                            ])->one()*/
+                            ])->one()
+                */
 
                 if ($item = ServiceAssignment::getDb()->cache(function ($db) use($row) {
                     return  ServiceAssignment::find()

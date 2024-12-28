@@ -14,7 +14,7 @@ class CartItem
     private $item;
 
 
-    public function __construct(ServiceAssignment $item)
+    public function __construct( $item)
     {
         $this->item = $item;
     }
