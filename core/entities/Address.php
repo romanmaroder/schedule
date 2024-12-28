@@ -4,13 +4,13 @@
 namespace core\entities;
 
 
-class Address
+readonly class Address
 {
-    public $town;
-    public $borough;
-    public $street;
-    public $home;
-    public $apartment;
+    public string $town;
+    public string $borough;
+    public string $street;
+    public string $home;
+    public string $apartment;
 
     /**
      * Address constructor.

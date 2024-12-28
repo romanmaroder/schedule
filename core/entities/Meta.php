@@ -6,11 +6,11 @@ namespace core\entities;
 
 use core\helpers\tHelper;
 
-class Meta
+readonly class Meta
 {
-    public $title;
-    public $description;
-    public $keywords;
+    public string $title;
+    public string $description;
+    public string $keywords;
 
     /**
      * Meta constructor.
@@ -24,7 +24,7 @@ class Meta
         $this->description = $description;
         $this->keywords = $keywords;
     }
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'title' => tHelper::translate('meta', 'Title'),

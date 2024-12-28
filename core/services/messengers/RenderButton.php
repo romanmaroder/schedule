@@ -46,7 +46,7 @@ class RenderButton implements RenderInterface
         $this->flag = $flag;
     }
 
-    public function render()
+    public function render(): string
     {
         return $this->button();
     }

@@ -59,13 +59,14 @@ class User extends ActiveRecord implements AggregateRoot
         string $username,
         string $email,
         string $phone,
+        #[\SensitiveParameter]
         string $password,
         Schedule $schedule,
         ?string $notice
     ): self {
         $user = new User();
         $user->username = $username;
-        $user->email = $email ? $email : Yii::$app->security->generateRandomString(8). self::DEFAULT_EMAIL ;
+        $user->email = $email ? $email : Yii::$app->security->generateRandomString(8) . self::DEFAULT_EMAIL;
         $user->phone = $phone;
         $user->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
         $user->created_at = time();
@@ -76,8 +77,15 @@ class User extends ActiveRecord implements AggregateRoot
         return $user;
     }
 
-    public function edit(string $username, string $email, string $phone, string $password, $status, Schedule $schedule,$notice): void
-    {
+    public function edit(
+        string $username,
+        string $email,
+        string $phone,
+        #[\SensitiveParameter] string $password,
+        $status,
+        Schedule $schedule,
+        $notice
+    ): void {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
@@ -92,7 +100,7 @@ class User extends ActiveRecord implements AggregateRoot
         $this->updated_at = time();
     }
 
-    public function editProfile(array $username, string $email, string $password): void
+    public function editProfile(array $username, string $email, #[\SensitiveParameter] string $password): void
     {
         $this->username = $this->mergeFullName($username);
         $this->email = $email;
@@ -103,13 +111,13 @@ class User extends ActiveRecord implements AggregateRoot
         }
     }
 
-    public function attachTelegram($tChatId, $tName)
+    public function attachTelegram($tChatId, $tName): void
     {
         $this->t_chat_id = $tChatId;
         $this->t_name = $tName;
     }
 
-    public static function requestSignup(string $username, string $email, string $password): self
+    public static function requestSignup(string $username, string $email, #[\SensitiveParameter] string $password): self
     {
         $user = new User();
         $user->username = $username;
@@ -192,7 +200,7 @@ class User extends ActiveRecord implements AggregateRoot
         throw new \DomainException('Item is not found.');
     }
 
-    public function wishListQuantity():int
+    public function wishListQuantity(): int
     {
         return count($this->wishlistItems);
     }
@@ -242,7 +250,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param $password
      * @throws \yii\base\Exception
      */
-    public function resetPassword($password): void
+    public function resetPassword(#[\SensitiveParameter] $password): void
     {
         if (empty($this->password_reset_token)) {
             throw new \DomainException('Password resetting is not requested.');
@@ -313,9 +321,8 @@ class User extends ActiveRecord implements AggregateRoot
     public function getInitials(): string
     {
         $str = $this->username;
-        $arr = explode(' ',$str);
-        foreach ($arr as $key=>$value)
-        {
+        $arr = explode(' ', $str);
+        foreach ($arr as $key => $value) {
             mb_internal_encoding("UTF-8");
             $arr["$key"] = mb_strtoupper(mb_substr(trim($value), 0, 1));
         }
@@ -332,20 +339,20 @@ class User extends ActiveRecord implements AggregateRoot
         return $this->schedule->weekends;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'username' =>tHelper::translate('user','Username') ,
-            'email' =>tHelper::translate('user','Email') ,
-            'password' =>tHelper::translate('user','Password') ,
-            'phone' =>tHelper::translate('user','Phone') ,
-            'status' =>tHelper::translate('user','Status'),
-            'notice' =>tHelper::translate('user','Notice') ,
-            'created_at' =>tHelper::translate('app','Created At') ,
-            'updated_at' =>tHelper::translate('app','Updated At') ,
-            'schedule.hours'=>tHelper::translate('user/schedule','Hours'),
-            'schedule.days'=>tHelper::translate('user/schedule','Days'),
-            'schedule.week'=>tHelper::translate('user/schedule','Week'),
+            'username' => tHelper::translate('user', 'Username'),
+            'email' => tHelper::translate('user', 'Email'),
+            'password' => tHelper::translate('user', 'Password'),
+            'phone' => tHelper::translate('user', 'Phone'),
+            'status' => tHelper::translate('user', 'Status'),
+            'notice' => tHelper::translate('user', 'Notice'),
+            'created_at' => tHelper::translate('app', 'Created At'),
+            'updated_at' => tHelper::translate('app', 'Updated At'),
+            'schedule.hours' => tHelper::translate('user/schedule', 'Hours'),
+            'schedule.days' => tHelper::translate('user/schedule', 'Days'),
+            'schedule.week' => tHelper::translate('user/schedule', 'Week'),
         ];
     }
 
@@ -366,7 +373,7 @@ class User extends ActiveRecord implements AggregateRoot
             TimestampBehavior::class,
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['networks', 'employee','wishlistItems'],
+                'relations' => ['networks', 'employee', 'wishlistItems'],
             ],
             ScheduleWorkBehavior::class
         ];
@@ -375,7 +382,8 @@ class User extends ActiveRecord implements AggregateRoot
     public function transactions()
     {
         return [
-            self::SCENARIO_DEFAULT => self::OP_ALL];
+            self::SCENARIO_DEFAULT => self::OP_ALL
+        ];
     }
 
 
@@ -396,16 +404,16 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $token password reset token
      * @return static|null
      */
-    public static function findByPasswordResetToken($token)
+    public static function findByPasswordResetToken(#[\SensitiveParameter] string $token)
     {
         if (!static::isPasswordResetTokenValid($token)) {
             return null;
         }
 
         return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
+                                   'password_reset_token' => $token,
+                                   'status' => self::STATUS_ACTIVE,
+                               ]);
     }
 
     /**
@@ -428,7 +436,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $token password reset token
      * @return bool
      */
-    public static function isPasswordResetTokenValid($token)
+    public static function isPasswordResetTokenValid(#[\SensitiveParameter] string $token)
     {
         if (empty($token)) {
             return false;
@@ -445,7 +453,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
-    public function validatePassword($password)
+    public function validatePassword(#[\SensitiveParameter] string $password)
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
@@ -456,7 +464,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $password
      * @throws \yii\base\Exception
      */
-    private function setPassword(string $password)
+    private function setPassword(#[\SensitiveParameter] string $password)
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }

@@ -20,10 +20,10 @@ return [
             //'datetimeFormat' => 'dd.MM.yyyy HH:mm:ss',
         ],
         'cache' => [
-            //'class' => \yii\caching\FileCache::class,
-            //'cachePath' => '@common/runtime/cache',
-            'class' => \yii\caching\MemCache::class,
-            'useMemcached' => true,
+            'class' => \yii\caching\FileCache::class,
+            'cachePath' => '@common/runtime/cache',
+//            'class' => \yii\caching\MemCache::class,
+//            'useMemcached' => true,
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

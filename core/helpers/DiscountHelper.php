@@ -5,12 +5,18 @@ namespace core\helpers;
 
 
 use core\cart\schedule\discount\Discount;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class DiscountHelper
 {
-    public static function discountList(): array
+    #[ArrayShape([
+        Discount::NO_DISCOUNT => "string",
+        Discount::MASTER_DISCOUNT => "string",
+        Discount::STUDIO_DISCOUNT => "string",
+        Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => "string"
+    ])] public static function discountList(): array
     {
         return [
             Discount::NO_DISCOUNT => \Yii::t('schedule/event/discount','NO DISCOUNT'),
@@ -27,30 +33,13 @@ class DiscountHelper
 
     public static function discountLabel($discount): string
     {
-        switch ($discount) {
-            case Discount::NO_DISCOUNT:
-                $class = 'badge bg-danger bg-gradient text-shadow box-shadow';
-                break;
-            case Discount::MASTER_DISCOUNT:
-                $class = 'badge bg-info bg-gradient text-shadow box-shadow';
-                break;
-            case Discount::STUDIO_DISCOUNT:
-                $class = 'badge bg-warning bg-gradient text-shadow box-shadow';
-                break;
-            case Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK:
-                $class = 'badge bg-primary bg-gradient text-shadow box-shadow';
-                break;
-            default:
-                $class = 'badge bg-danger bg-gradient text-shadow box-shadow';
-        }
-
-        /*$class = match ($discount) {
-            Discount::NO_DISCOUNT => 'badge bg-danger',
-            Discount::MASTER_DISCOUNT => 'badge bg-info',
-            Discount::STUDIO_DISCOUNT => 'badge bg-warning',
-            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => 'badge bg-primary',
-            default => 'badge bg-danger',
-        };*/
+        $class = match ($discount) {
+            Discount::NO_DISCOUNT => 'badge bg-danger bg-gradient text-shadow box-shadow',
+            Discount::MASTER_DISCOUNT => 'badge bg-info bg-gradient text-shadow box-shadow',
+            Discount::STUDIO_DISCOUNT => 'badge bg-warning bg-gradient text-shadow box-shadow',
+            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => 'badge bg-primary bg-gradient text-shadow box-shadow',
+            default => 'badge bg-danger bg-gradient text-shadow box-shadow',
+        };
 
         return Html::tag(
             'span',

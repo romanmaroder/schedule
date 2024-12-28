@@ -21,28 +21,14 @@ class MessageTemplates
 
     public function checkMessage($flag, $data, $greeting = true): string
     {
-        switch ($flag) {
-            case FlagsTemplates::REMAINDER:
-                return $this->RemindMessage($data);
-            case FlagsTemplates::ADDRESS:
-                return $this->AddressMessage();
-            case FlagsTemplates::QUESTION:
-                return $this->QuestionMessage($data);
-            case FlagsTemplates::PRICE;
-                return $this->PriceMessage($data,$greeting);
-            case FlagsTemplates::TOTAL_PRICE;
-                return $this->PriceTotalMessage($data,$greeting);
-            default:
-                throw new \Exception('No such template exists.');
-        }
-        /*return match ($flag) {
+        return match ($flag) {
             FlagsTemplates::REMAINDER => $this->RemindMessage($data),
             FlagsTemplates::ADDRESS => $this->AddressMessage(),
             FlagsTemplates::QUESTION => $this->QuestionMessage($data),
-            FlagsTemplates::PRICE => $this->PriceMessage($data),
-            FlagsTemplates::TOTAL_PRICE => $this->PriceTotalMessage($data),
+            FlagsTemplates::PRICE => $this->PriceMessage($data, $greeting),
+            FlagsTemplates::TOTAL_PRICE => $this->PriceTotalMessage($data, $greeting),
             default => throw new \Exception('No such template exists.'),
-        };*/
+        };
     }
 
 
@@ -89,7 +75,7 @@ class MessageTemplates
 
     private function PriceMessage($data, $greeting = true): string
     {
-        if ($greeting == false) {
+        if (!$greeting) {
             return tHelper::translate('sms', self::PRICE_MESSAGE) . ' ' .
                 ServiceHelper::detailedPriceList($data->serviceAssignments);
         }
@@ -99,7 +85,7 @@ class MessageTemplates
 
     private function PriceTotalMessage($data, $greeting = true): string
     {
-        if ($greeting == false) {
+        if (!$greeting) {
             return tHelper::translate('sms', self::TOTAL_PRICE_MESSAGE) . ' '
                 . ServiceHelper::priceList($data->serviceAssignments);
         }

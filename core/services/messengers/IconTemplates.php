@@ -17,32 +17,15 @@ class IconTemplates
 
     public function checkIcon($flag): string
     {
-        switch ($flag) {
-            case FlagsTemplates::ADDRESS:
-                return self::ICON_LOCATION;
-            case FlagsTemplates::REMAINDER:
-                return self::ICON_ENVELOPE;
-            case FlagsTemplates::QUESTION:
-                return self::ICON_CONFIRM;
-            case FlagsTemplates::PRICE;
-                return self::ICON_PRICE;
-            case FlagsTemplates::TOTAL_PRICE;
-                return self::ICON_TOTAL_PRICE;
-            case FlagsTemplates::SMS;
-                return self::ICON_SMS;
-            case FlagsTemplates::TELEGRAM;
-                return self::ICON_TELEGRAM;
-            default:
-                return '';
-        }
-        /*return match ($flag) {
+        return match ($flag) {
             FlagsTemplates::ADDRESS => self::ICON_LOCATION,
             FlagsTemplates::REMAINDER => self::ICON_ENVELOPE,
             FlagsTemplates::QUESTION => self::ICON_CONFIRM,
             FlagsTemplates::PRICE => self::ICON_PRICE,
+            FlagsTemplates::TOTAL_PRICE => self::ICON_TOTAL_PRICE,
             FlagsTemplates::SMS => self::ICON_SMS,
             FlagsTemplates::TELEGRAM => self::ICON_TELEGRAM,
             default => '',
-        };*/
+        };
     }
 }

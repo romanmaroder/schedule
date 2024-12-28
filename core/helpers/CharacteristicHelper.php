@@ -5,6 +5,7 @@ namespace core\helpers;
 
 
 use core\entities\CommonUses\Characteristic;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 
 class CharacteristicHelper
@@ -13,7 +14,11 @@ class CharacteristicHelper
     /**
      * @return string[]
      */
-    public static function typeList():array
+    #[ArrayShape([
+        Characteristic::TYPE_STRING => "string",
+        Characteristic::TYPE_INTEGER => "string",
+        Characteristic::TYPE_FLOAT => "string"
+    ])] public static function typeList():array
     {
         return[
             Characteristic::TYPE_STRING => \Yii::t('product/product','String'),

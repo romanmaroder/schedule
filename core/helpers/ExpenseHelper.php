@@ -5,11 +5,13 @@ namespace core\helpers;
 
 
 use core\entities\Expenses\Expenses\Expenses;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class ExpenseHelper
 {
+    #[ArrayShape([Expenses::STATUS_DRAFT => "string", Expenses::STATUS_ACTIVE => "string"])]
     public static function statusList(): array
     {
         return [
@@ -25,22 +27,11 @@ class ExpenseHelper
 
     public static function statusLabel($status): string
     {
-        /* Match expression is only allowed since PHP 8.0
-               match ($status) {
-                   0, Service::STATUS_DRAFT => $class ='badge badge-secondary',
-                   Service::STATUS_ACTIVE => $class = 'badge badge-success',
-               };
-       */
-        switch ($status) {
-            case Expenses::STATUS_DRAFT:
-                $class = 'badge badge-secondary';
-                break;
-            case Expenses::STATUS_ACTIVE:
-                $class = 'badge badge-success';
-                break;
-            default:
-                $class = 'badge badge-secondary';
-        }
+        $class = match ($status) {
+            Expenses::STATUS_DRAFT => 'badge badge-secondary',
+            Expenses::STATUS_ACTIVE => 'badge badge-success',
+            default => 'badge badge-secondary',
+        };
 
         return Html::tag('span', ArrayHelper::getValue(self::statusList(), $status), [
             'class' => $class,

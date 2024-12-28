@@ -5,11 +5,13 @@ namespace core\helpers;
 
 
 use core\entities\Shop\Product\Product;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class ProductHelper
 {
+    #[ArrayShape([Product::STATUS_DRAFT => "string", Product::STATUS_ACTIVE => "string"])]
     public static function statusList(): array
     {
         return [
@@ -25,22 +27,11 @@ class ProductHelper
 
     public static function statusLabel($status): string
     {
-        /* Match expression is only allowed since PHP 8.0
-               match ($status) {
-                   0, Product::STATUS_DRAFT => $class ='badge badge-secondary',
-                   Product::STATUS_ACTIVE => $class = 'badge badge-success',
-               };
-       */
-        switch ($status) {
-            case Product::STATUS_DRAFT:
-                $class = 'badge badge-secondary';
-                break;
-            case Product::STATUS_ACTIVE:
-                $class = 'badge badge-success';
-                break;
-            default:
-                $class = 'badge badge-secondary';
-        }
+        $class = match ($status) {
+            Product::STATUS_DRAFT => 'badge badge-secondary',
+            Product::STATUS_ACTIVE => 'badge badge-success',
+            default => 'badge badge-secondary',
+        };
 
         return Html::tag('span', ArrayHelper::getValue(self::statusList(), $status), [
             'class' => $class,

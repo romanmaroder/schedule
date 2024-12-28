@@ -6,12 +6,14 @@ namespace core\helpers;
 
 use core\access\Rbac;
 use core\entities\User\Employee\Employee;
+use JetBrains\PhpStorm\ArrayShape;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class EmployeeHelper
 {
+    #[ArrayShape([Employee::STATUS_INACTIVE => "string", Employee::STATUS_ACTIVE => "string"])]
     public static function statusList(): array
     {
         return [
@@ -27,23 +29,11 @@ class EmployeeHelper
 
     public static function statusLabel($status): string
     {
-        switch ($status) {
-            case Employee::STATUS_INACTIVE:
-                $class = 'badge bg-danger bg-gradient text-shadow box-shadow';
-                break;
-            case Employee::STATUS_ACTIVE:
-                $class = 'badge bg-success bg-gradient text-shadow box-shadow';
-                break;
-            default:
-                $class = 'badge bg-info';
-        }
-
-       /* $class = match ($status) {
+        $class = match ($status) {
             Employee::STATUS_INACTIVE => 'badge bg-danger bg-gradient text-shadow box-shadow',
             Employee::STATUS_ACTIVE => 'badge bg-success bg-gradient text-shadow box-shadow',
-            default => 'label label-default',
+            default => 'badge bg-info',
         };
-        };*/
 
         return Html::tag(
             'span',
@@ -54,7 +44,11 @@ class EmployeeHelper
         );
     }
 
-    public static function rolesList(): array
+    #[ArrayShape([
+        Rbac::ROLE_ADMIN => "string",
+        Rbac::ROLE_EMPLOYEE => "string",
+        Rbac::ROLE_MANAGER => "string"
+    ])] public static function rolesList(): array
     {
         return [
             Rbac::ROLE_ADMIN => Yii::t('role','admin'),
@@ -68,26 +62,12 @@ class EmployeeHelper
         $roles = ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($userId), 'name');
         $role = ArrayHelper::getValue(self::rolesList(), $roles);
 
-        switch ($role) {
-            case Rbac::ROLE_ADMIN:
-                $class = 'badge bg-danger bg-gradient box-shadow';
-                break;
-            case Rbac::ROLE_MANAGER:
-                $class = 'badge bg-warning bg-gradient box-shadow';
-                break;
-            case Rbac::ROLE_EMPLOYEE:
-                $class = 'badge bg-info bg-gradient box-shadow';
-                break;
-            default:
-                $class = 'badge bg-secondary';
-        }
-
-        /* $class = match ($role) {
+        $class = match ($role) {
             Rbac::ROLE_ADMIN => 'badge bg-danger bg-gradient box-shadow',
             Rbac::ROLE_MANAGER => 'badge bg-warning bg-gradient box-shadow',
             Rbac::ROLE_EMPLOYEE => 'badge bg-info bg-gradient box-shadow',
             default => 'badge bg-secondary',
-        };*/
+        };
 
         return Html::tag(
             'span',

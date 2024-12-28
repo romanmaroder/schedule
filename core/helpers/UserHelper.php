@@ -5,12 +5,14 @@ namespace core\helpers;
 
 
 use core\entities\User\User;
+use JetBrains\PhpStorm\ArrayShape;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class UserHelper
 {
+    #[ArrayShape([User::STATUS_INACTIVE => "string", User::STATUS_ACTIVE => "string"])]
     public static function statusList(): array
     {
         return [
@@ -26,22 +28,11 @@ class UserHelper
 
     public static function statusLabel($status): string
     {
-        switch ($status) {
-            case User::STATUS_INACTIVE:
-                $class = 'badge bg-danger bg-gradient text-shadow box-shadow';
-                break;
-            case User::STATUS_ACTIVE:
-                $class = 'badge bg-success bg-gradient text-shadow box-shadow';
-                break;
-            default:
-                $class = 'badge bg-info';
-        }
-
-        /*$class = match ($status) {
+        $class = match ($status) {
             User::STATUS_INACTIVE => 'badge bg-danger bg-gradient text-shadow box-shadow',
             User::STATUS_ACTIVE => 'badge bg-success bg-gradient text-shadow box-shadow',
             default => 'badge bg-info',
-        };*/
+        };
 
         return Html::tag(
             'span',
@@ -59,7 +50,8 @@ class UserHelper
             ->where(['is', 'schedule_employees.user_id', null]);
     }
 
-    public static function hasRole($roleName, $userId) {
+    public static function hasRole($roleName, $userId): bool
+    {
         $authManager = \Yii::$app->getAuthManager();
         return $authManager->getAssignment($roleName, $userId) ? true : false;
     }

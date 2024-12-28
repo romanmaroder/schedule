@@ -23,16 +23,10 @@ class MessengerFactory
      */
     public function build(string $type, string $flag, object $data = null): MessengerFactoryInterface
     {
-        switch (strtolower($type)) {
-            case "sms":
-                $messenger = new SmsMessenger($flag, $data);
-                break;
-            case "telegram":
-                $messenger = new TelegramMessenger($flag, $data);
-                break;
-            default:
-                throw new \Exception('Messenger type is not defined.');
-        }
-        return $messenger;
+        return match (strtolower($type)) {
+            "sms" => new SmsMessenger($flag, $data),
+            "telegram" => new TelegramMessenger($flag, $data),
+            default => throw new \Exception('Messenger type is not defined.'),
+        };
     }
 }
