@@ -63,7 +63,7 @@ class Event extends ActiveRecord
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'notifyUser']);
     }
 
-    public function notifyUser()
+    public function notifyUser(): void
     {
 
             $notify = new BotMessenger();

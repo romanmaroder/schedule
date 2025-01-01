@@ -45,6 +45,7 @@ class CartItem
         return $this->item->events->getFullName();
     }
 
+
     public function getClientName(): string
     {
         return $this->item->events->client->username;

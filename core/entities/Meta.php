@@ -8,9 +8,9 @@ use core\helpers\tHelper;
 
 readonly class Meta
 {
-    public string $title;
-    public string $description;
-    public string $keywords;
+    public null|string $title;
+    public null|string $description;
+    public null|string $keywords;
 
     /**
      * Meta constructor.

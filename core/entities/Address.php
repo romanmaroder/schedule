@@ -6,11 +6,11 @@ namespace core\entities;
 
 readonly class Address
 {
-    public string $town;
-    public string $borough;
-    public string $street;
-    public string $home;
-    public string $apartment;
+    public null|string $town;
+    public null|string $borough;
+    public null|string $street;
+    public null|string $home;
+    public null|string $apartment;
 
     /**
      * Address constructor.

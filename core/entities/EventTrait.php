@@ -6,7 +6,7 @@ namespace core\entities;
 
 trait EventTrait
 {
-    private $events = [];
+    private array $events = [];
 
     protected function recordEvent($event): void
     {
