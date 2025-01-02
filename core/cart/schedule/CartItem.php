@@ -106,27 +106,15 @@ class CartItem
 
     public function getDiscountedPrice(): float|int
     {
-        switch ($this->getDiscountFrom()) {
-            case Discount::MASTER_DISCOUNT:
-                $discountedPrice = $this->getMasterPrice() - $this->masterDiscount();
-                break;
-            case Discount::STUDIO_DISCOUNT:
-                $discountedPrice = $this->getMasterPrice() - ($this->getMasterPrice() * $this->getDiscount() / 100);
-                break;
-            default:
-                $discountedPrice =
-                    $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
-                        ($this->getDiscount() / 100));
-        }
-
-        /* $discountedPrice = match ($this->getDiscountFrom()) {
+        $discountedPrice = match ($this->getDiscountFrom()) {
             Discount::MASTER_DISCOUNT => $this->getMasterPrice() - $this->masterDiscount(),
             Discount::STUDIO_DISCOUNT => $this->getMasterPrice() - ($this->getMasterPrice() * $this->getDiscount(
                     ) / 100),
-            default => $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
-                    ($this->getDiscount() / 100)),
-        };*/
-
+            default =>
+                $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
+                    ($this->getDiscount() / 100)
+            ),
+        };
         return $discountedPrice;
     }
 
@@ -141,31 +129,13 @@ class CartItem
      */
     public function getCost(): float|int
     {
-        switch ($this->getDiscountFrom()) {
-            case Discount::NO_DISCOUNT:
-                $cost = $this->costNoDiscount();
-                break;
-            case Discount::MASTER_DISCOUNT:
-                $cost = $this->costMasterDiscount();
-                break;
-            case Discount::STUDIO_DISCOUNT:
-                $cost = $this->costStudioDiscount();
-                break;
-            case Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK :
-                $cost = $this->getCostDiscountFromTheStudioWithMaster();
-                break;
-            default:
-                $cost = $this->costNoDiscount();
-        }
-
-        /* $cost = match ($this->getDiscountFrom()) {
+        $cost = match ($this->getDiscountFrom()) {
             Discount::NO_DISCOUNT => $this->costNoDiscount(),
             Discount::MASTER_DISCOUNT => $this->costMasterDiscount(),
             Discount::STUDIO_DISCOUNT => $this->costStudioDiscount(),
             Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => $this->getCostDiscountFromTheStudioWithMaster(),
             default => $this->costNoDiscount(),
-        };*/
-
+        };
         return $cost;
     }
 
@@ -175,31 +145,13 @@ class CartItem
      */
     public function getProfit(): float|int
     {
-        switch ($this->getDiscountFrom()) {
-            case Discount::NO_DISCOUNT:
-                $profit = $this->profitNoDiscount();
-                break;
-            case Discount::MASTER_DISCOUNT:
-                $profit = $this->profitMasterDiscount();
-                break;
-            case Discount::STUDIO_DISCOUNT:
-                $profit = $this->profitStudioDiscount();
-                break;
-            case Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK:
-                $profit = $this->getProfitDiscountFromTheStudioWithMaster();
-                break;
-            default:
-                $profit = $this->profitNoDiscount();
-        }
-        /* $profit = match ($this->getDiscountFrom()) {
+        $profit = match ($this->getDiscountFrom()) {
             Discount::NO_DISCOUNT => $this->profitNoDiscount(),
             Discount::MASTER_DISCOUNT => $this->profitMasterDiscount(),
             Discount::STUDIO_DISCOUNT => $this->profitStudioDiscount(),
             Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => $this->getProfitDiscountFromTheStudioWithMaster(),
             default => $this->profitNoDiscount(),
         };
-        };*/
-
         return $profit;
     }
 

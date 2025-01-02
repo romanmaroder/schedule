@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 ?>
 <?php if (Yii::$app->id ==='app-backend'):?>
-<?php $user = \core\entities\User\User::findOne(Yii::$app->user->identity->getId());?>
+<?php $user = \core\entities\User\User::findOne(Yii::$app->user?->identity?->getId());?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -24,12 +24,12 @@ use yii\helpers\Html;
             <div class="image">
                 <!--<img src="<?
                 /*= $assetDir */ ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
-                <p class="img-circle elevation-2"><?= $user->getInitials() ?></p>
+                <p class="img-circle elevation-2"><?= $user?->getInitials() ?></p>
             </div>
             <div class="info">
                 <?=
                 Html::a(
-                    $user->username ?? ''  ,
+                    $user?->username ?? ''  ,
                     ['/cabinet/default/index'],
                     ['class' => ['d-block']]
                 ); ?>
