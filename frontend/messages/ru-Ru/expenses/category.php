@@ -11,4 +11,5 @@ return [
     'Update Category: '=>'Обновить: ',
     'Main' => 'Основная',
     'Others' => 'Другие',
+    'Parent Id'=>'Основная',
 ];
