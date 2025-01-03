@@ -1,5 +1,6 @@
 <?php
 
+use core\helpers\tHelper;
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
@@ -10,9 +11,9 @@ $resetLink = Yii::$app->get('frontendUrlManager')->createAbsoluteUrl(
 );
 ?>
 <div class="password-reset">
-    <p>Hello <?= Html::encode($user->username) ?>,</p>
+    <p><?= tHelper::translate('user/auth', 'greeting') ?><?= Html::encode($user->username) ?>,</p>
 
-    <p>Follow the link below to reset your password:</p>
+    <p><?= tHelper::translate('user/auth', 'follow') ?></p>
 
     <p><?= Html::a(Html::encode($resetLink), $resetLink) ?></p>
 </div>

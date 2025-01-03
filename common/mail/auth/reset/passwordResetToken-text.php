@@ -3,10 +3,12 @@
 /** @var yii\web\View $this */
 /** @var core\entities\User\User $user */
 
+use core\helpers\tHelper;
+
 $resetLink = Yii::$app->get('frontendUrlManager')->createAbsoluteUrl(['auth/reset/reset-password', 'token' => $user->password_reset_token]);
 ?>
-Hello <?= $user->username ?>,
+<?= tHelper::translate('user/auth', 'greeting') ?> <?= $user->username ?>,
 
-Follow the link below to reset your password:
+<?= tHelper::translate('user/auth', 'follow') ?>
 
 <?= $resetLink ?>

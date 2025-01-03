@@ -5,10 +5,11 @@
 
 /** @var \core\forms\auth\ResendVerificationEmailForm $model */
 
+use core\helpers\tHelper;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Resend verification email';
+$this->title = tHelper::translate('user/auth','resend-email');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-resend-verification-email">
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">
-                Please fill out your email. A verification email will be sent there.</p>
+                <?= tHelper::translate('user/auth', 'fill-email')?></p>
 
                     <?php
                     $form = ActiveForm::begin(['id' => 'resend-verification-email-form']); ?>
@@ -38,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     )->label(false) ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
+                        <?= Html::submitButton(tHelper::translate('user/auth','Send'), ['class' => 'btn btn-primary']) ?>
                     </div>
 
                     <?php

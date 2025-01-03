@@ -1,5 +1,6 @@
 <?php
 
+use core\helpers\tHelper;
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
@@ -10,9 +11,9 @@ $verifyLink = Yii::$app->get('frontendUrlManager')
 
 ?>
 <div class="verify-email">
-    <p>Hello <?= Html::encode($user->username) ?>,</p>
+    <p><?= tHelper::translate('user/auth', 'greeting') ?> <?= Html::encode($user->username) ?>,</p>
 
-    <p>Follow the link below to verify your email:</p>
+    <p><?= tHelper::translate('user/auth', 'follow-email') ?></p>
 
     <p><?= Html::a(Html::encode($verifyLink), $verifyLink) ?></p>
 </div>
