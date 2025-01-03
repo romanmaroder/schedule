@@ -97,7 +97,7 @@ $js = <<< JS
 $(function () {
 let table= $('#expenses').DataTable({
 responsive: true,
-pageLength: -1, 
+pageLength: 10, 
 paging: true,
 lengthChange: true,
 lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
@@ -113,7 +113,7 @@ fixedHeader: {
   footer: true
 },
 bStateSave: true,
-                dom:'<"row"<"col-12  btn-sm"Q><"col-12"B>> t <"row"<"col"l><"col"i><"col"p>> ',
+                dom:'<"row"<"col-12  btn-sm"Q>><"row"<"col-auto col-sm-6"B><"col-auto col-sm-6 text-right"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                             var api = this.api();
                             // Remove the formatting to get integer data for summation

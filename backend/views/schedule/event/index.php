@@ -1,7 +1,6 @@
 <?php
 
 use backend\assets\DataTableAsset;
-use backend\widgets\grid\ServiceColumn;
 use core\entities\Schedule\Event\Event;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
@@ -231,7 +230,7 @@ $js = <<< JS
  $(function () {
  
     $('#event').DataTable({
-        pageLength: -1, 
+        pageLength: 10, 
         paging: true,
         lengthChange: true,
         lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
@@ -248,7 +247,7 @@ $js = <<< JS
                 var data = localStorage.getItem('DataTables_' + window.location.pathname);
                 return JSON.parse(data);
                 },
-         dom:'<"row"<"col-12 btn-sm"Q>> t <"row"<"col"l><"col"i><"col"p>> ',
+         dom:'<"row"<"col-12 btn-sm"Q><"col-auto"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
         language: {
           url:"$ru"
          },

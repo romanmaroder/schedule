@@ -153,7 +153,7 @@ let table= $('#unpaid').DataTable({
         footer: true
         },
         bStateSave: true,
-        dom:'<"row"<"col-12  btn-sm"Q>> t <"row"<"col"l><"col"i><"col"p>> ',
+        dom:'<"row"<"col-12  btn-sm"Q>><"row"<"col-auto col-sm-6"B><"col-auto col-sm-6 text-right"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
         footerCallback: function ( row, data, start, end, display ) {
         var api = this.api();
         // Remove the formatting to get integer data for summation

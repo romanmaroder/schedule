@@ -87,9 +87,7 @@ class ExpenseReadRepository
                         ],
                     ],
                 ],
-                'pagination' => [
-                    'pageSizeLimit' => [15, 100],
-                ]
+                'pagination' => false
             ]
         );
     }

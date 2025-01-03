@@ -25,7 +25,7 @@ return [
         ],
         'user' => [
             'identityClass' => 'common\auth\Identity',
-            'enableAutoLogin' => false,
+            'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
             'loginUrl' => ['auth/auth/login'],
         ],

@@ -162,7 +162,7 @@ $js = <<< JS
                     footer: true
                 },
                 bStateSave: true,
-                dom:'<"row"<"col-12"Q>> t <"row"<"col-auto"l><"col-auto"i><"col-auto"p>> ',
+                dom:'<"row"<"col-12"Q><"col-auto"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
                 footerCallback: function ( row, data, start, end, display ) {
                             var api = this.api();
                             // Remove the formatting to get integer data for summation
