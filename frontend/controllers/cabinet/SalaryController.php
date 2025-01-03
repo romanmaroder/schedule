@@ -19,6 +19,9 @@ class SalaryController extends Controller
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index'],
                 'duration' => 3600,
+                'variations' => [
+                    \Yii::$app->user->getId()
+                ],
                 'dependency' => [
                     'class' => 'yii\caching\TagDependency',
                     'tags' => Event::CACHE_KEY,
