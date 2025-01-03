@@ -50,10 +50,27 @@ class UserHelper
             ->where(['is', 'schedule_employees.user_id', null]);
     }
 
-    public static function hasRole($roleName, $userId): bool
+    public static function hasRoleAccess($userId, array $rolesName): bool
     {
-        $authManager = \Yii::$app->getAuthManager();
-        return $authManager->getAssignment($roleName, $userId) ? true : false;
+        $authManager = \Yii::$app->authManager;
+
+        $userRoles = [];
+        $userAssigned = $authManager->getAssignments($userId);
+
+        foreach ($userAssigned as $userAssign) {
+            $userRoles[] = $userAssign->roleName;
+        }
+
+        $access = false;
+        foreach ($rolesName as $name) {
+            if (in_array($name, $userRoles)) {
+                $access = true;
+            }
+        }
+        if ($access) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -29,20 +29,17 @@ class AuthService
         return $user;
     }
 
-    public function authAdmin(LoginForm $form): User
+    public function authAdmin(LoginForm $form):User
     {
-        $user = $this->users->findByUsernameOrEmail($form->username);
+        $user = $this->users->findByUsername($form->username);
 
-        foreach (['admin', 'manager'] as $item) {
-            $role = UserHelper::hasRole($item, $user->id);
-            if ($item == $role) {
-                return $user;
-            }
-        }
-
-        if (!$user || !$user->employee || !$role || !$user->isActive() || !$user->validatePassword($form->password)) {
+        if (!$user || !$user->validatePassword($form->password) || !$user->employee || !$user->isActive()) {
             throw new \DomainException(tHelper::translate('login', 'permission'));
         }
-        return $user;
+
+        if (UserHelper::hasRoleAccess($user->id, ['admin', 'manager'])) {
+            return $user;
+        }
+        throw new \DomainException(tHelper::translate('login', 'permission'));
     }
 }
