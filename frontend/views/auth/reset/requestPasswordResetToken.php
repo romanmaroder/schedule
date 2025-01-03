@@ -4,10 +4,11 @@
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \core\forms\auth\PasswordResetRequestForm $model */
 
+use core\helpers\tHelper;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Request password reset';
+$this->title = tHelper::translate('user/auth','Request password reset');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-request-password-reset">
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     endif; ?>
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Please fill out your email. A link to reset password will be sent there.</p>
+            <p class="login-box-msg"><?= tHelper::translate('user/auth', 'reset-pass')?></p>
 
 
             <?php
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             )->label(false) ?>
 
             <div class="form-group">
-                <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton(tHelper::translate('user/auth', 'Send'), ['class' => 'btn btn-primary']) ?>
             </div>
 
             <?php

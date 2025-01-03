@@ -120,6 +120,7 @@ return [
                         'user/employee' => 'user/employee.php',
                         'user/schedule' => 'user/schedule.php',
                         'user/address' => 'user/address.php',
+                        'user/auth' => 'user/auth.php',
                     ],
                 ],
                 'product*' => [

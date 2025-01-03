@@ -5,6 +5,7 @@ namespace frontend\controllers\auth;
 
 
 use core\forms\auth\SignupForm;
+use core\helpers\tHelper;
 use core\useCases\auth\SignupService;
 use Yii;
 use yii\filters\AccessControl;
@@ -49,7 +50,7 @@ class SignupController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->signup($form);
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', tHelper::translate('user/auth','check-email'));
                 return $this->goHome();
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -71,7 +72,7 @@ class SignupController extends Controller
 
         try {
             $this->service->confirm($token);
-            Yii::$app->session->setFlash('success', 'Your email is confirmed.');
+            Yii::$app->session->setFlash('success', tHelper::translate('user/auth','email-confirmed'));
             return $this->redirect(['auth/auth/login']);
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);

@@ -11,6 +11,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'name'=>'NAILS',
     'basePath' => dirname(__DIR__),
     'aliases' => [
         '@staticRoot' => $params['staticPath'],

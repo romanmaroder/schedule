@@ -5,6 +5,7 @@ namespace core\useCases\auth;
 
 
 use core\forms\auth\ResendVerificationEmailForm;
+use core\helpers\tHelper;
 use core\repositories\UserRepository;
 use Yii;
 use yii\mail\MailerInterface;
@@ -35,7 +36,7 @@ class EmailResendService
             ->compose(['html' => 'auth/signup/emailVerify-html', 'text' => 'auth/signup/emailVerify-text'],
                 ['user' => $user])
             ->setTo($user->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->setSubject(tHelper::translate('user/auth','email-title') . Yii::$app->name)
             ->send();
 
         if (!$sent) {

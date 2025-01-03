@@ -5,6 +5,7 @@ namespace frontend\controllers\auth;
 
 
 use core\forms\auth\ResendVerificationEmailForm;
+use core\helpers\tHelper;
 use core\useCases\auth\EmailResendService;
 use Yii;
 use yii\web\Controller;
@@ -36,7 +37,7 @@ class ResendController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->request($form);
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', tHelper::translate('user/auth','check-email'));
                 return $this->goHome();
             }catch(\DomainException $e){
                 Yii::$app->errorHandler->logException($e);

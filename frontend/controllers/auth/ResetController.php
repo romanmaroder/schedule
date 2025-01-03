@@ -6,6 +6,7 @@ namespace frontend\controllers\auth;
 
 use core\forms\auth\PasswordResetRequestForm;
 use core\forms\auth\ResetPasswordForm;
+use core\helpers\tHelper;
 use core\useCases\auth\PasswordResetService;
 use Yii;
 use yii\filters\VerbFilter;
@@ -34,7 +35,7 @@ class ResetController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->request($form);
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', tHelper::translate('user/auth','check-email'));
                 return $this->goHome();
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -65,7 +66,7 @@ class ResetController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->reset($token, $form);
-                Yii::$app->session->setFlash('success', 'New password saved.');
+                Yii::$app->session->setFlash('success', tHelper::translate('user/auth','new-pass'));
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());

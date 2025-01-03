@@ -4,6 +4,7 @@ use core\helpers\EmployeeHelper;
 use core\helpers\RateHelper;
 use core\helpers\RoleHelper;
 use core\helpers\ScheduleHelper;
+use kartik\color\ColorInput;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
 use yii\bootstrap4\ActiveForm;
