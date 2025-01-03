@@ -111,6 +111,7 @@ div.dt-datetime div.dt-datetime-label {
   border: 1px solid transparent;
   box-sizing: border-box;
   cursor: pointer;
+  color: #ccc;
 }
 div.dt-datetime div.dt-datetime-label:hover {
   border: 1px solid #ddd;
