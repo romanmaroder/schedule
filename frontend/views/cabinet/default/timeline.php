@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $emptyEvents = Yii::t('cabinet/error','recordings');
 $emptyEducations = Yii::t('cabinet/error','lesson');
+
 ?>
 <div class="active tab-pane" id="timeline">
     <div class="timeline timeline-inverse">
@@ -31,7 +32,8 @@ $emptyEducations = Yii::t('cabinet/error','lesson');
                 <?=\Yii::$app->formatter->asDate(date('d-M-Y'),'medium')?>
             </span>
         </div>
-        <? if (!$events && !$educations && !$free):?>
+        <?php
+        if (!$events && !$educations && !$free):?>
             <div>
                 <i class="fas fa-exclamation-circle bg-warning btn-shadow"></i>
 
@@ -50,8 +52,10 @@ $emptyEducations = Yii::t('cabinet/error','lesson');
                     </div>
                 </div>
             </div>
-        <?endif;?>
-        <? foreach($events as $event) :?>
+        <?php
+        endif;?>
+        <?php
+        foreach($events as $event) :?>
             <div>
                 <i class="fas fa-user bg-info btn-shadow"></i>
 
@@ -67,11 +71,13 @@ $emptyEducations = Yii::t('cabinet/error','lesson');
 
                 </div>
             </div>
-        <?endforeach;?>
+        <?php
+        endforeach;?>
 
-        <? foreach($free as $item) :?>
+        <?php
+        foreach($free as $item) :?>
             <div>
-                <i class="fas fa-user bg-info btn-shadow"></i>
+                <i class="fas fa-umbrella-beach  bg-info btn-shadow"></i>
 
                 <div class="timeline-item btn-shadow">
                 <span class="time"><i class="far fa-clock"></i>
@@ -85,13 +91,14 @@ $emptyEducations = Yii::t('cabinet/error','lesson');
 
                 </div>
             </div>
-        <?endforeach;?>
+        <?php
+        endforeach;?>
 
-        <? foreach($educations as $education) :?>
+        <?php
+        foreach($educations as $education) :?>
 
             <div>
-                <i class="fas fa-comments bg-warning btn-shadow"></i>
-
+                <i class="fas fa-graduation-cap bg-warning btn-shadow"></i>
                 <div class="timeline-item btn-shadow">
                     <span class="time"><i class="far fa-clock"></i>
                         <?= date('H:i',strtotime($education->start))?>-<?= date('H:i',strtotime($education->end))?>
@@ -108,7 +115,8 @@ $emptyEducations = Yii::t('cabinet/error','lesson');
                 </div>
             </div>
 
-        <?endforeach;?>
+        <?php
+        endforeach;?>
         <div>
             <i class="far fa-clock bg-gray btn-shadow"></i>
         </div>

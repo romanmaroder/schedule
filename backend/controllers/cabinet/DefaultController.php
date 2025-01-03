@@ -107,7 +107,7 @@ class DefaultController extends Controller
 
         $educations = $this->education->getLessonDayById($this->user->id);
 
-        $free = $this->free->getAllDayById($employee->user_id);
+        $free = $this->free->getAllDayById($this->user->id);
 
 
         return $this->render(

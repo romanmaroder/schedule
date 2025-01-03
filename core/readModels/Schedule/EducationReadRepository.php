@@ -23,10 +23,9 @@ class EducationReadRepository
     {
         return Education::find()->with('teacher','student')
             ->where(['DATE(start)'=>new Expression('DATE(NOW())')])
-            //->andWhere(['','LIKE','student_ids', $id ])
-            ->andFilterWhere(['student_ids'=> $id ])
+            ->andWhere(['LIKE','student_ids', $id ])
+            ->orFilterWhere(['teacher_id'=> $id ])
             ->all();
-
     }
 
     public function getLessonCount($id): bool|int|string|null

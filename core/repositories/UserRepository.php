@@ -36,10 +36,16 @@ class UserRepository
                                 ->andWhere(['u.username' => $value])
                         ]
                     )*/->one();
-
-
         }
 
+    public function findByUsername($value)
+    {
+        return User::find()
+            ->where(['username'=>$value])
+            ->one();
+
+
+    }
 
     /**
      * @param $network
