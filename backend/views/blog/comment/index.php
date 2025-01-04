@@ -61,9 +61,8 @@ DataTableAsset::register($this);
                                 'created_at:datetime',
                                 [
                                     'attribute' => 'text',
-                                    'value' => function (Comment $model) {
-                                        return StringHelper::truncate(strip_tags($model->text), 100);
-                                    },
+                                    'value' => fn (Comment $model) =>
+                                         StringHelper::truncate(strip_tags($model->text), 100),
                                 ],
                                 [
                                     'attribute' => 'active',

@@ -1,15 +1,16 @@
 <?php
 
 
-
 /* @var $this \yii\web\View */
+
 /* @var $model \core\entities\Schedule\Event\Education */
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education','Lesson'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/education', 'Lesson'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -22,26 +23,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'teacher_id',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        return Html::a(
-                            Html::encode($model->teacher->username),
-                            ['/user/view', 'id' => $model->teacher->id]
-                        );
-                    }
+                    'value' => fn($model) => Html::a(
+                        Html::encode($model->teacher->username),
+                        ['/user/view', 'id' => $model->teacher->id]
+                    )
                 ],
                 [
                     'attribute' => 'student_ids',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        $st = '';
-                        foreach ($model->students as $student) {
-                            $st .= Html::a(
-                                    Html::encode($student->username),
-                                    ['/user/view', 'id' => $student->id]
-                                ) .'/'. PHP_EOL;
-                        }
-                        return $st;
-                    },
+                    'value' => fn($model) => implode(
+                        '/ ',
+                        ArrayHelper::getColumn($model->students, fn($student) => Html::a(
+                                Html::encode($student->username),
+                                ['/user/view', 'id' => $student->id]
+                            ) . PHP_EOL)
+                    ),
                     'contentOptions' => ['class' => 'text-break'],
                 ],
                 [
@@ -69,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
     if (Yii::$app->id == 'app-backend'): ?>
         <p>
             <?= Html::a(
-                Yii::t('app','Update'),
+                Yii::t('app', 'Update'),
                 ['update', 'id' => $model->id],
                 [
                     'id' => 'edit-link',
@@ -111,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
 
             <?= Html::a(
-                Yii::t('app','Delete'),
+                Yii::t('app', 'Delete'),
                 ['delete', 'id' => $model->id],
                 [
                     'id' => 'delete',

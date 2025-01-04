@@ -60,15 +60,13 @@ DataTableAsset::register($this);
                                 'id',
                                 [
                                     'attribute' => 'user_id',
-                                    'value' => function($review){
-                                        return $review->user->username;
-                                    }
+                                    'value' => fn($review)=>
+                                         $review->user->username
                                 ],
                                 [
                                     'attribute' => 'product_id',
-                                    'value' => function($review){
-                                        return $review->product->name;
-                                    }
+                                    'value' => fn($review)=>
+                                         $review->product->name
                                 ],
                                 'created_at:datetime',
                                 /*[

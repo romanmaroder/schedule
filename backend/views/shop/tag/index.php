@@ -50,9 +50,8 @@ DataTableAsset::register($this);
                     'id',
                     [
                         'attribute' => 'name',
-                        'value' => function (Tag $model) {
-                            return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                        },
+                        'value' => fn (Tag $model) =>
+                             Html::a(Html::encode($model->name), ['view', 'id' => $model->id]),
                         'format' => 'raw',
                     ],
                     'slug',
@@ -81,7 +80,7 @@ $js = <<< JS
        paging: true,
        lengthChange: false,
        searching: true,
-       ordering: true,
+       ordering: false,
        info: false,
        autoWidth: false,
        responsive: true,

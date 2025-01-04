@@ -58,20 +58,18 @@ DataTableAsset::register($this);
                     //  'id',
                     [
                         'attribute' => 'username',
-                        'value' => function (User $model) {
-                            return Html::a(Html::encode($model->username), ['view', 'id' => $model->id]);
-                        },
+                        'value' => fn (User $model) =>
+                             Html::a(Html::encode($model->username), ['view', 'id' => $model->id]),
                         'format' => 'raw',
                     ],
                     [
                         'attribute' => 'phone',
-                        'value' => function (User $model) {
-                            return Html::a(
+                        'value' => fn (User $model) =>
+                             Html::a(
                                 Html::encode($model->phone),
                                 'tel:' . $model->phone,
                                 ['view', 'id' => $model->id]
-                            );
-                        },
+                            ),
                         'format' => 'raw',
                     ],
                     'email:email',
@@ -84,9 +82,8 @@ DataTableAsset::register($this);
                             UserHelper::statusList(),
                             ['prompt' => 'Select...', 'class' => 'form-control form-control-sm']
                         ),
-                        'value' => function (User $model) {
-                            return UserHelper::statusLabel($model->status);
-                        },
+                        'value' => fn (User $model) =>
+                            UserHelper::statusLabel($model->status),
                         'format' => 'raw',
                     ],
                     [
@@ -129,12 +126,12 @@ $js = <<< JS
  
     $('#user').DataTable({
         bStateSave: true,
-        pageLength: -1, 
+        pageLength: 10, 
         paging: true,
         lengthChange: true,
         lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
         searching: true,
-        ordering: true,
+        ordering: false,
         info: false,
         autoWidth: false,
         responsive: true,
@@ -155,7 +152,7 @@ $js = <<< JS
         language: {
           url:"$ru"
          },
-    }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#user_wrapper .col-md-6:eq(0)');
 
   });
 

@@ -75,15 +75,15 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'active:boolean',
                         [
                             'attribute' => 'user_id',
-                            'value' => function($review){
-                                return $review->user->username;
-                            }
+                            'value' => fn($review)=>
+                                $review->user->username
+
                         ],
                         [
                             'attribute' => 'product_id',
-                            'value' => function($review){
-                                return $review->product->name;
-                            }
+                            'value' => fn($review)=>
+                                $review->product->name
+
                         ],
                         [
                             'attribute' => 'vote',

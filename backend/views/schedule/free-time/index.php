@@ -59,29 +59,25 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                                 [
                                     'attribute' => 'master_id',
-                                    'value' => function ($model) {
-                                        return Html::a(
+                                    'value' => fn ($model) =>
+                                         Html::a(
                                             Html::encode($model->master->username),
                                             ['view', 'id' => $model->id]
-                                        );
-                                    },
+                                        ),
                                     'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'additional_id',
-                                    'value' => function ($model) {
-                                        return Html::a(
+                                    'value' => fn ($model) =>
+                                         Html::a(
                                             Html::encode($model->additional->name),
                                             ['/schedule/additional-category/view', 'id' => $model->additional->category_id]
-                                        );
-                                    },
+                                        ),
                                     'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'notice',
-                                    'value' => function ($model) {
-                                        return $model->notice;
-                                    },
+                                    'value' => fn ($model) =>  $model->notice,
                                     'headerOptions' => ['class' => 'text-left'],
                                     'contentOptions' => [
                                         'class' => ['text-left align-middle']
@@ -104,13 +100,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'class'=>'text-center'
                                     ],
                                     'buttons' => [
-                                        'copy' => function ($url, $model, $key) {
-                                            return  Html::a(
+                                        'copy' => fn ($url, $model, $key) =>
+                                              Html::a(
                                                 Yii::t('app','Copy'),
                                                 Url::to(['schedule/free-time/copy', 'id' => $model->id]),
                                                 ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
-                                            );
-                                        },
+                                            ),
                                     ],
                                 ],
                             ],
@@ -132,7 +127,7 @@ $js = <<< JS
        paging: true,
        lengthChange: false,
        searching: true,
-       ordering: true,
+       ordering: false,
        info: true,
        autoWidth: false,
        responsive: true,

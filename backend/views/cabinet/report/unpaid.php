@@ -11,12 +11,13 @@
 use backend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 
-$this->title = Yii::t('cabinet/report','Unpaid');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report', 'Unpaid');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet', 'Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     [
@@ -48,17 +49,13 @@ DataTableAsset::register($this);
                         'headerRowOptions' => [
                             // 'class' => 'table-light'
                         ],
-                        'rowOptions' => function ($model) {
-                            return ['style' => 'background-color:' . $model->getDefaultColor()];
-                        },
+                        'rowOptions' => fn($model) => ['style' => 'background-color:' . $model->getDefaultColor()],
                         'emptyText' => false,
                         'columns' => [
                             [
                                 'attribute' => 'Date',
                                 'label' => Yii::t('cabinet/report', 'Date'),
-                                'value' => function ($model) {
-                                    return DATE('Y-m-d', strtotime($model->start));
-                                },
+                                'value' => fn($model) => DATE('Y-m-d', strtotime($model->start)),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -67,14 +64,12 @@ DataTableAsset::register($this);
                             ],
                             [
                                 'attribute' => 'Master',
-                                'label' => Yii::t('cabinet/report','Master'),
-                                'value' => function ($model) {
-                                    return Html::a(
-                                        Html::encode($model->getFullName()),
-                                        ['schedule/event/view', 'id' => $model->id],
-                                        ['class' => 'text-dark']
-                                    );
-                                },
+                                'label' => Yii::t('cabinet/report', 'Master'),
+                                'value' => fn($model) => Html::a(
+                                    Html::encode($model->getFullName()),
+                                    ['schedule/event/view', 'id' => $model->id],
+                                    ['class' => 'text-dark']
+                                ),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -83,10 +78,8 @@ DataTableAsset::register($this);
                             ],
                             [
                                 'attribute' => 'Client',
-                                'label' => Yii::t('cabinet/report','Client'),
-                                'value' => function ($model) {
-                                    return $model->client->username;
-                                },
+                                'label' => Yii::t('cabinet/report', 'Client'),
+                                'value' => fn($model) => $model->client->username,
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -94,14 +87,12 @@ DataTableAsset::register($this);
                             ],
                             [
                                 'attribute' => 'Service',
-                                'label' => Yii::t('cabinet/report','Service'),
-                                'value' => function ($model) {
-                                    $name = '';
-                                    foreach ($model->services as $item) {
-                                        $name .= $item->name . ', ';
-                                    }
-                                    return $name;
-                                },
+                                'label' => Yii::t('cabinet/report', 'Service'),
+                                'value' => fn($model) => implode(
+                                    ', </br>',
+                                    ArrayHelper::getColumn($model->services, 'name')
+                                ),
+                                'format' => 'raw',
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
@@ -109,24 +100,19 @@ DataTableAsset::register($this);
                             ],
                             [
                                 'attribute' => 'Debt',
-                                'label' => Yii::t('cabinet/report','Debt'),
-                                'value' => function ($model) use ($cart) {
-                                    return $model->getDiscountedPrice($model, $cart);
-                                },
+                                'label' => Yii::t('cabinet/report', 'Debt'),
+                                'value' => fn($model) => $model->getDiscountedPrice($model, $cart),
                                 'headerOptions' => ['class' => 'text-center'],
-                                'contentOptions' => function ($model) use ($cart) {
-                                    return [
-                                        'data-total' => $model->getDiscountedPrice($model, $cart),
-                                        'class' => ['text-center align-middle text-dark']
-                                    ];
-                                },
+                                'contentOptions' => fn($model) => [
+                                    'data-total' => $model->getDiscountedPrice($model, $cart),
+                                    'class' => ['text-center align-middle text-dark']
+                                ],
                                 //'footer' => '',
                                 'footerOptions' => ['class' => 'bg-info text-center'],
                             ]
                         ]
                     ]
                 ); ?>
-
             </div>
         </div>
     </div>

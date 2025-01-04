@@ -56,11 +56,10 @@ DataTableAsset::register($this);
                                                  'emptyText' => false,
                                                  'columns' => [
                                                      [
-                                                         'value' => function (Post $model) {
-                                                             return $model->files ? Html::img(
+                                                         'value' => fn (Post $model) =>
+                                                              $model->files ? Html::img(
                                                                  $model->getThumbFileUrl('files', 'admin')
-                                                             ) : '';
-                                                         },
+                                                             ) : '',
                                                          'format' => 'raw',
                                                          'contentOptions' => ['style' => 'width: 100px'],
                                                      ],
@@ -68,9 +67,8 @@ DataTableAsset::register($this);
                                                      'created_at:datetime',
                                                      [
                                                          'attribute' => 'title',
-                                                         'value' => function (Post $model) {
-                                                             return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
-                                                         },
+                                                         'value' => fn (Post $model) =>
+                                                             Html::a(Html::encode($model->title), ['view', 'id' => $model->id]),
                                                          'format' => 'raw',
                                                      ],
                                                      [
@@ -81,9 +79,8 @@ DataTableAsset::register($this);
                                                      [
                                                          'attribute' => 'status',
                                                          'filter' => $searchModel->statusList(),
-                                                         'value' => function (Post $model) {
-                                                             return PostHelper::statusLabel($model->status);
-                                                         },
+                                                         'value' => fn (Post $model) =>
+                                                              PostHelper::statusLabel($model->status),
                                                          'format' => 'raw',
                                                      ],
                                                  ],

@@ -55,9 +55,8 @@ DataTableAsset::register($this);
                                 'id',
                                 [
                                     'attribute' => 'name',
-                                    'value' => function (Service $model) {
-                                        return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                                    },
+                                    'value' => fn (Service $model) =>
+                                        Html::a(Html::encode($model->name), ['view', 'id' => $model->id]),
                                     'format' => 'raw',
                                 ],
                                 [
@@ -67,22 +66,19 @@ DataTableAsset::register($this);
                                 ],
                                 [
                                     'attribute' => 'price_new',
-                                    'value' => function (Service $model) {
-                                        return PriceHelper::format($model->price_new);
-                                    },
+                                    'value' => fn (Service $model) =>
+                                        PriceHelper::format($model->price_new),
                                 ],
                                 [
                                     'attribute' => 'price_old',
-                                    'value' => function (Service $model) {
-                                        return PriceHelper::format($model->price_old);
-                                    },
+                                    'value' => fn (Service $model) =>
+                                         PriceHelper::format($model->price_old),
                                 ],
                                 [
                                     'attribute' => 'status',
                                     'filter' => $searchModel->statusList(),
-                                    'value' => function (Service $model) {
-                                        return ServiceHelper::statusLabel($model->status);
-                                    },
+                                    'value' => fn (Service $model) =>
+                                        ServiceHelper::statusLabel($model->status),
                                     'format' => 'raw',
                                     'contentOptions' => ['style' => 'text-align:center'],
                                 ]

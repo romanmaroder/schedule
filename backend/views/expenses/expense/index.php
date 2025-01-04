@@ -62,37 +62,31 @@ DataTableAsset::register($this);
                             //'id',
                             [
                                 'attribute' => 'category_id',
-                                'value' => function (Expenses $model) {
-                                    return Html::a(Html::encode($model->category->name), ['expenses/category/view', 'id' => $model->category_id]);
-                                },
+                                'value' => fn (Expenses $model) =>
+                                     Html::a(Html::encode($model->category->name), ['expenses/category/view', 'id' => $model->category_id]),
                                 'format' => 'raw',
                             ],
                             [
                                 'attribute' => 'name',
-                                'value' => function (Expenses $model) {
-                                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                                },
+                                'value' => fn (Expenses $model) =>
+                                     Html::a(Html::encode($model->name), ['view', 'id' => $model->id]),
                                 'format' => 'raw',
                             ],
                             [
                                 'attribute' => 'value',
-                                'value' => function (Expenses $model) {
-                                    return PriceHelper::format($model->value);
-                                },
-                                'contentOptions' => function ($model) {
-                                    return [
+                                'value' => fn (Expenses $model) =>PriceHelper::format($model->value),
+                                'contentOptions' => fn ($model) =>
+                                     [
                                         'data-total' => $model->value,
                                         'class' => ['text-center align-middle']
-                                    ];
-                                },
+                                    ],
                                 'footer' => '',
                                 'footerOptions' => ['class' => 'text-center bg-info'],
                             ],
                             [
                                 'attribute' => 'created_at',
-                                'value' => function ($model) {
-                                    return DATE('Y-m-d', $model->created_at);
-                                },
+                                'value' => fn ($model) =>
+                                     DATE('Y-m-d', $model->created_at),
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']

@@ -42,13 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'phone',
-                    'value' => function ($model) {
-                        return Html::a(
+                    'value' => fn ($model) =>
+                         Html::a(
                             Html::encode($model->phone),
                             'tel:' . $model->phone,
                             ['view', 'id' => $model->id]
-                        );
-                    },
+                        ),
                     'format' => 'raw',
                     'visible' => $model->phone ?: false,
                 ],
@@ -64,12 +63,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'Week',
-                    'value' => function($model){ return $model->schedule->week;},
+                    'value' => fn($model)=> $model->schedule->week,
                     'visible' => $model->schedule->weekends ?: false,
                 ],
                 [
                     'attribute' => 'Notice',
-                    'value' => function($model){ return $model->notice;},
+                    'value' => fn($model)=> $model->notice,
                     'visible' => $model->notice ?: false,
                 ]
                 //'created_at:datetime',

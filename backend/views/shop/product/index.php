@@ -49,9 +49,8 @@ DataTableAsset::register($this);
                             'class' => 'table table-striped table-bordered',
                             'id' => 'product'
                         ],
-                            'rowOptions' => function (Product $model) {
-                                return $model->quantity <= 0 ? ['style' => 'background: #fdc'] : [];
-                            },
+                            'rowOptions' => fn (Product $model) =>
+                                 $model->quantity <= 0 ? ['style' => 'background: #fdc'] : [],
                         'columns' => [
                             /*[
                                 'value' => function (Product $model) {
@@ -65,9 +64,8 @@ DataTableAsset::register($this);
                             'id',
                             [
                                 'attribute' => 'name',
-                                'value' => function (Product $model) {
-                                    return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                                },
+                                'value' => fn (Product $model) =>
+                                    Html::a(Html::encode($model->name), ['view', 'id' => $model->id]),
                                 'format' => 'raw',
                             ],
                             [
@@ -77,17 +75,15 @@ DataTableAsset::register($this);
                             ],
                             [
                                 'attribute' => 'price_new',
-                                'value' => function (Product $model) {
-                                    return PriceHelper::format($model->price_new);
-                                },
+                                'value' => fn (Product $model) =>
+                                     PriceHelper::format($model->price_new),
                             ],
                             'quantity',
                             [
                                 'attribute' => 'status',
                                 'filter' => $searchModel->statusList(),
-                                'value' => function (Product $model) {
-                                    return ProductHelper::statusLabel($model->status);
-                                },
+                                'value' => fn (Product $model) =>
+                                     ProductHelper::statusLabel($model->status),
                                 'format' => 'raw',
                                 'contentOptions' => ['style' => 'text-align:center'],
                             ]
@@ -110,7 +106,7 @@ $js = <<< JS
        paging: false,
        lengthChange: false,
        searching: true,
-       ordering: true,
+       ordering: false,
        info: false,
        autoWidth: false,
        responsive: true,

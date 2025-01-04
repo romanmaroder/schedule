@@ -49,18 +49,16 @@ DataTableAsset::register($this);
                     'columns' => [
                         [
                             'attribute' => 'id',
-                            'value' => function (Order $model) {
-                                return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
-                            },
+                            'value' => fn (Order $model) =>
+                                 Html::a(Html::encode($model->id), ['view', 'id' => $model->id]),
                             'format' => 'raw',
                         ],
                         'created_at:datetime',
                         [
                             'attribute' => 'status',
                             'filter' => $searchModel->statusList(),
-                            'value' => function (Order $model) {
-                                return OrderHelper::statusLabel($model->current_status);
-                            },
+                            'value' => fn (Order $model) =>
+                                 OrderHelper::statusLabel($model->current_status),
                             'format' => 'raw',
                         ],
                         ['class' => ActionColumn::class],
@@ -89,7 +87,7 @@ $js = <<< JS
        paging: true,
        lengthChange: false,
        searching: true,
-       ordering: true,
+       ordering: false,
        info: false,
        autoWidth: false,
        responsive: true,

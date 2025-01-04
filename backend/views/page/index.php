@@ -2,9 +2,11 @@
 
 
 /* @var $this \yii\web\View */
+
 /* @var $searchModel \backend\forms\PageSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $searchModel backend\forms\PageSearch */
+
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use backend\assets\DataTableAsset;
@@ -15,16 +17,18 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = Yii::t('content/page','Pages');
+$this->title = Yii::t('content/page', 'Pages');
 $this->params['breadcrumbs'][] = $this->title;
 
-PluginAsset::register($this)->add(['datatables',
+PluginAsset::register($this)->add([
+                                      'datatables',
                                       'datatables-bs4',
                                       'datatables-responsive',
                                       'datatables-buttons',
                                       'datatables-searchbuilder',
                                       'datatables-fixedheader',
-                                      'sweetalert2']);
+                                      'sweetalert2'
+                                  ]);
 DataTableAsset::register($this);
 ?>
 
@@ -34,66 +38,68 @@ DataTableAsset::register($this);
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']) ?>
-        </h3>
-        <div class='card-tools'>
-            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-            </button>
-            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
-        <?= GridView::widget(
-            [
-                'dataProvider' => $dataProvider,
-                // 'filterModel' => $searchModel,
-                'summary' => false,
-                'tableOptions' => [
-                    'class' => 'table table-striped table-bordered',
-                    'id' => 'pages'
-                ],
-                'emptyText' => false,
-                'columns' => [
-                    [
-                        'attribute' => 'title',
-                        'value' => function (Page $model) {
-                            $indent = ($model->depth > 1 ? str_repeat(
-                                    '&nbsp;&nbsp;',
-                                    $model->depth - 1
-                                ) . ' ' : '');
-                            return $indent . Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
-                        },
-                        'format' => 'raw',
-                    ],
-                    [
-                        'value' => function (Page $model) {
-                            return
-                                Html::a(
-                                    '<i class="fas fa-arrow-up"></i>',
-                                    ['move-up', 'id' => $model->id]
-                                ) .
-                                Html::a(
-                                    '<i class="fas fa-arrow-down"></i>',
-                                    ['move-down', 'id' => $model->id]
-                                );
-                        },
-                        'format' => 'raw',
-                        'contentOptions' => ['style' => 'text-align: center'],
-                    ],
-                    'slug',
-                    //'title',
-                    ['class' => ActionColumn::class],
-                ],
-            ]
-        ); ?>
-    </div>
+                            <?= Html::a(
+                                Yii::t('app', 'Create'),
+                                ['create'],
+                                ['class' => 'btn btn-success btn-sm btn-gradient btn-shadow']
+                            ) ?>
+                        </h3>
+                        <div class='card-tools'>
+                            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                        class='fas fa-expand'></i>
+                            </button>
+                            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                        class='fas fa-minus'></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <?= GridView::widget(
+                            [
+                                'dataProvider' => $dataProvider,
+                                // 'filterModel' => $searchModel,
+                                'summary' => false,
+                                'tableOptions' => [
+                                    'class' => 'table table-striped table-bordered',
+                                    'id' => 'pages'
+                                ],
+                                'emptyText' => false,
+                                'columns' => [
+                                    [
+                                        'attribute' => 'title',
+                                        'value' => fn(Page $model) => ($model->depth > 1 ? str_repeat(
+                                                    '&nbsp;&nbsp;',
+                                                    $model->depth - 1
+                                                ) . ' ' : '') .
+                                            Html::a(Html::encode($model->title), ['view', 'id' => $model->id]),
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'value' => fn(Page $model) => Html::a(
+                                                '<i class="fas fa-arrow-up"></i>',
+                                                ['move-up', 'id' => $model->id]
+                                            ) .
+                                            Html::a(
+                                                '<i class="fas fa-arrow-down"></i>',
+                                                ['move-down', 'id' => $model->id]
+                                            ),
+                                        'format' => 'raw',
+                                        'contentOptions' => ['style' => 'text-align: center'],
+                                    ],
+                                    'slug',
+                                    //'title',
+                                    ['class' => ActionColumn::class],
+                                ],
+                            ]
+                        ); ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-<?php $ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
+<?php
+$ru = Url::to('@web/js/dataTable/internationalisation/plug-ins_2_1_7_i18n_ru.json');
 $js = <<< JS
 $('#pages').DataTable({
                 responsive: true,

@@ -1,8 +1,8 @@
 <?php
 
 
-
 /* @var $this \yii\web\View */
+
 /* @var $model \core\entities\Schedule\Event\FreeTime */
 
 use hail812\adminlte3\assets\PluginAsset;
@@ -23,25 +23,20 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 [
                     'attribute' => 'master_id',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        if ($model->employee !== null) {
-                            return Html::a(
-                                Html::encode($model->master->username),
-                                ['/employee/view', 'id' => $model->employee->id]
-                            );
-                        }
-                        return $model->employee->getFullName();
-                    }
+                    'value' => fn($model) => Html::a(
+                        Html::encode($model->master->username),
+                        ['/employee/view', 'id' => $model->employee->id]
+                    ) ?? $model->employee->getFullName(),
+
                 ],
                 [
                     'attribute' => 'additional_id',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        return Html::a(
+                    'value' => fn ($model) =>
+                         Html::a(
                             Html::encode($model->additional->name),
                             ['/schedule/additional-category/view', 'id' => $model->additional->category_id]
-                        );
-                    }
+                        ),
                 ],
                 [
                     'attribute' => 'start',
@@ -61,15 +56,15 @@ PluginAsset::register($this)->add(['sweetalert2']);
         ]
     ) ?>
     <p>
-          <?= Html::a(
-              Yii::t('app', 'Update'),
-                ['update', 'id' => $model->id],
-                [
-                    'id' => 'edit-link',
-                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
-                ]
-            ) ?>
+        <?= Html::a(
+            Yii::t('app', 'Update'),
+            ['update', 'id' => $model->id],
+            [
+                'id' => 'edit-link',
+                'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
+            ]
+        ) ?>
 
         <?php
 
@@ -87,6 +82,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             Html::addCssClass($options, 'd-inline-block');
         }
         echo Html::tag('a', '<i class="far fa-envelope"></i>', $options);*/
+
         ?>
         <?php
 
@@ -102,6 +98,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             Html::addCssClass($options, 'd-inline-block');
         }
         echo Html::tag('a', '<i class="fas fa-map-marker-alt"></i>', $options);*/
+
         ?>
         <?= Html::a(
             Yii::t('app', 'Copy'),

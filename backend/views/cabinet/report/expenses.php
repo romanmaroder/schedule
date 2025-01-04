@@ -12,8 +12,8 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = Yii::t('cabinet/report','Expenses');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet','Cabinet'), 'url' => ['/cabinet/default/index']];
+$this->title = Yii::t('cabinet/report', 'Expenses');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('cabinet', 'Cabinet'), 'url' => ['/cabinet/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(
     [
@@ -31,8 +31,6 @@ DataTableAsset::register($this);
 
         <div class="table-responsive ">
             <div class="container-fluid">
-
-
                 <?php
                 echo GridView::widget(
                     [
@@ -48,32 +46,25 @@ DataTableAsset::register($this);
                         'columns' => [
                             [
                                 'attribute' => 'created_at',
-                                'value' => function ($model) {
-                                    return DATE('Y-m-d', $model->created_at);
-                                },
+                                'value' => fn($model) => DATE('Y-m-d', $model->created_at),
                                 'format' => 'raw'
                             ],
                             [
                                 'attribute' => 'category_id',
-                                'value' => function ($model) {
-                                  return  Html::a(
-                                        Html::encode($model->category->name),
-                                        ['expenses/expense/view', 'id' => $model->id]);
-                                },
-                                'contentOptions' => function ($model) {
-                                    return [
-                                        'data-total' => $model->value,
-                                    ];
-                                },
+                                'value' => fn($model) => Html::a(
+                                    Html::encode($model->category->name),
+                                    ['expenses/expense/view', 'id' => $model->id]
+                                ),
+                                'contentOptions' => fn($model) => [
+                                    'data-total' => $model->value,
+                                ],
                                 'format' => 'raw'
                             ],
 
                             'name',
                             [
                                 'attribute' => 'value',
-                                'value' => function ($model) {
-                                    return $model->value;
-                                },
+                                'value' => fn ($model) =>$model->value,
                                 'contentOptions' => function ($model) {
                                     return [
                                         'data-total' => $model->value,

@@ -51,26 +51,23 @@ DataTableAsset::register($this);
                     //'id',
                     [
                         'attribute' => 'username',
-                        'value' => function (User $model) {
-                            return Html::a(Html::encode($model->username), ['user/view', 'id' => $model->id]);
-                        },
+                        'value' => fn (User $model) =>
+                            Html::a(Html::encode($model->username), ['user/view', 'id' => $model->id]),
                         'format' => 'raw'
                     ],
                     [
                         'attribute' => 'phone',
-                        'value' => function (User $model) {
-                            return Html::a(
+                        'value' => fn (User $model) =>
+                             Html::a(
                                 Html::encode($model->phone),
                                 'tel:' . $model->phone,
                                 ['view', 'id' => $model->id]
-                            );
-                        },
+                            ),
                         'format' => 'raw',
                     ],
                 ],
             ]
-        );
-        ?>
+        );?>
                 </div>
             </div>
         </div>

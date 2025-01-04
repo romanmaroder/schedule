@@ -64,9 +64,8 @@ DataTableAsset::register($this);
                     //'user_id',
                     [
                         'attribute' => 'first_name',
-                        'value' => function (Employee $model) {
-                            return Html::a(Html::encode($model->getFullName()), ['/employee/view', 'id' => $model->id]);
-                        },
+                        'value' => fn (Employee $model) =>
+                             Html::a(Html::encode($model->getFullName()), ['/employee/view', 'id' => $model->id]),
                         'format' => 'raw',
                     ],
                     [
@@ -94,9 +93,8 @@ DataTableAsset::register($this);
                     ],*/
                     [
                         'attribute' => 'phone',
-                        'value' => function (Employee $model) {
-                            return Html::a(Html::encode($model->phone), 'tel:' . $model->phone, ['view', 'id' => $model->id]);
-                        },
+                        'value' => fn (Employee $model) =>
+                             Html::a(Html::encode($model->phone), 'tel:' . $model->phone, ['view', 'id' => $model->id]),
                         'contentOptions' => [
                             'class'=>'text-center'
                         ],
@@ -105,21 +103,19 @@ DataTableAsset::register($this);
                     ],
                     [
                         'attribute' => 'color',
-                        'value' => function (Employee $model) {
-                            return Html::tag(
+                        'value' => fn (Employee $model) =>
+                             Html::tag(
                                 'div',
                                 '',
                                 ['style' => 'width:20px;height:20px;margin:0 auto;background-color:' . $model->color]
-                            );
-                        },
+                            ),
                         'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw',
                     ],
                     [
                         'attribute' => 'status',
-                        'value' => function ($model) {
-                            return EmployeeHelper::statusLabel($model->status);
-                        },
+                        'value' => fn ($model) =>
+                             EmployeeHelper::statusLabel($model->status),
                         'contentOptions' => [
                                 'class'=>'text-center'
                         ],
@@ -128,9 +124,8 @@ DataTableAsset::register($this);
                     ],
                     [
                         'class' => ActionColumn::class,
-                        'urlCreator' => function ($action, Employee $model, $key, $index, $column) {
-                            return Url::toRoute([$action, 'id' => $model->id]);
-                        }
+                        'urlCreator' => fn ($action, Employee $model, $key, $index, $column) =>
+                             Url::toRoute([$action, 'id' => $model->id]),
                     ],
                 ],
             ]

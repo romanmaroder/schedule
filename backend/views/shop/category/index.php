@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\forms\Shop\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('shop/category','Categories');
+$this->title = Yii::t('shop/category', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
@@ -25,55 +25,64 @@ DataTableAsset::register($this);
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']) ?>
-            </h3>
+                            <?= Html::a(
+                                Yii::t('app', 'Create'),
+                                ['create'],
+                                ['class' => 'btn btn-success btn-sm btn-shadow btn-gradient']
+                            ) ?>
+                        </h3>
 
-            <div class='card-tools'>
-                <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                </button>
-                <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
+                        <div class='card-tools'>
+                            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                        class='fas fa-expand'></i>
+                            </button>
+                            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                        class='fas fa-minus'></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
 
-            <?= GridView::widget(
-                [
-                    'dataProvider' => $dataProvider,
-                    //'filterModel' => $searchModel,
-                    'tableOptions' => [
-                        'class' => 'table table-striped table-bordered',
-                        'id' => 'category'
-                    ],
-                    'columns' => [
-                        'id',
-                        [
-                            'attribute' => 'name',
-                            'value' => function (Category $model) {
-                                $indent = ($model->depth > 1 ? str_repeat(
-                                        '&nbsp;&nbsp;&nbsp;',
-                                        $model->depth - 1
-                                    ) . ' ' : '<i class="fas fa-home fa-xs"></i> ');
-                                return $indent . Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                            },
-                            'format' => 'raw',
-                        ],
-                        [
-                            'value' => function (Category $model) {
-                                return
-                                    Html::a('<i class="fas fa-arrow-up"></i>', ['move-up', 'id' => $model->id]) .
-                                    Html::a('<i class="fas fa-arrow-down"></i>', ['move-down', 'id' => $model->id]);
-                            },
-                            'format' => 'raw',
-                            'contentOptions' => ['style' => 'text-align: center'],
-                        ],
-                        'slug',
-                        'title',
-                        //['class' => ActionColumn::class],
-                    ],
-                ]
-            ); ?>
-        </div>
+                        <?= GridView::widget(
+                            [
+                                'dataProvider' => $dataProvider,
+                                //'filterModel' => $searchModel,
+                                'tableOptions' => [
+                                    'class' => 'table table-striped table-bordered',
+                                    'id' => 'category'
+                                ],
+                                'columns' => [
+                                    'id',
+                                    [
+                                        'attribute' => 'name',
+                                        'value' => fn(Category $model) => ($model->depth > 1 ? str_repeat(
+                                                    '&nbsp;&nbsp;&nbsp;',
+                                                    $model->depth - 1
+                                                ) . ' ' : '<i class="fas fa-home fa-xs"></i>&nbsp;&nbsp;') . Html::a(
+                                                Html::encode($model->name),
+                                                ['view', 'id' => $model->id]
+                                            ),
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'value' => fn(Category $model) => Html::a(
+                                                '<i class="fas fa-arrow-up"></i>',
+                                                ['move-up', 'id' => $model->id]
+                                            ) .
+                                            Html::a(
+                                                '<i class="fas fa-arrow-down"></i>',
+                                                ['move-down', 'id' => $model->id]
+                                            ),
+                                        'format' => 'raw',
+                                        'contentOptions' => ['style' => 'text-align: center'],
+                                    ],
+                                    'slug',
+                                    'title',
+                                    //['class' => ActionColumn::class],
+                                ],
+                            ]
+                        ); ?>
+                    </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <!--Footer-->
@@ -95,7 +104,7 @@ $js = <<< JS
        paging: true,
        lengthChange: false,
        searching: true,
-       ordering: true,
+       ordering: false,
        info: false,
        autoWidth: false,
        responsive: true,

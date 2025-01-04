@@ -60,9 +60,8 @@ PluginAsset::register($this)->add(
                                            ],
                                            [
                                                'attribute' => 'user_id',
-                                               'value' => function ($order) {
-                                                   return $order->customer_name;
-                                               },
+                                               'value' => fn ($order) =>
+                                                    $order->customer_name,
                                            ],
                                            [
                                                'attribute' => 'delivery_method_name',
@@ -81,9 +80,7 @@ PluginAsset::register($this)->add(
                                            ],
                                            [
                                                'attribute' => 'total_cost',
-                                               'value' => function ($order) {
-                                                   return $order->getTotalCost();
-                                               },
+                                               'value' => fn ($order) =>$order->getTotalCost(),
                                            ],
                                            'note:ntext',
                                        ],

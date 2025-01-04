@@ -16,7 +16,8 @@ use yii\helpers\Url;
 /* @var $cart \core\cart\schedule\Cart */
 
 PluginAsset::register($this)->add(
-    ['datatables',
+    [
+        'datatables',
         'datatables-bs4',
         'datatables-responsive',
         'datatables-searchbuilder'
@@ -24,7 +25,7 @@ PluginAsset::register($this)->add(
 );
 DataTableAsset::register($this);
 
-$this->title = Yii::t('app','Events');
+$this->title = Yii::t('app', 'Events');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -34,191 +35,196 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card card-secondary">
                     <div class='card-header'>
                         <h3 class='card-title'>
-                            <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
-                    </h3>
-                    <div class='card-tools'>
-                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
-                                    class='fas fa-expand'></i>
-                        </button>
-                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
-                                    class='fas fa-minus'></i>
-                        </button>
+                            <?= Html::a(
+                                Yii::t('app', 'Create'),
+                                ['create'],
+                                ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
+                            ) ?>
+                        </h3>
+                        <div class='card-tools'>
+                            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                        class='fas fa-expand'></i>
+                            </button>
+                            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                        class='fas fa-minus'></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <?= GridView::widget(
-                        [
-                            'dataProvider' => $dataProvider,
-                            //'filterModel' => $searchModel,
-                            'summary' => false,
-                            'emptyText' => false,
-                            'tableOptions' => [
-                                'class' => 'table table-striped table-bordered',
-                                'id' => 'event'
-                            ],
-                            'columns' => [
-                                [
-                                    'attribute' => 'start',
-                                    'value' => function ($model) {
-                                        return DATE('Y-m-d', strtotime($model->start));
-                                    },
-                                    'headerOptions' => ['class' => 'text-center'],
-                                    'contentOptions' => [
-                                        'class' => ['text-center align-middle']
-                                    ],
-                                    'format' => 'raw',
+                    <div class="card-body">
+                        <?= GridView::widget(
+                            [
+                                'dataProvider' => $dataProvider,
+                                //'filterModel' => $searchModel,
+                                'summary' => false,
+                                'emptyText' => false,
+                                'tableOptions' => [
+                                    'class' => 'table table-striped table-bordered',
+                                    'id' => 'event'
                                 ],
-                                [
-                                    'attribute' => 'master_id',
-                                    'value' => function ($model) {
-                                        return Html::a(
+                                'columns' => [
+                                    [
+                                        'attribute' => 'start',
+                                        'value' => fn($model) => DATE('Y-m-d', strtotime($model->start)),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'attribute' => 'master_id',
+                                        'value' => fn($model) => Html::a(
                                             Html::encode($model->master->username),
                                             ['view', 'id' => $model->id]
-                                        );
-                                    },'contentOptions' => [
-                                    'class' => ['text-center align-middle']
-                                ],
-                                    'format' => 'raw',
-                                ],
-                                [
-                                    'attribute' => 'client_id',
-                                    'value' => function ($model) {
-                                        return Html::a(
+                                        ),
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'attribute' => 'client_id',
+                                        'value' => fn($model) => Html::a(
                                             Html::encode($model->client->username),
                                             ['/user/view', 'id' => $model->client->id]
-                                        );
-                                    },'contentOptions' => [
-                                    'class' => ['text-center align-middle']
-                                ],
-                                    'format' => 'raw',
-                                ],
-                                [
-                                    'attribute' => 'service',
-                                    'value' => function ($model) {
-                                        return implode(', </br>', ArrayHelper::getColumn($model->services, 'name'));
-                                    },
-                                    'contentOptions' => [
-                                        'class' => ['text-center align-middle']
+                                        ),
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw',
                                     ],
-                                    'format' => 'raw'
-                                ],
-                                //'amount',
-                                [
-                                    'attribute' => 'cost',
-                                    'value' => function (Event $models) use ($cart) {
-                                        return $models->getDiscountedPrice($models, $cart);
-                                    }
-                                ],
-                                [
-                                    'attribute' => 'status',
-                                    'value' => function ($model) {
-                                        return EventPaymentStatusHelper::statusLabel($model->status);
-                                    },
-                                    'headerOptions' => ['class' => 'text-center'],
-                                    'contentOptions' => [
-                                        'class' => ['text-center align-middle']
+                                    [
+                                        'attribute' => 'service',
+                                        'value' => fn($model) => implode(
+                                            ', </br>',
+                                            ArrayHelper::getColumn(
+                                                $model->services,
+                                                'name'
+                                            )
+                                        ),
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw'
                                     ],
-                                    'format' => 'raw',
+                                    //'amount',
+                                    [
+                                        'attribute' => 'cost',
+                                        'value' => fn(Event $models) => $models->getDiscountedPrice($models, $cart),
 
-                                ],
-                                [
-                                    'attribute' => 'payment',
-                                    'value' => function ($model) {
-                                        return EventMethodsOfPayment::statusLabel($model->payment);
-                                    },
-                                    'headerOptions' => ['class' => 'text-center'],
-                                    'contentOptions' => [
-                                        'class' => ['text-center align-middle']
                                     ],
-                                    'format' => 'raw',
-                                ],
-                                [
-                                    'class' => 'yii\grid\ActionColumn',
-                                    'template' => '{status} {payment}',
-                                    'header' => '<i class="far fa-credit-card"></i>',
-                                    //'header' => Yii::t('schedule/event','Cash register'),
-                                    'headerOptions' => [
-                                        'class' => 'text-center'
+                                    [
+                                        'attribute' => 'status',
+                                        'value' => fn($model) => EventPaymentStatusHelper::statusLabel($model->status),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw',
+
                                     ],
-                                    'contentOptions' => [
-                                        'class' => ['text-center align-middle']
+                                    [
+                                        'attribute' => 'payment',
+                                        'value' => fn($model) => EventMethodsOfPayment::statusLabel($model->payment),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw',
                                     ],
-                                    'buttonOptions' => [
-                                        'class' => 'text-center'
-                                    ],
-                                    'visibleButtons' => [
-                                        'status' => true,
-                                        'payment' => function ($model) {
-                                            return $model->status == 1;
-                                        },
-                                    ],
-                                    'buttons' => [
-                                        'status' => function ($url, $model, $key) {
-                                            return $model->status == 0 ? Html::a(
-                                                    '<i class="fas fa-ruble-sign"></i>',
+                                    [
+                                        'class' => 'yii\grid\ActionColumn',
+                                        'template' => '{status} {payment}',
+                                        'header' => '<i class="far fa-credit-card"></i>',
+                                        //'header' => Yii::t('schedule/event','Cash register'),
+                                        'headerOptions' => [
+                                            'class' => 'text-center'
+                                        ],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'buttonOptions' => [
+                                            'class' => 'text-center'
+                                        ],
+                                        'visibleButtons' => [
+                                            'status' => true,
+                                            'payment' => fn($model) => $model->status == Event::STATUS_PAYED,
+                                        ],
+                                        'buttons' => [
+                                            'status' => fn(
+                                                $url,
+                                                $model,
+                                                $key
+                                            ) => $model->status == Event::STATUS_NOT_PAYED ? Html::a(
+                                                '<i class="fas fa-ruble-sign"></i>',
                                                 //Yii::t('schedule/event','Pay'),
                                                 Url::to(['schedule/event/pay', 'id' => $model->id]),
-                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs',
-                                                        'title'=>Yii::t('schedule/event','Pay')]
+                                                [
+                                                    'class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs',
+                                                    'title' => Yii::t('schedule/event', 'Pay')
+                                                ]
                                             ) : Html::a(
-                                                    '<i class="fas fa-ruble-sign"></i>',
+                                                '<i class="fas fa-ruble-sign"></i>',
                                                 //Yii::t('schedule/event','No pay'),
                                                 Url::to(['schedule/event/unpay', 'id' => $model->id]),
-                                                ['class' => 'btn bg-danger bg-gradient text-shadow box-shadow btn-xs',
-                                                        'title'=>Yii::t('schedule/event','No pay')]
-                                            );
-                                        },
-                                        'payment' => function ($url, $model, $key) {
-                                            return $model->payment == 2 ? Html::a(
-                                                    '<i class="fab fa-cc-visa"></i>',
+                                                [
+                                                    'class' => 'btn bg-danger bg-gradient text-shadow box-shadow btn-xs',
+                                                    'title' => Yii::t('schedule/event', 'No pay')
+                                                ]
+                                            ),
+                                            'payment' => fn(
+                                                $url,
+                                                $model,
+                                                $key
+                                            ) => $model->payment == Event::STATUS_CASH ? Html::a(
+                                                '<i class="fab fa-cc-visa"></i>',
 
                                                 Url::to(['schedule/event/card', 'id' => $model->id]),
-                                                ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs',
-                                                    'title'=>Yii::t('schedule/event','Card')]
+                                                [
+                                                    'class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs',
+                                                    'title' => Yii::t('schedule/event', 'Card')
+                                                ]
                                             ) : Html::a(
-                                                    '<i class="fas fa-money-bill-wave-alt"></i>',
+                                                '<i class="fas fa-money-bill-wave-alt"></i>',
                                                 //Yii::t('schedule/event','Cash'),
                                                 Url::to(['schedule/event/cash', 'id' => $model->id]),
-                                                ['class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs',
-                                                        'title'=>Yii::t('schedule/event','Cash')]
-                                            );
-                                        },
+                                                [
+                                                    'class' => 'btn bg-success bg-gradient text-shadow box-shadow btn-xs',
+                                                    'title' => Yii::t('schedule/event', 'Cash')
+                                                ]
+                                            ),
+                                        ],
                                     ],
-                                ],
-                                [
-                                    'class' => 'yii\grid\ActionColumn',
-                                    'template' => '{copy}',
-                                    'header' => '<i class="far fa-copy"></i>',
-                                    //'header' => Yii::t('app','Copy'),
-                                    'headerOptions' => [
-                                        'class' => 'text-center'
-                                    ],
-                                    'contentOptions' => [
-                                        'class' => ['text-center align-middle']
-                                    ],
-                                    'buttonOptions' => [
-                                        'class' => 'text-center'
-                                    ],
-                                    'visibleButtons' => [
-                                        'status' => true,
-                                        'payment' => function ($model) {
-                                            return $model->status == 1;
-                                        },
-                                    ],
-                                    'buttons' => [
-                                        'copy' => function ($url, $model, $key) {
-                                            return Html::a(
-                                                Yii::t('app','Copy'),
+                                    [
+                                        'class' => 'yii\grid\ActionColumn',
+                                        'template' => '{copy}',
+                                        'header' => '<i class="far fa-copy"></i>',
+                                        //'header' => Yii::t('app','Copy'),
+                                        'headerOptions' => [
+                                            'class' => 'text-center'
+                                        ],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'buttonOptions' => [
+                                            'class' => 'text-center'
+                                        ],
+                                        'visibleButtons' => [
+                                            'status' => true,
+                                            'payment' => fn($model) => $model->status == Event::STATUS_PAYED,
+                                        ],
+                                        'buttons' => [
+                                            'copy' => fn($url, $model, $key) => Html::a(
+                                                Yii::t('app', 'Copy'),
                                                 Url::to(['schedule/event/copy', 'id' => $model->id]),
                                                 ['class' => 'btn bg-info bg-gradient text-shadow box-shadow btn-xs']
-                                            );
-                                        },
+                                            ),
+                                        ],
                                     ],
                                 ],
-                            ],
-                        ]
-                    ); ?>
-                </div>
+                            ]
+                        ); ?>
+                    </div>
                 </div>
             </div>
         </div>

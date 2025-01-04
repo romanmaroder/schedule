@@ -52,21 +52,18 @@ DataTableAsset::register($this);
                                         'id',
                                         [
                                             'attribute' => 'name',
-                                            'value' => function (Category $model) {
-                                                $indent = ($model->depth > 1 ? str_repeat(
+                                            'value' => fn (Category $model) =>
+                                                 ($model->depth > 1 ? str_repeat(
                                                         '&nbsp;&nbsp;&nbsp;',
                                                         $model->depth - 1
-                                                    ) . ' ' : '<i class="fas fa-home fa-xs"></i> ');
-                                                return $indent . Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                                            },
+                                                    ) . ' ' : '<i class="fas fa-home fa-xs"></i>&nbsp;&nbsp;'). Html::a(Html::encode($model->name), ['view', 'id' => $model->id]),
                                             'format' => 'raw',
                                         ],
                                         [
-                                            'value' => function (Category $model) {
-                                                return
+                                            'value' => fn (Category $model) =>
+
                                                     Html::a('<i class="fas fa-arrow-up"></i>', ['move-up', 'id' => $model->id]) .
-                                                    Html::a('<i class="fas fa-arrow-down"></i>', ['move-down', 'id' => $model->id]);
-                                            },
+                                                    Html::a('<i class="fas fa-arrow-down"></i>', ['move-down', 'id' => $model->id]),
                                             'format' => 'raw',
                                             'contentOptions' => ['style' => 'text-align: center'],
                                         ],
