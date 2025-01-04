@@ -4,26 +4,21 @@
 namespace core\entities;
 
 
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\ExpectedValues;
+
 class Schedule
 {
-    public $hoursWork;
-    public $weekends;
-    public $week;
-
     /**
-     * core constructor.
+     * Schedule constructor.
      * @param $hoursWork
      * @param $weekends
      * @param $week
      */
-    public function __construct($hoursWork, $weekends, $week)
-    {
-        $this->hoursWork = $hoursWork;
-        $this->weekends = $weekends;
-        $this->week = $week;
-    }
+    public function __construct(public $hoursWork, public $weekends, public $week)
+    {}
 
-    public static function coreDays(): array
+    public static function scheduleDays(): array
     {
         return (new ScheduleItem())->days();
     }
@@ -36,11 +31,12 @@ class Schedule
     public static function getScheduleDays($days): array
     {
         if (is_array($days)) {
-            return $result = array_intersect_key(self::coreDays(), array_flip($days));
+            return $result = array_intersect_key(self::scheduleDays(), array_flip($days));
         }
+        return [];
     }
 
-    public static function coreHours(): array
+    public static function scheduleHours(): array
     {
         return (new ScheduleItem())->hours();
     }
@@ -53,7 +49,7 @@ class Schedule
     public static function getScheduleHours($hours): array
     {
         if (is_array($hours)) {
-            return $result = array_intersect_key(self::coreHours(), array_flip($hours));
+            return $result = array_intersect_key(self::scheduleHours(), array_flip($hours));
         }
         return [];
     }
@@ -65,7 +61,7 @@ class Schedule
     public function disabledHours($hours): array
     {
         if (is_array($hours)) {
-            return array_keys(array_diff_key(self::coreHours(), array_flip($hours)));
+            return array_keys(array_diff_key(self::scheduleHours(), array_flip($hours)));
         }
         return [];
     }

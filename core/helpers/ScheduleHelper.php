@@ -12,12 +12,12 @@ class ScheduleHelper
 
     public static function days(): array
     {
-        return Schedule::coreDays();
+        return Schedule::scheduleDays();
     }
 
     public static function hours(): array
     {
-        return Schedule::coreHours();
+        return Schedule::scheduleHours();
     }
 
     public static function getWeekends($days): string

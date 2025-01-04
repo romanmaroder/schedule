@@ -5,24 +5,58 @@ namespace core\entities;
 
 
 use core\helpers\tHelper;
+use JetBrains\PhpStorm\ArrayShape;
 
 class ScheduleItem
 
 {
-
+    #[ArrayShape([
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ])]
     public function days(): array
     {
         return [
-            1 => tHelper::translate('user/scheduleItem','Monday'),
-            2 => tHelper::translate('user/scheduleItem','Tuesday'),
-            3 => tHelper::translate('user/scheduleItem','Wednesday'),
-            4 => tHelper::translate('user/scheduleItem','Thursday'),
-            5 => tHelper::translate('user/scheduleItem','Friday'),
-            6 => tHelper::translate('user/scheduleItem','Saturday'),
-            0 => tHelper::translate('user/scheduleItem','Sunday'),
+            1 => tHelper::translate('user/scheduleItem', 'Monday'),
+            2 => tHelper::translate('user/scheduleItem', 'Tuesday'),
+            3 => tHelper::translate('user/scheduleItem', 'Wednesday'),
+            4 => tHelper::translate('user/scheduleItem', 'Thursday'),
+            5 => tHelper::translate('user/scheduleItem', 'Friday'),
+            6 => tHelper::translate('user/scheduleItem', 'Saturday'),
+            0 => tHelper::translate('user/scheduleItem', 'Sunday'),
         ];
     }
 
+    #[ArrayShape([
+        '0:00',
+        '1:00',
+        '2:00',
+        '3:00',
+        '4:00',
+        '5:00',
+        '6:00',
+        '7:00',
+        '8:00',
+        '9:00',
+        '10:00',
+        '11:00',
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+        '18:00',
+        '19:00',
+        '20:00',
+        '21:00',
+        '22:00',
+        '23:00'])]
     public function hours(): array
     {
         return [
@@ -52,7 +86,6 @@ class ScheduleItem
             23 => '23:00'
         ];
     }
-
 
 
 }

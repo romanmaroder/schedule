@@ -6,28 +6,21 @@ namespace core\entities;
 
 readonly class Address
 {
-    public null|string $town;
-    public null|string $borough;
-    public null|string $street;
-    public null|string $home;
-    public null|string $apartment;
 
     /**
-     * Address constructor.
-     * @param $town
-     * @param $borough
-     * @param $street
-     * @param $home
-     * @param $apartment
+     * @param string|null $town
+     * @param string|null $borough
+     * @param string|null $street
+     * @param string|null $home
+     * @param string|null $apartment
      */
-    public function __construct($town, $borough, $street, $home, $apartment)
-    {
-        $this->town = $town;
-        $this->borough = $borough;
-        $this->street = $street;
-        $this->home = $home;
-        $this->apartment = $apartment;
-    }
+    public function __construct(
+        public string|null $town,
+        public string|null $borough,
+        public string|null $street,
+        public string|null $home,
+        public string|null $apartment
+    ) {}
 
 
 }
