@@ -5,6 +5,7 @@ namespace core\helpers;
 
 
 use core\access\Rbac;
+use core\entities\Enums\EmployeeStatusEnum;
 use core\entities\User\Employee\Employee;
 use JetBrains\PhpStorm\ArrayShape;
 use Yii;
@@ -13,12 +14,11 @@ use yii\helpers\Html;
 
 class EmployeeHelper
 {
-    #[ArrayShape([Employee::STATUS_INACTIVE => "string", Employee::STATUS_ACTIVE => "string"])]
     public static function statusList(): array
     {
         return [
-            Employee::STATUS_INACTIVE => \Yii::t('app','Inactive'),
-            Employee::STATUS_ACTIVE => \Yii::t('app','Active'),
+            EmployeeStatusEnum::STATUS_INACTIVE->value => \Yii::t('app','Inactive'),
+            EmployeeStatusEnum::STATUS_ACTIVE->value => \Yii::t('app','Active'),
         ];
     }
 
@@ -30,8 +30,8 @@ class EmployeeHelper
     public static function statusLabel($status): string
     {
         $class = match ($status) {
-            Employee::STATUS_INACTIVE => 'badge bg-danger bg-gradient text-shadow box-shadow',
-            Employee::STATUS_ACTIVE => 'badge bg-success bg-gradient text-shadow box-shadow',
+            EmployeeStatusEnum::STATUS_INACTIVE->value => 'badge bg-danger bg-gradient text-shadow box-shadow',
+            EmployeeStatusEnum::STATUS_ACTIVE->value => 'badge bg-success bg-gradient text-shadow box-shadow',
             default => 'badge bg-info',
         };
 

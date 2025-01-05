@@ -48,7 +48,7 @@ class EmployeeExistCreateForm extends CompositeForm
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'userId'=>tHelper::translate('user/employee','User Id'),

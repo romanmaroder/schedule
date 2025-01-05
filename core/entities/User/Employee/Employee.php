@@ -7,6 +7,7 @@ namespace core\entities\User\Employee;
 use core\entities\Address;
 use core\entities\behaviors\AddressBehavior;
 use core\entities\behaviors\ScheduleWorkBehavior;
+use core\entities\Enums\EmployeeStatusEnum;
 use core\entities\Schedule;
 use core\entities\Schedule\Event\Event;
 use core\entities\User\Employee\queries\EmployeeQuery;
@@ -33,7 +34,7 @@ use yii\db\ActiveRecord;
  * @property string $address_json
  * @property string $color
  * @property string $role_id
- * @property int $status
+ * @property EmployeeStatusEnum $status
  * @property Address $address
  * @property Schedule $schedule
  * @property User $user
@@ -46,10 +47,6 @@ class Employee extends ActiveRecord
 {
     public $address;
     public $schedule;
-
-    public const STATUS_INACTIVE = 0;
-    public const STATUS_ACTIVE = 1;
-
 
     public static function attach(
         $rateId,
@@ -75,7 +72,7 @@ class Employee extends ActiveRecord
         $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
-        $employee->status = self::STATUS_INACTIVE;
+        $employee->status = EmployeeStatusEnum::STATUS_INACTIVE->value;
         return $employee;
     }
 
@@ -105,7 +102,7 @@ class Employee extends ActiveRecord
         $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
-        $employee->status = self::STATUS_ACTIVE;
+        $employee->status = EmployeeStatusEnum::STATUS_ACTIVE->value;
         return $employee;
     }
 
@@ -151,7 +148,7 @@ class Employee extends ActiveRecord
 
     public function isActive(): bool
     {
-        return $this->status == self::STATUS_ACTIVE;
+        return $this->status == EmployeeStatusEnum::STATUS_ACTIVE;
     }
 
     /**
@@ -162,7 +159,7 @@ class Employee extends ActiveRecord
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
-    public function getFullAddress()
+    public function getFullAddress(): string
     {
         return $this->address->town . PHP_EOL . $this->address->borough . PHP_EOL . $this->address->street . PHP_EOL
             . $this->address->home . PHP_EOL . $this->address->apartment;
@@ -176,7 +173,7 @@ class Employee extends ActiveRecord
         return true;
     }
 
-    public function issetBirthday($birthday)
+    public function issetBirthday($birthday): bool
     {
         if (!$birthday) {
             return false;
@@ -244,7 +241,7 @@ class Employee extends ActiveRecord
         return $this->hasMany(Event::class, ['master_id' => 'user_id']);
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'user_id'=>tHelper::translate('user/employee','User Id'),

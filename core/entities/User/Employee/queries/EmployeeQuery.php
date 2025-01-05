@@ -4,15 +4,15 @@
 namespace core\entities\User\Employee\queries;
 
 
-use core\entities\User\Employee\Employee;
+use core\entities\Enums\EmployeeStatusEnum;
 
 class EmployeeQuery extends \yii\db\ActiveQuery
 {
-    public function active($alias = null)
+    public function active($alias = null): EmployeeQuery
     {
         return $this->andWhere(
             [
-                ($alias ? $alias . '.' : '') . 'status' => Employee::STATUS_ACTIVE,
+                ($alias ? $alias . '.' : '') . 'status' => EmployeeStatusEnum::STATUS_ACTIVE,
             ]
         );
     }

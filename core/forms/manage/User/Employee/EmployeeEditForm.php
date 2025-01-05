@@ -60,7 +60,7 @@ class EmployeeEditForm extends CompositeForm
         parent::__construct($config);
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['userId', 'rateId', 'priceId', 'firstName', 'lastName', 'role'], 'required'],
@@ -70,7 +70,7 @@ class EmployeeEditForm extends CompositeForm
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'userId'=>tHelper::translate('user/employee','User Id'),
