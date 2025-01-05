@@ -45,39 +45,30 @@ DataTableAsset::register($this);
                             'columns' => [
                                 [
                                     'attribute' => 'price.name',
-                                    'label' => Yii::t('price','Price'),
-                                    'value' => function ($model) {
-                                        return $model->price->name;
-                                    }
+                                    'label' => Yii::t('price', 'Price'),
+                                    'value' => fn($model) => $model->price->name
                                 ],
                                 [
                                     'attribute' => 'services.category.parent.name',
-                                    'label' => Yii::t('schedule/service/category','Categories'),
-                                    'value' => function ($model) use ($category) {
-                                        return $model->services->category->parent->name;
-                                    },
+                                    'label' => Yii::t('schedule/service/category', 'Categories'),
+                                    'value' => fn($model) => $model->services->category->parent->name,
                                     'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'services.name',
-                                    'value' => function ($model) {
-                                        return Html::a(
-                                            Html::encode($model->services->name),
-                                            ['view', 'id' => $model->services->id],
-                                            [
-                                                'category',
-                                                'id' => $model->services->category->id,
-                                            ]
-
-                                        );
-                                    },
+                                    'value' => fn($model) => Html::a(
+                                        Html::encode($model->services->name),
+                                        ['view', 'id' => $model->services->id],
+                                        [
+                                            'category',
+                                            'id' => $model->services->category->id,
+                                        ]
+                                    ),
                                     'format' => 'raw'
                                 ],
                                 [
                                     'attribute' => 'price.cost',
-                                    'value' => function ($model) {
-                                        return $model->cost;
-                                    }
+                                    'value' => fn($model) => $model->cost
                                 ]
 
                             ],

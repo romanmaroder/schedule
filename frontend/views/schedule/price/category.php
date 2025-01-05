@@ -47,26 +47,20 @@ PluginAsset::register($this)->add(
                             'columns' => [
                                 [
                                     'attribute' => 'parent category',
-                                    'value' => function (Service $model) {
-                                        return Html::a(
+                                    'value' => fn (Service $model) => Html::a(
                                             Html::encode($model->category->parent->name),
                                             ['category', 'id' => $model->category->parent->id]
-                                        );
-                                    },
+                                        ),
                                     'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'name',
-                                    'value' => function (Service $model) {
-                                        return Html::a(Html::encode($model->name), ['view', 'id' => $model->id]);
-                                    },
+                                    'value' => fn (Service $model) => Html::a(Html::encode($model->name), ['view', 'id' => $model->id]),
                                     'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'price_new',
-                                    'value' => function (Service $model) use ($user) {
-                                        return $model->price_new * $user->employee->rate->rate;
-                                    },
+                                    'value' => fn (Service $model)=> $model->price_new * $user->employee->rate->rate,
                                 ],
                             ],
                         ]

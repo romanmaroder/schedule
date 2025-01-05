@@ -41,19 +41,17 @@ DataTableAsset::register($this);
                     ],
                     [
                         'attribute' => Yii::t('schedule/event','Client'),
-                        'value' => function ($model) {
-                            return Html::a(
+                        'value' => fn ($model) =>
+                             Html::a(
                                 Html::encode($model->client->username),
                                 ['/user/view', 'id' => $model->client->id]
-                            );
-                        },
+                            ),
                         'format' => 'raw',
                     ],
                     [
                         'label' => Yii::t('schedule/event','Services'),
-                        'value' => function ($provider) {
-                            return implode(', </br>', ArrayHelper::getColumn($provider->services, 'name'));
-                        },
+                        'value' => fn ($provider) =>
+                             implode(', </br>', ArrayHelper::getColumn($provider->services, 'name')),
                         'format' => 'raw'
                     ],
                     [
@@ -68,9 +66,8 @@ DataTableAsset::register($this);
                     [
                         'attribute' => 'start',
                         'label' => Yii::t('schedule/event','Time'),
-                        'value'=>function ($model){
-                            return substr($model['start'],10,6) . ' - ' . substr($model['end'],10,6);
-                        },
+                        'value'=>fn ($model)=>
+                             substr($model['start'],10,6) . ' - ' . substr($model['end'],10,6),
                     ],/*
                     [
                         'attribute' => 'start',

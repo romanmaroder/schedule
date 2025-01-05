@@ -31,13 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],*/
                 [
                     'attribute' => 'client.phone',
-                    'value' => function ($model) {
-                        return Html::a(
+                    'value' => fn ($model) => Html::a(
                             Html::encode($model->client->phone),
                             'tel:' . $model->client->phone,
                             ['view', 'id' => $model->id]
-                        );
-                    },
+                        ),
                     'format' => 'raw',
                 ],
 
@@ -62,15 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'master_id',
-                    'value' => function ($model) {
-                        if ($model->employee !== null) {
-                            return Html::a(
-                                Html::encode($model->master->username),
-                                ['/users/user/view','id'=>$model->master->id]
-                            );
-                        }
-                        return $model->getFullName();
-                    },
+                    'value' => fn($model) => Html::a(
+                        Html::encode($model->master->username),
+                        ['/employee/view', 'id' => $model->employee->id]
+                    ) ?? $model->getFullName(),
                     'format' => 'raw',
                     'visible' => Yii::$app->user->identity->getId() != $model->master_id,
                 ],

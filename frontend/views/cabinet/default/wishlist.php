@@ -31,21 +31,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'columns' => [
                 [
-                    'value' => function (Product $model) {
-                        return $model->mainPhoto ? Html::img(
+                    'value' => fn (Product $model) =>
+                         $model->mainPhoto ?? Html::img(
                             $model->mainPhoto->getThumbFileUrl('file', 'admin'),
                             ['class' => 'img-shadow']
-                        ) : null;
-                    },
+                        ),
                     'format' => 'raw',
                     'contentOptions' => ['style' => 'width: 100px'],
                 ],
                 //'id',
                 [
                     'attribute' => 'name',
-                    'value' => function (Product $model) {
-                        return Html::a(Html::encode($model->name), ['/shop/catalog/product', 'id' => $model->id]);
-                    },
+                    'value' => fn (Product $model) =>
+                         Html::a(Html::encode($model->name), ['/shop/catalog/product', 'id' => $model->id]),
                     'contentOptions' => [
                         'class'=>'align-middle'
                     ],
@@ -53,9 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'price_new',
-                    'value' => function (Product $model) {
-                        return PriceHelper::format($model->price_new);
-                    },
+                    'value' => fn (Product $model) =>
+                         PriceHelper::format($model->price_new),
                     'contentOptions' => [
                         'class'=>'align-middle'
                     ],
@@ -67,8 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class'=>'align-middle'
                     ],
                     'buttons' => [
-                        'delete' => function ($url, $model, $key) {
-                            return Html::a(
+                        'delete' => fn($url, $model, $key) => Html::a(
                                 '<i class="fas fa-trash-alt"></i>',
                                 ['cabinet/default/wishlist-delete', 'id' => $model->id],
                                 [
@@ -76,8 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data-confirm' => 'Are you sure you want to delete?',
                                     'data-method' => 'post',
                                 ]
-                            );
-                        },
+                            ),
                     ],
                 ],
             ],

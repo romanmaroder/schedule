@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </h3>
                         <ul class="nav flex-column">
                         <?php foreach ($menu as $child): ?>
-                            <?
+                            <?php
                             echo Html::tag(
                                 'li',
                                 Html::a(
@@ -79,7 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel-body">
         <?php
 /*        foreach ($category->children as $child): */?>
-            <a href="<?/*= Html::encode(Url::to(['category', 'id' => $child->id])) */?>"><?/*= Html::encode(
+            <a href="<?php
+/*= Html::encode(Url::to(['category', 'id' => $child->id])) */?>"><?php/*= Html::encode(
                     $child->name
                 ) */?></a> &nbsp;
         <?php

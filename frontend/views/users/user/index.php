@@ -44,39 +44,41 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <h2 class="lead mb-3"><b><?= $user->username ?></b></h2>
 
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <?
+                                        <?php
                                         if ($user->status): ?>
                                             <li class="mb-2">
                                                 <span class="fa-li"><i class="fas fa-shield-alt"></i></span>
                                                 <?= UserHelper::statusLabel($user->status) ?>
                                             </li>
-                                        <?
+                                        <?php
                                         endif; ?>
 
-                                        <?
+                                        <?php
                                         if ($user->phone): ?>
                                             <li class="mb-2">
                                                 <span class="fa-li"><i class="fas fa-phone"></i></span>
                                                 <a href="tel:<?= $user->phone; ?>"> <?= $user->phone; ?></a>
                                             </li>
-                                        <?
+                                        <?php
                                         endif; ?>
-                                        <?
+                                        <?php
                                         if ($user->email): ?>
                                                 <li class="mb-2">
                                                     <span class="fa-li"><i class="fas fa-envelope"></i></span>
                                                     <a href="mailto:<?= $user->email; ?>"><?= $user->email; ?></a>
                                                 </li>
-                                            <?endif; ?>
-                                            <?
+                                        <?php
+                                        endif; ?>
+                                        <?php
                                             if ($user->schedule->week): ?>
                                                 <li class="mb-2">
                                                     <span class="fa-li"><i class="fas fa-calendar-week"></i></span>
                                                     Week :
                                                     <span><?=  $user->schedule->week; ?></span>
                                                 </li>
-                                            <?endif; ?>
-                                            <?
+                                            <?php
+                                            endif; ?>
+                                        <?php
                                             if ($user->schedule->weekends): ?>
                                                 <li class="mb-2">
                                                     <span class="fa-li"><i class="fas fa-calendar-alt"></i></span>
@@ -85,8 +87,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             $user->schedule->weekends
                                                         ); ?></span>
                                                 </li>
-                                            <?endif; ?>
-                                            <?
+                                            <?php
+                                            endif; ?>
+                                        <?php
                                             if ($user->schedule->hoursWork): ?>
                                                 <li class="mb-2">
                                                     <span class="fa-li"><i class="fas fa-clock"></i></span>
@@ -95,15 +98,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             $user->schedule->hoursWork
                                                         ); ?></span>
                                                 </li>
-                                            <?endif; ?>
-                                            <?
+                                            <?php
+                                            endif; ?>
+                                        <?php
                                             if ($user->notice): ?>
                                                 <li class="mb-2">
                                                     <span class="fa-li"><i class="fas fa-comment-alt"></i></span>
                                                     Notice :
                                                     <span><?= $user->notice; ?></span>
                                                 </li>
-                                            <?endif; ?>
+                                            <?php
+                                            endif; ?>
                                         </ul>
                                 </div>
                             </div>

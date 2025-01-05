@@ -33,17 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns' => [
                         [
                             'attribute' => 'id',
-                            'value' => function (Order $model) {
-                                return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
-                            },
+                            'value' => fn (Order $model) =>
+                                 Html::a(Html::encode($model->id), ['view', 'id' => $model->id]),
                             'format' => 'raw',
                         ],
                         'created_at:datetime',
                         [
                             'attribute' => 'status',
-                            'value' => function (Order $model) {
-                                return OrderHelper::statusLabel($model->current_status);
-                            },
+                            'value' => fn (Order $model) =>
+                                 OrderHelper::statusLabel($model->current_status),
                             'format' => 'raw',
                         ],
                         ['class' => ActionColumn::class,

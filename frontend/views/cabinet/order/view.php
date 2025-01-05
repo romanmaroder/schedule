@@ -37,9 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'cost',
                 [
                     'attribute' => 'cost',
-                    'value' => function (Order $order) {
-                        return $order->getTotalCost();
-                    },
+                    'value' => fn (Order $order) =>
+                         $order->getTotalCost(),
                 ],
                 'note:ntext',
             ],

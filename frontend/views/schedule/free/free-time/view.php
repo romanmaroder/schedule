@@ -22,23 +22,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'master_id',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        return Html::a(
+                    'value' => fn ($model) =>
+                         Html::a(
                             Html::encode($model->master->username),
                             ['/employee/view', 'id' => $model->employee->id ?? $model->master_id]
 
-                        );
-                    }
+                        )
                 ],
                 [
                     'attribute' => 'additional_id',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        return Html::a(
+                    'value' => fn ($model) => Html::a(
                             Html::encode($model->additional->name),
                             ['/schedule/additional-category/view', 'id' => $model->additional->category_id]
-                        );
-                    }
+                        )
                 ],
                 [
                     'attribute' => 'start',
