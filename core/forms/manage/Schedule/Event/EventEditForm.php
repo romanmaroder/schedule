@@ -65,7 +65,7 @@ class EventEditForm extends CompositeForm
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'discount' => tHelper::translate('schedule/event', 'Discount'),

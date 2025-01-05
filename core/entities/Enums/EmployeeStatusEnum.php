@@ -2,9 +2,15 @@
 
 namespace core\entities\Enums;
 
-enum EmployeeStatusEnum: int
+use core\entities\Enums\Interface\UserEnumInterface;
+use core\entities\Enums\Traits\UserEnumTrait;
+
+enum EmployeeStatusEnum: int implements UserEnumInterface
 {
-    case STATUS_INACTIVE = 0;
+    use UserEnumTrait;
 
     case STATUS_ACTIVE = 1;
+
+    case STATUS_INACTIVE = 0;
+
 }

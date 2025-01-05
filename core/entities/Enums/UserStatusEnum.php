@@ -2,12 +2,15 @@
 
 namespace core\entities\Enums;
 
-enum UserStatusEnum: int
-{
-    case STATUS_DELETED = 0;
+use core\entities\Enums\Interface\UserEnumInterface;
+use core\entities\Enums\Traits\UserEnumTrait;
 
-    case STATUS_INACTIVE = 9;
+enum UserStatusEnum: int implements UserEnumInterface
+{
+    use UserEnumTrait;
 
     case STATUS_ACTIVE = 10;
+
+    case STATUS_INACTIVE = 9;
 
 }

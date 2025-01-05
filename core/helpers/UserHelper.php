@@ -14,10 +14,7 @@ class UserHelper
 {
     public static function statusList(): array
     {
-        return [
-            UserStatusEnum::STATUS_INACTIVE->value => \Yii::t('app', 'Inactive'),
-            UserStatusEnum::STATUS_ACTIVE->value => \Yii::t('app', 'Active'),
-        ];
+        return UserStatusEnum::getList();
     }
 
     public static function statusName(string $status): string
@@ -27,11 +24,7 @@ class UserHelper
 
     public static function statusLabel($status): string
     {
-        $class = match ($status) {
-            UserStatusEnum::STATUS_INACTIVE->value => 'badge bg-danger bg-gradient text-shadow box-shadow',
-            UserStatusEnum::STATUS_ACTIVE->value => 'badge bg-success bg-gradient text-shadow box-shadow',
-            default => 'badge bg-info',
-        };
+        $class = UserStatusEnum::getBadge($status);
 
         return Html::tag(
             'span',

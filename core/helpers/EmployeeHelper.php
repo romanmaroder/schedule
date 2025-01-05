@@ -16,10 +16,8 @@ class EmployeeHelper
 {
     public static function statusList(): array
     {
-        return [
-            EmployeeStatusEnum::STATUS_INACTIVE->value => \Yii::t('app','Inactive'),
-            EmployeeStatusEnum::STATUS_ACTIVE->value => \Yii::t('app','Active'),
-        ];
+        return EmployeeStatusEnum::getList();
+
     }
 
     public static function statusName(string $status): string
@@ -29,11 +27,7 @@ class EmployeeHelper
 
     public static function statusLabel($status): string
     {
-        $class = match ($status) {
-            EmployeeStatusEnum::STATUS_INACTIVE->value => 'badge bg-danger bg-gradient text-shadow box-shadow',
-            EmployeeStatusEnum::STATUS_ACTIVE->value => 'badge bg-success bg-gradient text-shadow box-shadow',
-            default => 'badge bg-info',
-        };
+        $class=EmployeeStatusEnum::getBadge($status);
 
         return Html::tag(
             'span',
