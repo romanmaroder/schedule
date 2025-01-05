@@ -3,11 +3,11 @@
 namespace core\entities\Enums;
 
 use core\entities\Enums\Interface\UserEnumInterface;
-use core\entities\Enums\Traits\UserEnumTrait;
+use core\entities\Enums\Traits\UserStatusEnumTrait;
 
 enum UserStatusEnum: int implements UserEnumInterface
 {
-    use UserEnumTrait;
+    use UserStatusEnumTrait;
 
     case STATUS_ACTIVE = 10;
 

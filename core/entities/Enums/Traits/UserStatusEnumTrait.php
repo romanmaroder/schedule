@@ -4,7 +4,7 @@ namespace core\entities\Enums\Traits;
 
 use core\entities\Enums\Interface\UserEnumInterface;
 
-trait UserEnumTrait
+trait UserStatusEnumTrait
 {
 
     public static function getList(): array

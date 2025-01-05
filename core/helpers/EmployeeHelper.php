@@ -38,11 +38,7 @@ class EmployeeHelper
         );
     }
 
-    #[ArrayShape([
-        Rbac::ROLE_ADMIN => "string",
-        Rbac::ROLE_EMPLOYEE => "string",
-        Rbac::ROLE_MANAGER => "string"
-    ])] public static function rolesList(): array
+     public static function rolesList(): array
     {
         return [
             Rbac::ROLE_ADMIN => Yii::t('role','admin'),
