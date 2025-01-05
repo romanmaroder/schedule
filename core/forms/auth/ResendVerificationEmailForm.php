@@ -2,6 +2,7 @@
 
 namespace core\forms\auth;
 
+use core\entities\Enums\UserStatusEnum;
 use core\entities\User\User;
 use yii\base\Model;
 
@@ -24,7 +25,7 @@ class ResendVerificationEmailForm extends Model
             ['email', 'email'],
             ['email', 'exist',
                 'targetClass' => User::class,
-                'filter' => ['status' => User::STATUS_INACTIVE],
+                'filter' => ['status' => UserStatusEnum::STATUS_INACTIVE],
                 'message' => 'There is no user with this email address.'
             ],
         ];

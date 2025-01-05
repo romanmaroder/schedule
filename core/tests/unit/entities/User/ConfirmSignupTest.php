@@ -5,6 +5,7 @@ namespace core\tests\unit\entities\User;
 
 
 use Codeception\Test\Unit;
+use core\entities\Enums\UserStatusEnum;
 use core\entities\User\User;
 
 class ConfirmSignupTest extends Unit
@@ -12,7 +13,7 @@ class ConfirmSignupTest extends Unit
     public function testSuccess()
     {
         $user = new User([
-            'status' => User::STATUS_INACTIVE,
+            'status' => UserStatusEnum::STATUS_INACTIVE,
             'verification_token' => 'token',
         ]);
 
@@ -26,7 +27,7 @@ class ConfirmSignupTest extends Unit
     public function testAlreadyActive()
     {
         $user = new User([
-            'status' => User::STATUS_ACTIVE,
+            'status' => UserStatusEnum::STATUS_ACTIVE,
             'verification_token' => null,
         ]);
 

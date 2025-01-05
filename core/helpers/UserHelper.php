@@ -4,20 +4,19 @@
 namespace core\helpers;
 
 
+use core\entities\Enums\UserStatusEnum;
 use core\entities\User\User;
-use JetBrains\PhpStorm\ArrayShape;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class UserHelper
 {
-    #[ArrayShape([User::STATUS_INACTIVE => "string", User::STATUS_ACTIVE => "string"])]
     public static function statusList(): array
     {
         return [
-            User::STATUS_INACTIVE => \Yii::t('app','Inactive'),
-            User::STATUS_ACTIVE => \Yii::t('app','Active'),
+            UserStatusEnum::STATUS_INACTIVE->value => \Yii::t('app', 'Inactive'),
+            UserStatusEnum::STATUS_ACTIVE->value => \Yii::t('app', 'Active'),
         ];
     }
 
@@ -29,8 +28,8 @@ class UserHelper
     public static function statusLabel($status): string
     {
         $class = match ($status) {
-            User::STATUS_INACTIVE => 'badge bg-danger bg-gradient text-shadow box-shadow',
-            User::STATUS_ACTIVE => 'badge bg-success bg-gradient text-shadow box-shadow',
+            UserStatusEnum::STATUS_INACTIVE->value => 'badge bg-danger bg-gradient text-shadow box-shadow',
+            UserStatusEnum::STATUS_ACTIVE->value => 'badge bg-success bg-gradient text-shadow box-shadow',
             default => 'badge bg-info',
         };
 

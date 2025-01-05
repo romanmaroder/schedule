@@ -4,6 +4,7 @@
 namespace core\readModels\User;
 
 
+use core\entities\Enums\UserStatusEnum;
 use core\entities\User\User;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
@@ -13,17 +14,17 @@ class UserReadRepository
 {
 
 
-    public function find($id): ?User
+    public function find($id): array|\yii\db\ActiveRecord
     {
         return User::find()->with(['employee'])->andWhere(['id' => $id])->one();
     }
 
-    public function findByChatId($chatId): ?User
+    public function findByChatId($chatId): array|\yii\db\ActiveRecord
     {
         return User::find()->where(['t_chat_id'=>$chatId])->one();
     }
 
-    public function findByUserPhone($phone): ?User
+    public function findByUserPhone($phone): array|\yii\db\ActiveRecord
     {
         return User::find()
             ->where(['phone' => $phone])
@@ -32,12 +33,12 @@ class UserReadRepository
 
     public function findActiveById($id): ?User
     {
-        return User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
+        return User::findOne(['id' => $id, 'status' => UserStatusEnum::STATUS_ACTIVE]);
     }
 
     public function findActiveByUsername($username): ?User
     {
-        return User::findOne(['username' => $username, 'status' => User::STATUS_ACTIVE]);
+        return User::findOne(['username' => $username, 'status' => UserStatusEnum::STATUS_ACTIVE]);
     }
 
     public function findMissed($eventIdsUser): ActiveDataProvider
@@ -57,7 +58,7 @@ class UserReadRepository
         return User::find()->alias('u')->leftJoin('schedule_employees', 'schedule_employees.user_id = u.id')
             ->select(['u.id', 'u.username'])
             ->where(['is', 'schedule_employees.user_id', null])
-            ->andWhere(['u.status'=>User::STATUS_ACTIVE])
+            ->andWhere(['u.status'=>UserStatusEnum::STATUS_ACTIVE])
             ->asArray()
             ->all();
     }

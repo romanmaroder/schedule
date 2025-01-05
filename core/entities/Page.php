@@ -35,7 +35,6 @@ class Page extends ActiveRecord
         $category = new static();
         $category->title = $title;
         $category->slug = $slug;
-        $category->title = $title;
         $category->content = $content;
         $category->meta = $meta;
         return $category;
@@ -54,7 +53,7 @@ class Page extends ActiveRecord
         return $this->meta->title ?: $this->title;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'title' => tHelper::translate('content/page','title'),
