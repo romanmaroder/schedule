@@ -27,7 +27,7 @@ $url = Url::to(['product', 'id' =>$product->id]);
                 <button type="button"
                         data-toggle="tooltip"
                         title="Add to Wish List"
-                    <?
+                    <?php
                     /*= $product->wishlistItems ? '' : "href=" . Url::to(
                                                 ['/cabinet/default/wishlist-add', 'id' => $product->id]
                                             ) */ ?>
@@ -39,12 +39,12 @@ $url = Url::to(['product', 'id' =>$product->id]);
             </h6>
             <div class="d-flex justify-content-center">
                 <h6>$<?= PriceHelper::format($product->price_new) ?></h6>
-                <?
+                <?php
                 if ($product->price_old): ?>
                     <h6 class="text-muted ml-2">
                         <del>$<?= PriceHelper::format($product->price_old) ?></del>
                     </h6>
-                <?
+                <?php
                 endif; ?>
             </div>
         </div>
@@ -62,12 +62,13 @@ $url = Url::to(['product', 'id' =>$product->id]);
             <!--<button type="button"
                     data-toggle="tooltip"
                     title="Add to Wish List"
-                <?/*= $product->wishlistItems ? '' : "href=" . Url::to(
+                <?php/*= $product->wishlistItems ? '' : "href=" . Url::to(
                         ['/cabinet/default/wishlist-add', 'id' => $product->id]
                     ) */?>
                     data-method="post"
                     class="btn btn-sm text-dark p-0">
-                <i class="<?/*= $product->wishlistItems ? "fas fa-heart text-primary mr-1" : "far fa-heart text-primary mr-1" */?>"></i>
+                <i class="<?php
+            /*= $product->wishlistItems ? "fas fa-heart text-primary mr-1" : "far fa-heart text-primary mr-1" */?>"></i>
             </button>-->
 
             <button type="button"

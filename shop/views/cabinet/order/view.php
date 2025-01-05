@@ -42,9 +42,8 @@ PluginAsset::register($this)->add(
                     'cost',
                     [
                         'attribute' => 'Total cost',
-                        'value' => function ($order) {
-                            return $order->getTotalCost();
-                        },
+                        'value' => fn ($order) =>
+                             $order->getTotalCost(),
                     ],
                     'note:ntext',
                 ],
@@ -134,7 +133,7 @@ $js = <<< JS
        "paging": false,
        "lengthChange": false,
        "searching": false,
-       "ordering": true,
+       "ordering": false,
        //"order": [[0, 'desc']],
        "info": false,
        "autoWidth": false,

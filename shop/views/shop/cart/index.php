@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
-            <? if ($cart->getItems()) :?>
+            <?php
+            if ($cart->getItems()) :?>
             <table class="table table-bordered text-center mb-0">
                 <thead class="bg-secondary text-dark">
                 <tr>
@@ -88,9 +89,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 endforeach; ?>
                 </tbody>
             </table>
-            <?else:?>
+            <?php
+            else:?>
            <h2 class="font-weight-semi-bold text-uppercase mb-3 text-center text-primary ">Shopping cart is empty</h2>
-            <?endif?>
+            <?php
+            endif?>
         </div>
         <div class="col-lg-4">
             <!--<form class="mb-5" action="">

@@ -46,10 +46,8 @@ PluginAsset::register($this)->add(
                         'headerRowOptions' => [
                             'class' => 'table-light'
                         ],
-                        'rowOptions' => function ($model) {
-                            return ['style' => 'background-color:' . $model->getColor()];
-
-                        },
+                        'rowOptions' => fn ($model) =>
+                            ['style' => 'background-color:' . $model->getColor()],
                         'emptyText' => 'No results found',
                         'emptyTextOptions' => [
                             'tag' => 'div',
@@ -59,24 +57,20 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Date',
                                 'headerOptions' => ['class' => ''],
-                                'value' => function ($model) {
-                                    return DATE('Y-m-d', strtotime($model->getDate()));
-                                },
-                                'contentOptions' => function ($model) use ($cart) {
-                                    return [
+                                'value' => fn ($model) =>
+                                     DATE('Y-m-d', strtotime($model->getDate())),
+                                'contentOptions' => fn ($model) =>
+                                     [
                                         'data-total' => $model->getSalary(),
                                         'class' => ['text-center align-middle']
-                                    ];
-                                },
+                                    ],
                                 'footer' => $cart->getFullSalary(),
                                 'footerOptions'  => ['class' => 'bg-primary bg-gradient text-center '],
                             ],
                             [
                                 'attribute' => 'Price',
                                 'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) {
-                                    return $model->getMasterPrice();
-                                },
+                                'value' => fn ($model) =>$model->getMasterPrice(),
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
@@ -85,24 +79,21 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Salary',
                                 'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) use ($cart) {
-                                    return $model->getSalary();
-                                },
-                                'contentOptions' => function ($model) use ($cart) {
-                                    return [
+                                'value' => fn ($model)=>
+                                    $model->getSalary(),
+                                'contentOptions' => fn ($model)=>
+                                     [
                                         //'data-total' => $model->getSalary(),
                                         'class' => ['text-center align-middle ']
-                                    ];
-                                },
+                                    ],
                                 /*'footer' => $cart->getFullSalary(),
                                 'footerOptions'  => ['class' => 'bg-info text-center '],*/
                             ],
                             [
                                 'attribute' => 'Price with discount',
                                 'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) {
-                                    return $model->getDiscountedPrice();
-                                },
+                                'value' => fn ($model) =>
+                                     $model->getDiscountedPrice(),
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ]
@@ -110,9 +101,8 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Service',
                                 'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) {
-                                    return $model->getServiceList();
-                                },
+                                'value' => fn ($model) =>
+                                    $model->getServiceList(),
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],
@@ -122,9 +112,8 @@ PluginAsset::register($this)->add(
                             [
                                 'attribute' => 'Discount',
                                 'headerOptions' => ['class' => 'text-center'],
-                                'value' => function ($model) {
-                                    return $model->getDiscount() .'%<br>' . DiscountHelper::discountLabel($model->getDiscountFrom());
-                                },
+                                'value' => fn ($model) =>
+                                     $model->getDiscount() .'%<br>' . DiscountHelper::discountLabel($model->getDiscountFrom()),
                                 'contentOptions' => [
                                     'class' => ['text-center align-middle']
                                 ],'format' => 'raw'

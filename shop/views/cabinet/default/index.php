@@ -37,12 +37,11 @@ PluginAsset::register($this)->add(
                     ],
                     [
                         'attribute' => 'client_id',
-                        'value' => function ($model) {
-                            return Html::a(
+                        'value' => fn ($model) =>
+                            Html::a(
                                 Html::encode($model->client->username),
                                 ['/user/view', 'id' => $model->client->id]
-                            );
-                        },
+                            ),
                         'contentOptions' => [
                             'class'=>'text-center'
                         ],
@@ -51,9 +50,8 @@ PluginAsset::register($this)->add(
                     ],
                     [
                         'label' => 'Service',
-                        'value' => function ($provider) {
-                            return implode(', ', ArrayHelper::getColumn($provider->services, 'name'));
-                        },
+                        'value' => fn ($provider) =>
+                             implode(', ', ArrayHelper::getColumn($provider->services, 'name')),
                         'contentOptions' => [
                             'class'=>'text-center'
                         ],
@@ -110,7 +108,7 @@ $js = <<< JS
        "paging": false,
        "lengthChange": false,
        "searching": true,
-       "ordering": true,
+       "ordering": false,
        //"order": [[0, 'desc']],
        "info": false,
        "autoWidth": false,

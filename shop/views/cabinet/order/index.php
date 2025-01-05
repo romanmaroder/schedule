@@ -17,39 +17,38 @@ $this->params['breadcrumbs'][] = ['label' => 'Cabinet', 'url' => ['cabinet/defau
 $this->params['breadcrumbs'][] = $this->title;
 
 PluginAsset::register($this)->add(
-    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons','sweetalert2']
+    ['datatables', 'datatables-bs4', 'datatables-responsive', 'datatables-buttons', 'sweetalert2']
 );
 ?>
 
-            <?= GridView::widget(
-                [
-                    'dataProvider' => $dataProvider,
-                    'summary' => false,
-                    'tableOptions' => [
-                        'class' => 'table table-striped table-bordered',
-                        'id' => 'order'
-                    ],
-                    'columns' => [
-                        [
-                            'attribute' => 'id',
-                            'value' => function (Order $model) {
-                                return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
-                            },
-                            'format' => 'raw',
-                        ],
-                        'created_at:datetime',
-                        [
-                            'attribute' => 'status',
-                            'value' => function (Order $model) {
-                                return OrderHelper::statusLabel($model->current_status);
-                            },
-                            'format' => 'raw',
-                        ],
-                        ['class' => ActionColumn::class,
-                            'template' => '{view}'],
-                    ],
-                ]
-            ); ?>
+<?= GridView::widget(
+    [
+        'dataProvider' => $dataProvider,
+        'summary' => false,
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered',
+            'id' => 'order'
+        ],
+        'columns' => [
+            [
+                'attribute' => 'id',
+                'value' => fn(Order $model) => Html::a(Html::encode($model->id), ['view', 'id' => $model->id]),
+                'format' => 'raw',
+            ],
+            'created_at:datetime',
+            [
+                'attribute' => 'status',
+                'value' => fn (Order $model) =>
+                     OrderHelper::statusLabel($model->current_status),
+                'format' => 'raw',
+            ],
+            [
+                'class' => ActionColumn::class,
+                'template' => '{view}'
+            ],
+        ],
+    ]
+); ?>
 
 <?php
 $js = <<< JS
@@ -60,7 +59,7 @@ $js = <<< JS
        "paging": false,
        "lengthChange": false,
        "searching": true,
-       "ordering": true,
+       "ordering": false,
        //"order": [[0, 'desc']],
        "info": false,
        "autoWidth": false,

@@ -28,7 +28,8 @@ $emptyEducations = 'lesson';
         <div class="time-label">
             <span class="bg-danger btn-shadow"><?=date('d-M-Y')?></span>
         </div>
-        <? if (!$events && !$educations):?>
+        <?php
+        if (!$events && !$educations):?>
             <div>
                 <i class="fas fa-exclamation-circle bg-warning btn-shadow"></i>
 
@@ -43,8 +44,10 @@ $emptyEducations = 'lesson';
                     </div>
                 </div>
             </div>
-        <?endif;?>
-        <? foreach($events as $event) :?>
+        <?php
+        endif;?>
+        <?php
+        foreach($events as $event) :?>
             <div>
                 <i class="fas fa-user bg-info btn-shadow"></i>
 
@@ -60,9 +63,11 @@ $emptyEducations = 'lesson';
 
                 </div>
             </div>
-        <?endforeach;?>
+        <?php
+        endforeach;?>
 
-        <? foreach($educations as $education) :?>
+        <?php
+        foreach($educations as $education) :?>
 
             <div>
                 <i class="fas fa-comments bg-warning btn-shadow"></i>
@@ -83,7 +88,8 @@ $emptyEducations = 'lesson';
                 </div>
             </div>
 
-        <?endforeach;?>
+        <?php
+        endforeach;?>
         <div>
             <i class="far fa-clock bg-gray btn-shadow"></i>
         </div>
