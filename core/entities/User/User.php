@@ -4,6 +4,8 @@ namespace core\entities\User;
 
 use core\entities\AggregateRoot;
 use core\entities\behaviors\ScheduleWorkBehavior;
+use core\entities\Enums\UserDefaultValuesEnum;
+use core\entities\Enums\UserStatusEnum;
 use core\entities\EventTrait;
 use core\entities\Schedule;
 use core\entities\Schedule\Event\Event;
@@ -29,7 +31,7 @@ use yii\db\ActiveRecord;
  * @property string $phone
  * @property string $auth_key
  * @property string $schedule_json [json]
- * @property int $status
+ * @property UserStatusEnum $status
  * @property int $created_at
  * @property int $updated_at
  * @property string $password
@@ -44,12 +46,6 @@ use yii\db\ActiveRecord;
 class User extends ActiveRecord implements AggregateRoot
 {
     use EventTrait;
-
-    public const STATUS_DELETED = 0;
-    public const STATUS_INACTIVE = 9;
-    public const STATUS_ACTIVE = 10;
-    public const DEFAULT_PASSWORD = '12345678';
-    public const DEFAULT_EMAIL = '@mail.com';
 
     public $password;
     public $schedule;
@@ -66,11 +62,11 @@ class User extends ActiveRecord implements AggregateRoot
     ): self {
         $user = new User();
         $user->username = $username;
-        $user->email = $email ? $email : Yii::$app->security->generateRandomString(8) . self::DEFAULT_EMAIL;
+        $user->email = $email ? $email : Yii::$app->security->generateRandomString(8) . UserDefaultValuesEnum::DEFAULT_EMAIL->value;
         $user->phone = $phone;
-        $user->setPassword(!empty($password) ? $password : self::DEFAULT_PASSWORD);
+        $user->setPassword(!empty($password) ? $password : UserDefaultValuesEnum::DEFAULT_PASSWORD->value);
         $user->created_at = time();
-        $user->status = self::STATUS_ACTIVE;
+        $user->status = UserStatusEnum::STATUS_ACTIVE;
         $user->schedule = $schedule;
         $user->notice = $notice;
         $user->auth_key = Yii::$app->security->generateRandomString();
@@ -125,7 +121,7 @@ class User extends ActiveRecord implements AggregateRoot
         $user->phone = '';
         $user->setPassword($password);
         $user->created_at = time();
-        $user->status = self::STATUS_INACTIVE;
+        $user->status = $user->setUserStatus(UserStatusEnum::STATUS_INACTIVE);
         $user->verification_token = Yii::$app->security->generateRandomString();
         $user->generateAuthKey();
         $user->recordEvent(new UserSignUpRequested($user));
@@ -142,7 +138,7 @@ class User extends ActiveRecord implements AggregateRoot
         if ($this->isActive()) {
             throw new \DomainException('User is already active.');
         }
-        $this->status = self::STATUS_ACTIVE;
+        $this->status = $this->setUserStatus(UserStatusEnum::STATUS_ACTIVE);
         $this->removeEmailVerificationToken();
         $this->recordEvent(new UserSignUpConfirmed($this));
     }
@@ -157,7 +153,7 @@ class User extends ActiveRecord implements AggregateRoot
     {
         $user = new User();
         $user->created_at = time();
-        $user->status = self::STATUS_ACTIVE;
+        $user->status = $user->setUserStatus(UserStatusEnum::STATUS_ACTIVE);
         $user->generateAuthKey();
         $user->networks = [Network::create($network, $identity)];
         return $user;
@@ -264,7 +260,7 @@ class User extends ActiveRecord implements AggregateRoot
      */
     public function isActive(): bool
     {
-        return $this->status === self::STATUS_ACTIVE;
+        return $this->status == UserStatusEnum::STATUS_ACTIVE->value;
     }
 
     /**
@@ -272,7 +268,7 @@ class User extends ActiveRecord implements AggregateRoot
      */
     public function isInactive(): bool
     {
-        return $this->status === self::STATUS_INACTIVE;
+        return $this->status == UserStatusEnum::STATUS_INACTIVE->value;
     }
 
     public function isChatId(): bool
@@ -308,12 +304,12 @@ class User extends ActiveRecord implements AggregateRoot
         return $this->hasMany(WishlistItem::class, ['user_id' => 'id']);
     }
 
-    public function parseFullName($fullName)
+    public function parseFullName($fullName): array
     {
         return explode(" ", $fullName);
     }
 
-    public function mergeFullName(array $name)
+    public function mergeFullName(array $name): string
     {
         return implode(" ", $name);
     }
@@ -359,7 +355,7 @@ class User extends ActiveRecord implements AggregateRoot
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%users}}';
     }
@@ -379,7 +375,7 @@ class User extends ActiveRecord implements AggregateRoot
         ];
     }
 
-    public function transactions()
+    public function transactions(): array
     {
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL
@@ -393,9 +389,9 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByUsername(string $username): null|static
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username, 'status' => UserStatusEnum::STATUS_ACTIVE]);
     }
 
     /**
@@ -404,7 +400,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $token password reset token
      * @return static|null
      */
-    public static function findByPasswordResetToken(#[\SensitiveParameter] string $token)
+    public static function findByPasswordResetToken(#[\SensitiveParameter] string $token): null|static
     {
         if (!static::isPasswordResetTokenValid($token)) {
             return null;
@@ -412,7 +408,7 @@ class User extends ActiveRecord implements AggregateRoot
 
         return static::findOne([
                                    'password_reset_token' => $token,
-                                   'status' => self::STATUS_ACTIVE,
+                                   'status' => UserStatusEnum::STATUS_ACTIVE,
                                ]);
     }
 
@@ -436,7 +432,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $token password reset token
      * @return bool
      */
-    public static function isPasswordResetTokenValid(#[\SensitiveParameter] string $token)
+    public static function isPasswordResetTokenValid(#[\SensitiveParameter] string $token): bool
     {
         if (empty($token)) {
             return false;
@@ -453,7 +449,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
-    public function validatePassword(#[\SensitiveParameter] string $password)
+    public function validatePassword(#[\SensitiveParameter] string $password): bool
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
@@ -464,7 +460,7 @@ class User extends ActiveRecord implements AggregateRoot
      * @param string $password
      * @throws \yii\base\Exception
      */
-    private function setPassword(#[\SensitiveParameter] string $password)
+    private function setPassword(#[\SensitiveParameter] string $password): void
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
@@ -473,7 +469,7 @@ class User extends ActiveRecord implements AggregateRoot
      * Generates "remember me" authentication key
      * @throws \yii\base\Exception
      */
-    public function generateAuthKey()
+    public function generateAuthKey(): void
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
@@ -491,7 +487,7 @@ class User extends ActiveRecord implements AggregateRoot
      * Generates new token for email verification
      * @throws \yii\base\Exception
      */
-    public function generateEmailVerificationToken()
+    public function generateEmailVerificationToken(): void
     {
         $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
@@ -507,9 +503,21 @@ class User extends ActiveRecord implements AggregateRoot
     /**
      * Removes email verification token
      */
-    private function removeEmailVerificationToken()
+    private function removeEmailVerificationToken(): void
     {
         $this->verification_token = null;
+    }
+
+    public function getUserStatus(): UserStatusEnum
+    {
+
+        return $this->status;
+    }
+
+    public function setUserStatus(UserStatusEnum $userStatus): User
+    {
+        $this->status = $userStatus;
+        return $this;
     }
 
 }

@@ -27,7 +27,7 @@ class UserCreateForm extends CompositeForm
         parent::__construct($config);
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             [['username'],'required'],
@@ -39,7 +39,7 @@ class UserCreateForm extends CompositeForm
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'username'=>tHelper::t('user','Username'),

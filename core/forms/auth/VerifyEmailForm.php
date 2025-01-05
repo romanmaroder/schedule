@@ -2,6 +2,7 @@
 
 namespace core\forms\auth;
 
+use core\entities\Enums\UserStatusEnum;
 use core\entities\User\User;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
@@ -43,10 +44,10 @@ class VerifyEmailForm extends Model
      *
      * @return User|null the saved model or null if saving fails
      */
-    public function verifyEmail()
+    public function verifyEmail(): ?User
     {
         $user = $this->_user;
-        $user->status = User::STATUS_ACTIVE;
+        $user->status = UserStatusEnum::STATUS_ACTIVE;
         return $user->save(false) ? $user : null;
     }
 }
