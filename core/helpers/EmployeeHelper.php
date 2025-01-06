@@ -4,10 +4,8 @@
 namespace core\helpers;
 
 
-use core\access\Rbac;
-use core\entities\Enums\EmployeeStatusEnum;
-use core\entities\User\Employee\Employee;
-use JetBrains\PhpStorm\ArrayShape;
+use core\entities\Enums\UserRolesEnum;
+use core\entities\Enums\UserStatusEnum;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -16,8 +14,7 @@ class EmployeeHelper
 {
     public static function statusList(): array
     {
-        return EmployeeStatusEnum::getList();
-
+        return UserStatusEnum::getList();
     }
 
     public static function statusName(string $status): string
@@ -27,7 +24,7 @@ class EmployeeHelper
 
     public static function statusLabel($status): string
     {
-        $class=EmployeeStatusEnum::getBadge($status);
+        $class = UserStatusEnum::getBadge($status);
 
         return Html::tag(
             'span',
@@ -38,13 +35,9 @@ class EmployeeHelper
         );
     }
 
-     public static function rolesList(): array
+    public static function rolesList(): array
     {
-        return [
-            Rbac::ROLE_ADMIN => Yii::t('role','admin'),
-            Rbac::ROLE_EMPLOYEE => Yii::t('role','employee'),
-            Rbac::ROLE_MANAGER => Yii::t('role','manager'),
-        ];
+        return UserRolesEnum::getList();
     }
 
     public static function rolesLabel($userId): string
@@ -52,12 +45,7 @@ class EmployeeHelper
         $roles = ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($userId), 'name');
         $role = ArrayHelper::getValue(self::rolesList(), $roles);
 
-        $class = match ($role) {
-            Rbac::ROLE_ADMIN => 'badge bg-danger bg-gradient box-shadow',
-            Rbac::ROLE_MANAGER => 'badge bg-warning bg-gradient box-shadow',
-            Rbac::ROLE_EMPLOYEE => 'badge bg-info bg-gradient box-shadow',
-            default => 'badge bg-secondary',
-        };
+        $class = UserRolesEnum::getBadge($role);
 
         return Html::tag(
             'span',

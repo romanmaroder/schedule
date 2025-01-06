@@ -76,6 +76,7 @@ DataTableAsset::register($this);
                             'class'=>'text-center'
                         ],
                         'headerOptions' => ['class' => 'text-center'],
+                        'format' => 'raw',
                     ],
                     /*[
                         'attribute' => 'first_name',

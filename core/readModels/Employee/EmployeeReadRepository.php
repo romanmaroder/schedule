@@ -7,7 +7,6 @@ namespace core\readModels\Employee;
 use core\entities\User\Employee\Employee;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
-use yii\db\Expression;
 
 class EmployeeReadRepository
 {

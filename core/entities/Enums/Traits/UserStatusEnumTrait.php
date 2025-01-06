@@ -3,6 +3,7 @@
 namespace core\entities\Enums\Traits;
 
 use core\entities\Enums\Interface\UserEnumInterface;
+use core\helpers\tHelper;
 
 trait UserStatusEnumTrait
 {
@@ -28,8 +29,8 @@ trait UserStatusEnumTrait
     private static function translate(UserEnumInterface $enum): string
     {
         return match ($enum) {
-            self::STATUS_ACTIVE => \Yii::t('app', 'Active'),
-            self::STATUS_INACTIVE => \Yii::t('app', 'Inactive'),
+            self::STATUS_ACTIVE => tHelper::translate('app', 'Active'),
+            self::STATUS_INACTIVE => tHelper::translate('app', 'Inactive'),
             default => throw new \RuntimeException('Unknown status'),
         };
     }

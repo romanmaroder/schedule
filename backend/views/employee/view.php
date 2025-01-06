@@ -1,6 +1,7 @@
 <?php
 
 use core\entities\User\Employee\Employee;
+use core\helpers\EmployeeHelper;
 use core\helpers\ScheduleHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -49,27 +50,23 @@ $this->params['breadcrumbs'][] = $this->title;
                     'last_name',
                     [
                         'attribute' => 'employee.phone',
-                        'value' => function (Employee $model) {
-                            return Html::a(
+                        'value' => fn (Employee $model)=> Html::a(
                                 Html::encode(
                                     $model->phone
                                 ),
                                 'tel:' . $model->phone,
                                 ['view', 'id' => $model->id]
-                            );
-                        },
+                            ),
                         'format' => 'raw',
                     ],
                     [
                         'attribute' => 'user.phone',
-                        'value' => function (Employee $model) {
-                            return
+                        'value' => fn (Employee $model)=>
                                 Html::a(
                                     Html::encode($model->user->phone),
                                     'tel:' . $model->user->phone,
                                     ['view', 'id' => $model->user->id]
-                                );
-                        },
+                                ),
                         'format' => 'raw',
                     ],
                     [
@@ -78,34 +75,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'role_id',
-                        'value' => function ($model) {
-                            return $model->role->name;
-                        },
+                        'value' => fn ($model) => $model->role->name,
                     ],
                     [
                         'attribute' => 'role',
-                        // 'label' => 'Role',
-                        //'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->user_id), 'description')),
-                        'value' => \core\helpers\EmployeeHelper::rolesLabel($model->user_id),
+                        'value' => fn($model)=>EmployeeHelper::rolesLabel($model->user_id),
                         'format' => 'raw',
                     ],
                     [
                         'attribute' => 'rate_id',
-                        'value' => function ($model) {
-                            return $model->rate->name;
-                        },
+                        'value' => fn ($model) => $model->rate->name,
                     ],
                     [
                         'attribute' => 'price_id',
-                        'value' => function ($model) {
-                            return $model->price->name;
-                        },
+                        'value' => fn ($model) =>
+                             $model->price->name,
                     ],
                     [
                         'attribute' => 'status',
-                        'value' => function ($model) {
-                            return \core\helpers\EmployeeHelper::statusLabel($model->status);
-                        },
+                        'value' => fn ($model) =>
+                             EmployeeHelper::statusLabel($model->status),
                         'format' => 'raw',
                     ],
                     [
@@ -130,13 +119,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'color',
-                        'value' => function (Employee $model) {
-                            return Html::tag(
+                        'value' => fn (Employee $model) =>
+                             Html::tag(
                                 'div',
                                 '',
                                 ['style' => 'width:20px;height:20px;background-color:' . $model->color]
-                            );
-                        },
+                            ),
                         'format' => 'raw',
                     ],
                     [
