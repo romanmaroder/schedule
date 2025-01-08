@@ -6,12 +6,5 @@ namespace core\entities\Shop\Order;
 
 class DeliveryData
 {
-    public $index;
-    public $address;
-
-    public function __construct($index, $address)
-    {
-        $this->index = $index;
-        $this->address = $address;
-    }
+    public function __construct(public $index, public $address){}
 }

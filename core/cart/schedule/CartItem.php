@@ -2,26 +2,17 @@
 
 namespace core\cart\schedule;
 
-use core\cart\schedule\discount\Discount;
+use core\entities\Enums\DiscountEnum;
 use core\entities\Schedule\Event\ServiceAssignment;
-use JetBrains\PhpStorm\Pure;
 
-/**
- *
- */
 class CartItem
 {
-    private $item;
-
-
-    public function __construct( $item)
+    public function __construct(private $item)
     {
-        $this->item = $item;
     }
 
     public function getEvents(): ServiceAssignment
     {
-
         return $this->item;
     }
 
@@ -73,7 +64,7 @@ class CartItem
     }
 
     /**
-     * Discount
+     * DiscountEnum
      * @return int|null
      */
     public function getDiscount(): int|null
@@ -106,16 +97,15 @@ class CartItem
 
     public function getDiscountedPrice(): float|int
     {
-        $discountedPrice = match ($this->getDiscountFrom()) {
-            Discount::MASTER_DISCOUNT => $this->getMasterPrice() - $this->masterDiscount(),
-            Discount::STUDIO_DISCOUNT => $this->getMasterPrice() - ($this->getMasterPrice() * $this->getDiscount(
-                    ) / 100),
+        return match ($this->getDiscountFrom()) {
+            DiscountEnum::MASTER_DISCOUNT->value => $this->getMasterPrice() - $this->masterDiscount(),
+            DiscountEnum::STUDIO_DISCOUNT->value => $this->getMasterPrice() - ($this->getMasterPrice(
+                    ) * $this->getDiscount() / 100),
             default =>
                 $this->getMasterPrice() - ($this->getMasterPrice() * $this->getEmployeeRate() *
                     ($this->getDiscount() / 100)
-            ),
+                ),
         };
-        return $discountedPrice;
     }
 
     public function getDiscountFrom(): float|int
@@ -129,14 +119,12 @@ class CartItem
      */
     public function getCost(): float|int
     {
-        $cost = match ($this->getDiscountFrom()) {
-            Discount::NO_DISCOUNT => $this->costNoDiscount(),
-            Discount::MASTER_DISCOUNT => $this->costMasterDiscount(),
-            Discount::STUDIO_DISCOUNT => $this->costStudioDiscount(),
-            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => $this->getCostDiscountFromTheStudioWithMaster(),
+        return match ($this->getDiscountFrom()) {
+            DiscountEnum::MASTER_DISCOUNT->value => $this->costMasterDiscount(),
+            DiscountEnum::STUDIO_DISCOUNT->value => $this->costStudioDiscount(),
+            DiscountEnum::STUDIO_DISCOUNT_WITH_MASTER_WORK->value => $this->getCostDiscountFromTheStudioWithMaster(),
             default => $this->costNoDiscount(),
         };
-        return $cost;
     }
 
     /**
@@ -145,14 +133,12 @@ class CartItem
      */
     public function getProfit(): float|int
     {
-        $profit = match ($this->getDiscountFrom()) {
-            Discount::NO_DISCOUNT => $this->profitNoDiscount(),
-            Discount::MASTER_DISCOUNT => $this->profitMasterDiscount(),
-            Discount::STUDIO_DISCOUNT => $this->profitStudioDiscount(),
-            Discount::STUDIO_DISCOUNT_WITH_MASTER_WORK => $this->getProfitDiscountFromTheStudioWithMaster(),
+        return match ($this->getDiscountFrom()) {
+            DiscountEnum::MASTER_DISCOUNT->value => $this->profitMasterDiscount(),
+            DiscountEnum::STUDIO_DISCOUNT->value => $this->profitStudioDiscount(),
+            DiscountEnum::STUDIO_DISCOUNT_WITH_MASTER_WORK->value => $this->getProfitDiscountFromTheStudioWithMaster(),
             default => $this->profitNoDiscount(),
         };
-        return $profit;
     }
 
 
@@ -303,7 +289,6 @@ class CartItem
 
     private function fullRate(): bool
     {
-       
         if ($this->getEmployeeRate() == 1) {
             return true;
         }

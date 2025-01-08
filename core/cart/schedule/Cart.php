@@ -10,17 +10,12 @@ use core\cart\schedule\storage\StorageInterface;
 class Cart
 {
 
-    private $storage;
     /**
      * @var CartItem[]
      * */
     private $items;
 
-    public function __construct( StorageInterface $storage,)
-    {
-
-        $this->storage = $storage;
-    }
+    public function __construct( private  readonly StorageInterface $storage){}
 
     /**
      * @return CartItem[]

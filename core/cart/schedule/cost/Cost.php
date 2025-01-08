@@ -5,22 +5,18 @@ namespace core\cart\schedule\cost;
 
 
 
-use core\cart\schedule\discount\Discount;
+use core\entities\Enums\DiscountEnum;
 
-final class Cost
+
+
+final readonly class Cost
 {
-    private $value;
-    private $discounts = [];
+    public function __construct(private float $value, private array $discounts = [])
+    {}
 
-    public function __construct(float $value, array $discounts = [])
+    public function withDiscount(DiscountEnum $discount): self
     {
-        $this->value = $value;
-        $this->discounts = $discounts;
-    }
-
-    public function withDiscount(Discount $discount): self
-    {
-        return new static($this->value, array_merge($this->discounts, [$discount]));
+        return new Cost($this->value, array_merge($this->discounts, [$discount]));
     }
 
     public function getOrigin(): float
@@ -30,13 +26,13 @@ final class Cost
 
     public function getTotal(): float
     {
-        return $this->value - array_sum(array_map(function (Discount $discount) {
+        return $this->value - array_sum(array_map(function (DiscountEnum $discount) {
                 return $discount->getValue();
             }, $this->discounts));
     }
 
     /**
-     * @return Discount[]
+     * @return DiscountEnum[]
      */
     public function getDiscounts(): array
     {

@@ -38,7 +38,4 @@ enum StatusEnum: int
             default => throw new \RuntimeException('Unknown status'),
         };
     }
-
-
-
 }

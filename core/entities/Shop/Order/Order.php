@@ -4,6 +4,7 @@
 namespace core\entities\Shop\Order;
 
 
+use core\entities\Enums\StatusOrderEnum;
 use core\entities\Shop\DeliveryMethod;
 use core\entities\User\User;
 use core\helpers\tHelper;
@@ -50,7 +51,7 @@ class Order extends ActiveRecord
         $order->cost = $cost;
         $order->note = $note;
         $order->created_at = time();
-        $order->addStatus(Status::NEW);
+        $order->addStatus(StatusOrderEnum::NEW->value);
         return $order;
     }
 
@@ -74,7 +75,7 @@ class Order extends ActiveRecord
             throw new \DomainException('Order is already paid.');
         }
         $this->payment_method = $method;
-        $this->addStatus(Status::PAID);
+        $this->addStatus(StatusOrderEnum::PAID);
     }
 
     public function send(): void
@@ -82,7 +83,7 @@ class Order extends ActiveRecord
         if ($this->isSent()) {
             throw new \DomainException('Order is already sent.');
         }
-        $this->addStatus(Status::SENT);
+        $this->addStatus(StatusOrderEnum::SENT);
     }
 
     public function complete(): void
@@ -90,7 +91,7 @@ class Order extends ActiveRecord
         if ($this->isCompleted()) {
             throw new \DomainException('Order is already completed.');
         }
-        $this->addStatus(Status::COMPLETED);
+        $this->addStatus(StatusOrderEnum::COMPLETED);
     }
 
     public function cancel($reason): void
@@ -99,7 +100,7 @@ class Order extends ActiveRecord
             throw new \DomainException('Order is already cancelled.');
         }
         $this->cancel_reason = $reason;
-        $this->addStatus(Status::CANCELLED);
+        $this->addStatus(StatusOrderEnum::CANCELLED);
     }
 
     public function getTotalCost(): int
@@ -114,27 +115,27 @@ class Order extends ActiveRecord
 
     public function isNew(): bool
     {
-        return $this->current_status == Status::NEW;
+        return $this->current_status == StatusOrderEnum::NEW->value;
     }
 
     public function isPaid(): bool
     {
-        return $this->current_status == Status::PAID;
+        return $this->current_status == StatusOrderEnum::PAID->value;
     }
 
     public function isSent(): bool
     {
-        return $this->current_status == Status::SENT;
+        return $this->current_status == StatusOrderEnum::SENT->value;
     }
 
     public function isCompleted(): bool
     {
-        return $this->current_status == Status::COMPLETED;
+        return $this->current_status == StatusOrderEnum::COMPLETED->value;
     }
 
     public function isCancelled(): bool
     {
-        return $this->current_status == Status::CANCELLED;
+        return $this->current_status == StatusOrderEnum::CANCELLED->value;
     }
 
     private function addStatus($value): void
@@ -162,7 +163,7 @@ class Order extends ActiveRecord
 
     ##########################
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'user_id'=>tHelper::translate('shop/order','user_id'),

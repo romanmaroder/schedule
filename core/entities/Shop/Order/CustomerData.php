@@ -8,16 +8,9 @@ use core\helpers\tHelper;
 
 class CustomerData
 {
-    public $phone;
-    public $name;
+    public function __construct(public $phone, public $name){}
 
-    public function __construct($phone, $name)
-    {
-        $this->phone = $phone;
-        $this->name = $name;
-    }
-
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'name' => tHelper::translate('shop/customer','name'),

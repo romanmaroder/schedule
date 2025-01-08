@@ -5,6 +5,7 @@ namespace core\helpers;
 
 
 use core\entities\CommonUses\Characteristic;
+use core\entities\Enums\CharacteristicEnum;
 use JetBrains\PhpStorm\ArrayShape;
 use yii\helpers\ArrayHelper;
 
@@ -14,17 +15,9 @@ class CharacteristicHelper
     /**
      * @return string[]
      */
-    #[ArrayShape([
-        Characteristic::TYPE_STRING => "string",
-        Characteristic::TYPE_INTEGER => "string",
-        Characteristic::TYPE_FLOAT => "string"
-    ])] public static function typeList():array
+     public static function typeList():array
     {
-        return[
-            Characteristic::TYPE_STRING => \Yii::t('product/product','String'),
-            Characteristic::TYPE_INTEGER => \Yii::t('product/product','Integer'),
-            Characteristic::TYPE_FLOAT => \Yii::t('product/product','Float number'),
-        ];
+        return CharacteristicEnum::getList();
     }
 
     /**

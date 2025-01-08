@@ -3,10 +3,6 @@
 
 namespace core\entities;
 
-
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\ExpectedValues;
-
 class Schedule
 {
     /**
@@ -31,7 +27,7 @@ class Schedule
     public static function getScheduleDays($days): array
     {
         if (is_array($days)) {
-            return $result = array_intersect_key(self::scheduleDays(), array_flip($days));
+            return array_intersect_key(self::scheduleDays(), array_flip($days));
         }
         return [];
     }
@@ -49,7 +45,7 @@ class Schedule
     public static function getScheduleHours($hours): array
     {
         if (is_array($hours)) {
-            return $result = array_intersect_key(self::scheduleHours(), array_flip($hours));
+            return array_intersect_key(self::scheduleHours(), array_flip($hours));
         }
         return [];
     }

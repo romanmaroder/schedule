@@ -4,6 +4,7 @@
 namespace core\entities\CommonUses;
 
 
+use core\entities\Enums\CharacteristicEnum;
 use core\helpers\tHelper;
 use yii\db\ActiveRecord;
 use yii\helpers\Json;
@@ -20,12 +21,8 @@ use yii\helpers\Json;
  */
 class Characteristic extends ActiveRecord
 {
-
-    const TYPE_STRING = 'string';
-    const TYPE_INTEGER = 'integer';
-    const TYPE_FLOAT = 'float';
-
     public $variants;
+
     /**
      * @param $name
      * @param $type
@@ -70,7 +67,7 @@ class Characteristic extends ActiveRecord
      */
     public function isString(): bool
     {
-        return $this->type === self::TYPE_STRING;
+        return $this->type == CharacteristicEnum::TYPE_STRING->value;
     }
 
     /**
@@ -78,7 +75,7 @@ class Characteristic extends ActiveRecord
      */
     public function isInteger(): bool
     {
-        return $this->type === self::TYPE_INTEGER;
+        return $this->type == CharacteristicEnum::TYPE_INTEGER->value;
     }
 
     /**
@@ -86,8 +83,9 @@ class Characteristic extends ActiveRecord
      */
     public function isFloat(): bool
     {
-        return $this->type === self::TYPE_FLOAT;
+        return $this->type == CharacteristicEnum::TYPE_FLOAT->value;
     }
+
     /**
      * @return bool
      */
@@ -96,15 +94,15 @@ class Characteristic extends ActiveRecord
         return count($this->variants) > 0;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'name'=>tHelper::translate('shop/characteristic','name'),
-            'type'=>tHelper::translate('shop/characteristic','type'),
-            'required'=>tHelper::translate('shop/characteristic','required'),
-            'default'=>tHelper::translate('shop/characteristic','default'),
-            'variants'=>tHelper::translate('shop/characteristic','variants'),
-            'sort'=>tHelper::translate('shop/characteristic','sort'),
+            'name' => tHelper::translate('shop/characteristic', 'name'),
+            'type' => tHelper::translate('shop/characteristic', 'type'),
+            'required' => tHelper::translate('shop/characteristic', 'required'),
+            'default' => tHelper::translate('shop/characteristic', 'default'),
+            'variants' => tHelper::translate('shop/characteristic', 'variants'),
+            'sort' => tHelper::translate('shop/characteristic', 'sort'),
         ];
     }
 
@@ -119,7 +117,7 @@ class Characteristic extends ActiveRecord
         parent::afterFind();
     }
 
-    public function beforeSave($insert):bool
+    public function beforeSave($insert): bool
     {
         $this->setAttribute('variants_json', Json::encode(array_filter($this->variants)));
         return parent::beforeSave($insert);

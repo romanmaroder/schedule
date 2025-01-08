@@ -69,7 +69,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $product->weight = $weight;
         $product->quantity = $quantity;
         $product->meta = $meta;
-        $product->status = StatusEnum::STATUS_INACTIVE;
+        $product->status = StatusEnum::STATUS_INACTIVE->value;
         $product->created_at = time();
         return $product;
     }
