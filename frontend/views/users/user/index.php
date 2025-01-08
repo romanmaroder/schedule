@@ -9,6 +9,7 @@
 
 
 use core\helpers\ScheduleHelper;
+use core\helpers\StatusHelper;
 use core\helpers\UserHelper;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -48,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         if ($user->status): ?>
                                             <li class="mb-2">
                                                 <span class="fa-li"><i class="fas fa-shield-alt"></i></span>
-                                                <?= UserHelper::statusLabel($user->status) ?>
+                                                <?= StatusHelper::statusLabel($user->status) ?>
                                             </li>
                                         <?php
                                         endif; ?>
