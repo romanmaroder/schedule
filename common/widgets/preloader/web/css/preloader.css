@@ -16,50 +16,22 @@
     opacity: 0;
     z-index: -10;
 }
+
 .custom-preloader svg {
-    overflow: visible;
-    width: 100px;
-    height: 150px;
-}
-.custom-preloader svg g {
-    animation: custom-preloader-slide 2s linear infinite;
-}
-.custom-preloader svg g:nth-child(2) {
-    animation-delay: 0.5s;
-}
-.custom-preloader svg g:nth-child(2) path {
-    animation-delay: 0.5s;
-    stroke-dasharray: 0px 158px;
-    stroke-dashoffset: 1px;
-}
-.custom-preloader svg path {
-    stroke: url(#gradient);
-    stroke-width: 20px;
-    stroke-linecap: round;
+    max-width: 25em;
+    border-radius: 3px;
+    background: #FFF;
     fill: none;
-    stroke-dasharray: 0 157px;
-    stroke-dashoffset: 0;
-    animation: custom-preloader-escalade 2s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+    stroke: #BFE2FF;
+    stroke-linecap: round;
+    stroke-width: 12%
 }
-@keyframes custom-preloader-slide {
-    0% {
-        transform: translateY(-50px);
-    }
-    100% {
-        transform: translateY(50px);
-    }
+.custom-preloader use {
+    stroke: #337AB7;
+    animation: preloader 2s linear infinite
 }
-@keyframes custom-preloader-escalade {
-    0% {
-        stroke-dasharray: 0 157px;
-        stroke-dashoffset: 0;
-    }
-    50% {
-        stroke-dasharray: 156px 157px;
-        stroke-dashoffset: 0;
-    }
-    100% {
-        stroke-dasharray: 156px 157px;
-        stroke-dashoffset: 56px;
+@keyframes preloader {
+    to {
+        stroke-dashoffset: 0px;
     }
 }
