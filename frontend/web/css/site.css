@@ -207,7 +207,9 @@ a.desc:after {
 .dark-mode .table.fixedHeader-floating thead th{
     color: #726e6e;
 }
-
+.dark-mode div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-dropDown{
+    background-color: #6c757d;
+}
 @media (max-width: 548px) {
     div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria .form-control{
         width: 100%;
