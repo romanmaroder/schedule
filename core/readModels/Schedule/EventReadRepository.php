@@ -4,6 +4,8 @@
 namespace core\readModels\Schedule;
 
 
+use core\entities\Enums\PaymentOptionsEnum;
+use core\entities\Enums\StatusPayEnum;
 use core\entities\Schedule\Event\Event;
 use core\useCases\Schedule\CacheService;
 use yii\caching\TagDependency;
@@ -131,19 +133,19 @@ class EventReadRepository
 
     public function getUnpaidRecords(): array
     {
-       return Event::find()->where(['status'=>Event::STATUS_NOT_PAYED])
+       return Event::find()->where(['status'=>StatusPayEnum::STATUS_NOT_PAYED])
            ->orderBy(['start' => SORT_ASC])
            ->all();
     }
 
     public function getCash()
     {
-        return Event::find()->where(['payment'=>Event::STATUS_CASH])->sum('amount');
+        return Event::find()->where(['payment'=>PaymentOptionsEnum::STATUS_CASH])->sum('amount');
     }
 
     public function getCard()
     {
-        return Event::find()->where(['payment' => Event::STATUS_CARD])->sum('amount');
+        return Event::find()->where(['payment' => PaymentOptionsEnum::STATUS_CARD])->sum('amount');
     }
 
     public function find($id): ?Event

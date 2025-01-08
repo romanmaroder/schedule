@@ -5,6 +5,7 @@ namespace core\entities\Schedule\Additional;
 
 
 use core\entities\behaviors\MetaBehavior;
+use core\entities\Enums\StatusEnum;
 use core\entities\Meta;
 use core\entities\Schedule\Additional\queries\AdditionalQuery;
 use core\helpers\tHelper;
@@ -19,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property string $description
  * @property int $category_id
  * @property string $meta_json
- * @property int $status
+ * @property StatusEnum $status
  *
  * @property Meta $meta
  * @property Category $category
@@ -28,10 +29,6 @@ use yii\db\ActiveRecord;
  */
 class Additional extends ActiveRecord
 {
-
-    const STATUS_DRAFT = 0;
-    const STATUS_ACTIVE = 1;
-
     public $meta;
 
 
@@ -42,7 +39,7 @@ class Additional extends ActiveRecord
         $service->name = $name;
         $service->description = $description;
         $service->meta = $meta;
-        $service->status = self::STATUS_DRAFT;
+        $service->status = StatusEnum::STATUS_INACTIVE;
         $service->created_at = time();
         return $service;
     }
@@ -69,7 +66,7 @@ class Additional extends ActiveRecord
         if ($this->isActive()) {
             throw new \DomainException('Service is already active.');
         }
-        $this->status = self::STATUS_ACTIVE;
+        $this->status = StatusEnum::STATUS_ACTIVE;
     }
 
     public function draft(): void
@@ -77,17 +74,17 @@ class Additional extends ActiveRecord
         if ($this->isDraft()) {
             throw new \DomainException('Service is already draft.');
         }
-        $this->status = self::STATUS_DRAFT;
+        $this->status = StatusEnum::STATUS_INACTIVE;
     }
 
     public function isActive(): bool
     {
-        return $this->status == self::STATUS_ACTIVE;
+        return $this->status == StatusEnum::STATUS_ACTIVE->value;
     }
 
     public function isDraft(): bool
     {
-        return $this->status == self::STATUS_DRAFT;
+        return $this->status == StatusEnum::STATUS_INACTIVE->value;
     }
 
     /**
@@ -160,7 +157,7 @@ class Additional extends ActiveRecord
         return $this->name;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'name' => tHelper::translate('schedule/additional', 'Name'),

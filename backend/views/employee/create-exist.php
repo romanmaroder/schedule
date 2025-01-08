@@ -7,6 +7,7 @@ use core\helpers\PricesHelper;
 use core\helpers\RateHelper;
 use core\helpers\RoleHelper;
 use core\helpers\ScheduleHelper;
+use core\helpers\StatusHelper;
 use kartik\color\ColorInput;
 use kartik\date\DatePicker;
 use kartik\select2\Select2;
@@ -109,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'bsVersion' => '4.x',
                                     'name' => 'status',
-                                    'data' => EmployeeHelper::statusList(),
+                                    'data' => StatusHelper::statusList(),
                                     'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
                                     'options' => ['placeholder' => 'Select a status ...'],
                                     'pluginOptions' => [

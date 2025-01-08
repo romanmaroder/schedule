@@ -6,8 +6,8 @@
 /* @var $expense \core\entities\Expenses\Expenses\Expenses */
 
 
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
-use core\helpers\ExpenseHelper;
 use core\helpers\PriceHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -78,7 +78,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 'id',
                                 [
                                     'attribute' => 'status',
-                                    'value' => ExpenseHelper::statusLabel($expense->status),
+                                    'value' => StatusHelper::statusLabel($expense->status),
                                     'format' => 'raw',
                                 ],
                                 'name',

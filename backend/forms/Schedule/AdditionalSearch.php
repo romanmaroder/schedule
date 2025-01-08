@@ -6,7 +6,7 @@ namespace backend\forms\Schedule;
 
 use core\entities\Schedule\Additional\Category;
 use core\entities\Schedule\Additional\Additional;
-use core\helpers\AdditionalHelper;
+use core\helpers\StatusHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -80,6 +80,6 @@ class AdditionalSearch extends Model
 
     public function statusList(): array
     {
-        return AdditionalHelper::statusList();
+        return StatusHelper::statusList();
     }
 }

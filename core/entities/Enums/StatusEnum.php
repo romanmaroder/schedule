@@ -1,12 +1,16 @@
 <?php
 
-namespace core\entities\Enums\Traits;
+namespace core\entities\Enums;
 
-use core\entities\Enums\Interface\UserEnumInterface;
 use core\helpers\tHelper;
 
-trait UserStatusEnumTrait
+enum StatusEnum: int
 {
+
+    case STATUS_ACTIVE = 10;
+
+    case STATUS_INACTIVE = 9;
+
 
     public static function getList(): array
     {
@@ -21,12 +25,12 @@ trait UserStatusEnumTrait
     {
         return match ($enum) {
             self::STATUS_ACTIVE->value => 'badge bg-success bg-gradient text-shadow box-shadow',
-            self::STATUS_INACTIVE->value => 'badge bg-danger bg-gradient text-shadow box-shadow',
+            self::STATUS_INACTIVE->value=> 'badge bg-danger bg-gradient text-shadow box-shadow',
             default => 'badge bg-info',
         };
     }
 
-    private static function translate(UserEnumInterface $enum): string
+    private static function translate($enum): string
     {
         return match ($enum) {
             self::STATUS_ACTIVE => tHelper::translate('app', 'Active'),
@@ -36,19 +40,5 @@ trait UserStatusEnumTrait
     }
 
 
-    /*public static function names(): array
-    {
-        return array_column(self::cases(), 'name');
-    }
-
-    public static function values(): array
-    {
-        return array_column(self::cases(), 'value');
-    }
-
-    public static function array(): array
-    {
-        return array_combine(self::values(), self::names());
-    }*/
 
 }

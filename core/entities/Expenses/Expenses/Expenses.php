@@ -4,6 +4,7 @@
 namespace core\entities\Expenses\Expenses;
 
 
+use core\entities\Enums\StatusEnum;
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\queries\ExpensesQuery;
 use core\helpers\tHelper;
@@ -16,7 +17,7 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property int $value [int(11)]
  * @property int $category_id
- * @property int $status
+ * @property StatusEnum $status
  * @property int $created_at
  *
  * @property Category $category
@@ -28,17 +29,13 @@ use yii\db\ActiveRecord;
 class Expenses extends ActiveRecord
 {
 
-    const STATUS_DRAFT = 0;
-    const STATUS_ACTIVE = 1;
-
-
     public static function create($categoryId, $name, $value, $status, $created_at): self
     {
         $expense = new static();
         $expense->category_id = $categoryId;
         $expense->name = $name;
         $expense->value = $value;
-        $expense->status = self::STATUS_ACTIVE;
+        $expense->status = StatusEnum::STATUS_ACTIVE;
         $expense->created_at = strtotime($created_at);
         return $expense;
     }
@@ -66,7 +63,7 @@ class Expenses extends ActiveRecord
         if ($this->isActive()) {
             throw new \DomainException('Expense is already active.');
         }
-        $this->status = self::STATUS_ACTIVE;
+        $this->status = StatusEnum::STATUS_ACTIVE;
     }
 
     public function draft(): void
@@ -74,17 +71,17 @@ class Expenses extends ActiveRecord
         if ($this->isDraft()) {
             throw new \DomainException('Expense is already draft.');
         }
-        $this->status = self::STATUS_DRAFT;
+        $this->status = StatusEnum::STATUS_INACTIVE;
     }
 
     public function isActive(): bool
     {
-        return $this->status == self::STATUS_ACTIVE;
+        return $this->status == StatusEnum::STATUS_ACTIVE->value;
     }
 
     public function isDraft(): bool
     {
-        return $this->status == self::STATUS_DRAFT;
+        return $this->status == StatusEnum::STATUS_INACTIVE->value;
     }
 
     /**
@@ -203,7 +200,7 @@ class Expenses extends ActiveRecord
         return $this->name;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'category_id' => tHelper::translate('expenses/expenses', 'Category'),

@@ -4,7 +4,7 @@
 namespace core\entities\Shop\Product\queries;
 
 
-use core\entities\Shop\Product\Product;
+use core\entities\Enums\StatusEnum;
 use yii\db\ActiveQuery;
 
 class ProductQuery extends ActiveQuery
@@ -13,7 +13,7 @@ class ProductQuery extends ActiveQuery
     {
         return $this->andWhere(
             [
-                ($alias ? $alias . '.' : '') . 'status' => Product::STATUS_ACTIVE,
+                ($alias ? $alias . '.' : '') . 'status' => StatusEnum::STATUS_ACTIVE,
             ]
         );
     }

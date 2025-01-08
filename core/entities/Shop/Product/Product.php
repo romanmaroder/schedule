@@ -7,6 +7,7 @@ namespace core\entities\Shop\Product;
 use core\entities\AggregateRoot;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\CommonUses\Brand;
+use core\entities\Enums\StatusEnum;
 use core\entities\EventTrait;
 use core\entities\Meta;
 use core\entities\Shop\Product\events\ProductAppearedInStock;
@@ -30,7 +31,7 @@ use yii\web\UploadedFile;
  * @property int $price_new
  * @property int $rating
  * @property int $main_photo_id
- * @property int $status
+ * @property StatusEnum $status
  *
  * @property string $meta_json
  * @property int $quantity
@@ -54,9 +55,6 @@ class Product extends ActiveRecord implements AggregateRoot
 
     use EventTrait;
 
-    const STATUS_DRAFT = 0;
-    const STATUS_ACTIVE = 1;
-
     public $meta;
 
 
@@ -71,7 +69,7 @@ class Product extends ActiveRecord implements AggregateRoot
         $product->weight = $weight;
         $product->quantity = $quantity;
         $product->meta = $meta;
-        $product->status = self::STATUS_DRAFT;
+        $product->status = StatusEnum::STATUS_INACTIVE;
         $product->created_at = time();
         return $product;
     }
@@ -223,7 +221,7 @@ class Product extends ActiveRecord implements AggregateRoot
         if ($this->isActive()) {
             throw new \DomainException('Product is already active.');
         }
-        $this->status = self::STATUS_ACTIVE;
+        $this->status = StatusEnum::STATUS_ACTIVE;
     }
 
     public function draft(): void
@@ -231,17 +229,17 @@ class Product extends ActiveRecord implements AggregateRoot
         if ($this->isDraft()) {
             throw new \DomainException('Product is already draft.');
         }
-        $this->status = self::STATUS_DRAFT;
+        $this->status = StatusEnum::STATUS_INACTIVE;
     }
 
     public function isActive(): bool
     {
-        return $this->status == self::STATUS_ACTIVE;
+        return $this->status == StatusEnum::STATUS_ACTIVE->value;
     }
 
     public function isDraft(): bool
     {
-        return $this->status == self::STATUS_DRAFT;
+        return $this->status == StatusEnum::STATUS_INACTIVE->value;
     }
 
     public function getSeoTitle(): string
@@ -673,7 +671,7 @@ class Product extends ActiveRecord implements AggregateRoot
         return $this->hasMany(WishlistItem::class, ['product_id' => 'id']);
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'created_at'=>tHelper::translate('shop/product','created_at'),

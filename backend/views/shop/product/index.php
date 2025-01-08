@@ -3,7 +3,7 @@
 use backend\assets\DataTableAsset;
 use core\entities\Shop\Product\Product;
 use core\helpers\PriceHelper;
-use core\helpers\ProductHelper;
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -83,7 +83,7 @@ DataTableAsset::register($this);
                                 'attribute' => 'status',
                                 'filter' => $searchModel->statusList(),
                                 'value' => fn (Product $model) =>
-                                     ProductHelper::statusLabel($model->status),
+                                     StatusHelper::statusLabel($model->status),
                                 'format' => 'raw',
                                 'contentOptions' => ['style' => 'text-align:center'],
                             ]

@@ -4,6 +4,7 @@
 namespace core\entities\Blog\Post;
 
 
+use core\entities\Enums\StatusEnum;
 use core\helpers\tHelper;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use romanmaroder\upload\ImageUploadBehavior;
@@ -42,8 +43,6 @@ use yii\web\UploadedFile;
  */
 class Post extends ActiveRecord
 {
-    const STATUS_DRAFT = 0;
-    const STATUS_ACTIVE = 1;
 
     public $meta;
 
@@ -55,7 +54,7 @@ class Post extends ActiveRecord
         $post->description = $description;
         $post->content = $content;
         $post->meta = $meta;
-        $post->status = self::STATUS_DRAFT;
+        $post->status = StatusEnum::STATUS_INACTIVE;
         $post->created_at = time();
         $post->comments_count = 0;
         return $post;
@@ -81,7 +80,7 @@ class Post extends ActiveRecord
         if ($this->isActive()) {
             throw new \DomainException('Post is already active.');
         }
-        $this->status = self::STATUS_ACTIVE;
+        $this->status = StatusEnum::STATUS_ACTIVE;
     }
 
     public function draft(): void
@@ -89,18 +88,18 @@ class Post extends ActiveRecord
         if ($this->isDraft()) {
             throw new \DomainException('Post is already draft.');
         }
-        $this->status = self::STATUS_DRAFT;
+        $this->status = StatusEnum::STATUS_INACTIVE;
     }
 
     public function isActive(): bool
     {
-        return $this->status == self::STATUS_ACTIVE;
+        return $this->status == StatusEnum::STATUS_ACTIVE->value;
     }
 
 
     public function isDraft(): bool
     {
-        return $this->status == self::STATUS_DRAFT;
+        return $this->status == StatusEnum::STATUS_INACTIVE->value;
     }
 
     public function getSeoTitle(): string
@@ -149,7 +148,7 @@ class Post extends ActiveRecord
             throw new \DomainException('Cannot add comment to inactive parent.');
         }
         $comments = $this->comments;
-        $comments[] = $comment = Comment::create($userId, $parent ? $parent->id : null, $text);
+        $comments[] = $comment = Comment::create($userId, $parent?->id, $text);
         $this->updateComments($comments);
         return $comment;
     }
@@ -160,7 +159,7 @@ class Post extends ActiveRecord
         $comments = $this->comments;
         foreach ($comments as $comment) {
             if ($comment->isIdEqualTo($id)) {
-                $comment->edit($parent ? $parent->id : null, $text);
+                $comment->edit($parent?->id, $text);
                 $this->updateComments($comments);
                 return;
             }
@@ -300,7 +299,7 @@ class Post extends ActiveRecord
     {
         return new PostQuery(static::class);
     }
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'title' => tHelper::translate('blog', 'Title'),

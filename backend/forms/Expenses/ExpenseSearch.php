@@ -6,7 +6,8 @@ namespace backend\forms\Expenses;
 
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\Expenses;
-use core\helpers\ExpenseHelper;
+
+use core\helpers\StatusHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -80,6 +81,6 @@ class ExpenseSearch extends Model
 
     public function statusList(): array
     {
-        return ExpenseHelper::statusList();
+        return StatusHelper::statusList();
     }
 }

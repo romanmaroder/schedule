@@ -4,7 +4,7 @@
 namespace core\entities\Schedule\Additional\queries;
 
 
-use core\entities\Schedule\Additional\Additional;
+use core\entities\Enums\StatusEnum;
 use yii\db\ActiveQuery;
 
 class AdditionalQuery extends ActiveQuery
@@ -13,7 +13,7 @@ class AdditionalQuery extends ActiveQuery
     {
         return $this->andWhere(
             [
-                ($alias ? $alias . '.' : '') . 'status' => Additional::STATUS_ACTIVE,
+                ($alias ? $alias . '.' : '') . 'status' => StatusEnum::STATUS_ACTIVE,
             ]
         );
     }

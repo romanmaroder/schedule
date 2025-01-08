@@ -75,11 +75,11 @@ class Comment extends ActiveRecord
         return $this->hasOne(Post::class, ['id' => 'post_id']);
     }
 
-    public function getEmployee()
+    public function getEmployee(): ActiveQuery
     {
         return $this->hasOne(Employee::class, ['user_id' => 'user_id']);
     }
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'created_at' => tHelper::translate('blog/comments', 'Created At'),

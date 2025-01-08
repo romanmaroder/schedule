@@ -2,7 +2,7 @@
 
 
 use core\helpers\PriceHelper;
-use core\helpers\ServiceHelper;
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -75,7 +75,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 'id',
                                 [
                                     'attribute' => 'status',
-                                    'value' => ServiceHelper::statusLabel($service->status),
+                                    'value' => StatusHelper::statusLabel($service->status),
                                     'format' => 'raw',
                                 ],
                                 'name',

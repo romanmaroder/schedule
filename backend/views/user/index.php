@@ -2,7 +2,7 @@
 
 use backend\assets\DataTableAsset;
 use core\entities\user\User;
-use core\helpers\UserHelper;
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use kartik\date\DatePicker;
 use yii\grid\GridView;
@@ -79,11 +79,11 @@ DataTableAsset::register($this);
                         'filter' => Html::activeDropDownList(
                             $searchModel,
                             'status',
-                            UserHelper::statusList(),
+                            StatusHelper::statusList(),
                             ['prompt' => 'Select...', 'class' => 'form-control form-control-sm']
                         ),
                         'value' => fn (User $model) =>
-                            UserHelper::statusLabel($model->status),
+                        StatusHelper::statusLabel($model->status),
                         'format' => 'raw',
                     ],
                     [

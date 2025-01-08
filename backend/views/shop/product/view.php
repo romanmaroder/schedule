@@ -4,7 +4,7 @@
 use core\entities\Shop\Product\Modification;
 use core\entities\Shop\Product\Value;
 use core\helpers\PriceHelper;
-use core\helpers\ProductHelper;
+use core\helpers\StatusHelper;
 use core\helpers\WeightHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use kartik\file\FileInput;
@@ -93,7 +93,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                         'id',
                                         [
                                             'attribute' => 'status',
-                                            'value' => ProductHelper::statusLabel($product->status),
+                                            'value' => StatusHelper::statusLabel($product->status),
                                             'format' => 'raw',
                                         ],
                                         [

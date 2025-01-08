@@ -28,7 +28,7 @@ class Tag extends ActiveRecord
         $this->slug = $slug;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'name' => tHelper::translate('blog/tag', 'Name'),

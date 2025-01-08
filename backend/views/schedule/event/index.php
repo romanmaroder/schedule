@@ -1,6 +1,8 @@
 <?php
 
 use backend\assets\DataTableAsset;
+use core\entities\Enums\PaymentOptionsEnum;
+use core\entities\Enums\StatusPayEnum;
 use core\entities\Schedule\Event\Event;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
@@ -148,14 +150,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'visibleButtons' => [
                                             'status' => true,
-                                            'payment' => fn($model) => $model->status == Event::STATUS_PAYED,
+                                            'payment' => fn($model) => $model->status == StatusPayEnum::STATUS_PAYED->value,
                                         ],
                                         'buttons' => [
                                             'status' => fn(
                                                 $url,
                                                 $model,
                                                 $key
-                                            ) => $model->status == Event::STATUS_NOT_PAYED ? Html::a(
+                                            ) => $model->status == StatusPayEnum::STATUS_NOT_PAYED->value ? Html::a(
                                                 '<i class="fas fa-ruble-sign"></i>',
                                                 //Yii::t('schedule/event','Pay'),
                                                 Url::to(['schedule/event/pay', 'id' => $model->id]),
@@ -176,7 +178,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 $url,
                                                 $model,
                                                 $key
-                                            ) => $model->payment == Event::STATUS_CASH ? Html::a(
+                                            ) => $model->payment == PaymentOptionsEnum::STATUS_CASH->value ? Html::a(
                                                 '<i class="fab fa-cc-visa"></i>',
 
                                                 Url::to(['schedule/event/card', 'id' => $model->id]),
@@ -211,7 +213,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'visibleButtons' => [
                                             'status' => true,
-                                            'payment' => fn($model) => $model->status == Event::STATUS_PAYED,
+                                            'payment' => fn($model) => $model->status == StatusPayEnum::STATUS_PAYED->value,
                                         ],
                                         'buttons' => [
                                             'copy' => fn($url, $model, $key) => Html::a(
@@ -256,9 +258,8 @@ $js = <<< JS
          dom:'<"row"<"col-12 btn-sm"Q><"col-auto"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
         language: {
           url:"$ru"
-         },
-    }).buttons().container().appendTo('#event_wrapper .col-md-6:eq(0)');
-
+         }
+    });
   });
 
 JS;

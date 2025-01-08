@@ -6,7 +6,7 @@ namespace backend\forms\Shop;
 
 use core\entities\Shop\Product\Category;
 use core\entities\Shop\Product\Product;
-use core\helpers\ProductHelper;
+use core\helpers\StatusHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -86,7 +86,7 @@ class ProductSearch extends Model
 
     public function statusList(): array
     {
-        return ProductHelper::statusList();
+        return StatusHelper::statusList();
     }
 
 }

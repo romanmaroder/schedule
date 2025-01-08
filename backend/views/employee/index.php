@@ -12,6 +12,7 @@ use backend\assets\DataTableAsset;
 use backend\widgets\grid\RoleColumn;
 use core\entities\User\Employee\Employee;
 use core\helpers\EmployeeHelper;
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
@@ -116,7 +117,7 @@ DataTableAsset::register($this);
                     [
                         'attribute' => 'status',
                         'value' => fn ($model) =>
-                             EmployeeHelper::statusLabel($model->status),
+                             StatusHelper::statusLabel($model->status),
                         'contentOptions' => [
                                 'class'=>'text-center'
                         ],

@@ -3,6 +3,7 @@
 use core\entities\User\Employee\Employee;
 use core\helpers\EmployeeHelper;
 use core\helpers\ScheduleHelper;
+use core\helpers\StatusHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -94,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'status',
                         'value' => fn ($model) =>
-                             EmployeeHelper::statusLabel($model->status),
+                             StatusHelper::statusLabel($model->status),
                         'format' => 'raw',
                     ],
                     [

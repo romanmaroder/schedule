@@ -6,7 +6,8 @@ namespace backend\forms\Blog;
 
 use core\entities\Blog\Category;
 use core\entities\Blog\Post\Post;
-use core\helpers\PostHelper;
+
+use core\helpers\StatusHelper;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -70,6 +71,6 @@ class PostSearch extends Model
 
     public function statusList(): array
     {
-        return PostHelper::statusList();
+        return StatusHelper::statusList();
     }
 }

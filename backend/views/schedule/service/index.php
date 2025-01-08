@@ -3,7 +3,7 @@
 use backend\assets\DataTableAsset;
 use core\entities\Schedule\Service\Service;
 use core\helpers\PriceHelper;
-use core\helpers\ServiceHelper;
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -78,7 +78,7 @@ DataTableAsset::register($this);
                                     'attribute' => 'status',
                                     'filter' => $searchModel->statusList(),
                                     'value' => fn (Service $model) =>
-                                        ServiceHelper::statusLabel($model->status),
+                                        StatusHelper::statusLabel($model->status),
                                     'format' => 'raw',
                                     'contentOptions' => ['style' => 'text-align:center'],
                                 ]

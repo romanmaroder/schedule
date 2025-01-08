@@ -2,7 +2,7 @@
 
 namespace core\forms\auth;
 
-use core\entities\Enums\UserStatusEnum;
+use core\entities\Enums\StatusEnum;
 use core\entities\User\User;
 use yii\base\Model;
 
@@ -25,7 +25,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'email'],
             ['email', 'exist',
                 'targetClass' => User::class,
-                'filter' => ['status' => UserStatusEnum::STATUS_ACTIVE],
+                'filter' => ['status' => StatusEnum::STATUS_ACTIVE],
                 'message' => 'There is no user with this email address.'
             ],
         ];

@@ -4,7 +4,7 @@
 namespace core\entities\Schedule\Service\queries;
 
 
-use core\entities\Schedule\Service\Service;
+use core\entities\Enums\StatusEnum;
 use yii\db\ActiveQuery;
 
 class ServiceQuery extends ActiveQuery
@@ -13,7 +13,7 @@ class ServiceQuery extends ActiveQuery
     {
         return $this->andWhere(
             [
-                ($alias ? $alias . '.' : '') . 'status' => Service::STATUS_ACTIVE,
+                ($alias ? $alias . '.' : '') . 'status' => StatusEnum::STATUS_ACTIVE,
             ]
         );
     }

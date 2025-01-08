@@ -4,6 +4,11 @@
 namespace core\entities\Schedule\Event;
 
 
+use core\entities\Enums\IconEnum;
+use core\entities\Enums\PaymentOptionsEnum;
+use core\entities\Enums\StatusPayEnum;
+use core\entities\Enums\ToolsEnum;
+use core\entities\Enums\UserDefaultValuesEnum;
 use core\entities\Schedule\Service\Service;
 use core\entities\User\Employee\Employee;
 use core\entities\User\User;
@@ -42,33 +47,20 @@ use yii\db\ActiveRecord;
  */
 class Event extends ActiveRecord
 {
-    public const STATUS_NOT_PAYED = 0;
-    public const STATUS_PAYED = 1;
-    public const STATUS_CASH = 2;
-    public const STATUS_CARD = 3;
-    public const DEFAULT_COLOR = '#747d8c';
-    public const EX_EMPLOYEE = ' <small><i class="fas fa-user-slash"></i></small>';
-
-    public const TOOLS_ARE_NOT_READY = 0;
-    public const TOOLS_READY = 1;
-    public const TOOLS_ICON = '<i class="fas fa-wrench"></i>';
 
     public const CACHE_KEY = 'event';
-
-
     public function __construct($config = [])
     {
         parent::__construct($config);
-       // $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifyUser']);
-       // $this->on(self::EVENT_AFTER_UPDATE, [$this, 'notifyUser']);
+        // $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifyUser']);
+        // $this->on(self::EVENT_AFTER_UPDATE, [$this, 'notifyUser']);
     }
 
     public function notifyUser(): void
     {
-
-            //$notify = new BotMessenger();
-           // $notify->Telegram()->send($this);
-            //$notify->toViber()->send($data);
+        //$notify = new BotMessenger();
+        // $notify->Telegram()->send($this);
+        //$notify->toViber()->send($data);
     }
 
 
@@ -94,13 +86,13 @@ class Event extends ActiveRecord
         $event->end = $end;
         $event->discount = $discount;
         $event->discount_from = $discount_from;
-        $event->status = self::STATUS_NOT_PAYED;
-        $event->payment = self::STATUS_CASH;
+        $event->status = StatusPayEnum::STATUS_NOT_PAYED;
+        $event->payment = PaymentOptionsEnum::STATUS_CASH;
         $event->amount = $amount;
         $event->rate = $rate;
         $event->fullname = $fullname;
-        $event->default_color = self::DEFAULT_COLOR;
-        $event->tools = self::TOOLS_ARE_NOT_READY;
+        $event->default_color = UserDefaultValuesEnum::DEFAULT_COLOR->value;
+        $event->tools = ToolsEnum::TOOLS_ARE_NOT_READY->value;
         return $event;
     }
 
@@ -131,7 +123,7 @@ class Event extends ActiveRecord
             $this->payment = $payment;
             $this->amount = $amount;
         } else {
-            $this->payment = self::STATUS_CASH;
+            $this->payment = PaymentOptionsEnum::STATUS_CASH;
         }
         $this->rate = $rate;
         $this->fullname = $fullname;
@@ -163,8 +155,8 @@ class Event extends ActiveRecord
         $event->end = $end;
         $event->discount = $discount;
         $event->discount_from = $discount_from;
-        $event->status = self::STATUS_NOT_PAYED;
-        $event->payment = self::STATUS_CASH;
+        $event->status = StatusPayEnum::STATUS_NOT_PAYED;
+        $event->payment = PaymentOptionsEnum::STATUS_CASH;
         $event->amount = $amount;
         $event->rate = $rate;
         $event->fullname = $fullname;
@@ -179,52 +171,52 @@ class Event extends ActiveRecord
 
     public function isPayed(): bool
     {
-        return $this->status == self::STATUS_PAYED;
+        return $this->status == StatusPayEnum::STATUS_PAYED->value;
     }
 
     public function isNotPayed(): bool
     {
-        return $this->status == self::STATUS_NOT_PAYED;
+        return $this->status == StatusPayEnum::STATUS_NOT_PAYED->value;
     }
-    
+
     public function toPay(): int
     {
-        return $this->status = self::STATUS_PAYED;
+        return $this->status = StatusPayEnum::STATUS_PAYED->value;
     }
 
     public function cancelPay(): int
     {
-        return $this->status = self::STATUS_NOT_PAYED;
+        return $this->status = StatusPayEnum::STATUS_NOT_PAYED->value;
     }
 
     public function isCardPayment(): bool
     {
-        return $this->payment == self::STATUS_CARD;
+        return $this->payment == PaymentOptionsEnum::STATUS_CARD;
     }
 
     public function isCashPayment(): bool
     {
-        return $this->payment == self::STATUS_CASH;
+        return $this->payment == PaymentOptionsEnum::STATUS_CASH;
     }
 
     public function cardPayment(): int
     {
-        return $this->payment = self::STATUS_CARD;
+        return $this->payment = PaymentOptionsEnum::STATUS_CARD->value;
     }
 
     public function cashPayment(): int
     {
-        return $this->payment = self::STATUS_CASH;
+        return $this->payment = PaymentOptionsEnum::STATUS_CASH->value;
     }
 
-    public function isToolsAreNotReady():bool
+    public function isToolsAreNotReady(): bool
     {
-        return $this->tools == self::TOOLS_ARE_NOT_READY;
+        return $this->tools == ToolsEnum::TOOLS_ARE_NOT_READY;
     }
 
-    public function toolsReady():int
+    public function toolsReady(): int
     {
-        return $this->tools = self::TOOLS_READY;
+        return $this->tools = ToolsEnum::TOOLS_READY->value;
     }
 
     public function assignService($serviceId, $serviceCost, $priceRate, $priceCost): void
@@ -246,7 +238,7 @@ class Event extends ActiveRecord
 
     public function getDiscount(): int|null
     {
-        if ($this->discount == null){
+        if ($this->discount == null) {
             return 0;
         }
         return $this->discount;
@@ -265,7 +257,6 @@ class Event extends ActiveRecord
                 $cart->getItems()
             )
         );
-
     }
 
     public function revokeService($id): void
@@ -297,7 +288,7 @@ class Event extends ActiveRecord
     public function getServices(): ActiveQuery
     {
         return $this->hasMany(Service::class, ['id' => 'service_id'])
-            ->viaTable('schedule_service_assignments',['event_id'=>'id']);
+            ->viaTable('schedule_service_assignments', ['event_id' => 'id']);
     }
 
     public function getMaster(): ActiveQuery
@@ -312,13 +303,13 @@ class Event extends ActiveRecord
 
     public function getEmployee(): ActiveQuery
     {
-        return $this->hasOne(Employee::class,['user_id'=>'master_id']);
+        return $this->hasOne(Employee::class, ['user_id' => 'master_id']);
     }
 
 
-    public function issetNotice($notice):bool
+    public function issetNotice($notice): bool
     {
-        if (!$notice){
+        if (!$notice) {
             return false;
         }
         return true;
@@ -326,18 +317,12 @@ class Event extends ActiveRecord
 
     public function getFullName(): string
     {
-        if ($this->employee){
-            return $this->employee->getFullName();
-        }
-        return $this->fullname . self::EX_EMPLOYEE;
+        return $this->employee?->getFullName() ?? $this->fullname . ' <small>'.IconEnum::EX_EMPLOYEE->value.'</small>';
     }
 
     public function getDefaultColor(): string
     {
-        if ($this->employee) {
-            return $this->employee->color;
-        }
-            return self::DEFAULT_COLOR;
+        return $this->employee?->color ?? UserDefaultValuesEnum::DEFAULT_COLOR->value;
     }
 
     public function getRate(): int|float
@@ -347,20 +332,21 @@ class Event extends ActiveRecord
         }*/
         return $this->rate;
     }
-    public function attributeLabels()
+
+    public function attributeLabels(): array
     {
         return [
-            'master_id' => tHelper::translate('schedule/event','Master'),
-            'client_id' => tHelper::translate('schedule/event','Client'),
-            'service' => tHelper::translate('schedule/event','Services'),
-            'status' => tHelper::translate('schedule/event','Status'),
-            'start' => tHelper::translate('schedule/event','Start'),
-            'end' => tHelper::translate('schedule/event','End'),
-            'payment' => tHelper::translate('schedule/event','Payment'),
-            'cost' => tHelper::translate('schedule/event','Cost'),
-            'notice' => tHelper::translate('schedule/event','Notice'),
-            'amount' => tHelper::translate('schedule/event','Amount'),
-            'tools' => tHelper::translate('schedule/event','Tools'),
+            'master_id' => tHelper::translate('schedule/event', 'Master'),
+            'client_id' => tHelper::translate('schedule/event', 'Client'),
+            'service' => tHelper::translate('schedule/event', 'Services'),
+            'status' => tHelper::translate('schedule/event', 'Status'),
+            'start' => tHelper::translate('schedule/event', 'Start'),
+            'end' => tHelper::translate('schedule/event', 'End'),
+            'payment' => tHelper::translate('schedule/event', 'Payment'),
+            'cost' => tHelper::translate('schedule/event', 'Cost'),
+            'notice' => tHelper::translate('schedule/event', 'Notice'),
+            'amount' => tHelper::translate('schedule/event', 'Amount'),
+            'tools' => tHelper::translate('schedule/event', 'Tools'),
         ];
     }
 

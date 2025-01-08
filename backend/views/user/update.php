@@ -1,6 +1,7 @@
 <?php
 
 use core\helpers\ScheduleHelper;
+use core\helpers\StatusHelper;
 use core\helpers\UserHelper;
 use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
@@ -52,7 +53,7 @@ $this->params['breadcrumbs'][] = $user->username;
                         [
                             'bsVersion' => '4.x',
                             'name' => 'status',
-                            'data' => UserHelper::statusList(),
+                            'data' => StatusHelper::statusList(),
                             'theme' => Select2::THEME_KRAJEE_BS4, // this is the default if theme is not set
                             'options' => ['placeholder' => 'Select a status ...'],
                             'pluginOptions' => [

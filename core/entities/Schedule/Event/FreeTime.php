@@ -90,7 +90,7 @@ class FreeTime extends ActiveRecord
         return $this->hasOne(Additional::class,['id'=>'additional_id']);
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'master_id' => tHelper::translate('schedule/free','Master'),

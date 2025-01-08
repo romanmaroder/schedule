@@ -7,7 +7,7 @@ namespace core\entities\User\Employee;
 use core\entities\Address;
 use core\entities\behaviors\AddressBehavior;
 use core\entities\behaviors\ScheduleWorkBehavior;
-use core\entities\Enums\UserStatusEnum;
+use core\entities\Enums\StatusEnum;
 use core\entities\Schedule;
 use core\entities\Schedule\Event\Event;
 use core\entities\User\Employee\queries\EmployeeQuery;
@@ -34,7 +34,7 @@ use yii\db\ActiveRecord;
  * @property string $address_json
  * @property string $color
  * @property string $role_id
- * @property UserStatusEnum $status
+ * @property StatusEnum $status
  * @property Address $address
  * @property Schedule $schedule
  * @property User $user
@@ -72,7 +72,7 @@ class Employee extends ActiveRecord
         $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
-        $employee->status = UserStatusEnum::STATUS_INACTIVE->value;
+        $employee->status = StatusEnum::STATUS_INACTIVE->value;
         return $employee;
     }
 
@@ -102,7 +102,7 @@ class Employee extends ActiveRecord
         $employee->schedule = $schedule;
         $employee->color = $color;
         $employee->role_id = $roleId;
-        $employee->status = UserStatusEnum::STATUS_ACTIVE->value;
+        $employee->status = StatusEnum::STATUS_ACTIVE->value;
         return $employee;
     }
 
@@ -148,7 +148,7 @@ class Employee extends ActiveRecord
 
     public function isActive(): bool
     {
-        return $this->status == UserStatusEnum::STATUS_ACTIVE;
+        return $this->status == StatusEnum::STATUS_ACTIVE->value;
     }
 
     /**

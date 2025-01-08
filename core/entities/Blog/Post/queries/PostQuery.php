@@ -4,7 +4,7 @@
 namespace core\entities\Blog\Post\queries;
 
 
-use core\entities\Blog\Post\Post;
+use core\entities\Enums\StatusEnum;
 use yii\db\ActiveQuery;
 
 class PostQuery extends ActiveQuery
@@ -17,7 +17,7 @@ class PostQuery extends ActiveQuery
     {
         return $this->andWhere(
             [
-                ($alias ? $alias . '.' : '') . 'status' => Post::STATUS_ACTIVE,
+                ($alias ? $alias . '.' : '') . 'status' => StatusEnum::STATUS_ACTIVE,
             ]
         );
     }

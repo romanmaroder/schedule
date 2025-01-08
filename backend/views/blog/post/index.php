@@ -2,7 +2,7 @@
 
 use backend\assets\DataTableAsset;
 use core\entities\Blog\Post\Post;
-use core\helpers\PostHelper;
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -80,7 +80,7 @@ DataTableAsset::register($this);
                                                          'attribute' => 'status',
                                                          'filter' => $searchModel->statusList(),
                                                          'value' => fn (Post $model) =>
-                                                              PostHelper::statusLabel($model->status),
+                                                              StatusHelper::statusLabel($model->status),
                                                          'format' => 'raw',
                                                      ],
                                                  ],

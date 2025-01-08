@@ -3,7 +3,7 @@
 namespace core\tests\unit\forms;
 
 use common\fixtures\UserFixture;
-use core\entities\Enums\UserStatusEnum;
+use core\entities\Enums\StatusEnum;
 use core\forms\auth\VerifyEmailForm;
 
 class VerifyEmailFormTest extends \Codeception\Test\Unit
@@ -49,7 +49,7 @@ class VerifyEmailFormTest extends \Codeception\Test\Unit
         verify($user)->instanceOf('core\entities\User\User');
         verify($user->username)->equals('test.test');
         verify($user->email)->equals('test@mail.com');
-        verify($user->status)->equals(UserStatusEnum::STATUS_ACTIVE);
+        verify($user->status)->equals(StatusEnum::STATUS_ACTIVE);
         verify($user->validatePassword('Test1234'))->true();
     }
 }

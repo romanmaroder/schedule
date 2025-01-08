@@ -44,12 +44,12 @@ class Calendar
             $event->title = $item->client->username ?: $item->fullname;
             $event->extendedProps = [
                 'notice' => $item->notice,
-                'master' => $item->master->username ?: $item->fullname,
+                'master' => $item->getFullName(),
                 'service' => $this->serviceNameList($item->services),
                 'tools' => ToolsHelper::statusLabel($item->tools),
             ];
-            $event->backgroundColor = $item->employee->color ??  $item->default_color;
-            $event->borderColor = $item->employee->color ?? $item->default_color;
+            $event->backgroundColor = $item->getDefaultColor();
+            $event->borderColor = $item->getDefaultColor();
             $event->start = $item->start;
             $event->end = $item->end;
             $event->groupId = $item->master->id;
@@ -75,7 +75,7 @@ class Calendar
             $free->title = $item->master->username ?: $item->fullname;
             $free->extendedProps = [
                 'notice' => $item->notice,
-                'master' => $item->master->username ?: $item->fullname,
+                'master' => $item->employee->getFullName(),
                 'additional' => $item->additional->name,
             ];
             $free->backgroundColor = $item->employee->color ??  $item->default_color;

@@ -68,7 +68,7 @@ class Education extends ActiveRecord
         return $this->hasMany(User::class, ['id' => 'studentsIds']);
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'teacher_id' => tHelper::translate('schedule/education','Teacher'),

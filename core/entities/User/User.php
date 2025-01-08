@@ -5,7 +5,7 @@ namespace core\entities\User;
 use core\entities\AggregateRoot;
 use core\entities\behaviors\ScheduleWorkBehavior;
 use core\entities\Enums\UserDefaultValuesEnum;
-use core\entities\Enums\UserStatusEnum;
+use core\entities\Enums\StatusEnum;
 use core\entities\EventTrait;
 use core\entities\Schedule;
 use core\entities\Schedule\Event\Event;
@@ -31,7 +31,7 @@ use yii\db\ActiveRecord;
  * @property string $phone
  * @property string $auth_key
  * @property string $schedule_json [json]
- * @property UserStatusEnum $status
+ * @property StatusEnum $status
  * @property int $created_at
  * @property int $updated_at
  * @property string $password
@@ -66,7 +66,7 @@ class User extends ActiveRecord implements AggregateRoot
         $user->phone = $phone;
         $user->setPassword(!empty($password) ? $password : UserDefaultValuesEnum::DEFAULT_PASSWORD->value);
         $user->created_at = time();
-        $user->status = UserStatusEnum::STATUS_ACTIVE;
+        $user->status = StatusEnum::STATUS_ACTIVE;
         $user->schedule = $schedule;
         $user->notice = $notice;
         $user->auth_key = Yii::$app->security->generateRandomString();
@@ -121,7 +121,7 @@ class User extends ActiveRecord implements AggregateRoot
         $user->phone = '';
         $user->setPassword($password);
         $user->created_at = time();
-        $user->status = $user->setUserStatus(UserStatusEnum::STATUS_INACTIVE);
+        $user->status = $user->setUserStatus(StatusEnum::STATUS_INACTIVE);
         $user->verification_token = Yii::$app->security->generateRandomString();
         $user->generateAuthKey();
         $user->recordEvent(new UserSignUpRequested($user));
@@ -138,7 +138,7 @@ class User extends ActiveRecord implements AggregateRoot
         if ($this->isActive()) {
             throw new \DomainException('User is already active.');
         }
-        $this->status = $this->setUserStatus(UserStatusEnum::STATUS_ACTIVE);
+        $this->status = $this->setUserStatus(StatusEnum::STATUS_ACTIVE);
         $this->removeEmailVerificationToken();
         $this->recordEvent(new UserSignUpConfirmed($this));
     }
@@ -153,7 +153,7 @@ class User extends ActiveRecord implements AggregateRoot
     {
         $user = new User();
         $user->created_at = time();
-        $user->status = $user->setUserStatus(UserStatusEnum::STATUS_ACTIVE);
+        $user->status = $user->setUserStatus(StatusEnum::STATUS_ACTIVE);
         $user->generateAuthKey();
         $user->networks = [Network::create($network, $identity)];
         return $user;
@@ -260,7 +260,7 @@ class User extends ActiveRecord implements AggregateRoot
      */
     public function isActive(): bool
     {
-        return $this->status == UserStatusEnum::STATUS_ACTIVE->value;
+        return $this->status == StatusEnum::STATUS_ACTIVE->value;
     }
 
     /**
@@ -268,7 +268,7 @@ class User extends ActiveRecord implements AggregateRoot
      */
     public function isInactive(): bool
     {
-        return $this->status == UserStatusEnum::STATUS_INACTIVE->value;
+        return $this->status == StatusEnum::STATUS_INACTIVE->value;
     }
 
     public function isChatId(): bool
@@ -391,7 +391,7 @@ class User extends ActiveRecord implements AggregateRoot
      */
     public static function findByUsername(string $username): null|static
     {
-        return static::findOne(['username' => $username, 'status' => UserStatusEnum::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username, 'status' => StatusEnum::STATUS_ACTIVE]);
     }
 
     /**
@@ -408,7 +408,7 @@ class User extends ActiveRecord implements AggregateRoot
 
         return static::findOne([
                                    'password_reset_token' => $token,
-                                   'status' => UserStatusEnum::STATUS_ACTIVE,
+                                   'status' => StatusEnum::STATUS_ACTIVE,
                                ]);
     }
 
@@ -508,13 +508,13 @@ class User extends ActiveRecord implements AggregateRoot
         $this->verification_token = null;
     }
 
-    public function getUserStatus(): UserStatusEnum
+    public function getUserStatus(): StatusEnum
     {
 
         return $this->status;
     }
 
-    public function setUserStatus(UserStatusEnum $userStatus): User
+    public function setUserStatus(StatusEnum $userStatus): User
     {
         $this->status = $userStatus;
         return $this;

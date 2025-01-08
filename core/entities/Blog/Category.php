@@ -55,7 +55,7 @@ class Category extends ActiveRecord
         return $this->title ?: $this->name;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'title' => tHelper::translate('blog/category', 'Title'),

@@ -1,7 +1,7 @@
 <?php
 
 use core\helpers\ScheduleHelper;
-use core\helpers\UserHelper;
+use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -65,7 +65,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                 ],
                 [
                     'attribute' => 'status',
-                    'value' => UserHelper::statusLabel($model->status),
+                    'value' => StatusHelper::statusLabel($model->status),
                     'format' => 'raw',
                 ],
                 [
