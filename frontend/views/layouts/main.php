@@ -37,7 +37,7 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
 <body class="hold-transition sidebar-mini">
 <?php $this->beginBody() ?>
 <!-- Preloader -->
-<?=  \common\widgets\preloader\PreloaderWidget::widget(); ?>
+<?php /*=  \common\widgets\preloader\PreloaderWidget::widget(); */?>
 <!-- /.preloader -->
 <div class="wrapper">
     <!-- Navbar -->

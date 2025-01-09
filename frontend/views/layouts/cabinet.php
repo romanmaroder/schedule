@@ -38,7 +38,8 @@ $active ='active';
                             <p class="text-muted text-center"><?= $this->context->user->employee->role->name ?></p>
 
                             <ul class="list-group list-group-unbordered mb-3">
-                                <? if ($this->context->totalCount) :?>
+                                <?php
+                                if ($this->context->totalCount) :?>
                                 <li class="list-group-item">
                                     <b><?=Yii::t('cabinet/sidebar','Total entries')?></b> <span
                                             class="float-right badge badge-warning btn-shadow"><?= $this->context->totalCount ?></span>
@@ -47,8 +48,10 @@ $active ='active';
                                     <b><?=Yii::t('cabinet/sidebar','Today\'s total entries')?></b> <span
                                             class="float-right badge badge-danger btn-shadow"><?= $this->context->todayCount ?></span>
                                 </li>
-                                <?endif;?>
-                                <? if ($this->context->totalLessonCount) :?>
+                                <?php
+                                endif;?>
+                                <?php
+                                if ($this->context->totalLessonCount) :?>
                                 <li class="list-group-item">
                                     <b><?=Yii::t('cabinet/sidebar','Total lessons')?></b> <span
                                             class="float-right badge badge-info btn-shadow"><?= $this->context->totalLessonCount ?></span>
@@ -57,7 +60,8 @@ $active ='active';
                                     <b><?=Yii::t('cabinet/sidebar','Total lessons')?></b> <span
                                             class="float-right badge badge-primary btn-shadow"><?= $this->context->todayLessonCount ?></span>
                                 </li>
-                                <?endif;?>
+                                <?php
+                                endif;?>
                             </ul>
 
                             <!--<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
@@ -90,7 +94,7 @@ $active ='active';
                             <p class="text-muted"><?= $this->context->user->email ?></p>
 
                             <hr>
-                            <?
+                            <?php
                             if ($this->context->user->employee->issetBirthday($this->context->user->employee->birthday)): ?>
                                 <strong><i class="fas fa-birthday-cake mr-1"></i>
                                     <?=Yii::t('cabinet/sidebar','Birthday')?>
@@ -98,9 +102,9 @@ $active ='active';
 
                                 <p class="text-muted"><?= $this->context->user->employee->birthday ?></p>
                                 <hr>
-                            <?
+                            <?php
                             endif; ?>
-                            <?
+                            <?php
                             if ($this->context->user->employee->issetAddress(
                                 $this->context->user->employee->address->town ||
                                 $this->context->user->employee->address->borough ||
@@ -114,7 +118,7 @@ $active ='active';
 
                                 <p class="text-muted"><?= $this->context->user->employee->getFullAddress() ?></p>
                                 <hr>
-                            <?
+                            <?php
                             endif; ?>
 
                         </div>
