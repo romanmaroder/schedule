@@ -149,8 +149,7 @@ DataTableAsset::register($this);
                                         'attribute' => 'Discounted price',
                                         'label' => Yii::t('cabinet/report', 'Discounted price'),
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'value' => fn($model) => $model->getDiscountedPrice(
-                                            ) . '<br>' . EventPaymentStatusHelper::statusLabel($model->getStatus()),
+                                        'value' => fn($model) => $model->getDiscountedPrice(),
                                         'contentOptions' => fn($model) => [
                                             'data-total' => $model->getDiscountedPrice(),
                                             'class' => ['text-center align-middle']
@@ -182,6 +181,24 @@ DataTableAsset::register($this);
                                         ],
                                         'footer' => $cart->getFullProfit(),
                                         'footerOptions' => ['class' => 'bg-info text-right '],
+                                    ],
+                                    [
+                                        'attribute' => 'Status',
+                                        'label' => Yii::t('schedule/event','Status'),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'value' => function ($model) {
+                                            return EventPaymentStatusHelper::statusLabel($model->getStatus());
+                                        },
+                                        'contentOptions' => function ($model) use ($cart) {
+                                            return [
+                                                'data-total' => EventPaymentStatusHelper::getItem($model->getStatus()),
+                                                'class' => ['text-center align-middle']
+                                            ];
+                                        },
+                                        'footer' => $cart->getFullDiscountedCost(),
+                                        'footerOptions' => ['class' => 'text-center bg-info'],
+                                        'format' => 'raw',
+                                        //'visible' => false,
                                     ],
                                 ],
                             ]
@@ -320,7 +337,7 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,1,2,3]
+                    columns: [0,1,2,3,9]
                 },
                buttons: [
                /* {
