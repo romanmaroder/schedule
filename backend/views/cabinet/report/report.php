@@ -179,7 +179,6 @@ DataTableAsset::register($this);
                                 'footer' => $cart->getFullDiscountedCost(),
                                 'footerOptions' => ['class' => 'text-center bg-info'],
                                 'format' => 'raw',
-                                //'visible' => false,
                             ],
                         ]
                     ]

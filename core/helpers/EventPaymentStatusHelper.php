@@ -10,10 +10,6 @@ use yii\helpers\Html;
 
 class EventPaymentStatusHelper
 {
-    public static function getItem($value): int
-    {
-        return StatusPayEnum::getItem($value);
-    }
     public static function statusList(): array
     {
         return StatusPayEnum::getList();
