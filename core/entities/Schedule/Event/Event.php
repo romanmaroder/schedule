@@ -191,12 +191,12 @@ class Event extends ActiveRecord
 
     public function isCardPayment(): bool
     {
-        return $this->payment == PaymentOptionsEnum::STATUS_CARD;
+        return $this->payment == PaymentOptionsEnum::STATUS_CARD->value;
     }
 
     public function isCashPayment(): bool
     {
-        return $this->payment == PaymentOptionsEnum::STATUS_CASH;
+        return $this->payment == PaymentOptionsEnum::STATUS_CASH->value;
     }
 
     public function cardPayment(): int
@@ -211,7 +211,7 @@ class Event extends ActiveRecord
 
     public function isToolsAreNotReady(): bool
     {
-        return $this->tools == ToolsEnum::TOOLS_ARE_NOT_READY;
+        return $this->tools == ToolsEnum::TOOLS_ARE_NOT_READY->value;
     }
 
     public function toolsReady(): int
