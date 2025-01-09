@@ -59,6 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 //'filterModel' => $searchModel,
                                 'summary' => false,
                                 'emptyText' => false,
+                                'showHeader' => true,
+                                'showFooter' => true,
                                 'tableOptions' => [
                                     'class' => 'table table-striped table-bordered',
                                     'id' => 'event'
@@ -113,6 +115,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'attribute' => 'cost',
                                         'value' => fn(Event $models) => $models->getDiscountedPrice($models, $cart),
+                                        'contentOptions' => fn($models) => [
+                                            'data-total' => $models->getDiscountedPrice($models, $cart),
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        //'footer' => $cart->getFullDiscountedCost(),
+                                        'footerOptions' => ['class' => 'text-center bg-info'],
+                                        'format' => 'raw'
 
                                     ],
                                     [
@@ -255,7 +264,38 @@ $js = <<< JS
                 var data = localStorage.getItem('DataTables_' + window.location.pathname);
                 return JSON.parse(data);
                 },
-         dom:'<"row"<"col-12 btn-sm"Q><"col-auto"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
+        dom:'<"row"<"col-12 btn-sm"Q><"col-auto"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
+        footerCallback: function ( row, data, start, end, display ) {
+                var api = this.api();
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                i : 0;
+                };
+                
+                 let totalCash = api
+                                .column( 4)
+                                .nodes()
+                                .reduce( function (a, b) {
+                                    return intVal(a) + intVal($(b).attr('data-total'));
+                                }, 0 );
+                            // Total over this page
+                           let pageTotalCash = api
+                                .column( 4, { page: 'current'} )
+                                .nodes()
+                                .reduce( function (a, b) {
+                                    return intVal(a) + intVal($(b).attr('data-total'));
+                                }, 0 );
+                            // Update footer
+                            if ( pageTotalCash === 0 ){
+                                 $( api.column( 4).footer() )
+                                 .html('-');
+                            }else{
+                                 $( api.column( 4 ).footer() ).html(pageTotalCash);
+                            }
+                },
         language: {
           url:"$ru"
          },
