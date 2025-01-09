@@ -258,7 +258,10 @@ $js = <<< JS
          dom:'<"row"<"col-12 btn-sm"Q><"col-auto"l>> t <"row"<"col-12 mb-2 mb-md-0 col-md-6"i><"col-12 col-md-6"p>> ',
         language: {
           url:"$ru"
-         }
+         },
+         searchBuilder: {
+                    columns: [0,1,2,3,5,6]
+                }
     });
   });
 
