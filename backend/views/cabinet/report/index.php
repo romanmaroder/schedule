@@ -149,8 +149,7 @@ DataTableAsset::register($this);
                                         'attribute' => 'Discounted price',
                                         'label' => Yii::t('cabinet/report', 'Discounted price'),
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'value' => fn($model) => $model->getDiscountedPrice(
-                                            ) . '<br>' . EventPaymentStatusHelper::statusLabel($model->getStatus()),
+                                        'value' => fn($model) => $model->getDiscountedPrice(),
                                         'contentOptions' => fn($model) => [
                                             'data-total' => $model->getDiscountedPrice(),
                                             'class' => ['text-center align-middle']

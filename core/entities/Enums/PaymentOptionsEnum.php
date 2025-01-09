@@ -12,7 +12,15 @@ enum PaymentOptionsEnum: int
 
     case STATUS_CARD = 3;
 
-
+    public static function getItem($value): int
+    {
+        foreach (self::cases() as $case) {
+            if ($case->value == $value) {
+                return $case->value;
+            }
+        };
+        throw new \RuntimeException('Unknown status');
+    }
 
     public static function getList(): array
     {

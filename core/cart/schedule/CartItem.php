@@ -47,6 +47,11 @@ class CartItem
         return $this->item->events->status;
     }
 
+    public function getPayment():int
+    {
+        return $this->item->events->payment;
+    }
+
     public function getCash(): float|int
     {
         if ($this->item->events->isCashPayment() && $this->item->events->isPayed()) {

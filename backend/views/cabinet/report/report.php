@@ -9,6 +9,8 @@
 
 
 use backend\assets\DataTableAsset;
+use core\helpers\EventMethodsOfPayment;
+use core\helpers\EventPaymentStatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -145,7 +147,40 @@ DataTableAsset::register($this);
                                 ],
                                 'footer' => $cart->getFullProfit(),
                                 'footerOptions' => ['class' => 'bg-info text-right '],
-                            ]
+                            ],
+                            [
+                                'attribute' => 'Status',
+                                'label' => Yii::t('schedule/event', 'Status'),
+                                'headerOptions' => ['class' => 'text-center'],
+                                'value' => function ($model) {
+                                    return EventPaymentStatusHelper::statusLabel($model->getStatus());
+                                },
+                                'contentOptions' => function ($model) use ($cart) {
+                                    return [
+                                        'data-total' => EventPaymentStatusHelper::getItem($model->getStatus()),
+                                        'class' => ['text-center align-middle']
+                                    ];
+                                },
+                                'format' => 'raw',
+                            ],
+                            [
+                                'attribute' => 'Payments',
+                                'label' => Yii::t('cabinet/report','Payments'),
+                                'headerOptions' => ['class' => 'text-center'],
+                                'value' => function ($model) {
+                                    return EventMethodsOfPayment::statusLabel($model->getPayment());
+                                },
+                                'contentOptions' => function ($model) use ($cart) {
+                                    return [
+                                        'data-total' => EventMethodsOfPayment::getItem($model->getPayment()),
+                                        'class' => ['text-center align-middle']
+                                    ];
+                                },
+                                'footer' => $cart->getFullDiscountedCost(),
+                                'footerOptions' => ['class' => 'text-center bg-info'],
+                                'format' => 'raw',
+                                //'visible' => false,
+                            ],
                         ]
                     ]
                 ); ?>
@@ -269,7 +304,7 @@ let table= $('#report').DataTable({
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,1,2]
+                    columns: [0,1,2,7,8]
                 },
                buttons: [
                 /*{

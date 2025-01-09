@@ -10,6 +10,12 @@ use yii\helpers\Html;
 
 class EventMethodsOfPayment
 {
+
+    public static function getItem($value): int
+    {
+        return PaymentOptionsEnum::getItem($value);
+    }
+
     public static function statusList(): array
     {
         return PaymentOptionsEnum::getList();

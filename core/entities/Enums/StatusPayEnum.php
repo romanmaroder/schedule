@@ -13,6 +13,15 @@ enum StatusPayEnum: int
     case STATUS_PAYED = 1;
 
 
+    public static function getItem($value): int
+    {
+        foreach (self::cases() as $case) {
+            if ($case->value == $value) {
+                return $case->value;
+            }
+        };
+        throw new \RuntimeException('Unknown status');
+    }
 
     public static function getList(): array
     {
@@ -27,7 +36,7 @@ enum StatusPayEnum: int
     {
         return match ($enum) {
             self::STATUS_PAYED->value => 'badge bg-success bg-gradient text-shadow box-shadow',
-            self::STATUS_NOT_PAYED->value=> 'badge bg-danger bg-gradient text-shadow box-shadow',
+            self::STATUS_NOT_PAYED->value => 'badge bg-danger bg-gradient text-shadow box-shadow',
             default => 'badge bg-info',
         };
     }
