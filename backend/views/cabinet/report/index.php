@@ -111,10 +111,11 @@ DataTableAsset::register($this);
                                         'headerOptions' => ['class' => ''],
                                         'value' => fn ($model) =>
                                              DATE('Y-m-d', strtotime($model->getDate())),
-                                        'contentOptions' => [
+                                        'contentOptions' => fn($model) => [
+                                            'data-total' => $model->getSalary(),
                                             'class' => ['align-middle']
                                         ],
-                                        'footer' => $cart->getFullProfit() - $cart->getFullSalary(),
+                                        'footer' => $cart->getFullSalary(),
                                         'footerOptions' => ['class' => 'bg-info text-left'],
                                         'format' => 'raw'
                                     ],
