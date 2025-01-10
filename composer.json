@@ -40,6 +40,7 @@
         "yiisoft/yii2-redis": "^2.0",
         "yiisoft/yii2-queue": "^2.0",
         "irazasyed/telegram-bot-sdk": "3.*"
+
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
