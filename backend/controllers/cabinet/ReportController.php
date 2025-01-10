@@ -10,7 +10,9 @@ use core\readModels\Schedule\EventReadRepository;
 use core\useCases\Schedule\CartService;
 use core\useCases\Schedule\CartWithParamsService;
 use JetBrains\PhpStorm\ArrayShape;
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class ReportController extends Controller
@@ -38,7 +40,7 @@ class ReportController extends Controller
     }
 
 
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             [
@@ -54,11 +56,13 @@ class ReportController extends Controller
                 ]
             ]
         ];
-    }
+    }*/
 
     public function actionIndex()
     {
-        $cart = $this->service->getCart();
+        //$cart = $this->service->getCart();
+        $this->serviceWithParams->setParams($this->request());
+        $cart = $this->serviceWithParams->getCart();
 
         $events = $this->repository->getAll();
         $dataProvider = new ArrayDataProvider(
@@ -72,21 +76,24 @@ class ReportController extends Controller
             [
                 'cart' => $cart,
                 'dataProvider' => $dataProvider,
-                'events'=>$events,
+                'events' => $events,
             ]
         );
     }
 
     public function actionReport()
     {
-        $cart = $this->service->getCart();
+        //$cart = $this->service->getCart();
+        $this->serviceWithParams->setParams($this->request());
+        $cart = $this->serviceWithParams->getCart();
 
         $dataProvider = new ArrayDataProvider(
             [
-                'models' => $cart->getItems(),
-
+                'allModels' => $cart->getItems(),
+                'pagination' => false
             ]
         );
+
         return $this->render(
             'report',
             [
@@ -117,16 +124,16 @@ class ReportController extends Controller
 
     public function actionPayment()
     {
-        $card= $this->service->getCard();
-        $cash= $this->service->getCash();
+        $card = $this->service->getCard();
+        $cash = $this->service->getCash();
         $cart = $this->service->getCart();
 
         return $this->render(
             'method',
             [
                 'card' => $card,
-                'cash'=>$cash,
-                'cart'=>$cart
+                'cash' => $cash,
+                'cart' => $cart
             ]
         );
     }

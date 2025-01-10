@@ -33,7 +33,6 @@ DataTableAsset::register($this);
 
         <div class="table-responsive ">
             <div class="container-fluid">
-
                 <?php
                 echo GridView::widget(
                     [

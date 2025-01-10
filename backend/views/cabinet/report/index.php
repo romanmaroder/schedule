@@ -15,7 +15,7 @@ use backend\assets\DataTableAsset;
 use core\helpers\DiscountHelper;
 use core\helpers\EventPaymentStatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
-use kartik\widgets\DatePicker;
+use kartik\date\DatePicker;
 use yii\bootstrap4\ActiveForm;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -44,6 +44,48 @@ DataTableAsset::register($this);
 
         <div class="table-responsive ">
             <div class="container-fluid">
+                <div class="row">
+                    <?php
+                    $form = ActiveForm::begin(); ?>
+                    <div class="col-12">
+                        <div class="form-group"><?=
+                            DatePicker::widget(
+                                [
+                                    'name' => 'from_date',
+                                    'value' =>  '' ,
+                                    'type' => DatePicker::TYPE_RANGE,
+                                    'name2' => 'to_date',
+                                    'value2' => '',
+                                    'separator' => 'до',
+                                    'removeButton'=>true,
+                                    'size' => 'sm',
+                                    'options' => ['placeholder' => $params['from_date'] ?? ''],
+                                    'options2' => ['placeholder' => $params['to_date'] ?? ''],
+                                    'pluginOptions' => [
+                                        'autoclose' => true,
+                                        'todayHighlight' => true,
+                                        'format' => 'yyyy-mm-dd',
+                                    ],
+                                    /*'pluginEvents' => ['changeDate' => "function(et){
+                                            $('input').on('keypress', function(e) {
+                                                    var code = e.keyCode || e.which;
+                                                    if(code==13){
+                                                      $(et.target).closest('form').submit();
+                                                    }
+                                                });
+                                                }"
+                                    ]*/
+                                ]
+                            ); ?></div>
+                        <div class="form-group">
+                            <?= Html::submitButton(
+                                Yii::t('app', 'Update'),
+                                ['class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient text-shadow']
+                            ) ?>
+                        </div>
+                    </div><?php
+                    ActiveForm::end(); ?>
+                </div>
                 <div class="row">
                     <div class="col">
 

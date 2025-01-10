@@ -28,91 +28,92 @@ DataTableAsset::register($this);
                 <div class="card-header">
                     <h3 class="card-title">
                         <?= Html::a(
-                Yii::t('app', 'Create'),
-                ['create'],
-                ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
-            ) ?>
-        </h3>
+                            Yii::t('app', 'Create'),
+                            ['create'],
+                            ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
+                        ) ?>
+                    </h3>
 
-        <div class='card-tools'>
-            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-            </button>
-            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
-
-        <?= GridView::widget(
-            [
-                'dataProvider' => $dataProvider,
-                //'filterModel' => $searchModel,
-                'summary' => false,
-                'tableOptions' => [
-                    'class' => 'table table-striped table-bordered',
-                    'id' => 'user'
-                ],
-                'emptyText' => false,
-                'columns' => [
-                    // ['class' => 'yii\grid\SerialColumn'],
-                    //  'id',
-                    [
-                        'attribute' => 'username',
-                        'value' => fn (User $model) =>
-                             Html::a(Html::encode($model->username), ['view', 'id' => $model->id]),
-                        'format' => 'raw',
-                    ],
-                    [
-                        'attribute' => 'phone',
-                        'value' => fn (User $model) =>
-                             Html::a(
-                                Html::encode($model->phone),
-                                'tel:' . $model->phone,
-                                ['view', 'id' => $model->id]
-                            ),
-                        'format' => 'raw',
-                    ],
-                    'email:email',
-                    [
-                        'attribute' => 'status',
-                        // 'filter' => UserHelper::statusList(),
-                        'filter' => Html::activeDropDownList(
-                            $searchModel,
-                            'status',
-                            StatusHelper::statusList(),
-                            ['prompt' => 'Select...', 'class' => 'form-control form-control-sm']
-                        ),
-                        'value' => fn (User $model) =>
-                        StatusHelper::statusLabel($model->status),
-                        'format' => 'raw',
-                    ],
-                    [
-                        'attribute' => 'created_at',
-                        'filter' => DatePicker::widget(
-                            [
-                                'model' => $searchModel,
-                                'attribute' => 'date_from',
-                                'attribute2' => 'date_to',
-                                'type' => DatePicker::TYPE_RANGE,
-                                'separator' => '-',
-                                'pluginOptions' => [
-                                    'todayHighlight' => true,
-                                    'autoclose' => true,
-                                    'format' => 'yyyy-mm-dd',
-                                ],
-                            ]),
-                        'format' => 'datetime',
-                    ],
-                    /*[
-                        'class' => ActionColumn::class,
-                        'urlCreator' => function ($action, User $model, $key, $index, $column) {
-                            return Url::toRoute([$action, 'id' => $model->id]);
-                        }
-                    ],*/
-                ],
-            ]
-        ); ?>
-    </div>
+                    <div class='card-tools'>
+                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                    class='fas fa-expand'></i>
+                        </button>
+                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                    class='fas fa-minus'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                            <?= GridView::widget(
+                                [
+                                    'dataProvider' => $dataProvider,
+                                    //'filterModel' => $searchModel,
+                                    'summary' => false,
+                                    'tableOptions' => [
+                                        'class' => 'table table-striped table-bordered',
+                                        'id' => 'user'
+                                    ],
+                                    'emptyText' => false,
+                                    'columns' => [
+                                        // ['class' => 'yii\grid\SerialColumn'],
+                                        //  'id',
+                                        [
+                                            'attribute' => 'username',
+                                            'value' => fn (User $model) =>
+                                                 Html::a(Html::encode($model->username), ['view', 'id' => $model->id]),
+                                            'format' => 'raw',
+                                        ],
+                                        [
+                                            'attribute' => 'phone',
+                                            'value' => fn (User $model) =>
+                                                 Html::a(
+                                                    Html::encode($model->phone),
+                                                    'tel:' . $model->phone,
+                                                    ['view', 'id' => $model->id]
+                                                ),
+                                            'format' => 'raw',
+                                        ],
+                                        'email:email',
+                                        [
+                                            'attribute' => 'status',
+                                            // 'filter' => UserHelper::statusList(),
+                                            'filter' => Html::activeDropDownList(
+                                                $searchModel,
+                                                'status',
+                                                StatusHelper::statusList(),
+                                                ['prompt' => 'Select...', 'class' => 'form-control form-control-sm']
+                                            ),
+                                            'value' => fn (User $model) =>
+                                            StatusHelper::statusLabel($model->status),
+                                            'format' => 'raw',
+                                        ],
+                                        [
+                                            'attribute' => 'created_at',
+                                            'filter' => DatePicker::widget(
+                                                [
+                                                    'model' => $searchModel,
+                                                    'attribute' => 'date_from',
+                                                    'attribute2' => 'date_to',
+                                                    'type' => DatePicker::TYPE_RANGE,
+                                                    'separator' => '-',
+                                                    'pluginOptions' => [
+                                                        'todayHighlight' => true,
+                                                        'autoclose' => true,
+                                                        'format' => 'yyyy-mm-dd',
+                                                    ],
+                                                ]),
+                                            'format' => 'datetime',
+                                        ],
+                                        /*[
+                                            'class' => ActionColumn::class,
+                                            'urlCreator' => function ($action, User $model, $key, $index, $column) {
+                                                return Url::toRoute([$action, 'id' => $model->id]);
+                                            }
+                                        ],*/
+                                    ],
+                                ]
+                            ); ?>
+                </div>
                 <!-- /.card-body -->
             </div>
 
@@ -135,7 +136,7 @@ $js = <<< JS
         info: false,
         autoWidth: false,
         responsive: true,
-        // "dom": "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
+        // dom: "<'row'<'col-6 col-md-6 order-3 order-md-1 text-left'B><'col-sm-12 order-md-2 col-md-6 d-flex d-md-block'f>>tp",
       // "buttons": [
       //   {
 		// 		"text": "Добавить категорию",
@@ -151,7 +152,7 @@ $js = <<< JS
       //   ],
         language: {
           url:"$ru"
-         },
+         }
     }).buttons().container().appendTo('#user_wrapper .col-md-6:eq(0)');
 
   });
