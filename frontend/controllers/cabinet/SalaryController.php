@@ -5,7 +5,9 @@ namespace frontend\controllers\cabinet;
 
 
 use core\entities\Schedule\Event\Event;
-use core\useCases\Schedule\CartService;
+
+use core\useCases\Schedule\CartWithParamsService;
+use core\useCases\Schedule\RequestService;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 
@@ -33,19 +35,20 @@ class SalaryController extends Controller
 
     //public $layout = 'blank';
 
-    private $service;
-
-    public function __construct($id, $module, CartService $service, $config = [])
+    public function __construct($id,
+        $module,
+        private readonly CartWithParamsService $serviceWithParams,
+        private readonly RequestService $requestService,
+        $config = [])
     {
         parent::__construct($id, $module, $config);
 
-        $this->service = $service;
     }
 
     public function actionIndex()
     {
-        $cart = $this->service->getCart();
-
+        $this->serviceWithParams->setParams($this->request());
+        $cart = $this->serviceWithParams->getCart();
         $dataProvider = new ArrayDataProvider([
             'models' => $cart->getItems()
                                    ]);
@@ -55,6 +58,9 @@ class SalaryController extends Controller
             'dataProvider'=>$dataProvider,
         ]);
     }
-
+    private function request(): array
+    {
+        return $this->requestService->dataRangeParams('from_date','to_date');
+    }
 
 }

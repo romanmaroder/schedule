@@ -4,39 +4,27 @@
 namespace backend\controllers\cabinet;
 
 
-use core\entities\Schedule\Event\Event;
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\useCases\Schedule\CartService;
 use core\useCases\Schedule\CartWithParamsService;
-use JetBrains\PhpStorm\ArrayShape;
-use yii\data\ActiveDataProvider;
+use core\useCases\Schedule\RequestService;
 use yii\data\ArrayDataProvider;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class ReportController extends Controller
 {
-    private CartService $service;
-    private CartWithParamsService $serviceWithParams;
-    private EventReadRepository $repository;
-    private ExpenseReadRepository $expenses;
-
     public function __construct(
         $id,
         $module,
-        CartService $service,
-        CartWithParamsService $serviceWithParams,
-        EventReadRepository $repository,
-        ExpenseReadRepository $expenses,
+        private readonly CartService $service,
+        private readonly CartWithParamsService $serviceWithParams,
+        private readonly EventReadRepository $repository,
+        private readonly ExpenseReadRepository $expenses,
+        private readonly RequestService $requestService,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-
-        $this->service = $service;
-        $this->serviceWithParams = $serviceWithParams;
-        $this->repository = $repository;
-        $this->expenses = $expenses;
     }
 
 
@@ -60,7 +48,6 @@ class ReportController extends Controller
 
     public function actionIndex()
     {
-        //$cart = $this->service->getCart();
         $this->serviceWithParams->setParams($this->request());
         $cart = $this->serviceWithParams->getCart();
 
@@ -83,7 +70,6 @@ class ReportController extends Controller
 
     public function actionReport()
     {
-        //$cart = $this->service->getCart();
         $this->serviceWithParams->setParams($this->request());
         $cart = $this->serviceWithParams->getCart();
 
@@ -167,21 +153,9 @@ class ReportController extends Controller
         );
     }
 
-    #[ArrayShape(['from_date' => "mixed|null", 'to_date' => "mixed|null"])]
     private function request(): array
     {
-        if ($request = \Yii::$app->request->post()) {
-            $params = [
-                'from_date' => $request['from_date'],
-                'to_date' => $request['to_date']
-            ];
-        } else {
-            $params = [
-                'from_date' => null,
-                'to_date' => null
-            ];
-        }
-        return $params;
+        return $this->requestService->dataRangeParams('from_date', 'to_date');
     }
 
 }
