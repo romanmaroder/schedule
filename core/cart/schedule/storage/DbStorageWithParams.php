@@ -28,7 +28,7 @@ class DbStorageWithParams implements StorageInterface
 
 
     public function load(): array
-    { }
+    { return [];}
 
     public function loadWithParams(array $params): array
     {
@@ -36,8 +36,11 @@ class DbStorageWithParams implements StorageInterface
             $query = (new Query())
                 ->select(['*', 'DATE(schedule_events.start) as start', 'DATE(schedule_events.end) as end'])
                 ->from('{{%schedule_service_assignments}}')
-                ->leftJoin('{{%schedule_events}}', 'id=event_id')
-                ->andFilterWhere(['between', 'DATE(start)', $params['from_date'], $params['to_date']]);
+                ->leftJoin('{{%schedule_events}}', 'id=event_id');
+            if (\Yii::$app->id == 'app-frontend') {
+                $query->where(['master_id' => $this->userId->id]);
+            }
+                $query->andFilterWhere(['between', 'DATE(start)', $params['from_date'], $params['to_date']]);
             $rows = $query->orderBy(['DATE(start)' => SORT_ASC])
                 ->all($this->db);
         }else{
