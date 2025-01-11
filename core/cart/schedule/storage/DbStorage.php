@@ -65,7 +65,7 @@ class DbStorage implements StorageInterface
     }
 
     public function loadWithParams(array $params): array
-    {}
+    {return [];}
 
     public function save(array $items): void
     {
