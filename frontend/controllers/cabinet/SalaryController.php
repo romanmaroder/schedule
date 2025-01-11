@@ -4,8 +4,6 @@
 namespace frontend\controllers\cabinet;
 
 
-use core\entities\Schedule\Event\Event;
-
 use core\useCases\Schedule\CartWithParamsService;
 use core\useCases\Schedule\RequestService;
 use yii\data\ArrayDataProvider;
@@ -13,25 +11,6 @@ use yii\web\Controller;
 
 class SalaryController extends Controller
 {
-
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => 'yii\filters\PageCache',
-                'only' => ['index'],
-                'duration' => 3600,
-                'variations' => [
-                    \Yii::$app->user->getId()
-                ],
-                'dependency' => [
-                    'class' => 'yii\caching\TagDependency',
-                    'tags' => Event::CACHE_KEY,
-                ]
-            ]
-        ];
-    }
-
 
     //public $layout = 'blank';
 
