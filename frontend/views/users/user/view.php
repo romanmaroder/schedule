@@ -1,6 +1,7 @@
 <?php
 
 use core\helpers\ScheduleHelper;
+use core\helpers\StatusHelper;
 use core\helpers\UserHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -37,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'status',
-                    'value' => UserHelper::statusLabel($model->status),
+                    'value' => StatusHelper::statusLabel($model->status),
                     'format' => 'raw',
                 ],
                 [
