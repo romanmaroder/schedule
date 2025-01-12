@@ -8,13 +8,8 @@ use yii\base\Widget;
 
 class HeaderStart extends Widget
 {
-    public $title;
-    public $url;
-
-    public function __construct($title, $url, $config = [])
+    public function __construct(public $title, public $url, $config = [])
     {
-        $this->title = $title;
-        $this->url = $url;
         parent::__construct($config);
     }
 

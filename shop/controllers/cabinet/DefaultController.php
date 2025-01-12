@@ -28,36 +28,20 @@ class DefaultController extends Controller
     public $todayLessonCount;
     public $user;
     public $employee;
-
-    private $events;
-    private $users;
-    private $employees;
-    private $education;
-    private $profile;
-    private $wishList;
-    private $products;
-
-    private EmployeeManageService $employeeService;
-
     public function __construct(
         $id,
         $module,
-        EventReadRepository $events,
-        UserReadRepository $users,
-        EmployeeReadRepository $employees,
-        EducationReadRepository $education,
-        EmployeeManageService $employeeManageService,
-        ProfileService $profile,
-        WishlistService $wishList,
-        ProductReadRepository $products,
+        private readonly EventReadRepository $events,
+        private readonly UserReadRepository $users,
+        private readonly EmployeeReadRepository $employees,
+        private readonly EducationReadRepository $education,
+        private readonly EmployeeManageService $employeeManageService,
+        private readonly ProfileService $profile,
+        private readonly WishlistService $wishList,
+        private readonly ProductReadRepository $products,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->events = $events;
-        $this->users = $users;
-        $this->employees = $employees;
-        $this->education = $education;
-        $this->employeeService = $employeeManageService;
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
 
@@ -68,9 +52,6 @@ class DefaultController extends Controller
         if ($this->user) {
             $this->employee = $this->employees->find($this->user->id);
         }
-        $this->profile = $profile;
-        $this->wishList = $wishList;
-        $this->products = $products;
     }
 
     public function behaviors(): array

@@ -9,14 +9,9 @@ use yii\base\Widget;
 
 class FeaturedProductsWidget extends Widget
 {
-    public $limit;
-
-    private $repository;
-
-    public function __construct(ProductReadRepository $repository, $config = [])
+    public function __construct(public $limit,private readonly ProductReadRepository $repository, $config = [])
     {
         parent::__construct($config);
-        $this->repository = $repository;
     }
 
     public function run()

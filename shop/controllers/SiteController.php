@@ -10,21 +10,18 @@ use yii\web\Controller;
  */
 class SiteController extends Controller
 {
-    private UserReadRepository $users;
-
     public function __construct(
         $id,
         $module,
-        UserReadRepository $users,
+       private readonly UserReadRepository $users,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->users = $users;
     }
     /**
      * {@inheritdoc}
      */
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [

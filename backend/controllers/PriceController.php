@@ -18,23 +18,17 @@ use yii\web\NotFoundHttpException;
 
 class PriceController extends Controller
 {
-    private PriceManageService $prices;
-    private ServiceReadRepository $services;
-
-
     public function __construct(
         $id,
         $module,
-        PriceManageService $prices,
-        ServiceReadRepository $services,
+        private readonly PriceManageService $prices,
+        private readonly ServiceReadRepository $services,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->prices = $prices;
-        $this->services = $services;
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

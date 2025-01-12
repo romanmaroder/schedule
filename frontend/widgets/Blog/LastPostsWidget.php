@@ -9,14 +9,9 @@ use yii\base\Widget;
 
 class LastPostsWidget extends Widget
 {
-    public $limit;
-
-    private $repository;
-
-    public function __construct(PostReadRepository $repository, $config = [])
+    public function __construct(public $limit,private readonly PostReadRepository $repository, $config = [])
     {
         parent::__construct($config);
-        $this->repository = $repository;
     }
 
     public function run(): string

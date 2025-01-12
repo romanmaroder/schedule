@@ -15,17 +15,17 @@ class AuthController extends Controller
 {
     public $layout = 'main-login';
 
-    private $service;
 
-    public function __construct($id, $module, AuthService $service, $config = [])
+    public function __construct($id, $module,
+        private readonly AuthService $service,
+        $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

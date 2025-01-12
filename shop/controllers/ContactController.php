@@ -5,18 +5,15 @@ namespace shop\controllers;
 
 
 use core\forms\ContactForm;
-use core\services\ContactService;
+use core\useCases\ContactService;
 use Yii;
 use yii\web\Controller;
 
 class ContactController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, ContactService $service, $config = [])
+    public function __construct($id, $module,private readonly ContactService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function actionIndex()

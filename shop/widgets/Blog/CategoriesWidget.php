@@ -11,18 +11,15 @@ use yii\helpers\Html;
 
 class CategoriesWidget extends Widget
 {
-    /** @var Category|null */
-    public $active;
-
-    private $categories;
-
-    public function __construct(CategoryReadRepository $categories, $config = [])
-    {
+    public function __construct(
+        public Category|null $active,
+        private readonly CategoryReadRepository $categories,
+        $config = []
+    ) {
         parent::__construct($config);
-        $this->categories = $categories;
     }
 
-    public function run()
+    public function run(): void
     {
         /*return Html::tag(
             'ul',
@@ -45,7 +42,6 @@ class CategoriesWidget extends Widget
         );*/
 
 
-
         $this->categoryList();
     }
 
@@ -56,21 +52,27 @@ class CategoriesWidget extends Widget
             $active = $this->active && ($this->active->id == $category->id);
             $count++;
             echo Html::beginTag('div', ['class' => 'trend-entry d-flex']);
-                echo Html::tag('div', $count, ['class' => 'number align-self-start']);
-                echo Html::beginTag('div', ['class' => 'trend-contents']);
-                echo Html::beginTag('h2');
-                    echo Html::a(Html::encode($category->name), ['/blog/post/category', 'slug' => $category->slug],['class' => $active ? 'active' : '']);
-                echo Html::endTag('h2');
-                echo Html::beginTag('div', ['class' =>'post-meta']);
-                    echo Html::tag('span', Html::encode($category->meta->description), ['class' =>$active ? 'd-block active' : 'd-block']);
-                echo Html::endTag('div');
-                echo Html::endTag('div');
+            echo Html::tag('div', $count, ['class' => 'number align-self-start']);
+            echo Html::beginTag('div', ['class' => 'trend-contents']);
+            echo Html::beginTag('h2');
+            echo Html::a(
+                Html::encode($category->name),
+                ['/blog/post/category', 'slug' => $category->slug],
+                ['class' => $active ? 'active' : '']
+            );
+            echo Html::endTag('h2');
+            echo Html::beginTag('div', ['class' => 'post-meta']);
+            echo Html::tag(
+                'span',
+                Html::encode($category->meta->description),
+                ['class' => $active ? 'd-block active' : 'd-block']
+            );
             echo Html::endTag('div');
-
+            echo Html::endTag('div');
+            echo Html::endTag('div');
         }
         echo Html::beginTag('p');
-        echo Html::a('See All Popular <i class="fas fa-angle-right"></i>', ['/blog/post/index'],['class' => 'more']);
+        echo Html::a('See All Popular <i class="fas fa-angle-right"></i>', ['/blog/post/index'], ['class' => 'more']);
         echo Html::endTag('p');
-
     }
 }

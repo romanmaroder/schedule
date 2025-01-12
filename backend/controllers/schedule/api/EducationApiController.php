@@ -16,14 +16,15 @@ use yii\web\Controller;
 
 class EducationApiController extends Controller
 {
-    private EducationManageService $service;
-    private Calendar $calendar;
 
-    public function __construct($id, $module, EducationManageService $service, Calendar $calendar, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        private readonly EducationManageService $service,
+        private readonly Calendar $calendar,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->calendar = $calendar;
     }
 
     public function behaviors(): array
@@ -56,7 +57,7 @@ class EducationApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -80,7 +81,7 @@ class EducationApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($education->id, $form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -108,10 +109,10 @@ class EducationApiController extends Controller
         return [
             'event' => $education,
             'content' => [
-                'start' => Yii::t('schedule/event','Start'),
-                'end' => Yii::t('schedule/event','End'),
-                'resize' => Yii::t('schedule/event','resize'),
-                'drop' => Yii::t('schedule/event','drop'),
+                'start' => Yii::t('schedule/event', 'Start'),
+                'end' => Yii::t('schedule/event', 'End'),
+                'resize' => Yii::t('schedule/event', 'resize'),
+                'drop' => Yii::t('schedule/event', 'drop'),
             ]
         ];
     }

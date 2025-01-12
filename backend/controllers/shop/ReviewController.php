@@ -16,19 +16,14 @@ use yii\web\NotFoundHttpException;
 
 class ReviewController extends Controller
 {
-    private $service;
-    private $products;
-
     public function __construct(
         $id,
         $module,
-        ReviewManageService $service,
-        ProductReadRepository $products,
+        private readonly ReviewManageService $service,
+        private readonly ProductReadRepository $products,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->products = $products;
     }
 
     public function behaviors(): array

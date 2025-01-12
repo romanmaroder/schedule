@@ -17,15 +17,16 @@ use yii\web\Controller;
 
 class FreeTimeApiController extends Controller
 {
-    private FreeTimeManageService $freeTime;
-    private CartService $cart;
-
-    public function __construct($id, $module, FreeTimeManageService $freeTime,CartService $cart, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        private readonly FreeTimeManageService $freeTime,
+        private readonly CartService $cart,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->freeTime = $freeTime;
-        $this->cart = $cart;
     }
+
     public function behaviors(): array
     {
         return [
@@ -57,7 +58,7 @@ class FreeTimeApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->freeTime->create($form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -82,7 +83,7 @@ class FreeTimeApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->freeTime->edit($free->id, $form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -106,7 +107,7 @@ class FreeTimeApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->freeTime->copy($form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Copied'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Copied'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -136,10 +137,10 @@ class FreeTimeApiController extends Controller
         return [
             'event' => $free,
             'content' => [
-                'start' => Yii::t('schedule/event','Start'),
-                'end' => Yii::t('schedule/event','End'),
-                'resize' => Yii::t('schedule/event','resize'),
-                'drop' => Yii::t('schedule/event','drop'),
+                'start' => Yii::t('schedule/event', 'Start'),
+                'end' => Yii::t('schedule/event', 'End'),
+                'resize' => Yii::t('schedule/event', 'resize'),
+                'drop' => Yii::t('schedule/event', 'drop'),
             ]
         ];
     }

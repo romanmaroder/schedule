@@ -8,11 +8,8 @@ use yii\base\Widget;
 
 class HeaderCarousel extends Widget
 {
-    public $url;
-
-    public function __construct($url, $config = [])
+    public function __construct(public $url, $config = [])
     {
-        $this->url = $url;
         parent::__construct($config);
     }
 

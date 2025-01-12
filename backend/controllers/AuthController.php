@@ -12,18 +12,15 @@ use yii\web\Controller;
 
 class AuthController extends Controller
 {
-    private $authService;
-
-    public function __construct($id, $module, AuthService $authService, $config = [])
+    public function __construct($id, $module,private readonly AuthService $authService, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->authService = $authService;
     }
 
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

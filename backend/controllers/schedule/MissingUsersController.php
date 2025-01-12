@@ -11,14 +11,14 @@ use yii\web\Controller;
 
 class MissingUsersController extends Controller
 {
-    private UserReadRepository $users;
-    private EventReadRepository $events;
-
-    public function __construct($id, $module, UserReadRepository $users, EventReadRepository $events, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        private readonly UserReadRepository $users,
+        private readonly EventReadRepository $events,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->users = $users;
-        $this->events = $events;
     }
 
     public function behaviors()
@@ -35,6 +35,7 @@ class MissingUsersController extends Controller
             ],
         ];
     }
+
     public function actionIndex()
     {
         $users = $this->users->findMissed($this->events->findRecordsFromTodayDate());
@@ -42,7 +43,7 @@ class MissingUsersController extends Controller
         return $this->render(
             'missing',
             [
-                'dataProvider'=>$users
+                'dataProvider' => $users
             ]
         );
     }

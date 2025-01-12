@@ -18,23 +18,19 @@ class CheckoutController extends Controller
     public $layout = 'blank';
     public $user;
 
-    private $service;
-    private $cart;
-
-    private $users;
-
-
-    public function __construct($id, $module, OrderService $service, Cart $cart, UserReadRepository $users, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        private readonly OrderService $service,
+        private readonly Cart $cart,
+        private readonly UserReadRepository $users,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->cart = $cart;
-        $this->users = $users;
         if (!Yii::$app->user->isGuest) {
             $this->user = $this->users->find(Yii::$app->user->getId());
         }
-
-        }
+    }
 
     public function behaviors(): array
     {
@@ -71,7 +67,7 @@ class CheckoutController extends Controller
         return $this->render('index', [
             'cart' => $this->cart,
             'model' => $form,
-            'user'=>$this->user,
+            'user' => $this->user,
         ]);
     }
 }

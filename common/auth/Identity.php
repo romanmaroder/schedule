@@ -3,7 +3,7 @@
 
 namespace common\auth;
 
-use filsh\yii2\oauth2server\Module ;
+use filsh\yii2\oauth2server\Module;
 use OAuth2\Storage\UserCredentialsInterface;
 use core\entities\User\User;
 use core\readModels\User\UserReadRepository;
@@ -13,17 +13,15 @@ use yii\web\IdentityInterface;
 class Identity implements IdentityInterface, UserCredentialsInterface
 {
 
-    private $user;
 
-    public function __construct(User $user)
+    public function __construct(private readonly User $user)
     {
-        $this->user = $user;
     }
 
     public static function findIdentity($id)
     {
         $user = self::getRepository()->findActiveById($id);
-        return $user ? new self($user): null;
+        return $user ? new self($user) : null;
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
@@ -41,6 +39,7 @@ class Identity implements IdentityInterface, UserCredentialsInterface
     {
         return $this->user->username;
     }
+
     public function wishlistQuantity(): string
     {
         return $this->user->wishListQuantity();
@@ -79,6 +78,6 @@ class Identity implements IdentityInterface, UserCredentialsInterface
 
     private static function getOauth(): Module
     {
-      return Yii::$app->getModule('oauth2');
+        return Yii::$app->getModule('oauth2');
     }
 }

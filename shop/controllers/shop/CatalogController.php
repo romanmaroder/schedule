@@ -21,33 +21,19 @@ use yii\web\NotFoundHttpException;
 class CatalogController extends Controller
 {
     public $layout = 'catalog';
-
-    private $products;
-    private $categories;
-    private $brands;
-    private $tags;
-    private $users;
-    private $reviews;
-
     public function __construct(
         $id,
         $module,
-        ProductReadRepository $products,
-        CategoryReadRepository $categories,
-        BrandReadRepository $brands,
-        TagReadRepository $tags,
-        UserReadRepository $users,
-        ReviewManageService $reviews,
+        private readonly ProductReadRepository $products,
+        private readonly CategoryReadRepository $categories,
+        private readonly BrandReadRepository $brands,
+        private readonly TagReadRepository $tags,
+        private readonly UserReadRepository $users,
+        private readonly ReviewManageService $reviews,
         $config = []
     )
     {
         parent::__construct($id, $module, $config);
-        $this->products = $products;
-        $this->categories = $categories;
-        $this->brands = $brands;
-        $this->tags = $tags;
-        $this->users = $users;
-        $this->reviews = $reviews;
     }
 
     /**

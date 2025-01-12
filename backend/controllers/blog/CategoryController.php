@@ -7,6 +7,7 @@ namespace backend\controllers\blog;
 use backend\forms\Blog\CategorySearch;
 use core\entities\Blog\Category;
 use core\forms\manage\Blog\CategoryForm;
+use core\useCases\manage\Blog\CategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -14,12 +15,10 @@ use yii\web\NotFoundHttpException;
 
 class CategoryController extends Controller
 {
-    private $service;
 
-    public function __construct($id, $module, \core\useCases\manage\Blog\CategoryManageService $service, $config = [])
+    public function __construct($id, $module, private readonly CategoryManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array
@@ -51,6 +50,7 @@ class CategoryController extends Controller
     /**
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -82,6 +82,7 @@ class CategoryController extends Controller
     /**
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {

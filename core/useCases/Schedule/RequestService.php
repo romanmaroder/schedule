@@ -4,8 +4,15 @@ namespace core\useCases\Schedule;
 
 class RequestService
 {
-    public function dataRangeParams(string $fromDate,string $toDate): array
+    /**
+     * @param string $fromDate
+     * @param string $toDate
+     * @param bool $defaultDate
+     * @return array|null[]
+     */
+    public function dataRangeParams(string $fromDate, string $toDate, bool $defaultDate = true): array
     {
+        $date = Date('Y-m-d');
         if ($request = \Yii::$app->request->post()) {
             $params = [
                 $fromDate => $request[$fromDate],
@@ -13,8 +20,8 @@ class RequestService
             ];
         } else {
             $params = [
-                $fromDate => Date('Y-m-d'),
-                $toDate => Date('Y-m-d')
+                $fromDate => $defaultDate ? $date : null,
+                $toDate => $defaultDate ? $date : null,
             ];
         }
         return $params;

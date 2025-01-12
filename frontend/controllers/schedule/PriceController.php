@@ -20,35 +20,19 @@ use yii\web\NotFoundHttpException;
 class PriceController extends Controller
 {
     public $layout = 'price';
-
-    private $products;
-    private $service;
-    private $categories;
-    private $brands;
-    private $tags;
-    private $users;
-    private $employee;
-
     public function __construct(
         $id,
         $module,
-        ServiceReadRepository $service,
-        ProductReadRepository $products,
-        CategoryReadRepository $categories,
-        BrandReadRepository $brands,
-        TagReadRepository $tags,
-        UserReadRepository $users,
-        EmployeeReadRepository $employee,
+        private readonly ServiceReadRepository $service,
+        private readonly ProductReadRepository $products,
+        private readonly CategoryReadRepository $categories,
+        private readonly BrandReadRepository $brands,
+        private readonly TagReadRepository $tags,
+        private readonly UserReadRepository $users,
+        private readonly EmployeeReadRepository $employee,
         $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->products = $products;
-        $this->categories = $categories;
-        $this->brands = $brands;
-        $this->tags = $tags;
-        $this->users = $users;
-        $this->employee = $employee;
     }
 
     public function actionIndex()

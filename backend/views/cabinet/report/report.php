@@ -46,12 +46,12 @@ DataTableAsset::register($this);
                             DatePicker::widget(
                                 [
                                     'name' => 'from_date',
-                                    'value' =>  '' ,
+                                    'value' => '',
                                     'type' => DatePicker::TYPE_RANGE,
                                     'name2' => 'to_date',
                                     'value2' => '',
                                     'separator' => 'до',
-                                    'removeButton'=>true,
+                                    'removeButton' => true,
                                     'size' => 'sm',
                                     'options' => ['placeholder' => $params['from_date'] ?? ''],
                                     'options2' => ['placeholder' => $params['to_date'] ?? ''],
@@ -60,7 +60,8 @@ DataTableAsset::register($this);
                                         'todayHighlight' => true,
                                         'format' => 'yyyy-mm-dd',
                                     ],
-                                    'pluginEvents' => ['changeDate' => "function(et){
+                                    'pluginEvents' => [
+                                        'changeDate' => "function(et){
                                             $('input').on('keypress', function(e) {
                                                     var code = e.keyCode || e.which;
                                                     if(code==13){
@@ -210,7 +211,7 @@ DataTableAsset::register($this);
                                     ],
                                     [
                                         'attribute' => 'Payments',
-                                        'label' => Yii::t('cabinet/report','Payments'),
+                                        'label' => Yii::t('cabinet/report', 'Payments'),
                                         'headerOptions' => ['class' => 'text-center'],
                                         'value' => function ($model) {
                                             return EventMethodsOfPayment::statusLabel($model->getPayment());

@@ -11,52 +11,43 @@ use yii\helpers\ArrayHelper;
 class BirthdayWidget extends Widget
 {
     /**
-     * @var $user - users whose birthday is specified
-     * @var $text string - congratulation text
-     * @var $icon string - your own icon for congratulations
-     * @var $myClass string - your own block wrapper class
-     *
+     * @param $user
+     * @param string|null $myClass
+     * @param string|null $text
+     * @param string|null $icon
+     * @param $_user
+     * @param array $config
      */
-
-    public $user;
-    public $text;
-    public $icon;
-    public $myClass;
-
-    private $_user;
-
     public function __construct(
-        $user,
-        $myClass,
-        $text = 'HAPPY BIRTHDAY',
-        $icon = 'fas fa-birthday-cake',
-        $config = []
+        private $_user,
+        public $user,
+        public string|null $myClass,
+        public string|null $text = 'HAPPY BIRTHDAY',
+        public string|null $icon = 'fas fa-birthday-cake',
+        array $config = []
     ) {
-        $this->user = $user;
-        $this->text = $text;
-        $this->icon = $icon;
-        $this->myClass = $myClass;
-
         parent::__construct($config);
     }
 
     public function init(): void
     {
         if (is_array($this->user)) {
-            $this->_user = array_filter(ArrayHelper::map(
-                $this->user,
-                'id',
-                function ($item) {
-                    if ($item->isBirthday()) {
-                        return $item ;
+            $this->_user = array_filter(
+                ArrayHelper::map(
+                    $this->user,
+                    'id',
+                    function ($item) {
+                        if ($item->isBirthday()) {
+                            return $item;
+                        }
+                        return null;
                     }
-                }
-            ), fn ($item) => !is_null($item));
-        }elseif ($this->user?->isBirthday()){
+                ),
+                fn($item) => !is_null($item)
+            );
+        } elseif ($this->user?->isBirthday()) {
             $this->_user = $this->user;
         }
-
-
     }
 
     public function run(): string

@@ -15,12 +15,9 @@ class SignupController extends Controller
 
     public $layout='main-login';
 
-    private $service;
-
-    public function __construct($id, $module, SignupService $service, $config = [])
+    public function __construct($id, $module,private readonly SignupService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     /*public function behaviors(): array

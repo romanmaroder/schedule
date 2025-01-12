@@ -14,12 +14,9 @@ class ResendController extends Controller
 
     public $layout='main-login';
 
-    private $service;
-
-    public function __construct($id, $module, EmailResendService $service, $config = [])
+    public function __construct($id, $module,private readonly EmailResendService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     /**

@@ -66,15 +66,6 @@ DataTableAsset::register($this);
                                         'todayHighlight' => true,
                                         'format' => 'yyyy-mm-dd',
                                     ],
-                                    /*'pluginEvents' => ['changeDate' => "function(et){
-                                            $('input').on('keypress', function(e) {
-                                                    var code = e.keyCode || e.which;
-                                                    if(code==13){
-                                                      $(et.target).closest('form').submit();
-                                                    }
-                                                });
-                                                }"
-                                    ]*/
                                 ]
                             ); ?></div>
                         <div class="form-group">

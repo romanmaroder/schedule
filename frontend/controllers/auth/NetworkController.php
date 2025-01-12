@@ -14,15 +14,12 @@ use yii\authclient\AuthAction;
 
 class NetworkController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, NetworkService $service, $config = [])
+    public function __construct($id, $module, private readonly NetworkService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'auth' => [

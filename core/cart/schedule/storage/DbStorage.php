@@ -17,27 +17,25 @@ use yii\db\Query;
  */
 class DbStorage implements StorageInterface
 {
-    private $userId;
-    private $db;
 
-    public function __construct($userId, Connection $db)
+    public function __construct(private $userId, private readonly Connection $db)
     {
-        $this->userId = $userId;
-        $this->db = $db;
     }
 
 
     public function load(): array
     {
         $query = (new Query())
-            ->select(['*',
-                'DATE(start) as start'])
+            ->select([
+                         '*',
+                         'DATE(start) as start'
+                     ])
             ->from('{{%schedule_service_assignments}}')
             ->leftJoin('{{%schedule_events}}', 'id=event_id');
         if (\Yii::$app->id == 'app-frontend') {
             $query->where(['master_id' => $this->userId->id]);
         }
-        $rows = $query->orderBy(['DATE(start)'=>SORT_ASC])
+        $rows = $query->orderBy(['DATE(start)' => SORT_ASC])
             ->all($this->db);
 
         return array_map(
@@ -50,12 +48,13 @@ class DbStorage implements StorageInterface
                             ])->one()
                 */
 
-                if ($item = ServiceAssignment::getDb()->cache(function ($db) use($row) {
-                    return  ServiceAssignment::find()
-                        ->where(['service_id' => $row['service_id'],
+                if ($item = ServiceAssignment::getDb()->cache(function ($db) use ($row) {
+                    return ServiceAssignment::find()
+                        ->where([
+                                    'service_id' => $row['service_id'],
                                     'event_id' => $row['event_id'],
                                 ])->one();
-                },0,new TagDependency(['tags' => Event::CACHE_KEY]))) {
+                }, 0, new TagDependency(['tags' => Event::CACHE_KEY]))) {
                     return new CartItem($item);
                 }
                 return false;
@@ -65,7 +64,9 @@ class DbStorage implements StorageInterface
     }
 
     public function loadWithParams(array $params): array
-    {return [];}
+    {
+        return [];
+    }
 
     public function save(array $items): void
     {

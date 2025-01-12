@@ -16,12 +16,9 @@ use yii\web\NotFoundHttpException;
 
 class AdditionalController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, AdditionalManageService $service, $config = [])
+    public function __construct($id, $module,private readonly AdditionalManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

@@ -15,20 +15,14 @@ use yii\web\Response;
 class FreeTimeController extends Controller
 {
 
-    private FreeTimeManageService $freeTime;
-    private Calendar $calendar;
-
-
     public function __construct(
         $id,
         $module,
-        FreeTimeManageService $freeTime,
-        Calendar $calendar,
+        private FreeTimeManageService $freeTime,
+        private readonly Calendar $calendar,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->freeTime = $freeTime;
-        $this->calendar = $calendar;
     }
 
 

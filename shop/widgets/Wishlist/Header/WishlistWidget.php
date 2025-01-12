@@ -9,14 +9,8 @@ use yii\base\Widget;
 
 class WishlistWidget extends Widget
 {
-    public $userId;
-
-    private $users;
-
-    public function __construct(UserReadRepository $users, $userId = null, $config = [])
+    public function __construct(private readonly UserReadRepository $users, public $userId = null, $config = [])
     {
-        $this->userId = $userId;
-        $this->users = $users;
         parent::__construct($config);
     }
 

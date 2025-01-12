@@ -13,16 +13,15 @@ use yii\web\Response;
 
 class EducationController extends Controller
 {
-    private EducationManageService $service;
-    private Calendar $calendar;
-    public function __construct($id, $module, EducationManageService $service,
-        Calendar $calendar,$config = [])
+    public function __construct(
+        $id,
+        $module,
+        private EducationManageService $service,
+        private readonly Calendar $calendar,
+        $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->calendar = $calendar;
     }
-
     public function actionLessons()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;

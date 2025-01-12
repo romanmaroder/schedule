@@ -7,6 +7,7 @@ namespace backend\controllers\schedule;
 use backend\forms\Schedule\CategorySearch;
 use core\entities\Schedule\Service\Category;
 use core\forms\manage\Schedule\CategoryForm;
+use core\useCases\manage\Schedule\CategoryManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -14,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class CategoryController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, \core\useCases\manage\Schedule\CategoryManageService $service, $config = [])
+    public function __construct($id, $module,private readonly CategoryManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

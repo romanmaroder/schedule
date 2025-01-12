@@ -14,12 +14,9 @@ use yii\web\NotFoundHttpException;
 
 class ModificationController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, ProductManageService $service, $config = [])
+    public function __construct($id, $module,private readonly ProductManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

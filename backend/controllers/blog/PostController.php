@@ -15,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class PostController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, PostManageService $service, $config = [])
+    public function __construct($id, $module,private readonly PostManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

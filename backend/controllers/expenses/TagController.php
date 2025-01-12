@@ -15,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class TagController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, TagManageService $service, $config = [])
+    public function __construct($id, $module,private readonly TagManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

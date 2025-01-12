@@ -9,16 +9,14 @@ use core\cart\schedule\storage\StorageInterface;
 class CartWithParams
 {
 
-    private $storage;
     /**
      * @var CartItem[]
      * */
     private $items;
     private $params;
 
-    public function __construct(StorageInterface $storage,)
+    public function __construct(private readonly StorageInterface $storage,)
     {
-        $this->storage = $storage;
     }
 
     /**

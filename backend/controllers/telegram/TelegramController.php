@@ -16,21 +16,19 @@ use yii\web\Controller;
 
 class TelegramController extends Controller
 {
-    private TelegramBot $bot;
-    private $update;
-    private $service;
-    private $repository;
-    private $events;
-    private $message;
 
-    public function __construct( $id, $module, UserManageService $service, UserReadRepository $repository, EventReadRepository $events, MessageTemplates $message, $config = [])
+    public function __construct(
+        $id,
+        $module,
+        private readonly UserManageService $service,
+        private readonly UserReadRepository $repository,
+        private readonly EventReadRepository $events,
+        private readonly MessageTemplates $message,
+        private readonly TelegramBot $bot = new TelegramBot(),
+        private $update,
+        $config = [])
     {
-        $this->bot = new TelegramBot();
         $this->update = $this->bot->commandsHandler(true);
-        $this->service = $service;
-        $this->repository = $repository;
-        $this->events = $events;
-        $this->message = $message;
 
         parent::__construct($id, $module, $config);
     }
@@ -42,7 +40,7 @@ class TelegramController extends Controller
         return parent::beforeAction($action);
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [

@@ -8,15 +8,7 @@ use core\entities\Blog\Post\Comment;
 
 class CommentView
 {
-    public $comment;
-    /**
-     * @var self[]
-     */
-    public $children;
-
-    public function __construct(Comment $comment, array $children)
+    public function __construct(public Comment $comment,public array $children)
     {
-        $this->comment = $comment;
-        $this->children = $children;
     }
 }

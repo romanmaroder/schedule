@@ -15,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class OrderController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, OrderManageService $service, $config = [])
+    public function __construct($id, $module,private readonly OrderManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

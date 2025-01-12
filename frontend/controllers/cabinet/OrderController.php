@@ -23,23 +23,14 @@ class OrderController extends Controller
     public $totalLessonCount;
     public $todayLessonCount;
 
-    private $orders;
-    private $users;
-    private $events;
-    private $education;
-
     public function __construct($id, $module,
-        OrderReadRepository $orders,
-        UserReadRepository $users,
-        EventReadRepository $events,
-        EducationReadRepository $education,
+        private readonly OrderReadRepository $orders,
+        private readonly UserReadRepository $users,
+        private readonly EventReadRepository $events,
+        private readonly EducationReadRepository $education,
         $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->orders = $orders;
-        $this->users = $users;
-        $this->events = $events;
-        $this->education = $education;
 
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());

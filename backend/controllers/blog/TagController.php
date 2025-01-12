@@ -7,6 +7,7 @@ namespace backend\controllers\blog;
 use backend\forms\Blog\TagSearch;
 use core\entities\Blog\Tag;
 use core\forms\manage\Blog\TagForm;
+use core\useCases\manage\Blog\TagManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -14,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class TagController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, \core\useCases\manage\Blog\TagManageService $service, $config = [])
+    public function __construct($id, $module,private readonly TagManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array
@@ -51,6 +49,7 @@ class TagController extends Controller
     /**
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -82,6 +81,7 @@ class TagController extends Controller
     /**
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {

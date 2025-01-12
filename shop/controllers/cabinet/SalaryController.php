@@ -12,13 +12,9 @@ class SalaryController extends Controller
 {
     //public $layout = 'blank';
 
-    private $service;
-
-    public function __construct($id, $module, CartService $service, $config = [])
+    public function __construct($id, $module,private readonly CartService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-
-        $this->service = $service;
     }
 
     public function actionIndex()

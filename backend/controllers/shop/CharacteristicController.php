@@ -13,12 +13,9 @@ use yii\web\NotFoundHttpException;
 
 class CharacteristicController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, CharacteristicManageService $service, $config = [])
+    public function __construct($id, $module,private readonly CharacteristicManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

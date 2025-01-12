@@ -13,12 +13,9 @@ use yii\web\Response;
 
 class MarketController extends Controller
 {
-    private $generator;
-
-    public function __construct($id, $module, YandexMarket $generator, $config = [])
+    public function __construct($id, $module,private readonly YandexMarket $generator, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->generator = $generator;
     }
 
     public function actionIndex(): Response

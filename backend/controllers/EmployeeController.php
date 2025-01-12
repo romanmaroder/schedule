@@ -21,23 +21,18 @@ use yii\web\NotFoundHttpException;
 
 class EmployeeController extends Controller
 {
-    private $service;
-    private EmployeeReadRepository $employees;
-
     public function __construct(
         $id,
         $module,
-        EmployeeManageService $service,
-        EmployeeReadRepository $employees,
+       private readonly EmployeeManageService $service,
+       private readonly EmployeeReadRepository $employees,
         $config = []
     )
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->employees = $employees;
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

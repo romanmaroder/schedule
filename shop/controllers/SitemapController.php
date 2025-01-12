@@ -26,33 +26,19 @@ use yii\web\Response;
 class SitemapController extends Controller
 {
     public const ITEMS_PER_PAGE = 100;
-
-    private $sitemap;
-    private $pages;
-    private $blogCategories;
-    private $posts;
-    private $shopCategories;
-    private $products;
-
     public function __construct(
         $id,
         $module,
-        Sitemap $sitemap,
-        PageReadRepository $pages,
-        BlogCategoryReadRepository $blogCategories,
-        PostReadRepository $posts,
-        ShopCategoryReadRepository $shopCategories,
-        ProductReadRepository $products,
+        private readonly Sitemap $sitemap,
+        private readonly PageReadRepository $pages,
+        private readonly BlogCategoryReadRepository $blogCategories,
+        private readonly PostReadRepository $posts,
+        private readonly ShopCategoryReadRepository $shopCategories,
+        private readonly ProductReadRepository $products,
         $config = []
     )
     {
         parent::__construct($id, $module, $config);
-        $this->sitemap = $sitemap;
-        $this->pages = $pages;
-        $this->blogCategories = $blogCategories;
-        $this->posts = $posts;
-        $this->shopCategories = $shopCategories;
-        $this->products = $products;
     }
 
     public function actionIndex(): Response

@@ -17,12 +17,9 @@ use yii\web\NotFoundHttpException;
 
 class ServiceController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, ServiceManageService $service, $config = [])
+    public function __construct($id, $module, private readonly ServiceManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

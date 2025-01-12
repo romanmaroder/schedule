@@ -18,14 +18,14 @@ use yii\web\Response;
 
 class EducationController extends Controller
 {
-    private \core\useCases\manage\Schedule\EducationManageService $service;
-    private Calendar $calendar;
-
-    public function __construct($id, $module, EducationManageService $service, Calendar $calendar,$config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        private readonly EducationManageService $service,
+        private readonly Calendar $calendar,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->calendar = $calendar;
     }
 
     public function behaviors(): array
@@ -45,9 +45,9 @@ class EducationController extends Controller
         $searchModel = new EducationSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 
-        return $this->render('index',[
-            'searchModel'=>$searchModel,
-            'dataProvider'=>$dataProvider,
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -60,7 +60,6 @@ class EducationController extends Controller
 
     public function actionView($id)
     {
-
         return $this->render(
             'view',
             [
@@ -76,7 +75,7 @@ class EducationController extends Controller
             try {
                 $education = $this->service->create($form);
                 return $this->redirect(['view', 'id' => $education->id]);
-            }catch (\DomainException $e){
+            } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
@@ -102,7 +101,6 @@ class EducationController extends Controller
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
-
         }
 
         return $this->render(

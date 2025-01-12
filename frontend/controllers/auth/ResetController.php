@@ -17,12 +17,9 @@ class ResetController extends Controller
 {
     public $layout='main-login';
 
-    private $service;
-
-    public function __construct($id, $module, PasswordResetService $service, $config = [])
+    public function __construct($id, $module,private readonly PasswordResetService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     /**

@@ -7,10 +7,12 @@ use core\entities\Schedule\Event\Event;
 use core\helpers\EventMethodsOfPayment;
 use core\helpers\EventPaymentStatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
+use kartik\date\DatePicker;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Schedule\EventSearch */
@@ -53,10 +55,42 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <?php
+                            $form = ActiveForm::begin(); ?>
+                            <div class="col-12">
+                                <div class="form-group"><?=
+                                    DatePicker::widget(
+                                        [
+                                            'name' => 'from_date',
+                                            'value' => '',
+                                            'type' => DatePicker::TYPE_RANGE,
+                                            'name2' => 'to_date',
+                                            'value2' => '',
+                                            'separator' => 'до',
+                                            'removeButton' => true,
+                                            'size' => 'sm',
+                                            'options' => ['placeholder' => $params['from_date'] ?? ''],
+                                            'options2' => ['placeholder' => $params['to_date'] ?? ''],
+                                            'pluginOptions' => [
+                                                'autoclose' => true,
+                                                'todayHighlight' => true,
+                                                'format' => 'yyyy-mm-dd',
+                                            ],
+                                        ]
+                                    ); ?></div>
+                                <div class="form-group">
+                                    <?= Html::submitButton(
+                                        Yii::t('app', 'Update'),
+                                        ['class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient text-shadow']
+                                    ) ?>
+                                </div>
+                            </div><?php
+                            ActiveForm::end(); ?>
+                        </div>
                         <?= GridView::widget(
                             [
                                 'dataProvider' => $dataProvider,
-                                //'filterModel' => $searchModel,
                                 'summary' => false,
                                 'emptyText' => false,
                                 'showHeader' => true,
@@ -159,7 +193,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'visibleButtons' => [
                                             'status' => true,
-                                            'payment' => fn($model) => $model->status == StatusPayEnum::STATUS_PAYED->value,
+                                            'payment' => fn($model
+                                            ) => $model->status == StatusPayEnum::STATUS_PAYED->value,
                                         ],
                                         'buttons' => [
                                             'status' => fn(
@@ -222,7 +257,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'visibleButtons' => [
                                             'status' => true,
-                                            'payment' => fn($model) => $model->status == StatusPayEnum::STATUS_PAYED->value,
+                                            'payment' => fn($model
+                                            ) => $model->status == StatusPayEnum::STATUS_PAYED->value,
                                         ],
                                         'buttons' => [
                                             'copy' => fn($url, $model, $key) => Html::a(
@@ -252,7 +288,7 @@ $js = <<< JS
         lengthChange: true,
         lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
         searching: true,
-        ordering: false,
+        ordering: true,
         info: true,
         autoWidth: false,
         responsive: true,

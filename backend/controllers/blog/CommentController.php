@@ -15,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class CommentController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, CommentManageService $service, $config = [])
+    public function __construct($id, $module, private readonly CommentManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array
@@ -53,6 +50,7 @@ class CommentController extends Controller
      * @param int $post_id
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($post_id, $id)
     {
@@ -80,6 +78,7 @@ class CommentController extends Controller
      * @param int $post_id
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($post_id, $id)
     {
@@ -113,6 +112,7 @@ class CommentController extends Controller
      * @param $post_id
      * @param int $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionDelete($post_id, $id)
     {

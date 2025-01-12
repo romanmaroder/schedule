@@ -11,12 +11,15 @@ use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
 use core\readModels\Employee\EmployeeReadRepository;
+use core\readModels\Schedule\EventReadRepository;
 use core\repositories\NotFoundException;
 use core\repositories\PriceRepository;
 use core\services\bots\classes\Bot;
 use core\services\bots\classes\telegram\TelegramBot;
 use core\useCases\manage\Schedule\EventManageService;
 use core\useCases\Schedule\CartService;
+use core\useCases\Schedule\CartWithParamsService;
+use core\useCases\Schedule\RequestService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -24,29 +27,20 @@ use yii\web\Response;
 
 class EventController extends Controller
 {
-
-    private EventManageService $service;
-    private Calendar $calendar;
-    private CartService $cart;
-    private EmployeeReadRepository $employees;
-    private PriceRepository $prices;
-
     public function __construct(
         $id,
         $module,
-        EventManageService $service,
-        Calendar $calendar,
-        CartService $cart,
-        EmployeeReadRepository $employees,
-        PriceRepository $prices,
+        private readonly EventManageService $service,
+        private readonly Calendar $calendar,
+        private readonly CartService $cart,
+        private readonly EmployeeReadRepository $employees,
+        private readonly PriceRepository $prices,
+        private readonly RequestService $requestService,
+        private readonly CartWithParamsService $serviceWithParams,
+        private readonly EventReadRepository $repository,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->calendar = $calendar;
-        $this->cart = $cart;
-        $this->employees = $employees;
-        $this->prices = $prices;
     }
 
     public function behaviors(): array
@@ -73,13 +67,14 @@ class EventController extends Controller
     public function actionIndex()
     {
         $searchModel = new EventSearch();
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
-        $cart = $this->cart->getCart();
+        $dataProvider = $searchModel->search($this->request());
+        $this->serviceWithParams->setParams($this->request());
+        $cart = $this->serviceWithParams->getCart();
 
         return $this->render(
             'index',
             [
-                'searchModel' => $searchModel,
+                //'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
                 'cart'=>$cart,
             ]
@@ -230,5 +225,9 @@ class EventController extends Controller
             return $model;
         }
         throw new NotFoundException('The requested page does not exist.');
+    }
+    private function request(): array
+    {
+        return $this->requestService->dataRangeParams('from_date', 'to_date');
     }
 }

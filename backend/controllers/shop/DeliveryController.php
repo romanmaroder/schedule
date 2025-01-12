@@ -7,6 +7,7 @@ namespace backend\controllers\shop;
 use backend\forms\Shop\DeliveryMethodSearch;
 use core\entities\Shop\DeliveryMethod;
 use core\forms\manage\Shop\DeliveryMethodForm;
+use core\useCases\manage\Shop\DeliveryMethodManageService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -14,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class DeliveryController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, \core\useCases\manage\Shop\DeliveryMethodManageService $service, $config = [])
+    public function __construct($id, $module,private readonly DeliveryMethodManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

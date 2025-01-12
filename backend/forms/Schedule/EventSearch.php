@@ -22,16 +22,17 @@ class EventSearch extends Model
     public function rules(): array
     {
         return [
-            [['id', 'client_id', 'master_id','amount'], 'integer'],
+            [['id', 'client_id', 'master_id', 'amount'], 'integer'],
             [['notice'], 'string'],
             [['notice'], 'safe'],
             [['start', 'end'], 'safe'],
         ];
     }
 
-    public function search(array $params): ActiveDataProvider
+    public function search(array $params): ?ActiveDataProvider
     {
-         $query = Event::find()->with('services', 'employee', 'master', 'client');
+        $query = Event::find()->with('services', 'employee', 'master', 'client');
+
 
         $dataProvider = new ActiveDataProvider(
             [
@@ -44,7 +45,7 @@ class EventSearch extends Model
         );
         $this->load($params);
 
-        if (!$this->validate()) {
+        if ($params['from_date'] == null || $params['to_date'] == null) {
             $query->where('0=1');
             return $dataProvider;
         }
@@ -57,12 +58,7 @@ class EventSearch extends Model
                 'amount' => $this->amount,
             ]
         );
-
-
-        $query->andFilterWhere(['>=', 'start', $this->start ? $this->start . ' 00:00:00' : null])
-            ->andFilterWhere(['<=', 'end', $this->end ? $this->end . ' 23:59:59' : null]);
-
-
+        $query->andFilterWhere(['between', 'DATE(start)', $params['from_date'], $params['to_date']]);
         return $dataProvider;
     }
 

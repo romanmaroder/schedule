@@ -27,40 +27,26 @@ class DefaultController extends Controller
     public $todayCount;
     public $totalLessonCount;
     public $todayLessonCount;
+
     public $user;
 
-    private $events;
-    private $users;
-    private $employees;
-    private $education;
-    private $free;
-    private $profile;
 //    private $wishList;
-    private $products;
-
-    private EmployeeManageService $employeeService;
 
     public function __construct(
         $id,
         $module,
-        EventReadRepository $events,
-        UserReadRepository $users,
-        EmployeeReadRepository $employees,
-        EducationReadRepository $education,
-        FreeTimeReadRepository $free,
-        EmployeeManageService $employeeManageService,
-        ProfileService $profile,
+        private EventReadRepository $events,
+        private UserReadRepository $users,
+        private EmployeeReadRepository $employees,
+        private EducationReadRepository $education,
+        private FreeTimeReadRepository $free,
+        private EmployeeManageService $employeeManageService,
+        private ProfileService $profile,
 //        WishlistService $wishList,
-        ProductReadRepository $products,
+        private ProductReadRepository $products,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->events = $events;
-        $this->users = $users;
-        $this->employees = $employees;
-        $this->education = $education;
-        $this->free = $free;
-        $this->employeeService = $employeeManageService;
         $this->totalCount = $this->events->getEventsCount(\Yii::$app->user->getId());
         $this->todayCount = $this->events->getEventsCountToday(\Yii::$app->user->getId());
 

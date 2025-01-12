@@ -16,15 +16,16 @@ class NetworkController extends Controller
 {
     public $layout = 'cabinet';
 
-    private $service;
-
-    public function __construct($id, $module, NetworkService $service, $config = [])
+    public function __construct(
+        $id,
+        $module,
+       private NetworkService $service,
+        $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'attach' => [

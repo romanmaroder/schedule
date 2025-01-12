@@ -4,6 +4,7 @@
 namespace backend\controllers\cabinet;
 
 
+use core\entities\Schedule\Event\Event;
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
 use core\useCases\Schedule\CartService;

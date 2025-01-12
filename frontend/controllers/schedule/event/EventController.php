@@ -14,19 +14,12 @@ use yii\web\Response;
 
 class EventController extends Controller
 {
-    private EventManageService $service;
-    private Calendar $calendar;
-    private CartService $cart;
-
-    public function __construct($id, $module,
-        EventManageService $service,
-        Calendar $calendar,
-        CartService $cart,$config = [])
+   public function __construct($id, $module,
+        private readonly EventManageService $service,
+        private readonly Calendar $calendar,
+        private readonly CartService $cart,$config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->calendar = $calendar;
-        $this->cart = $cart;
     }
 
     public function actionIndex()

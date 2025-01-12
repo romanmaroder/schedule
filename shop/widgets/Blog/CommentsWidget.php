@@ -43,10 +43,10 @@ class CommentsWidget extends Widget
 
     /**
      * @param Comment[] $comments
-     * @param int $parentId
+     * @param int|null $parentId
      * @return CommentView[]
      */
-    public function treeRecursive(&$comments, $parentId): array
+    public function treeRecursive(array &$comments, int|null $parentId): array
     {
         $items = [];
         foreach ($comments as $comment) {

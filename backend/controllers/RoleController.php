@@ -15,14 +15,12 @@ use yii\web\NotFoundHttpException;
 
 class RoleController extends Controller
 {
-    private RoleServiceManager $service;
-    public function __construct($id, $module, RoleServiceManager $service, $config = [])
+    public function __construct($id, $module,private readonly RoleServiceManager $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

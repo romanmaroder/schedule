@@ -15,14 +15,12 @@ use yii\web\NotFoundHttpException;
 
 class RateController extends Controller
 {
-    private RateServiceManager $service;
-    public function __construct($id, $module, RateServiceManager $service, $config = [])
+    public function __construct($id, $module,private readonly RateServiceManager $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

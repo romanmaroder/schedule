@@ -16,27 +16,17 @@ use yii\web\NotFoundHttpException;
 class PostController extends Controller
 {
     public $layout = 'blog';
-
-    private $service;
-    private $posts;
-    private $categories;
-    private $tags;
-
     public function __construct(
         $id,
         $module,
-        CommentService $service,
-        PostReadRepository $posts,
-        CategoryReadRepository $categories,
-        TagReadRepository $tags,
+       private readonly CommentService $service,
+       private readonly PostReadRepository $posts,
+       private readonly CategoryReadRepository $categories,
+       private readonly TagReadRepository $tags,
         $config = []
     )
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->posts = $posts;
-        $this->categories = $categories;
-        $this->tags = $tags;
     }
 
     /**

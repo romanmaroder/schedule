@@ -6,7 +6,7 @@ namespace shop\controllers\payment;
 
 use core\entities\Shop\Order\Order;
 use core\readModels\Shop\OrderReadRepository;
-use core\services\Shop\OrderService;
+use core\useCases\Shop\OrderService;
 use robokassa\FailAction;
 use robokassa\Merchant;
 use robokassa\ResultAction;
@@ -17,16 +17,15 @@ use yii\web\NotFoundHttpException;
 
 class RobokassaController extends Controller
 {
-    public $enableCsrfValidation = false;
-
-    private $orders;
-    private $service;
-
-    public function __construct($id, $module, OrderReadRepository $orders, OrderService $service, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        public $enableCsrfValidation = false,
+        private readonly OrderReadRepository $orders,
+        private readonly OrderService $service,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->orders = $orders;
-        $this->service = $service;
     }
 
     public function actionInvoice($id)
@@ -39,7 +38,7 @@ class RobokassaController extends Controller
     /**
      * @inheritdoc
      */
-    public function actions()
+    public function actions(): array
     {
         return [
             'result' => [

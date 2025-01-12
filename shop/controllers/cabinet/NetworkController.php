@@ -4,7 +4,7 @@
 namespace shop\controllers\cabinet;
 
 
-use core\services\auth\NetworkService;
+use core\useCases\auth\NetworkService;
 use Yii;
 use yii\authclient\AuthAction;
 use yii\authclient\ClientInterface;
@@ -16,15 +16,12 @@ class NetworkController extends Controller
 {
     public $layout = 'cabinet';
 
-    private $service;
-
-    public function __construct($id, $module, NetworkService $service, $config = [])
+    public function __construct($id, $module, private readonly NetworkService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'attach' => [

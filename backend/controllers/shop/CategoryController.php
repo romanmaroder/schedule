@@ -15,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class CategoryController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, CategoryManageService $service, $config = [])
+    public function __construct($id, $module,private readonly CategoryManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

@@ -17,13 +17,8 @@ use yii\db\Query;
  */
 class DbStorageWithParams implements StorageInterface
 {
-    private $userId;
-    private $db;
-
-    public function __construct($userId, Connection $db)
+    public function __construct(private $userId, private readonly Connection $db)
     {
-        $this->userId = $userId;
-        $this->db = $db;
     }
 
 

@@ -15,12 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class PageController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, PageManageService $service, $config = [])
+    public function __construct($id, $module,private readonly PageManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     public function behaviors(): array

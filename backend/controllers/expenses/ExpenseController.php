@@ -16,12 +16,9 @@ use yii\web\NotFoundHttpException;
 
 class ExpenseController extends Controller
 {
-    private $expense;
-
-    public function __construct($id, $module, ExpenseManageService $expense, $config = [])
+    public function __construct($id, $module,private readonly ExpenseManageService $expense, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->expense = $expense;
     }
 
     public function behaviors(): array

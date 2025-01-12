@@ -11,24 +11,21 @@ use yii\helpers\Html;
 
 class MainNavCategoriesWidget extends Widget
 {
-    /** @var Category|null */
-    public $active;
-    private $categories;
-
-
     /**
      * CategoriesWidget constructor.
+     * @param Category|null $active
      * @param CategoryReadRepository $categories
      * @param array $config
      */
-    public function __construct(CategoryReadRepository $categories, $config = [])
-    {
+    public function __construct(
+        public readonly Category|null $active,
+        private readonly CategoryReadRepository $categories,
+        array $config = []
+    ) {
         parent::__construct($config);
-        $this->categories = $categories;
-
     }
 
-    private function printNode($categories, $depth = 1)
+    private function printNode($categories, $depth = 1): void
     {
         if (is_array($categories)) {
             echo Html::beginTag('ul', ['class' => $depth == 1 ? 'cat_menu' : 'sub_menu']);
@@ -37,11 +34,13 @@ class MainNavCategoriesWidget extends Widget
                 $active = $this->active && ($this->active->id == $category->id || $this->active->isChildOf($category));
 
                 if ($category->depth == $depth) {
-
                     echo Html::beginTag('li', ['class' => $category->children ? 'hassubs' : '']);
 
-                    echo Html::a(Html::encode($category->name) . ($category->children ? "<i class='fas fa-chevron-right'></i>" : ''),
-                        ['/core/catalog/category', 'id' => $category->id],['class' => $active ? 'active' : '']
+                    echo Html::a(
+                        Html::encode(
+                            $category->name
+                        ) . ($category->children ? "<i class='fas fa-chevron-right'></i>" : ''),
+                        ['/core/catalog/category', 'id' => $category->id], ['class' => $active ? 'active' : '']
                     );
 
                     if ($category->children) {

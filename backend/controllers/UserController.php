@@ -17,18 +17,15 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends Controller
 {
-    private $service;
-
-    public function __construct($id, $module, UserManageService $service, $config = [])
+    public function __construct($id, $module,private readonly UserManageService $service, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
     }
 
     /**
      * @inheritDoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

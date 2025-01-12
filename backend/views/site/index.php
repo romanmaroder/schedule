@@ -8,8 +8,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <?= \backend\widgets\birthday\BirthdayWidget::widget(['user' => $employees, 'text' => 'С днем рождения!',
-                                                                         'myClass' => 'bg-secondary p-x-2 py-2 mb-2 text-center rounded']) ?>
+                <?= \backend\widgets\birthday\BirthdayWidget::widget(['text' => 'С днем рождения!',
+                                                                         'myClass' => 'bg-secondary p-x-2 py-2 mb-2 text-center rounded',
+                                                                         'user' => $employees, ]) ?>
             </div>
         </div>
     <div class="row">

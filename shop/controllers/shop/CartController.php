@@ -16,14 +16,14 @@ class CartController extends Controller
 {
     public $layout = 'blank';
 
-    private $products;
-    private $service;
-
-    public function __construct($id, $module, CartService $service, ProductReadRepository $products, $config = [])
-    {
+    public function __construct(
+        $id,
+        $module,
+        private readonly CartService $service,
+        private readonly ProductReadRepository $products,
+        $config = []
+    ) {
         parent::__construct($id, $module, $config);
-        $this->products = $products;
-        $this->service = $service;
     }
 
     public function behaviors(): array
@@ -63,14 +63,13 @@ class CartController extends Controller
         }
 
         if (!$product->modifications) {
-                try {
-                    $this->service->add($product->id, null, 1);
-                    Yii::$app->session->setFlash('success', 'Success!');
-                    return $this->redirect(Yii::$app->request->referrer);
-                } catch (\DomainException $e) {
-                    Yii::$app->errorHandler->logException($e);
-                    Yii::$app->session->setFlash('error', $e->getMessage());
-
+            try {
+                $this->service->add($product->id, null, 1);
+                Yii::$app->session->setFlash('success', 'Success!');
+                return $this->redirect(Yii::$app->request->referrer);
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
 

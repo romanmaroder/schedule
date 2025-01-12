@@ -21,28 +21,18 @@ use yii\web\Controller;
 
 class EventApiController extends Controller
 {
-    private EventManageService $service;
-    private CartService $cart;
-    private SmsSender $sms;
-    private MessengerFactory $messengers;
-    private PriceRepository $prices;
 
     public function __construct(
         $id,
         $module,
-        EventManageService $service,
-        CartService $cart,
-        SmsSender $sms,
-        MessengerFactory $messengers,
-        PriceRepository $prices,
+        private readonly EventManageService $service,
+        private readonly CartService $cart,
+        private readonly SmsSender $sms,
+        private readonly MessengerFactory $messengers,
+        private readonly PriceRepository $prices,
         $config = []
     ) {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
-        $this->cart = $cart;
-        $this->sms = $sms;
-        $this->messengers = $messengers;
-        $this->prices = $prices;
     }
 
 
