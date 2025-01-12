@@ -1,5 +1,6 @@
 <?php
 
+use core\helpers\EventPaymentStatusHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -31,11 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],*/
                 [
                     'attribute' => 'client.phone',
-                    'value' => fn ($model) => Html::a(
-                            Html::encode($model->client->phone),
-                            'tel:' . $model->client->phone,
-                            ['view', 'id' => $model->id]
-                        ),
+                    'value' => fn($model) => Html::a(
+                        Html::encode($model->client->phone),
+                        'tel:' . $model->client->phone,
+                        ['view', 'id' => $model->id]
+                    ),
                     'format' => 'raw',
                 ],
 
@@ -43,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'service',
                     //'label' => 'service',
                     'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
-                    'contentOptions' => ['class'=>'text-break'],
+                    'contentOptions' => ['class' => 'text-break'],
                 ],
                 [
                     'attribute' => 'start',
@@ -60,17 +61,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'master_id',
-                    'value' => fn($model) => Html::a(
-                        Html::encode($model->master->username),
-                        ['/employee/view', 'id' => $model->employee->id]
-                    ) ?? $model->getFullName(),
+                    'value' => fn($model) => $model->master?->username ?? $model->getFullName(),
                     'format' => 'raw',
                     'visible' => Yii::$app->user->identity->getId() != $model->master_id,
                 ],
                 [
                     'attribute' => 'cost',
                     'value' => $model->getDiscountedPrice($model, $cart),
-                    'visible' => Yii::$app->user->identity->getId() == $model->master_id,
+                    'visible' => Yii::$app->user->identity->getId() == $model->master_id && $model->isNotPayed(),
+                    'format' => 'raw',
                 ],
             ],
         ]
