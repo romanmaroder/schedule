@@ -1,8 +1,10 @@
 <?php
 
+use core\helpers\StatusHelper;
 use frontend\assets\DataTableAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -56,19 +58,24 @@ DataTableAsset::register($this);
                                 ],
                                 [
                                     'attribute' => 'services.name',
-                                    'value' => fn($model) => Html::a(
-                                        Html::encode($model->services->name),
-                                        ['view', 'id' => $model->services->id],
-                                        [
-                                            'category',
-                                            'id' => $model->services->category->id,
-                                        ]
-                                    ),
-                                    'format' => 'raw'
+                                    'value' => function ($model) {
+                                        if ($model->services->isDraft()) {
+                                            return Html::tag('span',$model->services->name,['class'=>'text-danger']);
+                                        }
+                                        return Html::a(
+                                            Html::encode($model->services->name),
+                                            ['view', 'id' => $model->services->id],
+                                            [
+                                                'category',
+                                                'id' => $model->services->category->id,
+                                            ]
+                                        );
+                                    },
+                                    'format' => 'raw',
                                 ],
                                 [
                                     'attribute' => 'price.cost',
-                                    'value' => fn($model) => $model->cost
+                                    'value' => fn($model) => $model->cost,
                                 ]
 
                             ],

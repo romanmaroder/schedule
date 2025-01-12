@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
 /*        foreach ($category->children as $child): */?>
             <a href="<?php
-/*= Html::encode(Url::to(['category', 'id' => $child->id])) */?>"><?php/*= Html::encode(
+/*= Html::encode(Url::to(['category', 'id' => $child->id])) */?>"><?/*= Html::encode(
                     $child->name
                 ) */?></a> &nbsp;
         <?php
