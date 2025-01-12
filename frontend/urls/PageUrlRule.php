@@ -15,14 +15,12 @@ use yii\web\UrlRuleInterface;
 
 class PageUrlRule extends BaseObject implements UrlRuleInterface
 {
-    private $repository;
-    private $cache;
-
-    public function __construct(PageReadRepository $repository, Cache $cache, $config = [])
-    {
+    public function __construct(
+        private readonly PageReadRepository $repository,
+        private readonly Cache $cache,
+        $config = []
+    ) {
         parent::__construct($config);
-        $this->repository = $repository;
-        $this->cache = $cache;
     }
 
     public function parseRequest($manager, $request)

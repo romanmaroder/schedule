@@ -16,16 +16,13 @@ use yii\web\UrlRuleInterface;
 class CategoryUrlRule extends BaseObject implements UrlRuleInterface
 {
 
-    public $prefix = 'catalog';
-
-    private $repository;
-    private $cache;
-
-    public function __construct(CategoryReadRepository $repository, Cache $cache, $config = [])
-    {
+    public function __construct(
+        private readonly CategoryReadRepository $repository,
+        private readonly Cache $cache,
+        public $prefix = 'catalog',
+        $config = []
+    ) {
         parent::__construct($config);
-        $this->repository = $repository;
-        $this->cache =  $cache;
     }
 
     public function parseRequest($manager, $request)
