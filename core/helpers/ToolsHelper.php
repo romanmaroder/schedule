@@ -18,8 +18,7 @@ class ToolsHelper
     public static function statusLabel($tools): string
     {
         $class = ToolsEnum::getBadge($tools);
-        $out = '';
-        $out .= Html::beginTag('span', ['class' => $class]);
+        $out = Html::beginTag('span', ['class' => $class]);
         $out .= Html::tag(
             'i',
             IconEnum::TOOLS_ICON->value,
