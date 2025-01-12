@@ -70,7 +70,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="card-footer">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success btn-sm btn-shadow bg-gradient text-shadow']) ?>
     </div>
 
         </div>
