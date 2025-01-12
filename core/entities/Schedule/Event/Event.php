@@ -332,7 +332,6 @@ class Event extends ActiveRecord
         }*/
         return $this->rate;
     }
-
     public function attributeLabels(): array
     {
         return [
