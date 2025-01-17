@@ -11,7 +11,7 @@ use yii\helpers\Url;
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <?
+        <?php
         echo Html::tag(
             'li',
             Html::a(
@@ -21,7 +21,7 @@ use yii\helpers\Url;
             ),
             ['class' => ['nav-item d-none d-sm-inline-block']]
         ); ?>
-        <?
+        <?php
         echo Html::tag(
             'li',
             Html::a(
@@ -31,10 +31,20 @@ use yii\helpers\Url;
             ),
             ['class' => ['nav-item d-none d-sm-inline-block']]
         ); ?>
+        <?php
+        echo Html::tag(
+            'li',
+            Html::a(
+                Yii::t('navbar','graph'),
+               'https://shiftcalendar.online/ru',
+                ['class' => ['nav-link'],'target' => '_blank']
+            ),
+            ['class' => ['nav-item d-none d-sm-inline-block']]
+        ); ?>
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?=Yii::t('navbar','Dropdown')?></a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <?
+                <?php
                 echo Html::tag(
                     'li',
                     Html::a(
@@ -44,13 +54,23 @@ use yii\helpers\Url;
                     ),
                     ['class' => ['d-sm-none']]
                 ); ?>
+                <?php
+                echo Html::tag(
+                    'li',
+                    Html::a(
+                        Yii::t('navbar','graph'),
+                        'https://shiftcalendar.online/ru',
+                        ['class' => ['dropdown-item'],'target' => '_blank']
+                    ),
+                    ['class' => ['d-sm-none']]
+                ); ?>
                 <!-- Level two dropdown-->
                 <li class="dropdown-submenu dropdown-hover">
                     <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"
                        class="dropdown-item dropdown-toggle"><?=Yii::t('navbar','Account')?></a>
                     <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <?
+                        <?php
                         echo Html::tag(
                             'li',
                             Html::a(
@@ -61,7 +81,7 @@ use yii\helpers\Url;
                             ),
                             ['class' => ['d-block']]
                         ); ?>
-                        <?
+                        <?php
                         echo Html::tag(
                             'li',
                             Html::a(
@@ -71,7 +91,7 @@ use yii\helpers\Url;
                             ),
                             ['class' => ['d-block']]
                         ); ?>
-                        <?
+                        <?php
                         echo Html::tag(
                             'li',
                             Html::a(
@@ -81,7 +101,7 @@ use yii\helpers\Url;
                             ),
                             ['class' => ['d-block']]
                         ); ?>
-                        <?
+                        <?php
                         echo Html::tag(
                             'li',
                             Html::a(
@@ -91,7 +111,7 @@ use yii\helpers\Url;
                             ),
                             ['class' => ['d-block']]
                         ); ?>
-                        <?
+                        <?php
                         echo Html::tag(
                             'li',
                             Html::a(
@@ -101,7 +121,7 @@ use yii\helpers\Url;
                             ),
                             ['class' => ['d-block']]
                         ); ?>
-                        <?
+                        <?php
                         echo Html::tag(
                             'li',
                             Html::a(
@@ -111,7 +131,7 @@ use yii\helpers\Url;
                             ),
                             ['class' => ['d-block']]
                         ); ?>
-                        <?
+                        <?php
                         echo Html::tag(
                             'li',
                             Html::a(
@@ -176,7 +196,8 @@ use yii\helpers\Url;
                 <a href="#" class="dropdown-item">-->
                     <!-- Message Start -->
                     <!--<div class="media">
-                        <img src="<?/*=$assetDir*/?>/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="<?php
+                    /*=$assetDir*/?>/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
@@ -192,7 +213,8 @@ use yii\helpers\Url;
                 <a href="#" class="dropdown-item">-->
                     <!-- Message Start -->
                     <!--<div class="media">
-                        <img src="<?/*=$assetDir*/?>/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <img src="<?php
+                    /*=$assetDir*/?>/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce
@@ -208,7 +230,8 @@ use yii\helpers\Url;
                 <a href="#" class="dropdown-item">-->
                     <!-- Message Start -->
                     <!--<div class="media">
-                        <img src="<?/*=$assetDir*/?>/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <img src="<?php
+                    /*=$assetDir*/?>/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Nora Silvester
