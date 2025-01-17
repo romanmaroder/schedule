@@ -5,7 +5,6 @@ namespace core\services\messengers;
 
 
 use core\helpers\tHelper;
-use Yii;
 
 class Greeting
 {
@@ -24,15 +23,15 @@ class Greeting
     {
         $hour = date("H A");
         switch ($hour) {
-            case $hour >= 04;
+            case ($hour >= 04) && ($hour <= 10);
                 return tHelper::translate('sms/greeting',self::MORNING);
-            case $hour >= 10;
+            case ($hour >= 10) && ($hour <= 16);
                 return tHelper::translate('sms/greeting',self::DAY);
-            case $hour >= 16;
+            case ($hour >= 16) && ($hour <= 20);
                 return tHelper::translate('sms/greeting',self::EVENING);
-            case ($hour >= 02 or $hour <= 04);
+            case  ($hour >= 20);
                 return tHelper::translate('sms/greeting',self::NIGHT);
         }
-
+        return tHelper::translate('sms/greeting',self::NIGHT);
     }
 }
