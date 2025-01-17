@@ -54,6 +54,7 @@ use yii\helpers\Url;
                     ),
                     ['class' => ['d-sm-none']]
                 ); ?>
+
                 <?php
                 echo Html::tag(
                     'li',
