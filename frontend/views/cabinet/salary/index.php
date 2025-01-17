@@ -149,6 +149,14 @@ DataTableAsset::register($this);
                                         ],
                                         'format' => 'raw'
                                     ],
+                                    [
+                                        'attribute' => 'username',
+                                        'label' => Yii::t('user', 'Username'),
+                                        'value' => fn($model) => $model->getClientName(),
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ]
+                                    ],
                                 ]
                             ]
                         ) ?></div>

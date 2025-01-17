@@ -244,7 +244,7 @@ let table= $('#report').DataTable({
                 lengthChange: true,
                 lengthMenu: [[10, 25, 50, -1], [ 10, 25, 50,"All"]],
                 searching: true,
-                ordering: false,
+                ordering: true,
                 info: true,
                 autoWidth: false,
                 responsive: true,

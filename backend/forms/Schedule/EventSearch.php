@@ -39,7 +39,7 @@ class EventSearch extends Model
                 'query' => $query,
                 'pagination' => false,
                 'sort' => [
-                    'defaultOrder' => ['id' => SORT_ASC],
+                    'start' => ['start' => SORT_ASC],
                 ]
             ]
         );
