@@ -145,7 +145,19 @@ class CartItem
             default => $this->profitNoDiscount(),
         };
     }
-
+    public function ProfitOnlyFromServicesPaidFor(): float|int
+    {
+        if( $this->item->events->isPayed()) {
+            return match ($this->getDiscountFrom()) {
+                DiscountEnum::MASTER_DISCOUNT->value => $this->profitMasterDiscount(),
+                DiscountEnum::STUDIO_DISCOUNT->value => $this->profitStudioDiscount(),
+                DiscountEnum::STUDIO_DISCOUNT_WITH_MASTER_WORK->value => $this->getProfitDiscountFromTheStudioWithMaster(
+                ),
+                default => $this->profitNoDiscount(),
+            };
+        }
+        return 0;
+    }
 
     public function getServiceList(): string
     {
