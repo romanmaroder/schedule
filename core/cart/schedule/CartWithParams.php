@@ -59,6 +59,18 @@ class CartWithParams
             )
         );
     }
+    public function getFullProfitOnlyFromServicesPaidFor(): int|float
+    {
+        $this->loadItems();
+        return array_sum(
+            array_map(
+                function (CartItem $item) {
+                    return $item->ProfitOnlyFromServicesPaidFor();
+                },
+                $this->items
+            )
+        );
+    }
 
 
     public function getFullDiscountedCost(): float|int

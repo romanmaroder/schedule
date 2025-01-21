@@ -88,10 +88,10 @@ DataTableAsset::register($this);
                             <tbody>
                             <tr>
                                 <td class="text-center"><?= Yii::$app->formatter->asDate($params['from_date'],'medium') . ' - ' . Yii::$app->formatter->asDate($params['to_date'],'medium') ?></td>
-                                <td class="text-center"><?= $cart->getFullProfit()  ?></td>
+                                <td class="text-center"><?= $cart->getFullProfitOnlyFromServicesPaidFor()  ?></td>
                                 <td class="text-center"><?= $amountOfExpenses ?? '0'  ?></td>
                                 <td class="text-right"
-                                    data-total="<?= $cart->getTotalWithSubtractions($amountOfExpenses);  ?>"><?= $cart->getFullProfit()  ?>
+                                    data-total="<?= $cart->getTotalWithSubtractions($amountOfExpenses);  ?>"><?= $cart->getFullProfitOnlyFromServicesPaidFor()  ?>
                                     - <?= $amountOfExpenses ?? '0' ?> </td>
                             </tr>
                             </tbody>
