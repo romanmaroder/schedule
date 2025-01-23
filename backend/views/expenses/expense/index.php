@@ -75,6 +75,7 @@ DataTableAsset::register($this);
                             [
                                 'attribute' => 'value',
                                 'value' => fn (Expenses $model) =>PriceHelper::format($model->value),
+                                'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => fn ($model) =>
                                      [
                                         'data-total' => $model->value,

@@ -6,6 +6,7 @@
 /* @var $expense \core\entities\Expenses\Expenses\Expenses */
 
 
+use core\helpers\EventMethodsOfPayment;
 use core\helpers\StatusHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use core\helpers\PriceHelper;
@@ -79,6 +80,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 [
                                     'attribute' => 'status',
                                     'value' => StatusHelper::statusLabel($expense->status),
+                                    'format' => 'raw',
+                                ],
+                                [
+                                    'attribute' => 'payment',
+                                    'value' => EventMethodsOfPayment::statusLabel($expense->payment),
                                     'format' => 'raw',
                                 ],
                                 'name',

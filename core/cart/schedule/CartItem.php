@@ -3,6 +3,7 @@
 namespace core\cart\schedule;
 
 use core\entities\Enums\DiscountEnum;
+use core\entities\Enums\PaymentOptionsEnum;
 use core\entities\Schedule\Event\ServiceAssignment;
 
 class CartItem
@@ -145,9 +146,14 @@ class CartItem
             default => $this->profitNoDiscount(),
         };
     }
-    public function ProfitOnlyFromServicesPaidFor(): float|int
+    public function ProfitOnlyFromServicesPaidFor( PaymentOptionsEnum $type = null): float|int
     {
-        if( $this->item->events->isPayed()) {
+        $type = match ($type){
+            PaymentOptionsEnum::STATUS_CASH =>$this->item->events->isCashPayment(),
+            PaymentOptionsEnum::STATUS_CARD =>$this->item->events->isCardPayment(),
+        };
+
+        if( $this->item->events->isPayed() && $type) {
             return match ($this->getDiscountFrom()) {
                 DiscountEnum::MASTER_DISCOUNT->value => $this->profitMasterDiscount(),
                 DiscountEnum::STUDIO_DISCOUNT->value => $this->profitStudioDiscount(),

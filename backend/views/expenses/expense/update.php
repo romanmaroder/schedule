@@ -7,7 +7,9 @@
 
 /* @var $expense \core\entities\Expenses\Expenses\Expenses */
 
+use core\helpers\EventMethodsOfPayment;
 use kartik\date\DatePicker;
+use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
@@ -41,6 +43,49 @@ $this->params['breadcrumbs'][] = Yii::t('app','Update');
                 </div>
                 <div class="col-md-6">
                     <?= $form->field($model, 'value')->textInput() ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <?= $form->field($model, 'payment')->widget(
+                            Select2::class,
+                            [
+                                'name' => 'payment',
+                                'language' => 'ru',
+                                'data' => EventMethodsOfPayment::statusList(),
+                                'theme' => Select2::THEME_BOOTSTRAP,
+                                'options' => [
+                                    'id' => 'payment',
+                                    'placeholder' => 'Select',
+                                    'multiple' => false,
+                                    'autocomplete' => 'on',
+                                ],
+                                'pluginOptions' => [
+                                    'tags' => false,
+                                    'allowClear' => false,
+                                ],
+                                /*'pluginEvents' => [
+                                    "change" => 'function() {
+                                            let data_id = $(this).val();
+                                            let discount = $(".discount");
+
+                                            if(data_id > 0) {
+                                                discount.each(function() {
+                                                        $(this).removeClass( "d-none");
+                                                        $(this).attr( "required" );
+                                                    });
+                                            }else{
+                                                discount.each(function() {
+                                                        $(this).addClass( "d-none");
+                                                    });
+                                            }
+
+                                            }',
+                                ],*/
+                            ]
+                        ) ?>
+                    </div>
                 </div>
             </div>
             <div class="row">
