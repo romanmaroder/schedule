@@ -5,9 +5,11 @@ namespace core\readModels\Expenses;
 
 
 use core\entities\CommonUses\Brand;
+use core\entities\Enums\PaymentOptionsEnum;
 use core\entities\Expenses\Expenses\Expenses;
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\Tag;
+use core\helpers\EventMethodsOfPayment;
 use yii\data\ActiveDataProvider;
 use yii\data\DataProviderInterface;
 use yii\db\ActiveQuery;
@@ -38,11 +40,15 @@ class ExpenseReadRepository
         return $this->getProvider($query);
     }
 
-    public function getSumByDate($date)
+    public function getSumByDate($date, PaymentOptionsEnum $type = null)
     {
         $query = Expenses::find()->alias('s')->active('s');
+        $query= match ($type) {
+            PaymentOptionsEnum::STATUS_CASH => $query->cash(),
+            PaymentOptionsEnum::STATUS_CARD => $query->card(),
+        };
         $query->andFilterWhere(['>=', 'created_at', strtotime($date['from_date'] ?? 0)])
-            ->andFilterWhere(['<=', 'created_at',strtotime($date['to_date'] ?? 0)]);
+            ->andFilterWhere(['<=', 'created_at', strtotime($date['to_date'] ?? 0)]);
         return $query->sum('value');
     }
 

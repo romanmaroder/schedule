@@ -43,6 +43,7 @@ class ExpenseManageService
             $form->name,
             $form->value,
             $form->status,
+            $form->payment,
             $form->created_at,
         );
 
@@ -82,6 +83,7 @@ class ExpenseManageService
             $form->name,
             $form->value,
             $form->status,
+            $form->payment,
             $form->created_at,
         );
         $service->changeMainCategory($category->id);

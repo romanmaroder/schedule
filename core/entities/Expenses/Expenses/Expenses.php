@@ -4,6 +4,7 @@
 namespace core\entities\Expenses\Expenses;
 
 
+use core\entities\Enums\PaymentOptionsEnum;
 use core\entities\Enums\StatusEnum;
 use core\entities\Expenses\Category;
 use core\entities\Expenses\Expenses\queries\ExpensesQuery;
@@ -18,6 +19,7 @@ use yii\db\ActiveRecord;
  * @property int $value [int(11)]
  * @property int $category_id
  * @property StatusEnum $status
+ * @property PaymentOptionsEnum $payment
  * @property int $created_at
  *
  * @property Category $category
@@ -29,23 +31,25 @@ use yii\db\ActiveRecord;
 class Expenses extends ActiveRecord
 {
 
-    public static function create($categoryId, $name, $value, $status, $created_at): self
+    public static function create($categoryId, $name, $value, $status, $payment, $created_at): self
     {
         $expense = new static();
         $expense->category_id = $categoryId;
         $expense->name = $name;
         $expense->value = $value;
         $expense->status = StatusEnum::STATUS_ACTIVE;
+        $expense->payment = PaymentOptionsEnum::STATUS_CASH;
         $expense->created_at = strtotime($created_at);
         return $expense;
     }
 
 
-    public function edit($name, $value, $status, $created_at): void
+    public function edit($name, $value, $status, $payment, $created_at): void
     {
         $this->name = $name;
         $this->value = $value;
         $this->status = $status;
+        $this->payment = $payment;
         $this->created_at =  strtotime($created_at);
     }
     # Category methods
@@ -82,6 +86,16 @@ class Expenses extends ActiveRecord
     public function isDraft(): bool
     {
         return $this->status == StatusEnum::STATUS_INACTIVE->value;
+    }
+
+    public function isCash(): bool
+    {
+        return $this->payment == PaymentOptionsEnum::STATUS_CASH->value;
+    }
+
+    public function isCard(): bool
+    {
+        return $this->payment == PaymentOptionsEnum::STATUS_CARD->value;
     }
 
     /**
@@ -208,6 +222,7 @@ class Expenses extends ActiveRecord
             'value' => tHelper::translate('expenses/expenses', 'Value'),
             'created_at' => tHelper::translate('app', 'Created At'),
             'status' => tHelper::translate('expenses/expenses', 'Status'),
+            'payment' => tHelper::translate('schedule/event', 'Payment'),
             'tags.name' => tHelper::translate('expenses/tag', 'Tags'),
             'category.others' => tHelper::translate('expenses/category', 'Others'),
         ];
