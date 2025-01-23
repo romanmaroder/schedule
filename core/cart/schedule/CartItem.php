@@ -3,6 +3,7 @@
 namespace core\cart\schedule;
 
 use core\entities\Enums\DiscountEnum;
+use core\entities\Enums\PaymentOptionsEnum;
 use core\entities\Schedule\Event\ServiceAssignment;
 
 class CartItem
@@ -47,9 +48,43 @@ class CartItem
         return $this->item->events->status;
     }
 
-    public function getPayment():int
+    public function getPayment(): int
     {
         return $this->item->events->payment;
+    }
+
+    /**
+     * Discounted price by type of source of funds
+     * Цена со скидкой по типу источника поступления средств
+     * @param PaymentOptionsEnum $type
+     * @return float|false|int
+     */
+    public function paymentSource(PaymentOptionsEnum $type): float|false|int
+    {
+        if ($this->paymentType($type) && $this->item->events->isPayed()) {
+            return $this->getDiscountedPrice();
+        }
+        return false;
+    }
+
+    /**
+     * The price with a discount on the type of source of receipt of funds including salaries
+     * Цена со скидкой по типу источника поступления средств включая зарплату
+     * @param PaymentOptionsEnum $type
+     * @return float|false|int
+     */
+    public function paymentSourceIncludingSalary(PaymentOptionsEnum $type): float|false|int
+    {
+        if ($this->item->events->isPayed() && $this->paymentType($type)) {
+            return match ($this->getDiscountFrom()) {
+                DiscountEnum::MASTER_DISCOUNT->value => $this->profitMasterDiscount(),
+                DiscountEnum::STUDIO_DISCOUNT->value => $this->profitStudioDiscount(),
+                DiscountEnum::STUDIO_DISCOUNT_WITH_MASTER_WORK->value => $this->getProfitDiscountFromTheStudioWithMaster(
+                ),
+                default => $this->profitNoDiscount(),
+            };
+        }
+        return 0;
     }
 
     public function getCash(): float|int
@@ -113,6 +148,7 @@ class CartItem
         };
     }
 
+
     public function getDiscountFrom(): float|int
     {
         return $this->item->events->discount_from;
@@ -144,19 +180,6 @@ class CartItem
             DiscountEnum::STUDIO_DISCOUNT_WITH_MASTER_WORK->value => $this->getProfitDiscountFromTheStudioWithMaster(),
             default => $this->profitNoDiscount(),
         };
-    }
-    public function ProfitOnlyFromServicesPaidFor(): float|int
-    {
-        if( $this->item->events->isPayed()) {
-            return match ($this->getDiscountFrom()) {
-                DiscountEnum::MASTER_DISCOUNT->value => $this->profitMasterDiscount(),
-                DiscountEnum::STUDIO_DISCOUNT->value => $this->profitStudioDiscount(),
-                DiscountEnum::STUDIO_DISCOUNT_WITH_MASTER_WORK->value => $this->getProfitDiscountFromTheStudioWithMaster(
-                ),
-                default => $this->profitNoDiscount(),
-            };
-        }
-        return 0;
     }
 
     public function getServiceList(): string
@@ -318,5 +341,19 @@ class CartItem
             return true;
         }
         return false;
+    }
+
+    /**
+     * The source of funds
+     * Источник поступления средств
+     * @param PaymentOptionsEnum $type
+     * @return mixed
+     */
+    private function paymentType(PaymentOptionsEnum $type): mixed
+    {
+        return match ($type) {
+            PaymentOptionsEnum::STATUS_CASH => $this->item->events->isCashPayment(),
+            PaymentOptionsEnum::STATUS_CARD => $this->item->events->isCardPayment(),
+        };
     }
 }

@@ -5,6 +5,7 @@
 /* @var $this \yii\web\View */
 /* @var $model \core\forms\manage\Expenses\Expense\ExpenseCreateForm */
 
+use core\helpers\EventMethodsOfPayment;
 use kartik\widgets\DatePicker;
 use kartik\widgets\Select2;
 use yii\bootstrap4\ActiveForm;
@@ -59,6 +60,50 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= $form->field($model, 'status')->textInput(
                                     ['maxlength' => true, 'placeholder' => $model->getAttributeLabel('status')]
                                 )->label($model->getAttributeLabel('status')) ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <?= $form->field($model, 'payment')->widget(
+                                    Select2::class,
+                                    [
+                                        'name' => 'status',
+                                        'language' => 'ru',
+                                        'data' => EventMethodsOfPayment::statusList(),
+                                        'theme' => Select2::THEME_BOOTSTRAP,
+                                        'options' => [
+                                            'id' => 'status',
+                                            'placeholder' => 'Select',
+                                            'value' => 0,
+                                            'multiple' => false,
+                                            'autocomplete' => 'on',
+                                        ],
+                                        'pluginOptions' => [
+                                            'tags' => false,
+                                            'allowClear' => false,
+                                        ],
+                                        /*'pluginEvents' => [
+                                            "change" => 'function() {
+                                                    let data_id = $(this).val();
+                                                    let discount = $(".discount");
+
+                                                    if(data_id > 0) {
+                                                        discount.each(function() {
+                                                                $(this).removeClass( "d-none");
+                                                                $(this).attr( "required" );
+                                                            });
+                                                    }else{
+                                                        discount.each(function() {
+                                                                $(this).addClass( "d-none");
+                                                            });
+                                                    }
+
+                                                    }',
+                                        ],*/
+                                    ]
+                                ) ?>
                             </div>
                         </div>
                     </div>

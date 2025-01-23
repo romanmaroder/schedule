@@ -13,7 +13,7 @@ class RequestService
     public function dataRangeParams(string $fromDate, string $toDate, bool $defaultDate = true): array
     {
         $date = Date('Y-m-d');
-        if ($request = \Yii::$app->request->post()) {
+        if ($request = $this->request()) {
             $params = [
                 $fromDate => $request[$fromDate],
                 $toDate => $request[$toDate]
@@ -25,5 +25,10 @@ class RequestService
             ];
         }
         return $params;
+    }
+
+    private function request()
+    {
+        return \Yii::$app->request->post();
     }
 }

@@ -5,6 +5,7 @@ namespace core\cart\schedule;
 
 
 use core\cart\schedule\storage\StorageInterface;
+use core\entities\Enums\PaymentOptionsEnum;
 
 class CartWithParams
 {
@@ -15,7 +16,7 @@ class CartWithParams
     private $items;
     private $params;
 
-    public function __construct(private readonly StorageInterface $storage,)
+    public function __construct(private readonly StorageInterface $storage)
     {
     }
 
@@ -28,94 +29,85 @@ class CartWithParams
         return $this->items;
     }
 
-    public function getAmount(): int
-    {
-        $this->loadItems();
-        return count($this->items);
-    }
-
     public function getFullSalary(): int|float
     {
         $this->loadItems();
-        return array_sum(
-            array_map(
-                function (CartItem $item) {
-                    return $item->getSalary();
-                },
-                $this->items
-            )
-        );
+        return array_sum(array_map(fn(CartItem $item) => $item->getSalary(), $this->items));
     }
 
     public function getFullProfit(): int|float
     {
         $this->loadItems();
-        return array_sum(
-            array_map(
-                function (CartItem $item) {
-                    return $item->getTotalProfit();
-                },
-                $this->items
-            )
-        );
+        return array_sum(array_map(fn(CartItem $item) => $item->getTotalProfit(), $this->items));
     }
-    public function getFullProfitOnlyFromServicesPaidFor(): int|float
-    {
-        $this->loadItems();
-        return array_sum(
-            array_map(
-                function (CartItem $item) {
-                    return $item->ProfitOnlyFromServicesPaidFor();
-                },
-                $this->items
-            )
-        );
-    }
-
 
     public function getFullDiscountedCost(): float|int
     {
         $this->loadItems();
-        return array_sum(
-            array_map(
-                function (CartItem $item) {
-                    return $item->getDiscountedPrice();
-                },
-                $this->items
-            )
-        );
+        return array_sum(array_map(fn(CartItem $item) => $item->getDiscountedPrice(), $this->items));
     }
 
-    public function getTotalWithSubtractions($expense): float|int
+    /**
+     * Total amount by type of source of funds
+     * Общая сумма по типу источника поступления средств
+     * @param PaymentOptionsEnum $type
+     * @return float|int
+     */
+    public function getAmount(PaymentOptionsEnum $type): float|int
     {
-        return $this->getFullProfitOnlyFromServicesPaidFor() - $expense;
+        $this->loadItems();
+        return array_sum(array_map(fn(CartItem $item) => $item->paymentSource($type), $this->items));
     }
 
+    /**
+     * Total amount by type of source of funds, including salary
+     * Общая сумма по типу источника поступления средств включая зарплату
+     * @param PaymentOptionsEnum $type
+     * @return float|int
+     */
+    public function getAmountIncludingSalary (PaymentOptionsEnum $type): float|int
+    {
+        $this->loadItems();
+        return array_sum(array_map(fn(CartItem $item) => $item->paymentSourceIncludingSalary($type), $this->items));
+    }
 
+    /**
+     * The total amount of the type of source of receipt of funds including costs
+     * Общая сумма по типу источника поступления средств включая затраты
+     * @param PaymentOptionsEnum $type
+     * @param float $expense
+     * @param false $salary
+     * @return float|int
+     */
+    public function getAmountIncludingExpenses(PaymentOptionsEnum $type, float $expense, bool $salary = false): float|int
+    {
+        if (!$salary) {
+
+        return $this->getAmount($type) - $expense;
+        }
+        return $this->getAmountIncludingSalary($type) - $expense;
+    }
+
+    /**
+     * Total cash
+     * Общая сумма наличных средств
+     * @return float|int
+     */
     public function getCash(): float|int
     {
         $this->loadItems();
-        return array_sum(
-            array_map(
-                function (CartItem $item) {
-                    return $item->getCash();
-                },
-                $this->items
-            )
-        );
+        return array_sum(array_map(fn(CartItem $item) => $item->getCash(), $this->items));
     }
 
+    /**
+     * Total amount of non-cash funds
+     * Общая сумма безналичных средств
+     * @return float|int
+     */
     public function getCard(): float|int
     {
         $this->loadItems();
-        return array_sum(
-            array_map(
-                function (CartItem $item) {
-                    return $item->getCard();
-                },
-                $this->items
-            )
-        );
+        return array_sum(array_map(fn(CartItem $item) => $item->getCard(), $this->items));
     }
 
     /*public function getCost(): Cost
@@ -169,11 +161,22 @@ class CartWithParams
         $this->items = [];
         $this->saveItems();
     }*/
+    /**
+     * Parameters for sampling from the database
+     * Параметры для выборки из БД
+     * @param array $params
+     * @return array
+     */
     public function setParams(array $params): array
     {
         return $this->params = $params;
     }
 
+    /**
+     * Data loading from a database with parameters
+     * Загрузка данных из БД с параметрами
+     * @return void
+     */
     private function loadItems(): void
     {
         if ($this->items === null) {

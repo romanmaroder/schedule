@@ -1,13 +1,15 @@
 <?php
 
 
-
 /* @var $this \yii\web\View */
+
 /* @var $searchModel \backend\forms\Expenses\ExpenseSearch */
+
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use backend\assets\DataTableAsset;
 use core\entities\Expenses\Expenses\Expenses;
+use core\helpers\EventMethodsOfPayment;
 use core\helpers\PriceHelper;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\grid\GridView;
@@ -34,84 +36,107 @@ DataTableAsset::register($this);
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col">
-                    <div class="card card-secondary">
-                        <div class="card-header">
-                            <h3 class="card-title ">
-                                <?= Html::a(Yii::t('app','Create'), ['create'], ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']) ?>
-                </h3>
-                    <div class='card-tools'>
-                        <button type='button' class='btn btn-tool' data-card-widget='maximize'><i class='fas fa-expand'></i>
-                        </button>
-                        <button type='button' class='btn btn-tool' data-card-widget='collapse'><i class='fas fa-minus'></i>
-                        </button>
-                    </div>
-            </div>
-            <div class="card-body">
-                <?= GridView::widget(
-                    [
-                        'dataProvider' => $dataProvider,
-                        //'filterModel' => $searchModel,
-                        'summary' => false,
-                        'showFooter' => true,
-                        'tableOptions' => [
-                            'class' => 'table table-striped table-bordered',
-                            'id' => 'expense'
-                        ],
-                        'emptyText' => false,
-                        'columns' => [
-                            //'id',
-                            [
-                                'attribute' => 'category_id',
-                                'value' => fn (Expenses $model) =>
-                                     Html::a(Html::encode($model->category->name), ['expenses/category/view', 'id' => $model->category_id]),
-                                'format' => 'raw',
-                            ],
-                            [
-                                'attribute' => 'name',
-                                'value' => fn (Expenses $model) =>
-                                     Html::a(Html::encode($model->name), ['view', 'id' => $model->id]),
-                                'format' => 'raw',
-                            ],
-                            [
-                                'attribute' => 'value',
-                                'value' => fn (Expenses $model) =>PriceHelper::format($model->value),
-                                'contentOptions' => fn ($model) =>
-                                     [
-                                        'data-total' => $model->value,
-                                        'class' => ['text-center align-middle']
-                                    ],
-                                'footer' => '',
-                                'footerOptions' => ['class' => 'text-center bg-info'],
-                            ],
-                            [
-                                'attribute' => 'created_at',
-                                'value' => fn ($model) =>
-                                     DATE('Y-m-d', $model->created_at),
-                                'headerOptions' => ['class' => 'text-center'],
-                                'contentOptions' => [
-                                    'class' => ['text-center align-middle']
-                                ],
-                                'format' => 'raw',
-                            ],
-                            /*[
-                                'attribute' => 'status',
-                                'filter' => $searchModel->statusList(),
-                                'value' => function (Expenses $model) {
-                                    return ExpenseHelper::statusLabel($model->status);
-                                },
-                                'format' => 'raw',
-                                'contentOptions' => ['style' => 'text-align:center'],
-                            ],*/
-                        ],
-                    ]
-                ); ?>
-            </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <!--Footer-->
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title ">
+                            <?= Html::a(
+                                Yii::t('app', 'Create'),
+                                ['create'],
+                                ['class' => 'btn btn-success btn-shadow btn-sm btn-gradient']
+                            ) ?>
+                        </h3>
+                        <div class='card-tools'>
+                            <button type='button' class='btn btn-tool' data-card-widget='maximize'><i
+                                        class='fas fa-expand'></i>
+                            </button>
+                            <button type='button' class='btn btn-tool' data-card-widget='collapse'><i
+                                        class='fas fa-minus'></i>
+                            </button>
                         </div>
-                        <!-- /.card-footer-->
                     </div>
+                    <div class="card-body">
+                        <?= GridView::widget(
+                            [
+                                'dataProvider' => $dataProvider,
+                                //'filterModel' => $searchModel,
+                                'summary' => false,
+                                'showFooter' => true,
+                                'tableOptions' => [
+                                    'class' => 'table table-striped table-bordered',
+                                    'id' => 'expense'
+                                ],
+                                'emptyText' => false,
+                                'columns' => [
+                                    //'id',
+                                    [
+                                        'attribute' => 'category_id',
+                                        'value' => fn(Expenses $model) => Html::a(
+                                            Html::encode($model->category->name),
+                                            [
+                                                'expenses/category/view',
+                                                'id' => $model->category_id
+                                            ]
+                                        ),
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'attribute' => 'name',
+                                        'value' => fn(Expenses $model) => Html::a(
+                                            Html::encode($model->name),
+                                            ['view', 'id' => $model->id]
+                                        ),
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'attribute' => 'value',
+                                        'value' => fn(Expenses $model) => PriceHelper::format($model->value),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => fn($model) => [
+                                            'data-total' => $model->value,
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'footer' => '',
+                                        'footerOptions' => ['class' => 'text-center bg-info'],
+                                    ],
+                                    [
+                                        'attribute' => 'payment',
+                                        'value' => fn(Expenses $model) => EventMethodsOfPayment::statusLabel(
+                                            $model->payment
+                                        ),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'attribute' => 'created_at',
+                                        'value' => fn($model) => DATE('Y-m-d', $model->created_at),
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => [
+                                            'class' => ['text-center align-middle']
+                                        ],
+                                        'format' => 'raw',
+                                    ],
+                                    /*[
+                                        'attribute' => 'status',
+                                        'filter' => $searchModel->statusList(),
+                                        'value' => function (Expenses $model) {
+                                            return ExpenseHelper::statusLabel($model->status);
+                                        },
+                                        'format' => 'raw',
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                    ],*/
+                                ],
+                            ]
+                        ); ?>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <!--Footer-->
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
             </div>
         </div>
     </div>
@@ -178,7 +203,7 @@ $js = <<< JS
                 return JSON.parse(data);
                 },
                 searchBuilder: {
-                    columns: [0,1,3]
+                    columns: [0,1,3,4]
                 },fixedHeader: {
                     header: true,
                     footer: true

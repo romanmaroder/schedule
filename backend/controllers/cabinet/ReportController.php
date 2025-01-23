@@ -4,6 +4,7 @@
 namespace backend\controllers\cabinet;
 
 
+use core\entities\Enums\PaymentOptionsEnum;
 use core\entities\Schedule\Event\Event;
 use core\readModels\Expenses\ExpenseReadRepository;
 use core\readModels\Schedule\EventReadRepository;
@@ -141,14 +142,16 @@ class ReportController extends Controller
     {
         $this->serviceWithParams->setParams($this->request());
         $cart = $this->serviceWithParams->getCart();
-        $amountOfExpenses = $this->expenses->getSumByDate($this->request());
+        $cardExpenses = $this->expenses->getSumByDate($this->request(), type:PaymentOptionsEnum::STATUS_CARD);
+        $cashExpenses = $this->expenses->getSumByDate($this->request(), type:PaymentOptionsEnum::STATUS_CASH);
 
 
         return $this->render(
             'summary',
             [
                 'cart' => $cart,
-                'amountOfExpenses' => $amountOfExpenses,
+                'cardExpenses' => $cardExpenses,
+                'cashExpenses' => $cashExpenses,
                 'params' => $this->request(),
             ]
         );

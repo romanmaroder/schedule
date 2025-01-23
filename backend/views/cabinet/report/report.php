@@ -3,7 +3,7 @@
 
 /* @var $this \yii\web\View */
 
-/* @var $cart \core\cart\schedule\Cart */
+/* @var $cart \core\cart\schedule\CartWithParams */
 
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 

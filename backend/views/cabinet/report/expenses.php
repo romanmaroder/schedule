@@ -60,7 +60,6 @@ DataTableAsset::register($this);
                                 ],
                                 'format' => 'raw'
                             ],
-
                             'name',
                             [
                                 'attribute' => 'value',
