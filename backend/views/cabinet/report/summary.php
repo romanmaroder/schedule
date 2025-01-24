@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * By default, salary is paid from cash
+ * Therefore, in the “Card” table, the “Income” column displays all funds received by non-cash method
+ * The "Costs" column in the "Card" table displays costs paid by non-cash means
+ * The “Cash” table, the “income” column displays all funds received in cash, taking into account wages
+ * The "Costs" column displays all costs paid in cash
+ *
+ * По умолчанию зарплата выплачивается из наличных средств
+ * Поэтому в таблице "Карта" колонка "Доход" отображает все средства полученные безналичным способом
+ * Колонка "Затраты" в таблице "Карта" отображает затраты оплаченные безналичными средствами
+ * Таблица "Наличные", колонка "Доход" отображает все средства полученные наличным способом с учетом заработной платы
+ * Колонка "Затраты" отображает все затраты оплаченные наличными средствами
+ *
+ */
 
 /* @var $this \yii\web\View */
 
@@ -118,12 +132,13 @@ DataTableAsset::register($this);
                     </table>
                 </div>
             </div>
-            <div class="row">
+<!--     Раскомментируйте если хотите отображать таблицы учитывающие в Картах зарплату, а в "Наличных" не учитывать зарплату      -->
+            <!--<div class="row">
                 <div class="col">
                     <table class='table table-bordered table-striped' id='card'>
                         <thead>
                         <tr>
-                            <th colspan="4" class="text-center text-info"><?=tHelper::translate('schedule/event','Card')?> Минус зарплата</th>
+                            <th colspan="4" class="text-center text-info"><?=tHelper::translate('schedule/event','Card')?></th>
                         </tr>
                         <tr>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Date') ?></th>
@@ -166,50 +181,50 @@ DataTableAsset::register($this);
                     <table class='table table-bordered table-striped' id='cash'>
                         <thead>
                         <tr>
-                            <th colspan="4" class="text-center text-success"><?=tHelper::translate('schedule/event','Cash')?></th>
+                            <th colspan="4" class="text-center text-success"><?php /*=tHelper::translate('schedule/event','Cash')*/?></th>
                         </tr>
                         <tr>
-                            <th class="text-center"><?= Yii::t('cabinet/report', 'Date') ?></th>
-                            <th class="text-center"><?= Yii::t('cabinet/report', 'Profit') ?></th>
-                            <th class="text-center"><?= Yii::t('cabinet/report', 'Expenses') ?></th>
-                            <th class="text-right"><?= Yii::t('cabinet/report', 'Total with costs') ?></th>
+                            <th class="text-center"><?php /*= Yii::t('cabinet/report', 'Date') */?></th>
+                            <th class="text-center"><?php /*= Yii::t('cabinet/report', 'Profit') */?></th>
+                            <th class="text-center"><?php /*= Yii::t('cabinet/report', 'Expenses') */?></th>
+                            <th class="text-right"><?php /*= Yii::t('cabinet/report', 'Total with costs') */?></th>
 
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="text-center"><?= Yii::$app->formatter->asDate(
+                            <td class="text-center"><?php /*= Yii::$app->formatter->asDate(
                                     $params['from_date'],
                                     'medium'
-                                ) . ' - ' . Yii::$app->formatter->asDate($params['to_date'], 'medium') ?></td>
-                            <td class="text-center"><?= $cart->getAmount(PaymentOptionsEnum::STATUS_CASH) ?></td>
-                            <td class="text-center"><?= $cashExpenses ?? '0' ?></td>
+                                ) . ' - ' . Yii::$app->formatter->asDate($params['to_date'], 'medium') */?></td>
+                            <td class="text-center"><?php /*= $cart->getAmount(PaymentOptionsEnum::STATUS_CASH) */?></td>
+                            <td class="text-center"><?php /*= $cashExpenses ?? '0' */?></td>
                             <td class="text-right"
-                                data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
+                                data-total="<?php /*= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
                                     $cashExpenses
-                                ); ?>"><?= $cart->getAmount(PaymentOptionsEnum::STATUS_CASH) ?>
-                                - <?= $cashExpenses ?? '0' ?> </td>
+                                ); */?>"><?php /*= $cart->getAmount(PaymentOptionsEnum::STATUS_CASH) */?>
+                                - <?php /*= $cashExpenses ?? '0' */?> </td>
                         </tr>
                         </tbody>
                         <tfoot>
                         <tr>
                             <td></td>
                             <td></td>
-                            <td class="text-center"><?= Yii::t('cabinet/report', 'TOTAL') ?>:</td>
-                            <td class="text-right bg-success" data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
+                            <td class="text-center"><?php /*= Yii::t('cabinet/report', 'TOTAL') */?>:</td>
+                            <td class="text-right bg-success" data-total="<?php /*= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
                                 $cashExpenses
-                            );?>"><?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,$cashExpenses);?></td>
+                            );*/?>"><?php /*= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,$cashExpenses);*/?></td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col">
                     <table class='table table-bordered table-striped' id='cash'>
                         <thead>
                         <tr>
-                            <th colspan="4" class="text-center text-success"><?=tHelper::translate('schedule/event','Cash')?> Минус зарплата</th>
+                            <th colspan="4" class="text-center text-success"><?=tHelper::translate('schedule/event','Cash')?></th>
                         </tr>
                         <tr>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Date') ?></th>

@@ -75,11 +75,11 @@ class CartWithParams
      * The total amount of the type of source of receipt of funds including costs
      * Общая сумма по типу источника поступления средств включая затраты
      * @param PaymentOptionsEnum $type
-     * @param float $expense
+     * @param float|null $expense
      * @param false $salary
      * @return float|int
      */
-    public function getAmountIncludingExpenses(PaymentOptionsEnum $type, float $expense, bool $salary = false): float|int
+    public function getAmountIncludingExpenses(PaymentOptionsEnum $type, float|null $expense, bool $salary = false): float|int
     {
         if (!$salary) {
 
