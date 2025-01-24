@@ -35,26 +35,20 @@ class Cart
     public function getFullSalary(): int|float
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getSalary() ;
-        }, $this->items));
+        return array_sum(array_map(fn (CartItem $item) =>$item->getSalary(), $this->items));
     }
 
     public function getFullProfit(): int|float
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getTotalProfit() ;
-        }, $this->items));
+        return array_sum(array_map(fn (CartItem $item)=> $item->getTotalProfit(), $this->items));
     }
 
 
     public function getFullDiscountedCost(): float|int
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getDiscountedPrice();
-        }, $this->items));
+        return array_sum(array_map(fn (CartItem $item)=>$item->getDiscountedPrice(), $this->items));
     }
 
     public function getTotalWithSubtractions($expense): float|int
@@ -66,17 +60,13 @@ class Cart
     public function getCash(): float|int
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getCash() ;
-        }, $this->items));
+        return array_sum(array_map(fn (CartItem $item) =>$item->getCash(), $this->items));
     }
 
     public function getCard(): float|int
     {
         $this->loadItems();
-        return array_sum(array_map(function (CartItem $item) {
-            return $item->getCard() ;
-        }, $this->items));
+        return array_sum(array_map(fn (CartItem $item) =>$item->getCard(), $this->items));
     }
 
     /*public function getCost(): Cost
