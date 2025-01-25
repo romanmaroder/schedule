@@ -152,6 +152,15 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     ]
                 ) ?>
                 <?= Html::a(
+                    '<i class="fas fa-history"></i>',
+                    ['history', 'id' => $model->client_id],
+                    [
+                        'id' => 'archive-link',
+                        'title' => Yii::t('app', 'History'),
+                        'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient ml-3'
+                    ]
+                ) ?>
+                <?= Html::a(
                     '<i class="fas fa-trash-alt"></i>',
                     ['delete', 'id' => $model->id],
                     [

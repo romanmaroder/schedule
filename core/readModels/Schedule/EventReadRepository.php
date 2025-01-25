@@ -164,6 +164,14 @@ class EventReadRepository
             ->all();
     }
 
+    public function findClientEvents($userId)
+    {
+        return Event::find()
+            ->with('services', 'employee', 'master', 'client')
+            ->where(['client_id' => $userId])
+            ->orderBy(['start' => SORT_ASC])->all();
+    }
+
     public function findOneClientEvent($id)
     {
         return Event::find()

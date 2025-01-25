@@ -17,6 +17,7 @@ return [
         'event/m' => 'schedule/event/m',
         'event/<id:\d+>' => 'schedule/event/view',
         'event/update/<id:\d+>' => 'schedule/event/update',
+        'event/history/<id:\d+>' => 'schedule/api/event-api/history',
         'calendar' => 'schedule/calendar/calendar',
 
         'education' => 'schedule/education/index',

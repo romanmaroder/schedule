@@ -9,6 +9,7 @@ use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
 use core\helpers\BotLogger;
+use core\readModels\Schedule\EventReadRepository;
 use core\repositories\NotFoundException;
 use core\repositories\PriceRepository;
 use core\services\messengers\MessengerFactory;
@@ -26,6 +27,7 @@ class EventApiController extends Controller
         $id,
         $module,
         private readonly EventManageService $service,
+        private readonly EventReadRepository $repository,
         private readonly CartService $cart,
         private readonly SmsSender $sms,
         private readonly MessengerFactory $messengers,
@@ -71,7 +73,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -96,7 +98,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->edit($event->id, $form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Saved'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Saved'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -112,12 +114,22 @@ class EventApiController extends Controller
         );
     }
 
+    public function actionHistory($id)
+    {
+        return $this->render(
+            'history',
+            [
+                'model' => $this->repository->findClientEvents($id),
+            ]
+        );
+    }
+
     public function actionTools($id)
     {
         $event = $this->findModel($id);
         try {
             $this->service->tools($event->id);
-            Yii::$app->session->setFlash('msg', Yii::t('schedule/event','TOOLS READY'));
+            Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'TOOLS READY'));
             return $this->redirect('/schedule/calendar/calendar');
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);
@@ -133,7 +145,7 @@ class EventApiController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->copy($form);
-                Yii::$app->session->setFlash('msg', Yii::t('schedule/event','Copied'));
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Copied'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
