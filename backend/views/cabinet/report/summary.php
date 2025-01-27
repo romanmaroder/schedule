@@ -94,13 +94,18 @@ DataTableAsset::register($this);
                     <table class='table table-bordered table-striped' id='card'>
                         <thead>
                         <tr>
-                            <th colspan="4" class="text-center text-info"><?=tHelper::translate('schedule/event','Card')?></th>
+                            <th colspan="4" class="text-center text-info"><?= tHelper::translate(
+                                    'schedule/event',
+                                    'Card'
+                                ) ?>
+                                <p><small class="text-info">Доход б/н средствами - заработная плата (?) - расходы из б/н
+                                        средств</small></p></th>
                         </tr>
                         <tr>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Date') ?></th>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Profit') ?> </th>
+                            <th class="text-center"><?= Yii::t('cabinet/report', 'Salary') ?> </th>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Expenses') ?></th>
-                            <th class="text-right"><?= Yii::t('cabinet/report', 'Total with costs') ?></th>
 
                         </tr>
                         </thead>
@@ -110,57 +115,12 @@ DataTableAsset::register($this);
                                     $params['from_date'],
                                     'medium'
                                 ) . ' - ' . Yii::$app->formatter->asDate($params['to_date'], 'medium') ?></td>
-                            <td class="text-center"><?= $cart->getAmount(PaymentOptionsEnum::STATUS_CARD) ?></td>
-                            <td class="text-center"><?= $cardExpenses ?? '0' ?></td>
-                            <td class="text-right"
-                                data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CARD,
-                                    $cardExpenses
-                                ); ?>"><?= $cart->getAmount(PaymentOptionsEnum::STATUS_CARD) ?>
-                                - <?= $cardExpenses ?? '0' ?> </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="text-center"><?= Yii::t('cabinet/report', 'TOTAL') ?>:</td>
-                            <td class="text-right bg-info" data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CARD,
+                            <td class="text-center"><?= $cart->getCard() ?></td>
+                            <td class="text-center text-secondary"><?= $cart->getFullSalary() ?></td>
+                            <td class="text-center" data-total="<?= $cart->getAmountIncludingSalaryExpenses(
+                                PaymentOptionsEnum::STATUS_CARD,
                                 $cardExpenses
-                            ); ?>"><?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CARD,$cardExpenses); ?></td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-<!--     Раскомментируйте если хотите отображать таблицы учитывающие в Картах зарплату, а в "Наличных" не учитывать зарплату      -->
-            <!--<div class="row">
-                <div class="col">
-                    <table class='table table-bordered table-striped' id='card'>
-                        <thead>
-                        <tr>
-                            <th colspan="4" class="text-center text-info"><?=tHelper::translate('schedule/event','Card')?></th>
-                        </tr>
-                        <tr>
-                            <th class="text-center"><?= Yii::t('cabinet/report', 'Date') ?></th>
-                            <th class="text-center"><?= Yii::t('cabinet/report', 'Profit') ?> </th>
-                            <th class="text-center"><?= Yii::t('cabinet/report', 'Expenses') ?></th>
-                            <th class="text-right"><?= Yii::t('cabinet/report', 'Total with costs') ?></th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="text-center"><?= Yii::$app->formatter->asDate(
-                                    $params['from_date'],
-                                    'medium'
-                                ) . ' - ' . Yii::$app->formatter->asDate($params['to_date'], 'medium') ?></td>
-                            <td class="text-center"><?= $cart->getAmountIncludingSalary(PaymentOptionsEnum::STATUS_CARD) ?></td>
-                            <td class="text-center"><?= $cardExpenses ?? '0' ?></td>
-                            <td class="text-right"
-                                data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CARD,
-                                                                                               $cardExpenses,true
-                                ); ?>"><?= $cart->getAmountIncludingSalary(PaymentOptionsEnum::STATUS_CARD) ?>
-                                - <?= $cardExpenses ?? '0' ?> </td>
+                            ) ?>"><?= $cardExpenses ?? '0' ?></td>
                         </tr>
                         </tbody>
                         <tfoot>
@@ -168,9 +128,13 @@ DataTableAsset::register($this);
                             <td></td>
                             <td></td>
                             <td class="text-center"><?= Yii::t('cabinet/report', 'TOTAL') ?>:</td>
-                            <td class="text-right bg-info" data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CARD,
-                                                                                                                          $cardExpenses
-                            ); ?>"><?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CARD,$cardExpenses,true); ?></td>
+                            <td class="text-right bg-success" data-total="<?= $cart->getAmountIncludingSalaryExpenses(
+                                PaymentOptionsEnum::STATUS_CARD,
+                                $cardExpenses
+                            ); ?>"><?= $cart->getAmountIncludingSalaryExpenses(
+                                    PaymentOptionsEnum::STATUS_CARD,
+                                    $cardExpenses
+                                ); ?></td>
                         </tr>
                         </tfoot>
                     </table>
@@ -181,56 +145,19 @@ DataTableAsset::register($this);
                     <table class='table table-bordered table-striped' id='cash'>
                         <thead>
                         <tr>
-                            <th colspan="4" class="text-center text-success"><?php /*=tHelper::translate('schedule/event','Cash')*/?></th>
-                        </tr>
-                        <tr>
-                            <th class="text-center"><?php /*= Yii::t('cabinet/report', 'Date') */?></th>
-                            <th class="text-center"><?php /*= Yii::t('cabinet/report', 'Profit') */?></th>
-                            <th class="text-center"><?php /*= Yii::t('cabinet/report', 'Expenses') */?></th>
-                            <th class="text-right"><?php /*= Yii::t('cabinet/report', 'Total with costs') */?></th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="text-center"><?php /*= Yii::$app->formatter->asDate(
-                                    $params['from_date'],
-                                    'medium'
-                                ) . ' - ' . Yii::$app->formatter->asDate($params['to_date'], 'medium') */?></td>
-                            <td class="text-center"><?php /*= $cart->getAmount(PaymentOptionsEnum::STATUS_CASH) */?></td>
-                            <td class="text-center"><?php /*= $cashExpenses ?? '0' */?></td>
-                            <td class="text-right"
-                                data-total="<?php /*= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
-                                    $cashExpenses
-                                ); */?>"><?php /*= $cart->getAmount(PaymentOptionsEnum::STATUS_CASH) */?>
-                                - <?php /*= $cashExpenses ?? '0' */?> </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="text-center"><?php /*= Yii::t('cabinet/report', 'TOTAL') */?>:</td>
-                            <td class="text-right bg-success" data-total="<?php /*= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
-                                $cashExpenses
-                            );*/?>"><?php /*= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,$cashExpenses);*/?></td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>-->
-            <div class="row">
-                <div class="col">
-                    <table class='table table-bordered table-striped' id='cash'>
-                        <thead>
-                        <tr>
-                            <th colspan="4" class="text-center text-success"><?=tHelper::translate('schedule/event','Cash')?></th>
+                            <th colspan="5" class="text-center text-success"><?= tHelper::translate(
+                                    'schedule/event',
+                                    'Cash'
+                                ) ?>
+                                <p><small>Доход наличными средствами - заработная плата (нал/бн) - расходы из наличных
+                                        средств </small></p>
+                            </th>
                         </tr>
                         <tr>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Date') ?></th>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Profit') ?></th>
+                            <th class="text-center"><?= Yii::t('cabinet/report', 'Salary') ?></th>
                             <th class="text-center"><?= Yii::t('cabinet/report', 'Expenses') ?></th>
-                            <th class="text-right"><?= Yii::t('cabinet/report', 'Total with costs') ?></th>
 
                         </tr>
                         </thead>
@@ -240,13 +167,12 @@ DataTableAsset::register($this);
                                     $params['from_date'],
                                     'medium'
                                 ) . ' - ' . Yii::$app->formatter->asDate($params['to_date'], 'medium') ?></td>
-                            <td class="text-center"><?= $cart->getAmountIncludingSalary(PaymentOptionsEnum::STATUS_CASH) ?></td>
-                            <td class="text-center"><?= $cashExpenses ?? '0' ?></td>
-                            <td class="text-right"
-                                data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
-                                                                                      $cashExpenses,true
-                                ); ?>"><?= $cart->getAmountIncludingSalary(PaymentOptionsEnum::STATUS_CASH) ?>
-                                - <?= $cashExpenses ?? '0' ?> </td>
+                            <td class="text-center"><?= $cart->getCash() ?></td>
+                            <td class="text-center"><?= $cart->getFullSalary() ?></td>
+                            <td class="text-center"data-total="<?= $cart->getAmountIncludingSalaryExpenses(
+                                PaymentOptionsEnum::STATUS_CASH,
+                                $cashExpenses
+                            ) ?>"><?= $cashExpenses ?? '0' ?></td>
                         </tr>
                         </tbody>
                         <tfoot>
@@ -254,9 +180,13 @@ DataTableAsset::register($this);
                             <td></td>
                             <td></td>
                             <td class="text-center"><?= Yii::t('cabinet/report', 'TOTAL') ?>:</td>
-                            <td class="text-right bg-success" data-total="<?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,
-                                                                                                                    $cashExpenses,true
-                            );?>"><?= $cart->getAmountIncludingExpenses(PaymentOptionsEnum::STATUS_CASH,$cashExpenses,true);?></td>
+                            <td class="text-right bg-success" data-total="<?= $cart->getAmountIncludingSalaryExpenses(
+                                PaymentOptionsEnum::STATUS_CASH,
+                                $cashExpenses
+                            ); ?>"><?= $cart->getAmountIncludingSalaryExpenses(
+                                    PaymentOptionsEnum::STATUS_CASH,
+                                    $cashExpenses
+                                ); ?></td>
                         </tr>
                         </tfoot>
                     </table>

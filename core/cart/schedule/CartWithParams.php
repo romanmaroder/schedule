@@ -48,44 +48,22 @@ class CartWithParams
     }
 
     /**
-     * Total amount by type of source of funds
-     * Общая сумма по типу источника поступления средств
-     * @param PaymentOptionsEnum $type
-     * @return float|int
-     */
-    public function getAmount(PaymentOptionsEnum $type): float|int
-    {
-        $this->loadItems();
-        return array_sum(array_map(fn(CartItem $item) => $item->paymentSource($type), $this->items));
-    }
-
-    /**
-     * Total amount by type of source of funds, including salary
-     * Общая сумма по типу источника поступления средств включая зарплату
-     * @param PaymentOptionsEnum $type
-     * @return float|int
-     */
-    public function getAmountIncludingSalary (PaymentOptionsEnum $type): float|int
-    {
-        $this->loadItems();
-        return array_sum(array_map(fn(CartItem $item) => $item->paymentSourceIncludingSalary($type), $this->items));
-    }
-
-    /**
      * The total amount of the type of source of receipt of funds including costs
-     * Общая сумма по типу источника поступления средств включая затраты
+     *
+     * Общая сумма по типу источника поступления средств включая зарплату и затраты
+     *
+     * Карта не учитывает заработную плату. Придумать логику учета заработной платы из безнала
      * @param PaymentOptionsEnum $type
      * @param float|null $expense
-     * @param false $salary
      * @return float|int
      */
-    public function getAmountIncludingExpenses(PaymentOptionsEnum $type, float|null $expense, bool $salary = false): float|int
+    public function getAmountIncludingSalaryExpenses(PaymentOptionsEnum $type, float|null $expense): float|int
     {
-        if (!$salary) {
-
-        return $this->getAmount($type) - $expense;
-        }
-        return $this->getAmountIncludingSalary($type) - $expense;
+        return match ($type) {
+            PaymentOptionsEnum::STATUS_CASH => $this->getCash() - $this->getFullSalary() - $expense,
+            PaymentOptionsEnum::STATUS_CARD => $this->getCard() - $expense, //TODO
+            default => 0,
+        };
     }
 
     /**
