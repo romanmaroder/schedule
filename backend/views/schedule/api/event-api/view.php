@@ -100,7 +100,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?php
             endif; ?>
             <?php
-            if ($model->isToolsAreNotReady()): ?>
+            if ($model->isToolsAreNotReady() || $model->isToolsChecked()): ?>
                 <div class="col-auto">
                     <?= Html::a(
                         '<i class="fas fa-wrench"></i>',

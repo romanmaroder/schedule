@@ -4,6 +4,7 @@
 namespace core\useCases\manage\Schedule;
 
 
+use core\entities\Enums\ToolsEnum;
 use core\entities\Schedule\Event\Event;
 use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
@@ -22,8 +23,7 @@ class EventManageService
         EventRepository $events,
         ServiceRepository $services,
         TransactionManager $transaction,
-    )
-    {
+    ) {
         $this->events = $events;
         $this->services = $services;
         $this->transaction = $transaction;
@@ -52,7 +52,7 @@ class EventManageService
             $price = $event->employee->price->getService($event->employee->price->id, $service->id);
 
             $amount += $price->cost;
-            $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
+            $event->assignService($service->id, $service->price_new, $price->rate, $price->cost);
         }
         $event->getAmount($amount);
 
@@ -101,20 +101,36 @@ class EventManageService
                     $service = $this->services->get($listId);
                     $price = $event->employee->price->getService($event->employee->price->id, $service->id);
                     $amount += $price->cost;
-                    $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
+                    $event->assignService($service->id, $service->price_new, $price->rate, $price->cost);
                 }
                 $event->getAmount($amount);
                 $event->rate = $event->employee->rate->rate;
 
                 $event->fullname = $event->employee->getFullName();
+
+                if ($event->oldAttributes['start'] !== $form->start) {
+                    $event->tools = $event->toolsNeedToBeChecked();
+                }
+
                 $this->events->save($event);
             }
         );
     }
 
-    public function copy(EventCopyForm $form): Event
+    public function dragAndResize($event): void
     {
+        $this->transaction->wrap(
+            function () use ($event) {
+                if ($event->oldAttributes['start'] !== $event->start) {
+                    $event->tools = $event->toolsneedToBeChecked();
+                }
+                $this->events->save($event);
+            }
+        );
+    }
 
+    public function copy(EventCopyForm $form, $originalEvent = null): Event
+    {
         $event = Event::copy(
             $form->id = $this->events->getLastId()->id + 1,
             $form->master->master,
@@ -137,18 +153,21 @@ class EventManageService
             $service = $this->services->get($listId);
             $price = $event->employee->price->getService($event->employee->price->id, $service->id);
             $amount += $price->cost;
-            $event->assignService($service->id,$service->price_new,$price->rate,$price->cost);
+            $event->assignService($service->id, $service->price_new, $price->rate, $price->cost);
         }
         $event->getAmount($amount);
         $event->rate = $event->employee->rate->rate;
         $event->fullname = $event->employee->getFullName();
+
+        if ($originalEvent->oldAttributes['start'] !== $form->start) {
+            $event->tools = $originalEvent->toolsNeedToBeChecked();
+        }
         $this->transaction->wrap(
             function () use ($event, $form) {
                 $this->events->save($event);
             }
         );
         return $event;
-
     }
 
     public function pay($id)
@@ -182,7 +201,7 @@ class EventManageService
         $this->events->save($event);
     }
 
-    public function tools($id)
+    public function tools($id): void
     {
         $event = $this->events->get($id);
         $event->tools = $event->toolsReady();

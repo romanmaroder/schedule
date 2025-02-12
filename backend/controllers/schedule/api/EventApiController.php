@@ -144,7 +144,7 @@ class EventApiController extends Controller
         $form = new EventCopyForm($event);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $this->service->copy($form);
+                $this->service->copy($form, $event);
                 Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Copied'));
                 return $this->redirect('/schedule/calendar/calendar');
             } catch (\DomainException $e) {
@@ -179,7 +179,7 @@ class EventApiController extends Controller
         /* bot error */
 
         try {
-            $this->service->save($event);
+            $this->service->dragAndResize($event);
         } catch (\DomainException $e) {
             Yii::$app->errorHandler->logException($e);
             Yii::$app->session->setFlash('error', $e->getMessage());
