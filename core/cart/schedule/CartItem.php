@@ -3,7 +3,6 @@
 namespace core\cart\schedule;
 
 use core\entities\Enums\DiscountEnum;
-use core\entities\Enums\PaymentOptionsEnum;
 use core\entities\Schedule\Event\ServiceAssignment;
 
 class CartItem

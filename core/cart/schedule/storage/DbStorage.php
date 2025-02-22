@@ -9,7 +9,6 @@ use core\entities\Schedule\Event\Event;
 use core\entities\Schedule\Event\ServiceAssignment;
 use yii\caching\TagDependency;
 use yii\db\Connection;
-use yii\db\Query;
 
 
 /**
@@ -25,42 +24,26 @@ class DbStorage implements StorageInterface
 
     public function load(): array
     {
-        $query = (new Query())
-            ->select([
-                         '*',
-                         'DATE(start) as start'
-                     ])
-            ->from('{{%schedule_service_assignments}}')
-            ->leftJoin('{{%schedule_events}}', 'id=event_id');
-        if (\Yii::$app->id == 'app-frontend') {
-            $query->where(['master_id' => $this->userId->id]);
-        }
-        $rows = $query->orderBy(['DATE(start)' => SORT_ASC])
-            ->all($this->db);
 
-        return array_map(
-            function (array $row) {
-                /** @var ServiceAssignment $item */
+        $rows= ServiceAssignment::getDb()->cache(function () {
+            $query = ServiceAssignment::find()
+                ->joinWith(['events.client','events.employee','events.master'])
+                ->joinWith(['services']);
 
-                /* $item = ServiceAssignment::find()
-                    ->where(['service_id' => $row['service_id'],
-                                'event_id' => $row['event_id'],
-                            ])->one()
-                */
+            if (\Yii::$app->id == 'app-frontend') {
+                $query->where(['master_id' => $this->userId->id]);
+            }
 
-                if ($item = ServiceAssignment::getDb()->cache(function ($db) use ($row) {
-                    return ServiceAssignment::find()
-                        ->where([
-                                    'service_id' => $row['service_id'],
-                                    'event_id' => $row['event_id'],
-                                ])->one();
-                }, 0, new TagDependency(['tags' => Event::CACHE_KEY]))) {
-                    return new CartItem($item);
-                }
-                return false;
-            },
-            $rows
-        );
+            return $query->orderBy(['DATE(start)' => SORT_ASC])
+                ->all();
+        }, 0, new TagDependency(['tags' => Event::CACHE_KEY]));
+
+            return array_map(function ($row) {
+                return new CartItem(
+                    $row
+                );
+            },$rows);
+
     }
 
     public function loadWithParams(array $params): array
