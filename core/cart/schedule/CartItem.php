@@ -4,6 +4,7 @@ namespace core\cart\schedule;
 
 use core\entities\Enums\DiscountEnum;
 use core\entities\Enums\PaymentOptionsEnum;
+use core\entities\Enums\UserDefaultValuesEnum;
 use core\entities\Schedule\Event\ServiceAssignment;
 
 class CartItem
@@ -117,6 +118,7 @@ class CartItem
 
     public function getDiscountFrom(): float|int
     {
+        //return $this->item['discount_from'];
         return $this->item->events->discount_from;
     }
 

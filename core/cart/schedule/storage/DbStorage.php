@@ -25,42 +25,61 @@ class DbStorage implements StorageInterface
 
     public function load(): array
     {
-        $query = (new Query())
-            ->select([
-                         '*',
-                         'DATE(start) as start'
-                     ])
-            ->from('{{%schedule_service_assignments}}')
-            ->leftJoin('{{%schedule_events}}', 'id=event_id');
-        if (\Yii::$app->id == 'app-frontend') {
-            $query->where(['master_id' => $this->userId->id]);
-        }
-        $rows = $query->orderBy(['DATE(start)' => SORT_ASC])
-            ->all($this->db);
 
-        return array_map(
-            function (array $row) {
-                /** @var ServiceAssignment $item */
+        if (!empty($params['from_date']) || !empty($params['to_date'])) {
 
-                /* $item = ServiceAssignment::find()
-                    ->where(['service_id' => $row['service_id'],
-                                'event_id' => $row['event_id'],
-                            ])->one()
-                */
+            $rows= ServiceAssignment::getDb()->cache(function () use ($params) {
+                $query = ServiceAssignment::find()
+                    ->joinWith(['events.client','events.employee','events.master'])
+                    ->joinWith(['services']);
 
-                if ($item = ServiceAssignment::getDb()->cache(function ($db) use ($row) {
-                    return ServiceAssignment::find()
-                        ->where([
-                                    'service_id' => $row['service_id'],
-                                    'event_id' => $row['event_id'],
-                                ])->one();
-                }, 0, new TagDependency(['tags' => Event::CACHE_KEY]))) {
-                    return new CartItem($item);
+                if (\Yii::$app->id == 'app-frontend') {
+                    $query->where(['master_id' => $this->userId->id]);
                 }
-                return false;
-            },
-            $rows
-        );
+
+                $query->andFilterWhere(['between', 'DATE(start)', $params['from_date'], $params['to_date']]);
+
+                return $query->orderBy(['DATE(start)' => SORT_ASC])
+                    ->all();
+            }, 0, new TagDependency(['tags' => Event::CACHE_KEY]));
+
+            return array_map(function ($row) {
+                return new CartItem($row);
+            },$rows );
+        } else {
+            return [];
+        }
+
+//        $query = (new Query())
+//            ->select([
+//                         '*',
+//                         'DATE(start) as start'
+//                     ])
+//            ->from('{{%schedule_service_assignments}}')
+//            ->leftJoin('{{%schedule_events}}', 'id=event_id');
+//        if (\Yii::$app->id == 'app-frontend') {
+//            $query->where(['master_id' => $this->userId->id]);
+//        }
+//        $rows = $query->orderBy(['DATE(start)' => SORT_ASC])
+//            ->all($this->db);
+//
+//        return array_map(
+//            function (array $row) {
+//                /** @var ServiceAssignment $item */
+//
+//                if ($item = ServiceAssignment::getDb()->cache(function ($db) use ($row) {
+//                    return ServiceAssignment::find()
+//                        ->where([
+//                                    'service_id' => $row['service_id'],
+//                                    'event_id' => $row['event_id'],
+//                                ])->one();
+//                }, 0, new TagDependency(['tags' => Event::CACHE_KEY]))) {
+//                    return new CartItem($item);
+//                }
+//                return false;
+//            },
+//            $rows
+//        );
     }
 
     public function loadWithParams(array $params): array
