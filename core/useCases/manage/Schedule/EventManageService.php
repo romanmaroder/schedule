@@ -71,6 +71,7 @@ class EventManageService
     public function edit($id, EventEditForm $form): void
     {
         $event = $this->events->get($id);
+        $oldAttributes = $event->oldAttributes;
 
         if ($form->discount_from == 0) {
             $form->discount = 0;
@@ -92,7 +93,7 @@ class EventManageService
             $form->tools,
         );
         $this->transaction->wrap(
-            function () use ($event, $form) {
+            function () use ($event, $form, $oldAttributes) {
                 $event->revokeServices();
                 $this->events->save($event);
 
@@ -108,9 +109,11 @@ class EventManageService
 
                 $event->fullname = $event->employee->getFullName();
 
-                if ($event->oldAttributes['start'] !== $form->start) {
-                    $event->tools = $event->toolsNeedToBeChecked();
-                }
+
+                $this->changingTheStatusOfAToolSet(
+                    ['new' => $event->start, 'old' => $oldAttributes['start'], 'tools' => $oldAttributes['tools']],
+                    $event
+                );
 
                 $this->events->save($event);
             }
@@ -121,9 +124,12 @@ class EventManageService
     {
         $this->transaction->wrap(
             function () use ($event) {
-                if ($event->oldAttributes['start'] !== $event->start) {
-                    $event->tools = $event->toolsneedToBeChecked();
-                }
+                $this->changingTheStatusOfAToolSet([
+                                                       'new' => $event->attributes['start'],
+                                                       'old' => $event->oldAttributes['start'],
+                                                       'tools' => $event->attributes['tools']
+                                                   ], $event);
+
                 $this->events->save($event);
             }
         );
@@ -159,9 +165,11 @@ class EventManageService
         $event->rate = $event->employee->rate->rate;
         $event->fullname = $event->employee->getFullName();
 
-        if ($originalEvent->oldAttributes['start'] !== $form->start) {
-            $event->tools = $originalEvent->toolsNeedToBeChecked();
-        }
+        $this->changingTheStatusOfAToolSet([
+                                               'new' => $event->start,
+                                               'old' => $originalEvent->start,
+                                               'tools' => $originalEvent->tools,
+                                           ], $event);
         $this->transaction->wrap(
             function () use ($event, $form) {
                 $this->events->save($event);
@@ -170,7 +178,7 @@ class EventManageService
         return $event;
     }
 
-    public function pay($id)
+    public function pay($id): void
     {
         $event = $this->events->get($id);
         $event->status = $event->toPay();
@@ -178,7 +186,7 @@ class EventManageService
     }
 
 
-    public function unpay($id)
+    public function unpay($id): void
     {
         $event = $this->events->get($id);
 
@@ -187,14 +195,14 @@ class EventManageService
         $this->events->save($event);
     }
 
-    public function cash($id)
+    public function cash($id): void
     {
         $event = $this->events->get($id);
         $event->payment = $event->cashPayment();
         $this->events->save($event);
     }
 
-    public function card($id)
+    public function card($id): void
     {
         $event = $this->events->get($id);
         $event->payment = $event->cardPayment();
@@ -217,5 +225,12 @@ class EventManageService
     {
         $event = $this->events->get($id);
         $this->events->remove($event);
+    }
+
+    private function changingTheStatusOfAToolSet(array $params, Event $event): void
+    {
+        if ($params['old'] !== $params['new'] && $params['tools'] == ToolsEnum::TOOLS_READY->value) {
+            $event->tools = $event->toolsNeedToBeChecked();
+        }
     }
 }
