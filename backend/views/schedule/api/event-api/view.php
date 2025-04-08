@@ -16,6 +16,9 @@ use yii\widgets\DetailView;
 /* @var $sms \core\services\sms\SmsSender */
 /* @var $messengers \core\services\messengers\MessengerFactory */
 
+/*echo '<pre>';
+var_dump($model);
+die();*/
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 
@@ -100,7 +103,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
             <?php
             endif; ?>
             <?php
-            if ($model->isToolsAreNotReady() || $model->isToolsChecked()): ?>
+            if ($model->isToolsAreNotReady() || $model->isToolsChecked() || $model->isToolsSterelisation()): ?>
                 <div class="col-auto">
                     <?= Html::a(
                         '<i class="fas fa-wrench"></i>',

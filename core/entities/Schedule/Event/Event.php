@@ -49,6 +49,7 @@ class Event extends ActiveRecord
 {
 
     public const CACHE_KEY = 'event';
+
     public function __construct($config = [])
     {
         parent::__construct($config);
@@ -214,9 +215,23 @@ class Event extends ActiveRecord
         return $this->tools == ToolsEnum::TOOLS_ARE_NOT_READY->value;
     }
 
+    public function isToolsChecked(): bool
+    {
+        return $this->tools == ToolsEnum::TOOLS_CHECK->value;
+    }
+
+    public function isToolsSterelisation():bool
+    {
+        return $this->tools == ToolsEnum::TOOLS_STERELISATION->value;
+    }
+
     public function toolsReady(): int
     {
         return $this->tools = ToolsEnum::TOOLS_READY->value;
+    }
+    public function toolsNeedToBeChecked(): int
+    {
+        return $this->tools = ToolsEnum::TOOLS_CHECK->value;
     }
 
     public function assignService($serviceId, $serviceCost, $priceRate, $priceCost): void
@@ -317,7 +332,8 @@ class Event extends ActiveRecord
 
     public function getFullName(): string
     {
-        return $this->employee?->getFullName() ?? $this->fullname . ' <small>'.IconEnum::EX_EMPLOYEE->value.'</small>';
+        return $this->employee?->getFullName(
+        ) ?? $this->fullname . ' <small>' . IconEnum::EX_EMPLOYEE->value . '</small>';
     }
 
     public function getDefaultColor(): string
@@ -332,6 +348,7 @@ class Event extends ActiveRecord
         }*/
         return $this->rate;
     }
+
     public function attributeLabels(): array
     {
         return [

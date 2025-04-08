@@ -20,6 +20,8 @@ return [
     'Tools'=>'Набор',
     'TOOLS READY'=>'Готов',
     'TOOLS ARE NOT READY'=>'Не готов',
+    'TOOLS CHECK'=>'Проверить наличие',
+    'TOOLS_STERELISATION'=>'На стерилизации',
     'Cost'=>'Стоимость',
     'Cash register'=>'Вид оплаты касса',
     'Pay'=>'Оплачено',
