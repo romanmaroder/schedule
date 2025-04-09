@@ -8,8 +8,8 @@ use yii2fullcalendar6\yii2fullcalendar6;
 /* @var $events \core\entities\Schedule\Event\Calendar\Calendar */
 /* @var http://host1827487.hostland.pro/shop/ \core\entities\Schedule\Event\Calendar\Calendar */
 
-$this->title = Yii::t('schedule/calendar','Calendar');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/calendar','Calendar'), 'url' => ['calendar']];
+$this->title = Yii::t('schedule/calendar', 'Calendar');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('schedule/calendar', 'Calendar'), 'url' => ['calendar']];
 $this->params['breadcrumbs'][] = $this->title;
 PluginAsset::register($this)->add(['sweetalert2']);
 
@@ -29,8 +29,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                     'title' => $this->title,
                     'size' => 'SIZE_SMALL',
                     'id' => 'modal',
-                    'scrollable'=>true,
-                    'centerVertical'=>true,
+                    'scrollable' => true,
+                    'centerVertical' => true,
                     'options' => ['tabindex' => '']
                 ]
             );
@@ -48,7 +48,11 @@ PluginAsset::register($this)->add(['sweetalert2']);
 							});
 							Toast.fire({
 									icon: 'success',
-									title: '". \yii\helpers\Html::tag('h6',Yii::$app->session->getFlash('msg'),['class'=>'text-info'] )."',
+									title: '" . \yii\helpers\Html::tag(
+                        'h6',
+                        Yii::$app->session->getFlash('msg'),
+                        ['class' => 'text-info']
+                    ) . "',
 							});	  
 				})";
 
@@ -221,8 +225,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'id' => 'event',
                             'title' => 'Event',
                             'className' => 'event-class',
-                            'backgroundColor'=>'#004794',
-                            'textColor'=>'#F5FCFF',
+                            'backgroundColor' => '#004794',
+                            'textColor' => '#F5FCFF',
                             'events' => new JsExpression(
                                 "
                                 function (info, successCallback, failureCallback) {
@@ -247,6 +251,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                                         className: 'event-custom-classes',
                                                         allDay : $(this).attr('allDay'),
                                                         //groupId : $(this).attr('groupId'),
+                                                        resourceId : $(this).attr('extendedProps').resourceId,
                                                         extendedProps:$(this).attr('extendedProps'),
                                                         url:'/schedule/api/event-api/view',
                                                         });
@@ -261,8 +266,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'id' => 'education',
                             'title' => 'Education',
                             'className' => 'education-class',
-                            'backgroundColor'=>'#51560B',
-                            'textColor'=>'#F5F5F5',
+                            'backgroundColor' => '#51560B',
+                            'textColor' => '#F5F5F5',
                             'events' => new JsExpression(
                                 "
                                 function (info, successCallback, failureCallback) {
@@ -301,8 +306,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                             'id' => 'free-time',
                             'title' => 'Private Time',
                             'className' => 'free-time-class',
-                            'backgroundColor'=>'#2c3e50',
-                            'textColor'=>'#F6F6F6',
+                            'backgroundColor' => '#2c3e50',
+                            'textColor' => '#F6F6F6',
                             'events' => new JsExpression(
                                 "
                                 function (info, successCallback, failureCallback) {
@@ -343,21 +348,23 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'headerToolbar' => [
                             'left' => 'prev,next,today',
                             'center' => 'title',
-                            'right' => 'dayGridMonth,dayGridWeek,dayGridDay,timeGridDay' //TODO timeGridWeek think about displaying
+                            'right' => 'resourceTimelineMonth,resourceTimelineDay,resourceTimeGridDay,dayGridMonth,dayGridWeek,dayGridDay,timeGridDay'
+                            //TODO timeGridWeek think about displaying
                         ],
                         'footerToolbar' => [
                             'right' => 'addEducation',
                             'left' => 'addFree',
                         ],
-                        'initialView' =>  new JsExpression(
+                        'initialView' => new JsExpression(
                             "
-             localStorage.getItem('fullCalendarDefaultView') !== null ? localStorage.getItem('fullCalendarDefaultView') : '$initialView'"),
+             localStorage.getItem('fullCalendarDefaultView') !== null ? localStorage.getItem('fullCalendarDefaultView') : '$initialView'"
+                        ),
                         'selectable' => true,
                         'editable' => true,
                         'select' => $select,
                         'eventResize' => $eventResize,
                         'eventDrop' => $eventDrop,
-                        'eventMinHeight'=>'150',
+                        'eventMinHeight' => '150',
                         'droppable' => true,
                         'nowIndicator' => true,
                         'expandRows' => false,
@@ -367,8 +374,8 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'locale' => 'ru',
                         'eventOrder' => 'start',
                         //'eventMaxStack' => 5,
-                        'dayMaxEventRows'=>15,
-                        'dayMaxEvents'=> false,
+                        'dayMaxEventRows' => 15,
+                        'dayMaxEvents' => false,
                         'showNonCurrentDates' => true,
                         'fixedWeekCount' => false,
                         'weekNumbers' => true,
@@ -378,13 +385,20 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'slotEventOverlap' => true,
                         'slotMinTime' => '07:00:00',
                         'slotMaxTime' => '20:00:00',
-                        'slotDuration' => '0:15:00',
-                        'slotLabelInterval' => '01:00:00',
+                        'slotDuration' => '0:10:00',
+                        'slotLabelInterval' => '00:10:00',
+                        'slotLabelFormat' => [
+                            [
+                                'hour' => 'numeric',
+                                'minute' => '2-digit',
+                                'meridiem' => false
+                            ]
+                        ],
                         'displayEventTime' => true,
                         'displayEventEnd' => true,
-                        'filterResourcesWithEvents'=>true,
-                        'buttonText'=>[
-                                'today'=>Yii::t('schedule/calendar','Today')
+                        'filterResourcesWithEvents' => true,
+                        'buttonText' => [
+                            'today' => Yii::t('schedule/calendar', 'Today')
                         ],
                         'buttonIcons' => [
                             'dayGridMonth' => 'fas fas fa-calendar-alt',
@@ -455,8 +469,12 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 ),
                             ]
                         ],
-
                         'eventClassNames' => ['p-1', 'm-1'],
+                        'resourceAreaHeaderContent' => 'Master',
+                         'resources'=> [
+                                 'url'=>'/employee/resources',
+                                 'method'=> 'GET'
+                             ],
                         'eventDidMount' => new JsExpression(
                             "
                                 function(info){
@@ -514,7 +532,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                 wrapAdditional.classList.add('fc-event-description-container', 'mb-2','d-none','d-md-block','text-wrap');
                                 wrapStartTime.classList.add('fc-event-time-start','dayGridMonth');
                                 wrapEndTime.classList.add('fc-event-time-end','dayGridMonth');
-                                wrapTime.classList.add('fc-event-time-container','text-center','text-md-left','d-flex','flex-column','flex-sm-row');
+                                wrapTime.classList.add('fc-event-time-container','text-center','text-md-left','d-flex','flex-wrap','flex-column','flex-sm-row');
                                 wrapTeacher.classList.add('fc-event-teacher-container','mb-2','d-none','d-md-block','text-wrap');
                                 wrapStudent.classList.add('fc-event-student-container','mb-2','d-none','d-md-block','text-wrap');
                                 
@@ -544,7 +562,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                                             }
                                  }
                                  
-                                 if(arg.view.type == 'dayGridDay' || arg.view.type == 'timeGridDay' || arg.view.type == 'timeGridWeek'){
+                                 if(arg.view.type == 'dayGridDay' || arg.view.type == 'timeGridDay' || arg.view.type =='resourceTimeGridDay' || arg.view.type  =='resourceTimelineDay'  || arg.view.type == 'timeGridWeek'){
                                         wrapTitle.classList.remove('d-none','text-wrap');
                                         wrapTeacher.classList.remove('d-none','text-wrap');
                                         wrapStudent.classList.remove('d-none','text-wrap');
@@ -588,7 +606,6 @@ PluginAsset::register($this)->add(['sweetalert2']);
 
     
                                 return { domNodes: arrayOfDomNodes }
-                                
                                 }"
                         ),
                         'dateClick' => new JsExpression(
@@ -651,6 +668,7 @@ PluginAsset::register($this)->add(['sweetalert2']);
                         'eventMouseEnter' => new JsExpression(
                             "
                                 function( info  ){
+                                 console.log(info);
                                     if(info.event.source.id ==='event'){
                                             $(info.el).tooltip({
                                                         title: info.event.title + '<br>' +  info.event.extendedProps.service,

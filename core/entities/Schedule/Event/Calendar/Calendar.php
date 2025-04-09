@@ -47,12 +47,13 @@ class Calendar
                 'master' => $item->getFullName(),
                 'service' => $this->serviceNameList($item->services),
                 'tools' => ToolsHelper::statusLabel($item->tools),
+                'resourceId' => $item->master->id,
             ];
             $event->backgroundColor = $item->getDefaultColor();
             $event->borderColor = $item->getDefaultColor();
             $event->start = $item->start;
             $event->end = $item->end;
-            $event->groupId = $item->master->id;
+            //$event->groupId = $item->master->id;
             $event->source = '/schedule/event/events';
             $event->display = 'block';
 
@@ -77,6 +78,7 @@ class Calendar
                 'notice' => $item->notice,
                 'master' => $item->employee->getFullName(),
                 'additional' => $item->additional->name,
+                'resourceId' => $item->master->id,
             ];
             $free->backgroundColor = $item->employee->color ??  $item->default_color;
             $free->borderColor = $item->employee->color ?? $item->default_color;
@@ -106,6 +108,7 @@ class Calendar
                 'teacher' => $item->teacher->username,
                 'student' => $this->studentsName($item->students),
                 'description' => $item->description,
+                //'resourceId' => $item->master->id,
             ];
             $event->backgroundColor = $item->color;
             $event->borderColor = $item->color;
