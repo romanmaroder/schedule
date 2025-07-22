@@ -50,17 +50,18 @@ class Event extends ActiveRecord
 
     public const CACHE_KEY = 'event';
 
+
     public function __construct($config = [])
     {
         parent::__construct($config);
-        // $this->on(self::EVENT_AFTER_INSERT, [$this, 'notifyUser']);
-        // $this->on(self::EVENT_AFTER_UPDATE, [$this, 'notifyUser']);
+        //$this->on(self::EVENT_AFTER_INSERT, [$this, 'notifyUser']);
+        //$this->on(self::EVENT_AFTER_UPDATE, [$this, 'notifyUser']);
     }
 
     public function notifyUser(): void
     {
-        //$notify = new BotMessenger();
-        // $notify->Telegram()->send($this);
+        // $notify = new BotMessenger();
+        //$notify->Telegram()->send($this);
         //$notify->toViber()->send($data);
     }
 
@@ -220,15 +221,17 @@ class Event extends ActiveRecord
         return $this->tools == ToolsEnum::TOOLS_CHECK->value;
     }
 
-    public function isToolsSterelisation():bool
+    public function isToolsSterelisation(): bool
     {
         return $this->tools == ToolsEnum::TOOLS_STERELISATION->value;
     }
 
-    public function toolsReady(): int
+
+    public function toolsReady($tools): void
     {
-        return $this->tools = ToolsEnum::TOOLS_READY->value;
+        $this->tools = $tools;
     }
+
     public function toolsNeedToBeChecked(): int
     {
         return $this->tools = ToolsEnum::TOOLS_CHECK->value;

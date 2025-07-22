@@ -9,6 +9,7 @@ use core\entities\Schedule\Event\Event;
 use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
+use core\forms\manage\Schedule\Event\ToolsEditForm;
 use core\repositories\Schedule\EventRepository;
 use core\repositories\Schedule\ServiceRepository;
 use core\services\TransactionManager;
@@ -109,7 +110,6 @@ class EventManageService
 
                 $event->fullname = $event->employee->getFullName();
 
-
                 $this->changingTheStatusOfAToolSet(
                     ['new' => $event->start, 'old' => $oldAttributes['start'], 'tools' => $oldAttributes['tools']],
                     $event
@@ -129,7 +129,6 @@ class EventManageService
                                                        'old' => $event->oldAttributes['start'],
                                                        'tools' => $event->attributes['tools']
                                                    ], $event);
-
                 $this->events->save($event);
             }
         );
@@ -170,6 +169,7 @@ class EventManageService
                                                'old' => $originalEvent->start,
                                                'tools' => $originalEvent->tools,
                                            ], $event);
+
         $this->transaction->wrap(
             function () use ($event, $form) {
                 $this->events->save($event);
@@ -178,15 +178,14 @@ class EventManageService
         return $event;
     }
 
-    public function pay($id): void
+    public function pay($id)
     {
         $event = $this->events->get($id);
         $event->status = $event->toPay();
         $this->events->save($event);
     }
 
-
-    public function unpay($id): void
+    public function unpay($id)
     {
         $event = $this->events->get($id);
 
@@ -195,25 +194,32 @@ class EventManageService
         $this->events->save($event);
     }
 
-    public function cash($id): void
+    public function cash($id)
     {
         $event = $this->events->get($id);
         $event->payment = $event->cashPayment();
         $this->events->save($event);
     }
 
-    public function card($id): void
+    public function card($id)
     {
         $event = $this->events->get($id);
         $event->payment = $event->cardPayment();
         $this->events->save($event);
     }
 
-    public function tools($id): void
+    public function tools($id, ToolsEditForm $form): void
     {
         $event = $this->events->get($id);
-        $event->tools = $event->toolsReady();
-        $this->events->save($event);
+
+        $event->toolsReady(
+            $form->tools,
+        );
+        $this->transaction->wrap(
+            function () use ($event, $form) {
+                $this->events->save($event);
+            }
+        );
     }
 
     public function save($event): void

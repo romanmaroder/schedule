@@ -5,6 +5,7 @@ use core\helpers\ToolsHelper;
 use core\services\messengers\FlagsTemplates;
 use core\services\sms\simpleSms\SmsMessage;
 use hail812\adminlte3\assets\PluginAsset;
+use yii\bootstrap4\Modal;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\YiiAsset;
@@ -16,169 +17,168 @@ use yii\widgets\DetailView;
 /* @var $sms \core\services\sms\SmsSender */
 /* @var $messengers \core\services\messengers\MessengerFactory */
 
-/*echo '<pre>';
-var_dump($model);
-die();*/
 YiiAsset::register($this);
 PluginAsset::register($this)->add(['sweetalert2']);
 
 ?>
-    <div class="event-view container-fluid">
+<div class="event-view container-fluid">
 
-        <?= DetailView::widget(
-            [
-                'model' => $model,
-                'attributes' => [
-                    [
-                        'attribute' => 'master_id',
-                        'format' => 'raw',
-                        'value' => fn($model) => Html::a(
-                            Html::encode($model->master->username),
-                            ['/employee/view', 'id' => $model->employee->id ?? $model->master->id]
-                        ) ?? $model->getFullName(),
-                    ],
-                    [
-                        'attribute' => 'client_id',
-                        'format' => 'raw',
-                        'value' => fn($model) => Html::a(
-                            Html::encode($model->client->username),
-                            ['/user/view', 'id' => $model->client->id]
-                        ),
-                    ],
-                    [
-                        'attribute' => 'start',
-                        'format' => ['date', 'php:d-m-Y / H:i '],
-                    ],
-                    [
-                        'attribute' => 'end',
-                        //'label'     => 'Время',
-                        'format' => ['date', 'php:d-m-Y / H:i'],
-                    ],
-                    [
-                        'attribute' => 'service',
-                        //'label' => 'Service',
-                        'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
-                        'contentOptions' => ['class' => 'text-break'],
-                    ],
-                    //'amount',
-                    [
-                        'attribute' => 'cost',
-                        'value' => $model->getDiscountedPrice($model, $cart),
-                        'visible' => $model->isNotPayed(),
-                    ],
-                    [
-                        'attribute' => 'status',
-                        'value' => EventPaymentStatusHelper::statusLabel($model->status),
-                        'format' => 'raw',
-                    ],
-                    [
-                        'attribute' => 'notice',
-                        'visible' => $model->issetNotice($model->notice),
-                        'format' => 'ntext',
-                    ],
-                    [
-                        'attribute' => 'tools',
-                        'value' => ToolsHelper::statusLabel($model->tools),
-                        'format' => 'raw',
-                    ],
-
+    <?= DetailView::widget(
+        [
+            'model' => $model,
+            'attributes' => [
+                [
+                    'attribute' => 'master_id',
+                    'format' => 'raw',
+                    'value' => fn($model) => Html::a(
+                        Html::encode($model->master->username),
+                        ['/employee/view', 'id' => $model->employee->id ?? $model->master->id]
+                    ) ?? $model->getFullName(),
                 ],
-            ]
-        ) ?>
-        <div class="row">
-            <?php
-            if ($model->isNotPayed()): ?>
-                <div class="col-auto">
-                    <?= Html::a(
-                        '<i class="fas fa-pencil-alt"></i>',
-                        ['update', 'id' => $model->id],
-                        [
-                            'id' => 'edit-link',
-                            'title' => Yii::t('app', 'Update'),
-                            'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                            'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
-                        ]
-                    ) ?>
-                </div>
-            <?php
-            endif; ?>
-            <?php
-            if ($model->isToolsAreNotReady() || $model->isToolsChecked() || $model->isToolsSterelisation()): ?>
-                <div class="col-auto">
-                    <?= Html::a(
-                        '<i class="fas fa-wrench"></i>',
-                        ['tools', 'id' => $model->id],
-                        [
-                            'id' => 'tools-link',
-                            'title' => Yii::t('schedule/event', 'Tools'),
-                            'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                            'class' => 'btn btn-sm btn-secondary btn-shadow bg-gradient'
-                        ]
-                    ) ?>
-                </div>
-            <?php
-            endif; ?>
-            <div class="col-auto trigger-button">
-                <?= $messengers->build('sms', FlagsTemplates::SMS)->buildTrigger()->render() ?>
-            </div>
-            <div class="col-auto mb-2 group-button" id="<?= FlagsTemplates::GROUP_SMS ?>">
-                <?php
-                echo $messengers->build('sms', FlagsTemplates::ADDRESS, $model)->buildRender()->render();
-                echo $messengers->build('sms', FlagsTemplates::PRICE, $model)->buildRender()->render();
-                echo $messengers->build('sms', FlagsTemplates::TOTAL_PRICE, $model)->buildRender()->render();
-                echo $messengers->build('sms', FlagsTemplates::QUESTION, $model)->buildRender()->render();
-                echo $messengers->build('sms', FlagsTemplates::REMAINDER, $model)->buildRender()->render();
-                ?>
-            </div>
+                [
+                    'attribute' => 'client_id',
+                    'format' => 'raw',
+                    'value' => fn($model) => Html::a(
+                        Html::encode($model->client->username),
+                        ['/user/view', 'id' => $model->client->id]
+                    ),
+                ],
+                [
+                    'attribute' => 'start',
+                    'format' => ['date', 'php:d-m-Y / H:i '],
+                ],
+                [
+                    'attribute' => 'end',
+                    //'label'     => 'Время',
+                    'format' => ['date', 'php:d-m-Y / H:i'],
+                ],
+                [
+                    'attribute' => 'service',
+                    //'label' => 'Service',
+                    'value' => implode(', ', ArrayHelper::getColumn($model->services, 'name')),
+                    'contentOptions' => ['class' => 'text-break'],
+                ],
+                //'amount',
+                [
+                    'attribute' => 'cost',
+                    'value' => $model->getDiscountedPrice($model, $cart),
+                    'visible' => $model->isNotPayed(),
+                ],
+                [
+                    'attribute' => 'status',
+                    'value' => EventPaymentStatusHelper::statusLabel($model->status),
+                    'format' => 'raw',
+                ],
+                [
+                    'attribute' => 'notice',
+                    'visible' => $model->issetNotice($model->notice),
+                    'format' => 'ntext',
+                ],
+                [
+                    'attribute' => 'tools',
+                    'value' => ToolsHelper::statusLabel($model->tools),
+                    'format' => 'raw',
+                ],
 
-            <div class="col-auto trigger-button">
-                <?= $messengers->build('telegram', FlagsTemplates::TELEGRAM)->buildTrigger()->render() ?>
-            </div>
-            <div class="col-auto mb-2 group-button" id="<?= FlagsTemplates::GROUP_TELEGRAM ?>">
-                <?php
-                echo $messengers->build('telegram', FlagsTemplates::ADDRESS, $model)->buildRender()->render();
-                echo $messengers->build('telegram', FlagsTemplates::PRICE, $model)->buildRender()->render();
-                echo $messengers->build('telegram', FlagsTemplates::TOTAL_PRICE, $model)->buildRender()->render();
-                echo $messengers->build('telegram', FlagsTemplates::QUESTION, $model)->buildRender()->render();
-                echo $messengers->build('telegram', FlagsTemplates::REMAINDER, $model)->buildRender()->render();
-                ?>
-            </div>
+            ],
+        ]
+    ) ?>
+    <div class="row">
+        <?php
+        if ($model->isNotPayed()): ?>
             <div class="col-auto">
                 <?= Html::a(
-                    '<i class="far fa-copy"></i>',
-                    ['copy', 'id' => $model->id],
+                    '<i class="fas fa-pencil-alt"></i>',
+                    ['update', 'id' => $model->id],
                     [
-                        'id' => 'copy-link',
-                        'title' => Yii::t('app', 'Copy'),
+                        'id' => 'edit-link',
+                        'title' => Yii::t('app', 'Update'),
                         'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
-                        'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
-                    ]
-                ) ?>
-                <?= Html::a(
-                    '<i class="fas fa-history"></i>',
-                    ['history', 'id' => $model->client_id],
-                    [
-                        'id' => 'archive-link',
-                        'title' => Yii::t('app', 'History'),
-                        'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient ml-3'
-                    ]
-                ) ?>
-                <?= Html::a(
-                    '<i class="fas fa-trash-alt"></i>',
-                    ['delete', 'id' => $model->id],
-                    [
-                        'id' => 'delete',
-                        'title' => Yii::t('app', 'Delete'),
-                        'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-3',
-                        'data' => [
-                            'confirm' => Yii::t('app', 'Delete file?'),
-                            'method' => 'post',
-                        ],
+                        'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient'
                     ]
                 ) ?>
             </div>
+        <?php
+        endif; ?>
+        <?php
+        if ($model->isToolsAreNotReady()|| $model->isToolsChecked() || $model->isToolsSterelisation()): ?>
+            <div class="col-auto">
+                <?= Html::a(
+                    '<i class="fas fa-wrench"></i>',
+                    ['tools', 'id' => $model->id],
+                    [
+                        'id' => 'tools-link',
+                        'title' => Yii::t('schedule/event', 'Tools'),
+                        'onClick' => "$('#modalTools').modal('show').find('.modal-body').load($(this).attr('href'));
+                         return false;",
+                        'class' => 'btn btn-sm btn-secondary btn-shadow bg-gradient'
+                    ]
+                ) ?>
+            </div>
+        <?php
+        endif; ?>
+        <div class="col-auto trigger-button">
+            <?= $messengers->build('sms',FlagsTemplates::SMS)->buildTrigger()->render()?>
+        </div>
+        <div class="col-auto mb-2 group-button" id="<?=FlagsTemplates::GROUP_SMS?>">
+            <?php
+            echo $messengers->build('sms', FlagsTemplates::ADDRESS,$model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::PRICE, $model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::TOTAL_PRICE, $model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::QUESTION, $model)->buildRender()->render();
+            echo $messengers->build('sms', FlagsTemplates::REMAINDER, $model)->buildRender()->render();
+            ?>
+        </div>
+
+        <div class="col-auto trigger-button">
+            <?= $messengers->build('telegram',FlagsTemplates::TELEGRAM)->buildTrigger()->render()?>
+        </div>
+        <div class="col-auto mb-2 group-button" id="<?=FlagsTemplates::GROUP_TELEGRAM?>">
+            <?php
+            echo $messengers->build('telegram', FlagsTemplates::ADDRESS,$model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::PRICE, $model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::TOTAL_PRICE, $model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::QUESTION, $model)->buildRender()->render();
+            echo $messengers->build('telegram', FlagsTemplates::REMAINDER, $model)->buildRender()->render();
+            ?>
+        </div>
+        <div class="col-auto">
+            <?= Html::a(
+                '<i class="far fa-copy"></i>',
+                ['copy', 'id' => $model->id],
+                [
+                    'id' => 'copy-link',
+                    'title' => Yii::t('app', 'Copy'),
+                    'onClick' => "$('#modal').find('.modal-body').load($(this).attr('href')); return false;",
+                    'class' => 'btn btn-secondary btn-sm btn-shadow bg-gradient',
+                ]
+            ) ?>
+            <?= Html::a(
+                '<i class="fas fa-history"></i>',
+                ['history', 'id' => $model->client_id],
+                [
+                    'id' => 'archive-link',
+                    'title' => Yii::t('app', 'History'),
+                    'class' => 'btn btn-primary btn-sm btn-shadow bg-gradient ml-3'
+                ]
+            ) ?>
+            <?= Html::a(
+                '<i class="fas fa-trash-alt"></i>',
+                ['delete', 'id' => $model->id],
+                [
+                    'id' => 'delete',
+                    'title' => Yii::t('app', 'Delete'),
+                    'class' => 'btn btn-danger btn-sm btn-shadow bg-gradient ml-3',
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Delete file?'),
+                        'method' => 'post',
+                    ],
+                ]
+            ) ?>
         </div>
     </div>
+</div>
+
 
 <?php
 $sms = <<< JS
@@ -187,5 +187,5 @@ $sms = <<< JS
       $(this).next().animate({width: 'toggle'}).removeClass('d-none').css('display','flex');
     })
 JS;
-$this->registerJs($sms, $position = yii\web\View::POS_READY, $key = null);
+$this->registerJs($sms,$position = yii\web\View::POS_READY, $key = null);
 ?>

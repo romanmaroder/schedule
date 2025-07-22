@@ -8,6 +8,7 @@ use core\entities\Schedule\Event\Event;
 use core\forms\manage\Schedule\Event\EventCopyForm;
 use core\forms\manage\Schedule\Event\EventCreateForm;
 use core\forms\manage\Schedule\Event\EventEditForm;
+use core\forms\manage\Schedule\Event\ToolsEditForm;
 use core\helpers\BotLogger;
 use core\readModels\Schedule\EventReadRepository;
 use core\repositories\NotFoundException;
@@ -22,7 +23,6 @@ use yii\web\Controller;
 
 class EventApiController extends Controller
 {
-
     public function __construct(
         $id,
         $module,
@@ -126,15 +126,27 @@ class EventApiController extends Controller
 
     public function actionTools($id)
     {
+
         $event = $this->findModel($id);
-        try {
-            $this->service->tools($event->id);
-            Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'TOOLS READY'));
-            return $this->redirect('/schedule/calendar/calendar');
-        } catch (\DomainException $e) {
-            Yii::$app->errorHandler->logException($e);
-            Yii::$app->session->setFlash('error', $e->getMessage());
+
+        $form = new ToolsEditForm($event);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->tools($event->id, $form);
+                Yii::$app->session->setFlash('msg', Yii::t('schedule/event', 'Saved'));
+                return $this->redirect('/calendar');
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
+        return $this->renderAjax(
+            'tools',
+            [
+                'model' => $form,
+                'event' => $event,
+            ]
+        );
     }
 
     public function actionCopy($id)
